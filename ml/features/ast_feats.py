@@ -753,7 +753,7 @@ def _recursion(fn):
 def _nan_result():
     return ({name: math.nan for name in GROUP_A},
             {"parse_ok": False, "lines": {}, "values": {}, "entry": None,
-             "loops": {"main": None, "outer": None, "inner": None, "all": [], "main_var": None,
+             "loops": {"main": None, "outer": None, "inner": None, "all": [], "inline": [], "main_var": None,
                        "main_cond_vars": [], "selected_by": "none"}})
 
 
@@ -1137,6 +1137,9 @@ def ast_features(code, entry=None, trace=None, display_test=0):
             "outer": outer.line if outer else None,
             "inner": inner.line if inner else None,
             "all": [lp.line for lp in loops],
+            # loops whose body starts on the header line: steps on that line are body steps too
+            "inline": [lp.line for lp in loops if _line(next(iter(_direct(lp.body)), None)) == lp.line
+                       and not isinstance(lp.body, c_ast.EmptyStatement)],
             "main_var": main.var if main else None,
             "main_cond_vars": list(main.cond_vars) if main else [],
             "selected_by": "none" if main is None else ("trace" if trace else "static"),

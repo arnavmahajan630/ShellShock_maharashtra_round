@@ -249,7 +249,7 @@ def test_class_defining_features_dark_on_plain_correct_code():
 def test_main_loop_static_rule_is_first_outermost_loop():
     feats, meta = feats_of("bubble_correct")
     assert meta["loops"] == {"main": 2, "outer": 2, "inner": 3, "all": [2, 3], "main_var": "i",
-                             "main_cond_vars": ["i", "n"], "selected_by": "static"}
+                             "inline": [], "main_cond_vars": ["i", "n"], "selected_by": "static"}
     assert feats["a_bound_form_n_minus_1"] == 1
 
 
@@ -376,3 +376,13 @@ def test_entry_is_named_function_when_given():
     assert ast_features(code)[1]["entry"] == "factorial"
     feats, meta = ast_features(code, entry="go")
     assert meta["entry"] == "go" and feats["a_reads_all_params"] == 1
+
+
+def test_inline_loop_bodies_are_reported_for_the_trace_features():
+    """F2 counts steps per line; a body on the header line must not be mistaken for header steps."""
+    one_line = "int f(int a[], int n) {\n    int t = 0;\n    for (int i = 0; i < n; i++) t += a[i];\n    return t;\n}"
+    assert ast_features(one_line)[1]["loops"]["inline"] == [3]
+    braces_same_line = "int f(int a[], int n) {\n    int t = 0;\n    for (int i = 0; i < n; i++) { t += a[i]; }\n    return t;\n}"
+    assert ast_features(braces_same_line)[1]["loops"]["inline"] == [3]
+    assert feats_of("sum_for_lt")[1]["loops"]["inline"] == []
+    assert feats_of("for_semicolon")[1]["loops"]["inline"] == []          # an empty body is not an inline body
