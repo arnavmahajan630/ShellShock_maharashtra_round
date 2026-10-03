@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return fuel as a percentage of cap, with decimals.\nSignature: float fuel_percent(int fuel, int cap)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: learned from YouTube: uses while loops where a for would do, declares every variable at the top, keeps an unused variable.\nThe student truly believes this about C, and nobody has corrected them: int / int gives the exact decimal.\nBecause of that belief the submission is wrong: it gives a wrong result (or never finishes) on at least some inputs. It has no other bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"float fuel_percent(int fuel, int cap)\\n{\\n    float ans;\\n    int i;\\n    int spare;\\n    i = 0;\\n    ans = 0.0;\\n    while (i < 1)\\n    {\\n        ans = fuel / cap * 100;\\n        i = i + 1;\\n    }\\n    return ans;\\n}\",\n  \"note\": \"The int/int division inside the while loop reflects the student's belief that int division gives exact decimals; top declarations, unused variable, and while-loop instead of for-loop are also present.\"\n}",
+  "parsed": {
+    "code": "float fuel_percent(int fuel, int cap)\n{\n    float ans;\n    int i;\n    int spare;\n    i = 0;\n    ans = 0.0;\n    while (i < 1)\n    {\n        ans = fuel / cap * 100;\n        i = i + 1;\n    }\n    return ans;\n}",
+    "note": "The int/int division inside the while loop reflects the student's belief that int division gives exact decimals; top declarations, unused variable, and while-loop instead of for-loop are also present."
+  },
+  "usage": {
+    "prompt_tokens": 365,
+    "completion_tokens": 2094
+  }
+}

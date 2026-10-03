@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: a is sorted. Return 1 if two different cells add up to target, using two indexes that move inward; otherwise 0.\nSignature: int pair_sum_exists(int a[], int n, int target)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: cramped style: almost no spaces, inconsistent braces, single-letter names, a commented-out earlier attempt.\nThe student truly believes this about C, and nobody has corrected them: The loop variable advances by itself and the loop ends by itself.\nBecause of that belief the submission is wrong: it gives a wrong result (or never finishes) on at least some inputs. It has no other bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"/*for(i=0;i<n;i++)\\nfor(j=i+1;j<n;j++)\\nif(a[i]+a[j]==target)return 1;\\nreturn 0;*/\\nint pair_sum_exists(int a[],int n,int target)\\n{\\nint i=0,j=n-1;\\nwhile(i<j){\\nif(a[i]+a[j]==target)return 1;\\n}\\nreturn 0;\\n}\",\n  \"note\": \"The omitted i/j updates in the while loop come from the student's belief that the loop variable advances and the loop ends by itself, so it only checks the first pair before hanging.\"\n}",
+  "parsed": {
+    "code": "/*for(i=0;i<n;i++)\nfor(j=i+1;j<n;j++)\nif(a[i]+a[j]==target)return 1;\nreturn 0;*/\nint pair_sum_exists(int a[],int n,int target)\n{\nint i=0,j=n-1;\nwhile(i<j){\nif(a[i]+a[j]==target)return 1;\n}\nreturn 0;\n}",
+    "note": "The omitted i/j updates in the while loop come from the student's belief that the loop variable advances and the loop ends by itself, so it only checks the first pair before hanging."
+  },
+  "usage": {
+    "prompt_tokens": 384,
+    "completion_tokens": 7022
+  }
+}

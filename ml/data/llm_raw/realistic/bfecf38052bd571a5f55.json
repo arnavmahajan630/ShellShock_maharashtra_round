@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return the index of x in a, or -1 if it is not there.\nSignature: int linear_search(int a[], int n, int x)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: over-careful: a comment on almost every line restating it, extra parentheses, one small helper function.\nThe student understands C well. Their solution is correct on every input but unusual: it uses a found-index variable and break instead of returning inside the loop.\n\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"int is_equal(int a, int b) { // helper function to check if two integers are equal\\n    if ((a == b)) { // compare the two integers\\n        return (1); // return 1 if they are equal\\n    } else { // if they are not equal\\n        return (0); // return 0 otherwise\\n    }\\n}\\n\\nint linear_search(int a[], int n, int x) {\\n    int found_index = -1; // start with -1 to indicate not found\\n    int i; // loop index\\n    for ((i = 0); (i < n); (i = (i + 1))) { // iterate through the array\\n        if (((is_equal(a[i], x)) == 1)) { // if current element equals x\\n            found_index = i; // save the index\\n            break; // stop searching\\n        }\\n    }\\n    return found_index; // return the found index or -1\\n}\",\n  \"note\": \"The found_index variable with break instead of an early return, and the is_equal helper function, reflect the student's over-careful style and preference for explicit control flow.\"\n}",
+  "parsed": {
+    "code": "int is_equal(int a, int b) { // helper function to check if two integers are equal\n    if ((a == b)) { // compare the two integers\n        return (1); // return 1 if they are equal\n    } else { // if they are not equal\n        return (0); // return 0 otherwise\n    }\n}\n\nint linear_search(int a[], int n, int x) {\n    int found_index = -1; // start with -1 to indicate not found\n    int i; // loop index\n    for ((i = 0); (i < n); (i = (i + 1))) { // iterate through the array\n        if (((is_equal(a[i], x)) == 1)) { // if current element equals x\n            found_index = i; // save the index\n            break; // stop searching\n        }\n    }\n    return found_index; // return the found index or -1\n}",
+    "note": "The found_index variable with break instead of an early return, and the is_equal helper function, reflect the student's over-careful style and preference for explicit control flow."
+  },
+  "usage": {
+    "prompt_tokens": 348,
+    "completion_tokens": 1964
+  }
+}

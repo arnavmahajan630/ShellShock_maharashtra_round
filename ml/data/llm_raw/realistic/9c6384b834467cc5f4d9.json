@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: a is sorted. Return the index of x using binary search, or -1.\nSignature: int binary_search(int a[], int n, int x)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: cramped style: almost no spaces, inconsistent braces, single-letter names, a commented-out earlier attempt.\nThe student understands C well. Their solution is correct on every input but unusual: it computes mid as low + (high - low) / 2 and loops while low <= high.\n\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\"code\":\"/*int binary_search(int a[],int n,int x){int l=0,h=n-1;while(l<=h){int m=(l+h)/2;if(a[m]==x)return m;if(a[m]<x)l=m+1;else h=m-1;}return -1;}*/\\nint binary_search(int a[],int n,int x)\\n{\\nint l=0,h=n-1;\\nwhile(l<=h){\\nint m=l+(h-l)/2;\\nif(a[m]==x)return m;\\nif(a[m]<x)l=m+1;\\nelse h=m-1;\\n}\\nreturn -1;\\n}\",\"note\":\"Uses an overflow-safe mid calculation and leaves a commented-out earlier attempt visible.\"}",
+  "parsed": {
+    "code": "/*int binary_search(int a[],int n,int x){int l=0,h=n-1;while(l<=h){int m=(l+h)/2;if(a[m]==x)return m;if(a[m]<x)l=m+1;else h=m-1;}return -1;}*/\nint binary_search(int a[],int n,int x)\n{\nint l=0,h=n-1;\nwhile(l<=h){\nint m=l+(h-l)/2;\nif(a[m]==x)return m;\nif(a[m]<x)l=m+1;\nelse h=m-1;\n}\nreturn -1;\n}",
+    "note": "Uses an overflow-safe mid calculation and leaves a commented-out earlier attempt visible."
+  },
+  "usage": {
+    "prompt_tokens": 352,
+    "completion_tokens": 2809
+  }
+}

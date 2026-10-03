@@ -1,0 +1,436 @@
+{
+  "about": "LLM-written stand-in for the hand-written realistic set. Not hand-written, not real student code. Rater 2 is also an LLM. Each kept program was run against a reference solution (see run_check); that shows it is wrong or right, not that it is wrong for the intended reason.",
+  "author_model": "deepseek-v4-pro",
+  "rater_model": "deepseek-flash",
+  "planned": 60,
+  "kept": 58,
+  "agreement": 0.896551724137931,
+  "kappa": 0.8874878758486906,
+  "dropped": [
+    [
+      "M05",
+      "Q09",
+      "misconception",
+      "behaves correctly on every input, so it shows no bug"
+    ],
+    [
+      "M01",
+      "Q01",
+      "hard_twin",
+      "behaves correctly on every input, so it shows no bug"
+    ]
+  ],
+  "items": {
+    "RL-001": {
+      "kind": "misconception",
+      "persona": "hostel_2am",
+      "note": "The loop uses `i<=n` from 0 because the student believes that runs n times, causing n+1 fire calls.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-002": {
+      "kind": "misconception",
+      "persona": "youtube_learner",
+      "note": "The student's included/excluded confusion appears as `i <= n / 2` instead of `i < n / 2`, and `unused` is declared and assigned but never used.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-003": {
+      "kind": "misconception",
+      "persona": "over_careful",
+      "note": "The empty for-loop update and the comment about steps moving forward by itself come from the student's belief that loop variables advance automatically.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-004": {
+      "kind": "misconception",
+      "persona": "cramped",
+      "note": "The omitted i/j updates in the while loop come from the student's belief that the loop variable advances and the loop ends by itself, so it only checks the first pair before hanging.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-005": {
+      "kind": "misconception",
+      "persona": "long_way",
+      "note": "The student resets totalValueSoFar to 0 inside each loop pass, believing the old accumulated value persists even after reassignment; the verbose flag and redundant else reflect their usual habits.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-006": {
+      "kind": "misconception",
+      "persona": "notes_copier",
+      "note": "The student's belief that total retains its value across passes even after being set to zero inside the loop leads to the counter being reset each iteration, so the function returns 1 only if the last element matches x, otherwise 0.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-007": {
+      "kind": "misconception",
+      "persona": "hostel_2am",
+      "note": "The student computes ans = sum / n with both ints, expecting exact decimal, and assigns to float believing it will hold the fraction; leftover printf and Hinglish comment remain.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-008": {
+      "kind": "misconception",
+      "persona": "youtube_learner",
+      "note": "The int/int division inside the while loop reflects the student's belief that int division gives exact decimals; top declarations, unused variable, and while-loop instead of for-loop are also present.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-009": {
+      "kind": "misconception",
+      "persona": "over_careful",
+      "note": "The student leaves loop counter i uninitialized in the for loop because they believe local variables start at 0; all comments restating this false belief are visible.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-010": {
+      "kind": "misconception",
+      "persona": "long_way",
+      "note": "The student used = for comparison, assigning 42 to code and compareCheck, so compareCheck is always nonzero/true and the function always returns 1.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-011": {
+      "kind": "misconception",
+      "persona": "notes_copier",
+      "note": "The condition `if(a[i] = x)` uses assignment because the student believes `=` is the comparison operator.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-012": {
+      "kind": "misconception",
+      "persona": "hostel_2am",
+      "note": "Semicolon after each if header comes from the student's mistaken belief that it is harmless; ans/temp1/x2 and the debug printf are typical 2 a.m. hostel habits.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-013": {
+      "kind": "misconception",
+      "persona": "youtube_learner",
+      "note": "The student's belief that a semicolon after a loop header is harmless produces an empty while loop that never finishes for n > 1; the unused variable 'swapped' comes from their habit of keeping extras.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-014": {
+      "kind": "misconception",
+      "persona": "over_careful",
+      "note": "The code accesses arr[size] as the last element because the student believes arrays are indexed 1..n.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-015": {
+      "kind": "misconception",
+      "persona": "cramped",
+      "note": "Student indexes from 1 to n as if arrays are 1-based, so the rotation misses a[0] and writes out of bounds.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-016": {
+      "kind": "misconception",
+      "persona": "long_way",
+      "note": "The student's belief that printf returns the value leads to printing the result and returning a dummy 0, while the code also shows their long-winded style with a step-counting loop, redundant flag, and verbose variable names.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-017": {
+      "kind": "misconception",
+      "persona": "notes_copier",
+      "note": "The student computes the result but uses printf to output it and omits the return statement, believing printing is what returns the value to the caller.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-018": {
+      "kind": "misconception",
+      "persona": "hostel_2am",
+      "note": "The student's else branch assigns ans = -1, believing it means 'not this one, keep looking' and won't overwrite the previous found ans, which causes the final answer to be -1 unless the last element matches.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-019": {
+      "kind": "misconception",
+      "persona": "youtube_learner",
+      "note": "The empty else block comes from the student's belief that else only means 'keep looking' and must not overwrite flag; while-loop and top declarations/unused variable are their habits.",
+      "drafts": 1,
+      "run_check": "passed",
+      "relabelled": {
+        "from": "D01",
+        "to": "OTHER",
+        "why": "meant as D01, but the code never sets the flag to 0 at all: no early exit and no overwrite of an earlier match, so it is not that belief"
+      }
+    },
+    "RL-020": {
+      "kind": "misconception",
+      "persona": "over_careful",
+      "note": "The `low = mid;` and `high = mid;` updates (instead of `low = mid + 1;` and `high = mid - 1;`) reflect the student's mistaken belief that the mid index is automatically excluded from the next search window.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-021": {
+      "kind": "misconception",
+      "persona": "cramped",
+      "note": "The l=m;h=m updates (missing +1/-1) come from the student's mistaken belief that mid is excluded automatically.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-022": {
+      "kind": "misconception",
+      "persona": "long_way",
+      "note": "The temp-less swap with a[i]=a[i+1]; a[i+1]=a[i] comes from the student's belief that two assignments happen simultaneously, so both elements end up with the same larger value.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-023": {
+      "kind": "misconception",
+      "persona": "notes_copier",
+      "note": "The student replaces a temp-variable swap with two plain assignments, believing C performs both assignments simultaneously.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-024": {
+      "kind": "misconception",
+      "persona": "hostel_2am",
+      "note": "Student believes one pass of adjacent swaps sorts the array, so the code has only a single loop.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-025": {
+      "kind": "misconception",
+      "persona": "youtube_learner",
+      "note": "Single while loop only finds the minimum and swaps it to the first position, reflecting the student's one-pass sort belief; unused variable declared and assigned but never used.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-026": {
+      "kind": "misconception",
+      "persona": "over_careful",
+      "note": "The student omitted the base case because they believed recursion stops by itself once the multiplication work is done.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-027": {
+      "kind": "misconception",
+      "persona": "cramped",
+      "note": "Missing base case from the student's belief that recursion stops by itself; commented loop shows the earlier iterative attempt.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-028": {
+      "kind": "misconception",
+      "persona": "long_way",
+      "note": "The student uses long names, a flag variable, an i = i + 1 statement, and a redundant else; the factorial(n) call shows the belief that recursion moves toward the base case on its own.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-029": {
+      "kind": "misconception",
+      "persona": "notes_copier",
+      "note": "The recursive call uses sum_digits(n) instead of sum_digits(n/10), showing the student's belief that recursion moves toward the base case on its own.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-030": {
+      "kind": "misconception",
+      "persona": "hostel_2am",
+      "note": "The student thinks the recursive call's result is combined automatically, so they return ans without adding temp1 (current element).",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-031": {
+      "kind": "misconception",
+      "persona": "youtube_learner",
+      "note": "The student expects the recursive call to handle the remaining digits automatically, so they ignore its return and overwrite sum each iteration, leaving the last digit as the result.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-032": {
+      "kind": "misconception",
+      "persona": "over_careful",
+      "note": "The helper uses == with string literals because the student believes == compares text, causing the vowel check to always be false.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-033": {
+      "kind": "misconception",
+      "persona": "cramped",
+      "note": "The student compares s and b with ==, believing that == compares the strings' text contents.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-034": {
+      "kind": "correct_unusual",
+      "persona": "long_way",
+      "note": "Loops backwards from n-1 to 0 with a separate flag variable and redundant else branch.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-035": {
+      "kind": "correct_unusual",
+      "persona": "notes_copier",
+      "note": "The student first returns 1 for k == 0 and then uses a loop to multiply base exactly k times.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-036": {
+      "kind": "correct_unusual",
+      "persona": "hostel_2am",
+      "note": "Walks the whole array with temp1 and x2 to keep the last value in ans; debug printf is left guarded by if(0).",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-037": {
+      "kind": "correct_unusual",
+      "persona": "youtube_learner",
+      "note": "Nested ifs instead of else-if and an unused variable declared at the top reflect the student's habits.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-038": {
+      "kind": "correct_unusual",
+      "persona": "over_careful",
+      "note": "The found_index variable with break instead of an early return, and the is_equal helper function, reflect the student's over-careful style and preference for explicit control flow.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-039": {
+      "kind": "correct_unusual",
+      "persona": "cramped",
+      "note": "Uses an overflow-safe mid calculation and leaves a commented-out earlier attempt visible.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-040": {
+      "kind": "correct_unusual",
+      "persona": "long_way",
+      "note": "The student used a swap flag for early termination, verbose variable names, explicit counter increments, and a redundant else self-assignment.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-041": {
+      "kind": "correct_unusual",
+      "persona": "notes_copier",
+      "note": "The student uses a two-pointer style with i and j moving toward the centre, swapping via a temporary snake_case variable, and adds a Hindi comment explaining the approach.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-042": {
+      "kind": "correct_unusual",
+      "persona": "hostel_2am",
+      "note": "Student manually computes length instead of strlen, uses ans and temp1 with a Hinglish comment and an inactive debug printf.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-043": {
+      "kind": "correct_unusual",
+      "persona": "youtube_learner",
+      "note": "Uses n <= 1 base case and a local result variable; keeps an unused int as per habit.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-044": {
+      "kind": "other",
+      "persona": "over_careful",
+      "note": "The helper function and line-by-line comments with extra parentheses show the student's over-careful style; the student meant to add but used -= in combine_energy.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-045": {
+      "kind": "other",
+      "persona": "cramped",
+      "note": "The student thought of using a ternary for absolute difference but left it commented and carelessly returned a-b.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-046": {
+      "kind": "other",
+      "persona": "long_way",
+      "note": "Student used separate flag variables, redundant else branches, and verbose variable names; the typo is upperThresholdValue set to 60 instead of 70.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-047": {
+      "kind": "other",
+      "persona": "notes_copier",
+      "note": "The student uses snake_case names, a simple loop with a count variable, and Hindi/Marathi comments; the comparison mistakenly uses n instead of x.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-048": {
+      "kind": "other",
+      "persona": "hostel_2am",
+      "note": "Student's flipped comparison (a[i] < a[i+1]) reveals a mental model where sorted means increasing, so the function accepts descending; the leftover printf and Hinglish comment show 2am habits.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-049": {
+      "kind": "other",
+      "persona": "youtube_learner",
+      "note": "Declares all variables at top, keeps an unused variable, correctly uses recursion but returns 0 for the base case.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-050": {
+      "kind": "hard_twin",
+      "persona": "over_careful",
+      "note": "The over-careful student added a small add_values helper, restating comments, extra parentheses, and wrote the loop condition as position <= n.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-051": {
+      "kind": "hard_twin",
+      "persona": "cramped",
+      "note": "The <=k loop boundary shows the student treats the last valid index as k, causing one extra read past the requested first k values.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-052": {
+      "kind": "hard_twin",
+      "persona": "notes_copier",
+      "note": "Student uses classic nested loop bubble sort shape from class notes with snake_case names and Hindi/Marathi comments; inner loop boundary is n - i instead of n - i - 1.",
+      "drafts": 1,
+      "run_check": "passed"
+    },
+    "RL-053": {
+      "kind": "junk",
+      "persona": "hostel_2am",
+      "note": "Student's thinking: Python solution with C-style leftover printf and Hinglish comment, using variable names ans, temp1, x2.",
+      "drafts": 1,
+      "run_check": "not run (junk item)"
+    },
+    "RL-054": {
+      "kind": "junk",
+      "persona": "youtube_learner",
+      "note": "The student outlines a while-loop plan with top-declared variables and an unused variable but writes no executable code.",
+      "drafts": 1,
+      "run_check": "not run (junk item)"
+    },
+    "RL-055": {
+      "kind": "junk",
+      "persona": "over_careful",
+      "note": "The student recalls the sample test's last beacon as 42 and uses a small helper to return that fixed number while keeping the required signature.",
+      "drafts": 1,
+      "run_check": "not run (junk item)"
+    },
+    "RL-056": {
+      "kind": "junk",
+      "persona": "cramped",
+      "note": "Student ignored the C-only judge, added iostream and main to test with cin/cout, and used if/else for absolute difference.",
+      "drafts": 1,
+      "run_check": "not run (junk item)"
+    },
+    "RL-057": {
+      "kind": "junk",
+      "persona": "long_way",
+      "note": "Long variable names, separate flag, i=i+1, redundant else branches, and a while loop instead of recursion.",
+      "drafts": 1,
+      "run_check": "not run (junk item)"
+    },
+    "RL-058": {
+      "kind": "junk",
+      "persona": "notes_copier",
+      "note": "The student uses pointer arithmetic in the summation loop and keeps Hindi/Marathi comments, ignoring the judge's no-pointer rule.",
+      "drafts": 1,
+      "run_check": "not run (junk item)"
+    }
+  }
+}

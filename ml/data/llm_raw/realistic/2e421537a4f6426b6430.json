@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Sort a in place, smallest first, with bubble sort.\nSignature: void bubble_sort(int a[], int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: learned from YouTube: uses while loops where a for would do, declares every variable at the top, keeps an unused variable.\nThe student truly believes this about C, and nobody has corrected them: A `;` after the header is harmless.\nBecause of that belief the submission is wrong: it gives a wrong result (or never finishes) on at least some inputs. It has no other bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"void bubble_sort(int a[], int n)\\n{\\n    int i, j, temp, swapped;\\n    i = 0;\\n    while (i < n - 1);\\n    {\\n        j = 0;\\n        while (j < n - i - 1)\\n        {\\n            if (a[j] > a[j + 1])\\n            {\\n                temp = a[j];\\n                a[j] = a[j + 1];\\n                a[j + 1] = temp;\\n            }\\n            j = j + 1;\\n        }\\n        i = i + 1;\\n    }\\n}\",\n  \"note\": \"The student's belief that a semicolon after a loop header is harmless produces an empty while loop that never finishes for n > 1; the unused variable 'swapped' comes from their habit of keeping extras.\"\n}",
+  "parsed": {
+    "code": "void bubble_sort(int a[], int n)\n{\n    int i, j, temp, swapped;\n    i = 0;\n    while (i < n - 1);\n    {\n        j = 0;\n        while (j < n - i - 1)\n        {\n            if (a[j] > a[j + 1])\n            {\n                temp = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = temp;\n            }\n            j = j + 1;\n        }\n        i = i + 1;\n    }\n}",
+    "note": "The student's belief that a semicolon after a loop header is harmless produces an empty while loop that never finishes for n > 1; the unused variable 'swapped' comes from their habit of keeping extras."
+  },
+  "usage": {
+    "prompt_tokens": 367,
+    "completion_tokens": 2386
+  }
+}

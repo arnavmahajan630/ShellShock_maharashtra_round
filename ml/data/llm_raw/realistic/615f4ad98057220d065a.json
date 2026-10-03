@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return the index of x in a, or -1 if it is not there.\nSignature: int linear_search(int a[], int n, int x)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: does everything the long way: i = i + 1, separate flag variables, redundant else branches, long names like totalValueSoFar.\nThe student's loop over the array runs one step too far, so it touches one cell past the end.\nThat is the only bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}\n\n(Researcher's note, draft 2: an earlier draft behaved correctly on every input, so it did not show the student's thinking. Trace the code by hand on a small input and make sure it really goes wrong.)"
+    }
+  ],
+  "content": "{\"code\": \"int linear_search(int a[], int n, int x)\\n{\\n    int currentIndex = 0;\\n    int foundFlag = 0;\\n    int totalValueSoFar = -1;\\n\\n    while (currentIndex <= n)\\n    {\\n        if (a[currentIndex] == x)\\n        {\\n            foundFlag = 1;\\n            totalValueSoFar = currentIndex;\\n        }\\n        else\\n        {\\n            foundFlag = foundFlag;\\n        }\\n\\n        currentIndex = currentIndex + 1;\\n    }\\n\\n    if (foundFlag == 1)\\n    {\\n        return totalValueSoFar;\\n    }\\n    else\\n    {\\n        return -1;\\n    }\\n}\", \"note\": \"Verbose student style with currentIndex, foundFlag, totalValueSoFar, and a while condition that checks one cell past the array.\"}",
+  "parsed": {
+    "code": "int linear_search(int a[], int n, int x)\n{\n    int currentIndex = 0;\n    int foundFlag = 0;\n    int totalValueSoFar = -1;\n\n    while (currentIndex <= n)\n    {\n        if (a[currentIndex] == x)\n        {\n            foundFlag = 1;\n            totalValueSoFar = currentIndex;\n        }\n        else\n        {\n            foundFlag = foundFlag;\n        }\n\n        currentIndex = currentIndex + 1;\n    }\n\n    if (foundFlag == 1)\n    {\n        return totalValueSoFar;\n    }\n    else\n    {\n        return -1;\n    }\n}",
+    "note": "Verbose student style with currentIndex, foundFlag, totalValueSoFar, and a while condition that checks one cell past the array."
+  },
+  "usage": {
+    "prompt_tokens": 398,
+    "completion_tokens": 3128
+  }
+}

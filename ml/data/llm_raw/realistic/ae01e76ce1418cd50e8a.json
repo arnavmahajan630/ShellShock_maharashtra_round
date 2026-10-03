@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return 0 if energy is below 30, 1 if it is below 70, otherwise 2.\nSignature: int shield_mode(int energy)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: does everything the long way: i = i + 1, separate flag variables, redundant else branches, long names like totalValueSoFar.\nThe student understands C but made one careless slip: the code mistypes one of the two limits (for example 60 instead of 70).\nApart from that slip the code is fine.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"int shield_mode(int energy)\\n{\\n    int lowerThresholdValue = 30;\\n    int upperThresholdValue = 60;\\n    int isEnergyBelowLowerThreshold = 0;\\n    int isEnergyBelowUpperThreshold = 0;\\n    int shieldModeResult = 0;\\n\\n    if (energy < lowerThresholdValue)\\n    {\\n        isEnergyBelowLowerThreshold = 1;\\n    }\\n    else\\n    {\\n        isEnergyBelowLowerThreshold = 0;\\n    }\\n\\n    if (energy < upperThresholdValue)\\n    {\\n        isEnergyBelowUpperThreshold = 1;\\n    }\\n    else\\n    {\\n        isEnergyBelowUpperThreshold = 0;\\n    }\\n\\n    if (isEnergyBelowLowerThreshold == 1)\\n    {\\n        shieldModeResult = 0;\\n    }\\n    else\\n    {\\n        if (isEnergyBelowUpperThreshold == 1)\\n        {\\n            shieldModeResult = 1;\\n        }\\n        else\\n        {\\n            shieldModeResult = 2;\\n        }\\n    }\\n\\n    return shieldModeResult;\\n}\",\n  \"note\": \"Student used separate flag variables, redundant else branches, and verbose variable names; the typo is upperThresholdValue set to 60 instead of 70.\"\n}",
+  "parsed": {
+    "code": "int shield_mode(int energy)\n{\n    int lowerThresholdValue = 30;\n    int upperThresholdValue = 60;\n    int isEnergyBelowLowerThreshold = 0;\n    int isEnergyBelowUpperThreshold = 0;\n    int shieldModeResult = 0;\n\n    if (energy < lowerThresholdValue)\n    {\n        isEnergyBelowLowerThreshold = 1;\n    }\n    else\n    {\n        isEnergyBelowLowerThreshold = 0;\n    }\n\n    if (energy < upperThresholdValue)\n    {\n        isEnergyBelowUpperThreshold = 1;\n    }\n    else\n    {\n        isEnergyBelowUpperThreshold = 0;\n    }\n\n    if (isEnergyBelowLowerThreshold == 1)\n    {\n        shieldModeResult = 0;\n    }\n    else\n    {\n        if (isEnergyBelowUpperThreshold == 1)\n        {\n            shieldModeResult = 1;\n        }\n        else\n        {\n            shieldModeResult = 2;\n        }\n    }\n\n    return shieldModeResult;\n}",
+    "note": "Student used separate flag variables, redundant else branches, and verbose variable names; the typo is upperThresholdValue set to 60 instead of 70."
+  },
+  "usage": {
+    "prompt_tokens": 362,
+    "completion_tokens": 1657
+  }
+}

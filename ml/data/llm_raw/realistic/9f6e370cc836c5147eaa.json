@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return the sum of the first n values of a. It must use recursion.\nSignature: int array_sum_rec(int a[], int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: cramped style: almost no spaces, inconsistent braces, single-letter names, a commented-out earlier attempt.\nThe student truly believes this about C, and nobody has corrected them: Recursion stops by itself when the work is done.\nBecause of that belief the submission is wrong: it gives a wrong result (or never finishes) on at least some inputs. It has no other bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\"code\":\"//int array_sum_rec(int a[],int n){int i,s=0;for(i=0;i<n;i++)s+=a[i];return s;}\\nint array_sum_rec(int a[],int n){\\nreturn a[n-1]+array_sum_rec(a,n-1);\\n}\",\"note\":\"Missing base case from the student's belief that recursion stops by itself; commented loop shows the earlier iterative attempt.\"}",
+  "parsed": {
+    "code": "//int array_sum_rec(int a[],int n){int i,s=0;for(i=0;i<n;i++)s+=a[i];return s;}\nint array_sum_rec(int a[],int n){\nreturn a[n-1]+array_sum_rec(a,n-1);\n}",
+    "note": "Missing base case from the student's belief that recursion stops by itself; commented loop shows the earlier iterative attempt."
+  },
+  "usage": {
+    "prompt_tokens": 368,
+    "completion_tokens": 1577
+  }
+}

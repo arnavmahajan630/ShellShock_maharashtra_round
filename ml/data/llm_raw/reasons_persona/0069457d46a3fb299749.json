@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: explaining to a friend on WhatsApp in Hinglish (romanised Hindi with English code words).\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\n`low = mid` keeps mid inside the window, so with neighbouring low and high the window never shrinks; it has to be `mid + 1`.\n\nThe quiz shows:\n// guessing game: secret = 8, lo = 7, hi = 8\nguess = (lo + hi) / 2;   // 7, too small\nlo = guess;\n\nWhat is the next guess?\nOptions: \"7 again\" or \"8\"\n\nPick the option your character would pick. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"7 again\",\n  \"why\": \"bhai low=guess karne se window shrink hi nahi hoti, mid wali value wapas low ban jaati hai to guess hamesha 7 hi rahega, low aur high padosi hain to while loop chalta jayega\"\n}",
+  "parsed": {
+    "answer": "7 again",
+    "why": "bhai low=guess karne se window shrink hi nahi hoti, mid wali value wapas low ban jaati hai to guess hamesha 7 hi rahega, low aur high padosi hain to while loop chalta jayega"
+  },
+  "usage": {
+    "prompt_tokens": 266,
+    "completion_tokens": 72
+  }
+}

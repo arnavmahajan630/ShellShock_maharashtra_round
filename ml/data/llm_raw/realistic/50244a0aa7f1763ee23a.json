@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return 1 if a is in non-decreasing order, otherwise 0.\nSignature: int is_sorted(int a[], int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: copied the shape from class notes but renamed things in snake_case, with a couple of Hindi or Marathi comments.\nThe student truly believes this about C, and nobody has corrected them: Printing the value hands it back to the caller.\nBecause of that belief the submission is wrong: it gives a wrong result (or never finishes) on at least some inputs. It has no other bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"int is_sorted(int a[], int n)\\n{\\n    int kram_mein_hai = 1; // array kram mein hai ya nahi\\n    int i;\\n\\n    for (i = 0; i < n - 1; i = i + 1)\\n    {\\n        if (a[i] > a[i + 1])\\n        {\\n            kram_mein_hai = 0; // yahan galti mili\\n            break;\\n        }\\n    }\\n\\n    printf(\\\"%d\\\", kram_mein_hai);\\n}\",\n  \"note\": \"The student computes the result but uses printf to output it and omits the return statement, believing printing is what returns the value to the caller.\"\n}",
+  "parsed": {
+    "code": "int is_sorted(int a[], int n)\n{\n    int kram_mein_hai = 1; // array kram mein hai ya nahi\n    int i;\n\n    for (i = 0; i < n - 1; i = i + 1)\n    {\n        if (a[i] > a[i + 1])\n        {\n            kram_mein_hai = 0; // yahan galti mili\n            break;\n        }\n    }\n\n    printf(\"%d\", kram_mein_hai);\n}",
+    "note": "The student computes the result but uses printf to output it and omits the return statement, believing printing is what returns the value to the caller."
+  },
+  "usage": {
+    "prompt_tokens": 370,
+    "completion_tokens": 3954
+  }
+}

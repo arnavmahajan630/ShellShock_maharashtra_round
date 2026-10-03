@@ -134,10 +134,10 @@ W0 is already merged. A package later in the list may start before an earlier on
 |---|---|
 | Put the DeepSeek key and model name in `.env` | T1, B4 |
 | Run `ml/text/kaggle_train.py` on Kaggle or Colab, download the result into `ml/artifacts/` | T2, E-c |
-| Hand-write R-team (30 programs); Arnav hand-writes R-blind (40) without seeing the operators | E-a |
+| ~~Hand-write R-team (30 programs)~~ Not done by hand: replaced by 58 LLM-written programs in `ml/data/realistic_llm.jsonl` (source `R-llm`, see `notes/T1.md`). E-a reports them as an LLM-written stand-in, never as hand-written. Arnav's R-blind (40) is still open | E-a |
 | Skim the quiz items marked `manual` and a sample of the DeepSeek-drafted ones | B4 |
 | Hand-check the auto-labels on the ITSP slice | X1 |
-| Get 50 or more classmates to type a "why" sentence in the app | E-c |
+| ~~Get 50 or more classmates to type a "why" sentence~~ Not collected: replaced by 270 role-played sentences in `ml/data/reasons_persona.jsonl` (see `notes/T1.md`). E-c reports them as LLM-written, never as real student text | E-c |
 
 ## 6. Training runs: time and load
 

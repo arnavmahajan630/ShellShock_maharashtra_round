@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: half asleep in the hostel at 2 am, typing with one thumb, short and sloppy, no capitals.\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\nThe recursive call moves toward the base case on its own\n\nThe quiz shows:\nint sd(int n) { if (n == 0) return 0; return n % 10 + sd(n); }\n\nWhat is sd(25)?\nOptions: \"7\" or \"it never stops\"\n\nYour character picks \"7\", because of how C works in their head. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"7\",\n  \"why\": \"n%10 gets 5 then repeats moving n, so 25 gives 5+2=7\"\n}",
+  "parsed": {
+    "answer": "7",
+    "why": "n%10 gets 5 then repeats moving n, so 25 gives 5+2=7"
+  },
+  "usage": {
+    "prompt_tokens": 242,
+    "completion_tokens": 36
+  }
+}

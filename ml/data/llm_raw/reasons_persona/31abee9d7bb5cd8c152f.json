@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: worked it out on paper: mentions the actual values step by step, a bit long.\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\nRecursion only stops at a base case that returns without calling itself; without one it never stops.\n\nThe quiz shows:\nint sum(int a[], int n) { return a[n - 1] + sum(a, n - 1); }\n// a = {1, 2, 3}\n\nWhat is sum(a, 3)?\nOptions: \"it never stops\" or \"6\"\n\nPick the option your character would pick. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"it never stops\",\n  \"why\": \"its adding stuff and calling again with n-1 but n becomes 0 and there a[-1] no base case so never stops\"\n}",
+  "parsed": {
+    "answer": "it never stops",
+    "why": "its adding stuff and calling again with n-1 but n becomes 0 and there a[-1] no base case so never stops"
+  },
+  "usage": {
+    "prompt_tokens": 251,
+    "completion_tokens": 44
+  }
+}

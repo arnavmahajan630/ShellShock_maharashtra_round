@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Sort a in place, smallest first, with bubble sort.\nSignature: void bubble_sort(int a[], int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: does everything the long way: i = i + 1, separate flag variables, redundant else branches, long names like totalValueSoFar.\nThe student understands C well. Their solution is correct on every input but unusual: it uses a swapped flag to stop early.\n\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"void bubble_sort(int a[], int n)\\n{\\n    int swapHappenedInThisPass;\\n    int currentIndex;\\n    int temporaryStorageForSwapping;\\n    int numberOfElementsToSort = n;\\n\\n    swapHappenedInThisPass = 1;\\n    while (swapHappenedInThisPass == 1)\\n    {\\n        swapHappenedInThisPass = 0;\\n        currentIndex = 0;\\n        while (currentIndex < numberOfElementsToSort - 1)\\n        {\\n            if (a[currentIndex] > a[currentIndex + 1])\\n            {\\n                temporaryStorageForSwapping = a[currentIndex];\\n                a[currentIndex] = a[currentIndex + 1];\\n                a[currentIndex + 1] = temporaryStorageForSwapping;\\n                swapHappenedInThisPass = 1;\\n            }\\n            else\\n            {\\n                swapHappenedInThisPass = swapHappenedInThisPass;\\n            }\\n            currentIndex = currentIndex + 1;\\n        }\\n        numberOfElementsToSort = numberOfElementsToSort - 1;\\n    }\\n}\\n\",\n  \"note\": \"The student used a swap flag for early termination, verbose variable names, explicit counter increments, and a redundant else self-assignment.\"\n}",
+  "parsed": {
+    "code": "void bubble_sort(int a[], int n)\n{\n    int swapHappenedInThisPass;\n    int currentIndex;\n    int temporaryStorageForSwapping;\n    int numberOfElementsToSort = n;\n\n    swapHappenedInThisPass = 1;\n    while (swapHappenedInThisPass == 1)\n    {\n        swapHappenedInThisPass = 0;\n        currentIndex = 0;\n        while (currentIndex < numberOfElementsToSort - 1)\n        {\n            if (a[currentIndex] > a[currentIndex + 1])\n            {\n                temporaryStorageForSwapping = a[currentIndex];\n                a[currentIndex] = a[currentIndex + 1];\n                a[currentIndex + 1] = temporaryStorageForSwapping;\n                swapHappenedInThisPass = 1;\n            }\n            else\n            {\n                swapHappenedInThisPass = swapHappenedInThisPass;\n            }\n            currentIndex = currentIndex + 1;\n        }\n        numberOfElementsToSort = numberOfElementsToSort - 1;\n    }\n}\n",
+    "note": "The student used a swap flag for early termination, verbose variable names, explicit counter increments, and a redundant else self-assignment."
+  },
+  "usage": {
+    "prompt_tokens": 341,
+    "completion_tokens": 2127
+  }
+}

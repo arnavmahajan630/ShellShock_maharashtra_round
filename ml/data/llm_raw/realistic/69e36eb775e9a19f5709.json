@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return the absolute difference between a and b.\nSignature: int distance(int a, int b)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: cramped style: almost no spaces, inconsistent braces, single-letter names, a commented-out earlier attempt.\nThis student writes C++ with cout and #include <iostream>.\n(The judge rules are ignored here.)\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\"code\": \"#include<iostream>\\nusing namespace std;\\n//int distance(int a,int b){return a-b;}\\nint distance(int a,int b)\\n{\\nif(a>b)\\nreturn a-b;\\nelse\\nreturn b-a;\\n}\\nint main(){int x,y;cin>>x>>y;cout<<distance(x,y);return 0;}\", \"note\": \"Student ignored the C-only judge, added iostream and main to test with cin/cout, and used if/else for absolute difference.\"}",
+  "parsed": {
+    "code": "#include<iostream>\nusing namespace std;\n//int distance(int a,int b){return a-b;}\nint distance(int a,int b)\n{\nif(a>b)\nreturn a-b;\nelse\nreturn b-a;\n}\nint main(){int x,y;cin>>x>>y;cout<<distance(x,y);return 0;}",
+    "note": "Student ignored the C-only judge, added iostream and main to test with cin/cout, and used if/else for absolute difference."
+  },
+  "usage": {
+    "prompt_tokens": 324,
+    "completion_tokens": 2611
+  }
+}

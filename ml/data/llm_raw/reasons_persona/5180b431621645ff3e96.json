@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: explaining to a friend on WhatsApp in Hinglish (romanised Hindi with English code words).\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\n`=` stores the value and the condition then tests that stored value; `==` is the comparison.\n\nThe quiz shows:\nint lives = 3;\nif (lives = 1) printf(\"last life\");\n\nWhat is lives afterwards?\nOptions: \"1\" or \"3\"\n\nPick the option your character would pick. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"1\",\n  \"why\": \"bhai = stores value na, isliye lives me 1 store ho gaya, phir condition me 1 true hua, isliye lives ab 1 hai\"\n}",
+  "parsed": {
+    "answer": "1",
+    "why": "bhai = stores value na, isliye lives me 1 store ho gaya, phir condition me 1 true hua, isliye lives ab 1 hai"
+  },
+  "usage": {
+    "prompt_tokens": 229,
+    "completion_tokens": 51
+  }
+}

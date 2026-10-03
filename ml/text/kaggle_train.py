@@ -322,9 +322,15 @@ def main():
             print(f"\nONNX export FAILED ({type(error).__name__}: {error}). PyTorch weights saved in {out_dir}/hf instead.")
     (out_dir / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
-    archive = shutil.make_archive(f"reason_{run_id}", "zip", out_dir)
-    print(f"\nDone in {time.time() - started:.0f} s. Download {Path(archive).name} "
-          f"({Path(archive).stat().st_size / 1e6:.0f} MB) and unzip it into ml/artifacts/reason_{run_id}/")
+    if args.no_export:
+        # No model inside: name it differently so it is never unzipped over a real model folder.
+        archive = shutil.make_archive(f"reason_{run_id}_results_only", "zip", out_dir)
+        print(f"\nDone in {time.time() - started:.0f} s. No model was exported. The results are in {out_dir}/meta.json "
+              f"(also in {Path(archive).name}); keep that file as ml/artifacts/reason_{run_id}/lomo_meta.json.")
+    else:
+        archive = shutil.make_archive(f"reason_{run_id}", "zip", out_dir)
+        print(f"\nDone in {time.time() - started:.0f} s. Download {Path(archive).name} "
+              f"({Path(archive).stat().st_size / 1e6:.0f} MB) and unzip it into ml/artifacts/reason_{run_id}/")
 
 
 if __name__ == "__main__":

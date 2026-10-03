@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return 1 if the string s reads the same backwards, otherwise 0. strlen may be used.\nSignature: int is_palindrome(char s[])\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: typing at 2 am in the hostel: names like ans, temp1, x2, a leftover debug printf, one Hinglish comment such as // yaha add karo.\nThe student understands C well. Their solution is correct on every input but unusual: it builds the length with its own loop instead of strlen.\n\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"int is_palindrome(char s[]) {\\n    int len = 0;\\n    int i;\\n    int ans = 1;\\n    int temp1;\\n    // yaha length add karo\\n    while (s[len] != '\\\\0') {\\n        len++;\\n    }\\n    temp1 = len - 1;\\n    for (i = 0; i < len / 2; i++) {\\n        if (s[i] != s[temp1 - i]) {\\n            ans = 0;\\n            break;\\n        }\\n    }\\n    // printf(\\\"debug len=%d temp1=%d ans=%d\\\", len, temp1, ans); // leftover debug\\n    return ans;\\n}\",\n  \"note\": \"Student manually computes length instead of strlen, uses ans and temp1 with a Hinglish comment and an inactive debug printf.\"\n}",
+  "parsed": {
+    "code": "int is_palindrome(char s[]) {\n    int len = 0;\n    int i;\n    int ans = 1;\n    int temp1;\n    // yaha length add karo\n    while (s[len] != '\\0') {\n        len++;\n    }\n    temp1 = len - 1;\n    for (i = 0; i < len / 2; i++) {\n        if (s[i] != s[temp1 - i]) {\n            ans = 0;\n            break;\n        }\n    }\n    // printf(\"debug len=%d temp1=%d ans=%d\", len, temp1, ans); // leftover debug\n    return ans;\n}",
+    "note": "Student manually computes length instead of strlen, uses ans and temp1 with a Hinglish comment and an inactive debug printf."
+  },
+  "usage": {
+    "prompt_tokens": 362,
+    "completion_tokens": 3546
+  }
+}

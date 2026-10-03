@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: explaining to a friend on WhatsApp in Hinglish (romanised Hindi with English code words).\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\n`i<=n` (from 0) runs n times; whether the bound is the last value included or excluded is mixed up\n\nThe quiz shows:\nint i = 10;\nwhile (i > 0) { fire(); i--; }\n\nHow many shots are fired?\nOptions: \"10\" or \"11\"\n\nPick the option your character would pick. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"10\",\n  \"why\": \"dekho bhai, loop 10 bar chalega kyunki i>0 hai aur i=10 se start hokar 1 tak jaata hai, fir 0 pe ruk jaata hai\"\n}",
+  "parsed": {
+    "answer": "10",
+    "why": "dekho bhai, loop 10 bar chalega kyunki i>0 hai aur i=10 se start hokar 1 tak jaata hai, fir 0 pe ruk jaata hai"
+  },
+  "usage": {
+    "prompt_tokens": 238,
+    "completion_tokens": 58
+  }
+}

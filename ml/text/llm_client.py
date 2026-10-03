@@ -50,13 +50,13 @@ def _cache_path(job, model, messages, temperature, thinking):
     return RAW / job / (hashlib.sha256(payload.encode("utf-8")).hexdigest()[:20] + ".json")
 
 
-def chat_json(job, messages, temperature=1.0, retries=4, thinking=False):
+def chat_json(job, messages, temperature=1.0, retries=4, thinking=False, model=None):
     """One chat call that must return a JSON object. Returns (parsed, from_cache).
 
     thinking=False switches off the model's hidden reasoning. Measured on one sentence call:
     about 150 output tokens instead of about 2,000, with no visible loss for this kind of writing.
     """
-    model = model_name()
+    model = model or model_name()
     path = _cache_path(job, model, messages, temperature, thinking)
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))["parsed"], True
@@ -84,11 +84,11 @@ def chat_json(job, messages, temperature=1.0, retries=4, thinking=False):
     raise RuntimeError(f"DeepSeek call failed after {retries} tries: {type(last_error).__name__}: {last_error}")
 
 
-def chat_json_many(job, message_lists, temperature=1.0, workers=8):
+def chat_json_many(job, message_lists, temperature=1.0, workers=8, model=None, thinking=False):
     """Run many calls side by side. Returns a list of (parsed or None, from_cache, error or None)."""
     def one(messages):
         try:
-            parsed, cached = chat_json(job, messages, temperature)
+            parsed, cached = chat_json(job, messages, temperature, model=model, thinking=thinking)
             return parsed, cached, None
         except RuntimeError as exc:
             return None, False, str(exc)

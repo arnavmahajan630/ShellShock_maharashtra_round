@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return the sum of the n values in cells.\nSignature: int total_energy(int cells[], int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: typing at 2 am in the hostel: names like ans, temp1, x2, a leftover debug printf, one Hinglish comment such as // yaha add karo.\nThis student writes the whole solution in Python out of habit.\n(The judge rules are ignored here.)\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"def total_energy(cells, n):\\n    ans = 0\\n    temp1 = 0\\n    x2 = 0\\n    # yaha add karo\\n    for i in range(n):\\n        ans = ans + cells[i]\\n    printf(\\\"debug ans\\\")\\n    return ans\",\n  \"note\": \"Student's thinking: Python solution with C-style leftover printf and Hinglish comment, using variable names ans, temp1, x2.\"\n}",
+  "parsed": {
+    "code": "def total_energy(cells, n):\n    ans = 0\n    temp1 = 0\n    x2 = 0\n    # yaha add karo\n    for i in range(n):\n        ans = ans + cells[i]\n    printf(\"debug ans\")\n    return ans",
+    "note": "Student's thinking: Python solution with C-style leftover printf and Hinglish comment, using variable names ans, temp1, x2."
+  },
+  "usage": {
+    "prompt_tokens": 343,
+    "completion_tokens": 2618
+  }
+}

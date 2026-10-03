@@ -172,7 +172,9 @@ class TraceSummary(Strict):
 
 class DatasetRow(Strict):
     id: str
-    source: Literal["A", "E", "AMB", "R-blind", "R-team", "U", "X"]
+    # "R-llm": written by an LLM role-playing a student. A stand-in for the hand-written
+    # R sets; never report it as hand-written or as real student code.
+    source: Literal["A", "E", "AMB", "R-blind", "R-team", "R-llm", "U", "X"]
     problem_id: str
     family: str
     split: Literal["train", "holdout_problem"]

@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return n! (factorial(0) is 1). It must use recursion.\nSignature: int factorial(int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: over-careful: a comment on almost every line restating it, extra parentheses, one small helper function.\nThe student truly believes this about C, and nobody has corrected them: Recursion stops by itself when the work is done.\nBecause of that belief the submission is wrong: it gives a wrong result (or never finishes) on at least some inputs. It has no other bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\"code\":\"// helper function to multiply two numbers\\nint multiply(int first_number, int second_number) {\\n    // multiply the two numbers together\\n    int product = ((first_number) * (second_number));\\n    // return the multiplication result to the caller\\n    return (product);\\n}\\n\\n// main required function for returning n factorial\\nint factorial(int n) {\\n    // get the factorial of the number that is one smaller\\n    int smaller_factorial = factorial((n - 1));\\n    // multiply n by the smaller factorial to find the answer\\n    return (multiply(n, smaller_factorial));\\n}\",\"note\":\"The student omitted the base case because they believed recursion stops by itself once the multiplication work is done.\"}",
+  "parsed": {
+    "code": "// helper function to multiply two numbers\nint multiply(int first_number, int second_number) {\n    // multiply the two numbers together\n    int product = ((first_number) * (second_number));\n    // return the multiplication result to the caller\n    return (product);\n}\n\n// main required function for returning n factorial\nint factorial(int n) {\n    // get the factorial of the number that is one smaller\n    int smaller_factorial = factorial((n - 1));\n    // multiply n by the smaller factorial to find the answer\n    return (multiply(n, smaller_factorial));\n}",
+    "note": "The student omitted the base case because they believed recursion stops by itself once the multiplication work is done."
+  },
+  "usage": {
+    "prompt_tokens": 367,
+    "completion_tokens": 5349
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return n! (factorial(0) is 1). It must use recursion.\nSignature: int factorial(int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: does everything the long way: i = i + 1, separate flag variables, redundant else branches, long names like totalValueSoFar.\nThis student ignores the recursion requirement and solves it with a loop only.\n(The judge rules are ignored here.)\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"int factorial(int n)\\n{\\n    int totalValueSoFar = 1;\\n    int loopCounter = 1;\\n    int checkFlag = 0;\\n    if(n == 0)\\n    {\\n        totalValueSoFar = 1;\\n        checkFlag = 1;\\n    }\\n    else\\n    {\\n        while(loopCounter <= n)\\n        {\\n            totalValueSoFar = totalValueSoFar * loopCounter;\\n            loopCounter = loopCounter + 1;\\n        }\\n        checkFlag = 1;\\n    }\\n    if(checkFlag == 1)\\n    {\\n        return totalValueSoFar;\\n    }\\n    else\\n    {\\n        return totalValueSoFar;\\n    }\\n    return totalValueSoFar;\\n}\",\n  \"note\": \"Long variable names, separate flag, i=i+1, redundant else branches, and a while loop instead of recursion.\"\n}",
+  "parsed": {
+    "code": "int factorial(int n)\n{\n    int totalValueSoFar = 1;\n    int loopCounter = 1;\n    int checkFlag = 0;\n    if(n == 0)\n    {\n        totalValueSoFar = 1;\n        checkFlag = 1;\n    }\n    else\n    {\n        while(loopCounter <= n)\n        {\n            totalValueSoFar = totalValueSoFar * loopCounter;\n            loopCounter = loopCounter + 1;\n        }\n        checkFlag = 1;\n    }\n    if(checkFlag == 1)\n    {\n        return totalValueSoFar;\n    }\n    else\n    {\n        return totalValueSoFar;\n    }\n    return totalValueSoFar;\n}",
+    "note": "Long variable names, separate flag, i=i+1, redundant else branches, and a while loop instead of recursion."
+  },
+  "usage": {
+    "prompt_tokens": 339,
+    "completion_tokens": 1075
+  }
+}

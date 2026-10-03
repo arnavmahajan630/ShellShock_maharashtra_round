@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: worked it out on paper: mentions the actual values step by step, a bit long.\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\nLocal variables start at 0\n\nThe quiz shows:\nint p;\np = p * 3;\n\nWhat is p?\nOptions: \"0\" or \"unpredictable\"\n\nPick the option your character would pick. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"0\",\n  \"why\": \"I worked it out on paper. p starts 0, then 0*3 is 0, so p is 0.\"\n}",
+  "parsed": {
+    "answer": "0",
+    "why": "I worked it out on paper. p starts 0, then 0*3 is 0, so p is 0."
+  },
+  "usage": {
+    "prompt_tokens": 206,
+    "completion_tokens": 41
+  }
+}

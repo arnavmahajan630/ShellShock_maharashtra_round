@@ -1,0 +1,23 @@
+{
+  "job": "realistic_rater",
+  "model": "deepseek-flash",
+  "temperature": 0.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You label student C submissions for a programming course. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return 1 if a is in non-decreasing order, otherwise 0.\nSignature: int is_sorted(int a[], int n)\n\nSubmission:\nint is_sorted(int a[], int n)\n{\n    int i = 0;\n    int flag = 1;\n    int count;\n\n    while (i < n - 1)\n    {\n        if (a[i] <= a[i + 1])\n        {\n            flag = 1;\n        }\n        else\n        {\n        }\n        i = i + 1;\n    }\n    return flag;\n}\n\nChoose exactly one label for this submission from the code alone:\n- M01: Loop runs one step too many or too few. Wrong belief: `i<=n` (from 0) runs n times; whether the bound is the last value included or excluded is mixed up\n- M02: Loop variable never moves toward the exit. Wrong belief: The loop variable advances by itself and the loop ends by itself\n- M03: Running total is reset inside the loop. Wrong belief: The total keeps its value across passes even if it is set again inside the loop\n- M04: int ÷ int drops the decimals. Wrong belief: int / int gives the exact decimal\n- M05: Variable used before it was given a value. Wrong belief: Local variables start at 0\n- M06: `=` stores a value; `==` compares. Wrong belief: `=` compares\n- M07: A stray `;` gives the if/loop an empty body. Wrong belief: A `;` after the header is harmless\n- M08: Arrays start at 0; last cell is n−1. Wrong belief: Arrays are indexed 1..n\n- M10: `printf` shows a value; `return` hands it back. Wrong belief: Printing the value hands it back to the caller\n- D01: The search gives up after the first miss. Wrong belief: The else branch means 'not this one, keep looking'; it doesn't end or overwrite anything\n- D02: Binary search window never shrinks (`low = mid`). Wrong belief: mid is excluded from the window automatically\n- D03: Swapping without a temp loses a value. Wrong belief: Two assignments happen at the same time\n- D04: One pass doesn't sort the whole array. Wrong belief: One pass over the array sorts it\n- D05: Recursion has no reachable base case. Wrong belief: Recursion stops by itself when the work is done\n- D06: The recursive call doesn't move toward the base case. Wrong belief: The recursive call moves toward the base case on its own\n- D07: The recursive call's result is thrown away. Wrong belief: The recursive call's result is combined automatically\n- D08: `==` doesn't compare text in C. Wrong belief: `==` compares text\n- CORRECT: it solves the task on every input.\n- OTHER: it is wrong, but not because of any belief above.\n- GATE: it is not a valid answer in the allowed C (wrong language, empty, hard-coded, uses pointers or scanf, no recursion where required).\n\nReturn JSON: {\"label\": \"<one id from the list>\"}"
+    }
+  ],
+  "content": "{\"label\": \"OTHER\"}",
+  "parsed": {
+    "label": "OTHER"
+  },
+  "usage": {
+    "prompt_tokens": 728,
+    "completion_tokens": 6
+  }
+}

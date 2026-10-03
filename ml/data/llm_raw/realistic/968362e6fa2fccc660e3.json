@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Call fire() exactly n times. fire() already exists; do not define it.\nSignature: void fire_shots(int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no <string.h> except strlen. Arrays use [] only.\n- Plain C.\n\nThe student: typing at 2 am in the hostel: names like ans, temp1, x2, a leftover debug printf, one Hinglish comment such as // yaha add karo.\nThe student truly believes this about C, and nobody has corrected them: `i<=n` (from 0) runs n times; whether the bound is the last value included or excluded is mixed up.\nBecause of that belief the submission is wrong: it fails on at least some inputs. It has no other bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"#include <string.h>\\nvoid fire_shots(int n) {\\n    int i;\\n    // yaha add karo\\n    for (i = 0; i <= n; i++) {\\n        fire();\\n    }\\n    // printf(\\\"done\\\");\\n}\",\n  \"note\": \"The loop uses i<=n because the student believes that includes n iterations, not n+1.\"\n}",
+  "parsed": {
+    "code": "#include <string.h>\nvoid fire_shots(int n) {\n    int i;\n    // yaha add karo\n    for (i = 0; i <= n; i++) {\n        fire();\n    }\n    // printf(\"done\");\n}",
+    "note": "The loop uses i<=n because the student believes that includes n iterations, not n+1."
+  },
+  "usage": {
+    "prompt_tokens": 317,
+    "completion_tokens": 96
+  }
+}

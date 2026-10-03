@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: half asleep in the hostel at 2 am, typing with one thumb, short and sloppy, no capitals.\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\nA `;` after the header is harmless\n\nThe quiz shows:\nint n = 3;\nwhile (n > 0); { fire(); n--; }\n\nWhat happens?\nOptions: \"it never stops and nothing is fired\" or \"3 shots are fired\"\n\nYour character picks \"3 shots are fired\", because of how C works in their head. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"3 shots are fired\",\n  \"why\": \"semicolon after while is harmless, body still executes\"\n}",
+  "parsed": {
+    "answer": "3 shots are fired",
+    "why": "semicolon after while is harmless, body still executes"
+  },
+  "usage": {
+    "prompt_tokens": 240,
+    "completion_tokens": 29
+  }
+}

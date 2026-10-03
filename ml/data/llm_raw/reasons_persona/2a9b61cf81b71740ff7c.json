@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: nervous first-timer who hedges, apologises and is never sure.\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\nA `;` after the header is harmless\n\nThe quiz shows:\nint temp = 20;\nif (temp > 100); printf(\"overheat\");\n\nWhat is printed?\nOptions: \"nothing\" or \"overheat\"\n\nPick the option your character would pick. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"overheat\",\n  \"why\": \"The ; after the if line is just a small slip, so the printf still runs. I think it prints overheat. sorry if wrong\"\n}",
+  "parsed": {
+    "answer": "overheat",
+    "why": "The ; after the if line is just a small slip, so the printf still runs. I think it prints overheat. sorry if wrong"
+  },
+  "usage": {
+    "prompt_tokens": 213,
+    "completion_tokens": 44
+  }
+}

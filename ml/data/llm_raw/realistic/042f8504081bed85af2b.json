@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Sort a in place, smallest first, with bubble sort.\nSignature: void bubble_sort(int a[], int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: copied the shape from class notes but renamed things in snake_case, with a couple of Hindi or Marathi comments.\nThe student's loop over the array runs one step too far, so it touches one cell past the end.\nThat is the only bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"void bubble_sort(int a[], int n) {\\n    // chhote se bade kram mein karte hain\\n    int i, j;\\n    for (i = 0; i < n - 1; i++) {\\n        // har pass ke baad ek element apni sahi jagah par\\n        for (j = 0; j < n - i; j++) {\\n            if (a[j] > a[j + 1]) {\\n                // adla badli\\n                int temp = a[j];\\n                a[j] = a[j + 1];\\n                a[j + 1] = temp;\\n            }\\n        }\\n    }\\n}\",\n  \"note\": \"Student uses classic nested loop bubble sort shape from class notes with snake_case names and Hindi/Marathi comments; inner loop boundary is n - i instead of n - i - 1.\"\n}",
+  "parsed": {
+    "code": "void bubble_sort(int a[], int n) {\n    // chhote se bade kram mein karte hain\n    int i, j;\n    for (i = 0; i < n - 1; i++) {\n        // har pass ke baad ek element apni sahi jagah par\n        for (j = 0; j < n - i; j++) {\n            if (a[j] > a[j + 1]) {\n                // adla badli\n                int temp = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = temp;\n            }\n        }\n    }\n}",
+    "note": "Student uses classic nested loop bubble sort shape from class notes with snake_case names and Hindi/Marathi comments; inner loop boundary is n - i instead of n - i - 1."
+  },
+  "usage": {
+    "prompt_tokens": 338,
+    "completion_tokens": 1660
+  }
+}

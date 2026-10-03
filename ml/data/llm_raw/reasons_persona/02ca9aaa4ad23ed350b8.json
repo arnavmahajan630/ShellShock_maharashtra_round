@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: worked it out on paper: mentions the actual values step by step, a bit long.\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\nA local variable that was never given a value holds whatever was in memory, not 0.\n\nThe quiz shows:\nint count;\nif (5 > 3) count++;\nprintf(\"%d\", count);\n\nWhat is printed?\nOptions: \"unpredictable\" or \"1\"\n\nPick the option your character would pick. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"unpredictable\",\n  \"why\": \"count does not have a value so prints garbage memory from before, not 1\"\n}",
+  "parsed": {
+    "answer": "unpredictable",
+    "why": "count does not have a value so prints garbage memory from before, not 1"
+  },
+  "usage": {
+    "prompt_tokens": 226,
+    "completion_tokens": 33
+  }
+}

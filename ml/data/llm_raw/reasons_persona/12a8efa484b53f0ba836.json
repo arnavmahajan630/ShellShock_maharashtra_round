@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: worked it out on paper: mentions the actual values step by step, a bit long.\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\nSetting or declaring the total inside the loop wipes it on every pass, so only the last pass counts.\n\nThe quiz shows:\nint n = 0;\nwhile (n < 4) { int hits = 0; hits++; n++; }\n\nWhat is hits in the last pass?\nOptions: \"4\" or \"1\"\n\nPick the option your character would pick. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"1\",\n  \"why\": \"Every loop sets hits to 0, then hits++ makes it 1. Last pass same, so 1.\"\n}",
+  "parsed": {
+    "answer": "1",
+    "why": "Every loop sets hits to 0, then hits++ makes it 1. Last pass same, so 1."
+  },
+  "usage": {
+    "prompt_tokens": 238,
+    "completion_tokens": 38
+  }
+}

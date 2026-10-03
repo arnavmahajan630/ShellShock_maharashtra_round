@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return the sum of the n values in cells.\nSignature: int total_energy(int cells[], int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: over-careful: a comment on almost every line restating it, extra parentheses, one small helper function.\nThe student's loop over the array runs one step too far, so it touches one cell past the end.\nThat is the only bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\"code\":\"/* Helper function to add two given values. */\\nint add_values(int first_value, int second_value)\\n{\\n    /* Return the sum of the two values. */\\n    return (first_value + second_value);\\n}\\n\\n/* Return the sum of the n values in cells. */\\nint total_energy(int cells[], int n)\\n{\\n    /* Declare a variable to keep the running total. */\\n    int running_total = 0;\\n    /* Declare a variable to move through the array positions. */\\n    int position = 0;\\n\\n    /* Visit each position of the cells array. */\\n    for (position = 0; position <= n; position = position + 1)\\n    {\\n        /* Add the current cell value to the running total. */\\n        running_total = add_values(running_total, cells[position]);\\n    }\\n\\n    /* Return the final total energy. */\\n    return (running_total);\\n}\\n\",\"note\":\"The over-careful student added a small add_values helper, restating comments, extra parentheses, and wrote the loop condition as position <= n.\"}",
+  "parsed": {
+    "code": "/* Helper function to add two given values. */\nint add_values(int first_value, int second_value)\n{\n    /* Return the sum of the two values. */\n    return (first_value + second_value);\n}\n\n/* Return the sum of the n values in cells. */\nint total_energy(int cells[], int n)\n{\n    /* Declare a variable to keep the running total. */\n    int running_total = 0;\n    /* Declare a variable to move through the array positions. */\n    int position = 0;\n\n    /* Visit each position of the cells array. */\n    for (position = 0; position <= n; position = position + 1)\n    {\n        /* Add the current cell value to the running total. */\n        running_total = add_values(running_total, cells[position]);\n    }\n\n    /* Return the final total energy. */\n    return (running_total);\n}\n",
+    "note": "The over-careful student added a small add_values helper, restating comments, extra parentheses, and wrote the loop condition as position <= n."
+  },
+  "usage": {
+    "prompt_tokens": 336,
+    "completion_tokens": 1549
+  }
+}

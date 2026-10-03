@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: explaining to a friend on WhatsApp in Hinglish (romanised Hindi with English code words).\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\nprintf only shows the value on screen; the caller gets whatever `return` gives.\n\nThe quiz shows:\nint get(void) { printf(\"42\"); return 0; }\nint z = get() * 2;\n\nWhat is z?\nOptions: \"0\" or \"84\"\n\nPick the option your character would pick. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"84\",\n  \"why\": \"Bhai dekh, print 42 dikha raha hai na, to get() ka matlab 42 hi hai. To 42*2 = 84. Simple.\"\n}",
+  "parsed": {
+    "answer": "84",
+    "why": "Bhai dekh, print 42 dikha raha hai na, to get() ka matlab 42 hi hai. To 42*2 = 84. Simple."
+  },
+  "usage": {
+    "prompt_tokens": 228,
+    "completion_tokens": 51
+  }
+}

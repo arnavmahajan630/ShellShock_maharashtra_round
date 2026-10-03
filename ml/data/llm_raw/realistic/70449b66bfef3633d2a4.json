@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return 1 if code is 42, otherwise 0.\nSignature: int door_open(int code)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: does everything the long way: i = i + 1, separate flag variables, redundant else branches, long names like totalValueSoFar.\nThe student truly believes this about C, and nobody has corrected them: `=` compares.\nBecause of that belief the submission is wrong: it gives a wrong result (or never finishes) on at least some inputs. It has no other bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"int door_open(int code)\\n{\\n    int i = 0;\\n    int resultValue = 0;\\n    int compareCheck = 0;\\n\\n    while (i < 1)\\n    {\\n        compareCheck = (code = 42);\\n        i = i + 1;\\n    }\\n\\n    if (compareCheck)\\n    {\\n        resultValue = 1;\\n    }\\n    else\\n    {\\n        resultValue = 0;\\n    }\\n\\n    return resultValue;\\n}\",\n  \"note\": \"The student used = for comparison, assigning 42 to code and compareCheck, so compareCheck is always nonzero/true and the function always returns 1.\"\n}",
+  "parsed": {
+    "code": "int door_open(int code)\n{\n    int i = 0;\n    int resultValue = 0;\n    int compareCheck = 0;\n\n    while (i < 1)\n    {\n        compareCheck = (code = 42);\n        i = i + 1;\n    }\n\n    if (compareCheck)\n    {\n        resultValue = 1;\n    }\n    else\n    {\n        resultValue = 0;\n    }\n\n    return resultValue;\n}",
+    "note": "The student used = for comparison, assigning 42 to code and compareCheck, so compareCheck is always nonzero/true and the function always returns 1."
+  },
+  "usage": {
+    "prompt_tokens": 363,
+    "completion_tokens": 1968
+  }
+}

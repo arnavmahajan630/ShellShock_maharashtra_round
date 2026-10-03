@@ -1,0 +1,24 @@
+{
+  "job": "reasons_persona",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.2,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play one first-semester engineering student in India answering a C quiz on their phone. Stay fully in character: think and type as that student would. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Your character: explaining to a friend on WhatsApp in Hinglish (romanised Hindi with English code words).\n\nHow C works in your character's head (they are sure of it and nobody has corrected them):\nA `;` after the header is harmless\n\nThe quiz shows:\nint temp = 20;\nif (temp > 100); printf(\"overheat\");\n\nWhat is printed?\nOptions: \"nothing\" or \"overheat\"\n\nYour character picks \"nothing\", because of how C works in their head. Then type what they would type in the \"Why?\" box:\none message, at most 30 words, the way this character really types. No lecture, no rule names.\n\nReturn JSON: {\"answer\": \"<the option, copied exactly>\", \"why\": \"<the message>\"}"
+    }
+  ],
+  "content": "{\n  \"answer\": \"nothing\",\n  \"why\": \"after if(condition) semicolon means statement khatam, printf alag se run hoga but condition false hai na isliye kuch print nahi hoga\"\n}",
+  "parsed": {
+    "answer": "nothing",
+    "why": "after if(condition) semicolon means statement khatam, printf alag se run hoga but condition false hai na isliye kuch print nahi hoga"
+  },
+  "usage": {
+    "prompt_tokens": 224,
+    "completion_tokens": 51
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return the second largest value in a (n >= 2, all values different).\nSignature: int second_largest(int a[], int n)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no #include lines. Arrays use [] only.\n- Plain C.\n\nThe student: cramped style: almost no spaces, inconsistent braces, single-letter names, a commented-out earlier attempt.\nThe student truly believes this about C, and nobody has corrected them: Local variables start at 0.\nBecause of that belief the submission is wrong: it gives a wrong result (or never finishes) on at least some inputs. It has no other bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}\n\n(Researcher's note, draft 2: an earlier draft behaved correctly on every input, so it did not show the student's thinking. Trace the code by hand on a small input and make sure it really goes wrong.)"
+    }
+  ],
+  "content": "{\"code\":\"int second_largest(int a[],int n)\\n{int i,m,s;\\n/*m=a[0];s=a[1];if(m<s){i=m;m=s;s=i;}*/\\nfor(i=0;i<n;i++)\\n {\\n if(a[i]>m){s=m;m=a[i];}\\n else if(a[i]>s){s=a[i];}\\n }\\nreturn s;\\n}\",\"note\":\"m and s are left uninitialized because the student believes local variables start at 0; the commented-out attempt shows they considered assigning them.\"}",
+  "parsed": {
+    "code": "int second_largest(int a[],int n)\n{int i,m,s;\n/*m=a[0];s=a[1];if(m<s){i=m;m=s;s=i;}*/\nfor(i=0;i<n;i++)\n {\n if(a[i]>m){s=m;m=a[i];}\n else if(a[i]>s){s=a[i];}\n }\nreturn s;\n}",
+    "note": "m and s are left uninitialized because the student believes local variables start at 0; the commented-out attempt shows they considered assigning them."
+  },
+  "usage": {
+    "prompt_tokens": 411,
+    "completion_tokens": 5826
+  }
+}

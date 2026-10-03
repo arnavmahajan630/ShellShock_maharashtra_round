@@ -1,0 +1,24 @@
+{
+  "job": "realistic",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You role-play first-semester engineering students in India writing C for an online judge. You stay in character and write exactly the code that student would submit. Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return how many times x appears in a.\nSignature: int count_occurrences(int a[], int n, int x)\n\nRules of the online judge (the student knows them):\n- Submit only the function with the given signature (helper functions are allowed). No main().\n- No scanf, no pointers (* or &), no struct, no malloc, no <string.h> except strlen. Arrays use [] only.\n- Plain C.\n\nThe student: copied the shape from class notes but renamed things in snake_case, with a couple of Hindi or Marathi comments.\nThe student truly believes this about C, and nobody has corrected them: The total keeps its value across passes even if it is set again inside the loop.\nBecause of that belief the submission is wrong: it fails on at least some inputs. It has no other bug.\nWrite the code this student submits, with their habits visible. Do not write comments that admit or point at a mistake.\n\nReturn JSON: {\"code\": \"<the full submission>\", \"note\": \"<one line for the researcher: what in the code comes from the student's thinking>\"}"
+    }
+  ],
+  "content": "{\n  \"code\": \"#include <string.h>\\n\\nint count_occurrences(int a[], int n, int x) {\\n    int total = 0;\\n    int i;\\n    // yahaan se shuru karte hain\\n    for (i = 0; i < n; i = i + 1) {\\n        total = 0; // har baar reset hota hai, par total pichhli baar ka yaad rehta hai\\n        if (a[i] == x) {\\n            total = total + 1;\\n        }\\n    }\\n    return total;\\n}\",\n  \"note\": \"The student resets total inside the loop, believing it retains its previous value across iterations, which reflects their misconception.\"\n}",
+  "parsed": {
+    "code": "#include <string.h>\n\nint count_occurrences(int a[], int n, int x) {\n    int total = 0;\n    int i;\n    // yahaan se shuru karte hain\n    for (i = 0; i < n; i = i + 1) {\n        total = 0; // har baar reset hota hai, par total pichhli baar ka yaad rehta hai\n        if (a[i] == x) {\n            total = total + 1;\n        }\n    }\n    return total;\n}",
+    "note": "The student resets total inside the loop, believing it retains its previous value across iterations, which reflects their misconception."
+  },
+  "usage": {
+    "prompt_tokens": 290,
+    "completion_tokens": 168
+  }
+}
