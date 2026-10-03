@@ -32,17 +32,31 @@ class Step(Strict):
     effects: list[str] = []
 
 
+class PerTest(Strict):
+    """Counters for one test. The sums on Trace are what the frontend reads;
+    per-test values are what b_iter_delta_const_pm1, b_branch_always/never and
+    b_return_first_iter need (03 §2.4)."""
+    status: Literal["ok", "timeout", "runtime_error", "parse_error", "unsupported"]
+    returned: Any = None
+    printed: str = ""
+    loop_iters: dict[str, int] = {}
+    branch: dict[str, dict[str, int]] = {}
+    effects_count: dict[str, int] = {}
+    max_depth: int = 0
+
+
 class Trace(Strict):
     status: Literal["ok", "timeout", "runtime_error", "parse_error", "unsupported"]
     returned: Any = None
     printed: str = ""
     steps: list[Step] = []
-    loop_iters: dict[str, int] = {}                  # "L<line>" -> iterations
-    branch: dict[str, dict[str, int]] = {}           # "B<line>" -> {"true": n, "false": m}
+    loop_iters: dict[str, int] = {}                  # "L<line>" -> iterations, summed over tests
+    branch: dict[str, dict[str, int]] = {}           # "B<line>" -> {"true": n, "false": m}, summed
     events: list[Event] = []
-    effects_count: dict[str, int] = {}
-    max_depth: int = 0
+    effects_count: dict[str, int] = {}               # summed over tests
+    max_depth: int = 0                               # maximum over tests
     truncated: bool = False
+    per_test: list[PerTest] = []                     # one entry per test, same order as problem.tests
 
 
 class TestResult(Strict):
@@ -327,6 +341,13 @@ class EvidenceItem(Strict):
     weight: float | None = None
 
 
+class Latent(BaseModel):
+    """Set when every test passed but the model still names a misconception (passes-by-luck, 03 §5.5)."""
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
+    cls: str = Field(alias="class")
+    p: float
+
+
 class Diagnosis(Strict):
     status: Literal["confident", "ambiguous", "novel", "two_bug", "correct", "gate"]
     posterior: dict[str, float] = {}
@@ -337,6 +358,7 @@ class Diagnosis(Strict):
     evidence: list[EvidenceItem] = []
     next_probe: PublicProbe | None = None
     probes_asked: list[str] = []
+    latent: Latent | None = None
     model_version: str
 
 

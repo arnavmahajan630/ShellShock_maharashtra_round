@@ -180,7 +180,84 @@
           "ret": 5
         },
         "max_depth": 1,
-        "truncated": false
+        "truncated": false,
+        "per_test": [
+          {
+            "status": "ok",
+            "returned": 12,
+            "printed": "",
+            "loop_iters": {
+              "L3": 3
+            },
+            "branch": {},
+            "effects_count": {
+              "read_cell": 3,
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 5,
+            "printed": "",
+            "loop_iters": {
+              "L3": 1
+            },
+            "branch": {},
+            "effects_count": {
+              "read_cell": 1,
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 10,
+            "printed": "",
+            "loop_iters": {
+              "L3": 4
+            },
+            "branch": {},
+            "effects_count": {
+              "read_cell": 4,
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 9,
+            "printed": "",
+            "loop_iters": {
+              "L3": 3
+            },
+            "branch": {},
+            "effects_count": {
+              "read_cell": 3,
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 8,
+            "printed": "",
+            "loop_iters": {
+              "L3": 2
+            },
+            "branch": {},
+            "effects_count": {
+              "read_cell": 2,
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          }
+        ]
       },
       "tests": {
         "passed": 5,
@@ -369,7 +446,92 @@
           "ret": 20
         },
         "max_depth": 10,
-        "truncated": false
+        "truncated": false,
+        "per_test": [
+          {
+            "status": "ok",
+            "returned": 6,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1,
+                "false": 2
+              }
+            },
+            "effects_count": {
+              "call": 3,
+              "ret": 3
+            },
+            "max_depth": 3
+          },
+          {
+            "status": "ok",
+            "returned": 1,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1
+              }
+            },
+            "effects_count": {
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 1,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1
+              }
+            },
+            "effects_count": {
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 120,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1,
+                "false": 4
+              }
+            },
+            "effects_count": {
+              "call": 5,
+              "ret": 5
+            },
+            "max_depth": 5
+          },
+          {
+            "status": "ok",
+            "returned": 3628800,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1,
+                "false": 9
+              }
+            },
+            "effects_count": {
+              "call": 10,
+              "ret": 10
+            },
+            "max_depth": 10
+          }
+        ]
       },
       "tests": {
         "passed": 5,

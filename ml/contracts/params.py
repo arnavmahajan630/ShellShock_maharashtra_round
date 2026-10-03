@@ -12,6 +12,7 @@ P_OTHER_CORRECT = 0.4   # an OTHER learner answers correctly
 PROB_FLOOR = 0.02       # every likelihood is floored here, then renormalised
 PRIOR_GAMMA = 0.3       # exponent on the learner prior
 PRIOR_FLOOR = 0.02
+PRIOR_NEUTRAL = 1.0     # π_L(CORRECT) and π_L(OTHER): history does not move these (03 §6.1)
 
 # --- Decision logic (03 §5.5, §6.4) ---
 CONFIDENT_P = 0.75
@@ -25,13 +26,17 @@ NOVEL_P_OTHER = 0.5
 # --- Knowledge model (03 §8.1, §8.2) ---
 POPULATION_PRIOR = 0.10
 EXAM_DSA_PRIOR = 0.15           # D-classes at exam start if unseen (03 §8.5.2)
-DIAGNOSIS_ACTIVE_P = 0.5
+DIAGNOSIS_ACTIVE_P = 0.5        # state → ACTIVE when the updated P(A_k) reaches this (03 §8.4)
 LEARN_RATE = 0.35               # ℓ, applied when an intervention completes
 FORGET_RATE = 0.05              # φ, per intervening level before a ghost return
 HINT_GUESS_BONUS = 0.2
 HINT_GUESS_CAP = 0.9
+# One update for a failed code task diagnosed as k (03 §8.2, §8.5.3):
+# P(fail_k | A) = the problem's authored exposure e_ik, or this default when it lists none.
 FAIL_SIGNATURE_IF_ACTIVE = 0.5
 FAIL_SIGNATURE_IF_NOT = 0.03
+# Tests passed but top-1 is a misconception: same ratio with e_ik multiplied by this (03 §5.5).
+LATENT_EXPOSURE_FACTOR = 0.5
 
 # g = P(correct | active), s = P(wrong | not active), per item type.
 # "belief_mcq" covers probes, mcq, predict_output, next_state and exam trace items:

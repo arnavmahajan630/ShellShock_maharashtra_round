@@ -264,7 +264,89 @@
           "ret": 5
         },
         "max_depth": 1,
-        "truncated": false
+        "truncated": false,
+        "per_test": [
+          {
+            "status": "ok",
+            "returned": -858993448,
+            "printed": "",
+            "loop_iters": {
+              "L3": 4
+            },
+            "branch": {},
+            "effects_count": {
+              "read_cell": 3,
+              "read_void": 1,
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": -858993455,
+            "printed": "",
+            "loop_iters": {
+              "L3": 2
+            },
+            "branch": {},
+            "effects_count": {
+              "read_cell": 1,
+              "read_void": 1,
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": -858993450,
+            "printed": "",
+            "loop_iters": {
+              "L3": 5
+            },
+            "branch": {},
+            "effects_count": {
+              "read_cell": 4,
+              "read_void": 1,
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": -858993451,
+            "printed": "",
+            "loop_iters": {
+              "L3": 4
+            },
+            "branch": {},
+            "effects_count": {
+              "read_cell": 3,
+              "read_void": 1,
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": -858993452,
+            "printed": "",
+            "loop_iters": {
+              "L3": 3
+            },
+            "branch": {},
+            "effects_count": {
+              "read_cell": 2,
+              "read_void": 1,
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          }
+        ]
       },
       "tests": {
         "passed": 0,
@@ -528,7 +610,89 @@
           "ret": 5
         },
         "max_depth": 1,
-        "truncated": false
+        "truncated": false,
+        "per_test": [
+          {
+            "status": "ok",
+            "returned": 1,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1
+              }
+            },
+            "effects_count": {
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 1,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "false": 1
+              }
+            },
+            "effects_count": {
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 1,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "false": 1
+              }
+            },
+            "effects_count": {
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 1,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "false": 1
+              }
+            },
+            "effects_count": {
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 1,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "false": 1
+              }
+            },
+            "effects_count": {
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          }
+        ]
       },
       "tests": {
         "passed": 1,
@@ -949,7 +1113,93 @@
           "call": 4
         },
         "max_depth": 1,
-        "truncated": false
+        "truncated": false,
+        "per_test": [
+          {
+            "status": "ok",
+            "returned": null,
+            "printed": "",
+            "loop_iters": {
+              "L2": 2,
+              "L3": 3
+            },
+            "branch": {
+              "B4": {
+                "true": 1,
+                "false": 2
+              }
+            },
+            "effects_count": {
+              "read_cell": 8,
+              "write_cell": 2,
+              "compare": 3,
+              "call": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": null,
+            "printed": "",
+            "loop_iters": {
+              "L2": 1,
+              "L3": 1
+            },
+            "branch": {
+              "B4": {
+                "true": 1
+              }
+            },
+            "effects_count": {
+              "read_cell": 4,
+              "write_cell": 2,
+              "compare": 1,
+              "call": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": null,
+            "printed": "",
+            "loop_iters": {
+              "L2": 2,
+              "L3": 3
+            },
+            "branch": {
+              "B4": {
+                "false": 3
+              }
+            },
+            "effects_count": {
+              "read_cell": 6,
+              "compare": 3,
+              "call": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": null,
+            "printed": "",
+            "loop_iters": {
+              "L2": 3,
+              "L3": 6
+            },
+            "branch": {
+              "B4": {
+                "true": 6
+              }
+            },
+            "effects_count": {
+              "read_cell": 24,
+              "write_cell": 12,
+              "compare": 6,
+              "call": 1
+            },
+            "max_depth": 1
+          }
+        ]
       },
       "tests": {
         "passed": 1,
@@ -1223,7 +1473,92 @@
           "ret": 20
         },
         "max_depth": 10,
-        "truncated": false
+        "truncated": false,
+        "per_test": [
+          {
+            "status": "ok",
+            "returned": 6,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1,
+                "false": 2
+              }
+            },
+            "effects_count": {
+              "call": 3,
+              "ret": 3
+            },
+            "max_depth": 3
+          },
+          {
+            "status": "ok",
+            "returned": 1,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1
+              }
+            },
+            "effects_count": {
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 1,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1
+              }
+            },
+            "effects_count": {
+              "call": 1,
+              "ret": 1
+            },
+            "max_depth": 1
+          },
+          {
+            "status": "ok",
+            "returned": 120,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1,
+                "false": 4
+              }
+            },
+            "effects_count": {
+              "call": 5,
+              "ret": 5
+            },
+            "max_depth": 5
+          },
+          {
+            "status": "ok",
+            "returned": 3628800,
+            "printed": "",
+            "loop_iters": {},
+            "branch": {
+              "B2": {
+                "true": 1,
+                "false": 9
+              }
+            },
+            "effects_count": {
+              "call": 10,
+              "ret": 10
+            },
+            "max_depth": 10
+          }
+        ]
       },
       "tests": {
         "passed": 5,

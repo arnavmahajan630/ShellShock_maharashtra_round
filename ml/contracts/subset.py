@@ -90,6 +90,9 @@ EFFECTS_COUNT_KEYS = ["fire", "read_cell", "read_void", "write_cell", "compare",
 #   caller's own step comes after the callee's steps
 # - trace["events"] lists every occurrence over all tests, in order; each carries "test",
 #   the index of the test it happened in. steps[].events carry no "test"
+# - loop_iters, branch and effects_count on the trace are sums over tests; max_depth is the
+#   maximum. trace["per_test"] holds each test's own counters (03 §2.4), because
+#   b_iter_delta_const_pm1, b_branch_always/never and b_return_first_iter are per-test.
 
 GATE_MESSAGES = {
     "G0": "",

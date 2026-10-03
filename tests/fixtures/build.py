@@ -48,6 +48,35 @@ class Recorder:
         self.truncated = False
         self.recording = False
         self.test = 0
+        self.per_test = []
+        self._test_max_depth = 0
+        self._base_loops, self._base_branch, self._base_effects = {}, {}, {}
+
+    def set_depth(self, depth):
+        self._test_max_depth = max(self._test_max_depth, depth)
+        self.max_depth = max(self.max_depth, depth)
+
+    def begin_test(self):
+        self._base_loops = dict(self.loop_iters)
+        self._base_branch = {k: dict(v) for k, v in self.branch.items()}
+        self._base_effects = dict(self.effects_count)
+        self._test_max_depth = 0
+
+    def end_test(self, status, returned, printed=""):
+        loops = {k: v - self._base_loops.get(k, 0) for k, v in self.loop_iters.items()}
+        loops = {k: v for k, v in loops.items() if v}
+        branch = {}
+        for key, counts in self.branch.items():
+            base = self._base_branch.get(key, {})
+            delta = {side: n - base.get(side, 0) for side, n in counts.items()}
+            delta = {side: n for side, n in delta.items() if n}
+            if delta:
+                branch[key] = delta
+        effects = {k: v - self._base_effects.get(k, 0) for k, v in self.effects_count.items()}
+        effects = {k: v for k, v in effects.items() if v}
+        self.per_test.append({"status": status, "returned": returned, "printed": printed,
+                              "loop_iters": loops, "branch": branch, "effects_count": effects,
+                              "max_depth": self._test_max_depth})
 
     def step(self, line, variables, events=(), effects=()):
         self.executed += 1
@@ -75,7 +104,7 @@ class Recorder:
         return {"status": status, "returned": returned, "printed": printed, "steps": self.steps,
                 "loop_iters": self.loop_iters, "branch": self.branch, "events": self.events,
                 "effects_count": self.effects_count, "max_depth": self.max_depth,
-                "truncated": self.truncated}
+                "truncated": self.truncated, "per_test": self.per_test}
 
 
 def run_all(problem, program, max_steps=None):
@@ -83,9 +112,11 @@ def run_all(problem, program, max_steps=None):
     rec = Recorder(max_steps)
     outcomes = []
     for index, test in enumerate(problem["tests"]):
+        rec.begin_test()
         rec.test, rec.recording = index, index == problem["display_test"]
         args = json.loads(json.dumps(test["args"]))     # arrays may be changed in place
         status, returned = program(rec, *args)
+        rec.end_test(status, returned)
         outcomes.append((status, returned, args))
     shown = outcomes[problem["display_test"]]
     worst = next((s for s, _, _ in outcomes if s != "ok"), "ok")
@@ -115,7 +146,7 @@ P03_LE = """int total_energy(int cells[], int n) {
 
 def p03_for(rec, cells, n, rel_le):
     """total_energy with `i < n` (correct) or `i <= n` (the hard twin)."""
-    rec.max_depth = max(rec.max_depth, 1)
+    rec.set_depth(1)
     v = {"n": n, "total": 0, "i": None}
     rec.step(2, v, effects=[f"call:total_energy:1:cells,{n}"])
     v["i"] = 0
@@ -152,7 +183,7 @@ P03_NO_UPDATE = """int total_energy(int cells[], int n) {
 
 def p03_no_update(rec, cells, n):
     """total_energy as a while loop whose `i++` is missing: runs into the step cap."""
-    rec.max_depth = max(rec.max_depth, 1)
+    rec.set_depth(1)
     start = rec.executed
     v = {"n": n, "total": 0, "i": None}
     rec.step(2, v, effects=[f"call:total_energy:1:cells,{n}"])
@@ -178,7 +209,7 @@ P11_SEMI = """int door_open(int code) {
 
 def p11_semi(rec, code):
     """door_open with a stray `;` after the if: the block below always runs."""
-    rec.max_depth = max(rec.max_depth, 1)
+    rec.set_depth(1)
     v = {"code": code}
     rec.take(2, code == 42)
     rec.step(2, v, events=[{"type": "empty_body", "kind": "if"}], effects=[f"call:door_open:1:{code}"])
@@ -191,7 +222,7 @@ Q17_OK = Q17["correct_variants"][0]
 
 def q17_ok(rec, n, depth=1):
     """Correct recursive factorial (base case n <= 1)."""
-    rec.max_depth = max(rec.max_depth, depth)
+    rec.set_depth(depth)
     v = {"n": n}
     rec.take(2, n <= 1)
     rec.step(2, v, effects=[f"call:factorial:{depth}:{n}"])
@@ -232,7 +263,7 @@ Q06_NO_TEMP = """void bubble_sort(int a[], int n) {
 
 def q06_no_temp(rec, a, n):
     """Bubble sort that swaps without a temp: a value gets duplicated."""
-    rec.max_depth = max(rec.max_depth, 1)
+    rec.set_depth(1)
     v = {"n": n, "i": 0, "j": None}
     rec.step(2, v, effects=[f"call:bubble_sort:1:a,{n}"])
     while True:

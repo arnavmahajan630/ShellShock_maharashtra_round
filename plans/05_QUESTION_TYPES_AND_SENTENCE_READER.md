@@ -15,7 +15,7 @@
 | Complete the snippet | `complete_snippet` | code (holes filled) | diagnoser, through `/attempt` | LightGBM (03 §5) |
 | Fix bug | `fix_bug` | code (repaired) | diagnoser, through `/attempt`, with the rule in §4 | LightGBM |
 | Build the algo | (missions, exam coding items) | code | diagnoser | LightGBM |
-| Reasoning | `reasoning` | one typed sentence | **sentence reader** (§6) → Bayes layer | **new model** |
+| Reasoning | `reasoning` | one typed sentence | **sentence reader** (§6) → Bayes layer | **new model** (`tfidf` and `frozen` are Core; the fine-tuned biencoder is Strong) |
 
 ## 2. New files
 
@@ -110,21 +110,22 @@ A "why?" follow-up is asked after a quiz answer only when the chosen option is t
 
 ## 6. Sentence reader (`ml/text/`)
 
-**Job:** given a code snippet and one sentence from the learner, say which mistake the sentence shows, or say "unsure".
+**Job:** given one sentence from the learner, say which mistake the sentence shows, or say "unsure". The code is used only to mask classes the snippet makes impossible.
 
 - **Labels:** the 17 classes + `CORRECT_REASON`. "Unsure" is not a label; it is the answer when confidence is below a threshold.
-- **Input:** `code + "\n[WHY] " + sentence`. The chosen option is **not** part of the input: the Bayes layer already counts it, and feeding it here would count it twice.
-- **Three readers behind one interface** (`serve.py: read(code, text) -> {probs, status, reader}`), tried in this order at start-up: fine-tuned → frozen → word-count → none.
+- **Input:** the sentence only. The code is not embedded with it: the code would dominate the vector and the reader would classify by context, which the context-grouped split then punishes for the wrong reason. The Bayes layer already counted the chosen option, so the option is not part of the input either. The code is used only to apply the same structural masking as the diagnoser (`MASK_PRECONDITIONS` in `ml/contracts/feature_names.py`): a class that the code makes impossible is removed before the reader answers.
+- **What ships.** `tfidf` and `frozen` are Core. The fine-tuned `biencoder`, `kaggle_train.py`, the ONNX export and the leave-one-class-out run of E16 are Strong: they need a cloud GPU and a human to download the artifact, and the demo does not wait on them.
+- **Three readers behind one interface** (`serve.py: read(code, text) -> {probs, status, reader}`). `code` is accepted so masking can run; it is not part of the vector. At start-up, try in this order and keep the first that loads: fine-tuned (only if the Strong artifact is present) → frozen → word-count → none.
 
 | Reader | What it is | Training | Load |
 |---|---|---|---|
 | `tfidf` | word and character counts + logistic regression | seconds, laptop CPU | no extra installs |
-| `frozen` | sentences turned into vectors by an unchanged `BAAI/bge-base-en-v1.5`, then logistic regression on the vectors | no GPU training; about 1–2 min to embed 3k sentences on CPU (estimate) | model file about 420 MB |
-| `biencoder` | the same model fine-tuned so a sentence lands next to the **description** of its mistake (description = name + wrong belief from 03 §3.1) | about 3–10 min on a free T4 or on the RTX 4050 (estimate); 4 epochs, lr 2e-5, batch 32 (T4) or 16 (4050), max length 256, mixed precision, cross-entropy over cosine similarity to all descriptions, temperature 0.05 | 3–4 GB GPU memory (estimate) |
+| `frozen` | the sentence alone turned into a vector by an unchanged `BAAI/bge-base-en-v1.5`, then logistic regression on the vectors | no GPU training; about 1–2 min to embed 3k sentences on CPU (estimate) | model file about 420 MB |
+| `biencoder` *(Strong)* | the same model fine-tuned so a sentence lands next to the **description** of its mistake (description = name + wrong belief from 03 §3.1). The sentence is embedded alone; the description is the other side | about 3–10 min on a free T4 or on the RTX 4050 (estimate); 4 epochs, lr 2e-5, batch 32 (T4) or 16 (4050), max length 256, mixed precision, cross-entropy over cosine similarity to all descriptions, temperature 0.05 | 3–4 GB GPU memory (estimate) |
 
 - **Why descriptions:** a new mistake can be added by writing its description, with no retraining. That is what the leave-one-out test (E16) measures.
 - **Threshold:** chosen on validation so that accepted answers are at least 90% right; below it the status is `unsure` and nothing is updated.
-- **Where to train:** Kaggle or Colab, with `ml/text/kaggle_train.py` (one self-contained script: installs its own packages, reads `reasons.jsonl`, trains, exports). Reason: GPU PyTorch is about 5–6 GB on a drive that is 95% full. The leave-one-out run is 17 retrains, about 1–2 hours on a T4 (estimate), so that one should be in the cloud regardless.
+- **Where to train (Strong):** Kaggle or Colab, with `ml/text/kaggle_train.py` (one self-contained script: installs its own packages, reads `reasons.jsonl`, trains, exports). Reason: GPU PyTorch is about 5–6 GB on a drive that is 95% full. The leave-one-out run is 17 retrains, about 1–2 hours on a T4 (estimate), so that one should be in the cloud regardless. The Core demo uses `tfidf` or `frozen` and does not wait for this.
 - **Running it on the laptop:** export to ONNX in the cloud; the laptop then needs only `onnxruntime` and `tokenizers` (tens of MB) plus the model file. Fallback if the export misbehaves: CPU-only PyTorch (about 1 GB, estimate).
 - **Artifacts:** `ml/artifacts/reason_<sha8>/{model.onnx, tokenizer.json, descriptions.json, meta.json}`; gitignored (over GitHub's 100 MB file limit), shared as a download. `tfidf` and `frozen` heads are small and are committed.
 - Model id is a config value. `google/embeddinggemma-300m` is a newer option that handles more languages, but it needs a licence click-through on Hugging Face.

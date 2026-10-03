@@ -764,5 +764,77 @@
     "call": 5
   },
   "max_depth": 1,
-  "truncated": true
+  "truncated": true,
+  "per_test": [
+    {
+      "status": "timeout",
+      "returned": null,
+      "printed": "",
+      "loop_iters": {
+        "L4": 2499
+      },
+      "branch": {},
+      "effects_count": {
+        "read_cell": 2499,
+        "call": 1
+      },
+      "max_depth": 1
+    },
+    {
+      "status": "timeout",
+      "returned": null,
+      "printed": "",
+      "loop_iters": {
+        "L4": 2499
+      },
+      "branch": {},
+      "effects_count": {
+        "read_cell": 2499,
+        "call": 1
+      },
+      "max_depth": 1
+    },
+    {
+      "status": "timeout",
+      "returned": null,
+      "printed": "",
+      "loop_iters": {
+        "L4": 2499
+      },
+      "branch": {},
+      "effects_count": {
+        "read_cell": 2499,
+        "call": 1
+      },
+      "max_depth": 1
+    },
+    {
+      "status": "timeout",
+      "returned": null,
+      "printed": "",
+      "loop_iters": {
+        "L4": 2499
+      },
+      "branch": {},
+      "effects_count": {
+        "read_cell": 2499,
+        "call": 1
+      },
+      "max_depth": 1
+    },
+    {
+      "status": "timeout",
+      "returned": null,
+      "printed": "",
+      "loop_iters": {
+        "L4": 2499
+      },
+      "branch": {},
+      "effects_count": {
+        "read_cell": 2499,
+        "call": 1
+      },
+      "max_depth": 1
+    }
+  ]
 }

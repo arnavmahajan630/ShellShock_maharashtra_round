@@ -93,7 +93,7 @@ DSA exam:  /exam/start ─► exam selector (EIG over P(A_k) + sector coverage +
 ## 2. Execution engine (`ml/c_interp/`) — shared by game and ML
 
 ### 2.1 Frozen C subset
-**Supported:** `int`, `float`, `double` (treated as float), `char` (as int, char literals), 1D arrays (`int a[5]`, `int a[] = {..}`, array params), `+ - * / %`, `+= -= *= /= %=`, `++/--` (pre/post), relational, `&& || !`, ternary, casts `(int)` `(float)` `(double)`, `if/else`, `for` (C99 decl in init), `while`, `do-while`, `break`, `continue`, `return`, user functions (scalars by value, **arrays by reference**, as in real C), **recursion (depth cap 100)**, **`char` arrays and string literals** (`char s[] = "level";`, `'\0'` terminator, `char s[]` params, `printf("%s")`), builtin **`strlen`** (unless the problem lists it in `forbid`), `printf` (`%d %i %f %.Nf %c %s %% %lf %ld`), `#define NAME literal` (textual substitution), `#include` lines (stripped).
+**Supported:** `int`, `float`, `double` (treated as float), `char` (as int, char literals), 1D arrays (`int a[5]`, `int a[] = {..}`, array params), `+ - * / %`, `+= -= *= /= %=`, `++/--` (pre/post), relational, `&& || !` (**short-circuit**, as in C: the right operand is not evaluated when the left one decides the result), ternary, casts `(int)` `(float)` `(double)`, `if/else`, `for` (C99 decl in init), `while`, `do-while`, `break`, `continue`, `return`, user functions (scalars by value, **arrays by reference**, as in real C), **recursion (depth cap 100)**, **`char` arrays and string literals** (`char s[] = "level";`, `'\0'` terminator, `char s[]` params, `printf("%s")`), builtin **`strlen`** (unless the problem lists it in `forbid`), `printf` (`%d %i %f %.Nf %c %s %% %lf %ld`), `#define NAME literal` (textual substitution), `#include` lines (stripped).
 **World builtins** (the game API): `fire()`, `launch()`, `open_door()`, `close_door()`, `scan(int x)`. Each call appends a world effect.
 **Rejected (gate G4):** pointers (`*p`, `&x`, `char *s`), `struct`, `malloc`, `<string.h>` functions other than `strlen` (`strcmp`, `strcpy`…), `scanf` *(Strong: allowed only for the ITSP slice via an input queue)*, `goto`, multi-dim arrays, `switch` *(add only if time)*.
 
@@ -137,19 +137,22 @@ A problem defines the entry function. The harness parses the learner file, calls
   "events": [{"type": "oob_read", "line": 5, "arr": "cells", "idx": 3, "size": 3}],
   "effects_count": {"fire": 0, "read_cell": 3, "read_void": 1, "write_cell": 0, "compare": 0, "call": 1},
   "max_depth": 1,
-  "truncated": false
+  "truncated": false,
+  "per_test": [{"status": "ok", "returned": 26, "printed": "", "loop_iters": {"L4": 4}, "branch": {}, "effects_count": {"read_cell": 3, "read_void": 1}, "max_depth": 1}]
 }
 ```
 DSA traces use the same shape: ArrayBars replays `read_cell / write_cell / compare` effects with marker variables (`problem.markers`, e.g. `["low","mid","high"]`) taken from `steps[].vars`; WarpStack replays `call / ret`; SignalTiles replays `read_cell` on `char[]` params.
 Steps are recorded for **one display test** (the problem's `display_test`); counters and events are aggregated for all tests in `tests[]`. Cap 2,000 recorded steps (`truncated: true`).
+`per_test` is one object per test, in test order: `{status, returned, printed, loop_iters, branch, effects_count, max_depth}`. The same-named fields on the trace stay the **sums** over tests (`max_depth` stays the **maximum**) so the frontend keeps reading them. Features that say "on every test" (`b_iter_delta_const_pm1`, `b_branch_always`, `b_branch_never`, `b_return_first_iter`) read `per_test`, never the sums.
 
 ### 2.5 Implementation notes
-- `pycparser.CParser().parse(src)`. Preprocess: normalise smart quotes, strip `#include`, apply `#define`, reject other `#` lines. pycparser doesn't need prototypes for `printf` or builtins (implicit declarations parse fine).
+- `pycparser.CParser().parse(src)`. Preprocess: normalise smart quotes, **replace `//` and `/* */` comments with spaces (keep the newlines, so line numbers stay)**, strip `#include`, apply `#define`, reject other `#` lines. pycparser rejects comments, and the `comments` augmentation plus the realistic-set brief both add them. pycparser doesn't need prototypes for `printf` or builtins (implicit declarations parse fine).
 - Tree-walking evaluator: one method per node type (`FileAST, FuncDef, Decl, TypeDecl, ArrayDecl, InitList, Compound, Assignment, BinaryOp, UnaryOp, Constant, ID, ArrayRef, FuncCall, If, For, While, DoWhile, Break, Continue, Return, EmptyStatement, Cast, TernaryOp, ExprList`). Use Python exceptions for `Break/Continue/Return`. Expect ~500–700 lines.
 - Values carry a type tag (`int|float`). int ops wrap at 32 bits. Arrays are Python lists of tagged values, shared by reference when passed.
 - Every node has `coord.line`; keep it for events, evidence and fixer edits.
 - **Unit tests** (`c_interp/tests/`): one per row of §2.2 + all correct variants of all problems pass their tests. Optional: differential check against `gcc` for defined-behaviour programs if gcc is installed.
-- **Performance budget:** a problem's whole test suite in < 30 ms (sorting tests use n ≤ 8; recursion n ≤ 12). Fix-probe features run up to ~60 suites, so the hard cap per `/attempt` is about 250 ms; cache by AST hash.
+- **Performance budget:** a problem's whole test suite in < 30 ms (sorting tests use n ≤ 8; recursion n ≤ 12). Fix-probe features are **not** model inputs (§4.4). After the model, fixers run for the **top-3 classes only**, ≤ 5 candidates each, and stop at the first candidate that passes. Worst case before the cache: 3 × 5 × 30 ms = 450 ms. The p95 target for `/attempt` is 300 ms, which holds on a cache hit and on the common case where the first candidate of each class passes. Cache by AST hash.
+- **gcc differential:** compare the interpreter with gcc only for programs whose trace has none of `uninit_read`, `oob_read`, `overflow`, `str_literal_compare`. Those are undefined behaviour in real C, so a mismatch there is not an interpreter bug.
 - **v3 extra unit tests:** string literal init + terminator; `s[i] == "a"` → false + event; in-place sort visible to the caller; `depth_cap_hit` on missing base case; `discarded_call_value`; `strlen` forbid.
 
 ---
@@ -288,7 +291,7 @@ Coverage check (CI): every D-class has ≥ 2 training problems (D01: Q01 Q08 Q15
 | **E** | Hard negatives (near-miss CORRECT), two-bug compositions, weird-but-valid OTHER | ~2,200 | constructed | train / eval slices | ✔ (two-bug as soft) |
 | **AMB** | Ambiguity groups (T1 incl. DSA pair loops) | ~400 | soft 0.5/0.5 | train + twin eval | ✔ (weighted) |
 | **R-blind** | 40 items hand-written by **FE** (has not seen operators): 25 main + 15 DSA | 40 | intended label + 2nd-rater | **headline test, run once** | ✘ |
-| **R-team** | 60 items hand-written by ML: 35 main + 25 DSA | 60 | same | test + adversarial validation | ✘ |
+| **R-team** | 30 items hand-written by ML (04 decision; was 60): about 18 main + 12 DSA | 30 | same | test + adversarial validation | ✘ |
 | **U** | U1/U2 unseen-class items (hand-written + operator) | 30 | U1/U2 | novelty test | ✘ |
 | **X** *(Strong)* | ITSP real-student slice, diff-auto-labelled + hand-checked | 40–80 | auto + manual | external real-student test | ✘ |
 
@@ -307,9 +310,9 @@ Coverage check (CI): every D-class has ≥ 2 training problems (D01: Q01 Q08 Q15
 **Conclusion:** no public C dataset ships *misconception* labels. The ready data that helps within 12 hours is ITSP (real students, paired fixes) as an external test slice. Everything trainable is generated and verified by us.
 
 #### R (realistic set) protocol — the honest replacement for the human study
-1. **Blind authoring:** FE writes R-blind (40: 25 main + 15 DSA) at T+6:15 *without having seen* `operators.py`. ML writes R-team (60: 35 main + 25 DSA) separately at T+8:00.
+1. **Blind authoring:** FE writes R-blind (40: 25 main + 15 DSA) at T+6:15 *without having seen* `operators.py`. ML writes R-team (**30**, 04 decision) separately at T+8:00. The combined realistic set is 70.
 2. **Brief to authors:** "Write like a first-semester student who has *this* belief: odd names (`ans`, `temp1`, `x2`), debug `printf`s, comments (Hinglish fine), `while` instead of `for`, extra variables, partial solutions, different structure from the reference. Use only the frozen subset. Pick any bank problem."
-3. **Composition (100):** ≥ 4 per class × 17 = 68; CORRECT 14 (incl. weird-but-correct sorts and recursions); OTHER 6; HARD-twin 6 (incl. 2 DSA pair loops); gate/outlier 6 (incl. a loop-only "recursive" answer and `strlen` in Q13); plus U1/U2 live in set U.
+3. **Composition (70):** 4 per class is no longer possible. Aim for at least 2 items per class across the combined set, plus CORRECT, OTHER, at least 4 HARD-twin items (incl. 2 DSA pair loops) and at least 4 gate/outlier items (incl. a loop-only "recursive" answer and `strlen` in Q13). U1/U2 live in set U, not here.
 4. **Second rater:** the other teammate labels each item from code alone (≤ 10 min). Report % agreement + Cohen's κ; disagreements → final label by discussion, keep both raw labels.
 5. **Verify by execution:** misconception items should fail ≥ 1 test. Items that pass all tests are kept in a **"passes-by-luck"** slice (evidence for the resolution argument).
 6. **Freeze:** commit with hash before running any model on it. R-blind is evaluated **once**, at the end.
@@ -337,7 +340,7 @@ for problem in train+holdout problems:
   compositions(two-bug, 8%) ; OTHER ops ; AMB ops
 → ambiguity pass (§3.5.5) → dedupe + caps (§3.5.6) → dataset.jsonl
 ```
-Operators edit **source text using pycparser coordinates** (line/column of the node), so formatting and names survive (same approach Da GOATS used for its fixer). Each operator has a stable `op_id`, a `variant` id (for the operator-holdout evaluation) and an inverse in the fixer.
+Operators change the **syntax tree and reprint it with `pycparser.c_generator`** (a `BinaryOp`'s coordinate is where its left operand starts, not where the operator is, so text edits by coordinate are reserved for the fixer, where the learner sees a diff of their own code). Each operator has a stable `op_id`. **`op_variant` equals `op_id`**: E3 holds out one operator per class that has at least two. The row field `variant` is the correct-variant id (`cv1`, `cv2`, `cv3`) and is unrelated. Each operator has an inverse in the fixer.
 
 #### 3.5.1 Operator catalogue
 
@@ -440,7 +443,7 @@ Log drop rate per operator. An operator with > 40% drops is buggy: fix it, don't
 {
   "id": "A-004311", "source": "A|E|AMB|R-blind|R-team|U|X",
   "problem_id": "P03", "family": "array_accumulate", "split": "train|holdout_problem",
-  "variant": "cv1", "op_id": "amb_le_array", "op_variant": "v1", "aug": ["rename","debug_printf"],
+  "variant": "cv1", "op_id": "amb_le_array", "op_variant": "amb_le_array", "aug": ["rename","debug_printf"],
   "code": "...",
   "label": "M01", "soft_label": {"M01": 0.5, "M08": 0.5}, "labels_all": ["M01","M08"],
   "is_two_bug": false, "ambiguous_group": "h_9f2c…", "ast_hash": "h_9f2c…",
@@ -504,6 +507,10 @@ Sources and counts (class × source × problem), operator catalogue with drop ra
 
 **Design rule: every feature is problem-agnostic.** Behaviour is measured *relative to the reference solution on the same inputs*, so a feature means the same thing on P03 and on an unseen P09. No raw text, identifiers, line counts, `problem_id`, `op_id` or template ids.
 
+**Main loop.** `a_main_cond_op_*`, `a_bound_form_*`, `a_init_form_*` and `a_update_*` describe one loop: the loop with the most executed iterations on the display test, ties going to the outermost. Nested loops also emit `a_outer_cond_op_*` and `a_outer_bound_*` for the outermost loop and `a_inner_cond_op_*` for the loop directly inside it; all of those are 0 when the function has one loop. The same rule picks the reference's main loop.
+
+**Reference.** Every learner-vs-reference feature uses `correct_variants[0]`, not a blend of the three variants.
+
 ### 4.1 Group A — AST structure (`ast_feats.py`), ~30 features
 | Feature | Meaning |
 |---|---|
@@ -512,6 +519,7 @@ Sources and counts (class × source × problem), operator catalogue with drop ra
 | `a_bound_form_{n, n_minus_1, n_plus_1, const, other}` | bound expression shape (param-relative) |
 | `a_init_form_{0, 1, n, n_minus_1, other}` | loop-variable initial value |
 | `a_update_present`, `a_update_dir` (+1/−1/0), `a_update_var_is_cond_var`, `a_update_in_branch` | progress structure |
+| `a_outer_cond_op_{lt,le,gt,ge,ne,eq,other}`, `a_inner_cond_op_{…}`, `a_outer_bound_{n, n_minus_1, n_plus_1, const, other}` | nested loops only; 0 when there is one loop |
 | `a_empty_body_{if,for,while}` | `EmptyStatement` directly as a body |
 | `a_assign_in_cond` | `Assignment` node as an `if`/`while`/`for` condition |
 | `a_decl_noinit_read_first` | declared without initialiser and the first use is a read / compound assign |
@@ -550,14 +558,14 @@ For each failing test, compute **counterfactual reference outputs** by running t
 **DSA (v3):** `r_eq_one_pass` (learner's `array0` equals the reference's **first pass only**, computed by running a provided `one_pass` helper of the reference; **D04 signal**) · `r_eq_first_check_only` / `r_eq_last_check_only` (result equals the reference run on only the first / last element: **D01** early return / flag reset) · `r_eq_top_frame_only` (output equals the top frame's own contribution, e.g. `n` for factorial, `a[n-1]` for array sum: **D07 signal**) · `r_eq_reversed_twice` (array unchanged after a reverse: `m01_half_bound`) · `r_eq_shift_without_wrap` (rotate lost the first value).
 These generalise across problems because they're defined by input transformations, not by problem-specific values.
 
-### 4.4 Group F — fix-probe ("would class k's fix repair it?") (`fix_feats.py`), 34 features (2 per class)
-For each class k: run its **fixer** (§7.3, up to 5 candidate edits); `f_fix_k` = 1 if any candidate passes all tests, `f_fixgain_k` = best Δ pass fraction. For T1 code, the M01 and M08 fixes are the same edit, so both fire: the ambiguity is preserved, as it should be. Budget: stop as soon as one candidate per class passes; cache by AST hash.
+### 4.4 Group F — fix-probe, computed after the model, not an input
+For each of the **top-3 classes** after masking and temperature (§5.5): run its fixer (§7.3, up to 5 candidate edits); `f_fix_k` = 1 if any candidate passes all tests, `f_fixgain_k` = best Δ pass fraction. These 34 numbers (`ml/contracts/feature_names.py`: `OFFLINE_FEATURES`) are **not columns of the training matrix**. On synthetic data the class-k fixer is the inverse of the operator that built the row, so `f_fix_k` is a near-perfect label and a model trained on it memorizes the generator (E1/E2 then hit the ≥ 0.98 red flag and `/attempt` spends ~17 × 5 suites). For T1 code the M01 and M08 fixes are the same edit, so both fire: the ambiguity is preserved. Results feed `two_bug_check`, the `f_fix` evidence sentence and the intervention's minimal fix. E9 still reports an offline row that *adds* F to the model, so the Lab Report shows what was given up. Budget: stop as soon as one candidate per class passes; cache by AST hash.
 
 ### 4.5 Group C — coarse task meta, 5 features
 `t_has_array_param`, `t_returns_float`, `t_is_void`, `t_has_char_array_param`, `t_mutates_array_arg`. (Coarse only. Anything finer — sector, problem id, "is DSA" — lets the model learn "problem → class". E15 checks this.)
 
 ### 4.6 Missing values
-LightGBM handles NaN natively. 15% of training rows have groups B, R, F set to NaN (feature dropout), so AST-only inputs (ITSP, unsupported runs) still get sensible posteriors. Ablation E9 reports AST-only performance explicitly.
+LightGBM handles NaN natively. 15% of training rows have groups B and R set to NaN (feature dropout), so AST-only inputs (ITSP, unsupported runs) still get sensible posteriors. Group F is not a model input (§4.4). Ablation E9 reports AST-only performance explicitly, and one extra row with F added back.
 
 ### 4.7 Explicitly **not** features
 Simulated predictions, belief-agreement vectors, history, hint usage, time taken, text n-grams, identifiers, `n_lines`. (Predictions/probes/history live in the Bayes layer; TF-IDF exists only as a baseline.)
@@ -566,13 +574,14 @@ Simulated predictions, belief-agreement vectors, history, hint usage, time taken
 - `knn_dist`: mean Euclidean distance to the 5 nearest training rows in standardised A+B+R space (NaN → column median; drop zero-variance columns). Threshold `τ_d` = 99th percentile of out-of-fold distances.
 - `p_max`: calibrated max probability; `p_other`.
 - **novel** if `knn_dist > τ_d` **or** `p_other ≥ 0.5` **or** (`p_max < τ_p` **and** the top-2 aren't a known twin pair). `τ_p` is chosen on OOF predictions so that accepted (non-abstained) predictions have ≥ 90% precision.
+- **LOCO.** E6 "LOCO strict" (§9.2) drops `CLASS_DEFINING_FEATURES[k]` (`ml/contracts/feature_names.py`) from this space before scoring class k's rows, and does not run fixer k. "LOCO naive" is the same score without that drop, reported beside it. The naive number is optimistic: k's own signature features are near-constant 0 in a model that never saw k.
 
 ---
 
 ## 5. Diagnoser model (`ml/model/`)
 
 ### 5.1 Labels
-19 outputs: `M01 M02 M03 M04 M05 M06 M07 M08 M10 D01 D02 D03 D04 D05 D06 D07 D08 CORRECT OTHER` (+ `M09` if Strong S4 lands → 20). **One model for both domains** (main + DSA): M-classes occur inside DSA problems, and a shared model is what makes the exam's "did your Loops repair hold inside a sort?" question answerable. Soft-labelled rows are duplicated with weights (§3.5.5). Two-bug rows: 0.5/0.5 duplication.
+19 outputs: `M01 M02 M03 M04 M05 M06 M07 M08 M10 D01 D02 D03 D04 D05 D06 D07 D08 CORRECT OTHER` (+ `M09` if Strong S4 lands → 20). **One model for both domains** (main + DSA): M-classes occur inside DSA problems, and a shared model is what makes the exam's "did your Loops repair hold inside a sort?" question answerable. **Inputs are groups A, B, R and C.** Group F is computed afterwards for the top-3 classes (§4.4, §5.5) and is not in the matrix. Soft-labelled rows are duplicated with weights (§3.5.5). Two-bug rows: 0.5/0.5 duplication.
 
 ### 5.2 LightGBM configuration
 ```python
@@ -587,7 +596,7 @@ sample_weight = soft_weight × balanced_class_weight
 
 ### 5.3 Training procedure (`train.py`)
 1. Load `dataset.jsonl`, drop `split == holdout_problem`, the passes-by-luck pool and U rows.
-2. `GroupKFold(n_splits=5, groups=problem_id)` over the 28 training problems (13 main + 15 DSA; folds stratified so each fold holds main and DSA problems) → OOF probabilities for every row (used for calibration, τ, novelty, E1).
+2. `StratifiedGroupKFold(n_splits=5)` over the 28 training problems (13 main + 15 DSA), groups = `problem_id`, stratified by domain (main vs DSA) so each fold holds both. `GroupKFold` cannot stratify; do not use it here. → OOF probabilities for every row (used for calibration, τ, novelty, E1).
 3. Pick config (§5.2), refit on all training problems → `model.txt`.
 4. Temperature scaling on OOF logits (§5.4); novelty thresholds on OOF (§4.8).
 5. Save `artifacts/diagnoser_<sha8>/{model.txt, meta.json}`; `meta.json` = classes, feature list + order, T, τ_p, τ_d, kNN reference matrix (≤ 4k rows, float32), training data hash, git commit.
@@ -597,10 +606,12 @@ sample_weight = soft_weight × balanced_class_weight
 Fit a scalar temperature T by minimising NLL of `softmax(logits / T)` on OOF logits (`scipy.optimize.minimize_scalar`, bounds [0.5, 5]). Report ECE (10 equal-width bins) before/after and a reliability diagram. If per-class reliability is bad for one class, report it; don't add per-class isotonic in the MVP (too little data per class).
 
 ### 5.5 Decision logic (`model/decide.py`)
-Structural masking (§4.1b) is applied to `p_code` first; then the Bayes layer (§6) produces `posterior`:
+Structural masking (§4.1b) is applied to `p_code` first; then the Bayes layer (§6) produces `posterior`. Fixers for the **top-3** classes run here (§4.4), not inside the model:
 ```
 if gate != G0                                   → status = "gate"
-elif top1 == CORRECT and tests all pass         → status = "correct"
+elif tests all pass:
+     if top1 == CORRECT or p(top1) < 0.5        → status = "correct"
+     else                                       → status = "correct", latent = {class: top1, p: p(top1)}
 elif novel (§4.8)                               → status = "novel"
 elif two_bug_check(top1, top2)                  → status = "two_bug"
 elif p1 < 0.75 and p1 - p2 < 0.25:
@@ -608,17 +619,18 @@ elif p1 < 0.75 and p1 - p2 < 0.25:
      else                                       → status = "confident" (band "Possible")
 else                                            → status = "confident"
 ```
-`two_bug_check`: p2 ≥ 0.25 **and** fix(top1) alone fails tests **and** fix(top2) alone fails **and** fix(top1)∘fix(top2) passes.
+`latent` is the passes-by-luck case: the tests passed, but the model still names a misconception at ≥ 0.5. The attempt is shown as correct. The knowledge model applies the §8.2 likelihood ratio with `e_ik × LATENT_EXPOSURE_FACTOR` (`0.5` in `params.py`), so a lucky pass is weak evidence that k is active, not evidence that it is gone.
+`two_bug_check`: p2 ≥ 0.25 **and** fix(top1) alone fails tests **and** fix(top2) alone fails **and** fix(top1)∘fix(top2) passes. Both fixes come from the top-3 fixer run above.
 
 ### 5.6 Evidence generation (`model/evidence.py`)
 1. `booster.predict(X, pred_contrib=True)` → SHAP-style contributions per class; take the slice for `top1`.
-2. Top-3 positive contributors → sentence templates filled from extractor metadata (`feature_lines`, values):
+2. Top-3 positive contributors → sentence templates filled from extractor metadata (`feature_lines`, values). The template file is `evidence_templates.json`: one entry per feature in `FEATURES`, plus the post-model fixer sentence. A class's defining features are exactly `CLASS_DEFINING_FEATURES[k]`, and EDA 10.5 reads that same map.
    - `a_main_cond_op_le` → "Loop condition uses `<=` (line {line})."
    - `b_iter_delta_const_pm1` → "Loop ran {actual} times; the mission needed {expected}."
    - `b_oob_read_idx_eq_n` → "Reads `{arr}[{n}]`, one cell past the end (line {line})."
    - `r_eq_ref_last_only` → "Your total equals only the last cell's value."
    - `b_printed_eq_ref_return` → "The right value was printed, but the function returned {returned}."
-   - `f_fix_k` → "Changing only {fix_desc} makes every test pass."
+   - `f_fix_k` → "Changing only {fix_desc} makes every test pass." (from the post-model fixer, §4.4; this is not a model feature)
    - `b_multiset_changed` → "After your swap, crate {v} appears twice and {w} is gone."
    - `a_mid_assign_no_offset` → "`{var} = mid` keeps mid inside the window (line {line}); the window stops shrinking."
    - `b_depth_cap` + `a_base_case_present=0` → "Warp gates opened {depth} deep and never closed: no base case."
@@ -631,7 +643,7 @@ else                                            → status = "confident"
 4. For HARD-twin status, add: `{"type": "RUN", "text": "This code is identical for both explanations. Asking one question."}`.
 
 ### 5.7 Baselines (`model/baselines.py`)
-1. Majority class. 2. **Rules**: class predicates in fixed priority (gate → D08 → D05 → D06 → D07 → D03 → D02 → D04 → D01 → M07 → M06 → M05 → M02 → M10 → M04 → M03 → M08 → M01 → OTHER/CORRECT). 3. TF-IDF (char 3–5-grams on normalised code) + logistic regression. 4. TF-IDF + LightGBM. 5. *(Optional)* zero-shot LLM, only if an API key is available in the last hour: same label list, JSON output, same R/holdout items, temperature 0; otherwise the Lab Report row says "not run".
+1. Majority class. 2. **Rules**: class predicates in fixed priority (gate → D08 → D05 → D06 → D07 → D03 → D02 → D04 → D01 → M07 → M06 → M05 → M02 → M10 → M04 → M03 → M08 → M01 → OTHER/CORRECT). 3. TF-IDF (char 3–5-grams on normalised code) + logistic regression. 4. TF-IDF + LightGBM. 5. **Zero-shot DeepSeek** on R (R-blind and R-team), through `ml/text/llm_client.py`: same label list, JSON output, temperature 0. This is an E-a row. If the key is missing the Lab Report row says "not run" and the rest of E8 still ships. Cost is cents; do not skip it only because the hour is late.
 
 ---
 
@@ -642,6 +654,7 @@ else                                            → status = "confident"
 classes K = {M01…M10, D01…D08, CORRECT, OTHER}  (masked classes removed, §4.1b)
 p0(k)   = calibrated LightGBM probability (code + trace)
 π_L(k)  = learner's current P(active_k) from the knowledge model (§8), floored at 0.02
+π_L(CORRECT) = π_L(OTHER) = 1.0          (history does not move these two)
 prior   : p(k) ∝ p0(k) · π_L(k)^γ          γ = 0.3  (history can nudge, never dominate)
 response r_j (prediction, MCQ, probe):  p(k) ← p(k) · P(r_j | k)  then renormalise
 ```
@@ -761,14 +774,18 @@ Align learner and reference traces on the display test by loop iteration; produc
 `P(A_k)` = probability the misconception is currently **active**. Start at 0.10 (population prior). Stored in SQLite with a JSON evidence log.
 
 ### 8.2 Updates (2-state, BKT-style; parameters hand-set from item design)
-- **Diagnosis:** if posterior `p_k ≥ 0.5` → `P(A_k) ← max(P(A_k), p_k)` and state → ACTIVE (or RELAPSED if previously STABLE/MASTERED).
+One rule for a code attempt. There is no `max(P, p_k)` write.
+- **Failed code task whose diagnosis top-1 is k** (posterior ≥ 0.5): likelihood ratio with `P(fail_k | A) = e_ik` and `P(fail_k | ¬A) = 0.03`. `e_ik` is the problem's authored exposure for k; when the problem lists none, use `FAIL_SIGNATURE_IF_ACTIVE` (0.5). This is the same update the exam uses (§8.5.3).
+  - `P(A) ← P(A)·e_ik / (P(A)·e_ik + (1−P(A))·0.03)`
+- **Passed code task with `latent` = k** (§5.5): the same ratio with `e_ik × 0.5`.
+- **Passed code task, no latent class:** the item-response row below ("correct").
 - **Intervention completed:** learning transition `P(A) ← P(A)·(1 − ℓ)`, ℓ = 0.35.
-- **Item response** with guess `g = P(correct | A)` and slip `s = P(wrong | ¬A)`:
+- **Item response** with guess `g = P(correct | A)` and slip `s = P(wrong | ¬A)`, for traps, probes, MCQs, trace items and code tasks that are not a k-signature failure:
   - correct: `P(A) ← P(A)·g / (P(A)·g + (1−P(A))·(1−s))`
   - wrong: `P(A) ← P(A)·(1−g) / (P(A)·(1−g) + (1−P(A))·s)`
-  - a failed code task whose diagnosis top-1 is k uses a stronger ratio: `P(fail with k-signature | A) = 0.5`, `| ¬A) = 0.03`.
 - **Hint used:** `g ← min(0.9, g + 0.2)` for that item (passing with help is weaker evidence).
 - **Forgetting before a ghost return:** `P(A) ← P(A) + φ·(1 − P(A))`, φ = 0.05 per intervening level.
+- **State:** after the update, §8.4 fires from the new `P(A)`. A diagnosis moves the state to ACTIVE when the updated `P(A) ≥ 0.5` (and to RELAPSED if it was STABLE or MASTERED).
 
 | Item type | g = P(correct \| active) | s = P(wrong \| resolved) | Why |
 |---|---|---|---|
@@ -777,7 +794,7 @@ Align learner and reference traces on the display test by loop iteration; produc
 | **trap prediction** (belief ≠ correct) | **0.15** | 0.10 | a believer gives the specific wrong answer |
 | probe / MCQ with belief distractor | derived from §6.2: (1−p_b)·q ≈ 0.20 | 0.10 | |
 | ghost return (later, unscaffolded) | 0.25 | 0.15 | |
-| **exam coding item** exposing k (v3) | 0.30 (or via `P(fail with k-signature)` = exposure `e_ik`) | 0.15 | no hints, new surface |
+| **exam coding item** (v3) | pass with no latent class: 0.30. A `fail_k` or a `latent` class uses the §8.2 ratio instead of this row | 0.15 | no hints, new surface |
 | **exam trace item** with a k-belief option (v3) | from §6.2 | 0.10 | |
 
 ### 8.3 Trap items (`data/items.json`), one per class (17), verified by the interpreter
@@ -801,18 +818,21 @@ Align learner and reference traces on the display test by loop iteration; produc
 | D07 | `int fact(int n) { if (n == 1) return 1; fact(n - 1); return n; }` → `fact(4)`? | 4 | 24 |
 | D08 | `char c = 'a'; if (c == "a") fire(); else open_door();` what happens? | door opens | fires |
 
+One trap per class is burned once the learner leaves PROBATION. A RELAPSED learner needs another. `predict_output` quiz items (05 §3.1) whose `belief` map contains k are a second trap pool for that class: scored with the trap row of the table above, and never the probe that was already asked in the original diagnosis.
+
 **Transfer families** (different from where the misconception was found): M01 {count_loop, countdown_loop, prefix_loop} · M02 {while_progress, count_loop} · M03/M05 {array_accumulate, accumulate_product, array_count_if} · M04 {average, ratio} · M06/M07 {equality_check, branch_bands, while_progress} · M08 {index_access, array_accumulate, array_max} · M10 {return_value, index_access, equality_check, pairwise_check} · **D01** {linear_search, pairwise_check, string_two_pointer, flag_search} · **D02** {binary_search, guess_halving} · **D03** {bubble_sort, selection_sort, two_pointer_swap, shift} · **D04** {bubble_sort, selection_sort} · **D05/D06/D07** {rec_product, rec_digits, rec_array} · **D08** {string_count, string_two_pointer}. Main-game classes may also transfer onto DSA families (e.g. M01 → pairwise_check) once the learner has opened the Trials.
 
 ### 8.4 State machine (`state_machine.py`)
 ```
-UNSEEN ──diag p_k≥0.5──▶ ACTIVE ──intervention start──▶ TREATING ──intervention done──▶ PROBATION
+UNSEEN ──updated P(A)≥0.5──▶ ACTIVE ──intervention start──▶ TREATING ──intervention done──▶ PROBATION
 PROBATION ──[P(A)<0.15 ∧ trap passed ∧ ≥1 transfer in a different family passed]──▶ STABLE
 PROBATION ──[P(A)>0.5 after an item]──▶ TREATING (next modality)
 STABLE ──[ghost return passed ∧ P(A)<0.10]──▶ MASTERED
 STABLE ──[exam item with e_ik ≥ 0.4 passed ∧ P(A)<0.10]──▶ MASTERED      (v3: the exam is a ghost return)
-UNSEEN ──[exam diagnosis p_k≥0.5]──▶ ACTIVE                               (v3: "NEW" finding in the debrief)
-STABLE / MASTERED ──[diag p_k≥0.5 or ghost failed]──▶ RELAPSED ──intervention──▶ TREATING
+UNSEEN ──[exam update leaves P(A)≥0.5]──▶ ACTIVE                          (v3: "NEW" finding in the debrief)
+STABLE / MASTERED ──[updated P(A)≥0.5, or a ghost item failed]──▶ RELAPSED ──intervention──▶ TREATING
 ```
+Transitions read the `P(A)` produced by §8.2. They do not copy the model's posterior.
 `/reassess` returns `conditions[]`, e.g.
 `[{"id":"p_active","label":"Misconception probability < 0.15","met":false,"detail":"0.31"}, {"id":"trap","label":"Trap item passed","met":false,"detail":"predicted 9, actual: outside the array"}, {"id":"transfer","label":"Different-family transfer passed","met":true,"detail":"P09 max_shield"}]`.
 
@@ -831,13 +851,18 @@ STABLE / MASTERED ──[diag p_k≥0.5 or ghost failed]──▶ RELAPSED ─�
 - Sector rating `θ_s` (Elo-style), start 1300 (+100 if all 3 planets are complete). Item rating `r_i` = 1200 / 1400 / 1600 for difficulty 1 / 2 / 3. `P_pass(i) = 1 / (1 + 10^((r_i − θ_s) / 400))`.
 
 #### 8.5.3 Observation model
-- Coding item i: outcome `o ∈ {pass, fail_k, fail_other}` where `fail_k` = silent diagnosis top-1 is k with posterior ≥ 0.5. For each class k: `P(fail_k | A_k) = e_ik`, `P(fail_k | ¬A_k) = 0.03`.
+- Coding item i: outcome `o ∈ {pass, fail_k, fail_other}` where `fail_k` = silent diagnosis top-1 is k with posterior ≥ 0.5. The knowledge update is the §8.2 ratio: `P(fail_k | A_k) = e_ik`, `P(fail_k | ¬A_k) = 0.03`. A pass with a `latent` class uses `e_ik × 0.5`. There is no second, exam-only formula.
 - Trace item: answer likelihood from §6.2.
 - Classes are updated independently (stated approximation).
 
 #### 8.5.4 Selection rule (`exam/select.py`)
 ```
-EIG(i)   = Σ_{k : e_ik ≥ 0.2} [ H(P(A_k)) − E_o H(P(A_k) | o) ]          (binary entropies, bits)
+Each item is a set of independent per-class binary tests (classes are updated independently, §8.5.3).
+For every k with e_ik ≥ 0.2:
+  P(fail_k | A_k) = e_ik,  P(fail_k | ¬A_k) = 0.03
+  P(fail_k) = P(A_k)·e_ik + (1 − P(A_k))·0.03
+  EIG_k = H(P(A_k)) − [ P(fail_k)·H(P(A_k) | fail_k) + (1 − P(fail_k))·H(P(A_k) | not fail_k) ]
+EIG(i) = Σ_k EIG_k                                          (binary entropies, bits)
 cost(i)  = 1.0 for coding (≈ 4 min), 0.3 for trace (≈ 1 min)
 S(i)     = EIG(i) / cost(i)
          + 0.5 · [sector(i) not yet covered]
@@ -867,7 +892,7 @@ reason string = top-2 classes by EIG contribution + the bonus that fired, e.g.
 - `adaptivity_log[]`: `{order, item_id, sector, eig_bits, reason, outcome}`.
 
 #### 8.5.7 Fallback (same API)
-Fixed blueprint if the selector fails a checkpoint: `[Q01, xt_sort_1, Q06, xt_rec_1, Q17, xt_str_1, Q14, xt_search_1, Q10, xt_bsearch_1]`; `reason = "fixed blueprint"`. E14 compares both anyway.
+Fixed blueprint if the selector fails a checkpoint: `[Q01, xt_sort_1, Q06, xt_rec_1, Q17, xt_str_1, Q14, xt_search_1, Q10, xt_bsearch_1]`; `reason = "fixed blueprint"`. If strings were cut (D08, Q13–Q15), use `[Q01, xt_sort_1, Q06, xt_rec_1, Q17, xt_search_1, Q10, xt_bsearch_1, Q03, xt_arr_1]` and skip the strings sector. E14 compares both anyway.
 
 #### 8.5.8 Honest framing
 Exposure values, Elo constants and weights are **hand-set design choices**. Elo here is a convenience, not a calibrated IRT model. Classes are updated independently. The adaptive policy is evaluated only in simulation (E14), under parameter ranges different from the engine's.
@@ -882,9 +907,9 @@ Exposure values, Elo constants and weights are **hand-set design choices**. Elo 
 | TRAIN | A+E+AMB rows of the 28 training problems (13 main + 15 DSA) | fit, 5-fold grouped CV, calibration, τ | free |
 | HOLDOUT-P | A+E+AMB rows of P04, P09, P13, Q04, Q09, Q16 | unseen-problem test (reported per domain) | evaluate after model freeze |
 | TRAIN-MAIN (v3) | TRAIN restricted to the 13 main problems | cross-domain experiment E15 (separate retrain) | free |
-| OPHOLD | for each class with ≥ 2 operators, one `op_variant` removed from TRAIN | unseen surface-form test (separate retrains) | free |
+| OPHOLD | for each class with ≥ 2 operators, one `op_id` removed from TRAIN (`op_variant` = `op_id`, §3.5) | unseen surface-form test (separate retrains) | free |
 | LUCK | verified "passes-by-luck" mutants | resolution argument, CORRECT false-negatives | free |
-| R-team | 60 realistic items (35 main + 25 DSA) | test + adversarial validation (inputs only) | evaluate once at the end; inputs may be inspected |
+| R-team | 30 realistic items (04 decision) | test + adversarial validation (inputs only) | evaluate once at the end; inputs may be inspected |
 | **R-blind** | 40 realistic items by FE (25 main + 15 DSA) | **headline** | **never inspected; evaluated once** |
 | U | 30 U1/U2 items | unseen-class test | evaluate once |
 | X | ITSP slice (Strong) | real-student test | evaluate once |
@@ -894,15 +919,15 @@ Leakage asserts: no `ast_hash` appears in two slices; R/U/X hashes never in TRAI
 
 | ID | Question | Protocol | Metrics | Plot / table |
 |---|---|---|---|---|
-| **E1** | How well does it generalise to new problems (in-distribution style)? | 5-fold GroupKFold by problem on TRAIN | macro-F1 mean ± std, accuracy, per-class P/R/F1, per-problem acc | confusion matrix (OOF) |
+| **E1** | How well does it generalise to new problems (in-distribution style)? | 5-fold StratifiedGroupKFold by problem, stratified by domain, on TRAIN (§5.3) | macro-F1 mean ± std, accuracy, per-class P/R/F1, per-problem acc | confusion matrix (OOF) |
 | **E2** | Unseen problems | train on TRAIN, test HOLDOUT-P | macro-F1, per-problem acc, cluster-bootstrap CI | table |
-| **E3** | Unseen surface forms | per class: drop one op_variant, retrain, test on it | accuracy on the held-out variant (per class) | bar chart |
+| **E3** | Unseen surface forms | per class with ≥ 2 operators: drop one `op_id` (`op_variant` = `op_id`), retrain, test on it | accuracy on the held-out operator (per class) | bar chart |
 | **E4** | **Realistic code (headline)** | final model on R-blind, then R-team | macro-F1 + 95% bootstrap CI, per-class, confusion, fixer coverage, κ of the labels | table + confusion |
 | **E5** | **Twins** | STRUCTURAL: pair accuracy on twin rows (HOLDOUT-P + R). HARD: ambiguity-flag rate (status = ambiguous); then **simulated probing**: answers drawn from the true class with true `p_b ∈ {0.4 … 0.9}` while the engine assumes 0.6 | pair acc; flag rate; post-probe acc vs `p_b` | line chart (acc vs p_b), pre/post bars |
-| **E6** | **Unseen misconceptions** | (a) **LOCO** over all 17 classes: for each class k, retrain without k; novelty score on **all** of k's rows (none were trained on) vs seen-class HOLDOUT-P rows → AUROC. (b) U1/U2: abstain rate, and which class it is confused with when not abstained | per-class AUROC, mean; abstain precision; risk–coverage | bar chart, risk–coverage curve |
+| **E6** | **Unseen misconceptions** | (a) **LOCO strict:** for each class k, retrain without k **and without** `CLASS_DEFINING_FEATURES[k]`; do not run fixer k; novelty score on all of k's rows vs seen-class HOLDOUT-P rows → AUROC. (b) **LOCO naive:** the same retrain but the defining features stay, reported next to strict so the gap is visible. (c) U1/U2: abstain rate, and which class it is confused with when not abstained | per-class AUROC, mean, both ways; abstain precision; risk–coverage | bar chart, risk–coverage curve |
 | **E7** | Calibration | OOF before/after T | ECE, NLL, Brier | reliability diagram |
-| **E8** | Baselines | same splits for majority, rules, TF-IDF+LR, TF-IDF+LGBM, (LLM) | macro-F1 on E1, E2, E4 | table |
-| **E9** | Feature ablation | A → A+B → A+B+R → A+B+R+F (+C), and **AST-only** | macro-F1 on E1 and R | grouped bars |
+| **E8** | Baselines | same splits for majority, rules, TF-IDF+LR, TF-IDF+LGBM, and DeepSeek zero-shot on R via `ml/text/llm_client.py` (§5.7) | macro-F1 on E1, E2, E4 | table |
+| **E9** | Feature ablation | A → A+B → A+B+R → A+B+R+C, and **AST-only**. One extra offline row adds group F (§4.4); the shipped model is the row without F | macro-F1 on E1 and R | grouped bars |
 | **E10** | **Resolution** | simulated learners × policies (§9.3) | false-resolve, false-not-yet, items-to-decision | table + bar |
 | **E11** | Robustness | semantics-preserving perturbations of R + HOLDOUT-P (rename, reformat, comments, dead var, for↔while); near-miss CORRECT false-alarm rate | % unchanged predictions; false-alarm rate | table |
 | **E12** | Failure audit | all wrong predictions with confidence ≥ 0.6 on E2/E4 | code, true, pred, conf, top-3 SHAP, written "why" | table (Lab Report) |
@@ -968,7 +993,7 @@ Run after dataset v1 (CP2) and again after every generator change. Each check ha
 | 10.2 | Verification: drop rate per operator, passes-by-luck rate per class | table | operator drop > 40% → fix the operator |
 | 10.3 | Duplicates: `n_unique_hash / n_rows`; largest hash groups; **cross-label hash collisions** | table | collision other than {M01, M08} → generator bug |
 | 10.4 | **Shortcut scan:** depth-1 stump per feature (macro-acc); code length per class (KS test vs CORRECT) | ranked table, violin plot | a non-defining feature (e.g. style artefact) with stump acc > 0.6, or length separating a class → add augmentation |
-| 10.5 | Predicate matrix: mean of each class's defining features per class | heatmap (should be diagonal-dominant) | off-diagonal bleed > 0.3 → check operator scope |
+| 10.5 | Predicate matrix: mean of each class's `CLASS_DEFINING_FEATURES` per class | heatmap (should be diagonal-dominant) | off-diagonal bleed > 0.3 → check operator scope |
 | 10.6 | Feature health: constant/near-constant, NaN rate, pairs with \|corr\| > 0.95 | list | drop constants; keep one of each correlated pair |
 | 10.7 | **Distribution shift:** adversarial validation TRAIN vs **R-team** (inputs only; grouped CV LightGBM) | AUC + top drifting features | AUC > 0.85 → add augmentations that cover the drifting features (e.g. while-forms, debug prints); **never** look at R-blind |
 | 10.8 | 2-D projection (PCA; UMAP if installed) coloured by class and by source | scatter | classes overlapping heavily → expected for T1; anything else → look at features |
@@ -1023,7 +1048,7 @@ All responses include `model_version` and `latency_ms`. CORS: `localhost:*`. Err
     {"type": "RUN", "text": "This code is identical for both explanations. Asking one question."}
   ],
   "next_probe": {"probe_id": "P_T1_a", "prompt": "Index of the last valid cell?", "code": "int a[5];", "options": ["4", "5", "depends on values"], "eig_bits": 0.71},
-  "probes_asked": [], "model_version": "diagnoser_3f9a12cd"
+  "probes_asked": [], "latent": null, "model_version": "diagnoser_3f9a12cd"
 }
 ```
 
@@ -1041,7 +1066,7 @@ All responses include `model_version` and `latency_ms`. CORS: `localhost:*`. Err
 ```
 
 ### 11.3 Non-functional
-p95 `/attempt` < 300 ms on a laptop (interpreter + up to 17 fixers + LightGBM; fixers only for classes not masked out, cached by AST hash); `/exam/answer` < 400 ms (diagnosis + selection). Seeds fixed. SQLite tables: `learners`, `attempts`, `knowledge(learner_id, class, p_active, state, log_json)`, `events`. **Fixtures:** `server/fixtures/*.json` regenerated from the live API at T+10:45 by `scripts/dump_fixtures.py`, then copied to the FE. SQLite v3 adds `exams(exam_id, learner_id, state_json, log_json, report_json)`.
+p95 `/attempt` < 300 ms on a laptop (interpreter + LightGBM + fixers for the top-3 classes only, cached by AST hash; see §2.5). `/exam/answer` < 400 ms (diagnosis + selection). Seeds fixed. SQLite tables: `learners`, `attempts`, `knowledge(learner_id, class, p_active, state, log_json)`, `events`. **Fixtures:** `server/fixtures/*.json` regenerated from the live API at T+10:45 by `scripts/dump_fixtures.py`, then copied to the FE. SQLite v3 adds `exams(exam_id, learner_id, state_json, log_json, report_json)`.
 
 ### 11.4 Exam report object
 ```json
@@ -1087,6 +1112,8 @@ Makefile:  make data | make eda | make train | make eval | make serve | make fix
 
 ## 13. Twelve-hour ML timeline with agent task cards
 
+> **Superseded by `06_AGENT_WORK_PACKAGES.md`.** The cards below are the original hour-by-hour list. Agents follow 06, not this table. Where this table disagrees with 06 or with the amendments in §2–§11, §2–§11 and 06 win.
+
 Each card = what to ask your coding agent + the acceptance test to run before moving on. Paste §2–§11 of this file as context with every card.
 
 | Time | Card | Ask the agent to… | Acceptance test |
@@ -1098,10 +1125,10 @@ Each card = what to ask your coding agent + the acceptance test to run before mo
 | 4:05–4:15 | **K4 EDA v1** | 10.1–10.6, 10.9, 10.12, 10.13 | `docs/eda.md`; act on red rules |
 | 4:15–5:00 | **K5 Features + model** | §4 A/B/R/C incl. DSA features + masking; §5 training, calibration, novelty, decide, evidence | E1 printed (overall + per domain); `/attempt` < 300 ms |
 | 5:00–5:15 | **K6 Gate + Bug Lab + run** | §3.7.1 incl. G4b/G5b; `/lab/diagnose`; `/run` with `sample_only` | 8 gate fixtures behave as specified |
-| 5:15–6:15 | **K7 Fixer + F + counterexample + builders + `/intervene`** | §7 incl. D fixers, `call_stack`/`window_strip` builders; retrain with F | fixer coverage ≥ 80% on HOLDOUT-P mutants (main and DSA) |
+| 5:15–6:15 | **K7 Fixer + counterexample + builders + `/intervene`** | §7 incl. D fixers, `call_stack`/`window_strip` builders. Fixers run for the top-3 classes after the model (§4.4); do not retrain and do not add group F to the matrix | fixer coverage ≥ 80% on HOLDOUT-P mutants (main and DSA) |
 | 6:15–7:00 | **K8 Bayes + probes** | §6 incl. 14 probes, exam trace items, verify_probes | T1 and T7 curl scripts reach ≥ 0.85 after probes |
 | 7:00–8:00 | **K9 Knowledge + reassess + learner + exam** | §8.1–8.4 + SQLite + `/reassess`, `/learner`, seed; **§8.5 exam engine** + `/exam/*` + report | scripted learner: mission loop → STABLE; then exam (10 items) → report with ≥ 1 HELD and ≥ 1 NEW |
-| 8:00–8:45 | **K10 Realistic set** (human) | ML writes R-team (60) by hand; collect FE's R-blind (40); second-rater labels; freeze hash | files committed, κ computed |
+| 8:00–8:45 | **K10 Realistic set** (human) | ML writes R-team (30) by hand; collect FE's R-blind (40); second-rater labels; freeze hash | files committed, κ computed |
 | 8:45–10:00 | **K11 Eval** | `run_all.py`: E1–E15 (E3/E6/E15 retrains in loops), sim learners, sim exam, plots, `metrics.json` | `/metrics` returns all cards |
 | 10:00–10:45 | **K13 ITSP slice** (Strong) or buffer | §3.4 X protocol (60-min cap) | E13 card present |
 | 10:45–11:15 | **K12 Fixtures + cards** (both) | dump fixtures from the live API; model card + dataset card | FE works with the backend killed |

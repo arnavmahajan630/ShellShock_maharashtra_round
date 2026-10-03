@@ -23,8 +23,14 @@
 - Need a new pip package? Write it in your notes; do not install it.
 - Class ids, feature names, JSON fields and paths from 03 and 05 are fixed. Do not rename.
 - Finish = your acceptance command passes, and `notes/<your id>.md` says what was built, what was skipped, and what is still faked.
-- Never print, log or commit `DEEPSEEK_API_KEY`. Only T1 and B4 may call DeepSeek, and only through `ml/text/llm_client.py`.
+- Never print, log or commit `DEEPSEEK_API_KEY`. Only T1 and B4 may call DeepSeek, and only through `ml/text/llm_client.py`. E-a may call it once for the E8 zero-shot row on R, through the same client.
 - Strings (Q13–Q15, D08) are built last in every package and are the first thing dropped.
+- Decisions from `04_FEASIBILITY_AND_ML_BUILD_PLAN.md` that override 03 where the two disagree:
+  - The generator changes the syntax tree and reprints with `pycparser.c_generator`. Text edits by coordinate exist only in the fixer (03 §3.5).
+  - Comment stripping happens in `preprocess.py` before parse: comments become spaces, newlines stay (03 §2.5).
+  - R-team is 30 items, not 60. The realistic set is 70 (03 §3.4).
+  - The fine-tuned sentence reader is Strong. Core is `tfidf` and `frozen`, and the reader embeds the sentence alone (05 §6).
+  - Group F is not a model input. `FEATURES` in `ml/contracts/feature_names.py` is A + B + R + C (03 §4.4).
 
 ## 3. Packages
 
@@ -69,7 +75,7 @@ W0 builds:
 | **R1** | Verified fixer, counterexample search, fix-probe features (03 §7.2, §7.3, §4.4) | `ml/learner/fixer.py`, `ml/learner/counterexample.py`, `ml/features/fix_feats.py` | A1, C3 | fixer repairs ≥ 80% of held-out mutants |
 | **R2** | Timeline, call-stack, window and memory builders; intervention policy (03 §7.1, §7.4) | `ml/learner/timeline.py`, `ml/learner/interventions.py` | A1, R1 | packages match the 03 §11.2 shape on fixture traces |
 | **T1** | DeepSeek client + reason sentences (05 §7) | `ml/text/llm_client.py`, `ml/text/gen_reasons.py`, `ml/text/prompts/`, `ml/data/reasons.jsonl`, `ml/data/llm_raw/` | key; B4 for the second pass | ≥ 150 kept sentences per label, ≥ 6 contexts per class, filters applied, rerun costs nothing |
-| **T2** | Sentence reader: three readers, cloud training script, ONNX export, serving (05 §6) | rest of `ml/text/` | T1; one Kaggle or Colab run by a human | `read()` works with each reader; trains on the 60-row sample |
+| **T2** | Sentence reader: three readers, cloud training script, ONNX export, serving (05 §6) | rest of `ml/text/` | T1; one Kaggle or Colab run by a human | `read()` works with `tfidf` and `frozen` on the 60-row sample (sentence only, code used for masking). `biencoder` is Strong: the same call uses it when `ml/artifacts/` has the file, and skips it when not |
 | **X1** | Public data: fetch ITSP, Codeflaws, IntroClass, Mohler; label by diff (03 §3.4 protocol X) | `ml/external/`, `ml/data/itsp_slice.jsonl` | a human hand-check of labels | slices load; counts per class printed |
 | **G1** | Gate (03 §3.7.1) | `server/app/gate.py` | — | the gate fixtures of 03 §13 K6 behave as specified |
 | **S1** | SQLite store + learner routes (`/learner`, seed, `/reassess`, `/intervene`) | `server/app/store.py`, `server/app/routes/learner.py` | D2, R1, R2 | curl script: seed learner → reassess → STABLE |
@@ -115,7 +121,12 @@ Wave 1 has 23 packages that can all run at once. With fewer agents, give each ag
 
 More agents: split a lane at any arrow whose right side does not list the left side under "Starts after" or "Final check needs" (for example C1 and C2, B1 and B2, D1 and D2, F1 and F2).
 
-Merge order: W0 → A2 → A1 → everything else in wave 1 in any order → wave 2 → I1.
+Merge order for I1, and the order to prefer when agents finish out of sequence. The first list is what makes the Loops safe point (04 §6) real; nothing after it blocks that demo.
+
+1. Must merge first, in this order: **A2, A1, B1, C1, C3, F1, F2, F3, M1, D1, D2, R1, R2, G1, S1, S2.**
+2. Then everything else in wave 1, in any order, then wave 2, then I1.
+
+W0 is already merged. A package later in the list may start before an earlier one (06 §3), but I1 does not treat the loop as closed until this sequence is in.
 
 ## 5. Things only a human can do
 

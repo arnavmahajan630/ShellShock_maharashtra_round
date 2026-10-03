@@ -256,5 +256,87 @@
     "ret": 5
   },
   "max_depth": 1,
-  "truncated": false
+  "truncated": false,
+  "per_test": [
+    {
+      "status": "ok",
+      "returned": -858993448,
+      "printed": "",
+      "loop_iters": {
+        "L3": 4
+      },
+      "branch": {},
+      "effects_count": {
+        "read_cell": 3,
+        "read_void": 1,
+        "call": 1,
+        "ret": 1
+      },
+      "max_depth": 1
+    },
+    {
+      "status": "ok",
+      "returned": -858993455,
+      "printed": "",
+      "loop_iters": {
+        "L3": 2
+      },
+      "branch": {},
+      "effects_count": {
+        "read_cell": 1,
+        "read_void": 1,
+        "call": 1,
+        "ret": 1
+      },
+      "max_depth": 1
+    },
+    {
+      "status": "ok",
+      "returned": -858993450,
+      "printed": "",
+      "loop_iters": {
+        "L3": 5
+      },
+      "branch": {},
+      "effects_count": {
+        "read_cell": 4,
+        "read_void": 1,
+        "call": 1,
+        "ret": 1
+      },
+      "max_depth": 1
+    },
+    {
+      "status": "ok",
+      "returned": -858993451,
+      "printed": "",
+      "loop_iters": {
+        "L3": 4
+      },
+      "branch": {},
+      "effects_count": {
+        "read_cell": 3,
+        "read_void": 1,
+        "call": 1,
+        "ret": 1
+      },
+      "max_depth": 1
+    },
+    {
+      "status": "ok",
+      "returned": -858993452,
+      "printed": "",
+      "loop_iters": {
+        "L3": 3
+      },
+      "branch": {},
+      "effects_count": {
+        "read_cell": 2,
+        "read_void": 1,
+        "call": 1,
+        "ret": 1
+      },
+      "max_depth": 1
+    }
+  ]
 }

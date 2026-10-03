@@ -12,7 +12,9 @@ from fastapi.testclient import TestClient
 from ml import runner
 from ml.contracts import schemas as S
 from ml.contracts.classes import CLASS_INFO, LABELS, MISCONCEPTIONS, REASON_LABELS, TWIN_SETS, band
-from ml.contracts.feature_names import FEATURES, GROUPS, MASK_PRECONDITIONS
+from ml.contracts.feature_names import (
+    CLASS_DEFINING_FEATURES, FEATURES, GROUPS, MASK_PRECONDITIONS, OFFLINE_FEATURES,
+)
 from ml.contracts.params import ITEM_GUESS_SLIP
 from ml.contracts.subset import EFFECT_FIELDS, EVENT_FIELDS
 from server.app.main import FIXTURE_ROUTES, app
@@ -37,10 +39,15 @@ def test_class_lists():
 
 def test_feature_list():
     assert len(FEATURES) == len(set(FEATURES))
+    assert "F" not in GROUPS
     assert sum(len(g) for g in GROUPS.values()) == len(FEATURES)
-    assert len(GROUPS["F"]) == 2 * len(MISCONCEPTIONS)
+    assert len(OFFLINE_FEATURES) == 2 * len(MISCONCEPTIONS)
+    assert not set(OFFLINE_FEATURES) & set(FEATURES)
     for cls, needed in MASK_PRECONDITIONS.items():
         assert cls in MISCONCEPTIONS and set(needed) <= set(FEATURES)
+    assert set(CLASS_DEFINING_FEATURES) == set(MISCONCEPTIONS)
+    for needed in CLASS_DEFINING_FEATURES.values():
+        assert needed and set(needed) <= set(FEATURES)
 
 
 def test_params():
@@ -69,6 +76,12 @@ def test_sample_traces(path):
         for effect in step.effects:
             name, *fields = effect.split(":")
             assert name in EFFECT_FIELDS and len(fields) == len(EFFECT_FIELDS[name])
+    assert trace.per_test
+    for key, total in trace.loop_iters.items():
+        assert sum(pt.loop_iters.get(key, 0) for pt in trace.per_test) == total
+    for key, total in trace.effects_count.items():
+        assert sum(pt.effects_count.get(key, 0) for pt in trace.per_test) == total
+    assert max(pt.max_depth for pt in trace.per_test) == trace.max_depth
 
 
 def test_sample_reasons():
