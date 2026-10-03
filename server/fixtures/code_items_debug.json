@@ -1,0 +1,50 @@
+{
+  "_by": "line",
+  "cases": {
+    "4": {
+      "correct": true,
+      "bug_lines": [
+        4
+      ],
+      "explain": "total is set back to 0 on every pass.",
+      "fix": {
+        "code": "int total_energy(int cells[], int n) {\n    int total = 0;\n    for (int i = 0; i < n; i++) {\n        total += cells[i];\n    }\n    return total;\n}",
+        "changed_lines": [
+          4
+        ]
+      },
+      "updates": [
+        {
+          "class": "M03",
+          "p_before": 0.1,
+          "p_after": 0.04
+        }
+      ],
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    },
+    "other": {
+      "correct": false,
+      "bug_lines": [
+        4
+      ],
+      "explain": "total is set back to 0 on every pass.",
+      "fix": {
+        "code": "int total_energy(int cells[], int n) {\n    int total = 0;\n    for (int i = 0; i < n; i++) {\n        total += cells[i];\n    }\n    return total;\n}",
+        "changed_lines": [
+          4
+        ]
+      },
+      "updates": [
+        {
+          "class": "M03",
+          "p_before": 0.1,
+          "p_after": 0.24
+        }
+      ],
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    }
+  },
+  "default": "other"
+}

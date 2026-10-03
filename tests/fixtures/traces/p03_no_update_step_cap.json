@@ -1,0 +1,768 @@
+{
+  "status": "timeout",
+  "returned": null,
+  "printed": "",
+  "steps": [
+    {
+      "i": 0,
+      "line": 2,
+      "vars": {
+        "n": 3,
+        "total": 0,
+        "i": null
+      },
+      "events": [],
+      "effects": [
+        "call:total_energy:1:cells,3"
+      ]
+    },
+    {
+      "i": 1,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": 0,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 2,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 0,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 3,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 2,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 4,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 2,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 5,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 4,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 6,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 4,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 7,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 6,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 8,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 6,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 9,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 8,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 10,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 8,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 11,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 10,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 12,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 10,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 13,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 12,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 14,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 12,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 15,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 14,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 16,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 14,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 17,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 16,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 18,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 16,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 19,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 18,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 20,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 18,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 21,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 20,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 22,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 20,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 23,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 22,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 24,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 22,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 25,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 24,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 26,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 24,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 27,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 26,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 28,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 26,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 29,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 28,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 30,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 28,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 31,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 30,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 32,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 30,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 33,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 32,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 34,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 32,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 35,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 34,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 36,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 34,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 37,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 36,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 38,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 36,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 39,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 38,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 40,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 38,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 41,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 40,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 42,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 40,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 43,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 42,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 44,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 42,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 45,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 44,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 46,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 44,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 47,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 46,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 48,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 46,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 49,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 48,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 50,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 48,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 51,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 50,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 52,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 50,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 53,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 52,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 54,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 52,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 55,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 54,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 56,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 54,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 57,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 56,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 58,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 56,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 59,
+      "line": 5,
+      "vars": {
+        "n": 3,
+        "total": 58,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    }
+  ],
+  "loop_iters": {
+    "L4": 12495
+  },
+  "branch": {},
+  "events": [
+    {
+      "type": "step_cap_hit",
+      "line": 4,
+      "test": 0
+    },
+    {
+      "type": "step_cap_hit",
+      "line": 4,
+      "test": 1
+    },
+    {
+      "type": "step_cap_hit",
+      "line": 4,
+      "test": 2
+    },
+    {
+      "type": "step_cap_hit",
+      "line": 4,
+      "test": 3
+    },
+    {
+      "type": "step_cap_hit",
+      "line": 4,
+      "test": 4
+    }
+  ],
+  "effects_count": {
+    "fire": 0,
+    "read_cell": 12495,
+    "read_void": 0,
+    "write_cell": 0,
+    "compare": 0,
+    "call": 5
+  },
+  "max_depth": 1,
+  "truncated": true
+}

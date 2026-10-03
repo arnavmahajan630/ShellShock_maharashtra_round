@@ -1,0 +1,52 @@
+[
+  {
+    "item_id": "cs_P03_01",
+    "type": "complete_snippet",
+    "problem_id": "P03",
+    "starter": "int total_energy(int cells[], int n) {\n    int total = ____;\n    for (int i = ____; i ____ n; i++) total += cells[i];\n    return total;\n}",
+    "holes": [
+      {
+        "id": "h1",
+        "line": 2,
+        "kind": "acc_init",
+        "choices": [
+          "0",
+          "1",
+          "cells[0]"
+        ]
+      },
+      {
+        "id": "h2",
+        "line": 3,
+        "kind": "loop_init",
+        "choices": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "id": "h3",
+        "line": 3,
+        "kind": "loop_rel",
+        "choices": [
+          "<",
+          "<=",
+          "!="
+        ]
+      }
+    ]
+  },
+  {
+    "item_id": "fb_P03_m05_01",
+    "type": "fix_bug",
+    "problem_id": "P03",
+    "starter": "int total_energy(int cells[], int n) {\n    int total;\n    for (int i = 0; i < n; i++) {\n        total += cells[i];\n    }\n    return total;\n}"
+  },
+  {
+    "item_id": "dl_P03_m03_01",
+    "type": "debug_line",
+    "problem_id": "P03",
+    "code": "int total_energy(int cells[], int n) {\n    int total = 0;\n    for (int i = 0; i < n; i++) {\n        total = 0;\n        total += cells[i];\n    }\n    return total;\n}",
+    "allow_no_bug": true
+  }
+]

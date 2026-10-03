@@ -1,0 +1,445 @@
+{
+  "_by": "problem_id",
+  "cases": {
+    "P03": {
+      "gate": {
+        "code": "G0",
+        "message": ""
+      },
+      "trace": {
+        "status": "ok",
+        "returned": 12,
+        "printed": "",
+        "steps": [
+          {
+            "i": 0,
+            "line": 2,
+            "vars": {
+              "n": 3,
+              "total": 0,
+              "i": null
+            },
+            "events": [],
+            "effects": [
+              "call:total_energy:1:cells,3"
+            ]
+          },
+          {
+            "i": 1,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 0,
+              "i": 0
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 2,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 0,
+              "i": 0
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 3,
+            "line": 4,
+            "vars": {
+              "n": 3,
+              "total": 2,
+              "i": 0
+            },
+            "events": [],
+            "effects": [
+              "read_cell:0"
+            ]
+          },
+          {
+            "i": 4,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 2,
+              "i": 1
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 5,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 2,
+              "i": 1
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 6,
+            "line": 4,
+            "vars": {
+              "n": 3,
+              "total": 6,
+              "i": 1
+            },
+            "events": [],
+            "effects": [
+              "read_cell:1"
+            ]
+          },
+          {
+            "i": 7,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 6,
+              "i": 2
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 8,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 6,
+              "i": 2
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 9,
+            "line": 4,
+            "vars": {
+              "n": 3,
+              "total": 12,
+              "i": 2
+            },
+            "events": [],
+            "effects": [
+              "read_cell:2"
+            ]
+          },
+          {
+            "i": 10,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 12,
+              "i": 3
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 11,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 12,
+              "i": 3
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 12,
+            "line": 6,
+            "vars": {
+              "n": 3,
+              "total": 12,
+              "i": 3
+            },
+            "events": [],
+            "effects": [
+              "ret:total_energy:1:12"
+            ]
+          }
+        ],
+        "loop_iters": {
+          "L3": 13
+        },
+        "branch": {},
+        "events": [],
+        "effects_count": {
+          "fire": 0,
+          "read_cell": 13,
+          "read_void": 0,
+          "write_cell": 0,
+          "compare": 0,
+          "call": 5,
+          "ret": 5
+        },
+        "max_depth": 1,
+        "truncated": false
+      },
+      "tests": {
+        "passed": 5,
+        "total": 5,
+        "results": [
+          {
+            "args": [
+              [
+                2,
+                4,
+                6
+              ],
+              3
+            ],
+            "expected": {
+              "returned": 12
+            },
+            "got": {
+              "returned": 12
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              [
+                5
+              ],
+              1
+            ],
+            "expected": {
+              "returned": 5
+            },
+            "got": {
+              "returned": 5
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              [
+                1,
+                2,
+                3,
+                4
+              ],
+              4
+            ],
+            "expected": {
+              "returned": 10
+            },
+            "got": {
+              "returned": 10
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              [
+                0,
+                0,
+                9
+              ],
+              3
+            ],
+            "expected": {
+              "returned": 9
+            },
+            "got": {
+              "returned": 9
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              [
+                7,
+                1
+              ],
+              2
+            ],
+            "expected": {
+              "returned": 8
+            },
+            "got": {
+              "returned": 8
+            },
+            "pass": true
+          }
+        ]
+      },
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    },
+    "Q17": {
+      "gate": {
+        "code": "G0",
+        "message": ""
+      },
+      "trace": {
+        "status": "ok",
+        "returned": 6,
+        "printed": "",
+        "steps": [
+          {
+            "i": 0,
+            "line": 2,
+            "vars": {
+              "n": 3
+            },
+            "events": [],
+            "effects": [
+              "call:factorial:1:3"
+            ]
+          },
+          {
+            "i": 1,
+            "line": 2,
+            "vars": {
+              "n": 2
+            },
+            "events": [],
+            "effects": [
+              "call:factorial:2:2"
+            ]
+          },
+          {
+            "i": 2,
+            "line": 2,
+            "vars": {
+              "n": 1
+            },
+            "events": [],
+            "effects": [
+              "call:factorial:3:1"
+            ]
+          },
+          {
+            "i": 3,
+            "line": 3,
+            "vars": {
+              "n": 1
+            },
+            "events": [],
+            "effects": [
+              "ret:factorial:3:1"
+            ]
+          },
+          {
+            "i": 4,
+            "line": 5,
+            "vars": {
+              "n": 2
+            },
+            "events": [],
+            "effects": [
+              "ret:factorial:2:2"
+            ]
+          },
+          {
+            "i": 5,
+            "line": 5,
+            "vars": {
+              "n": 3
+            },
+            "events": [],
+            "effects": [
+              "ret:factorial:1:6"
+            ]
+          }
+        ],
+        "loop_iters": {},
+        "branch": {
+          "B2": {
+            "true": 5,
+            "false": 15
+          }
+        },
+        "events": [],
+        "effects_count": {
+          "fire": 0,
+          "read_cell": 0,
+          "read_void": 0,
+          "write_cell": 0,
+          "compare": 0,
+          "call": 20,
+          "ret": 20
+        },
+        "max_depth": 10,
+        "truncated": false
+      },
+      "tests": {
+        "passed": 5,
+        "total": 5,
+        "results": [
+          {
+            "args": [
+              3
+            ],
+            "expected": {
+              "returned": 6
+            },
+            "got": {
+              "returned": 6
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              0
+            ],
+            "expected": {
+              "returned": 1
+            },
+            "got": {
+              "returned": 1
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              1
+            ],
+            "expected": {
+              "returned": 1
+            },
+            "got": {
+              "returned": 1
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              5
+            ],
+            "expected": {
+              "returned": 120
+            },
+            "got": {
+              "returned": 120
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              10
+            ],
+            "expected": {
+              "returned": 3628800
+            },
+            "got": {
+              "returned": 3628800
+            },
+            "pass": true
+          }
+        ]
+      },
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    }
+  },
+  "default": "P03"
+}

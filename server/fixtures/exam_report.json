@@ -1,0 +1,182 @@
+{
+  "report": {
+    "exam_id": "ex_fixture",
+    "learner_id": "demo-learner",
+    "items_answered": 3,
+    "time_used_s": 412,
+    "sectors": [
+      {
+        "sector": "sorting",
+        "items": [
+          "Q06",
+          "Q08"
+        ],
+        "passed": 1,
+        "rating_before": 1400,
+        "rating_after": 1389
+      },
+      {
+        "sector": "recursion",
+        "items": [
+          "xt_rec_1"
+        ],
+        "passed": 0,
+        "rating_before": 1400,
+        "rating_after": 1376
+      }
+    ],
+    "findings": [
+      {
+        "class": "D03",
+        "status": "NEW",
+        "p_active": 0.82,
+        "name": "Cargo Overwrite",
+        "subtitle": "Swapping without a temp loses a value",
+        "evidence": [
+          {
+            "item_id": "Q06",
+            "diagnosis": {
+              "status": "confident",
+              "posterior": {
+                "M01": 0.0031,
+                "M02": 0.0031,
+                "M03": 0.0031,
+                "M04": 0.0031,
+                "M05": 0.0031,
+                "M06": 0.0031,
+                "M07": 0.0031,
+                "M08": 0.0031,
+                "M10": 0.0031,
+                "D01": 0.0031,
+                "D02": 0.0031,
+                "D03": 0.88,
+                "D04": 0.04,
+                "D05": 0.0031,
+                "D06": 0.0031,
+                "D07": 0.0031,
+                "D08": 0.0031,
+                "CORRECT": 0.0031,
+                "OTHER": 0.03
+              },
+              "top": [
+                {
+                  "id": "D03",
+                  "p": 0.88,
+                  "name": "Cargo Overwrite",
+                  "subtitle": "Swapping without a temp loses a value",
+                  "band": "Likely"
+                },
+                {
+                  "id": "D04",
+                  "p": 0.04,
+                  "name": "Half-Sorted Hold",
+                  "subtitle": "One pass doesn't sort the whole array",
+                  "band": "Unsure"
+                }
+              ],
+              "twin_set": null,
+              "two_bug": false,
+              "novelty": {
+                "knn_dist": 1.8,
+                "tau_d": 3.2,
+                "p_max": 0.88,
+                "tau_p": 0.55,
+                "abstain": false
+              },
+              "evidence": [
+                {
+                  "type": "CODE",
+                  "text": "Two cells are assigned to each other with no temp (lines 5-6).",
+                  "line": 5,
+                  "feature": "a_swap_no_temp",
+                  "weight": 0.9
+                },
+                {
+                  "type": "RUN",
+                  "text": "After your swap, crate 1 appears twice and 3 is gone.",
+                  "line": 6,
+                  "feature": "b_multiset_changed",
+                  "weight": 0.8
+                }
+              ],
+              "next_probe": null,
+              "probes_asked": [],
+              "model_version": "fixtures"
+            }
+          }
+        ]
+      },
+      {
+        "class": "M01",
+        "status": "HELD",
+        "p_active": 0.06,
+        "name": "Boundary Drift",
+        "subtitle": "Loop runs one step too many or too few",
+        "state_after": "MASTERED",
+        "evidence": [
+          {
+            "item_id": "Q08"
+          }
+        ]
+      },
+      {
+        "class": "D05",
+        "status": "UNCERTAIN",
+        "p_active": 0.48,
+        "name": "Endless Warp",
+        "subtitle": "Recursion has no reachable base case",
+        "twin_set": "T7"
+      }
+    ],
+    "deferred_probes": [
+      {
+        "probe_id": "P_T7_a",
+        "prompt": "What does h(2) do?",
+        "code": "int h(int n) { return h(n - 1); }",
+        "options": [
+          "0",
+          "never stops",
+          "2"
+        ],
+        "for_class": "D05"
+      }
+    ],
+    "recommendations": [
+      {
+        "class": "D03",
+        "problems": [
+          "Q10",
+          "Q11"
+        ]
+      }
+    ],
+    "adaptivity_log": [
+      {
+        "order": 1,
+        "item_id": "Q06",
+        "sector": "sorting",
+        "eig_bits": 0.58,
+        "reason": "Q06 bubble_sort: most informative about Cargo Overwrite and Half-Sorted Hold; covers Sorting.",
+        "outcome": "fail_D03"
+      },
+      {
+        "order": 2,
+        "item_id": "Q08",
+        "sector": "sorting",
+        "eig_bits": 0.62,
+        "reason": "Rechecks Boundary Drift (stable since Loops) on a pair loop; covers Sorting.",
+        "outcome": "pass"
+      },
+      {
+        "order": 3,
+        "item_id": "xt_rec_1",
+        "sector": "recursion",
+        "eig_bits": 0.41,
+        "reason": "xt_rec_1: checks Endless Warp and Static Warp; covers Recursion.",
+        "outcome": "wrong"
+      }
+    ]
+  },
+  "model_version": "fixtures",
+  "latency_ms": 1.0
+}

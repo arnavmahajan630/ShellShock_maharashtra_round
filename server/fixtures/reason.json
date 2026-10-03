@@ -1,0 +1,34 @@
+{
+  "status": "matched",
+  "top": [
+    {
+      "id": "M08",
+      "p": 0.81,
+      "name": "Index Origin Fault",
+      "subtitle": "Arrays start at 0; last cell is n−1",
+      "band": "Likely"
+    },
+    {
+      "id": "M01",
+      "p": 0.12,
+      "name": "Boundary Drift",
+      "subtitle": "Loop runs one step too many or too few",
+      "band": "Unsure"
+    }
+  ],
+  "reader": "tfidf",
+  "updates": [
+    {
+      "class": "M08",
+      "p_before": 0.31,
+      "p_after": 0.62
+    },
+    {
+      "class": "M01",
+      "p_before": 0.31,
+      "p_after": 0.14
+    }
+  ],
+  "model_version": "fixtures",
+  "latency_ms": 1.0
+}

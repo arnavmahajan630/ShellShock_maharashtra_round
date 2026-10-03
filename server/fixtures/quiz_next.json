@@ -1,0 +1,18 @@
+{
+  "item": {
+    "item_id": "qz_m01_m08_mcq_01",
+    "type": "mcq",
+    "concept": "loops",
+    "code": "int cells[3] = {2, 4, 6};\nint total = 0;\nfor (int i = 0; i <= 3; i++) {\n    total += cells[i];\n}",
+    "question": "How many cells does the loop read?",
+    "options": [
+      "3",
+      "4",
+      "2"
+    ],
+    "difficulty": 1
+  },
+  "reason": "Checks Boundary Drift and Index Origin Fault, which your Loops record leaves open.",
+  "model_version": "fixtures",
+  "latency_ms": 1.0
+}

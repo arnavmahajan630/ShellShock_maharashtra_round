@@ -1,0 +1,161 @@
+{
+  "learner_id": "demo-learner",
+  "callsign": "NOVA",
+  "misconceptions": {
+    "M01": {
+      "state": "STABLE",
+      "p_active": 0.08,
+      "times_seen": 2,
+      "evidence": [
+        {
+          "type": "RUN",
+          "text": "Loop ran 6 times; the mission needed 5."
+        }
+      ],
+      "interventions": [
+        "trace_timeline"
+      ],
+      "last_tested": "loops:P01",
+      "recheck_queued": true
+    },
+    "M02": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "M03": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "M04": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "M05": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "M06": {
+      "state": "MASTERED",
+      "p_active": 0.04,
+      "times_seen": 2,
+      "evidence": [
+        {
+          "type": "RUN",
+          "text": "Ghost return P17 passed."
+        }
+      ],
+      "interventions": [
+        "trace_timeline"
+      ],
+      "last_tested": "conditions:P17",
+      "recheck_queued": false
+    },
+    "M07": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "M08": {
+      "state": "ACTIVE",
+      "p_active": 0.9,
+      "times_seen": 1,
+      "evidence": [
+        {
+          "type": "PROBE",
+          "text": "You said the last valid cell of `int a[5]` is 5."
+        }
+      ],
+      "interventions": [],
+      "last_tested": "loops:P03",
+      "recheck_queued": false
+    },
+    "M10": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "D01": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "D02": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "D03": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "D04": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "D05": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "D06": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "D07": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    },
+    "D08": {
+      "state": "UNSEEN",
+      "p_active": 0.1
+    }
+  },
+  "nodes": {
+    "conditions:P11": {
+      "status": "done",
+      "stars": 3
+    },
+    "conditions:P12": {
+      "status": "done",
+      "stars": 2
+    },
+    "loops:P01": {
+      "status": "done",
+      "stars": 2
+    },
+    "loops:P03": {
+      "status": "unstable",
+      "stars": 0
+    },
+    "arrays:P08": {
+      "status": "done",
+      "stars": 3
+    }
+  },
+  "attempts": [
+    {
+      "attempt_id": "at_001",
+      "problem_id": "P11",
+      "ts": "2026-10-04T10:00:00Z",
+      "passed": 5,
+      "total": 5,
+      "status": "correct",
+      "top": "CORRECT"
+    },
+    {
+      "attempt_id": "at_002",
+      "problem_id": "P01",
+      "ts": "2026-10-04T10:06:00Z",
+      "passed": 0,
+      "total": 4,
+      "status": "confident",
+      "top": "M01"
+    },
+    {
+      "attempt_id": "at_003",
+      "problem_id": "P03",
+      "ts": "2026-10-04T10:15:00Z",
+      "passed": 0,
+      "total": 5,
+      "status": "ambiguous",
+      "top": "M01"
+    }
+  ],
+  "model_version": "fixtures",
+  "latency_ms": 1.0
+}

@@ -1,0 +1,15 @@
+pycparser
+lightgbm
+scikit-learn
+scipy
+numpy
+pandas
+matplotlib
+pytest
+fastapi
+uvicorn
+httpx
+python-dotenv
+openai
+onnxruntime
+tokenizers

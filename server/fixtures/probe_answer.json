@@ -1,0 +1,78 @@
+{
+  "diagnosis": {
+    "status": "confident",
+    "posterior": {
+      "M01": 0.07,
+      "M02": 0.0013,
+      "M03": 0.0013,
+      "M04": 0.0013,
+      "M05": 0.0013,
+      "M06": 0.0013,
+      "M07": 0.0013,
+      "M08": 0.9,
+      "M10": 0.0013,
+      "D01": 0.0013,
+      "D02": 0.0013,
+      "D03": 0.0013,
+      "D04": 0.0013,
+      "D05": 0.0013,
+      "D06": 0.0013,
+      "D07": 0.0013,
+      "D08": 0.0013,
+      "CORRECT": 0.005,
+      "OTHER": 0.005
+    },
+    "top": [
+      {
+        "id": "M08",
+        "p": 0.9,
+        "name": "Index Origin Fault",
+        "subtitle": "Arrays start at 0; last cell is n−1",
+        "band": "Likely"
+      },
+      {
+        "id": "M01",
+        "p": 0.07,
+        "name": "Boundary Drift",
+        "subtitle": "Loop runs one step too many or too few",
+        "band": "Unsure"
+      }
+    ],
+    "twin_set": "T1",
+    "two_bug": false,
+    "novelty": {
+      "knn_dist": 1.8,
+      "tau_d": 3.2,
+      "p_max": 0.9,
+      "tau_p": 0.55,
+      "abstain": false
+    },
+    "evidence": [
+      {
+        "type": "CODE",
+        "text": "Loop condition uses `<=` (line 3).",
+        "line": 3,
+        "feature": "a_main_cond_op_le",
+        "weight": 0.9
+      },
+      {
+        "type": "RUN",
+        "text": "Reads `cells[3]`, one cell past the end (line 4).",
+        "line": 4,
+        "feature": "b_oob_read_idx_eq_n",
+        "weight": 0.7
+      },
+      {
+        "type": "PROBE",
+        "text": "You said the last valid cell of `int a[5]` is 5."
+      }
+    ],
+    "next_probe": null,
+    "probes_asked": [
+      "P_T1_a"
+    ],
+    "model_version": "fixtures"
+  },
+  "model_version": "fixtures",
+  "latency_ms": 1.0
+}

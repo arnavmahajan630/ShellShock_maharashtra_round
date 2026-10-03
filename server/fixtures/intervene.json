@@ -1,0 +1,98 @@
+{
+  "class": "M08",
+  "modality": "memory_strip",
+  "next_modalities": [
+    "counterexample",
+    "minimal_fix"
+  ],
+  "copy": [
+    "Arrays start at cell 0.",
+    "An array of n cells ends at cell n−1; cell n is the void."
+  ],
+  "question": {
+    "prompt": "Which is the last cell the loop should read?",
+    "answer": 2
+  },
+  "timeline": [
+    {
+      "step": 3,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 2,
+        "i": 0
+      },
+      "effect": "read_cell:0",
+      "flag": null
+    },
+    {
+      "step": 6,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 6,
+        "i": 1
+      },
+      "effect": "read_cell:1",
+      "flag": null
+    },
+    {
+      "step": 9,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 12,
+        "i": 2
+      },
+      "effect": "read_cell:2",
+      "flag": null
+    },
+    {
+      "step": 12,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": -858993448,
+        "i": 3
+      },
+      "effect": "read_void:3",
+      "flag": "void_read"
+    }
+  ],
+  "memory_strip": {
+    "array": "cells",
+    "values": [
+      2,
+      4,
+      6
+    ],
+    "reads": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "counterexample": {
+    "input": {
+      "cells": [
+        3
+      ],
+      "n": 1
+    },
+    "intended": 3,
+    "yours": -858993457,
+    "effect_diff": "1 extra void read"
+  },
+  "fix": {
+    "kind": "minimal",
+    "code": "int total_energy(int cells[], int n) {\n    int total = 0;\n    for (int i = 0; i < n; i++) {\n        total += cells[i];\n    }\n    return total;\n}",
+    "changed_lines": [
+      3
+    ],
+    "rule": "<= to <",
+    "verified": true
+  },
+  "model_version": "fixtures",
+  "latency_ms": 1.0
+}

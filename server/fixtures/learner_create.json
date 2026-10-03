@@ -1,0 +1,5 @@
+{
+  "learner_id": "demo-learner",
+  "model_version": "fixtures",
+  "latency_ms": 1.0
+}

@@ -1,0 +1,65 @@
+{
+  "_by": "item_type",
+  "cases": {
+    "trap": {
+      "state": "PROBATION",
+      "p_active": 0.31,
+      "conditions": [
+        {
+          "id": "p_active",
+          "label": "Misconception probability < 0.15",
+          "met": false,
+          "detail": "0.31"
+        },
+        {
+          "id": "trap",
+          "label": "Trap item passed",
+          "met": false,
+          "detail": "predicted 9, actual: outside the array"
+        },
+        {
+          "id": "transfer",
+          "label": "Different-family transfer passed",
+          "met": false,
+          "detail": "not attempted yet"
+        }
+      ],
+      "resolved_level": null,
+      "next_item": {
+        "item_id": "P09",
+        "item_type": "transfer_code"
+      },
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    },
+    "transfer_code": {
+      "state": "STABLE",
+      "p_active": 0.09,
+      "conditions": [
+        {
+          "id": "p_active",
+          "label": "Misconception probability < 0.15",
+          "met": true,
+          "detail": "0.09"
+        },
+        {
+          "id": "trap",
+          "label": "Trap item passed",
+          "met": true,
+          "detail": "answered: outside the array"
+        },
+        {
+          "id": "transfer",
+          "label": "Different-family transfer passed",
+          "met": true,
+          "detail": "P09 max_shield"
+        }
+      ],
+      "resolved_level": "STABLE",
+      "next_item": null,
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    }
+  },
+  "default": "transfer_code"
+}

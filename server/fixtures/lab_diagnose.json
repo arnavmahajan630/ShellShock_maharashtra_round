@@ -1,0 +1,1356 @@
+{
+  "_by": "problem_id",
+  "cases": {
+    "P03": {
+      "gate": {
+        "code": "G0",
+        "message": ""
+      },
+      "trace": {
+        "status": "ok",
+        "returned": -858993448,
+        "printed": "",
+        "steps": [
+          {
+            "i": 0,
+            "line": 2,
+            "vars": {
+              "n": 3,
+              "total": 0,
+              "i": null
+            },
+            "events": [],
+            "effects": [
+              "call:total_energy:1:cells,3"
+            ]
+          },
+          {
+            "i": 1,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 0,
+              "i": 0
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 2,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 0,
+              "i": 0
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 3,
+            "line": 4,
+            "vars": {
+              "n": 3,
+              "total": 2,
+              "i": 0
+            },
+            "events": [],
+            "effects": [
+              "read_cell:0"
+            ]
+          },
+          {
+            "i": 4,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 2,
+              "i": 1
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 5,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 2,
+              "i": 1
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 6,
+            "line": 4,
+            "vars": {
+              "n": 3,
+              "total": 6,
+              "i": 1
+            },
+            "events": [],
+            "effects": [
+              "read_cell:1"
+            ]
+          },
+          {
+            "i": 7,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 6,
+              "i": 2
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 8,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 6,
+              "i": 2
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 9,
+            "line": 4,
+            "vars": {
+              "n": 3,
+              "total": 12,
+              "i": 2
+            },
+            "events": [],
+            "effects": [
+              "read_cell:2"
+            ]
+          },
+          {
+            "i": 10,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 12,
+              "i": 3
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 11,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": 12,
+              "i": 3
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 12,
+            "line": 4,
+            "vars": {
+              "n": 3,
+              "total": -858993448,
+              "i": 3
+            },
+            "events": [
+              {
+                "type": "oob_read",
+                "arr": "cells",
+                "idx": 3,
+                "size": 3,
+                "line": 4
+              }
+            ],
+            "effects": [
+              "read_void:3"
+            ]
+          },
+          {
+            "i": 13,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": -858993448,
+              "i": 4
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 14,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "total": -858993448,
+              "i": 4
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 15,
+            "line": 6,
+            "vars": {
+              "n": 3,
+              "total": -858993448,
+              "i": 4
+            },
+            "events": [],
+            "effects": [
+              "ret:total_energy:1:-858993448"
+            ]
+          }
+        ],
+        "loop_iters": {
+          "L3": 18
+        },
+        "branch": {},
+        "events": [
+          {
+            "type": "oob_read",
+            "arr": "cells",
+            "idx": 3,
+            "size": 3,
+            "line": 4,
+            "test": 0
+          },
+          {
+            "type": "oob_read",
+            "arr": "cells",
+            "idx": 1,
+            "size": 1,
+            "line": 4,
+            "test": 1
+          },
+          {
+            "type": "oob_read",
+            "arr": "cells",
+            "idx": 4,
+            "size": 4,
+            "line": 4,
+            "test": 2
+          },
+          {
+            "type": "oob_read",
+            "arr": "cells",
+            "idx": 3,
+            "size": 3,
+            "line": 4,
+            "test": 3
+          },
+          {
+            "type": "oob_read",
+            "arr": "cells",
+            "idx": 2,
+            "size": 2,
+            "line": 4,
+            "test": 4
+          }
+        ],
+        "effects_count": {
+          "fire": 0,
+          "read_cell": 13,
+          "read_void": 5,
+          "write_cell": 0,
+          "compare": 0,
+          "call": 5,
+          "ret": 5
+        },
+        "max_depth": 1,
+        "truncated": false
+      },
+      "tests": {
+        "passed": 0,
+        "total": 5,
+        "results": [
+          {
+            "args": [
+              [
+                2,
+                4,
+                6
+              ],
+              3
+            ],
+            "expected": {
+              "returned": 12
+            },
+            "got": {
+              "returned": -858993448
+            },
+            "pass": false
+          },
+          {
+            "args": [
+              [
+                5
+              ],
+              1
+            ],
+            "expected": {
+              "returned": 5
+            },
+            "got": {
+              "returned": -858993455
+            },
+            "pass": false
+          },
+          {
+            "args": [
+              [
+                1,
+                2,
+                3,
+                4
+              ],
+              4
+            ],
+            "expected": {
+              "returned": 10
+            },
+            "got": {
+              "returned": -858993450
+            },
+            "pass": false
+          },
+          {
+            "args": [
+              [
+                0,
+                0,
+                9
+              ],
+              3
+            ],
+            "expected": {
+              "returned": 9
+            },
+            "got": {
+              "returned": -858993451
+            },
+            "pass": false
+          },
+          {
+            "args": [
+              [
+                7,
+                1
+              ],
+              2
+            ],
+            "expected": {
+              "returned": 8
+            },
+            "got": {
+              "returned": -858993452
+            },
+            "pass": false
+          }
+        ]
+      },
+      "diagnosis": {
+        "status": "ambiguous",
+        "posterior": {
+          "M01": 0.46,
+          "M02": 0.0029,
+          "M03": 0.0029,
+          "M04": 0.0029,
+          "M05": 0.0029,
+          "M06": 0.0029,
+          "M07": 0.03,
+          "M08": 0.44,
+          "M10": 0.0029,
+          "D01": 0.0029,
+          "D02": 0.0029,
+          "D03": 0.0029,
+          "D04": 0.0029,
+          "D05": 0.0029,
+          "D06": 0.0029,
+          "D07": 0.0029,
+          "D08": 0.0029,
+          "CORRECT": 0.01,
+          "OTHER": 0.02
+        },
+        "top": [
+          {
+            "id": "M01",
+            "p": 0.46,
+            "name": "Boundary Drift",
+            "subtitle": "Loop runs one step too many or too few",
+            "band": "Possible"
+          },
+          {
+            "id": "M08",
+            "p": 0.44,
+            "name": "Index Origin Fault",
+            "subtitle": "Arrays start at 0; last cell is n−1",
+            "band": "Unsure"
+          }
+        ],
+        "twin_set": "T1",
+        "two_bug": false,
+        "novelty": {
+          "knn_dist": 1.8,
+          "tau_d": 3.2,
+          "p_max": 0.46,
+          "tau_p": 0.55,
+          "abstain": false
+        },
+        "evidence": [
+          {
+            "type": "CODE",
+            "text": "Loop condition uses `<=` (line 3).",
+            "line": 3,
+            "feature": "a_main_cond_op_le",
+            "weight": 0.9
+          },
+          {
+            "type": "RUN",
+            "text": "Reads `cells[3]`, one cell past the end (line 4).",
+            "line": 4,
+            "feature": "b_oob_read_idx_eq_n",
+            "weight": 0.7
+          },
+          {
+            "type": "RUN",
+            "text": "This code is identical for both explanations. Asking one question."
+          }
+        ],
+        "next_probe": {
+          "probe_id": "P_T1_a",
+          "prompt": "Index of the last valid cell?",
+          "code": "int a[5];",
+          "options": [
+            "4",
+            "5",
+            "depends on values"
+          ],
+          "eig_bits": 0.71
+        },
+        "probes_asked": [],
+        "model_version": "fixtures"
+      },
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    },
+    "P11": {
+      "gate": {
+        "code": "G0",
+        "message": ""
+      },
+      "trace": {
+        "status": "ok",
+        "returned": 1,
+        "printed": "",
+        "steps": [
+          {
+            "i": 0,
+            "line": 2,
+            "vars": {
+              "code": 7
+            },
+            "events": [
+              {
+                "type": "empty_body",
+                "kind": "if",
+                "line": 2
+              }
+            ],
+            "effects": [
+              "call:door_open:1:7"
+            ]
+          },
+          {
+            "i": 1,
+            "line": 3,
+            "vars": {
+              "code": 7
+            },
+            "events": [],
+            "effects": [
+              "ret:door_open:1:1"
+            ]
+          }
+        ],
+        "loop_iters": {},
+        "branch": {
+          "B2": {
+            "true": 1,
+            "false": 4
+          }
+        },
+        "events": [
+          {
+            "type": "empty_body",
+            "kind": "if",
+            "line": 2,
+            "test": 0
+          },
+          {
+            "type": "empty_body",
+            "kind": "if",
+            "line": 2,
+            "test": 1
+          },
+          {
+            "type": "empty_body",
+            "kind": "if",
+            "line": 2,
+            "test": 2
+          },
+          {
+            "type": "empty_body",
+            "kind": "if",
+            "line": 2,
+            "test": 3
+          },
+          {
+            "type": "empty_body",
+            "kind": "if",
+            "line": 2,
+            "test": 4
+          }
+        ],
+        "effects_count": {
+          "fire": 0,
+          "read_cell": 0,
+          "read_void": 0,
+          "write_cell": 0,
+          "compare": 0,
+          "call": 5,
+          "ret": 5
+        },
+        "max_depth": 1,
+        "truncated": false
+      },
+      "tests": {
+        "passed": 1,
+        "total": 5,
+        "results": [
+          {
+            "args": [
+              42
+            ],
+            "expected": {
+              "returned": 1
+            },
+            "got": {
+              "returned": 1
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              7
+            ],
+            "expected": {
+              "returned": 0
+            },
+            "got": {
+              "returned": 1
+            },
+            "pass": false
+          },
+          {
+            "args": [
+              0
+            ],
+            "expected": {
+              "returned": 0
+            },
+            "got": {
+              "returned": 1
+            },
+            "pass": false
+          },
+          {
+            "args": [
+              41
+            ],
+            "expected": {
+              "returned": 0
+            },
+            "got": {
+              "returned": 1
+            },
+            "pass": false
+          },
+          {
+            "args": [
+              -42
+            ],
+            "expected": {
+              "returned": 0
+            },
+            "got": {
+              "returned": 1
+            },
+            "pass": false
+          }
+        ]
+      },
+      "diagnosis": {
+        "status": "confident",
+        "posterior": {
+          "M01": 0.0025,
+          "M02": 0.0025,
+          "M03": 0.0025,
+          "M04": 0.0025,
+          "M05": 0.0025,
+          "M06": 0.05,
+          "M07": 0.88,
+          "M08": 0.0025,
+          "M10": 0.0025,
+          "D01": 0.0025,
+          "D02": 0.0025,
+          "D03": 0.0025,
+          "D04": 0.0025,
+          "D05": 0.0025,
+          "D06": 0.0025,
+          "D07": 0.0025,
+          "D08": 0.0025,
+          "CORRECT": 0.0025,
+          "OTHER": 0.03
+        },
+        "top": [
+          {
+            "id": "M07",
+            "p": 0.88,
+            "name": "Ghost Semicolon",
+            "subtitle": "A stray `;` gives the if/loop an empty body",
+            "band": "Likely"
+          },
+          {
+            "id": "M06",
+            "p": 0.05,
+            "name": "Sensor Overwrite",
+            "subtitle": "`=` stores a value; `==` compares",
+            "band": "Unsure"
+          }
+        ],
+        "twin_set": null,
+        "two_bug": false,
+        "novelty": {
+          "knn_dist": 1.8,
+          "tau_d": 3.2,
+          "p_max": 0.88,
+          "tau_p": 0.55,
+          "abstain": false
+        },
+        "evidence": [
+          {
+            "type": "CODE",
+            "text": "A `;` right after `if (...)` gives it an empty body (line 2).",
+            "line": 2,
+            "feature": "a_empty_body_if",
+            "weight": 0.9
+          },
+          {
+            "type": "RUN",
+            "text": "The door opened for every code, not only 42.",
+            "line": 3,
+            "feature": "b_branch_always",
+            "weight": 0.6
+          }
+        ],
+        "next_probe": null,
+        "probes_asked": [],
+        "model_version": "fixtures"
+      },
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    },
+    "Q06": {
+      "gate": {
+        "code": "G0",
+        "message": ""
+      },
+      "trace": {
+        "status": "ok",
+        "returned": null,
+        "printed": "",
+        "steps": [
+          {
+            "i": 0,
+            "line": 2,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": null
+            },
+            "events": [],
+            "effects": [
+              "call:bubble_sort:1:a,3"
+            ]
+          },
+          {
+            "i": 1,
+            "line": 2,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": null
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 2,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": 0
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 3,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": 0
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 4,
+            "line": 4,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": 0
+            },
+            "events": [],
+            "effects": [
+              "read_cell:0",
+              "read_cell:1",
+              "compare:0:1"
+            ]
+          },
+          {
+            "i": 5,
+            "line": 5,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": 0
+            },
+            "events": [],
+            "effects": [
+              "read_cell:1",
+              "write_cell:0:1"
+            ]
+          },
+          {
+            "i": 6,
+            "line": 6,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": 0
+            },
+            "events": [],
+            "effects": [
+              "read_cell:0",
+              "write_cell:1:1"
+            ]
+          },
+          {
+            "i": 7,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": 1
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 8,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": 1
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 9,
+            "line": 4,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": 1
+            },
+            "events": [],
+            "effects": [
+              "read_cell:1",
+              "read_cell:2",
+              "compare:1:2"
+            ]
+          },
+          {
+            "i": 10,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": 2
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 11,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "i": 0,
+              "j": 2
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 12,
+            "line": 2,
+            "vars": {
+              "n": 3,
+              "i": 1,
+              "j": 2
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 13,
+            "line": 2,
+            "vars": {
+              "n": 3,
+              "i": 1,
+              "j": 2
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 14,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "i": 1,
+              "j": 0
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 15,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "i": 1,
+              "j": 0
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 16,
+            "line": 4,
+            "vars": {
+              "n": 3,
+              "i": 1,
+              "j": 0
+            },
+            "events": [],
+            "effects": [
+              "read_cell:0",
+              "read_cell:1",
+              "compare:0:1"
+            ]
+          },
+          {
+            "i": 17,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "i": 1,
+              "j": 1
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 18,
+            "line": 3,
+            "vars": {
+              "n": 3,
+              "i": 1,
+              "j": 1
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 19,
+            "line": 2,
+            "vars": {
+              "n": 3,
+              "i": 2,
+              "j": 1
+            },
+            "events": [],
+            "effects": []
+          },
+          {
+            "i": 20,
+            "line": 2,
+            "vars": {
+              "n": 3,
+              "i": 2,
+              "j": 1
+            },
+            "events": [],
+            "effects": []
+          }
+        ],
+        "loop_iters": {
+          "L2": 8,
+          "L3": 13
+        },
+        "branch": {
+          "B4": {
+            "true": 8,
+            "false": 5
+          }
+        },
+        "events": [],
+        "effects_count": {
+          "fire": 0,
+          "read_cell": 42,
+          "read_void": 0,
+          "write_cell": 16,
+          "compare": 13,
+          "call": 4
+        },
+        "max_depth": 1,
+        "truncated": false
+      },
+      "tests": {
+        "passed": 1,
+        "total": 4,
+        "results": [
+          {
+            "args": [
+              [
+                3,
+                1,
+                2
+              ],
+              3
+            ],
+            "expected": {
+              "array0": [
+                1,
+                2,
+                3
+              ]
+            },
+            "got": {
+              "array0": [
+                1,
+                1,
+                2
+              ]
+            },
+            "pass": false
+          },
+          {
+            "args": [
+              [
+                2,
+                1
+              ],
+              2
+            ],
+            "expected": {
+              "array0": [
+                1,
+                2
+              ]
+            },
+            "got": {
+              "array0": [
+                1,
+                1
+              ]
+            },
+            "pass": false
+          },
+          {
+            "args": [
+              [
+                1,
+                2,
+                3
+              ],
+              3
+            ],
+            "expected": {
+              "array0": [
+                1,
+                2,
+                3
+              ]
+            },
+            "got": {
+              "array0": [
+                1,
+                2,
+                3
+              ]
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              [
+                4,
+                3,
+                2,
+                1
+              ],
+              4
+            ],
+            "expected": {
+              "array0": [
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            "got": {
+              "array0": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "pass": false
+          }
+        ]
+      },
+      "diagnosis": {
+        "status": "confident",
+        "posterior": {
+          "M01": 0.0031,
+          "M02": 0.0031,
+          "M03": 0.0031,
+          "M04": 0.0031,
+          "M05": 0.0031,
+          "M06": 0.0031,
+          "M07": 0.0031,
+          "M08": 0.0031,
+          "M10": 0.0031,
+          "D01": 0.0031,
+          "D02": 0.0031,
+          "D03": 0.88,
+          "D04": 0.04,
+          "D05": 0.0031,
+          "D06": 0.0031,
+          "D07": 0.0031,
+          "D08": 0.0031,
+          "CORRECT": 0.0031,
+          "OTHER": 0.03
+        },
+        "top": [
+          {
+            "id": "D03",
+            "p": 0.88,
+            "name": "Cargo Overwrite",
+            "subtitle": "Swapping without a temp loses a value",
+            "band": "Likely"
+          },
+          {
+            "id": "D04",
+            "p": 0.04,
+            "name": "Half-Sorted Hold",
+            "subtitle": "One pass doesn't sort the whole array",
+            "band": "Unsure"
+          }
+        ],
+        "twin_set": null,
+        "two_bug": false,
+        "novelty": {
+          "knn_dist": 1.8,
+          "tau_d": 3.2,
+          "p_max": 0.88,
+          "tau_p": 0.55,
+          "abstain": false
+        },
+        "evidence": [
+          {
+            "type": "CODE",
+            "text": "Two cells are assigned to each other with no temp (lines 5-6).",
+            "line": 5,
+            "feature": "a_swap_no_temp",
+            "weight": 0.9
+          },
+          {
+            "type": "RUN",
+            "text": "After your swap, crate 1 appears twice and 3 is gone.",
+            "line": 6,
+            "feature": "b_multiset_changed",
+            "weight": 0.8
+          }
+        ],
+        "next_probe": null,
+        "probes_asked": [],
+        "model_version": "fixtures"
+      },
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    },
+    "Q17": {
+      "gate": {
+        "code": "G0",
+        "message": ""
+      },
+      "trace": {
+        "status": "ok",
+        "returned": 6,
+        "printed": "",
+        "steps": [
+          {
+            "i": 0,
+            "line": 2,
+            "vars": {
+              "n": 3
+            },
+            "events": [],
+            "effects": [
+              "call:factorial:1:3"
+            ]
+          },
+          {
+            "i": 1,
+            "line": 2,
+            "vars": {
+              "n": 2
+            },
+            "events": [],
+            "effects": [
+              "call:factorial:2:2"
+            ]
+          },
+          {
+            "i": 2,
+            "line": 2,
+            "vars": {
+              "n": 1
+            },
+            "events": [],
+            "effects": [
+              "call:factorial:3:1"
+            ]
+          },
+          {
+            "i": 3,
+            "line": 3,
+            "vars": {
+              "n": 1
+            },
+            "events": [],
+            "effects": [
+              "ret:factorial:3:1"
+            ]
+          },
+          {
+            "i": 4,
+            "line": 5,
+            "vars": {
+              "n": 2
+            },
+            "events": [],
+            "effects": [
+              "ret:factorial:2:2"
+            ]
+          },
+          {
+            "i": 5,
+            "line": 5,
+            "vars": {
+              "n": 3
+            },
+            "events": [],
+            "effects": [
+              "ret:factorial:1:6"
+            ]
+          }
+        ],
+        "loop_iters": {},
+        "branch": {
+          "B2": {
+            "true": 5,
+            "false": 15
+          }
+        },
+        "events": [],
+        "effects_count": {
+          "fire": 0,
+          "read_cell": 0,
+          "read_void": 0,
+          "write_cell": 0,
+          "compare": 0,
+          "call": 20,
+          "ret": 20
+        },
+        "max_depth": 10,
+        "truncated": false
+      },
+      "tests": {
+        "passed": 5,
+        "total": 5,
+        "results": [
+          {
+            "args": [
+              3
+            ],
+            "expected": {
+              "returned": 6
+            },
+            "got": {
+              "returned": 6
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              0
+            ],
+            "expected": {
+              "returned": 1
+            },
+            "got": {
+              "returned": 1
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              1
+            ],
+            "expected": {
+              "returned": 1
+            },
+            "got": {
+              "returned": 1
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              5
+            ],
+            "expected": {
+              "returned": 120
+            },
+            "got": {
+              "returned": 120
+            },
+            "pass": true
+          },
+          {
+            "args": [
+              10
+            ],
+            "expected": {
+              "returned": 3628800
+            },
+            "got": {
+              "returned": 3628800
+            },
+            "pass": true
+          }
+        ]
+      },
+      "diagnosis": {
+        "status": "correct",
+        "posterior": {
+          "M01": 0.0017,
+          "M02": 0.0017,
+          "M03": 0.0017,
+          "M04": 0.0017,
+          "M05": 0.0017,
+          "M06": 0.0017,
+          "M07": 0.0017,
+          "M08": 0.0017,
+          "M10": 0.0017,
+          "D01": 0.0017,
+          "D02": 0.0017,
+          "D03": 0.0017,
+          "D04": 0.0017,
+          "D05": 0.0017,
+          "D06": 0.0017,
+          "D07": 0.0017,
+          "D08": 0.0017,
+          "CORRECT": 0.97,
+          "OTHER": 0.0017
+        },
+        "top": [
+          {
+            "id": "CORRECT",
+            "p": 0.97,
+            "name": "Correct",
+            "subtitle": "Passes every test",
+            "band": "Likely"
+          }
+        ],
+        "twin_set": null,
+        "two_bug": false,
+        "novelty": {
+          "knn_dist": 1.8,
+          "tau_d": 3.2,
+          "p_max": 0.97,
+          "tau_p": 0.55,
+          "abstain": false
+        },
+        "evidence": [],
+        "next_probe": null,
+        "probes_asked": [],
+        "model_version": "fixtures"
+      },
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    },
+    "GATE": {
+      "gate": {
+        "code": "G3b",
+        "message": "That's Python. This ship only speaks C."
+      },
+      "trace": null,
+      "tests": null,
+      "diagnosis": null,
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    }
+  },
+  "default": "P03"
+}

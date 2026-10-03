@@ -1,0 +1,37 @@
+{
+  "problem_id": "P03",
+  "name": "total_energy",
+  "planet": "loops",
+  "world": "drone_bay",
+  "family": "array_accumulate",
+  "split": "train",
+  "difficulty": 1,
+  "prompt": "Pull energy from every cell and return the total.",
+  "signature": "int total_energy(int cells[], int n)",
+  "starter": "int total_energy(int cells[], int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "int total_energy(int cells[], int n) {\n    int total = 0;\n    for (int i = 0; i < n; i++) {\n        total += cells[i];\n    }\n    return total;\n}",
+    "int total_energy(int cells[], int n) {\n    int total = 0;\n    int i = 0;\n    while (i < n) {\n        total = total + cells[i];\n        i++;\n    }\n    return total;\n}",
+    "int total_energy(int cells[], int n) {\n    int total = 0;\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        total += cells[i];\n    }\n    return total;\n}"
+  ],
+  "tests": [
+    {"args": [[2, 4, 6], 3], "expect": {"returned": 12}, "sample": true},
+    {"args": [[5], 1], "expect": {"returned": 5}, "sample": true},
+    {"args": [[1, 2, 3, 4], 4], "expect": {"returned": 10}},
+    {"args": [[0, 0, 9], 3], "expect": {"returned": 9}, "adversarial": "M03 passes by luck"},
+    {"args": [[7, 1], 2], "expect": {"returned": 8}}
+  ],
+  "display_test": 0,
+  "predict_item": {
+    "item_id": "PR_P03",
+    "code": "int cells[3] = {2, 4, 6};\nint total = 0;\nfor (int i = 0; i <= 3; i++) {\n    total += cells[i];\n}",
+    "question": "How many cells are read?",
+    "options": ["3", "4", "2"],
+    "correct": "4",
+    "belief": {"M01": "3", "M08": "3"}
+  },
+  "allowed_ops": ["m01_*", "amb_*", "m03_*", "m05_*", "m07_for_semi", "m08_*", "oth_*"],
+  "markers": ["i"],
+  "forbid": [],
+  "exposure": {"M01": 0.7, "M08": 0.7, "M03": 0.4, "M05": 0.4, "M07": 0.4}
+}

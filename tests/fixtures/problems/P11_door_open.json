@@ -1,0 +1,37 @@
+{
+  "problem_id": "P11",
+  "name": "door_open",
+  "planet": "conditions",
+  "world": "door",
+  "family": "equality_check",
+  "split": "train",
+  "difficulty": 1,
+  "prompt": "Return 1 if the code is 42, otherwise return 0.",
+  "signature": "int door_open(int code)",
+  "starter": "int door_open(int code) {\n    // TODO\n}",
+  "correct_variants": [
+    "int door_open(int code) {\n    if (code == 42) {\n        return 1;\n    }\n    return 0;\n}",
+    "int door_open(int code) {\n    int open = 0;\n    if (code == 42) {\n        open = 1;\n    }\n    return open;\n}",
+    "int door_open(int code) {\n    return code == 42 ? 1 : 0;\n}"
+  ],
+  "tests": [
+    {"args": [42], "expect": {"returned": 1}, "sample": true},
+    {"args": [7], "expect": {"returned": 0}, "sample": true},
+    {"args": [0], "expect": {"returned": 0}},
+    {"args": [41], "expect": {"returned": 0}},
+    {"args": [-42], "expect": {"returned": 0}}
+  ],
+  "display_test": 1,
+  "predict_item": {
+    "item_id": "PR_P11",
+    "code": "int code = 7;\nint open = 0;\nif (code = 42) {\n    open = 1;\n}",
+    "question": "What is open after this runs?",
+    "options": ["0", "1", "42"],
+    "correct": "1",
+    "belief": {"M06": "0"}
+  },
+  "allowed_ops": ["m06_if_assign", "m07_if_semi", "m10_*", "oth_*"],
+  "markers": [],
+  "forbid": [],
+  "exposure": {"M06": 0.7, "M07": 0.7, "M10": 0.4}
+}

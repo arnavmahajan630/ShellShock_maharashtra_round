@@ -1,0 +1,46 @@
+{
+  "_by": "answer",
+  "cases": {
+    "3": {
+      "correct": false,
+      "correct_answer": "4",
+      "explain": "i takes 0, 1, 2 and 3, so the loop reads four cells; the fourth is past the end of the array.",
+      "ask_reason": true,
+      "updates": [
+        {
+          "class": "M01",
+          "p_before": 0.1,
+          "p_after": 0.31
+        },
+        {
+          "class": "M08",
+          "p_before": 0.1,
+          "p_after": 0.31
+        }
+      ],
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    },
+    "4": {
+      "correct": true,
+      "correct_answer": "4",
+      "explain": "i takes 0, 1, 2 and 3, so the loop reads four cells; the fourth is past the end of the array.",
+      "ask_reason": false,
+      "updates": [
+        {
+          "class": "M01",
+          "p_before": 0.1,
+          "p_after": 0.03
+        },
+        {
+          "class": "M08",
+          "p_before": 0.1,
+          "p_after": 0.03
+        }
+      ],
+      "model_version": "fixtures",
+      "latency_ms": 1.0
+    }
+  },
+  "default": "3"
+}

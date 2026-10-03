@@ -1,0 +1,260 @@
+{
+  "status": "ok",
+  "returned": -858993448,
+  "printed": "",
+  "steps": [
+    {
+      "i": 0,
+      "line": 2,
+      "vars": {
+        "n": 3,
+        "total": 0,
+        "i": null
+      },
+      "events": [],
+      "effects": [
+        "call:total_energy:1:cells,3"
+      ]
+    },
+    {
+      "i": 1,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": 0,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 2,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": 0,
+        "i": 0
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 3,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 2,
+        "i": 0
+      },
+      "events": [],
+      "effects": [
+        "read_cell:0"
+      ]
+    },
+    {
+      "i": 4,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": 2,
+        "i": 1
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 5,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": 2,
+        "i": 1
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 6,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 6,
+        "i": 1
+      },
+      "events": [],
+      "effects": [
+        "read_cell:1"
+      ]
+    },
+    {
+      "i": 7,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": 6,
+        "i": 2
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 8,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": 6,
+        "i": 2
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 9,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": 12,
+        "i": 2
+      },
+      "events": [],
+      "effects": [
+        "read_cell:2"
+      ]
+    },
+    {
+      "i": 10,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": 12,
+        "i": 3
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 11,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": 12,
+        "i": 3
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 12,
+      "line": 4,
+      "vars": {
+        "n": 3,
+        "total": -858993448,
+        "i": 3
+      },
+      "events": [
+        {
+          "type": "oob_read",
+          "arr": "cells",
+          "idx": 3,
+          "size": 3,
+          "line": 4
+        }
+      ],
+      "effects": [
+        "read_void:3"
+      ]
+    },
+    {
+      "i": 13,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": -858993448,
+        "i": 4
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 14,
+      "line": 3,
+      "vars": {
+        "n": 3,
+        "total": -858993448,
+        "i": 4
+      },
+      "events": [],
+      "effects": []
+    },
+    {
+      "i": 15,
+      "line": 6,
+      "vars": {
+        "n": 3,
+        "total": -858993448,
+        "i": 4
+      },
+      "events": [],
+      "effects": [
+        "ret:total_energy:1:-858993448"
+      ]
+    }
+  ],
+  "loop_iters": {
+    "L3": 18
+  },
+  "branch": {},
+  "events": [
+    {
+      "type": "oob_read",
+      "arr": "cells",
+      "idx": 3,
+      "size": 3,
+      "line": 4,
+      "test": 0
+    },
+    {
+      "type": "oob_read",
+      "arr": "cells",
+      "idx": 1,
+      "size": 1,
+      "line": 4,
+      "test": 1
+    },
+    {
+      "type": "oob_read",
+      "arr": "cells",
+      "idx": 4,
+      "size": 4,
+      "line": 4,
+      "test": 2
+    },
+    {
+      "type": "oob_read",
+      "arr": "cells",
+      "idx": 3,
+      "size": 3,
+      "line": 4,
+      "test": 3
+    },
+    {
+      "type": "oob_read",
+      "arr": "cells",
+      "idx": 2,
+      "size": 2,
+      "line": 4,
+      "test": 4
+    }
+  ],
+  "effects_count": {
+    "fire": 0,
+    "read_cell": 13,
+    "read_void": 5,
+    "write_cell": 0,
+    "compare": 0,
+    "call": 5,
+    "ret": 5
+  },
+  "max_depth": 1,
+  "truncated": false
+}

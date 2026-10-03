@@ -1,0 +1,48 @@
+{
+  "stub": true,
+  "model_version": "fixtures",
+  "generated_at": "2026-10-04T00:00:00Z",
+  "effective_n": {
+    "rows": 0,
+    "unique_hash": 0,
+    "unique_prog_op": 0
+  },
+  "cards": [
+    {
+      "id": "E1",
+      "title": "Grouped CV by problem",
+      "slice": "TRAIN (stub)",
+      "n": 0,
+      "metrics": {
+        "macro_f1": 0.0,
+        "macro_f1_std": 0.0,
+        "acc": 0.0
+      },
+      "per_class": {},
+      "plots": [],
+      "caveat": "Stub: no model has been trained yet."
+    }
+  ],
+  "baselines": [],
+  "domains": {
+    "main": {},
+    "dsa": {}
+  },
+  "cross_domain": {
+    "m_recall_on_dsa_trained_main_only": 0.0,
+    "shortcut_auc": 0.0
+  },
+  "exam_sim": {
+    "curves": {
+      "adaptive": [],
+      "fixed": [],
+      "random": []
+    },
+    "final_f1": {},
+    "stable_recheck_rate": {}
+  },
+  "resolution": {
+    "rows": []
+  },
+  "failure_audit": []
+}

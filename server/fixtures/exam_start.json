@@ -1,0 +1,57 @@
+{
+  "exam_id": "ex_fixture",
+  "item": {
+    "item_id": "Q06",
+    "kind": "coding",
+    "sector": "sorting",
+    "difficulty": 2,
+    "prompt": "Sort the crates by weight, lightest first, in place.",
+    "signature": "void bubble_sort(int a[], int n)",
+    "starter": "void bubble_sort(int a[], int n) {\n    // TODO\n}",
+    "markers": [
+      "i",
+      "j"
+    ],
+    "sample_tests": [
+      {
+        "args": [
+          [
+            3,
+            1,
+            2
+          ],
+          3
+        ],
+        "expect": {
+          "array0": [
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      {
+        "args": [
+          [
+            2,
+            1
+          ],
+          2
+        ],
+        "expect": {
+          "array0": [
+            1,
+            2
+          ]
+        }
+      }
+    ]
+  },
+  "progress": {
+    "k": 1,
+    "n": 3
+  },
+  "time_limit_s": 1500,
+  "model_version": "fixtures",
+  "latency_ms": 1.0
+}

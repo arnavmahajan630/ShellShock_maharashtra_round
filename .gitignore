@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.db
+node_modules/
+.expo/
+.env
+# Old pointer MCQ build: kept on disk for reference, not part of the repo.
+legacy/
+ml/data/external/
+ml/artifacts/reason_*/
