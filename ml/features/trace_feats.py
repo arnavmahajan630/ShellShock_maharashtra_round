@@ -290,7 +290,8 @@ def trace_features(trace, reference_trace=None, problem=None, *, loops=None, ref
         deltas = [_iters(per_test[i], main) - _iters(ref_pt[i], ref_main) for i in range(n)]
         shown = min(display, n - 1)
         counts = {"actual": _iters(per_test[shown], main), "expected": _iters(ref_pt[shown], ref_main)}
-        put("b_iter_delta_mean", sum(deltas) / n, main, delta=round(sum(deltas) / n, 2), **counts)
+        mean = sum(deltas) / n
+        put("b_iter_delta_mean", mean, main, delta=round(mean, 2), fewer=round(abs(mean), 2), **counts)
         const = all(d == 1 for d in deltas) or all(d == -1 for d in deltas)
         put("b_iter_delta_const_pm1", const, main, **counts)
         eligible = [i for i in range(n) if _iters(ref_pt[i], ref_main) >= 2]

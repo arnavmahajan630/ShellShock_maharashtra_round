@@ -880,7 +880,7 @@ def ast_features(code, entry=None, trace=None, display_test=0):
                     ret = next((s for s in else_stmts if isinstance(s, c_ast.Return)), None)
                     if ret is not None:
                         hit("a_return_in_loop_else", ret,
-                            value=_src(ret.expr) if ret.expr is not None else "")
+                            ret=_src(ret.expr) if ret.expr is not None else "")
 
                     def plain(stmts):
                         return {s.lvalue.name: s for s in stmts
@@ -1118,7 +1118,7 @@ def ast_features(code, entry=None, trace=None, display_test=0):
     # ---- entry function only
     returns = [r for r in _walk(entry_fn.body) if isinstance(r, c_ast.Return)]
     if entry_fn.ret != "void" and returns and all(r.expr is not None and _is_number(r.expr) for r in returns):
-        hit("a_return_const_only", returns[0], value=_src(returns[0].expr))
+        hit("a_return_const_only", returns[0], const=_src(returns[0].expr))
     used = set()
     for cur in _walk(entry_fn.body):
         if isinstance(cur, c_ast.ID):
