@@ -91,12 +91,15 @@ def test_call_effect_on_first_callee_step_ret_on_its_return_step():
         }""")
     trace = itrace(make_problem("int f(int n)", [([5], {"returned": 11})]), code)
     steps = trace["steps"]
-    assert [s["line"] for s in steps] == [2, 5, 6]          # callee's step first, then the caller's own
-    assert "call:twice:2:5" in steps[0]["effects"] and "ret:twice:2:10" in steps[0]["effects"]
-    assert steps[0]["vars"] == {"x": 5}                     # the callee's frame
-    assert (steps[1]["vars"]["n"], steps[1]["vars"]["y"]) == (5, 10)
-    assert "ret:f:1:11" in steps[2]["effects"]
-    assert "call:f:1:5" in steps[0]["effects"] + steps[1]["effects"]
+    # f's first statement is itself a call. Effects that are already pending (here "call:f") are
+    # recorded as an early step on that line before the callee runs, so effects stay in the order
+    # they happened (subset.py step rules). Then the callee's step, then the caller's own.
+    assert [s["line"] for s in steps] == [5, 2, 5, 6]
+    assert steps[0]["effects"] == ["call:f:1:5"]
+    assert "call:twice:2:5" in steps[1]["effects"] and "ret:twice:2:10" in steps[1]["effects"]
+    assert steps[1]["vars"] == {"x": 5}                     # the callee's frame
+    assert (steps[2]["vars"]["n"], steps[2]["vars"]["y"]) == (5, 10)
+    assert "ret:f:1:11" in steps[3]["effects"]
 
 
 def test_vars_follow_the_current_frame_in_recursion():

@@ -438,6 +438,28 @@ def _tokens(code):
     return re.findall(r"[A-Za-z_]\w*|\d+\.?\d*|\S", strip_comments(normalise(code)))
 
 
+MAX_NESTING = 100
+
+
+def _too_deep(text):
+    """Line where brackets nest deeper than MAX_NESTING, else None.
+
+    Checked before parsing so the answer does not depend on Python's recursion limit, which the
+    interpreter raises when it is imported.
+    """
+    depth, line = 0, 1
+    for char in text:
+        if char == "\n":
+            line += 1
+        elif char in "([{":
+            depth += 1
+            if depth > MAX_NESTING:
+                return line
+        elif char in ")]}":
+            depth -= 1
+    return None
+
+
 def check(problem, code):
     """Run the gate. Returns schemas.Gate: {"code": ..., "message": ...}."""
     problem = problem or {}
@@ -457,6 +479,9 @@ def check(problem, code):
     text, directive = preprocess(bare)
     if directive:                                                       # G4: a `#` line outside the subset
         return _gate("G4", construct=directive)
+    deep_line = _too_deep(text)
+    if deep_line:                                                       # G3a, the same answer whatever the recursion limit is
+        return _gate("G3a", n=deep_line, reason="expression nested too deeply")
     ast, error = _try_parse(text)
     if ast is None:
         if _looks_like_python(bare):                                    # G3b

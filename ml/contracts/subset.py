@@ -88,6 +88,11 @@ EFFECTS_COUNT_KEYS = ["fire", "read_cell", "read_void", "write_cell", "compare",
 # - a step is recorded when its statement finishes. A "call" effect sits on the first step
 #   inside the called function and a "ret" effect on that function's return step, so the
 #   caller's own step comes after the callee's steps
+# - exception, so effects stay in the order they happened: if a statement already has effects
+#   pending (for example the "call" of the function it is the first statement of) and then calls
+#   a user function, those effects are recorded as an early step on that line before the callee
+#   runs. That line then appears twice. A function that falls off its end gets one step at its
+#   closing brace carrying its "ret" effect (decided when the interpreter was merged; notes/A1.md)
 # - trace["events"] lists every occurrence over all tests, in order; each carries "test",
 #   the index of the test it happened in. steps[].events carry no "test"
 # - loop_iters, branch and effects_count on the trace are sums over tests; max_depth is the
