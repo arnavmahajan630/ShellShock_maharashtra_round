@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint i = 0;\nwhile (i < 4) { fire(); }\n\nQuestion: How many shots are fired?\nThe student answered: 4\n\nThe student holds this wrong belief and does not know it is wrong: The loop variable advances by itself and the loop ends by itself\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"i ki value khud badhti rahegi, so 0,1,2,3 count hoke 4 shots fire honge.\", \"while loop ka condition khud check hota hai, i apne aap aage badh jayega isliye 4 baar chalega.\", \"har baar loop chalne pe i apne aap update ho jata hai, jab tak 4 na ho jaye.\", \"bas i ka count 0 se 3 tak jayega, phir loop ruk jayega, total 4 shots.\", \"i ko humne 0 diya hai, loop usko khud 4 tak le jayega, isliye 4 fire.\"]}",
+  "parsed": {
+    "sentences": [
+      "i ki value khud badhti rahegi, so 0,1,2,3 count hoke 4 shots fire honge.",
+      "while loop ka condition khud check hota hai, i apne aap aage badh jayega isliye 4 baar chalega.",
+      "har baar loop chalne pe i apne aap update ho jata hai, jab tak 4 na ho jaye.",
+      "bas i ka count 0 se 3 tak jayega, phir loop ruk jayega, total 4 shots.",
+      "i ko humne 0 diya hai, loop usko khud 4 tak le jayega, isliye 4 fire."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 266,
+    "completion_tokens": 158
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint n = 5;\nwhile (n > 0) { printf(\"%d \", n); }\n\nQuestion: What is printed?\nThe student answered: 5 4 3 2 1\n\nThe student holds this wrong belief and does not know it is wrong: The loop variable advances by itself and the loop ends by itself\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"Decriment ho raha hai n har baar, isliye 5 4 3 2 1 print hoga.\", \"Loop chalega jab tak n > 0 hai, phir 1 ke baad ruk jayega.\", \"n ki value apne aap kam hoti jati hai, isliye countdown milta hai.\", \"printf ke baad n ghat jata hai, phir 5 se 1 tak dikhata hai.\", \"While condition n > 0 false ho jayegi jab n zero ho jayega, isliye 1 tak print.\"]}",
+  "parsed": {
+    "sentences": [
+      "Decriment ho raha hai n har baar, isliye 5 4 3 2 1 print hoga.",
+      "Loop chalega jab tak n > 0 hai, phir 1 ke baad ruk jayega.",
+      "n ki value apne aap kam hoti jati hai, isliye countdown milta hai.",
+      "printf ke baad n ghat jata hai, phir 5 se 1 tak dikhata hai.",
+      "While condition n > 0 false ho jayegi jab n zero ho jayega, isliye 1 tak print."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 276,
+    "completion_tokens": 137
+  }
+}

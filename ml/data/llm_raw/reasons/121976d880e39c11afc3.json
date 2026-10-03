@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nfor (i = 0; i < 3; i++) {\n    if (a[i] > a[i + 1]) return 0; else return 1;\n}\n// a = {1, 2, 5, 3}; 1 means sorted\n\nQuestion: What is returned?\nThe student answered: 0\n\nThe student holds this wrong belief and does not know it is wrong: The else branch means 'not this one, keep looking'; it doesn't end or overwrite anything\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"a[i] > a[i+1] check hua, 5 > 3 tha, isliye return 0 de diya.\", \"loop pehli baar 5 aur 3 compare karta hai, condition true hui to 0 return ho jayega.\", \"else sirf tab aata jab bada nahi ho, par yahan bada hai isliye 0.\", \"return 0 pehle hi mil gaya jab 5 ne 3 ko cross kiya, isliye 0 aa raha.\", \"comparison mein 5 > 3 true hua, to return 0 ne answer set kar diya.\"]}",
+  "parsed": {
+    "sentences": [
+      "a[i] > a[i+1] check hua, 5 > 3 tha, isliye return 0 de diya.",
+      "loop pehli baar 5 aur 3 compare karta hai, condition true hui to 0 return ho jayega.",
+      "else sirf tab aata jab bada nahi ho, par yahan bada hai isliye 0.",
+      "return 0 pehle hi mil gaya jab 5 ne 3 ko cross kiya, isliye 0 aa raha.",
+      "comparison mein 5 > 3 true hua, to return 0 ne answer set kar diya."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 313,
+    "completion_tokens": 146
+  }
+}

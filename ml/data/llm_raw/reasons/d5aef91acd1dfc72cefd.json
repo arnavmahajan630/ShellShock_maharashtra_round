@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nfor (i = 0; i < 4; ) { fire(); }\n\nQuestion: How many shots are fired?\nThe student answered: 4\n\nThe student holds this wrong belief and does not know it is wrong: The loop variable advances by itself and the loop ends by itself\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: long-winded, walks through the steps one by one, 20 to 35 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"i starts at zero, loop runs while i is less than four, so i goes zero, one, two, three, that gives four shots total before stopping.\", \"Initialized i to zero, condition checks i below four, loop body fires, then i increases on its own, so four fires happen.\", \"The loop begins with i equal to zero and keeps going until i reaches four, so it fires once for each number, giving four shots.\", \"See i less than four in the condition, so the loop naturally counts zero through three, firing each time, which adds up to four shots.\", \"Started at zero, the loop moves i ahead automatically each round, so it runs for values zero, one, two, three, meaning four shots fire.\"]}",
+  "parsed": {
+    "sentences": [
+      "i starts at zero, loop runs while i is less than four, so i goes zero, one, two, three, that gives four shots total before stopping.",
+      "Initialized i to zero, condition checks i below four, loop body fires, then i increases on its own, so four fires happen.",
+      "The loop begins with i equal to zero and keeps going until i reaches four, so it fires once for each number, giving four shots.",
+      "See i less than four in the condition, so the loop naturally counts zero through three, firing each time, which adds up to four shots.",
+      "Started at zero, the loop moves i ahead automatically each round, so it runs for values zero, one, two, three, meaning four shots fire."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 265,
+    "completion_tokens": 159
+  }
+}

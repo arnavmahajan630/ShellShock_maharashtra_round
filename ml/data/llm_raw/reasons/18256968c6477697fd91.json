@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint a[3] = {5, 6, 7};\na[0] = a[1];\na[1] = a[2];\na[2] = a[0];\n\nQuestion: What is a now?\nThe student answered: {6, 7, 5}\n\nThe student holds this wrong belief and does not know it is wrong: Two assignments happen at the same time\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"Dono assignment ek saath hote hain, isliye a[0] aur a[1] ko 6 mil gaya.\", \"Jab a[0]=a[1] aur a[1]=a[2] saath chale, phir a[2] mein old a[0] gaya.\", \"Line 2 aur line 3 same time chalte hain, isliye swap ho gaya jaise.\", \"Mujhe laga a[1] pehle 6 ho jata hai, phir a[0] bhi 6 ho jata hai, toh 6, 7, 5.\", \"Saath mein assign hone se a[0] ki value 6 a[1] mein jaati hai aur a[1] ki 7 a[2] mein.\"]}",
+  "parsed": {
+    "sentences": [
+      "Dono assignment ek saath hote hain, isliye a[0] aur a[1] ko 6 mil gaya.",
+      "Jab a[0]=a[1] aur a[1]=a[2] saath chale, phir a[2] mein old a[0] gaya.",
+      "Line 2 aur line 3 same time chalte hain, isliye swap ho gaya jaise.",
+      "Mujhe laga a[1] pehle 6 ho jata hai, phir a[0] bhi 6 ho jata hai, toh 6, 7, 5.",
+      "Saath mein assign hone se a[0] ki value 6 a[1] mein jaati hai aur a[1] ki 7 a[2] mein."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 291,
+    "completion_tokens": 180
+  }
+}

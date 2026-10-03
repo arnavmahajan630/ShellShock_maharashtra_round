@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint temp = 20;\nif (temp > 100); printf(\"overheat\");\n\nQuestion: What is printed?\nThe student answered: nothing\n\nThe student holds this wrong belief and does not know it is wrong: A `;` after the header is harmless\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"temp 20 hai jo 100 se chhota hai, isliye if ke andar kuch print nahi hoga.\", \"; lagane se kuch farak nahi padta, condition false hai toh printf skip ho jayega.\", \"printf line if ke saath hi chalegi, par temp 100 se bada nahi hai toh kya print karega.\", \"condition galat hai, isliye overheat print nahi hoga, semicolon ka koi role nahi.\", \"temp ki value 20 hai, 100 se compare karne par false aata hai, toh output blank rahega.\"]}",
+  "parsed": {
+    "sentences": [
+      "temp 20 hai jo 100 se chhota hai, isliye if ke andar kuch print nahi hoga.",
+      "; lagane se kuch farak nahi padta, condition false hai toh printf skip ho jayega.",
+      "printf line if ke saath hi chalegi, par temp 100 se bada nahi hai toh kya print karega.",
+      "condition galat hai, isliye overheat print nahi hoga, semicolon ka koi role nahi.",
+      "temp ki value 20 hai, 100 se compare karne par false aata hai, toh output blank rahega."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 261,
+    "completion_tokens": 141
+  }
+}

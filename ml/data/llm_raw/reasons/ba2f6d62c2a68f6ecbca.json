@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint code = 7;\nif (code = 42) open_door();\n\nQuestion: Does the door open?\nThe student answered: no\n\nThe student holds this wrong belief and does not know it is wrong: `=` compares\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: sure of themselves, plain English, one sentence of 8 to 18 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"Since code is 7 and not 42, the check inside fails so the door stays closed.\", \"The part in brackets compares code with 42, and 7 is not equal, so nothing happens.\", \"7 and 42 are different values so the test is false and the door never opens.\", \"Code equals 7 which clearly doesn't match 42, so open_door() never gets called.\", \"The if only runs open_door when code and 42 are the same, and here they are not the same.\"]}",
+  "parsed": {
+    "sentences": [
+      "Since code is 7 and not 42, the check inside fails so the door stays closed.",
+      "The part in brackets compares code with 42, and 7 is not equal, so nothing happens.",
+      "7 and 42 are different values so the test is false and the door never opens.",
+      "Code equals 7 which clearly doesn't match 42, so open_door() never gets called.",
+      "The if only runs open_door when code and 42 are the same, and here they are not the same."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 252,
+    "completion_tokens": 114
+  }
+}

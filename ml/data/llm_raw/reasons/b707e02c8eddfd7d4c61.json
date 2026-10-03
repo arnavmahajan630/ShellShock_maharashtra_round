@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint i = 0;\nwhile (i < 4) { fire(); }\n\nQuestion: How many shots are fired?\nThe student answered: 4\n\nThe student holds this wrong belief and does not know it is wrong: The loop variable advances by itself and the loop ends by itself\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: long-winded, walks through the steps one by one, 20 to 35 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"i starts at 0, and the loop runs while i is less than 4, so it will fire for i equal to 0, 1, 2, and 3, giving four shots.\", \"Each time the loop repeats, i goes up by one on its own, so after four shots i becomes 4 and the condition stops being true.\", \"The variable i begins at zero, and because the loop keeps going until i reaches 4, it naturally fires four times before finishing.\", \"Looking at the condition i < 4, the loop will fire once for each value below 4, and i advances itself each round, so the total is 4.\", \"Since i is set to 0 and the loop runs until i is no longer less than 4, it counts 0, 1, 2, 3 and then ends, firing 4 shots.\"]}",
+  "parsed": {
+    "sentences": [
+      "i starts at 0, and the loop runs while i is less than 4, so it will fire for i equal to 0, 1, 2, and 3, giving four shots.",
+      "Each time the loop repeats, i goes up by one on its own, so after four shots i becomes 4 and the condition stops being true.",
+      "The variable i begins at zero, and because the loop keeps going until i reaches 4, it naturally fires four times before finishing.",
+      "Looking at the condition i < 4, the loop will fire once for each value below 4, and i advances itself each round, so the total is 4.",
+      "Since i is set to 0 and the loop runs until i is no longer less than 4, it counts 0, 1, 2, 3 and then ends, firing 4 shots."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 265,
+    "completion_tokens": 188
+  }
+}

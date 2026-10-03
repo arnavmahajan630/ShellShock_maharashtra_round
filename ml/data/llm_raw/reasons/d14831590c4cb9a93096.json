@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint lo = 2, hi = 9;\nif (lo < hi) { lo = hi; hi = lo; }\n\nQuestion: What are lo and hi now?\nThe student answered: lo = 9, hi = 9\n\nThe student understands this correctly: After the first assignment the old value is gone, so both end up the same; a swap needs a temp.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: typed fast on a phone: all lowercase, a spelling mistake or two, little punctuation, 6 to 15 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"lo gets 9 then hi takes that 9 so both r 9\", \"the first line overwrites lo so hi copies the new value not old\", \"i tot it swaps but lo changed befor hi reads it\", \"hi = lo happens after lo = hi so hi gets 9 too\", \"no temp so the old low value is gone and hi picks up 9\"]}",
+  "parsed": {
+    "sentences": [
+      "lo gets 9 then hi takes that 9 so both r 9",
+      "the first line overwrites lo so hi copies the new value not old",
+      "i tot it swaps but lo changed befor hi reads it",
+      "hi = lo happens after lo = hi so hi gets 9 too",
+      "no temp so the old low value is gone and hi picks up 9"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 291,
+    "completion_tokens": 85
+  }
+}

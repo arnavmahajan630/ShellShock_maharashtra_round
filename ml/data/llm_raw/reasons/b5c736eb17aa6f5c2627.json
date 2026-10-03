@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint h(int n) { return h(n - 1); }\n\nQuestion: What is h(2)?\nThe student answered: it never stops\n\nThe student understands this correctly: Recursion only stops at a base case that returns without calling itself; without one it never stops.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: hesitant (\"i think\", \"maybe\", \"not sure but\"), one sentence of 8 to 18 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"maybe h keeps calling h with n-1, and there's nothing that tells it to return and stop.\", \"i think since there's no return value like 0 or 1, the calls just continue endlessly.\", \"not sure but every time h runs it calls h again, so it never reaches a point where it stops.\", \"h(2) would call h(1) which calls h(0) and it just keeps going down without ending.\", \"i think the function only has the self-call, so nothing makes it stop even when n gets small.\"]}",
+  "parsed": {
+    "sentences": [
+      "maybe h keeps calling h with n-1, and there's nothing that tells it to return and stop.",
+      "i think since there's no return value like 0 or 1, the calls just continue endlessly.",
+      "not sure but every time h runs it calls h again, so it never reaches a point where it stops.",
+      "h(2) would call h(1) which calls h(0) and it just keeps going down without ending.",
+      "i think the function only has the self-call, so nothing makes it stop even when n gets small."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 266,
+    "completion_tokens": 122
+  }
+}

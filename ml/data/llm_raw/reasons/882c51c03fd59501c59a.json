@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nvoid sort(int a[], int n) {\n    for (j = 0; j < n - 1; j++)\n        if (a[j] > a[j + 1]) swap(a, j, j + 1);\n}\n// called once on {6, 5, 4}\n\nQuestion: Is the array sorted afterwards?\nThe student answered: yes\n\nThe student holds this wrong belief and does not know it is wrong: One pass over the array sorts it\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"Ek pass mein bada element right chala jaata hai, isliye array sort ho gaya.\", \"6 aur 5 swap hue, phir 5 aur 4 swap, sab set ho gaya.\", \"Har j pe check kiya, jo bada tha use aage bheja, bas.\", \"Loop n-1 tak chalta hai, matlab poora array cover ho gaya.\", \"Swap hone ke baad chhote se bada order aa gaya, so sorted.\"]}",
+  "parsed": {
+    "sentences": [
+      "Ek pass mein bada element right chala jaata hai, isliye array sort ho gaya.",
+      "6 aur 5 swap hue, phir 5 aur 4 swap, sab set ho gaya.",
+      "Har j pe check kiya, jo bada tha use aage bheja, bas.",
+      "Loop n-1 tak chalta hai, matlab poora array cover ho gaya.",
+      "Swap hone ke baad chhote se bada order aa gaya, so sorted."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 306,
+    "completion_tokens": 108
+  }
+}

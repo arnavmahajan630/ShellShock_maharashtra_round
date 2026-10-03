@@ -1,0 +1,26 @@
+{
+  "job": "smoke",
+  "model": "deepseek-flash",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "Return {\"sentences\": [...]} with two short sentences a first-year student might type to explain why they think int a[4] has a cell a[4]."
+    }
+  ],
+  "content": "{\"sentences\":[\"I thought the 4 means the last index is 4, so a[4] should be the last cell.\",\"I counted the four elements as a[1], a[2], a[3], and a[4] because I started at 1.\"]}",
+  "parsed": {
+    "sentences": [
+      "I thought the 4 means the last index is 4, so a[4] should be the last cell.",
+      "I counted the four elements as a[1], a[2], a[3], and a[4] because I started at 1."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 93,
+    "completion_tokens": 898
+  }
+}

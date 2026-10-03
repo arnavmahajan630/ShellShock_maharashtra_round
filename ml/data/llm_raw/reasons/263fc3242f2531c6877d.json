@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint h(int n) { return h(n - 1); }\n\nQuestion: What is h(2)?\nThe student answered: 0\n\nThe student holds this wrong belief and does not know it is wrong: Recursion stops by itself when the work is done\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: sure of themselves, plain English, one sentence of 8 to 18 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"h keeps calling itself until it finishes counting down from 2, then it returns 0.\", \"When n gets to the end the function just stops on its own and gives back 0.\", \"The function runs down from 2 and once all the work is done it returns 0.\", \"h(2) calls h(1) then h(0) and after that the function ends and returns 0.\", \"Since the calls finish by themselves, h(2) comes back with 0 as the final value.\"]}",
+  "parsed": {
+    "sentences": [
+      "h keeps calling itself until it finishes counting down from 2, then it returns 0.",
+      "When n gets to the end the function just stops on its own and gives back 0.",
+      "The function runs down from 2 and once all the work is done it returns 0.",
+      "h(2) calls h(1) then h(0) and after that the function ends and returns 0.",
+      "Since the calls finish by themselves, h(2) comes back with 0 as the final value."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 258,
+    "completion_tokens": 113
+  }
+}

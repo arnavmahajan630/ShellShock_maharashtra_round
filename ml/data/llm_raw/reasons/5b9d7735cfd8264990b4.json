@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nfor (i = 2; i <= 6; i++) fire();\n\nQuestion: How many shots are fired?\nThe student answered: 5\n\nThe student understands this correctly: `<=` includes the end value and `<` stops one before it; count every value the loop variable actually takes.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"i 2 se start hota hai aur 6 tak chalta hai, isliye 5 shots fire honge.\", \"<= lagane ke baad 6 bhi include ho jata hai, bas count 6-2+1=5 aata hai.\", \"loop do se chalu hoke chhe par hi rukta hai, beech ke saare values pe fire call hota hai.\", \"end value 6 bhi liya jata hai kyunki <= hai, isliye 2,3,4,5,6 milake paanch baar.\", \"start 2 se aur last 6, dono count karke total paanch shots fire hue.\"]}",
+  "parsed": {
+    "sentences": [
+      "i 2 se start hota hai aur 6 tak chalta hai, isliye 5 shots fire honge.",
+      "<= lagane ke baad 6 bhi include ho jata hai, bas count 6-2+1=5 aata hai.",
+      "loop do se chalu hoke chhe par hi rukta hai, beech ke saare values pe fire call hota hai.",
+      "end value 6 bhi liya jata hai kyunki <= hai, isliye 2,3,4,5,6 milake paanch baar.",
+      "start 2 se aur last 6, dono count karke total paanch shots fire hue."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 268,
+    "completion_tokens": 153
+  }
+}

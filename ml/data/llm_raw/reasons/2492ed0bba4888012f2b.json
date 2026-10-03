@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint i = 0;\nwhile (i < 3) { fire(); }\n\nQuestion: How many shots are fired?\nThe student answered: it never stops\n\nThe student understands this correctly: A loop variable only changes when the code changes it; with no update the condition stays true forever.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: typed fast on a phone: all lowercase, a spelling mistake or two, little punctuation, 6 to 15 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"i starts at 0 and nuthing adds to it so stays under 3\", \"theres no i++ inside the loop so i never grows\", \"while keeps checking i<3 but i aint changing inside\", \"fire() dont touch i so i stuck at 0 forever\", \"nobody updates i after each shot so loop dont end\"]}",
+  "parsed": {
+    "sentences": [
+      "i starts at 0 and nuthing adds to it so stays under 3",
+      "theres no i++ inside the loop so i never grows",
+      "while keeps checking i<3 but i aint changing inside",
+      "fire() dont touch i so i stuck at 0 forever",
+      "nobody updates i after each shot so loop dont end"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 271,
+    "completion_tokens": 79
+  }
+}

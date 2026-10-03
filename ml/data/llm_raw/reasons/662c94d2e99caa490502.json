@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\n// a = {5, 4, 3, 2, 1}; one bubble pass has just run\n\nQuestion: How many more passes are needed before a is sorted?\nThe student answered: none\n\nThe student holds this wrong belief and does not know it is wrong: One pass over the array sorts it\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: long-winded, walks through the steps one by one, 20 to 35 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"First pass compared 5 and 4, swapped, then 4 and 3, swapped, then 3 and 2, swapped, then 2 and 1. So now it is 4,3,2,1,5, too.\", \"I looked at the loop running from start to end once, checking each neighbour pair. After that single scan, every smaller number has moved left, so done.\", \"Started with 5,4,3,2,1. One trip through fixed each pair, pushing smaller ones forward. Now the list reads 4,3,2,1,5, which looks sorted enough.\", \"The pass checked positions one after another and swapped where needed. Since it touched every element once, no pair is left out of order, so no more trips.\", \"Ran the inner comparison across all four adjacent slots. Each swap placed a value correctly, so after finishing that one round, the array needs nothing further from me.\"]}",
+  "parsed": {
+    "sentences": [
+      "First pass compared 5 and 4, swapped, then 4 and 3, swapped, then 3 and 2, swapped, then 2 and 1. So now it is 4,3,2,1,5, too.",
+      "I looked at the loop running from start to end once, checking each neighbour pair. After that single scan, every smaller number has moved left, so done.",
+      "Started with 5,4,3,2,1. One trip through fixed each pair, pushing smaller ones forward. Now the list reads 4,3,2,1,5, which looks sorted enough.",
+      "The pass checked positions one after another and swapped where needed. Since it touched every element once, no pair is left out of order, so no more trips.",
+      "Ran the inner comparison across all four adjacent slots. Each swap placed a value correctly, so after finishing that one round, the array needs nothing further from me."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 272,
+    "completion_tokens": 204
+  }
+}

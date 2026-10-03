@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint big(int a, int b) {\n    if (a > b) printf(\"%d\", a); else printf(\"%d\", b);\n    return 0;\n}\nint m = big(4, 9);\n\nQuestion: What is m?\nThe student answered: 9\n\nThe student holds this wrong belief and does not know it is wrong: Printing the value hands it back to the caller\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: very short, 3 to 7 words, like a quick reply.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"printing a gets returned to m\", \"the printed 9 becomes m\", \"big gives back what it prints\", \"printf sends 9 to caller\", \"m takes the printed value\"]}",
+  "parsed": {
+    "sentences": [
+      "printing a gets returned to m",
+      "the printed 9 becomes m",
+      "big gives back what it prints",
+      "printf sends 9 to caller",
+      "m takes the printed value"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 284,
+    "completion_tokens": 44
+  }
+}

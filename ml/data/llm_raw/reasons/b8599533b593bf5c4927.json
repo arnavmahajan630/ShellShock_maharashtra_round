@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\n// guessing game: secret = 8, lo = 7, hi = 8\nguess = (lo + hi) / 2;   // 7, too small\nlo = guess;\n\nQuestion: What is the next guess?\nThe student answered: 7 again\n\nThe student understands this correctly: `low = mid` keeps mid inside the window, so with neighbouring low and high the window never shrinks; it has to be `mid + 1`.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"lo = guess karne se mid wapas window ke andar aa jata hai, toh same 7 phir guess hoga.\", \"lo aur hi paas paas hain, guess phir 7 aayega aur window chhoti nahi hogi.\", \"mid calculate karne par (7+8)/2 = 7 hi aata hai, toh agli baar bhi 7.\", \"lo ko guess pe set kiya, isliye window shrink nahi hoti, guess wahi 7 rehta hai.\", \"7 aur 8 ke beech integer division 7 deta hai, aur low 7 pe atka rehta hai.\"]}",
+  "parsed": {
+    "sentences": [
+      "lo = guess karne se mid wapas window ke andar aa jata hai, toh same 7 phir guess hoga.",
+      "lo aur hi paas paas hain, guess phir 7 aayega aur window chhoti nahi hogi.",
+      "mid calculate karne par (7+8)/2 = 7 hi aata hai, toh agli baar bhi 7.",
+      "lo ko guess pe set kiya, isliye window shrink nahi hoti, guess wahi 7 rehta hai.",
+      "7 aur 8 ke beech integer division 7 deta hai, aur low 7 pe atka rehta hai."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 304,
+    "completion_tokens": 148
+  }
+}

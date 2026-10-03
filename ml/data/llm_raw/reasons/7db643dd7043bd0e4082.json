@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint h(int n) { return h(n - 1); }\n\nQuestion: What is h(2)?\nThe student answered: it never stops\n\nThe student understands this correctly: Recursion only stops at a base case that returns without calling itself; without one it never stops.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: long-winded, walks through the steps one by one, 20 to 35 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"Starting h(2), it calls h(1), then h(0), then keeps going negative forever, because nothing inside ever returns a value without calling itself again.\", \"Look at the function body: there is only one line, and that line calls h again. So each call makes another call, endlessly, with no stopping point.\", \"When n equals 2, subtract 1 gives 1, then 0, then -1, and it never checks for a smallest number to quit at.\", \"The single return statement always contains another call to h, so there is no moment where execution can finish and hand a result back up.\", \"Every time h runs, it leaves a pending call and starts a new one, stacking up forever because no version just gives back a number.\"]}",
+  "parsed": {
+    "sentences": [
+      "Starting h(2), it calls h(1), then h(0), then keeps going negative forever, because nothing inside ever returns a value without calling itself again.",
+      "Look at the function body: there is only one line, and that line calls h again. So each call makes another call, endlessly, with no stopping point.",
+      "When n equals 2, subtract 1 gives 1, then 0, then -1, and it never checks for a smallest number to quit at.",
+      "The single return statement always contains another call to h, so there is no moment where execution can finish and hand a result back up.",
+      "Every time h runs, it leaves a pending call and starts a new one, stacking up forever because no version just gives back a number."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 262,
+    "completion_tokens": 165
+  }
+}

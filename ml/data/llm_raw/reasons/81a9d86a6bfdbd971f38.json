@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint a = 7, b = 2;\nfloat r = a / b;\n\nQuestion: What is r?\nThe student answered: 3.5\n\nThe student holds this wrong belief and does not know it is wrong: int / int gives the exact decimal\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"a=7 aur b=2, toh 7/2 ka exact value 3.5 hi aayega na.\", \"float r liya hai, isliye answer decimal mein 3.5 store hoga.\", \"Division karne se 3.5 aata hai, phir r mein daal diya.\", \"7 ko 2 se divide karo, 3.5 milta hai, bas wahi r hai.\", \"Maine socha a/b calculate hoga toh 3.5, aur float r usi ko le lega.\"]}",
+  "parsed": {
+    "sentences": [
+      "a=7 aur b=2, toh 7/2 ka exact value 3.5 hi aayega na.",
+      "float r liya hai, isliye answer decimal mein 3.5 store hoga.",
+      "Division karne se 3.5 aata hai, phir r mein daal diya.",
+      "7 ko 2 se divide karo, 3.5 milta hai, bas wahi r hai.",
+      "Maine socha a/b calculate hoga toh 3.5, aur float r usi ko le lega."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 262,
+    "completion_tokens": 125
+  }
+}

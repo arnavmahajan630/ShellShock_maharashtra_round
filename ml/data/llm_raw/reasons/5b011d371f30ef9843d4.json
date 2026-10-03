@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint total;\nfor (i = 0; i < 3; i++) total += 2;\n\nQuestion: What is total after the loop?\nThe student answered: 6\n\nThe student holds this wrong belief and does not know it is wrong: Local variables start at 0\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"total 0 se start hota hai, phir 3 baar 2 add kiya toh 6 aaya.\", \"loop 3 baar chalta hai aur total me 2-2 add hota jaata hai, jaise 0+2+2+2.\", \"i=0, i=1, i=2 pe total me 2 jod diya, shuru me total khali 0 tha.\", \"total apne aap 0 se shuru ho jaata hai, phir har iteration me 2 badhta hai.\", \"teen baar loop chala aur har baar 2 juda, kyunki total pehle se 0 maan liya.\"]}",
+  "parsed": {
+    "sentences": [
+      "total 0 se start hota hai, phir 3 baar 2 add kiya toh 6 aaya.",
+      "loop 3 baar chalta hai aur total me 2-2 add hota jaata hai, jaise 0+2+2+2.",
+      "i=0, i=1, i=2 pe total me 2 jod diya, shuru me total khali 0 tha.",
+      "total apne aap 0 se shuru ho jaata hai, phir har iteration me 2 badhta hai.",
+      "teen baar loop chala aur har baar 2 juda, kyunki total pehle se 0 maan liya."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 266,
+    "completion_tokens": 156
+  }
+}

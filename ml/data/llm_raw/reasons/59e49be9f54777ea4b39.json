@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint lives = 3;\nif (lives = 1) printf(\"last life\");\n\nQuestion: What is lives afterwards?\nThe student answered: 3\n\nThe student holds this wrong belief and does not know it is wrong: `=` compares\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"lives = 1 mein equals se compare hota hai, dono equal nahi, so lives 3 hi rahega\", \"if condition check karta hai ki lives 1 ke barabar hai ya nahi, equal nahi hai to change nahi hoga\", \"maine socha = comparison karta hai, 3 aur 1 match nahi karte, isliye lives 3 rehta hai\", \"printf tabhi chalega jab lives 1 ho, par lives 3 hai, so kuch change nahi hota\", \"lives ki value 3 hai aur = se check karne par 1 se equal nahi mila, so 3 hi raha\"]}",
+  "parsed": {
+    "sentences": [
+      "lives = 1 mein equals se compare hota hai, dono equal nahi, so lives 3 hi rahega",
+      "if condition check karta hai ki lives 1 ke barabar hai ya nahi, equal nahi hai to change nahi hoga",
+      "maine socha = comparison karta hai, 3 aur 1 match nahi karte, isliye lives 3 rehta hai",
+      "printf tabhi chalega jab lives 1 ho, par lives 3 hai, so kuch change nahi hota",
+      "lives ki value 3 hai aur = se check karne par 1 se equal nahi mila, so 3 hi raha"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 258,
+    "completion_tokens": 154
+  }
+}

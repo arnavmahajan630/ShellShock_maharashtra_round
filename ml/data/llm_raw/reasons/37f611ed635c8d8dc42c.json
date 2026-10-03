@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint k = 0;\nwhile (k = 0) fire();\n\nQuestion: How many shots are fired?\nThe student answered: it never stops\n\nThe student holds this wrong belief and does not know it is wrong: `=` compares\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: sure of themselves, plain English, one sentence of 8 to 18 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"Since the while condition checks if k equals zero, it is true at the start so the loop runs forever.\", \"The condition uses an equals thing which means compare, so zero equals zero is true and it keeps going.\", \"As long as k equals zero the loop fires, and k never changes, so it never stops shooting.\", \"k is set to zero and the check says k equals zero is a match, so it keeps firing without end.\", \"The loop asks whether k equals zero, gets a yes, and just fires again and again forever.\"]}",
+  "parsed": {
+    "sentences": [
+      "Since the while condition checks if k equals zero, it is true at the start so the loop runs forever.",
+      "The condition uses an equals thing which means compare, so zero equals zero is true and it keeps going.",
+      "As long as k equals zero the loop fires, and k never changes, so it never stops shooting.",
+      "k is set to zero and the check says k equals zero is a match, so it keeps firing without end.",
+      "The loop asks whether k equals zero, gets a yes, and just fires again and again forever."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 253,
+    "completion_tokens": 117
+  }
+}

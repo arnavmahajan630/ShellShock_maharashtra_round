@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\n// a = {4, 3, 2, 1}\nfor (j = 0; j < 3; j++)\n    if (a[j] > a[j + 1]) swap(a, j, j + 1);\n\nQuestion: What is a after this one pass?\nThe student answered: {3, 2, 1, 4}\n\nThe student understands this correctly: One pass only carries the biggest value to the end; the rest can still be out of order.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: very short, 3 to 7 words, like a quick reply.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"Biggest bubbles to the last spot.\", \"Only one pass done, so 4 at end.\", \"Loop ends at j<3, moved 4 right.\", \"Just one round of swapping neighbors.\", \"After one pass largest reaches end.\"]}",
+  "parsed": {
+    "sentences": [
+      "Biggest bubbles to the last spot.",
+      "Only one pass done, so 4 at end.",
+      "Loop ends at j<3, moved 4 right.",
+      "Just one round of swapping neighbors.",
+      "After one pass largest reaches end."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 306,
+    "completion_tokens": 55
+  }
+}

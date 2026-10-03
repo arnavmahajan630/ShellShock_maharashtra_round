@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint temp = 20;\nif (temp > 100); printf(\"overheat\");\n\nQuestion: What is printed?\nThe student answered: nothing\n\nThe student holds this wrong belief and does not know it is wrong: A `;` after the header is harmless\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: long-winded, walks through the steps one by one, 20 to 35 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"First I check temp which is 20, then see if it is greater than 100, which it is not, so the condition fails and nothing inside runs.\", \"The semicolon after the if header just ends that line normally like any other statement, so I treat the condition as false and skip the printf entirely.\", \"Since 20 is less than 100, the whole thing becomes false, so I ignore the printf after it and just move on to the next line.\", \"Look at temp equals 20, compare with 100, not greater, so the if block does nothing, and the printf stays outside and never executes.\", \"The condition evaluates false because 20 is not over 100, so the instruction after the header just doesn't happen and no text appears on screen.\"]}",
+  "parsed": {
+    "sentences": [
+      "First I check temp which is 20, then see if it is greater than 100, which it is not, so the condition fails and nothing inside runs.",
+      "The semicolon after the if header just ends that line normally like any other statement, so I treat the condition as false and skip the printf entirely.",
+      "Since 20 is less than 100, the whole thing becomes false, so I ignore the printf after it and just move on to the next line.",
+      "Look at temp equals 20, compare with 100, not greater, so the if block does nothing, and the printf stays outside and never executes.",
+      "The condition evaluates false because 20 is not over 100, so the instruction after the header just doesn't happen and no text appears on screen."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 260,
+    "completion_tokens": 166
+  }
+}

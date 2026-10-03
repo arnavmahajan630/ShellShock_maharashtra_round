@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint sum(int a[], int n) { if (n == 0) return 0; sum(a, n - 1); return a[n - 1]; }\n// a = {1, 2, 3}\n\nQuestion: What is sum(a, 3)?\nThe student answered: 6\n\nThe student holds this wrong belief and does not know it is wrong: The recursive call's result is combined automatically\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: long-winded, walks through the steps one by one, 20 to 35 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\n  \"sentences\": [\n    \"Start with n equals 3: call sum on a with 2, then it returns 2? No wait, the recursion adds 3 somehow, getting 6.\",\n    \"First n is 3, then 2, then 1, then 0 returns zero. After that, each call gives back its number, so 1 plus 2 plus 3 makes 6.\",\n    \"The function goes down until n is zero, that's the base case. Then as it comes back up, the result from each step piles onto the total, so 1+2+3.\",\n    \"Looking at the code: sum called again with n-1, then return a[n-1]. The computer keeps adding those returned values together, so 1 and 2 and 3 sum to 6.\",\n    \"Going through manually: a[2] is 3, then a[1] is 2, then a[0] is 1. The recursive call's answer gets combined automatically, so 3+2+1 equals 6.\"\n  ]\n}",
+  "parsed": {
+    "sentences": [
+      "Start with n equals 3: call sum on a with 2, then it returns 2? No wait, the recursion adds 3 somehow, getting 6.",
+      "First n is 3, then 2, then 1, then 0 returns zero. After that, each call gives back its number, so 1 plus 2 plus 3 makes 6.",
+      "The function goes down until n is zero, that's the base case. Then as it comes back up, the result from each step piles onto the total, so 1+2+3.",
+      "Looking at the code: sum called again with n-1, then return a[n-1]. The computer keeps adding those returned values together, so 1 and 2 and 3 sum to 6.",
+      "Going through manually: a[2] is 3, then a[1] is 2, then a[0] is 1. The recursive call's answer gets combined automatically, so 3+2+1 equals 6."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 294,
+    "completion_tokens": 231
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\n// low = 0, high = 1, the target is a[1]\nwhile (low < high) {\n    mid = (low + high) / 2;\n    if (a[mid] < target) low = mid; else high = mid;\n}\n\nQuestion: What happens?\nThe student answered: it finds the target on the next step\n\nThe student holds this wrong belief and does not know it is wrong: mid is excluded from the window automatically\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"mid ko low ya high mein set karne se target next step pe mil jayega.\", \"a[1] target hai aur mid 0 ya 1, toh next check mein pakka milega.\", \"condition a[mid] < target check karta hai, toh agla step target de dega.\", \"low < high loop chal raha hai, mid update hote hi target mil jayega.\", \"har baar mid naya window deta hai, toh next iteration mein target mil jayega.\"]}",
+  "parsed": {
+    "sentences": [
+      "mid ko low ya high mein set karne se target next step pe mil jayega.",
+      "a[1] target hai aur mid 0 ya 1, toh next check mein pakka milega.",
+      "condition a[mid] < target check karta hai, toh agla step target de dega.",
+      "low < high loop chal raha hai, mid update hote hi target mil jayega.",
+      "har baar mid naya window deta hai, toh next iteration mein target mil jayega."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 303,
+    "completion_tokens": 113
+  }
+}

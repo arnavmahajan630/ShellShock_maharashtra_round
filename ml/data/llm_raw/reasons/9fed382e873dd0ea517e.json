@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint a[2] = {4, 7};\na[0] = a[1];\na[1] = a[0];\n\nQuestion: What is a now?\nThe student answered: {7, 4}\n\nThe student holds this wrong belief and does not know it is wrong: Two assignments happen at the same time\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"a[0] ko a[1] ki value di aur a[1] ko a[0] ki value, dono ek saath set ho gaye.\", \"Dekho, a[0] aur a[1] ki values exchange ho rahi hain, isliye swap ho gaya.\", \"Jab a[0] = a[1] chalaya, tab a[1] ki old value 7 aa gayi, aur wahi 7 a[1] mein bhi chala gaya.\", \"Mere hisaab se dono assignments parallel mein chalti hain, isliye {7, 4} aaya.\", \"a[0] ki jagah 7 aur a[1] ki jagah 4 ho gaya kyunki dono lines ne ek doosre ko dekh liya.\"]}",
+  "parsed": {
+    "sentences": [
+      "a[0] ko a[1] ki value di aur a[1] ko a[0] ki value, dono ek saath set ho gaye.",
+      "Dekho, a[0] aur a[1] ki values exchange ho rahi hain, isliye swap ho gaya.",
+      "Jab a[0] = a[1] chalaya, tab a[1] ki old value 7 aa gayi, aur wahi 7 a[1] mein bhi chala gaya.",
+      "Mere hisaab se dono assignments parallel mein chalti hain, isliye {7, 4} aaya.",
+      "a[0] ki jagah 7 aur a[1] ki jagah 4 ho gaya kyunki dono lines ne ek doosre ko dekh liya."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 276,
+    "completion_tokens": 185
+  }
+}

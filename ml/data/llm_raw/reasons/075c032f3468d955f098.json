@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint a[4] = {1, 2, 3, 4};\n\nQuestion: What is a[2]?\nThe student answered: 2\n\nThe student holds this wrong belief and does not know it is wrong: Arrays are indexed 1..n\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: long-winded, walks through the steps one by one, 20 to 35 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"First position holds 1, so second position holds 2, third holds 3, fourth holds 4. I want the second slot so I picked 2.\", \"If a[1] is the first element with value 1, then a[2] is the next one. Counting 1, 2, I land on the number 2.\", \"Array starts at 1 for the first item, so the second item is a[2]. Looking at 1, 2, 3, 4, the second number is 2.\", \"The index tells which number in the list. a[2] means the second number, which is written right there as 2 in the braces.\", \"Counting starts from 1, so a[1] gets 1, a[2] gets 2, a[3] gets 3, a[4] gets 4. Therefore a[2] is clearly 2.\"]}",
+  "parsed": {
+    "sentences": [
+      "First position holds 1, so second position holds 2, third holds 3, fourth holds 4. I want the second slot so I picked 2.",
+      "If a[1] is the first element with value 1, then a[2] is the next one. Counting 1, 2, I land on the number 2.",
+      "Array starts at 1 for the first item, so the second item is a[2]. Looking at 1, 2, 3, 4, the second number is 2.",
+      "The index tells which number in the list. a[2] means the second number, which is written right there as 2 in the braces.",
+      "Counting starts from 1, so a[1] gets 1, a[2] gets 2, a[3] gets 3, a[4] gets 4. Therefore a[2] is clearly 2."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 262,
+    "completion_tokens": 202
+  }
+}

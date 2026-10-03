@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint x = 0;\nif (x = 0) fire(); else open_door();\n\nQuestion: What happens?\nThe student answered: it fires\n\nThe student holds this wrong belief and does not know it is wrong: `=` compares\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: typed fast on a phone: all lowercase, a spelling mistake or two, little punctuation, 6 to 15 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"x = 0 se x zero ho jata hai to if true hai na\", \"the = sign makes them equal so both r zero and it fires\", \"0 means false but x becomes 0 and that matches so fire runs\", \"i thot = just cheks if they are same, both 0 so if works\", \"since x equals 0 the if is true and fire() is called\"]}",
+  "parsed": {
+    "sentences": [
+      "x = 0 se x zero ho jata hai to if true hai na",
+      "the = sign makes them equal so both r zero and it fires",
+      "0 means false but x becomes 0 and that matches so fire runs",
+      "i thot = just cheks if they are same, both 0 so if works",
+      "since x equals 0 the if is true and fire() is called"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 262,
+    "completion_tokens": 90
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint count(int n) { printf(\"%d \", n); return count(n - 1); }\n\nQuestion: What does count(3) print?\nThe student answered: 3 2 1\n\nThe student holds this wrong belief and does not know it is wrong: Recursion stops by itself when the work is done\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: very short, 3 to 7 words, like a quick reply.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"prints n, then recursion eventually finishes\", \"3 printed first, stops after counting down\", \"count calls itself, it knows when done\", \"after reaching 0 it just stops\", \"each call prints and then ends\"]}",
+  "parsed": {
+    "sentences": [
+      "prints n, then recursion eventually finishes",
+      "3 printed first, stops after counting down",
+      "count calls itself, it knows when done",
+      "after reaching 0 it just stops",
+      "each call prints and then ends"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 268,
+    "completion_tokens": 51
+  }
+}

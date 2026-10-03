@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint a[2] = {4, 7};\na[0] = a[1];\na[1] = a[0];\n\nQuestion: What is a now?\nThe student answered: {7, 4}\n\nThe student holds this wrong belief and does not know it is wrong: Two assignments happen at the same time\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: very short, 3 to 7 words, like a quick reply.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"both values swap together at once\", \"a[0] and a[1] exchange simultaneously\", \"one line changes both values\", \"a[0] becomes 7 while a[1] becomes 4\", \"assignments run same time so they swap\"]}",
+  "parsed": {
+    "sentences": [
+      "both values swap together at once",
+      "a[0] and a[1] exchange simultaneously",
+      "one line changes both values",
+      "a[0] becomes 7 while a[1] becomes 4",
+      "assignments run same time so they swap"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 271,
+    "completion_tokens": 60
+  }
+}

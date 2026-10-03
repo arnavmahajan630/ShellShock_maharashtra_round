@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nfloat half = 1 / 2;\n\nQuestion: What is half?\nThe student answered: 0.5\n\nThe student holds this wrong belief and does not know it is wrong: int / int gives the exact decimal\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: sure of themselves, plain English, one sentence of 8 to 18 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"1 divided by 2 is 0.5, so half gets the exact decimal answer.\", \"The division of 1 by 2 naturally produces 0.5 as its result.\", \"Since 1 and 2 are numbers, dividing them gives 0.5 directly.\", \"I calculated 1 over 2, which equals 0.5, and assigned that to half.\", \"half equals 0.5 because one divided by two is exactly that value.\"]}",
+  "parsed": {
+    "sentences": [
+      "1 divided by 2 is 0.5, so half gets the exact decimal answer.",
+      "The division of 1 by 2 naturally produces 0.5 as its result.",
+      "Since 1 and 2 are numbers, dividing them gives 0.5 directly.",
+      "I calculated 1 over 2, which equals 0.5, and assigned that to half.",
+      "half equals 0.5 because one divided by two is exactly that value."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 250,
+    "completion_tokens": 102
+  }
+}

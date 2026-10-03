@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint lo = 2, hi = 9;\nif (lo < hi) { lo = hi; hi = lo; }\n\nQuestion: What are lo and hi now?\nThe student answered: lo = 9, hi = 2\n\nThe student holds this wrong belief and does not know it is wrong: Two assignments happen at the same time\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: long-winded, walks through the steps one by one, 20 to 35 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"First lo is 2, hi is 9, so lo is less than hi, then inside the if I set lo equal to hi and hi equal to lo at the same time so they swap.\", \"Since 2 is less than 9, the condition is true, and in that line both variables get new values together, lo becomes 9 and hi becomes 2 as a swap.\", \"The if says lo is less than hi so we go inside, then lo gets hi's value and hi gets lo's value, and since both happen together, lo is 9 and hi is 2.\", \"Inside the if, the two assignments run at once, so lo takes 9 from hi and hi takes 2 from lo, giving lo equal to 9 and hi equal to 2.\", \"Checking the condition first: 2 is less than 9, so we enter, and then the swap sets lo to 9 and hi to 2 simultaneously because both assignments are in that block.\"]}",
+  "parsed": {
+    "sentences": [
+      "First lo is 2, hi is 9, so lo is less than hi, then inside the if I set lo equal to hi and hi equal to lo at the same time so they swap.",
+      "Since 2 is less than 9, the condition is true, and in that line both variables get new values together, lo becomes 9 and hi becomes 2 as a swap.",
+      "The if says lo is less than hi so we go inside, then lo gets hi's value and hi gets lo's value, and since both happen together, lo is 9 and hi is 2.",
+      "Inside the if, the two assignments run at once, so lo takes 9 from hi and hi takes 2 from lo, giving lo equal to 9 and hi equal to 2.",
+      "Checking the condition first: 2 is less than 9, so we enter, and then the swap sets lo to 9 and hi to 2 simultaneously because both assignments are in that block."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 278,
+    "completion_tokens": 210
+  }
+}

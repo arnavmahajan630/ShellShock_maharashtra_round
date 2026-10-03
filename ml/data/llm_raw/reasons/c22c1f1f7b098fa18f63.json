@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint h(int n) { return h(n - 1); }\n\nQuestion: What is h(2)?\nThe student answered: it never stops\n\nThe student understands this correctly: Recursion only stops at a base case that returns without calling itself; without one it never stops.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: typed fast on a phone: all lowercase, a spelling mistake or two, little punctuation, 6 to 15 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"no stoping point so it keeps calling itself forever\", \"h only calls h again theres no case that just returns\", \"it goin 2 1 0 -1 -2 and never cum back\", \"nothing in the function says stop so h(2) never ends\", \"it just keeps going down n-1 forever cuz no ending\"]}",
+  "parsed": {
+    "sentences": [
+      "no stoping point so it keeps calling itself forever",
+      "h only calls h again theres no case that just returns",
+      "it goin 2 1 0 -1 -2 and never cum back",
+      "nothing in the function says stop so h(2) never ends",
+      "it just keeps going down n-1 forever cuz no ending"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 268,
+    "completion_tokens": 80
+  }
+}

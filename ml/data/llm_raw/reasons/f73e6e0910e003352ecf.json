@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\n// a = {3, 4, 1, 2}\n// one step of selection sort: find the smallest value and swap it into a[0]\n\nQuestion: What is a after that one step?\nThe student answered: {1, 2, 3, 4}\n\nThe student holds this wrong belief and does not know it is wrong: One pass over the array sorts it\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"Selection sort ka smallest nikal ke swap kiya, phir poora array apne aap sort ho gaya.\", \"Ek hi step mein sabse chhota 1 mila, toh baaki bhi apni jagah lag gaye honge.\", \"Jab smallest ko a[0] pe bheja, toh poora array arrange ho gaya ek hi baar mein.\", \"Array {3,4,1,2} tha, ek pass mein 1 aage aaya aur baaki numbers bhi line mein aa gaye.\", \"Find smallest aur swap kiya, bas ek operation mein saare elements apni sahi position pe set ho gaye.\"]}",
+  "parsed": {
+    "sentences": [
+      "Selection sort ka smallest nikal ke swap kiya, phir poora array apne aap sort ho gaya.",
+      "Ek hi step mein sabse chhota 1 mila, toh baaki bhi apni jagah lag gaye honge.",
+      "Jab smallest ko a[0] pe bheja, toh poora array arrange ho gaya ek hi baar mein.",
+      "Array {3,4,1,2} tha, ek pass mein 1 aage aaya aur baaki numbers bhi line mein aa gaye.",
+      "Find smallest aur swap kiya, bas ek operation mein saare elements apni sahi position pe set ho gaye."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 289,
+    "completion_tokens": 147
+  }
+}

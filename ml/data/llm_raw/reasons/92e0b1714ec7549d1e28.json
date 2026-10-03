@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint fact(int n) { if (n <= 1) return 1; return n * fact(n); }\n\nQuestion: What is fact(3)?\nThe student answered: it never stops\n\nThe student understands this correctly: The argument has to change toward the base case; calling with the same or a growing value never reaches it.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: sure of themselves, plain English, one sentence of 8 to 18 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"The function calls itself with the same n every time, so it never moves toward the ending condition.\", \"Since n stays exactly 3 in the recursive call, there is no path that reaches the return 1 line.\", \"That return statement keeps calling fact(n) with n unchanged, so nothing ever brings it closer to the base case.\", \"The argument inside the return never shrinks or changes, so the stopping point at n <= 1 is never reached.\", \"Calling fact(n) again with the very same value means the same call happens over and over forever.\"]}",
+  "parsed": {
+    "sentences": [
+      "The function calls itself with the same n every time, so it never moves toward the ending condition.",
+      "Since n stays exactly 3 in the recursive call, there is no path that reaches the return 1 line.",
+      "That return statement keeps calling fact(n) with n unchanged, so nothing ever brings it closer to the base case.",
+      "The argument inside the return never shrinks or changes, so the stopping point at n <= 1 is never reached.",
+      "Calling fact(n) again with the very same value means the same call happens over and over forever."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 272,
+    "completion_tokens": 121
+  }
+}

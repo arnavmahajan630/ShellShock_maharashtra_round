@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint t;\nt = t + 5;\n\nQuestion: What is t?\nThe student answered: 5\n\nThe student holds this wrong belief and does not know it is wrong: Local variables start at 0\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: long-winded, walks through the steps one by one, 20 to 35 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"When the computer makes the variable t, it starts empty, and empty means zero, so t is zero. Then the line adds five, and zero plus five is five.\", \"First the declaration creates t with nothing inside, but nothing inside actually means zero. Next t equals t plus five, so zero plus five gives five for t.\", \"Looking at int t, that just makes the box and fills it with zero already. Then t = t + 5 takes that zero and adds five, so the final t becomes five.\", \"The variable t is new, so it begins at zero because that is what a fresh variable holds. After that, t gets five added to it, making the answer five.\", \"Since t has no value written before, it must be zero at the start. The next line adds five to zero, so t ends up as five.\"]}",
+  "parsed": {
+    "sentences": [
+      "When the computer makes the variable t, it starts empty, and empty means zero, so t is zero. Then the line adds five, and zero plus five is five.",
+      "First the declaration creates t with nothing inside, but nothing inside actually means zero. Next t equals t plus five, so zero plus five gives five for t.",
+      "Looking at int t, that just makes the box and fills it with zero already. Then t = t + 5 takes that zero and adds five, so the final t becomes five.",
+      "The variable t is new, so it begins at zero because that is what a fresh variable holds. After that, t gets five added to it, making the answer five.",
+      "Since t has no value written before, it must be zero at the start. The next line adds five to zero, so t ends up as five."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 250,
+    "completion_tokens": 181
+  }
+}

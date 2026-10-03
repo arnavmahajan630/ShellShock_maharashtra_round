@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint f(int n) { return n + f(n - 1); }\n\nQuestion: What is f(2)?\nThe student answered: 3\n\nThe student holds this wrong belief and does not know it is wrong: Recursion stops by itself when the work is done\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: typed fast on a phone: all lowercase, a spelling mistake or two, little punctuation, 6 to 15 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"n=2 so 2+1=3 and it stops when the adding is finishd\", \"it just adds down till the numbrs run out so 2+1 is 3\", \"f(2) does 2 + f(1) which be 1 so 3, then it auto stops\", \"counts down 2 then 1 then the work is done = 3\", \"after 2 and 1 theres nothing left to add so it stps at 3\"]}",
+  "parsed": {
+    "sentences": [
+      "n=2 so 2+1=3 and it stops when the adding is finishd",
+      "it just adds down till the numbrs run out so 2+1 is 3",
+      "f(2) does 2 + f(1) which be 1 so 3, then it auto stops",
+      "counts down 2 then 1 then the work is done = 3",
+      "after 2 and 1 theres nothing left to add so it stps at 3"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 268,
+    "completion_tokens": 112
+  }
+}

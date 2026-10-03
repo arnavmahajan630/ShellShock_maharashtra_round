@@ -8,3 +8,4 @@ node_modules/
 legacy/
 ml/data/external/
 ml/artifacts/reason_*/
+.claude/

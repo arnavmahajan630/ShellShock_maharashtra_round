@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint count(int n) { if (n == 0) return 0; count(n - 1); return 1; }\n\nQuestion: What is count(5)?\nThe student answered: 1\n\nThe student understands this correctly: The value returned by the recursive call is thrown away unless the code uses it.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: typed fast on a phone: all lowercase, a spelling mistake or two, little punctuation, 6 to 15 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"the recursiv call just goes down and the return 1 stays same\", \"it keeps calling count until n is 0 then it comes back up with just 1\", \"the last line has return 1 so that what comes out at the end\", \"the call gets thrown away and only the value after it is returned\", \"count keeps running and n goes to 0 but the answer dosent add up anywhere\"]}",
+  "parsed": {
+    "sentences": [
+      "the recursiv call just goes down and the return 1 stays same",
+      "it keeps calling count until n is 0 then it comes back up with just 1",
+      "the last line has return 1 so that what comes out at the end",
+      "the call gets thrown away and only the value after it is returned",
+      "count keeps running and n goes to 0 but the answer dosent add up anywhere"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 277,
+    "completion_tokens": 92
+  }
+}

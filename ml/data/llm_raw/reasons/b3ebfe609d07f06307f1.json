@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nfor (i = 0; i < 3; i++) {\n    if (a[i] == 5) return i; else return -1;\n}\n// a = {2, 5, 9}\n\nQuestion: What is returned?\nThe student answered: 1\n\nThe student holds this wrong belief and does not know it is wrong: The else branch means 'not this one, keep looking'; it doesn't end or overwrite anything\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: typed fast on a phone: all lowercase, a spelling mistake or two, little punctuation, 6 to 15 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"a[0] is 2 so else keeps going to a[1] which is 5\", \"wen i hits 5 it shud return that so index 1\", \"the else just means skip this one and check next\", \"2 not 5 so move on then 5 matches at second spot\", \"loop cheks each one and 5 is in the middle so i=1\"]}",
+  "parsed": {
+    "sentences": [
+      "a[0] is 2 so else keeps going to a[1] which is 5",
+      "wen i hits 5 it shud return that so index 1",
+      "the else just means skip this one and check next",
+      "2 not 5 so move on then 5 matches at second spot",
+      "loop cheks each one and 5 is in the middle so i=1"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 306,
+    "completion_tokens": 89
+  }
+}

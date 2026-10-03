@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nchar cmd[] = \"go\";\nif (cmd == \"stop\") fire();\nelse if (cmd == \"go\") launch();\n\nQuestion: What happens?\nThe student answered: it launches\n\nThe student holds this wrong belief and does not know it is wrong: `==` compares text\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"cmd mein \\\"go\\\" likha hai, aur \\\"go\\\" se compare karne pe match ho raha hai.\", \"== dono strings ka text check karta hai, isliye go wala if true ho gaya.\", \"cmd ki value \\\"go\\\" hai, toh command \\\"go\\\" ke barabar hai, launch call hoga.\", \"else if wali line mein text same hai, isliye launch function chal jayega.\", \"dono jagah \\\"go\\\" likha hai, toh equal hai aur launch ho jata hai.\"]}",
+  "parsed": {
+    "sentences": [
+      "cmd mein \"go\" likha hai, aur \"go\" se compare karne pe match ho raha hai.",
+      "== dono strings ka text check karta hai, isliye go wala if true ho gaya.",
+      "cmd ki value \"go\" hai, toh command \"go\" ke barabar hai, launch call hoga.",
+      "else if wali line mein text same hai, isliye launch function chal jayega.",
+      "dono jagah \"go\" likha hai, toh equal hai aur launch ho jata hai."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 265,
+    "completion_tokens": 120
+  }
+}

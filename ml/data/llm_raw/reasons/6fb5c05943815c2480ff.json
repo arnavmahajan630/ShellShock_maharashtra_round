@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint fact(int n) { if (n <= 1) return 1; return n * fact(n); }\n\nQuestion: What is fact(3)?\nThe student answered: it never stops\n\nThe student understands this correctly: The argument has to change toward the base case; calling with the same or a growing value never reaches it.\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"n same rehta hai, base case tak pahunchega hi nahi, infinite chalta rahega.\", \"fact(n) ke andar phir fact(n) call ho raha, n kam nahi ho raha.\", \"return n * fact(n) mein value change nahi hoti, isliye stop nahi hoga.\", \"n ki jagah n hi pass kar rahe hain, toh condition kabhi true nahi hogi.\", \"har baar wahi n aata hai, 3 pe hi atka rahega, recursion khatam nahi hoga.\"]}",
+  "parsed": {
+    "sentences": [
+      "n same rehta hai, base case tak pahunchega hi nahi, infinite chalta rahega.",
+      "fact(n) ke andar phir fact(n) call ho raha, n kam nahi ho raha.",
+      "return n * fact(n) mein value change nahi hoti, isliye stop nahi hoga.",
+      "n ki jagah n hi pass kar rahe hain, toh condition kabhi true nahi hogi.",
+      "har baar wahi n aata hai, 3 pe hi atka rahega, recursion khatam nahi hoga."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 275,
+    "completion_tokens": 133
+  }
+}

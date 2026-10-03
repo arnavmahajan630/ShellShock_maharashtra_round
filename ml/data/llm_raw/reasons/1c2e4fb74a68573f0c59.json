@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint big(int a, int b) {\n    if (a > b) printf(\"%d\", a); else printf(\"%d\", b);\n    return 0;\n}\nint m = big(4, 9);\n\nQuestion: What is m?\nThe student answered: 9\n\nThe student holds this wrong belief and does not know it is wrong: Printing the value hands it back to the caller\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"printf ne 9 print kiya, toh m ko 9 hi milega.\", \"big ne 9 return kiya hoga, isliye m ki value 9 hai.\", \"jo value print hui wahi toh wapas aayi, m mein 9 aayega.\", \"a=4 b=9, b bada hai so 9 print hua, aur m bhi 9 ban gaya.\", \"return 0 likha hai par m toh big ke andar se 9 le raha hai.\"]}",
+  "parsed": {
+    "sentences": [
+      "printf ne 9 print kiya, toh m ko 9 hi milega.",
+      "big ne 9 return kiya hoga, isliye m ki value 9 hai.",
+      "jo value print hui wahi toh wapas aayi, m mein 9 aayega.",
+      "a=4 b=9, b bada hai so 9 print hua, aur m bhi 9 ban gaya.",
+      "return 0 likha hai par m toh big ke andar se 9 le raha hai."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 289,
+    "completion_tokens": 117
+  }
+}

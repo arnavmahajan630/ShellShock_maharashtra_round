@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint a[4] = {3, 5, 7, 9};\n\nQuestion: What is a[4]?\nThe student answered: 9\n\nThe student holds this wrong belief and does not know it is wrong: Arrays are indexed 1..n\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"a[4] matlab fourth element, toh 3,5,7,9 mein chautha 9 hi hai.\", \"Chaar elements hain isliye a[4] last wala element 9 dega.\", \"Index 1 se start hota hai, toh a[4] ka value 9 aayega.\", \"Array mein 4 numbers hain, fourth number 9 hai, isliye a[4] = 9.\", \"a[4] pooch rahe hain toh ginti karke chautha element 9 milega.\"]}",
+  "parsed": {
+    "sentences": [
+      "a[4] matlab fourth element, toh 3,5,7,9 mein chautha 9 hi hai.",
+      "Chaar elements hain isliye a[4] last wala element 9 dega.",
+      "Index 1 se start hota hai, toh a[4] ka value 9 aayega.",
+      "Array mein 4 numbers hain, fourth number 9 hai, isliye a[4] = 9.",
+      "a[4] pooch rahe hain toh ginti karke chautha element 9 milega."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 263,
+    "completion_tokens": 129
+  }
+}

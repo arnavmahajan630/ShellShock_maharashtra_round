@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint f(int x) { printf(\"%d\", x * 2); return 0; }\nint y = f(4);\n\nQuestion: What is y?\nThe student answered: 8\n\nThe student holds this wrong belief and does not know it is wrong: Printing the value hands it back to the caller\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"printf output dikhata hai aur wahi 8 wapas y mein aa jaata hai\", \"jo value function print karta hai wahi return hoti hai to y 8 hua\", \"x*2 se 8 aaya aur printf usko y ko de deta hai\", \"function ka kaam dikhana hai, toh y wahi 8 le lega\", \"return 0 likha hai par maine socha output y mein store ho jata hai\"]}",
+  "parsed": {
+    "sentences": [
+      "printf output dikhata hai aur wahi 8 wapas y mein aa jaata hai",
+      "jo value function print karta hai wahi return hoti hai to y 8 hua",
+      "x*2 se 8 aaya aur printf usko y ko de deta hai",
+      "function ka kaam dikhana hai, toh y wahi 8 le lega",
+      "return 0 likha hai par maine socha output y mein store ho jata hai"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 271,
+    "completion_tokens": 108
+  }
+}

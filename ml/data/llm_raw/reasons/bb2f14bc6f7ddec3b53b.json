@@ -1,0 +1,29 @@
+{
+  "job": "reasons",
+  "model": "deepseek-flash",
+  "temperature": 1.1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write the short explanations that first-year programming students in India type when a C quiz asks them \"Why did you choose that answer?\". Reply with a JSON object only."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code and question.\n\nCode:\nint f(int n) { if (n <= 0) return 0; return 1 + f(n); }\n\nQuestion: What is f(2)?\nThe student answered: 2\n\nThe student holds this wrong belief and does not know it is wrong: The recursive call moves toward the base case on its own\n\nWrite 5 different explanations this student might type for why they chose that answer.\nVoice: Hinglish: romanised Hindi mixed with English programming words, 6 to 16 words.\n\nRules:\n- Each one must show the student's reasoning, not just repeat the answer.\n- Write as the student, in the first person or with no subject. Do not judge the answer or say it is wrong.\n- Do not name the idea as a rule and do not use textbook terms for the mistake.\n- Make the 5 explanations differ in wording and in which part of the code they point at.\n\nReturn JSON: {\"sentences\": [\"...\", \"...\"]}"
+    }
+  ],
+  "content": "{\"sentences\": [\"n=2 hai toh f(2) call hoga aur andar jaake apne aap base case tak pahunch jayega, isliye 1+1=2.\", \"Har baar recursion andar jaata hai, toh 1+1 add karke 2 aa jayega, bas.\", \"f(n) khud ko call karta hai aur n chhota ho jaata hai, toh 2 baar count hoga, answer 2.\", \"Jab tak n<=0 nahi hota, function andar chalta rehta hai, 2 ke liye 2 return karega.\", \"Recursive call khud base case ki taraf badhta hai, isliye f(2) mein 1+1=2 sahi hai.\"]}",
+  "parsed": {
+    "sentences": [
+      "n=2 hai toh f(2) call hoga aur andar jaake apne aap base case tak pahunch jayega, isliye 1+1=2.",
+      "Har baar recursion andar jaata hai, toh 1+1 add karke 2 aa jayega, bas.",
+      "f(n) khud ko call karta hai aur n chhota ho jaata hai, toh 2 baar count hoga, answer 2.",
+      "Jab tak n<=0 nahi hota, function andar chalta rehta hai, 2 ke liye 2 return karega.",
+      "Recursive call khud base case ki taraf badhta hai, isliye f(2) mein 1+1=2 sahi hai."
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 273,
+    "completion_tokens": 175
+  }
+}
