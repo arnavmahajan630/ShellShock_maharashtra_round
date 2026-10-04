@@ -150,11 +150,86 @@ def diagnose_trial(trial: Dict[str, Any], code: str, predict_answer: Any = None)
         if predict_wrong else []
     )
 
-    if total and passed == total:
+    has_oob = any(e.get("type") in ("oob_read", "oob_write") for e in events)
+    has_timeout = any(
+        r.get("got", {}).get("status") == "timeout"
+        or r.get("got", {}).get("max_depth_le") == 100
+        for r in run["tests"]["results"]
+    )
+
+    # 1. Trial 1: Two Sum (Arrays & Indexing)
+    if problem_id == "T1_two_sum":
+        if has_oob or re.search(r"<=\s*(?:n|nums)\b", code) or re.search(r"j\s*<=\s*n\b", code):
+            return result("confident", "M01", 0.90, _DSA_EVIDENCE["M01"], extra_evidence=predict_evidence)
+        if re.search(r"for\s*\(\s*(?:int\s+)?\w+\s*=\s*1\s*;", code):
+            return result("confident", "M08", 0.88, _DSA_EVIDENCE["M08"], extra_evidence=predict_evidence)
+        if re.search(r"!=\s*target\s*\)\s*\{?\s*return\b|==\s*target\s*[^}]*return\s+1\s*;?\s*else\s*return\s+0", code):
+            return result(
+                "confident", "D01", 0.90,
+                "The function returns as soon as one pair's sum doesn't equal `target` — it gives "
+                "up on the very first mismatch instead of continuing to check the remaining pairs "
+                "(Premature Abort).",
+                extra_evidence=predict_evidence,
+            )
+        if re.search(r"nums\[\s*i\s*\]\s*\+\s*nums\[\s*i\s*\]", code):
+            return result(
+                "confident", "M01", 0.88,
+                "Two distinct elements must be found: pairing index i with itself duplicates the same element.",
+                extra_evidence=predict_evidence,
+            )
+
+    # 2. Trial 2: Binary Search (Searching)
+    if problem_id == "T2_binary_search":
+        m_abort = re.search(r"while\s*\([^)]*\)\s*\{[^}]*return\s+-1\s*;", code)
+        if m_abort:
+            return result("confident", "D01", 0.92, _DSA_EVIDENCE["D01"], extra_evidence=predict_evidence)
+        if re.search(r"while\s*\(\s*lo\s*<\s*hi\s*\)", code):
+            return result(
+                "confident", "D01", 0.90,
+                "The search condition `lo < hi` stops before examining the final element when lo == hi (Premature Abort). Use `lo <= hi`.",
+                extra_evidence=predict_evidence,
+            )
+        if "lo = mid;" in code or "hi = mid;" in code or has_timeout or re.search(r"\blo\s*=\s*mid\s*;", code) or re.search(r"\bhi\s*=\s*mid\s*;", code):
+            return result("confident", "D02", 0.90, _DSA_EVIDENCE["D02"], extra_evidence=predict_evidence)
+
+    # 3. Trial 3: Bubble Sort (Sorting)
+    if problem_id == "T3_bubble_sort":
+        if re.search(r"a\[\s*\w+\s*\]\s*=\s*a\[\s*\w+\s*\+\s*1\s*\]\s*;\s*a\[\s*\w+\s*\+\s*1\s*\]\s*=\s*a\[\s*\w+\s*\]\s*;", code):
+            return result("confident", "D03", 0.94, _DSA_EVIDENCE["D03"], extra_evidence=predict_evidence)
+        for r in run["tests"]["results"]:
+            got_arr = r.get("got", {}).get("array0")
+            if isinstance(got_arr, list) and len(got_arr) >= 2 and got_arr[0] == got_arr[1]:
+                return result("confident", "D03", 0.92, _DSA_EVIDENCE["D03"], extra_evidence=predict_evidence)
+        for_count = len(re.findall(r"\b(?:for|while)\b", code))
+        if for_count == 1:
+            return result("confident", "D04", 0.88, _DSA_EVIDENCE["D04"], extra_evidence=predict_evidence)
+        if has_oob:
+            return result("confident", "M01", 0.88, _DSA_EVIDENCE["M01"], extra_evidence=predict_evidence)
+
+    # 4. Trial 4: Valid Palindrome (Strings)
+    if problem_id == "T4_is_palindrome":
+        if re.search(r"==\s*s\b|\bs\s*==|s\s*==\s*rev|rev\s*==\s*s", code):
+            return result("confident", "D08", 0.92, _DSA_EVIDENCE["D08"], extra_evidence=predict_evidence)
+        if has_oob:
+            return result("confident", "M08", 0.88, _DSA_EVIDENCE["M08"], extra_evidence=predict_evidence)
+
+    # 5. Trial 5: Recursive Cascade (Recursion)
+    if problem_id == "T5_recursive_cascade":
+        if has_timeout or not re.search(r"if\s*\([^)]*<=\s*0|if\s*\([^)]*==\s*0", code):
+            return result("confident", "D05", 0.94, _DSA_EVIDENCE["D05"], extra_evidence=predict_evidence)
+        if re.search(r"solve_cascade\s*\([^)]*\)\s*;\s*return\s+n\s*;|return\s+solve_cascade\s*\([^)]*\)\s*;", code):
+            return result("confident", "D07", 0.89, _DSA_EVIDENCE["D07"], extra_evidence=predict_evidence)
+
+    # General checks
+    if any(e["type"] == "missing_return" for e in events) and trace.get("printed"):
+        return result("confident", "M10", 0.85, _DSA_EVIDENCE["M10"], extra_evidence=predict_evidence)
+
+    # Check clean pass only if no memory / execution violations occurred
+    if total and passed == total and not has_oob and not has_timeout:
         if predict_wrong and problem_id in _PREDICT_CLASS:
             cls = _PREDICT_CLASS[problem_id]
             return result(
-                "confident", cls, 0.6,
+                "confident", cls, 0.60,
                 f"Your code passes every test, but you predicted the wrong behavior for the classic "
                 f"{CLASS_INFO[cls]['name']} pattern this trial is built around — worth reviewing why "
                 f"your version avoids it.",
@@ -162,79 +237,14 @@ def diagnose_trial(trial: Dict[str, Any], code: str, predict_answer: Any = None)
             )
         return result("correct", "CORRECT", 0.95, None)
 
-    # 1. Trial 1: Two Sum (Arrays)
-    if problem_id == "T1_two_sum":
-        if any(e["type"] in ("oob_read", "oob_write") for e in events) or re.search(r"<=\s*n\b", code):
-            return result("confident", "M01", 0.90, _DSA_EVIDENCE["M01"])
-        if re.search(r"for\s*\(\s*(?:int\s+)?\w+\s*=\s*1\s*;", code):
-            return result("confident", "M08", 0.88, _DSA_EVIDENCE["M08"])
-        # Premature Abort (D01's pattern, applied here): bailing out of the whole search on
-        # the first pair that doesn't sum to target, instead of continuing to check the rest.
-        if re.search(r"!=\s*target\s*\)\s*\{?\s*return\b", code):
-            return result(
-                "confident", "D01", 0.90,
-                "The function returns as soon as one pair's sum doesn't equal `target` — it gives "
-                "up on the very first mismatch instead of continuing to check the remaining pairs "
-                "(Premature Abort).",
-            )
-
-    # 2. Trial 2: Binary Search (Searching)
-    if problem_id == "T2_binary_search":
-        # Check premature abort D01
-        m_abort = re.search(r"while\s*\([^)]*\)\s*\{[^}]*return\s+-1\s*;", code)
-        if m_abort:
-            return result("confident", "D01", 0.92, _DSA_EVIDENCE["D01"])
-        # Check frozen window D02
-        if "lo = mid;" in code or "hi = mid;" in code or any(r.get("got", {}).get("status") == "timeout" for r in run["tests"]["results"]):
-            return result("confident", "D02", 0.90, _DSA_EVIDENCE["D02"])
-
-    # 3. Trial 3: Bubble Sort (Sorting)
-    if problem_id == "T3_bubble_sort":
-        # Check swap overwrite D03
-        if re.search(r"a\[\s*\w+\s*\]\s*=\s*a\[\s*\w+\s*\+\s*1\s*\]\s*;\s*a\[\s*\w+\s*\+\s*1\s*\]\s*=\s*a\[\s*\w+\s*\]\s*;", code):
-            return result("confident", "D03", 0.94, _DSA_EVIDENCE["D03"])
-        for r in run["tests"]["results"]:
-            got_arr = r.get("got", {}).get("array0")
-            if isinstance(got_arr, list) and len(got_arr) >= 2 and got_arr[0] == got_arr[1]:
-                return result("confident", "D03", 0.92, _DSA_EVIDENCE["D03"])
-        # Check single pass D04
-        for_count = len(re.findall(r"\bfor\b", code))
-        if for_count == 1:
-            return result("confident", "D04", 0.88, _DSA_EVIDENCE["D04"])
-
-    # 4. Trial 4: Valid Palindrome (Strings)
-    if problem_id == "T4_is_palindrome":
-        # Check string equality comparison D08
-        if re.search(r"==\s*s\b|\bs\s*==|s\s*==\s*rev", code):
-            return result("confident", "D08", 0.92, _DSA_EVIDENCE["D08"])
-        if any(e["type"] in ("oob_read", "oob_write") for e in events):
-            return result("confident", "M08", 0.88, _DSA_EVIDENCE["M08"])
-
-    # 5. Trial 5: Recursive Cascade (Recursion)
-    if problem_id == "T5_recursive_cascade":
-        # Check depth cap timeout / missing base case D05
-        has_timeout = any(r.get("got", {}).get("status") == "timeout" or r.get("got", {}).get("max_depth_le") == 100 for r in run["tests"]["results"])
-        if has_timeout or not re.search(r"if\s*\([^)]*<=\s*0|if\s*\([^)]*==\s*0", code):
-            return result("confident", "D05", 0.94, _DSA_EVIDENCE["D05"])
-        # Check lost echo D07
-        if re.search(r"solve_cascade\s*\([^)]*\)\s*;\s*return\s+n\s*;", code):
-            return result("confident", "D07", 0.89, _DSA_EVIDENCE["D07"])
-
-    # General checks
-    if any(e["type"] == "missing_return" for e in events) and trace.get("printed"):
-        return result("confident", "M10", 0.85, _DSA_EVIDENCE["M10"])
-
-    # None of the code-pattern checks above matched (or the bug isn't one of the specific
-    # regexes they look for), but a wrong predict answer still names the exact misconception
-    # this trial targets — surface that instead of falling through to an unhelpful "novel".
-    if predict_wrong and problem_id in _PREDICT_CLASS:
+    # If code failed tests or predict was wrong, map to the targeted sector misconception
+    # instead of falling through to unclassified "OTHER" so debrief reports actionable findings
+    if problem_id in _PREDICT_CLASS:
         cls = _PREDICT_CLASS[problem_id]
-        return result(
-            "confident", cls, 0.70,
-            f"Your predicted behavior for this pattern doesn't match {CLASS_INFO[cls]['name']} — "
-            f"that's the misconception this trial is built around.",
-            extra_evidence=predict_evidence,
-        )
+        evidence_msg = _DSA_EVIDENCE.get(cls, f"Solution did not pass all test cases. Review {CLASS_INFO[cls]['name']}.")
+        if predict_wrong:
+            evidence_msg = f"Predicted behavior does not match {CLASS_INFO[cls]['name']}. {evidence_msg}"
+        return result("confident", cls, 0.75, evidence_msg, extra_evidence=predict_evidence)
 
     return result("novel", "OTHER", 0.50, "Solution failed one or more test cases.", extra_evidence=predict_evidence)
 
@@ -266,6 +276,26 @@ def compile_debrief(exam_id: str, answers: List[Dict[str, Any]], trials: List[Di
         if sec:
             sec["items"].append(pid)
 
+        if ans.get("skipped"):
+            if sec:
+                sec["rating_after"] = max(1100, sec["rating_after"] - 20)
+            top_id = _PREDICT_CLASS.get(pid, "M01")
+            if top_id not in seen_misconceptions:
+                seen_misconceptions.add(top_id)
+                info = CLASS_INFO.get(top_id, {})
+                findings.append({
+                    "class": top_id,
+                    "status": "UNRESOLVED",
+                    "p_active": 0.70,
+                    "name": info.get("name", top_id),
+                    "subtitle": info.get("subtitle", ""),
+                    "belief": info.get("belief", ""),
+                    "item_id": pid,
+                    "trial_title": trial.get("title", pid),
+                    "evidence": [{"type": "SKIPPED", "text": "Trial was skipped without a verified solution."}],
+                })
+            continue
+
         code = ans.get("code") or ""
         diag = diagnose_trial(trial, code, ans.get("predict_answer"))
 
@@ -283,6 +313,9 @@ def compile_debrief(exam_id: str, answers: List[Dict[str, Any]], trials: List[Di
         top = diag.get("top") or []
         if top:
             top_id = top[0]["id"]
+            if top_id in ("CORRECT", "OTHER") and not diag["is_correct"]:
+                top_id = _PREDICT_CLASS.get(pid, "M01")
+
             if top_id not in ("CORRECT", "OTHER") and top_id not in seen_misconceptions:
                 seen_misconceptions.add(top_id)
                 info = CLASS_INFO.get(top_id, {})

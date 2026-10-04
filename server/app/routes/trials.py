@@ -121,12 +121,14 @@ async def answer_trial(request: Request):
         }
         _SESSIONS[sess["exam_id"]] = sess
 
+    skipped = bool(body.get("skipped"))
     answer_entry = {
         "problem_id": item_id,
         "code": code,
         "predict_answer": predict_answer,
         "diagnosis": diag,
-        "pass": diag["is_correct"],
+        "pass": diag["is_correct"] and not skipped,
+        "skipped": skipped,
     }
     # Update existing answer for this problem_id or append
     existing_idx = next((i for i, a in enumerate(sess["answers"]) if a["problem_id"] == item_id), None)

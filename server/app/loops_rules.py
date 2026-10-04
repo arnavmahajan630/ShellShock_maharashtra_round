@@ -34,6 +34,9 @@ _EVIDENCE_TEXT = {
 def _loop_body(code):
     match = re.search(r"\b(?:for|while)\s*\([^)]*\)\s*\{", code)
     if not match:
+        m_single = re.search(r"\b(?:for|while)\s*\([^)]*\)\s*([^{};\n]+;)", code)
+        if m_single:
+            return m_single.group(1)
         return ""
     start = match.end() - 1
     depth = 0

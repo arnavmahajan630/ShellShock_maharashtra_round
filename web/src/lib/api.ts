@@ -254,7 +254,7 @@ export const api = {
     post<{ diagnosis: Diagnosis }>("/probe/answer", payload),
   startExam: (learnerId = "pilot") => post<ExamStartResponse>("/trials/start", { learner_id: learnerId }),
   runTrial: (payload: { item_id: string; code: string }) => post<ExamRunResponse>("/trials/run", payload),
-  answerTrial: (payload: { exam_id: string; item_id: string; code: string; predict_answer?: number }) =>
+  answerTrial: (payload: { exam_id: string; item_id: string; code: string; predict_answer?: number; skipped?: boolean }) =>
     post<ExamAnswerResponse>("/trials/answer", payload),
   finishExam: (examId: string) => post<{ report: DebriefReport }>("/trials/finish", { exam_id: examId }),
   getExamReport: (examId: string) => get<{ report: DebriefReport }>(`/trials/${examId}/report`),

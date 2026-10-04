@@ -146,12 +146,37 @@ export default function TrialsExamScreen() {
 
   // A pilot can stop after any single trial and get a report scoped to what they attempted —
   // no need to grind through all 5. /exam/finish no longer pads the rest as failures.
-  function handleFinishEarly() {
+  async function handleFinishEarly() {
+    if (currentTrial && code && code !== currentTrial.starter) {
+      try {
+        await api.answerTrial({
+          exam_id: examId,
+          item_id: currentTrial.problem_id,
+          code,
+          predict_answer: selectedOption ?? undefined,
+        });
+      } catch {
+        // Proceed even if network request fails
+      }
+    }
     navigate("/trials/debrief", { state: { examId, totalTrials: trials.length } });
   }
 
-  function handleSkipConfirm() {
+  async function handleSkipConfirm() {
     setShowSkipModal(false);
+    if (currentTrial) {
+      try {
+        await api.answerTrial({
+          exam_id: examId,
+          item_id: currentTrial.problem_id,
+          code: "",
+          skipped: true,
+        });
+        setAnsweredCount((n) => n + 1);
+      } catch {
+        // Proceed on network error
+      }
+    }
     goToTrial(currentIndex + 1);
   }
 

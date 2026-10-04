@@ -8,11 +8,11 @@ export const functions: PlanetConfig = {
   artHeight: 841,
   backButton: { top: 1.2, left: 1.1, width: 12.3, height: 5.9 },
   nodes: [
-    { id: "P20", kind: "mission", label: "Modular Thinking · clamp_range", position: { top: 67.0, left: 28.3 }, problemId: "P20" },
-    { id: "P21", kind: "mission", label: "Interfaces & Contracts · boost_shield", position: { top: 70.0, left: 36.8 }, problemId: "P21" },
-    { id: "P22", kind: "mission", label: "Composition · compose_pipeline", position: { top: 73.0, left: 45.8 }, problemId: "P22" },
-    { id: "WARMUP", kind: "warmup", label: "Dependency Management · Protocol Quiz", position: { top: 73.0, left: 55.0 } },
-    { id: "BRIEFING", kind: "briefing", label: "Modular Debugging · Architecture Briefing", position: { top: 70.0, left: 63.8 } },
+    { id: "BRIEFING", kind: "briefing", label: "Modular Debugging · Architecture Briefing", position: { top: 67.0, left: 28.3 } },
+    { id: "WARMUP", kind: "warmup", label: "Dependency Management · Protocol Quiz", position: { top: 70.0, left: 36.8 } },
+    { id: "P20", kind: "mission", label: "Modular Thinking · clamp_range", position: { top: 73.0, left: 45.8 }, problemId: "P20" },
+    { id: "P21", kind: "mission", label: "Interfaces & Contracts · boost_shield", position: { top: 73.0, left: 55.0 }, problemId: "P21" },
+    { id: "P22", kind: "mission", label: "Composition · compose_pipeline", position: { top: 70.0, left: 63.8 }, problemId: "P22" },
     { id: "P23", kind: "ghost", label: "Real-world Modular Design · integrate_subsystem", position: { top: 67.0, left: 73.5 }, problemId: "P23" },
   ],
   briefingText: [

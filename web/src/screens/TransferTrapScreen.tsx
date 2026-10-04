@@ -32,11 +32,23 @@ export default function TransferTrapScreen() {
   const [loadError, setLoadError] = useState<string | null>(null);
 
   async function loadTransferProblem() {
-    const nextId = planet!.nextProblem[problem!.problem_id];
-    const next = await api.getProblem(nextId);
-    setTransferProblem(next);
-    setCode(next.starter);
-    setPhase("transfer");
+    if (!planet || !problem) {
+      setLoadError("Missing mission context for transfer problem.");
+      return;
+    }
+    const nextId = planet.nextProblem?.[problem.problem_id];
+    if (!nextId) {
+      setLoadError("No transfer problem configured for this mission.");
+      return;
+    }
+    try {
+      const next = await api.getProblem(nextId);
+      setTransferProblem(next);
+      setCode(next.starter);
+      setPhase("transfer");
+    } catch (err) {
+      setLoadError(err instanceof Error ? err.message : "Failed to load transfer problem.");
+    }
   }
 
   useEffect(() => {
