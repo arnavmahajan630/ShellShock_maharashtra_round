@@ -7,5 +7,8 @@ node_modules/
 legacy/
 ml/data/external/
 ml/artifacts/reason_*/
+# Regenerable experiment caches (E-a, E-b). Cards stay tracked.
+ml/eval/_ea_cache/
+ml/eval/out/
 .claude/
 

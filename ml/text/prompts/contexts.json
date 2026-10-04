@@ -1,5 +1,5 @@
 {
-  "_about": "Question contexts for generating reason sentences (plans/05 §7). Six per class. `chosen` is the answer a learner with that wrong belief gives; `correct` is what C really does. Contexts 1-4 of a class are train, 5 is val, 6 is test. The first context of each class is its trap item (03 §8.3); probe contexts come from 03 §6.3.",
+  "_about": "Question contexts for generating reason sentences (ml_plan/05 §7). Six per class. `chosen` is the answer a learner with that wrong belief gives; `correct` is what C really does. Contexts 1-4 of a class are train, 5 is val, 6 is test. The first context of each class is its trap item (03 §8.3); probe contexts come from 03 §6.3.",
   "correct_rules": {
     "M01": "`<=` includes the end value and `<` stops one before it; count every value the loop variable actually takes.",
     "M02": "A loop variable only changes when the code changes it; with no update the condition stays true forever.",
