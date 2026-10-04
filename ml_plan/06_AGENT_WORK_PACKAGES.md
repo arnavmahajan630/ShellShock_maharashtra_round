@@ -19,7 +19,7 @@
 
 - Read: 03, 05, this file, and `ml/contracts/`. Build only your package.
 - Edit only the paths in your "Owns" cell, plus `tests/<your id>/` and `notes/<your id>.md`.
-- Never edit `plans/`, `ml/contracts/`, `ml/runner.py`, `server/app/main.py`, `requirements.txt`. If a contract looks wrong or a package is missing something, write it in `notes/<your id>.md` and work around it inside your own files.
+- Never edit `ml_plan/`, `design_plan/`, `ml/contracts/`, `ml/runner.py`, `server/app/main.py`, `requirements.txt`. If a contract looks wrong or a package is missing something, write it in `notes/<your id>.md` and work around it inside your own files.
 - Need a new pip package? Write it in your notes; do not install it.
 - Class ids, feature names, JSON fields and paths from 03 and 05 are fixed. Do not rename.
 - Finish = your acceptance command passes, and `notes/<your id>.md` says what was built, what was skipped, and what is still faked.
@@ -162,8 +162,8 @@ Disk on the laptop: about 1 GB for everything above, plus about 0.5 GB for the s
 
 ```
 You are building package <ID> of the Re:Learn ML backend.
-Read plans/03_ML_IMPLEMENTATION_PLAN_v3.md, plans/05_QUESTION_TYPES_AND_SENTENCE_READER.md,
-plans/06_AGENT_WORK_PACKAGES.md (your row in §3 and all of §2), ml/contracts/, and notes/W0.md
+Read ml_plan/03_ML_IMPLEMENTATION_PLAN_v3.md, ml_plan/05_QUESTION_TYPES_AND_SENTENCE_READER.md,
+ml_plan/06_AGENT_WORK_PACKAGES.md (your row in §3 and all of §2), ml/contracts/, and notes/W0.md
 (decisions made where the plans are silent).
 Build only the paths in your "Owns" cell. Follow every rule in 06 §2.
 Use ml/runner.py with the gcc backend and tests/fixtures/ for anything that is not merged yet.
