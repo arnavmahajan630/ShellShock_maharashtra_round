@@ -1,0 +1,490 @@
+{
+  "id": "E18",
+  "title": "Is the item bank sound?",
+  "slice": "ml/data/quiz_items.json (115 items, re-run on the interpreter and gcc); code items: CHECK PASSED: 143 items",
+  "n": 115,
+  "metrics": {
+    "quiz_items": 115,
+    "pct_verified_interpreter": 100.0,
+    "pct_verified_gcc": 90.4,
+    "pct_interpreter_only_because_c_undefined": 9.6,
+    "n_manual": 0,
+    "verify_passed": true,
+    "collision_items": 13,
+    "code_items_checked": 143,
+    "code_check_passed": true,
+    "code_counts_meet_targets": true
+  },
+  "per_class": {
+    "M01": {
+      "mcq": 4,
+      "predict_output": 5,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "M02": {
+      "mcq": 5,
+      "predict_output": 3,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "M03": {
+      "mcq": 3,
+      "predict_output": 3,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "M04": {
+      "mcq": 2,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "M05": {
+      "mcq": 2,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "M06": {
+      "mcq": 2,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "M07": {
+      "mcq": 4,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "M08": {
+      "mcq": 4,
+      "predict_output": 5,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "M10": {
+      "mcq": 2,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "D01": {
+      "mcq": 3,
+      "predict_output": 3,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "D02": {
+      "mcq": 3,
+      "predict_output": 3,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "D03": {
+      "mcq": 2,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "D04": {
+      "mcq": 2,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "D05": {
+      "mcq": 4,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "D06": {
+      "mcq": 4,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "D07": {
+      "mcq": 2,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "D08": {
+      "mcq": 2,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    }
+  },
+  "plots": [],
+  "generated_at": "2026-10-04",
+  "caveat": "'Verified' means: re-running the code gives the stated answer, and re-running the believed program gives the stated belief answer. It does not mean a student holding that mistake would choose that option; no student has answered these items. Nobody has skimmed the DeepSeek-drafted items (06 §5). Counts are for the files on disk at the time of the run.",
+  "quiz": {
+    "items": 115,
+    "by_type": {
+      "mcq": 42,
+      "next_state": 17,
+      "predict_output": 39,
+      "reasoning": 17
+    },
+    "backends": [
+      "interp",
+      "gcc"
+    ],
+    "seconds": 27.7,
+    "verify_passed": true,
+    "problems": [],
+    "items_with_a_problem": 0,
+    "run_on_interpreter": 115,
+    "agreed_by_gcc": 104,
+    "interpreter_only_c_undefined": 11,
+    "belief_programs_run": 128,
+    "pct_verified_interpreter": 100.0,
+    "pct_verified_gcc": 90.4,
+    "flags_in_file": {
+      "interp_true": 115,
+      "gcc_true": 104,
+      "manual_true": 0
+    },
+    "flags_match_fresh_run": true,
+    "manual": [],
+    "n_manual": 0,
+    "collision_items": 13,
+    "collision_target": 12,
+    "per_class_type": {
+      "M01": {
+        "mcq": 4,
+        "predict_output": 5,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "M02": {
+        "mcq": 5,
+        "predict_output": 3,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "M03": {
+        "mcq": 3,
+        "predict_output": 3,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "M04": {
+        "mcq": 2,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "M05": {
+        "mcq": 2,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "M06": {
+        "mcq": 2,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "M07": {
+        "mcq": 4,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "M08": {
+        "mcq": 4,
+        "predict_output": 5,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "M10": {
+        "mcq": 2,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "D01": {
+        "mcq": 3,
+        "predict_output": 3,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "D02": {
+        "mcq": 3,
+        "predict_output": 3,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "D03": {
+        "mcq": 2,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "D04": {
+        "mcq": 2,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "D05": {
+        "mcq": 4,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "D06": {
+        "mcq": 4,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "D07": {
+        "mcq": 2,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      },
+      "D08": {
+        "mcq": 2,
+        "predict_output": 2,
+        "next_state": 1,
+        "reasoning": 1
+      }
+    },
+    "per_class_type_target": {
+      "mcq": 2,
+      "predict_output": 2,
+      "next_state": 1,
+      "reasoning": 1
+    },
+    "per_class_type_short": {},
+    "descriptive": {
+      "correct_option_position": {
+        "0": 28,
+        "1": 19,
+        "2": 32,
+        "3": 19
+      },
+      "correct_option_position_chi2_p": 0.2004,
+      "correct_is_the_unique_longest_option": 31,
+      "choice_items": 98,
+      "options_per_item": {
+        "3": 39,
+        "4": 59
+      },
+      "difficulty": {
+        "1": 61,
+        "2": 41,
+        "3": 13
+      },
+      "concept": {
+        "array_tech": 6,
+        "arrays": 10,
+        "conditions": 12,
+        "functions": 6,
+        "loops": 20,
+        "recursion": 20,
+        "searching": 16,
+        "sorting": 7,
+        "strings": 6,
+        "variables": 12
+      },
+      "source": {
+        "DeepSeek draft, checked by running": 96,
+        "hand-written": 19
+      }
+    }
+  },
+  "code_items": {
+    "status": "checked",
+    "exit_code": 0,
+    "passed": true,
+    "check_line": "CHECK PASSED: 143 items",
+    "output_tail": [
+      "items complete_snippet=67 fix_bug=34 debug_line=42",
+      "fix_bug per class M01=2 M02=2 M03=2 M04=2 M05=2 M06=2 M07=2 M08=2 M10=2 D01=2 D02=2 D03=2 D04=2 D05=2 D06=2 D07=2 D08=2",
+      "debug_line per class M01=2 M02=2 M03=2 M04=2 M05=2 M06=2 M07=2 M08=2 M10=2 D01=2 D02=2 D03=2 D04=2 D05=2 D06=2 D07=2 D08=2",
+      "debug_line no-bug 8/42",
+      "complete_snippet per problem P01=2 P02=2 P03=2 P04=2 P05=2 P06=2 P07=2 P08=2 P09=2 P10=2 P11=2 P12=2 P13=1 P14=2 P16=2 P17=2 Q01=2 Q02=2 Q03=2 Q04=2 Q05=2 Q06=2 Q07=2 Q08=2 Q09=2 Q10=2 Q11=2 Q12=2 Q13=2 Q14=2 Q15=2 Q16=2 Q17=2 Q18=2",
+      "gcc cross-check on",
+      "CHECK PASSED: 143 items"
+    ],
+    "errors_tail": [],
+    "checked": 143,
+    "by_type": {
+      "complete_snippet": 67,
+      "fix_bug": 34,
+      "debug_line": 42
+    },
+    "targets_05_3_2": {
+      "complete_snippet": "1-2 per problem",
+      "fix_bug": "2 per class",
+      "debug_line": "2 per class"
+    },
+    "versus_targets": {
+      "complete_snippet": {
+        "target": "1-2 per problem",
+        "items": 67,
+        "problems": 34,
+        "with_1": [
+          "P13"
+        ],
+        "with_2": 33,
+        "outside": {},
+        "met": true
+      },
+      "fix_bug": {
+        "target": "2 per class",
+        "items": 34,
+        "not_equal_to_2": {},
+        "met": true
+      },
+      "debug_line": {
+        "target": "2 per class",
+        "planted_items": 34,
+        "not_equal_to_2": {},
+        "met": true,
+        "no_bug": 8,
+        "no_bug_of": 42,
+        "no_bug_share": 0.19
+      },
+      "counts_meet_targets": true
+    },
+    "counts_meet_targets": true,
+    "planted_per_class_and_type": {
+      "M01": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "M02": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "M03": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "M04": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "M05": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "M06": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "M07": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "M08": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "M10": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "D01": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "D02": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "D03": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "D04": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "D05": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "D06": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "D07": {
+        "fix_bug": 2,
+        "debug_line": 2
+      },
+      "D08": {
+        "fix_bug": 2,
+        "debug_line": 2
+      }
+    },
+    "debug_line_no_bug_share": 0.19,
+    "complete_snippet_per_problem": {
+      "P01": 2,
+      "P02": 2,
+      "P03": 2,
+      "P04": 2,
+      "P05": 2,
+      "P06": 2,
+      "P07": 2,
+      "P08": 2,
+      "P09": 2,
+      "P10": 2,
+      "P11": 2,
+      "P12": 2,
+      "P13": 1,
+      "P14": 2,
+      "P16": 2,
+      "P17": 2,
+      "Q01": 2,
+      "Q02": 2,
+      "Q03": 2,
+      "Q04": 2,
+      "Q05": 2,
+      "Q06": 2,
+      "Q07": 2,
+      "Q08": 2,
+      "Q09": 2,
+      "Q10": 2,
+      "Q11": 2,
+      "Q12": 2,
+      "Q13": 2,
+      "Q14": 2,
+      "Q15": 2,
+      "Q16": 2,
+      "Q17": 2,
+      "Q18": 2
+    },
+    "planted_overall": {
+      "M02": 4,
+      "M03": 4,
+      "M05": 4,
+      "M01": 4,
+      "M04": 4,
+      "M08": 4,
+      "M06": 4,
+      "M07": 4,
+      "M10": 4,
+      "D02": 4,
+      "D03": 4,
+      "D04": 4,
+      "D01": 4,
+      "D08": 4,
+      "D06": 4,
+      "D07": 4,
+      "D05": 4,
+      "None": 8
+    }
+  },
+  "scope": "The plan asks for verify_quiz.py + build_code_items.py --check over every item. The quiz half ran in full. The code-item half ran (CHECK PASSED: 143 items)."
+}
