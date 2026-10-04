@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
 
 export interface PredictItem {
   item_id: string;
@@ -241,7 +241,85 @@ export interface DebriefReport {
   recommendations: DebriefRecommendation[];
 }
 
+export type ChartStarState = "uncharted" | "unexplored" | "attempted" | "known" | "shaky";
+
+export interface ChartHazard {
+  id: string;
+  name: string;
+  subtitle: string | null;
+  p_active: number;
+  state: string;
+  exposure: number;
+}
+
+export interface ChartStar {
+  id: string;
+  label: string;
+  kind: "skill" | "uncharted";
+  topic: string | null;
+  pos: [number, number];
+  state: ChartStarState;
+  cleared: boolean;
+  brightness: number | null;
+  risk: number | null;
+  at_risk: boolean;
+  risk_from: { id: string; name: string }[];
+  hazards: ChartHazard[];
+  problems: { problem_id: string; name: string }[];
+  playable: string | null;
+  suggested: boolean;
+}
+
+export interface ChartTopic {
+  id: string;
+  label: string;
+  pos: [number, number];
+  radius: number;
+  skills_total: number;
+  skills_cleared: number;
+}
+
+export interface ChartEdge {
+  from: string;
+  to: string;
+  kind: "prereq" | "line";
+}
+
+export interface ChartView {
+  learner_id: string;
+  canvas: { width: number; height: number };
+  topics: ChartTopic[];
+  stars: ChartStar[];
+  edges: ChartEdge[];
+  summary: { charted: number; cleared: number; known: number; shaky: number; at_risk: number; uncharted: number };
+  suggested_next: { star_id: string; label: string; reason: string; route: string } | null;
+}
+
+/** null when the server does not know this learner yet (404). */
+async function getChart(learnerId: string): Promise<ChartView | null> {
+  const path = `/learner/${encodeURIComponent(learnerId)}/graph`;
+  const res = await fetch(`${BASE_URL}${path}`);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`${path} → ${res.status}`);
+  return res.json();
+}
+
+/** Creates the learner if the server does not have it. "Already exists" (409) and an unreachable server are both fine. */
+async function ensureLearner(learnerId: string): Promise<void> {
+  try {
+    await fetch(`${BASE_URL}/learner`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ callsign: "PILOT", learner_id: learnerId }),
+    });
+  } catch {
+    // The screens that need the server report it themselves.
+  }
+}
+
 export const api = {
+  getChart,
+  ensureLearner,
   getProblem: (problemId: string) => get<Problem>(`/problems/${problemId}`),
   attempt: (payload: { learner_id: string; problem_id: string; code: string; prediction?: string; events?: unknown[] }) =>
     post<AttemptResponse>("/attempt", { events: [], ...payload }),

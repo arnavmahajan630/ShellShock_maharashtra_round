@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api, type DsaTrial, type TestResult } from "../lib/api";
+import { useMissionStore } from "../store/missionStore";
 import TrialsHeader from "../components/trials/TrialsHeader";
 import ProblemSpecPanel from "../components/trials/ProblemSpecPanel";
 import CodeEditorPanel from "../components/trials/CodeEditorPanel";
@@ -30,7 +31,7 @@ export default function TrialsExamScreen() {
   useEffect(() => {
     let mounted = true;
     api
-      .startExam("pilot-user")
+      .startExam(useMissionStore.getState().learnerId)
       .then((res) => {
         if (!mounted) return;
         setExamId(res.exam_id);

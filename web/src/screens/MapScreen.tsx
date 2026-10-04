@@ -28,6 +28,13 @@ export default function MapScreen() {
           />
         );
       })}
+      <button
+        type="button"
+        onClick={() => navigate("/chart")}
+        className="fixed left-4 bottom-4 z-10 font-ui text-xl px-5 py-2 rounded border border-warp-cyan bg-deep-space/90 text-warp-cyan hover:bg-warp-cyan hover:text-deep-space active:scale-95"
+      >
+        ✦ STAR CHART
+      </button>
     </ArtStage>
   );
 }

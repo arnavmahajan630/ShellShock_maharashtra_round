@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { MotionConfig } from "framer-motion";
 import { Route, Routes } from "react-router-dom";
 import LandingScreen from "./screens/LandingScreen";
@@ -13,10 +14,20 @@ import TrialsWarpScreen from "./screens/TrialsWarpScreen";
 import TrialsLandingScreen from "./screens/TrialsLandingScreen";
 import TrialsExamScreen from "./screens/TrialsExamScreen";
 import TrialsDebriefScreen from "./screens/TrialsDebriefScreen";
+import StarChartScreen from "./screens/StarChartScreen";
 import { AudioProvider } from "./audio/AudioContext";
 import AudioToggle from "./components/AudioToggle";
+import { api } from "./lib/api";
+import { useMissionStore } from "./store/missionStore";
 
 export default function App() {
+  const learnerId = useMissionStore((s) => s.learnerId);
+
+  // The server only saves progress for a learner it knows, so make sure ours exists.
+  useEffect(() => {
+    void api.ensureLearner(learnerId);
+  }, [learnerId]);
+
   return (
     <AudioProvider>
       <MotionConfig reducedMotion="user">
@@ -24,6 +35,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<LandingScreen />} />
           <Route path="/map" element={<MapScreen />} />
+          <Route path="/chart" element={<StarChartScreen />} />
           <Route path="/planet/:planet" element={<PlanetPathScreen />} />
           <Route path="/planet/:planet/mission/:problemId" element={<MissionScreen />} />
           <Route path="/planet/:planet/diagnosis" element={<DiagnosisScreen />} />

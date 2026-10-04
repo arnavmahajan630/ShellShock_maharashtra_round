@@ -11,6 +11,8 @@ Endpoints:
 - GET /trials/list: lists the 5 trials with metadata
 """
 import json
+import logging
+import os
 import time
 from pathlib import Path
 from typing import Any, Dict
@@ -18,8 +20,9 @@ from typing import Any, Dict
 from fastapi import APIRouter, Request
 
 from ml.c_interp import harness
-from server.app import dsa_rules
+from server.app import dsa_rules, store as store_module
 
+log = logging.getLogger("relearn.trials")
 router = APIRouter()
 
 FIXTURES_PATH = Path(__file__).resolve().parent.parent.parent / "fixtures" / "dsa_trials.json"
@@ -34,6 +37,22 @@ def _get_trials() -> list:
 def _find_trial(item_id: str) -> Dict[str, Any] | None:
     trials = _get_trials()
     return next((t for t in trials if t["problem_id"] == item_id), None)
+
+
+def _mark_cleared(learner_id: Any, item_id: str) -> None:
+    """Star chart (package K1): a solved trial lights its star for a learner the store knows.
+
+    Only the node is written. The trial findings are pattern rules, so no P(A) moves.
+    """
+    try:
+        path = store_module.db_path()
+        if not isinstance(learner_id, str) or (path != ":memory:" and not os.path.exists(path)):
+            return
+        store = store_module.get_store()
+        if store.exists(learner_id):
+            store.set_node(learner_id, f"trials:{item_id}", "done", 3)
+    except Exception:  # noqa: BLE001 - the chart must never break a trial
+        log.exception("marking the trial cleared failed")
 
 
 @router.get("/trials/list")
@@ -130,6 +149,8 @@ async def answer_trial(request: Request):
         "pass": diag["is_correct"] and not skipped,
         "skipped": skipped,
     }
+    if answer_entry["pass"]:
+        _mark_cleared(sess.get("learner_id"), item_id)
     # Update existing answer for this problem_id or append
     existing_idx = next((i for i, a in enumerate(sess["answers"]) if a["problem_id"] == item_id), None)
     if existing_idx is not None:

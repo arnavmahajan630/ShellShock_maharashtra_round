@@ -13,6 +13,7 @@ never reached until that file is removed. The learner-aware version is also serv
 import json
 import logging
 import os
+import re
 import time
 from pathlib import Path
 
@@ -97,8 +98,11 @@ def create_learner(body: dict = Body(...)):
     callsign = body.get("callsign") if isinstance(body, dict) else None
     if not isinstance(callsign, str) or not callsign.strip():
         return _error(422, "callsign is required")
+    wanted = body.get("learner_id")                             # optional: the app's fixed id (package K1)
+    if wanted is not None and (not isinstance(wanted, str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", wanted)):
+        return _error(422, "learner_id must be 1-64 letters, digits, - or _")
     try:
-        learner_id = get_store().create_learner(callsign.strip()[:40])
+        learner_id = get_store().create_learner(callsign.strip()[:40], wanted)
     except StoreError as exc:
         return _store_error(exc)
     except Exception as exc:                                    # noqa: BLE001
