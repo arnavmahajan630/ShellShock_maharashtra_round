@@ -53,8 +53,12 @@ app = FastAPI(title="Re:Learn")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 
+_ROUTER_ROUTES = set()        # (method, path) of every route that came from a module in routes/
+
+
 def _live_routes():
-    return {(method, route.path) for route in app.routes for method in getattr(route, "methods", None) or []}
+    direct = {(method, route.path) for route in app.routes for method in getattr(route, "methods", None) or []}
+    return direct | _ROUTER_ROUTES
 
 
 def _load_routers():
@@ -64,6 +68,10 @@ def _load_routers():
         if hasattr(module, "router"):
             app.include_router(module.router)
             loaded.append(module_info.name)
+            # Read the paths from the router itself: newer FastAPI wraps an included router,
+            # so its routes no longer show up one by one in app.routes.
+            _ROUTER_ROUTES.update((method, route.path) for route in module.router.routes
+                                  for method in getattr(route, "methods", None) or [])
     return loaded
 
 
