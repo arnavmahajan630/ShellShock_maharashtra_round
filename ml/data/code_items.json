@@ -1,0 +1,4166 @@
+[
+ {
+  "item_id": "cs_P01_01",
+  "type": "complete_snippet",
+  "problem_id": "P01",
+  "starter": "void fire_shots(int n) {\n    for (int i = ____; i ____ n; ____) {\n        fire();\n    }\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_init",
+    "choices": [
+     "-1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 2,
+    "kind": "loop_rel",
+    "choices": [
+     ">",
+     "<",
+     "<="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 2,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i--",
+     "i++"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02"
+  ],
+  "fix": {
+   "code": "void fire_shots(int n) {\n    for (int i = 0; i < n; i++) {\n        fire();\n    }\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<",
+    "h3": "i++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P01_02",
+  "type": "complete_snippet",
+  "problem_id": "P01",
+  "starter": "void fire_shots(int n) {\n    int i = ____;\n    while (i ____ n) {\n        fire();\n        ____;\n    }\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_init",
+    "choices": [
+     "0",
+     "-1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     "<",
+     ">",
+     "<="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 5,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i--",
+     "i++"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02"
+  ],
+  "fix": {
+   "code": "void fire_shots(int n) {\n    int i = 0;\n    while (i < n) {\n        fire();\n        i++;\n    }\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<",
+    "h3": "i++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P02_01",
+  "type": "complete_snippet",
+  "problem_id": "P02",
+  "starter": "void countdown(int n) {\n    for (int i = ____; i ____ 1; ____) {\n        printf(\"%d\\n\", i);\n    }\n    launch();\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_init",
+    "choices": [
+     "n + 1",
+     "n - 1",
+     "n"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 2,
+    "kind": "loop_rel",
+    "choices": [
+     "<=",
+     ">",
+     ">="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 2,
+    "kind": "loop_update",
+    "choices": [
+     "i--",
+     "i -= 2",
+     "i++"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02"
+  ],
+  "fix": {
+   "code": "void countdown(int n) {\n    for (int i = n; i >= 1; i--) {\n        printf(\"%d\\n\", i);\n    }\n    launch();\n}",
+   "answers": {
+    "h1": "n",
+    "h2": ">=",
+    "h3": "i--"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P02_02",
+  "type": "complete_snippet",
+  "problem_id": "P02",
+  "starter": "void countdown(int n) {\n    int i = ____;\n    while (i ____ 1) {\n        printf(\"%d\\n\", i);\n        ____;\n    }\n    launch();\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_init",
+    "choices": [
+     "n - 1",
+     "n",
+     "n + 1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     ">",
+     "<=",
+     ">="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 5,
+    "kind": "loop_update",
+    "choices": [
+     "i++",
+     "i--",
+     "i -= 2"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02"
+  ],
+  "fix": {
+   "code": "void countdown(int n) {\n    int i = n;\n    while (i >= 1) {\n        printf(\"%d\\n\", i);\n        i--;\n    }\n    launch();\n}",
+   "answers": {
+    "h1": "n",
+    "h2": ">=",
+    "h3": "i--"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P03_01",
+  "type": "complete_snippet",
+  "problem_id": "P03",
+  "starter": "int total_energy(int cells[], int n) {\n    int total = ____;\n    for (int i = ____; i ____ n; i++) {\n        total += cells[i];\n    }\n    return total;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "-1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_init",
+    "choices": [
+     "0",
+     "1",
+     "-1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     "<",
+     "<=",
+     ">"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M05",
+   "M08"
+  ],
+  "fix": {
+   "code": "int total_energy(int cells[], int n) {\n    int total = 0;\n    for (int i = 0; i < n; i++) {\n        total += cells[i];\n    }\n    return total;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "0",
+    "h3": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P03_02",
+  "type": "complete_snippet",
+  "problem_id": "P03",
+  "starter": "int total_energy(int cells[], int n) {\n    int total = 0;\n    int i = ____;\n    while (i < n) {\n        total = total + cells[____];\n        ____;\n    }\n    return total;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 3,
+    "kind": "loop_init",
+    "choices": [
+     "-1",
+     "1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 5,
+    "kind": "index",
+    "choices": [
+     "i - 1",
+     "i + 1",
+     "i"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 6,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i--",
+     "i++"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02",
+   "M08"
+  ],
+  "fix": {
+   "code": "int total_energy(int cells[], int n) {\n    int total = 0;\n    int i = 0;\n    while (i < n) {\n        total = total + cells[i];\n        i++;\n    }\n    return total;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "i",
+    "h3": "i++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P04_01",
+  "type": "complete_snippet",
+  "problem_id": "P04",
+  "starter": "int count_overheated(int t[], int n, int limit) {\n    int count = ____;\n    for (int i = ____; i ____ n; i++) {\n        if (t[i] > limit) {\n            count++;\n        }\n    }\n    return count;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "-1",
+     "0",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_init",
+    "choices": [
+     "0",
+     "2",
+     "1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     ">",
+     ">=",
+     "<"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M05",
+   "M08"
+  ],
+  "fix": {
+   "code": "int count_overheated(int t[], int n, int limit) {\n    int count = 0;\n    for (int i = 0; i < n; i++) {\n        if (t[i] > limit) {\n            count++;\n        }\n    }\n    return count;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "0",
+    "h3": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P04_02",
+  "type": "complete_snippet",
+  "problem_id": "P04",
+  "starter": "int count_overheated(int t[], int n, int limit) {\n    int count = 0;\n    int i = 0;\n    while (i < n) {\n        if (t[____] ____ limit) {\n            count++;\n        }\n        ____;\n    }\n    return count;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 5,
+    "kind": "index",
+    "choices": [
+     "i + 1",
+     "i - 1",
+     "i"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 5,
+    "kind": "branch_rel",
+    "choices": [
+     ">=",
+     ">",
+     "<"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 8,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i--",
+     "i++"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02",
+   "M06",
+   "M08"
+  ],
+  "fix": {
+   "code": "int count_overheated(int t[], int n, int limit) {\n    int count = 0;\n    int i = 0;\n    while (i < n) {\n        if (t[i] > limit) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+   "answers": {
+    "h1": "i",
+    "h2": ">",
+    "h3": "i++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P05_01",
+  "type": "complete_snippet",
+  "problem_id": "P05",
+  "starter": "int charge_steps(int level, int target) {\n    int steps = ____;\n    while (level ____ target) {\n        level += 7;\n        steps++;\n    }\n    return steps;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "-1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     "<=",
+     "<",
+     ">"
+    ]
+   }
+  ],
+  "exposes": [
+   "M05"
+  ],
+  "fix": {
+   "code": "int charge_steps(int level, int target) {\n    int steps = 0;\n    while (level < target) {\n        level += 7;\n        steps++;\n    }\n    return steps;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P05_02",
+  "type": "complete_snippet",
+  "problem_id": "P05",
+  "starter": "int charge_steps(int level, int target) {\n    int steps = ____;\n    for (; level ____ target; ____) {\n        level = level + 7;\n    }\n    return steps;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "0",
+     "-1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     ">",
+     "<",
+     "<="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "loop_update",
+    "choices": [
+     "steps += 2",
+     "steps--",
+     "steps++"
+    ]
+   }
+  ],
+  "exposes": [
+   "M02",
+   "M05"
+  ],
+  "fix": {
+   "code": "int charge_steps(int level, int target) {\n    int steps = 0;\n    for (; level < target; steps++) {\n        level = level + 7;\n    }\n    return steps;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<",
+    "h3": "steps++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P06_01",
+  "type": "complete_snippet",
+  "problem_id": "P06",
+  "starter": "int power_up(int base, int k) {\n    int power = ____;\n    for (int i = ____; i ____ k; i++) {\n        power *= base;\n    }\n    return power;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "2",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_init",
+    "choices": [
+     "0",
+     "-1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     "<=",
+     ">",
+     "<"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M05"
+  ],
+  "fix": {
+   "code": "int power_up(int base, int k) {\n    int power = 1;\n    for (int i = 0; i < k; i++) {\n        power *= base;\n    }\n    return power;\n}",
+   "answers": {
+    "h1": "1",
+    "h2": "0",
+    "h3": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P06_02",
+  "type": "complete_snippet",
+  "problem_id": "P06",
+  "starter": "int power_up(int base, int k) {\n    int power = 1;\n    int i = ____;\n    while (i ____ k) {\n        power = power * base;\n        ____;\n    }\n    return power;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 3,
+    "kind": "loop_init",
+    "choices": [
+     "0",
+     "-1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "loop_rel",
+    "choices": [
+     "<=",
+     ">",
+     "<"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 6,
+    "kind": "loop_update",
+    "choices": [
+     "i++",
+     "i--",
+     "i += 2"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02"
+  ],
+  "fix": {
+   "code": "int power_up(int base, int k) {\n    int power = 1;\n    int i = 0;\n    while (i < k) {\n        power = power * base;\n        i++;\n    }\n    return power;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<",
+    "h3": "i++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P07_01",
+  "type": "complete_snippet",
+  "problem_id": "P07",
+  "starter": "float avg_fuel(int tanks[], int n) {\n    int sum = ____;\n    for (int i = ____; i ____ n; i++) {\n        sum += tanks[i];\n    }\n    return (float)sum / n;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "0",
+     "-1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_init",
+    "choices": [
+     "-1",
+     "1",
+     "0"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     "<",
+     "<=",
+     ">"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M05",
+   "M08"
+  ],
+  "fix": {
+   "code": "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += tanks[i];\n    }\n    return (float)sum / n;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "0",
+    "h3": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P07_02",
+  "type": "complete_snippet",
+  "problem_id": "P07",
+  "starter": "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    int i = 0;\n    while (i < n) {\n        sum = sum + tanks[____];\n        ____;\n    }\n    return ____;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 5,
+    "kind": "index",
+    "choices": [
+     "i",
+     "i - 1",
+     "i + 1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 6,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i--",
+     "i++"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 8,
+    "kind": "cast_expr",
+    "choices": [
+     "sum / n",
+     "sum / (float)n"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02",
+   "M04",
+   "M08"
+  ],
+  "fix": {
+   "code": "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    int i = 0;\n    while (i < n) {\n        sum = sum + tanks[i];\n        i++;\n    }\n    return sum / (float)n;\n}",
+   "answers": {
+    "h1": "i",
+    "h2": "i++",
+    "h3": "sum / (float)n"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P08_01",
+  "type": "complete_snippet",
+  "problem_id": "P08",
+  "starter": "int last_beacon(int ids[], int n) {\n    return ids[____];\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "index",
+    "choices": [
+     "n - 1",
+     "n - 2",
+     "n"
+    ]
+   }
+  ],
+  "exposes": [
+   "M08"
+  ],
+  "fix": {
+   "code": "int last_beacon(int ids[], int n) {\n    return ids[n - 1];\n}",
+   "answers": {
+    "h1": "n - 1"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P08_02",
+  "type": "complete_snippet",
+  "problem_id": "P08",
+  "starter": "int last_beacon(int ids[], int n) {\n    int last = ____;\n    int i = ____;\n    while (i ____ n) {\n        last = ids[i];\n        i++;\n    }\n    return last;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "ids[1]",
+     "ids[0]",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_init",
+    "choices": [
+     "2",
+     "1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 4,
+    "kind": "loop_rel",
+    "choices": [
+     ">",
+     "<",
+     "<="
+    ]
+   }
+  ],
+  "exposes": [
+   "M08"
+  ],
+  "fix": {
+   "code": "int last_beacon(int ids[], int n) {\n    int last = ids[0];\n    int i = 1;\n    while (i < n) {\n        last = ids[i];\n        i++;\n    }\n    return last;\n}",
+   "answers": {
+    "h1": "ids[0]",
+    "h2": "1",
+    "h3": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P09_01",
+  "type": "complete_snippet",
+  "problem_id": "P09",
+  "starter": "int max_shield(int s[], int n) {\n    int best = ____;\n    for (int i = ____; i ____ n; i++) {\n        if (s[i] > best) {\n            best = s[i];\n        }\n    }\n    return best;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "s[0]",
+     "s[1]",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_init",
+    "choices": [
+     "2",
+     "1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     "<",
+     ">=",
+     ">"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M05",
+   "M08"
+  ],
+  "fix": {
+   "code": "int max_shield(int s[], int n) {\n    int best = s[0];\n    for (int i = 1; i < n; i++) {\n        if (s[i] > best) {\n            best = s[i];\n        }\n    }\n    return best;\n}",
+   "answers": {
+    "h1": "s[0]",
+    "h2": "1",
+    "h3": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P09_02",
+  "type": "complete_snippet",
+  "problem_id": "P09",
+  "starter": "int max_shield(int s[], int n) {\n    int best = s[0];\n    int i = 1;\n    while (i < n) {\n        if (s[____] ____ best) {\n            best = s[i];\n        }\n        ____;\n    }\n    return best;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 5,
+    "kind": "index",
+    "choices": [
+     "i",
+     "i - 1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 5,
+    "kind": "branch_rel",
+    "choices": [
+     ">",
+     "<=",
+     "<"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 8,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i++",
+     "i--"
+    ]
+   }
+  ],
+  "exposes": [
+   "M02",
+   "M06",
+   "M08"
+  ],
+  "fix": {
+   "code": "int max_shield(int s[], int n) {\n    int best = s[0];\n    int i = 1;\n    while (i < n) {\n        if (s[i] > best) {\n            best = s[i];\n        }\n        i++;\n    }\n    return best;\n}",
+   "answers": {
+    "h1": "i",
+    "h2": ">",
+    "h3": "i++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P10_01",
+  "type": "complete_snippet",
+  "problem_id": "P10",
+  "starter": "int sum_first_k(int a[], int n, int k) {\n    int total = ____;\n    for (int i = 0; i < k && i < n; ____) {\n        total += a[____];\n    }\n    return total;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "-1",
+     "1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_update",
+    "choices": [
+     "i++",
+     "i += 2",
+     "i--"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 4,
+    "kind": "index",
+    "choices": [
+     "i - 1",
+     "i + 1",
+     "i"
+    ]
+   }
+  ],
+  "exposes": [
+   "M02",
+   "M08"
+  ],
+  "fix": {
+   "code": "int sum_first_k(int a[], int n, int k) {\n    int total = 0;\n    for (int i = 0; i < k && i < n; i++) {\n        total += a[i];\n    }\n    return total;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "i++",
+    "h3": "i"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P10_02",
+  "type": "complete_snippet",
+  "problem_id": "P10",
+  "starter": "int sum_first_k(int a[], int n, int k) {\n    int total = ____;\n    int i = 0;\n    while (i < k && i < n) {\n        total = total + a[____];\n        i++;\n    }\n    return total;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "0",
+     "-1",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 5,
+    "kind": "index",
+    "choices": [
+     "i",
+     "i + 1",
+     "i - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M08"
+  ],
+  "fix": {
+   "code": "int sum_first_k(int a[], int n, int k) {\n    int total = 0;\n    int i = 0;\n    while (i < k && i < n) {\n        total = total + a[i];\n        i++;\n    }\n    return total;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "i"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P11_01",
+  "type": "complete_snippet",
+  "problem_id": "P11",
+  "starter": "int door_open(int code) {\n    if (code ____ 42) {\n        return ____;\n    }\n    return 0;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "branch_rel",
+    "choices": [
+     "==",
+     "=",
+     "!="
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "return_value",
+    "choices": [
+     "0",
+     "2",
+     "1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int door_open(int code) {\n    if (code == 42) {\n        return 1;\n    }\n    return 0;\n}",
+   "answers": {
+    "h1": "==",
+    "h2": "1"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P11_02",
+  "type": "complete_snippet",
+  "problem_id": "P11",
+  "starter": "int door_open(int code) {\n    int open = ____;\n    if (code ____ 42) {\n        open = 1;\n    }\n    return open;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "-1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "branch_rel",
+    "choices": [
+     "==",
+     "!=",
+     "="
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int door_open(int code) {\n    int open = 0;\n    if (code == 42) {\n        open = 1;\n    }\n    return open;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "=="
+   }
+  }
+ },
+ {
+  "item_id": "cs_P12_01",
+  "type": "complete_snippet",
+  "problem_id": "P12",
+  "starter": "int shield_mode(int energy) {\n    if (energy ____ 30) {\n        return ____;\n    }\n    if (energy < 70) {\n        return 1;\n    }\n    return 2;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "branch_rel",
+    "choices": [
+     ">",
+     "<",
+     "<="
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "return_value",
+    "choices": [
+     "0",
+     "1",
+     "-1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int shield_mode(int energy) {\n    if (energy < 30) {\n        return 0;\n    }\n    if (energy < 70) {\n        return 1;\n    }\n    return 2;\n}",
+   "answers": {
+    "h1": "<",
+    "h2": "0"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P12_02",
+  "type": "complete_snippet",
+  "problem_id": "P12",
+  "starter": "int shield_mode(int energy) {\n    int mode = ____;\n    if (energy ____ 70) {\n        mode = 1;\n    }\n    if (energy < 30) {\n        mode = 0;\n    }\n    return mode;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "3",
+     "2",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "branch_rel",
+    "choices": [
+     "<",
+     "<=",
+     ">"
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int shield_mode(int energy) {\n    int mode = 2;\n    if (energy < 70) {\n        mode = 1;\n    }\n    if (energy < 30) {\n        mode = 0;\n    }\n    return mode;\n}",
+   "answers": {
+    "h1": "2",
+    "h2": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P13_01",
+  "type": "complete_snippet",
+  "problem_id": "P13",
+  "starter": "float fuel_percent(int fuel, int cap) {\n    return ____;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "cast_expr",
+    "choices": [
+     "fuel / cap * 100",
+     "(float)(fuel / cap) * 100",
+     "(float)fuel / cap * 100"
+    ]
+   }
+  ],
+  "exposes": [
+   "M04"
+  ],
+  "fix": {
+   "code": "float fuel_percent(int fuel, int cap) {\n    return (float)fuel / cap * 100;\n}",
+   "answers": {
+    "h1": "(float)fuel / cap * 100"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P14_01",
+  "type": "complete_snippet",
+  "problem_id": "P14",
+  "starter": "int distance(int a, int b) {\n    if (a ____ b) {\n        return a - b;\n    }\n    return b - a;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "branch_rel",
+    "choices": [
+     ">=",
+     "<",
+     "<="
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int distance(int a, int b) {\n    if (a >= b) {\n        return a - b;\n    }\n    return b - a;\n}",
+   "answers": {
+    "h1": ">="
+   }
+  }
+ },
+ {
+  "item_id": "cs_P14_02",
+  "type": "complete_snippet",
+  "problem_id": "P14",
+  "starter": "int distance(int a, int b) {\n    int diff = a - b;\n    if (diff ____ 0) {\n        diff = -diff;\n    }\n    return diff;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 3,
+    "kind": "branch_rel",
+    "choices": [
+     ">=",
+     "<",
+     ">"
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int distance(int a, int b) {\n    int diff = a - b;\n    if (diff < 0) {\n        diff = -diff;\n    }\n    return diff;\n}",
+   "answers": {
+    "h1": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P16_01",
+  "type": "complete_snippet",
+  "problem_id": "P16",
+  "starter": "int in_range(int x, int lo, int hi) {\n    if (lo ____ x && x < hi) {\n        return ____;\n    }\n    return 0;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "branch_rel",
+    "choices": [
+     "<=",
+     ">",
+     "<"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "return_value",
+    "choices": [
+     "1",
+     "0",
+     "2"
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int in_range(int x, int lo, int hi) {\n    if (lo < x && x < hi) {\n        return 1;\n    }\n    return 0;\n}",
+   "answers": {
+    "h1": "<",
+    "h2": "1"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P16_02",
+  "type": "complete_snippet",
+  "problem_id": "P16",
+  "starter": "int in_range(int x, int lo, int hi) {\n    int inside = ____;\n    if (x ____ lo) {\n        if (x < hi) {\n            inside = 1;\n        }\n    }\n    return inside;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "-1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "branch_rel",
+    "choices": [
+     ">=",
+     ">",
+     "<"
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int in_range(int x, int lo, int hi) {\n    int inside = 0;\n    if (x > lo) {\n        if (x < hi) {\n            inside = 1;\n        }\n    }\n    return inside;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": ">"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P17_01",
+  "type": "complete_snippet",
+  "problem_id": "P17",
+  "starter": "int max_of_three(int a, int b, int c) {\n    int best = a;\n    if (b ____ best) {\n        best = b;\n    }\n    if (c > best) {\n        best = c;\n    }\n    return best;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 3,
+    "kind": "branch_rel",
+    "choices": [
+     "<",
+     "<=",
+     ">"
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int max_of_three(int a, int b, int c) {\n    int best = a;\n    if (b > best) {\n        best = b;\n    }\n    if (c > best) {\n        best = c;\n    }\n    return best;\n}",
+   "answers": {
+    "h1": ">"
+   }
+  }
+ },
+ {
+  "item_id": "cs_P17_02",
+  "type": "complete_snippet",
+  "problem_id": "P17",
+  "starter": "int max_of_three(int a, int b, int c) {\n    if (a ____ b && a >= c) {\n        return a;\n    }\n    if (b >= c) {\n        return b;\n    }\n    return c;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "branch_rel",
+    "choices": [
+     "<",
+     ">=",
+     "<="
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int max_of_three(int a, int b, int c) {\n    if (a >= b && a >= c) {\n        return a;\n    }\n    if (b >= c) {\n        return b;\n    }\n    return c;\n}",
+   "answers": {
+    "h1": ">="
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q01_01",
+  "type": "complete_snippet",
+  "problem_id": "Q01",
+  "starter": "int linear_search(int a[], int n, int x) {\n    for (int i = ____; i ____ n; i++) {\n        if (a[____] == x) {\n            return i;\n        }\n    }\n    return -1;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_init",
+    "choices": [
+     "0",
+     "2",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 2,
+    "kind": "loop_rel",
+    "choices": [
+     ">=",
+     ">",
+     "<"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "index",
+    "choices": [
+     "i",
+     "i - 1",
+     "i + 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M08"
+  ],
+  "fix": {
+   "code": "int linear_search(int a[], int n, int x) {\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<",
+    "h3": "i"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q01_02",
+  "type": "complete_snippet",
+  "problem_id": "Q01",
+  "starter": "int linear_search(int a[], int n, int x) {\n    int i = 0;\n    while (i < n) {\n        if (a[i] ____ x) {\n            return i;\n        }\n        ____;\n    }\n    return ____;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 4,
+    "kind": "branch_rel",
+    "choices": [
+     "=",
+     "!=",
+     "=="
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 7,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i--",
+     "i++"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 9,
+    "kind": "return_value",
+    "choices": [
+     "0",
+     "-1",
+     "-2"
+    ]
+   }
+  ],
+  "exposes": [
+   "M02",
+   "M06"
+  ],
+  "fix": {
+   "code": "int linear_search(int a[], int n, int x) {\n    int i = 0;\n    while (i < n) {\n        if (a[i] == x) {\n            return i;\n        }\n        i++;\n    }\n    return -1;\n}",
+   "answers": {
+    "h1": "==",
+    "h2": "i++",
+    "h3": "-1"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q02_01",
+  "type": "complete_snippet",
+  "problem_id": "Q02",
+  "starter": "int count_occurrences(int a[], int n, int x) {\n    int count = ____;\n    for (int i = ____; i ____ n; i++) {\n        if (a[i] == x) {\n            count++;\n        }\n    }\n    return count;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "-1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_init",
+    "choices": [
+     "0",
+     "2",
+     "1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     ">=",
+     ">",
+     "<"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M05",
+   "M08"
+  ],
+  "fix": {
+   "code": "int count_occurrences(int a[], int n, int x) {\n    int count = 0;\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            count++;\n        }\n    }\n    return count;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "0",
+    "h3": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q02_02",
+  "type": "complete_snippet",
+  "problem_id": "Q02",
+  "starter": "int count_occurrences(int a[], int n, int x) {\n    int count = 0;\n    int i = 0;\n    while (i < n) {\n        if (a[____] ____ x) {\n            count++;\n        }\n        ____;\n    }\n    return count;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 5,
+    "kind": "index",
+    "choices": [
+     "i - 1",
+     "i",
+     "i + 1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 5,
+    "kind": "branch_rel",
+    "choices": [
+     "==",
+     "=",
+     "!="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 8,
+    "kind": "loop_update",
+    "choices": [
+     "i--",
+     "i++",
+     "i += 2"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02",
+   "M06",
+   "M08"
+  ],
+  "fix": {
+   "code": "int count_occurrences(int a[], int n, int x) {\n    int count = 0;\n    int i = 0;\n    while (i < n) {\n        if (a[i] == x) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+   "answers": {
+    "h1": "i",
+    "h2": "==",
+    "h3": "i++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q03_01",
+  "type": "complete_snippet",
+  "problem_id": "Q03",
+  "starter": "int binary_search(int a[], int n, int x) {\n    int low = ____;\n    int high = n - 1;\n    while (low ____ high) {\n        int mid = low + (high - low) / 2;\n        if (a[____] == x) {\n            return mid;\n        }\n        if (a[mid] < x) {\n            low = mid + 1;\n        } else {\n            high = mid - 1;\n        }\n    }\n    return -1;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_init",
+    "choices": [
+     "2",
+     "0",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "loop_rel",
+    "choices": [
+     ">=",
+     "<",
+     "<="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 6,
+    "kind": "index",
+    "choices": [
+     "mid",
+     "mid + 1",
+     "mid - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M08"
+  ],
+  "fix": {
+   "code": "int binary_search(int a[], int n, int x) {\n    int low = 0;\n    int high = n - 1;\n    while (low <= high) {\n        int mid = low + (high - low) / 2;\n        if (a[mid] == x) {\n            return mid;\n        }\n        if (a[mid] < x) {\n            low = mid + 1;\n        } else {\n            high = mid - 1;\n        }\n    }\n    return -1;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<=",
+    "h3": "mid"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q03_02",
+  "type": "complete_snippet",
+  "problem_id": "Q03",
+  "starter": "int binary_search(int a[], int n, int x) {\n    int low = 0;\n    int high = n - 1;\n    for (; low <= high; ) {\n        int mid = low + (high - low) / 2;\n        if (a[mid] ____ x) {\n            return mid;\n        }\n        if (x < a[mid]) {\n            high = ____;\n        } else {\n            low = mid + 1;\n        }\n    }\n    return ____;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 6,
+    "kind": "branch_rel",
+    "choices": [
+     "!=",
+     "=",
+     "=="
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 10,
+    "kind": "bound_update",
+    "choices": [
+     "mid",
+     "mid - 1",
+     "mid + 1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 15,
+    "kind": "return_value",
+    "choices": [
+     "-1",
+     "0",
+     "-2"
+    ]
+   }
+  ],
+  "exposes": [
+   "D02",
+   "M06"
+  ],
+  "fix": {
+   "code": "int binary_search(int a[], int n, int x) {\n    int low = 0;\n    int high = n - 1;\n    for (; low <= high; ) {\n        int mid = low + (high - low) / 2;\n        if (a[mid] == x) {\n            return mid;\n        }\n        if (x < a[mid]) {\n            high = mid - 1;\n        } else {\n            low = mid + 1;\n        }\n    }\n    return -1;\n}",
+   "answers": {
+    "h1": "==",
+    "h2": "mid - 1",
+    "h3": "-1"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q04_01",
+  "type": "complete_snippet",
+  "problem_id": "Q04",
+  "starter": "int contains(int a[], int n, int x) {\n    int found = ____;\n    for (int i = ____; i ____ n; i++) {\n        if (a[i] == x) {\n            found = 1;\n        }\n    }\n    return found;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "-1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_init",
+    "choices": [
+     "1",
+     "2",
+     "0"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     ">=",
+     ">",
+     "<"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M05",
+   "M08"
+  ],
+  "fix": {
+   "code": "int contains(int a[], int n, int x) {\n    int found = 0;\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            found = 1;\n        }\n    }\n    return found;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "0",
+    "h3": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q04_02",
+  "type": "complete_snippet",
+  "problem_id": "Q04",
+  "starter": "int contains(int a[], int n, int x) {\n    int found = 0;\n    int i = 0;\n    while (i < n) {\n        if (a[____] ____ x) {\n            found = 1;\n        }\n        ____;\n    }\n    return found;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 5,
+    "kind": "index",
+    "choices": [
+     "i",
+     "i + 1",
+     "i - 1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 5,
+    "kind": "branch_rel",
+    "choices": [
+     "!=",
+     "=",
+     "=="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 8,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i++",
+     "i--"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02",
+   "M06",
+   "M08"
+  ],
+  "fix": {
+   "code": "int contains(int a[], int n, int x) {\n    int found = 0;\n    int i = 0;\n    while (i < n) {\n        if (a[i] == x) {\n            found = 1;\n        }\n        i++;\n    }\n    return found;\n}",
+   "answers": {
+    "h1": "i",
+    "h2": "==",
+    "h3": "i++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q05_01",
+  "type": "complete_snippet",
+  "problem_id": "Q05",
+  "starter": "int count_guesses(int secret, int lo, int hi) {\n    int guesses = ____;\n    while (lo ____ hi) {\n        int mid = lo + (hi - lo) / 2;\n        guesses++;\n        if (mid == secret) {\n            return guesses;\n        }\n        if (mid < secret) {\n            lo = ____;\n        } else {\n            hi = mid - 1;\n        }\n    }\n    return guesses;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "-1",
+     "0",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     "<=",
+     ">=",
+     "<"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 10,
+    "kind": "bound_update",
+    "choices": [
+     "mid",
+     "mid + 2",
+     "mid + 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "D02"
+  ],
+  "fix": {
+   "code": "int count_guesses(int secret, int lo, int hi) {\n    int guesses = 0;\n    while (lo <= hi) {\n        int mid = lo + (hi - lo) / 2;\n        guesses++;\n        if (mid == secret) {\n            return guesses;\n        }\n        if (mid < secret) {\n            lo = mid + 1;\n        } else {\n            hi = mid - 1;\n        }\n    }\n    return guesses;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<=",
+    "h3": "mid + 1"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q05_02",
+  "type": "complete_snippet",
+  "problem_id": "Q05",
+  "starter": "int count_guesses(int secret, int lo, int hi) {\n    int guesses = ____;\n    for (; lo ____ hi; ) {\n        int mid = lo + (hi - lo) / 2;\n        guesses++;\n        if (mid ____ secret) return guesses;\n        if (mid < secret) lo = mid + 1;\n        else hi = mid - 1;\n    }\n    return guesses;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "-1",
+     "0",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_rel",
+    "choices": [
+     "<",
+     ">=",
+     "<="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 6,
+    "kind": "branch_rel",
+    "choices": [
+     "=",
+     "!=",
+     "=="
+    ]
+   }
+  ],
+  "exposes": [
+   "M06"
+  ],
+  "fix": {
+   "code": "int count_guesses(int secret, int lo, int hi) {\n    int guesses = 0;\n    for (; lo <= hi; ) {\n        int mid = lo + (hi - lo) / 2;\n        guesses++;\n        if (mid == secret) return guesses;\n        if (mid < secret) lo = mid + 1;\n        else hi = mid - 1;\n    }\n    return guesses;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<=",
+    "h3": "=="
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q06_01",
+  "type": "complete_snippet",
+  "problem_id": "Q06",
+  "starter": "void bubble_sort(int a[], int n) {\n    for (int i = 0; i < n - 1; ____) {\n        for (int j = 0; j < n - 1 - i; j++) {\n            if (a[____] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n        }\n    }\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_update",
+    "choices": [
+     "i++",
+     "i += 2",
+     "i--"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "index",
+    "choices": [
+     "j + 1",
+     "j",
+     "j - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M02",
+   "M08"
+  ],
+  "fix": {
+   "code": "void bubble_sort(int a[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        for (int j = 0; j < n - 1 - i; j++) {\n            if (a[j] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n        }\n    }\n}",
+   "answers": {
+    "h1": "i++",
+    "h2": "j"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q06_02",
+  "type": "complete_snippet",
+  "problem_id": "Q06",
+  "starter": "void bubble_sort(int a[], int n) {\n    int i = ____;\n    while (i < n - 1) {\n        int j = 0;\n        while (j < n - 1 - i) {\n            if (a[____] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n            j++;\n        }\n        i++;\n    }\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "-1",
+     "1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 6,
+    "kind": "index",
+    "choices": [
+     "j",
+     "j + 1",
+     "j - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M08"
+  ],
+  "fix": {
+   "code": "void bubble_sort(int a[], int n) {\n    int i = 0;\n    while (i < n - 1) {\n        int j = 0;\n        while (j < n - 1 - i) {\n            if (a[j] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n            j++;\n        }\n        i++;\n    }\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "j"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q07_01",
+  "type": "complete_snippet",
+  "problem_id": "Q07",
+  "starter": "void selection_sort(int a[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        int m = i;\n        for (int j = ____; j ____ n; j++) {\n            if (a[____] < a[m]) m = j;\n        }\n        int t = a[i];\n        a[i] = a[m];\n        a[m] = t;\n    }\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 4,
+    "kind": "loop_init",
+    "choices": [
+     "i + 1",
+     "i + 2",
+     "i - 1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "loop_rel",
+    "choices": [
+     "<=",
+     ">",
+     "<"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 5,
+    "kind": "index",
+    "choices": [
+     "j",
+     "j + 1",
+     "j - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M08"
+  ],
+  "fix": {
+   "code": "void selection_sort(int a[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        int m = i;\n        for (int j = i + 1; j < n; j++) {\n            if (a[j] < a[m]) m = j;\n        }\n        int t = a[i];\n        a[i] = a[m];\n        a[m] = t;\n    }\n}",
+   "answers": {
+    "h1": "i + 1",
+    "h2": "<",
+    "h3": "j"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q07_02",
+  "type": "complete_snippet",
+  "problem_id": "Q07",
+  "starter": "void selection_sort(int a[], int n) {\n    int i = ____;\n    while (i < n - 1) {\n        int m = i;\n        int j = i + 1;\n        while (j < n) {\n            if (a[j] ____ a[m]) m = j;\n            ____;\n        }\n        int t = a[i];\n        a[i] = a[m];\n        a[m] = t;\n        i++;\n    }\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "0",
+     "1",
+     "2"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 7,
+    "kind": "branch_rel",
+    "choices": [
+     ">",
+     ">=",
+     "<"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 8,
+    "kind": "loop_update",
+    "choices": [
+     "j--",
+     "j",
+     "j++"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02",
+   "M05",
+   "M08"
+  ],
+  "fix": {
+   "code": "void selection_sort(int a[], int n) {\n    int i = 0;\n    while (i < n - 1) {\n        int m = i;\n        int j = i + 1;\n        while (j < n) {\n            if (a[j] < a[m]) m = j;\n            j++;\n        }\n        int t = a[i];\n        a[i] = a[m];\n        a[m] = t;\n        i++;\n    }\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<",
+    "h3": "j++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q08_01",
+  "type": "complete_snippet",
+  "problem_id": "Q08",
+  "starter": "int is_sorted(int a[], int n) {\n    for (int i = 0; i < n - 1; ____) {\n        if (a[____] > a[i + 1]) {\n            return ____;\n        }\n    }\n    return 1;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i--",
+     "i++"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "index",
+    "choices": [
+     "i",
+     "i - 1",
+     "i + 1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 4,
+    "kind": "return_value",
+    "choices": [
+     "1",
+     "-1",
+     "0"
+    ]
+   }
+  ],
+  "exposes": [
+   "M02",
+   "M08"
+  ],
+  "fix": {
+   "code": "int is_sorted(int a[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        if (a[i] > a[i + 1]) {\n            return 0;\n        }\n    }\n    return 1;\n}",
+   "answers": {
+    "h1": "i++",
+    "h2": "i",
+    "h3": "0"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q08_02",
+  "type": "complete_snippet",
+  "problem_id": "Q08",
+  "starter": "int is_sorted(int a[], int n) {\n    int i = ____;\n    while (i < n - 1) {\n        if (a[____] > a[i + 1]) return ____;\n        i++;\n    }\n    return 1;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "2",
+     "1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "index",
+    "choices": [
+     "i - 1",
+     "i",
+     "i + 1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 4,
+    "kind": "return_value",
+    "choices": [
+     "-1",
+     "1",
+     "0"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M08"
+  ],
+  "fix": {
+   "code": "int is_sorted(int a[], int n) {\n    int i = 0;\n    while (i < n - 1) {\n        if (a[i] > a[i + 1]) return 0;\n        i++;\n    }\n    return 1;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "i",
+    "h3": "0"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q09_01",
+  "type": "complete_snippet",
+  "problem_id": "Q09",
+  "starter": "int second_largest(int a[], int n) {\n    int first = ____;\n    int second = a[1];\n    if (second > first) {\n        int t = first;\n        first = second;\n        second = t;\n    }\n    for (int i = ____; i ____ n; i++) {\n        if (a[i] > first) {\n            second = first;\n            first = a[i];\n        } else if (a[i] > second) {\n            second = a[i];\n        }\n    }\n    return second;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "a[0]",
+     "0",
+     "a[1]"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 9,
+    "kind": "loop_init",
+    "choices": [
+     "2",
+     "3",
+     "1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 9,
+    "kind": "loop_rel",
+    "choices": [
+     "<",
+     ">",
+     ">="
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M05",
+   "M08"
+  ],
+  "fix": {
+   "code": "int second_largest(int a[], int n) {\n    int first = a[0];\n    int second = a[1];\n    if (second > first) {\n        int t = first;\n        first = second;\n        second = t;\n    }\n    for (int i = 2; i < n; i++) {\n        if (a[i] > first) {\n            second = first;\n            first = a[i];\n        } else if (a[i] > second) {\n            second = a[i];\n        }\n    }\n    return second;\n}",
+   "answers": {
+    "h1": "a[0]",
+    "h2": "2",
+    "h3": "<"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q09_02",
+  "type": "complete_snippet",
+  "problem_id": "Q09",
+  "starter": "int second_largest(int a[], int n) {\n    int first = a[0];\n    int second = a[1];\n    if (second ____ first) {\n        int t = first;\n        first = second;\n        second = t;\n    }\n    int i = 2;\n    while (i < n) {\n        if (a[____] >= first) {\n            second = first;\n            first = a[i];\n        } else if (a[i] > second) {\n            second = a[i];\n        }\n        ____;\n    }\n    return second;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 4,
+    "kind": "branch_rel",
+    "choices": [
+     "<=",
+     ">",
+     "<"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 11,
+    "kind": "index",
+    "choices": [
+     "0",
+     "i"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 17,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i--",
+     "i++"
+    ]
+   }
+  ],
+  "exposes": [
+   "M02",
+   "M08"
+  ],
+  "fix": {
+   "code": "int second_largest(int a[], int n) {\n    int first = a[0];\n    int second = a[1];\n    if (second > first) {\n        int t = first;\n        first = second;\n        second = t;\n    }\n    int i = 2;\n    while (i < n) {\n        if (a[i] >= first) {\n            second = first;\n            first = a[i];\n        } else if (a[i] > second) {\n            second = a[i];\n        }\n        i++;\n    }\n    return second;\n}",
+   "answers": {
+    "h1": ">",
+    "h2": "i",
+    "h3": "i++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q10_01",
+  "type": "complete_snippet",
+  "problem_id": "Q10",
+  "starter": "void reverse(int a[], int n) {\n    for (int i = 0; i < n / 2; ____) {\n        int t = a[i];\n        a[____] = a[n - 1 - i];\n        a[n - 1 - i] = t;\n    }\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_update",
+    "choices": [
+     "i--",
+     "i++",
+     "i += 2"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "index",
+    "choices": [
+     "i + 1",
+     "i",
+     "i - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02",
+   "M08"
+  ],
+  "fix": {
+   "code": "void reverse(int a[], int n) {\n    for (int i = 0; i < n / 2; i++) {\n        int t = a[i];\n        a[i] = a[n - 1 - i];\n        a[n - 1 - i] = t;\n    }\n}",
+   "answers": {
+    "h1": "i++",
+    "h2": "i"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q10_02",
+  "type": "complete_snippet",
+  "problem_id": "Q10",
+  "starter": "void reverse(int a[], int n) {\n    int i = ____;\n    int j = n - 1;\n    while (i ____ j) {\n        int t = a[i];\n        a[____] = a[j];\n        a[j] = t;\n        i++;\n        j--;\n    }\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_init",
+    "choices": [
+     "-1",
+     "0",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "loop_rel",
+    "choices": [
+     ">",
+     "<",
+     ">="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 6,
+    "kind": "index",
+    "choices": [
+     "i - 1",
+     "i",
+     "i + 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M08"
+  ],
+  "fix": {
+   "code": "void reverse(int a[], int n) {\n    int i = 0;\n    int j = n - 1;\n    while (i < j) {\n        int t = a[i];\n        a[i] = a[j];\n        a[j] = t;\n        i++;\n        j--;\n    }\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<",
+    "h3": "i"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q11_01",
+  "type": "complete_snippet",
+  "problem_id": "Q11",
+  "starter": "void rotate_left(int a[], int n) {\n    if (n ____ 1) return;\n    int first = a[0];\n    for (int i = 0; i < n - 1; ____) {\n        a[____] = a[i + 1];\n    }\n    a[n - 1] = first;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "branch_rel",
+    "choices": [
+     ">",
+     "<=",
+     ">="
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "loop_update",
+    "choices": [
+     "i++",
+     "i--",
+     "i += 2"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 5,
+    "kind": "index",
+    "choices": [
+     "i",
+     "i - 1",
+     "i + 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M02",
+   "M08"
+  ],
+  "fix": {
+   "code": "void rotate_left(int a[], int n) {\n    if (n <= 1) return;\n    int first = a[0];\n    for (int i = 0; i < n - 1; i++) {\n        a[i] = a[i + 1];\n    }\n    a[n - 1] = first;\n}",
+   "answers": {
+    "h1": "<=",
+    "h2": "i++",
+    "h3": "i"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q11_02",
+  "type": "complete_snippet",
+  "problem_id": "Q11",
+  "starter": "void rotate_left(int a[], int n) {\n    if (n ____ 1) return;\n    int first = a[0];\n    int i = ____;\n    while (i < n - 1) {\n        a[____] = a[i + 1];\n        i++;\n    }\n    a[n - 1] = first;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "branch_rel",
+    "choices": [
+     ">",
+     ">=",
+     "<="
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "2",
+     "0"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 6,
+    "kind": "index",
+    "choices": [
+     "i - 1",
+     "i + 1",
+     "i"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M08"
+  ],
+  "fix": {
+   "code": "void rotate_left(int a[], int n) {\n    if (n <= 1) return;\n    int first = a[0];\n    int i = 0;\n    while (i < n - 1) {\n        a[i] = a[i + 1];\n        i++;\n    }\n    a[n - 1] = first;\n}",
+   "answers": {
+    "h1": "<=",
+    "h2": "0",
+    "h3": "i"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q12_01",
+  "type": "complete_snippet",
+  "problem_id": "Q12",
+  "starter": "int pair_sum_exists(int a[], int n, int target) {\n    int i = ____;\n    int j = n - 1;\n    while (i ____ j) {\n        int sum = a[i] + a[j];\n        if (sum ____ target) return 1;\n        if (sum < target) i++;\n        else j--;\n    }\n    return 0;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_init",
+    "choices": [
+     "1",
+     "0",
+     "2"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "loop_rel",
+    "choices": [
+     ">",
+     "<",
+     "<="
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 6,
+    "kind": "branch_rel",
+    "choices": [
+     "!=",
+     "=",
+     "=="
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M06",
+   "M08"
+  ],
+  "fix": {
+   "code": "int pair_sum_exists(int a[], int n, int target) {\n    int i = 0;\n    int j = n - 1;\n    while (i < j) {\n        int sum = a[i] + a[j];\n        if (sum == target) return 1;\n        if (sum < target) i++;\n        else j--;\n    }\n    return 0;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<",
+    "h3": "=="
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q12_02",
+  "type": "complete_snippet",
+  "problem_id": "Q12",
+  "starter": "int pair_sum_exists(int a[], int n, int target) {\n    for (int i = 0; i < n; ____) {\n        for (int j = i + 1; j < n; j++) {\n            if (a[____] + a[j] == target) return ____;\n        }\n    }\n    return 0;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "loop_update",
+    "choices": [
+     "i++",
+     "i += 2",
+     "i--"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "index",
+    "choices": [
+     "i - 1",
+     "i + 1",
+     "i"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 4,
+    "kind": "return_value",
+    "choices": [
+     "0",
+     "2",
+     "1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02",
+   "M08"
+  ],
+  "fix": {
+   "code": "int pair_sum_exists(int a[], int n, int target) {\n    for (int i = 0; i < n; i++) {\n        for (int j = i + 1; j < n; j++) {\n            if (a[i] + a[j] == target) return 1;\n        }\n    }\n    return 0;\n}",
+   "answers": {
+    "h1": "i++",
+    "h2": "i",
+    "h3": "1"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q13_01",
+  "type": "complete_snippet",
+  "problem_id": "Q13",
+  "starter": "int str_length(char s[]) {\n    int n = ____;\n    while (s[n] != '\\0') {\n        n++;\n    }\n    return n;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "0",
+     "2",
+     "1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M05"
+  ],
+  "fix": {
+   "code": "int str_length(char s[]) {\n    int n = 0;\n    while (s[n] != '\\0') {\n        n++;\n    }\n    return n;\n}",
+   "answers": {
+    "h1": "0"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q13_02",
+  "type": "complete_snippet",
+  "problem_id": "Q13",
+  "starter": "int str_length(char s[]) {\n    int n;\n    for (n = 0; s[n] != '\\0'; ____) {\n    }\n    return n;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 3,
+    "kind": "loop_update",
+    "choices": [
+     "n--",
+     "n += 2",
+     "n++"
+    ]
+   }
+  ],
+  "exposes": [
+   "M02"
+  ],
+  "fix": {
+   "code": "int str_length(char s[]) {\n    int n;\n    for (n = 0; s[n] != '\\0'; n++) {\n    }\n    return n;\n}",
+   "answers": {
+    "h1": "n++"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q14_01",
+  "type": "complete_snippet",
+  "problem_id": "Q14",
+  "starter": "int count_vowels(char s[]) {\n    int count = ____;\n    int i = 0;\n    while (s[i] != '\\0') {\n        char ch = s[i];\n        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "-1",
+     "0"
+    ]
+   }
+  ],
+  "exposes": [
+   "M05"
+  ],
+  "fix": {
+   "code": "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i] != '\\0') {\n        char ch = s[i];\n        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+   "answers": {
+    "h1": "0"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q14_02",
+  "type": "complete_snippet",
+  "problem_id": "Q14",
+  "starter": "int count_vowels(char s[]) {\n    int count = ____;\n    for (int i = 0; s[i] != '\\0'; ____) {\n        if (s[____] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u') {\n            count++;\n        }\n    }\n    return count;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "1",
+     "0",
+     "-1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i++",
+     "i--"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 4,
+    "kind": "index",
+    "choices": [
+     "i + 1",
+     "i - 1",
+     "i"
+    ]
+   }
+  ],
+  "exposes": [
+   "M05",
+   "M08"
+  ],
+  "fix": {
+   "code": "int count_vowels(char s[]) {\n    int count = 0;\n    for (int i = 0; s[i] != '\\0'; i++) {\n        if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u') {\n            count++;\n        }\n    }\n    return count;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "i++",
+    "h3": "i"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q15_01",
+  "type": "complete_snippet",
+  "problem_id": "Q15",
+  "starter": "int is_palindrome(char s[]) {\n    int n = ____;\n    while (s[n] != '\\0') n++;\n    for (int i = 0; i < n / 2; ____) {\n        if (s[____] != s[n - 1 - i]) return 0;\n    }\n    return 1;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "acc_init",
+    "choices": [
+     "2",
+     "0",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 4,
+    "kind": "loop_update",
+    "choices": [
+     "i += 2",
+     "i++",
+     "i--"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 5,
+    "kind": "index",
+    "choices": [
+     "i",
+     "i + 1",
+     "i - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M02",
+   "M08"
+  ],
+  "fix": {
+   "code": "int is_palindrome(char s[]) {\n    int n = 0;\n    while (s[n] != '\\0') n++;\n    for (int i = 0; i < n / 2; i++) {\n        if (s[i] != s[n - 1 - i]) return 0;\n    }\n    return 1;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "i++",
+    "h3": "i"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q15_02",
+  "type": "complete_snippet",
+  "problem_id": "Q15",
+  "starter": "int is_palindrome(char s[]) {\n    int n = 0;\n    while (s[n] != '\\0') n++;\n    int i = ____;\n    int j = n - 1;\n    while (i ____ j) {\n        if (s[i] ____ s[j]) return 0;\n        i++;\n        j--;\n    }\n    return 1;\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 4,
+    "kind": "loop_init",
+    "choices": [
+     "-1",
+     "0",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 6,
+    "kind": "loop_rel",
+    "choices": [
+     ">=",
+     "<",
+     ">"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 7,
+    "kind": "branch_rel",
+    "choices": [
+     "!=",
+     "=",
+     "=="
+    ]
+   }
+  ],
+  "exposes": [
+   "M01",
+   "M06",
+   "M08"
+  ],
+  "fix": {
+   "code": "int is_palindrome(char s[]) {\n    int n = 0;\n    while (s[n] != '\\0') n++;\n    int i = 0;\n    int j = n - 1;\n    while (i < j) {\n        if (s[i] != s[j]) return 0;\n        i++;\n        j--;\n    }\n    return 1;\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "<",
+    "h3": "!="
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q16_01",
+  "type": "complete_snippet",
+  "problem_id": "Q16",
+  "starter": "int sum_digits(int n) {\n    if (n < ____) return n;\n    return n % 10 + sum_digits(____);\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "base_cond",
+    "choices": [
+     "10",
+     "0",
+     "11"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "rec_arg",
+    "choices": [
+     "n / 10",
+     "n - 1",
+     "n"
+    ]
+   }
+  ],
+  "exposes": [
+   "D05",
+   "D06"
+  ],
+  "fix": {
+   "code": "int sum_digits(int n) {\n    if (n < 10) return n;\n    return n % 10 + sum_digits(n / 10);\n}",
+   "answers": {
+    "h1": "10",
+    "h2": "n / 10"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q16_02",
+  "type": "complete_snippet",
+  "problem_id": "Q16",
+  "starter": "int sum_digits(int n) {\n    if (n == ____) return ____;\n    return n % 10 + sum_digits(____);\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "base_cond",
+    "choices": [
+     "0",
+     "-1",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 2,
+    "kind": "return_value",
+    "choices": [
+     "0",
+     "1",
+     "-1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "rec_arg",
+    "choices": [
+     "n - 1",
+     "n",
+     "n / 10"
+    ]
+   }
+  ],
+  "exposes": [
+   "D05",
+   "D06"
+  ],
+  "fix": {
+   "code": "int sum_digits(int n) {\n    if (n == 0) return 0;\n    return n % 10 + sum_digits(n / 10);\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "0",
+    "h3": "n / 10"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q17_01",
+  "type": "complete_snippet",
+  "problem_id": "Q17",
+  "starter": "int factorial(int n) {\n    if (n <= ____) {\n        return ____;\n    }\n    return n * factorial(____);\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "base_cond",
+    "choices": [
+     "1",
+     "2"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "return_value",
+    "choices": [
+     "2",
+     "1",
+     "0"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 5,
+    "kind": "rec_arg",
+    "choices": [
+     "n",
+     "n - 2",
+     "n - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "D05",
+   "D06"
+  ],
+  "fix": {
+   "code": "int factorial(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * factorial(n - 1);\n}",
+   "answers": {
+    "h1": "1",
+    "h2": "1",
+    "h3": "n - 1"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q17_02",
+  "type": "complete_snippet",
+  "problem_id": "Q17",
+  "starter": "int factorial(int n) {\n    if (n == ____) return ____;\n    return n * factorial(____);\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "base_cond",
+    "choices": [
+     "-1",
+     "0",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 2,
+    "kind": "return_value",
+    "choices": [
+     "2",
+     "0",
+     "1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "rec_arg",
+    "choices": [
+     "n",
+     "n - 2",
+     "n - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "D05",
+   "D06"
+  ],
+  "fix": {
+   "code": "int factorial(int n) {\n    if (n == 0) return 1;\n    return n * factorial(n - 1);\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "1",
+    "h3": "n - 1"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q18_01",
+  "type": "complete_snippet",
+  "problem_id": "Q18",
+  "starter": "int array_sum_rec(int a[], int n) {\n    if (n <= ____) return 0;\n    return a[____] + array_sum_rec(a, ____);\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "base_cond",
+    "choices": [
+     "0",
+     "-1",
+     "1"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "index",
+    "choices": [
+     "n - 2",
+     "n",
+     "n - 1"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "rec_arg",
+    "choices": [
+     "n - 2",
+     "n",
+     "n - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "D05",
+   "D06",
+   "M08"
+  ],
+  "fix": {
+   "code": "int array_sum_rec(int a[], int n) {\n    if (n <= 0) return 0;\n    return a[n - 1] + array_sum_rec(a, n - 1);\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "n - 1",
+    "h3": "n - 1"
+   }
+  }
+ },
+ {
+  "item_id": "cs_Q18_02",
+  "type": "complete_snippet",
+  "problem_id": "Q18",
+  "starter": "int array_sum_rec(int a[], int n) {\n    if (n == 0) return ____;\n    return array_sum_rec(a, ____) + a[____];\n}",
+  "holes": [
+   {
+    "id": "h1",
+    "line": 2,
+    "kind": "return_value",
+    "choices": [
+     "1",
+     "-1",
+     "0"
+    ]
+   },
+   {
+    "id": "h2",
+    "line": 3,
+    "kind": "rec_arg",
+    "choices": [
+     "n - 1",
+     "n - 2",
+     "n"
+    ]
+   },
+   {
+    "id": "h3",
+    "line": 3,
+    "kind": "index",
+    "choices": [
+     "n - 2",
+     "n",
+     "n - 1"
+    ]
+   }
+  ],
+  "exposes": [
+   "D05",
+   "D06",
+   "M08"
+  ],
+  "fix": {
+   "code": "int array_sum_rec(int a[], int n) {\n    if (n == 0) return 0;\n    return array_sum_rec(a, n - 1) + a[n - 1];\n}",
+   "answers": {
+    "h1": "0",
+    "h2": "n - 1",
+    "h3": "n - 1"
+   }
+  }
+ },
+ {
+  "item_id": "fb_P01_m02_01",
+  "type": "fix_bug",
+  "problem_id": "P01",
+  "planted": "M02",
+  "op_id": "m02_reverse",
+  "starter": "void fire_shots(int n) {\n    for (int i = 0; i < n; i--) {\n        fire();\n    }\n}",
+  "bug_lines": [
+   2
+  ]
+ },
+ {
+  "item_id": "fb_P03_m03_01",
+  "type": "fix_bug",
+  "problem_id": "P03",
+  "planted": "M03",
+  "op_id": "m03_assign_in_loop",
+  "starter": "int total_energy(int cells[], int n) {\n    int total = 0;\n    int i = 0;\n    while (i < n) {\n        total = 0;\n        total = total + cells[i];\n        i++;\n    }\n    return total;\n}",
+  "bug_lines": [
+   5
+  ]
+ },
+ {
+  "item_id": "fb_P03_m05_01",
+  "type": "fix_bug",
+  "problem_id": "P03",
+  "planted": "M05",
+  "op_id": "m05_drop_init_acc",
+  "starter": "int total_energy(int cells[], int n) {\n    int total;\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        total += cells[i];\n    }\n    return total;\n}",
+  "bug_lines": [
+   2
+  ]
+ },
+ {
+  "item_id": "fb_P05_m05_01",
+  "type": "fix_bug",
+  "problem_id": "P05",
+  "planted": "M05",
+  "op_id": "m05_drop_init_counter",
+  "starter": "int charge_steps(int level, int target) {\n    int steps;\n    int now = level;\n    while (now < target) {\n        now += 7;\n        steps = steps + 1;\n    }\n    return steps;\n}",
+  "bug_lines": [
+   2
+  ]
+ },
+ {
+  "item_id": "fb_P06_m01_01",
+  "type": "fix_bug",
+  "problem_id": "P06",
+  "planted": "M01",
+  "op_id": "m01_start1_count",
+  "starter": "int power_up(int base, int k) {\n    int power = 1;\n    for (int i = 1; i < k; i++) {\n        power *= base;\n    }\n    return power;\n}",
+  "bug_lines": [
+   3
+  ]
+ },
+ {
+  "item_id": "fb_P07_m04_01",
+  "type": "fix_bug",
+  "problem_id": "P07",
+  "planted": "M04",
+  "op_id": "m04_cast_late",
+  "starter": "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    int i = 0;\n    while (i < n) {\n        sum = sum + tanks[i];\n        i++;\n    }\n    return (float) (sum / n);\n}",
+  "bug_lines": [
+   8
+  ]
+ },
+ {
+  "item_id": "fb_P09_m08_01",
+  "type": "fix_bug",
+  "problem_id": "P09",
+  "planted": "M08",
+  "op_id": "m08_first1",
+  "starter": "int max_shield(int s[], int n) {\n    int best = s[1];\n    int i = 1;\n    while (i < n) {\n        if (s[i] > best) {\n            best = s[i];\n        }\n        i++;\n    }\n    return best;\n}",
+  "bug_lines": [
+   2
+  ]
+ },
+ {
+  "item_id": "fb_P11_m06_01",
+  "type": "fix_bug",
+  "problem_id": "P11",
+  "planted": "M06",
+  "op_id": "m06_if_assign",
+  "starter": "int door_open(int code) {\n    if (code = 42) {\n        return 1;\n    }\n    return 0;\n}",
+  "bug_lines": [
+   2
+  ]
+ },
+ {
+  "item_id": "fb_P11_m06_02",
+  "type": "fix_bug",
+  "problem_id": "P11",
+  "planted": "M06",
+  "op_id": "m06_if_assign",
+  "starter": "int door_open(int code) {\n    int open = 0;\n    if (code = 42) {\n        open = 1;\n    }\n    return open;\n}",
+  "bug_lines": [
+   3
+  ]
+ },
+ {
+  "item_id": "fb_P13_m04_01",
+  "type": "fix_bug",
+  "problem_id": "P13",
+  "planted": "M04",
+  "op_id": "m04_cast_late",
+  "starter": "float fuel_percent(int fuel, int cap) {\n    return ((float) (fuel / cap)) * 100;\n}",
+  "bug_lines": [
+   2
+  ]
+ },
+ {
+  "item_id": "fb_P17_m07_01",
+  "type": "fix_bug",
+  "problem_id": "P17",
+  "planted": "M07",
+  "op_id": "m07_if_semi",
+  "starter": "int max_of_three(int a, int b, int c) {\n    if ((a >= b) && (a >= c))\n        ;\n    {\n        return a;\n    }\n    if (b >= c) {\n        return b;\n    }\n    return c;\n}",
+  "bug_lines": [
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "item_id": "fb_P17_m10_01",
+  "type": "fix_bug",
+  "problem_id": "P17",
+  "planted": "M10",
+  "op_id": "m10_printf_noreturn",
+  "starter": "int max_of_three(int a, int b, int c) {\n    int best = (a > b) ? (a) : (b);\n    printf(\"%d\", (best > c) ? (best) : (c));\n}",
+  "bug_lines": [
+   3
+  ]
+ },
+ {
+  "item_id": "fb_Q02_m03_01",
+  "type": "fix_bug",
+  "problem_id": "Q02",
+  "planted": "M03",
+  "op_id": "m03_decl_in_loop",
+  "starter": "int count_occurrences(int a[], int n, int x) {\n    int count = 0;\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        int count = 0;\n        if (a[i] == x) {\n            count = count + 1;\n        }\n    }\n    return count;\n}",
+  "bug_lines": [
+   5
+  ]
+ },
+ {
+  "item_id": "fb_Q05_d02_01",
+  "type": "fix_bug",
+  "problem_id": "Q05",
+  "planted": "D02",
+  "op_id": "d02_high_mid",
+  "starter": "int count_guesses(int secret, int lo, int hi) {\n    int guesses = 0;\n    while (lo <= hi) {\n        int mid = lo + ((hi - lo) / 2);\n        guesses++;\n        if (mid == secret) {\n            return guesses;\n        }\n        if (mid < secret) {\n            lo = mid + 1;\n        } else {\n            hi = mid;\n        }\n    }\n    return guesses;\n}",
+  "bug_lines": [
+   12
+  ]
+ },
+ {
+  "item_id": "fb_Q05_d02_02",
+  "type": "fix_bug",
+  "problem_id": "Q05",
+  "planted": "D02",
+  "op_id": "d02_low_mid",
+  "starter": "int count_guesses(int secret, int lo, int hi) {\n    int guesses = 0;\n    while (lo <= hi) {\n        int mid = (lo + hi) / 2;\n        guesses = guesses + 1;\n        if (mid == secret)\n            return guesses;\n        if (secret > mid)\n            lo = mid;\n        else\n            hi = mid - 1;\n    }\n    return guesses;\n}",
+  "bug_lines": [
+   9
+  ]
+ },
+ {
+  "item_id": "fb_Q06_d03_01",
+  "type": "fix_bug",
+  "problem_id": "Q06",
+  "planted": "D03",
+  "op_id": "d03_drop_temp",
+  "starter": "void bubble_sort(int a[], int n) {\n    int i = 0;\n    while (i < (n - 1)) {\n        int j = 0;\n        while (j < ((n - 1) - i)) {\n            if (a[j] > a[j + 1]) {\n                a[j] = a[j + 1];\n                a[j + 1] = a[j];\n            }\n            j++;\n        }\n        i++;\n    }\n}",
+  "bug_lines": [
+   6,
+   7,
+   8
+  ]
+ },
+ {
+  "item_id": "fb_Q06_d04_01",
+  "type": "fix_bug",
+  "problem_id": "Q06",
+  "planted": "D04",
+  "op_id": "d04_outer_once",
+  "starter": "void bubble_sort(int a[], int n) {\n    int i = 0;\n    while (i < 1) {\n        int j = 0;\n        while (j < ((n - 1) - i)) {\n            if (a[j] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n            j++;\n        }\n        i++;\n    }\n}",
+  "bug_lines": [
+   3
+  ]
+ },
+ {
+  "item_id": "fb_Q06_d04_02",
+  "type": "fix_bug",
+  "problem_id": "Q06",
+  "planted": "D04",
+  "op_id": "d04_outer_once",
+  "starter": "void bubble_sort(int a[], int n) {\n    for (int i = 0; i < 1; i++) {\n        for (int j = 0; j < (n - 1); j++) {\n            if (a[j] > a[j + 1]) {\n                int t = a[j + 1];\n                a[j + 1] = a[j];\n                a[j] = t;\n            }\n        }\n    }\n}",
+  "bug_lines": [
+   2
+  ]
+ },
+ {
+  "item_id": "fb_Q06_m01_01",
+  "type": "fix_bug",
+  "problem_id": "Q06",
+  "planted": "M01",
+  "op_id": "m01_start1_count",
+  "starter": "void bubble_sort(int a[], int n) {\n    for (int i = 1; i < (n - 1); i++) {\n        for (int j = 0; j < (n - 1); j++) {\n            if (a[j] > a[j + 1]) {\n                int t = a[j + 1];\n                a[j + 1] = a[j];\n                a[j] = t;\n            }\n        }\n    }\n}",
+  "bug_lines": [
+   2
+  ]
+ },
+ {
+  "item_id": "fb_Q06_m07_01",
+  "type": "fix_bug",
+  "problem_id": "Q06",
+  "planted": "M07",
+  "op_id": "m07_while_semi",
+  "starter": "void bubble_sort(int a[], int n) {\n    int i = 0;\n    while (i < (n - 1))\n        ;\n    {\n        int j = 0;\n        while (j < ((n - 1) - i)) {\n            if (a[j] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n            j++;\n        }\n        i++;\n    }\n}",
+  "bug_lines": [
+   3,
+   4,
+   5
+  ]
+ },
+ {
+  "item_id": "fb_Q07_d03_01",
+  "type": "fix_bug",
+  "problem_id": "Q07",
+  "planted": "D03",
+  "op_id": "d03_drop_temp",
+  "starter": "void selection_sort(int a[], int n) {\n    for (int i = 0; i < (n - 1); i++) {\n        int m = i;\n        for (int j = i + 1; j < n; j++) {\n            if (a[j] < a[m])\n                m = j;\n        }\n        a[i] = a[m];\n        a[m] = a[i];\n    }\n}",
+  "bug_lines": [
+   7,
+   8,
+   9
+  ]
+ },
+ {
+  "item_id": "fb_Q08_d01_01",
+  "type": "fix_bug",
+  "problem_id": "Q08",
+  "planted": "D01",
+  "op_id": "d01_else_return",
+  "starter": "int is_sorted(int a[], int n) {\n    int i = 0;\n    while (i < (n - 1)) {\n        if (a[i] > a[i + 1])\n            return 0;\n        else\n            return 0;\n        i++;\n    }\n    return 1;\n}",
+  "bug_lines": [
+   6,
+   7
+  ]
+ },
+ {
+  "item_id": "fb_Q09_m08_01",
+  "type": "fix_bug",
+  "problem_id": "Q09",
+  "planted": "M08",
+  "op_id": "m08_first1",
+  "starter": "int second_largest(int a[], int n) {\n    int first = (a[0] > a[1]) ? (a[0]) : (a[1]);\n    int second = (a[1] > a[1]) ? (a[1]) : (a[0]);\n    for (int i = 2; i < n; i++) {\n        if (a[i] > first) {\n            second = first;\n            first = a[i];\n        } else\n            if (a[i] > second) {\n            second = a[i];\n        }\n    }\n    return second;\n}",
+  "bug_lines": [
+   3
+  ]
+ },
+ {
+  "item_id": "fb_Q12_m02_01",
+  "type": "fix_bug",
+  "problem_id": "Q12",
+  "planted": "M02",
+  "op_id": "m02_drop_update",
+  "starter": "int pair_sum_exists(int a[], int n, int target) {\n    for (int i = 0; i < n; i++) {\n        for (int j = i + 1; j < n;) {\n            if ((a[i] + a[j]) == target)\n                return 1;\n        }\n    }\n    return 0;\n}",
+  "bug_lines": [
+   3
+  ]
+ },
+ {
+  "item_id": "fb_Q14_d08_01",
+  "type": "fix_bug",
+  "problem_id": "Q14",
+  "planted": "D08",
+  "op_id": "d08_str_literal",
+  "starter": "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i] != '\\0') {\n        char ch = s[i];\n        if (((((ch == \"a\") || (ch == 'e')) || (ch == 'i')) || (ch == 'o')) || (ch == 'u')) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+  "bug_lines": [
+   6
+  ]
+ },
+ {
+  "item_id": "fb_Q14_d08_02",
+  "type": "fix_bug",
+  "problem_id": "Q14",
+  "planted": "D08",
+  "op_id": "d08_str_literal",
+  "starter": "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i]) {\n        int vowel = ((((s[i] == 'a') || (s[i] == 'e')) || (s[i] == 'i')) || (s[i] == \"o\")) || (s[i] == 'u');\n        if (vowel)\n            count = count + 1;\n        i++;\n    }\n    return count;\n}",
+  "bug_lines": [
+   5
+  ]
+ },
+ {
+  "item_id": "fb_Q15_d01_01",
+  "type": "fix_bug",
+  "problem_id": "Q15",
+  "planted": "D01",
+  "op_id": "d01_else_return",
+  "starter": "int is_palindrome(char s[]) {\n    int n = 0;\n    for (n = 0; s[n] != '\\0'; n++) {\n    }\n    for (int i = 0; i < (n / 2); i++) {\n        if (s[i] != s[(n - 1) - i])\n            return 0;\n        else\n            return 0;\n    }\n    return 1;\n}",
+  "bug_lines": [
+   8,
+   9
+  ]
+ },
+ {
+  "item_id": "fb_Q15_m10_01",
+  "type": "fix_bug",
+  "problem_id": "Q15",
+  "planted": "M10",
+  "op_id": "m10_print_bool",
+  "starter": "int is_palindrome(char s[]) {\n    int n = 0;\n    while (s[n] != '\\0')\n        n++;\n    int i = 0;\n    int j = n - 1;\n    while (i < j) {\n        if (s[i] != s[j])\n            printf(\"no\");\n        i++;\n        j--;\n    }\n    return 1;\n}",
+  "bug_lines": [
+   9
+  ]
+ },
+ {
+  "item_id": "fb_Q16_d06_01",
+  "type": "fix_bug",
+  "problem_id": "Q16",
+  "planted": "D06",
+  "op_id": "d06_same_arg",
+  "starter": "int sum_digits(int n) {\n    if (n == 0)\n        return 0;\n    return (n % 10) + sum_digits(n % 10);\n}",
+  "bug_lines": [
+   4
+  ]
+ },
+ {
+  "item_id": "fb_Q16_d07_01",
+  "type": "fix_bug",
+  "problem_id": "Q16",
+  "planted": "D07",
+  "op_id": "d07_discard",
+  "starter": "int sum_digits(int n) {\n    if (n == 0)\n        return 0;\n    sum_digits(n / 10);\n    return n % 10;\n}",
+  "bug_lines": [
+   4,
+   5
+  ]
+ },
+ {
+  "item_id": "fb_Q17_d05_01",
+  "type": "fix_bug",
+  "problem_id": "Q17",
+  "planted": "D05",
+  "op_id": "d05_drop_base",
+  "starter": "int factorial(int n) {\n    return n * factorial(n - 1);\n}",
+  "bug_lines": [
+   1,
+   2
+  ]
+ },
+ {
+  "item_id": "fb_Q17_d07_01",
+  "type": "fix_bug",
+  "problem_id": "Q17",
+  "planted": "D07",
+  "op_id": "d07_discard",
+  "starter": "int factorial(int n) {\n    if (n == 0)\n        return 1;\n    factorial(n - 1);\n    return n;\n}",
+  "bug_lines": [
+   4,
+   5
+  ]
+ },
+ {
+  "item_id": "fb_Q18_d05_01",
+  "type": "fix_bug",
+  "problem_id": "Q18",
+  "planted": "D05",
+  "op_id": "d05_unreachable_base",
+  "starter": "int array_sum_rec(int a[], int n) {\n    if (n == 0)\n        return 0;\n    return array_sum_rec(a, n - 2) + a[n - 1];\n}",
+  "bug_lines": [
+   4
+  ]
+ },
+ {
+  "item_id": "fb_Q18_d06_01",
+  "type": "fix_bug",
+  "problem_id": "Q18",
+  "planted": "D06",
+  "op_id": "d06_grow_arg",
+  "starter": "int array_sum_rec(int a[], int n) {\n    if (n == 0)\n        return 0;\n    return array_sum_rec(a, n + 1) + a[n - 1];\n}",
+  "bug_lines": [
+   4
+  ]
+ },
+ {
+  "item_id": "dl_P01_ok_01",
+  "type": "debug_line",
+  "problem_id": "P01",
+  "planted": null,
+  "op_id": null,
+  "code": "void fire_shots(int n) {\n    for (int i = 0; i < n; i++) {\n        fire();\n    }\n}",
+  "bug_lines": [],
+  "allow_no_bug": true,
+  "explain": "There is no bug: this program passes every test.",
+  "fix": null
+ },
+ {
+  "item_id": "dl_P04_m05_01",
+  "type": "debug_line",
+  "problem_id": "P04",
+  "planted": "M05",
+  "op_id": "m05_drop_init_counter",
+  "code": "int count_overheated(int t[], int n, int limit) {\n    int count;\n    int i = 0;\n    while (i < n) {\n        if (t[i] > limit) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+  "bug_lines": [
+   2
+  ],
+  "allow_no_bug": true,
+  "explain": "The counter is never given a starting value, so it begins with garbage. It should read: int count = 0;",
+  "fix": {
+   "code": "int count_overheated(int t[], int n, int limit) {\n    int count = 0;\n    int i = 0;\n    while (i < n) {\n        if (t[i] > limit) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+   "changed_lines": [
+    2
+   ]
+  }
+ },
+ {
+  "item_id": "dl_P04_ok_01",
+  "type": "debug_line",
+  "problem_id": "P04",
+  "planted": null,
+  "op_id": null,
+  "code": "int count_overheated(int t[], int n, int limit) {\n    int count = 0;\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        if (t[i] > limit) {\n            count = count + 1;\n        }\n    }\n    return count;\n}",
+  "bug_lines": [],
+  "allow_no_bug": true,
+  "explain": "There is no bug: this program passes every test.",
+  "fix": null
+ },
+ {
+  "item_id": "dl_P05_m02_01",
+  "type": "debug_line",
+  "problem_id": "P05",
+  "planted": "M02",
+  "op_id": "m02_drop_update",
+  "code": "int charge_steps(int level, int target) {\n    int steps = 0;\n    for (; level < target; steps++) {\n    }\n    return steps;\n}",
+  "bug_lines": [
+   3
+  ],
+  "allow_no_bug": true,
+  "explain": "The loop variable is never changed, so the loop never ends. It should read: level = level + 7;",
+  "fix": {
+   "code": "int charge_steps(int level, int target) {\n    int steps = 0;\n    for (; level < target; steps++) {\n        level = level + 7;\n    }\n    return steps;\n}",
+   "changed_lines": [
+    4
+   ]
+  }
+ },
+ {
+  "item_id": "dl_P06_m02_01",
+  "type": "debug_line",
+  "problem_id": "P06",
+  "planted": "M02",
+  "op_id": "m02_reverse",
+  "code": "int power_up(int base, int k) {\n    int power = 1;\n    for (int i = 0; i < k; i--) {\n        power *= base;\n    }\n    return power;\n}",
+  "bug_lines": [
+   3
+  ],
+  "allow_no_bug": true,
+  "explain": "The loop variable moves the wrong way, so the test never becomes false. It should read: for (int i = 0; i < k; i++) {",
+  "fix": {
+   "code": "int power_up(int base, int k) {\n    int power = 1;\n    for (int i = 0; i < k; i++) {\n        power *= base;\n    }\n    return power;\n}",
+   "changed_lines": [
+    3
+   ]
+  }
+ },
+ {
+  "item_id": "dl_P06_ok_01",
+  "type": "debug_line",
+  "problem_id": "P06",
+  "planted": null,
+  "op_id": null,
+  "code": "int power_up(int base, int k) {\n    int power = 1;\n    for (int i = 0; i < k; i++) {\n        power *= base;\n    }\n    return power;\n}",
+  "bug_lines": [],
+  "allow_no_bug": true,
+  "explain": "There is no bug: this program passes every test.",
+  "fix": null
+ },
+ {
+  "item_id": "dl_P07_m03_01",
+  "type": "debug_line",
+  "problem_id": "P07",
+  "planted": "M03",
+  "op_id": "m03_decl_in_loop",
+  "code": "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        int sum = 0;\n        sum += tanks[i];\n    }\n    return ((float) sum) / ((float) n);\n}",
+  "bug_lines": [
+   5
+  ],
+  "allow_no_bug": true,
+  "explain": "A new copy of the variable is made on every pass, so the running total is lost. It should read: for (i = n - 1; i >= 0; i--) {",
+  "fix": {
+   "code": "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        sum += tanks[i];\n    }\n    return ((float) sum) / ((float) n);\n}",
+   "changed_lines": [
+    4
+   ]
+  }
+ },
+ {
+  "item_id": "dl_P07_m04_01",
+  "type": "debug_line",
+  "problem_id": "P07",
+  "planted": "M04",
+  "op_id": "m04_drop_cast",
+  "code": "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    int i = 0;\n    while (i < n) {\n        sum = sum + tanks[i];\n        i++;\n    }\n    return sum / n;\n}",
+  "bug_lines": [
+   8
+  ],
+  "allow_no_bug": true,
+  "explain": "Both operands are int, so the division drops the fraction. It should read: return sum / ((float) n);",
+  "fix": {
+   "code": "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    int i = 0;\n    while (i < n) {\n        sum = sum + tanks[i];\n        i++;\n    }\n    return sum / ((float) n);\n}",
+   "changed_lines": [
+    8
+   ]
+  }
+ },
+ {
+  "item_id": "dl_P10_m03_01",
+  "type": "debug_line",
+  "problem_id": "P10",
+  "planted": "M03",
+  "op_id": "m03_decl_in_loop",
+  "code": "int sum_first_k(int a[], int n, int k) {\n    int total = 0;\n    int i;\n    int stop = k;\n    if (stop > n) {\n        stop = n;\n    }\n    for (i = 0; i < stop; i++) {\n        int total = 0;\n        total += a[i];\n    }\n    return total;\n}",
+  "bug_lines": [
+   9
+  ],
+  "allow_no_bug": true,
+  "explain": "A new copy of the variable is made on every pass, so the running total is lost. It should read: for (i = 0; i < stop; i++) {",
+  "fix": {
+   "code": "int sum_first_k(int a[], int n, int k) {\n    int total = 0;\n    int i;\n    int stop = k;\n    if (stop > n) {\n        stop = n;\n    }\n    for (i = 0; i < stop; i++) {\n        total += a[i];\n    }\n    return total;\n}",
+   "changed_lines": [
+    8
+   ]
+  }
+ },
+ {
+  "item_id": "dl_P11_m07_01",
+  "type": "debug_line",
+  "problem_id": "P11",
+  "planted": "M07",
+  "op_id": "m07_if_semi",
+  "code": "int door_open(int code) {\n    int open = 0;\n    if (code == 42)\n        ;\n    {\n        open = 1;\n    }\n    return open;\n}",
+  "bug_lines": [
+   3,
+   4,
+   5
+  ],
+  "allow_no_bug": true,
+  "explain": "A stray semicolon ends the if, so the body always runs. It should read: if (code == 42) {",
+  "fix": {
+   "code": "int door_open(int code) {\n    int open = 0;\n    if (code == 42) {\n        open = 1;\n    }\n    return open;\n}",
+   "changed_lines": [
+    3
+   ]
+  }
+ },
+ {
+  "item_id": "dl_P11_m10_01",
+  "type": "debug_line",
+  "problem_id": "P11",
+  "planted": "M10",
+  "op_id": "m10_printf_noreturn",
+  "code": "int door_open(int code) {\n    printf(\"%d\", (code == 42) ? (1) : (0));\n}",
+  "bug_lines": [
+   2
+  ],
+  "allow_no_bug": true,
+  "explain": "The function prints the answer instead of returning it. It should read: return (code == 42) ? (1) : (0);",
+  "fix": {
+   "code": "int door_open(int code) {\n    return (code == 42) ? (1) : (0);\n}",
+   "changed_lines": [
+    2
+   ]
+  }
+ },
+ {
+  "item_id": "dl_P12_m07_01",
+  "type": "debug_line",
+  "problem_id": "P12",
+  "planted": "M07",
+  "op_id": "m07_if_semi",
+  "code": "int shield_mode(int energy) {\n    int mode = 2;\n    if (energy < 70) {\n        mode = 1;\n    }\n    if (energy < 30)\n        ;\n    {\n        mode = 0;\n    }\n    return mode;\n}",
+  "bug_lines": [
+   6,
+   7,
+   8
+  ],
+  "allow_no_bug": true,
+  "explain": "A stray semicolon ends the if, so the body always runs. It should read: if (energy < 30) {",
+  "fix": {
+   "code": "int shield_mode(int energy) {\n    int mode = 2;\n    if (energy < 70) {\n        mode = 1;\n    }\n    if (energy < 30) {\n        mode = 0;\n    }\n    return mode;\n}",
+   "changed_lines": [
+    6
+   ]
+  }
+ },
+ {
+  "item_id": "dl_P13_m04_01",
+  "type": "debug_line",
+  "problem_id": "P13",
+  "planted": "M04",
+  "op_id": "m04_drop_cast",
+  "code": "float fuel_percent(int fuel, int cap) {\n    return (fuel / cap) * 100;\n}",
+  "bug_lines": [
+   2
+  ],
+  "allow_no_bug": true,
+  "explain": "Both operands are int, so the division drops the fraction. It should read: return (((float) fuel) / cap) * 100;",
+  "fix": {
+   "code": "float fuel_percent(int fuel, int cap) {\n    return (((float) fuel) / cap) * 100;\n}",
+   "changed_lines": [
+    2
+   ]
+  }
+ },
+ {
+  "item_id": "dl_P14_ok_01",
+  "type": "debug_line",
+  "problem_id": "P14",
+  "planted": null,
+  "op_id": null,
+  "code": "int distance(int a, int b) {\n    return (a >= b) ? (a - b) : (b - a);\n}",
+  "bug_lines": [],
+  "allow_no_bug": true,
+  "explain": "There is no bug: this program passes every test.",
+  "fix": null
+ },
+ {
+  "item_id": "dl_P16_ok_01",
+  "type": "debug_line",
+  "problem_id": "P16",
+  "planted": null,
+  "op_id": null,
+  "code": "int in_range(int x, int lo, int hi) {\n    int inside = 0;\n    if (x > lo) {\n        if (x < hi) {\n            inside = 1;\n        }\n    }\n    return inside;\n}",
+  "bug_lines": [],
+  "allow_no_bug": true,
+  "explain": "There is no bug: this program passes every test.",
+  "fix": null
+ },
+ {
+  "item_id": "dl_Q01_d01_01",
+  "type": "debug_line",
+  "problem_id": "Q01",
+  "planted": "D01",
+  "op_id": "d01_else_return",
+  "code": "int linear_search(int a[], int n, int x) {\n    int i = 0;\n    while (i < n) {\n        if (a[i] == x) {\n            return i;\n        } else\n            return -1;\n        i++;\n    }\n    return -1;\n}",
+  "bug_lines": [
+   6,
+   7
+  ],
+  "allow_no_bug": true,
+  "explain": "The else branch answers after the first item, so the rest are never looked at. It should read: }",
+  "fix": {
+   "code": "int linear_search(int a[], int n, int x) {\n    int i = 0;\n    while (i < n) {\n        if (a[i] == x) {\n            return i;\n        }\n        i++;\n    }\n    return -1;\n}",
+   "changed_lines": [
+    6
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q01_m01_01",
+  "type": "debug_line",
+  "problem_id": "Q01",
+  "planted": "M01",
+  "op_id": "m01_nminus1",
+  "code": "int linear_search(int a[], int n, int x) {\n    for (int i = 0; i < (n - 1); i++) {\n        if (a[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}",
+  "bug_lines": [
+   2
+  ],
+  "allow_no_bug": true,
+  "explain": "The loop stops one step early, so the last item is never visited. It should read: for (int i = 0; i < n; i++) {",
+  "fix": {
+   "code": "int linear_search(int a[], int n, int x) {\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}",
+   "changed_lines": [
+    2
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q01_ok_01",
+  "type": "debug_line",
+  "problem_id": "Q01",
+  "planted": null,
+  "op_id": null,
+  "code": "int linear_search(int a[], int n, int x) {\n    int i = 0;\n    while (i < n) {\n        if (a[i] == x) {\n            return i;\n        }\n        i++;\n    }\n    return -1;\n}",
+  "bug_lines": [],
+  "allow_no_bug": true,
+  "explain": "There is no bug: this program passes every test.",
+  "fix": null
+ },
+ {
+  "item_id": "dl_Q03_d02_01",
+  "type": "debug_line",
+  "problem_id": "Q03",
+  "planted": "D02",
+  "op_id": "d02_high_mid",
+  "code": "int binary_search(int a[], int n, int x) {\n    int low = 0;\n    int high = n - 1;\n    for (; low <= high;) {\n        int mid = low + ((high - low) / 2);\n        if (a[mid] == x) {\n            return mid;\n        }\n        if (x < a[mid]) {\n            high = mid;\n        } else {\n            low = mid + 1;\n        }\n    }\n    return -1;\n}",
+  "bug_lines": [
+   10
+  ],
+  "allow_no_bug": true,
+  "explain": "high = mid never shrinks the range, so the search can stay in one place forever. It should read: high = mid - 1;",
+  "fix": {
+   "code": "int binary_search(int a[], int n, int x) {\n    int low = 0;\n    int high = n - 1;\n    for (; low <= high;) {\n        int mid = low + ((high - low) / 2);\n        if (a[mid] == x) {\n            return mid;\n        }\n        if (x < a[mid]) {\n            high = mid - 1;\n        } else {\n            low = mid + 1;\n        }\n    }\n    return -1;\n}",
+   "changed_lines": [
+    10
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q03_d02_02",
+  "type": "debug_line",
+  "problem_id": "Q03",
+  "planted": "D02",
+  "op_id": "d02_low_mid",
+  "code": "int binary_search(int a[], int n, int x) {\n    int low = 0;\n    int high = n - 1;\n    while (low <= high) {\n        int mid = low + ((high - low) / 2);\n        if (a[mid] == x) {\n            return mid;\n        }\n        if (a[mid] < x) {\n            low = mid;\n        } else {\n            high = mid - 1;\n        }\n    }\n    return -1;\n}",
+  "bug_lines": [
+   10
+  ],
+  "allow_no_bug": true,
+  "explain": "low = mid never shrinks the range, so the search can stay in one place forever. It should read: low = mid + 1;",
+  "fix": {
+   "code": "int binary_search(int a[], int n, int x) {\n    int low = 0;\n    int high = n - 1;\n    while (low <= high) {\n        int mid = low + ((high - low) / 2);\n        if (a[mid] == x) {\n            return mid;\n        }\n        if (a[mid] < x) {\n            low = mid + 1;\n        } else {\n            high = mid - 1;\n        }\n    }\n    return -1;\n}",
+   "changed_lines": [
+    10
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q06_d04_01",
+  "type": "debug_line",
+  "problem_id": "Q06",
+  "planted": "D04",
+  "op_id": "d04_outer_once",
+  "code": "void bubble_sort(int a[], int n) {\n    for (int i = 0; i < 1; i++) {\n        for (int j = 0; j < ((n - 1) - i); j++) {\n            if (a[j] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n        }\n    }\n}",
+  "bug_lines": [
+   2
+  ],
+  "allow_no_bug": true,
+  "explain": "The outer loop stops after one pass, so the array is not sorted. It should read: for (int i = 0; i < (n - 1); i++) {",
+  "fix": {
+   "code": "void bubble_sort(int a[], int n) {\n    for (int i = 0; i < (n - 1); i++) {\n        for (int j = 0; j < ((n - 1) - i); j++) {\n            if (a[j] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n        }\n    }\n}",
+   "changed_lines": [
+    2
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q06_m08_01",
+  "type": "debug_line",
+  "problem_id": "Q06",
+  "planted": "M08",
+  "op_id": "m08_iplus1",
+  "code": "void bubble_sort(int a[], int n) {\n    int i = 0;\n    while (i < (n - 1)) {\n        int j = 0;\n        while (j < ((n - 1) - i)) {\n            if (a[j + 1] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n            j++;\n        }\n        i++;\n    }\n}",
+  "bug_lines": [
+   6
+  ],
+  "allow_no_bug": true,
+  "explain": "The index is one cell off, so the code reads past the end of the array. It should read: if (a[j] > a[j + 1]) {",
+  "fix": {
+   "code": "void bubble_sort(int a[], int n) {\n    int i = 0;\n    while (i < (n - 1)) {\n        int j = 0;\n        while (j < ((n - 1) - i)) {\n            if (a[j] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n            j++;\n        }\n        i++;\n    }\n}",
+   "changed_lines": [
+    6
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q07_d04_01",
+  "type": "debug_line",
+  "problem_id": "Q07",
+  "planted": "D04",
+  "op_id": "d04_outer_once",
+  "code": "void selection_sort(int a[], int n) {\n    for (int i = 0; i < 1; i++) {\n        int m = i;\n        for (int j = i + 1; j < n; j++) {\n            if (a[j] < a[m])\n                m = j;\n        }\n        if (m != i) {\n            int t = a[m];\n            a[m] = a[i];\n            a[i] = t;\n        }\n    }\n}",
+  "bug_lines": [
+   2
+  ],
+  "allow_no_bug": true,
+  "explain": "The outer loop stops after one pass, so the array is not sorted. It should read: for (int i = 0; i < (n - 1); i++) {",
+  "fix": {
+   "code": "void selection_sort(int a[], int n) {\n    for (int i = 0; i < (n - 1); i++) {\n        int m = i;\n        for (int j = i + 1; j < n; j++) {\n            if (a[j] < a[m])\n                m = j;\n        }\n        if (m != i) {\n            int t = a[m];\n            a[m] = a[i];\n            a[i] = t;\n        }\n    }\n}",
+   "changed_lines": [
+    2
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q08_m08_01",
+  "type": "debug_line",
+  "problem_id": "Q08",
+  "planted": "M08",
+  "op_id": "m08_iplus1",
+  "code": "int is_sorted(int a[], int n) {\n    for (int i = 0; i < (n - 1); i++) {\n        if (a[i + 1] > a[i + 1]) {\n            return 0;\n        }\n    }\n    return 1;\n}",
+  "bug_lines": [
+   3
+  ],
+  "allow_no_bug": true,
+  "explain": "The index is one cell off, so the code reads past the end of the array. It should read: if (a[i] > a[i + 1]) {",
+  "fix": {
+   "code": "int is_sorted(int a[], int n) {\n    for (int i = 0; i < (n - 1); i++) {\n        if (a[i] > a[i + 1]) {\n            return 0;\n        }\n    }\n    return 1;\n}",
+   "changed_lines": [
+    3
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q08_m10_01",
+  "type": "debug_line",
+  "problem_id": "Q08",
+  "planted": "M10",
+  "op_id": "m10_print_bool",
+  "code": "int is_sorted(int a[], int n) {\n    int i = 0;\n    while (i < (n - 1)) {\n        if (a[i] > a[i + 1])\n            printf(\"no\");\n        i++;\n    }\n    return 1;\n}",
+  "bug_lines": [
+   5
+  ],
+  "allow_no_bug": true,
+  "explain": "The function prints the answer instead of returning it. It should read: return 0;",
+  "fix": {
+   "code": "int is_sorted(int a[], int n) {\n    int i = 0;\n    while (i < (n - 1)) {\n        if (a[i] > a[i + 1])\n            return 0;\n        i++;\n    }\n    return 1;\n}",
+   "changed_lines": [
+    5
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q08_ok_01",
+  "type": "debug_line",
+  "problem_id": "Q08",
+  "planted": null,
+  "op_id": null,
+  "code": "int is_sorted(int a[], int n) {\n    int i = 0;\n    while (i < (n - 1)) {\n        if (a[i] > a[i + 1])\n            return 0;\n        i++;\n    }\n    return 1;\n}",
+  "bug_lines": [],
+  "allow_no_bug": true,
+  "explain": "There is no bug: this program passes every test.",
+  "fix": null
+ },
+ {
+  "item_id": "dl_Q10_d03_01",
+  "type": "debug_line",
+  "problem_id": "Q10",
+  "planted": "D03",
+  "op_id": "d03_drop_temp",
+  "code": "void reverse(int a[], int n) {\n    for (int i = 0; i < (n / 2); i++) {\n        a[i] = a[(n - 1) - i];\n        a[(n - 1) - i] = a[i];\n    }\n}",
+  "bug_lines": [
+   2,
+   3,
+   4
+  ],
+  "allow_no_bug": true,
+  "explain": "Without the temporary, the first assignment overwrites a value the swap still needs. It should read: int t = a[i]; a[(n - 1) - i] = t;",
+  "fix": {
+   "code": "void reverse(int a[], int n) {\n    for (int i = 0; i < (n / 2); i++) {\n        int t = a[i];\n        a[i] = a[(n - 1) - i];\n        a[(n - 1) - i] = t;\n    }\n}",
+   "changed_lines": [
+    3,
+    5
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q11_d03_01",
+  "type": "debug_line",
+  "problem_id": "Q11",
+  "planted": "D03",
+  "op_id": "d03_rotate_no_save",
+  "code": "void rotate_left(int a[], int n) {\n    if (n <= 1)\n        return;\n    int i;\n    for (i = 1; i < n; i++) {\n        a[i - 1] = a[i];\n    }\n    a[n - 1] = a[0];\n}",
+  "bug_lines": [
+   3,
+   4,
+   8
+  ],
+  "allow_no_bug": true,
+  "explain": "The first element is not saved before the shift overwrites it. It should read: int saved = a[0]; a[n - 1] = saved;",
+  "fix": {
+   "code": "void rotate_left(int a[], int n) {\n    if (n <= 1)\n        return;\n    int saved = a[0];\n    int i;\n    for (i = 1; i < n; i++) {\n        a[i - 1] = a[i];\n    }\n    a[n - 1] = saved;\n}",
+   "changed_lines": [
+    4,
+    9
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q12_d01_01",
+  "type": "debug_line",
+  "problem_id": "Q12",
+  "planted": "D01",
+  "op_id": "d01_else_return",
+  "code": "int pair_sum_exists(int a[], int n, int target) {\n    int i = 0;\n    int j = n - 1;\n    while (i < j) {\n        int sum = a[i] + a[j];\n        if (sum == target)\n            return 1;\n        else\n            return 0;\n        if (sum < target)\n            i++;\n        else\n            j--;\n    }\n    return 0;\n}",
+  "bug_lines": [
+   8,
+   9
+  ],
+  "allow_no_bug": true,
+  "explain": "The else branch answers after the first item, so the rest are never looked at. It should read: return 1;",
+  "fix": {
+   "code": "int pair_sum_exists(int a[], int n, int target) {\n    int i = 0;\n    int j = n - 1;\n    while (i < j) {\n        int sum = a[i] + a[j];\n        if (sum == target)\n            return 1;\n        if (sum < target)\n            i++;\n        else\n            j--;\n    }\n    return 0;\n}",
+   "changed_lines": [
+    7
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q12_m01_01",
+  "type": "debug_line",
+  "problem_id": "Q12",
+  "planted": "M01",
+  "op_id": "m01_nminus1",
+  "code": "int pair_sum_exists(int a[], int n, int target) {\n    int i = 0;\n    int j = n - 1;\n    while (i < (j - 1)) {\n        if ((a[i] + a[j]) == target)\n            return 1;\n        if ((a[i] + a[j]) < target)\n            i = i + 1;\n        else\n            j = j - 1;\n    }\n    return 0;\n}",
+  "bug_lines": [
+   4
+  ],
+  "allow_no_bug": true,
+  "explain": "The loop stops one step early, so the last item is never visited. It should read: while (i < j) {",
+  "fix": {
+   "code": "int pair_sum_exists(int a[], int n, int target) {\n    int i = 0;\n    int j = n - 1;\n    while (i < j) {\n        if ((a[i] + a[j]) == target)\n            return 1;\n        if ((a[i] + a[j]) < target)\n            i = i + 1;\n        else\n            j = j - 1;\n    }\n    return 0;\n}",
+   "changed_lines": [
+    4
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q13_m05_01",
+  "type": "debug_line",
+  "problem_id": "Q13",
+  "planted": "M05",
+  "op_id": "m05_drop_init_counter",
+  "code": "int str_length(char s[]) {\n    int n;\n    while (s[n]) {\n        n = n + 1;\n    }\n    return n;\n}",
+  "bug_lines": [
+   2
+  ],
+  "allow_no_bug": true,
+  "explain": "The counter is never given a starting value, so it begins with garbage. It should read: int n = 0;",
+  "fix": {
+   "code": "int str_length(char s[]) {\n    int n = 0;\n    while (s[n]) {\n        n = n + 1;\n    }\n    return n;\n}",
+   "changed_lines": [
+    2
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q14_d08_01",
+  "type": "debug_line",
+  "problem_id": "Q14",
+  "planted": "D08",
+  "op_id": "d08_str_literal",
+  "code": "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i] != '\\0') {\n        char ch = s[i];\n        if (((((ch == 'a') || (ch == 'e')) || (ch == \"i\")) || (ch == 'o')) || (ch == 'u')) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+  "bug_lines": [
+   6
+  ],
+  "allow_no_bug": true,
+  "explain": "== compares addresses, not text; use a loop over the characters. It should read: if (((((ch == 'a') || (ch == 'e')) || (ch == 'i')) || (ch == 'o')) || (ch == 'u')) {",
+  "fix": {
+   "code": "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i] != '\\0') {\n        char ch = s[i];\n        if (((((ch == 'a') || (ch == 'e')) || (ch == 'i')) || (ch == 'o')) || (ch == 'u')) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+   "changed_lines": [
+    6
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q14_d08_02",
+  "type": "debug_line",
+  "problem_id": "Q14",
+  "planted": "D08",
+  "op_id": "d08_str_literal",
+  "code": "int count_vowels(char s[]) {\n    int count = 0;\n    for (int i = 0; s[i] != '\\0'; i++) {\n        if (((((s[i] == \"a\") || (s[i] == 'e')) || (s[i] == 'i')) || (s[i] == 'o')) || (s[i] == 'u')) {\n            count++;\n        }\n    }\n    return count;\n}",
+  "bug_lines": [
+   4
+  ],
+  "allow_no_bug": true,
+  "explain": "== compares addresses, not text; use a loop over the characters. It should read: if (((((s[i] == 'a') || (s[i] == 'e')) || (s[i] == 'i')) || (s[i] == 'o')) || (s[i] == 'u')) {",
+  "fix": {
+   "code": "int count_vowels(char s[]) {\n    int count = 0;\n    for (int i = 0; s[i] != '\\0'; i++) {\n        if (((((s[i] == 'a') || (s[i] == 'e')) || (s[i] == 'i')) || (s[i] == 'o')) || (s[i] == 'u')) {\n            count++;\n        }\n    }\n    return count;\n}",
+   "changed_lines": [
+    4
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q14_m06_01",
+  "type": "debug_line",
+  "problem_id": "Q14",
+  "planted": "M06",
+  "op_id": "m06_if_assign",
+  "code": "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i] != '\\0') {\n        char ch = s[i];\n        if (((((ch == 'a') || (ch == 'e')) || (ch == 'i')) || (ch = 'o')) || (ch == 'u')) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+  "bug_lines": [
+   6
+  ],
+  "allow_no_bug": true,
+  "explain": "= assigns; == compares. The condition overwrites the variable. It should read: if (((((ch == 'a') || (ch == 'e')) || (ch == 'i')) || (ch == 'o')) || (ch == 'u')) {",
+  "fix": {
+   "code": "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i] != '\\0') {\n        char ch = s[i];\n        if (((((ch == 'a') || (ch == 'e')) || (ch == 'i')) || (ch == 'o')) || (ch == 'u')) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+   "changed_lines": [
+    6
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q14_m06_02",
+  "type": "debug_line",
+  "problem_id": "Q14",
+  "planted": "M06",
+  "op_id": "m06_if_assign",
+  "code": "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i] != '\\0') {\n        char ch = s[i];\n        if (((((ch == 'a') || (ch = 'e')) || (ch == 'i')) || (ch == 'o')) || (ch == 'u')) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+  "bug_lines": [
+   6
+  ],
+  "allow_no_bug": true,
+  "explain": "= assigns; == compares. The condition overwrites the variable. It should read: if (((((ch == 'a') || (ch == 'e')) || (ch == 'i')) || (ch == 'o')) || (ch == 'u')) {",
+  "fix": {
+   "code": "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i] != '\\0') {\n        char ch = s[i];\n        if (((((ch == 'a') || (ch == 'e')) || (ch == 'i')) || (ch == 'o')) || (ch == 'u')) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+   "changed_lines": [
+    6
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q16_d05_01",
+  "type": "debug_line",
+  "problem_id": "Q16",
+  "planted": "D05",
+  "op_id": "d05_drop_base",
+  "code": "int sum_digits(int n) {\n    return (n % 10) + sum_digits(n / 10);\n}",
+  "bug_lines": [
+   1,
+   2
+  ],
+  "allow_no_bug": true,
+  "explain": "There is no base case, so the recursion never stops. It should read: if (n < 10) return n;",
+  "fix": {
+   "code": "int sum_digits(int n) {\n    if (n < 10)\n        return n;\n    return (n % 10) + sum_digits(n / 10);\n}",
+   "changed_lines": [
+    2,
+    3
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q17_d06_01",
+  "type": "debug_line",
+  "problem_id": "Q17",
+  "planted": "D06",
+  "op_id": "d06_grow_arg",
+  "code": "int factorial(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * factorial(n + 1);\n}",
+  "bug_lines": [
+   5
+  ],
+  "allow_no_bug": true,
+  "explain": "The recursive call moves away from the base case. It should read: return n * factorial(n - 1);",
+  "fix": {
+   "code": "int factorial(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * factorial(n - 1);\n}",
+   "changed_lines": [
+    5
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q17_d07_01",
+  "type": "debug_line",
+  "problem_id": "Q17",
+  "planted": "D07",
+  "op_id": "d07_discard",
+  "code": "int factorial(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    factorial(n - 1);\n    return n;\n}",
+  "bug_lines": [
+   5,
+   6
+  ],
+  "allow_no_bug": true,
+  "explain": "The result of the recursive call is thrown away. It should read: return n * factorial(n - 1);",
+  "fix": {
+   "code": "int factorial(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * factorial(n - 1);\n}",
+   "changed_lines": [
+    5
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q17_ok_01",
+  "type": "debug_line",
+  "problem_id": "Q17",
+  "planted": null,
+  "op_id": null,
+  "code": "int factorial(int n) {\n    if (n == 0)\n        return 1;\n    return n * factorial(n - 1);\n}",
+  "bug_lines": [],
+  "allow_no_bug": true,
+  "explain": "There is no bug: this program passes every test.",
+  "fix": null
+ },
+ {
+  "item_id": "dl_Q18_d05_01",
+  "type": "debug_line",
+  "problem_id": "Q18",
+  "planted": "D05",
+  "op_id": "d05_drop_base",
+  "code": "int array_sum_rec(int a[], int n) {\n    int rest = array_sum_rec(a, n - 1);\n    return rest + a[n - 1];\n}",
+  "bug_lines": [
+   1,
+   2
+  ],
+  "allow_no_bug": true,
+  "explain": "There is no base case, so the recursion never stops. It should read: if (n <= 0) return 0;",
+  "fix": {
+   "code": "int array_sum_rec(int a[], int n) {\n    if (n <= 0)\n        return 0;\n    int rest = array_sum_rec(a, n - 1);\n    return rest + a[n - 1];\n}",
+   "changed_lines": [
+    2,
+    3
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q18_d06_01",
+  "type": "debug_line",
+  "problem_id": "Q18",
+  "planted": "D06",
+  "op_id": "d06_same_arg",
+  "code": "int array_sum_rec(int a[], int n) {\n    if (n == 0)\n        return 0;\n    return array_sum_rec(a, n) + a[n - 1];\n}",
+  "bug_lines": [
+   4
+  ],
+  "allow_no_bug": true,
+  "explain": "The recursive call passes the same value, so it never gets closer to the base case. It should read: return array_sum_rec(a, n - 1) + a[n - 1];",
+  "fix": {
+   "code": "int array_sum_rec(int a[], int n) {\n    if (n == 0)\n        return 0;\n    return array_sum_rec(a, n - 1) + a[n - 1];\n}",
+   "changed_lines": [
+    4
+   ]
+  }
+ },
+ {
+  "item_id": "dl_Q18_d07_01",
+  "type": "debug_line",
+  "problem_id": "Q18",
+  "planted": "D07",
+  "op_id": "d07_discard",
+  "code": "int array_sum_rec(int a[], int n) {\n    if (n == 0)\n        return 0;\n    array_sum_rec(a, n - 1);\n    return a[n - 1];\n}",
+  "bug_lines": [
+   4,
+   5
+  ],
+  "allow_no_bug": true,
+  "explain": "The result of the recursive call is thrown away. It should read: return array_sum_rec(a, n - 1) + a[n - 1];",
+  "fix": {
+   "code": "int array_sum_rec(int a[], int n) {\n    if (n == 0)\n        return 0;\n    return array_sum_rec(a, n - 1) + a[n - 1];\n}",
+   "changed_lines": [
+    4
+   ]
+  }
+ }
+]
