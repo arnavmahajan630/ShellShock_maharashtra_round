@@ -1,0 +1,108 @@
+{
+  "problem_id": "P06",
+  "name": "power_up",
+  "planet": "loops",
+  "world": "amplifier",
+  "family": "accumulate_product",
+  "split": "train",
+  "difficulty": 2,
+  "prompt": "Return base to the power k. base^0 is 1.",
+  "signature": "int power_up(int base, int k)",
+  "starter": "int power_up(int base, int k) {\n    // TODO\n}",
+  "correct_variants": [
+    "int power_up(int base, int k) {\n    int power = 1;\n    for (int i = 0; i < k; i++) {\n        power *= base;\n    }\n    return power;\n}",
+    "int power_up(int base, int k) {\n    int power = 1;\n    int i = 0;\n    while (i < k) {\n        power = power * base;\n        i++;\n    }\n    return power;\n}",
+    "int power_up(int base, int k) {\n    int power = 1;\n    int left = k;\n    while (left > 0) {\n        power *= base;\n        left--;\n    }\n    return power;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        2,
+        3
+      ],
+      "expect": {
+        "returned": 8
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        5,
+        1
+      ],
+      "expect": {
+        "returned": 5
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        3,
+        0
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "adversarial": "M03 resetting the product inside the loop never runs when k is 0, so it still returns 1"
+    },
+    {
+      "args": [
+        10,
+        2
+      ],
+      "expect": {
+        "returned": 100
+      }
+    },
+    {
+      "args": [
+        2,
+        5
+      ],
+      "expect": {
+        "returned": 32
+      }
+    },
+    {
+      "args": [
+        7,
+        2
+      ],
+      "expect": {
+        "returned": 49
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P06",
+    "code": "int power = 1;\nfor (int i = 0; i < 3; i++) {\n    power = 0;\n    power = power * 2;\n}",
+    "question": "What is power at the end?",
+    "options": [
+      "0",
+      "2",
+      "8"
+    ],
+    "correct": "2",
+    "belief": {
+      "M03": "8"
+    }
+  },
+  "allowed_ops": [
+    "m01_*",
+    "m02_*",
+    "m03_*",
+    "m05_*",
+    "oth_*"
+  ],
+  "markers": [
+    "i"
+  ],
+  "exposure": {
+    "M01": 0.7,
+    "M03": 0.7,
+    "M02": 0.4,
+    "M05": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

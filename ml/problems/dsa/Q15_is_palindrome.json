@@ -1,0 +1,90 @@
+{
+  "problem_id": "Q15",
+  "name": "is_palindrome",
+  "sector": "strings",
+  "world": "signal_decoder",
+  "family": "string_two_pointer",
+  "split": "train",
+  "difficulty": 2,
+  "prompt": "Return 1 if the string reads the same forwards and backwards, otherwise 0.",
+  "signature": "int is_palindrome(char s[])",
+  "starter": "int is_palindrome(char s[]) {\n    // TODO\n}",
+  "correct_variants": [
+    "int is_palindrome(char s[]) {\n    int n = 0;\n    while (s[n] != '\\0') n++;\n    for (int i = 0; i < n / 2; i++) {\n        if (s[i] != s[n - 1 - i]) return 0;\n    }\n    return 1;\n}",
+    "int is_palindrome(char s[]) {\n    int n = 0;\n    while (s[n] != '\\0') n++;\n    int i = 0;\n    int j = n - 1;\n    while (i < j) {\n        if (s[i] != s[j]) return 0;\n        i++;\n        j--;\n    }\n    return 1;\n}",
+    "int is_palindrome(char s[]) {\n    int n = 0;\n    for (n = 0; s[n] != '\\0'; n++) {\n    }\n    for (int i = 0; i < n / 2; i++) {\n        if (s[i] != s[n - 1 - i]) return 0;\n    }\n    return 1;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        "aba"
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        "ab"
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        "a"
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "adversarial": "M08 and D08 never get a pair to compare in a one-character string, so they still return 1"
+    },
+    {
+      "args": [
+        "level"
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        ""
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        "abca"
+      ],
+      "expect": {
+        "returned": 0
+      }
+    }
+  ],
+  "markers": [
+    "i",
+    "j"
+  ],
+  "allowed_ops": [
+    "m08_*",
+    "d01_*",
+    "d08_*",
+    "m10_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D08": 0.7,
+    "D01": 0.7,
+    "M08": 0.4,
+    "M10": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

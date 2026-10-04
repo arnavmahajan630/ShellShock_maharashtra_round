@@ -1,0 +1,80 @@
+{
+  "problem_id": "Q13",
+  "name": "str_length",
+  "sector": "strings",
+  "world": "signal_decoder",
+  "family": "string_scan",
+  "split": "train",
+  "prompt": "Return the number of characters before the terminator. Do not call strlen.",
+  "signature": "int str_length(char s[])",
+  "starter": "int str_length(char s[]) {\n    // TODO\n}",
+  "correct_variants": [
+    "int str_length(char s[]) {\n    int n = 0;\n    while (s[n] != '\\0') {\n        n++;\n    }\n    return n;\n}",
+    "int str_length(char s[]) {\n    int n;\n    for (n = 0; s[n] != '\\0'; n++) {\n    }\n    return n;\n}",
+    "int str_length(char s[]) {\n    int n = 0;\n    while (s[n]) {\n        n = n + 1;\n    }\n    return n;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        "abc"
+      ],
+      "expect": {
+        "returned": 3
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        ""
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true,
+      "adversarial": "A count that never starts also returns 0 on the empty string"
+    },
+    {
+      "args": [
+        "a"
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        "hello"
+      ],
+      "expect": {
+        "returned": 5
+      }
+    },
+    {
+      "args": [
+        "ab"
+      ],
+      "expect": {
+        "returned": 2
+      }
+    }
+  ],
+  "markers": [
+    "n"
+  ],
+  "forbid": [
+    "strlen"
+  ],
+  "allowed_ops": [
+    "m01_*",
+    "m02_*",
+    "m05_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "M01": 0.7,
+    "M02": 0.7,
+    "M05": 0.4
+  },
+  "difficulty": 1,
+  "display_test": 0
+}

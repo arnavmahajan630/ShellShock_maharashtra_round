@@ -1,0 +1,122 @@
+{
+  "problem_id": "P10",
+  "name": "sum_first_k",
+  "planet": "arrays",
+  "world": "cargo",
+  "family": "prefix_loop",
+  "split": "train",
+  "prompt": "Return the sum of the first k cells. k is between 0 and n.",
+  "signature": "int sum_first_k(int a[], int n, int k)",
+  "starter": "int sum_first_k(int a[], int n, int k) {\n    // TODO\n}",
+  "correct_variants": [
+    "int sum_first_k(int a[], int n, int k) {\n    int total = 0;\n    for (int i = 0; i < k && i < n; i++) {\n        total += a[i];\n    }\n    return total;\n}",
+    "int sum_first_k(int a[], int n, int k) {\n    int total = 0;\n    int i = 0;\n    while (i < k && i < n) {\n        total = total + a[i];\n        i++;\n    }\n    return total;\n}",
+    "int sum_first_k(int a[], int n, int k) {\n    int total = 0;\n    int i;\n    int stop = k;\n    if (stop > n) {\n        stop = n;\n    }\n    for (i = 0; i < stop; i++) {\n        total += a[i];\n    }\n    return total;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4,
+        3
+      ],
+      "expect": {
+        "returned": 6
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          5
+        ],
+        1,
+        0
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true,
+      "adversarial": "M01 that stops one early also returns 0 when k is 0"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4,
+        4
+      ],
+      "expect": {
+        "returned": 10
+      }
+    },
+    {
+      "args": [
+        [
+          7,
+          1
+        ],
+        2,
+        1
+      ],
+      "expect": {
+        "returned": 7
+      }
+    },
+    {
+      "args": [
+        [
+          4,
+          4,
+          4
+        ],
+        3,
+        2
+      ],
+      "expect": {
+        "returned": 8
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P10",
+    "code": "int a[4] = {1, 2, 3, 4};\nint total = 0;\nfor (int i = 0; i <= 2; i++) total += a[i];",
+    "question": "How many cells are added?",
+    "options": [
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": "3",
+    "belief": {
+      "M01": "2"
+    }
+  },
+  "allowed_ops": [
+    "m01_*",
+    "m03_*",
+    "m08_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "markers": [
+    "i"
+  ],
+  "exposure": {
+    "M01": 0.7,
+    "M08": 0.7,
+    "M03": 0.4
+  },
+  "difficulty": 1,
+  "forbid": [],
+  "display_test": 0
+}

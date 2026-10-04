@@ -1,0 +1,113 @@
+{
+  "problem_id": "P08",
+  "name": "last_beacon",
+  "planet": "arrays",
+  "world": "beacon",
+  "family": "index_access",
+  "split": "train",
+  "prompt": "Return the last id. The array has n cells, starting at index 0.",
+  "signature": "int last_beacon(int ids[], int n)",
+  "starter": "int last_beacon(int ids[], int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "int last_beacon(int ids[], int n) {\n    return ids[n - 1];\n}",
+    "int last_beacon(int ids[], int n) {\n    int last = ids[0];\n    int i = 1;\n    while (i < n) {\n        last = ids[i];\n        i++;\n    }\n    return last;\n}",
+    "int last_beacon(int ids[], int n) {\n    int last = 0;\n    for (int i = 0; i < n; i++) {\n        last = ids[i];\n    }\n    return last;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          3,
+          5,
+          7,
+          9
+        ],
+        4
+      ],
+      "expect": {
+        "returned": 9
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          4
+        ],
+        1
+      ],
+      "expect": {
+        "returned": 4
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          8,
+          8,
+          8
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 8
+      },
+      "adversarial": "M08 that returns the first cell still passes when every cell holds the same id"
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        2
+      ],
+      "expect": {
+        "returned": 2
+      }
+    },
+    {
+      "args": [
+        [
+          6,
+          1,
+          6
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 6
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P08",
+    "code": "int ids[4] = {3, 5, 7, 9};\nint last = ids[4];",
+    "question": "Which cell is the last valid one?",
+    "options": [
+      "3",
+      "4",
+      "2"
+    ],
+    "correct": "3",
+    "belief": {
+      "M08": "4"
+    }
+  },
+  "allowed_ops": [
+    "m08_*",
+    "m10_*",
+    "oth_*"
+  ],
+  "markers": [
+    "i"
+  ],
+  "exposure": {
+    "M08": 0.7,
+    "M10": 0.7
+  },
+  "difficulty": 1,
+  "forbid": [],
+  "display_test": 0
+}

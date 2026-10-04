@@ -1,0 +1,102 @@
+{
+  "problem_id": "Q09",
+  "name": "second_largest",
+  "sector": "array_tech",
+  "world": "convoy",
+  "family": "running_max2",
+  "split": "holdout_problem",
+  "difficulty": 2,
+  "prompt": "Return the second largest value. n is at least 2. Duplicates count, so two equal maxima make that value the second largest too.",
+  "signature": "int second_largest(int a[], int n)",
+  "starter": "int second_largest(int a[], int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "int second_largest(int a[], int n) {\n    int first = a[0];\n    int second = a[1];\n    if (second > first) {\n        int t = first;\n        first = second;\n        second = t;\n    }\n    for (int i = 2; i < n; i++) {\n        if (a[i] > first) {\n            second = first;\n            first = a[i];\n        } else if (a[i] > second) {\n            second = a[i];\n        }\n    }\n    return second;\n}",
+    "int second_largest(int a[], int n) {\n    int first = a[0];\n    int second = a[1];\n    if (second > first) {\n        int t = first;\n        first = second;\n        second = t;\n    }\n    int i = 2;\n    while (i < n) {\n        if (a[i] >= first) {\n            second = first;\n            first = a[i];\n        } else if (a[i] > second) {\n            second = a[i];\n        }\n        i++;\n    }\n    return second;\n}",
+    "int second_largest(int a[], int n) {\n    int first = a[0] > a[1] ? a[0] : a[1];\n    int second = a[0] > a[1] ? a[1] : a[0];\n    for (int i = 2; i < n; i++) {\n        if (a[i] > first) {\n            second = first;\n            first = a[i];\n        } else if (a[i] > second) {\n            second = a[i];\n        }\n    }\n    return second;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          1,
+          4,
+          3,
+          4
+        ],
+        4
+      ],
+      "expect": {
+        "returned": 4
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          5,
+          1
+        ],
+        2
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 2
+      },
+      "adversarial": "M08 that skips a cell still passes when every value is equal"
+    },
+    {
+      "args": [
+        [
+          9,
+          3,
+          8
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 8
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        2
+      ],
+      "expect": {
+        "returned": 1
+      }
+    }
+  ],
+  "markers": [
+    "i"
+  ],
+  "allowed_ops": [
+    "m05_*",
+    "m08_*",
+    "oth_*",
+    "amb_*"
+  ],
+  "exposure": {
+    "M05": 0.7,
+    "M08": 0.7,
+    "OTHER": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

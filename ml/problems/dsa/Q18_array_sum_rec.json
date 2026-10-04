@@ -1,0 +1,103 @@
+{
+  "problem_id": "Q18",
+  "name": "array_sum_rec",
+  "sector": "recursion",
+  "world": "warp_gates",
+  "family": "rec_array",
+  "split": "train",
+  "difficulty": 2,
+  "prompt": "Return the sum of the first n cells, using recursion. The sum of no cells is 0.",
+  "signature": "int array_sum_rec(int a[], int n)",
+  "starter": "int array_sum_rec(int a[], int n) {\n    // TODO: use recursion\n}",
+  "correct_variants": [
+    "int array_sum_rec(int a[], int n) {\n    if (n <= 0) return 0;\n    return a[n - 1] + array_sum_rec(a, n - 1);\n}",
+    "int array_sum_rec(int a[], int n) {\n    if (n == 0) return 0;\n    return array_sum_rec(a, n - 1) + a[n - 1];\n}",
+    "int array_sum_rec(int a[], int n) {\n    if (n <= 0) return 0;\n    int rest = array_sum_rec(a, n - 1);\n    return rest + a[n - 1];\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 6,
+        "max_depth_le": 30
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          5
+        ],
+        1
+      ],
+      "expect": {
+        "returned": 5,
+        "max_depth_le": 30
+      },
+      "sample": true,
+      "adversarial": "D07 that throws away the recursive result still returns the only cell when n is 1"
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          9
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 9,
+        "max_depth_le": 30
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4
+      ],
+      "expect": {
+        "returned": 10,
+        "max_depth_le": 30
+      }
+    },
+    {
+      "args": [
+        [],
+        0
+      ],
+      "expect": {
+        "returned": 0,
+        "max_depth_le": 30
+      }
+    }
+  ],
+  "markers": [],
+  "allowed_ops": [
+    "d05_*",
+    "d06_*",
+    "d07_*",
+    "m08_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D05": 0.7,
+    "D06": 0.7,
+    "D07": 0.7,
+    "M08": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

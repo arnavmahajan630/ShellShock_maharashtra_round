@@ -1,0 +1,116 @@
+{
+  "problem_id": "Q03",
+  "name": "binary_search",
+  "sector": "searching",
+  "world": "beacon_scan",
+  "family": "binary_search",
+  "split": "train",
+  "difficulty": 3,
+  "prompt": "a is sorted. Return the index of x, or -1 if it is not there.",
+  "signature": "int binary_search(int a[], int n, int x)",
+  "starter": "int binary_search(int a[], int n, int x) {\n    // TODO\n}",
+  "correct_variants": [
+    "int binary_search(int a[], int n, int x) {\n    int low = 0;\n    int high = n - 1;\n    while (low <= high) {\n        int mid = low + (high - low) / 2;\n        if (a[mid] == x) {\n            return mid;\n        }\n        if (a[mid] < x) {\n            low = mid + 1;\n        } else {\n            high = mid - 1;\n        }\n    }\n    return -1;\n}",
+    "int binary_search(int a[], int n, int x) {\n    int low = 0;\n    int high = n - 1;\n    for (; low <= high; ) {\n        int mid = low + (high - low) / 2;\n        if (a[mid] == x) {\n            return mid;\n        }\n        if (x < a[mid]) {\n            high = mid - 1;\n        } else {\n            low = mid + 1;\n        }\n    }\n    return -1;\n}",
+    "int binary_search(int a[], int n, int x) {\n    int low = 0;\n    int high = n - 1;\n    while (low <= high) {\n        int mid = (low + high) / 2;\n        if (a[mid] == x) return mid;\n        if (a[mid] < x) low = mid + 1;\n        else high = mid - 1;\n    }\n    return -1;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          1,
+          3,
+          5,
+          7,
+          9
+        ],
+        5,
+        7
+      ],
+      "expect": {
+        "returned": 3
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          1,
+          3,
+          5,
+          7,
+          9
+        ],
+        5,
+        1
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          2
+        ],
+        1,
+        2
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "adversarial": "D02 low = mid still returns the only cell when that cell is the target"
+    },
+    {
+      "args": [
+        [
+          1,
+          3,
+          5,
+          7,
+          9
+        ],
+        5,
+        4
+      ],
+      "expect": {
+        "returned": -1
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          3,
+          5,
+          7,
+          9
+        ],
+        5,
+        9
+      ],
+      "expect": {
+        "returned": 4
+      }
+    }
+  ],
+  "markers": [
+    "low",
+    "mid",
+    "high"
+  ],
+  "allowed_ops": [
+    "d02_*",
+    "m01_*",
+    "m02_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D02": 0.7,
+    "M01": 0.4,
+    "M02": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

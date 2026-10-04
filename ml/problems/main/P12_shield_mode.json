@@ -1,0 +1,96 @@
+{
+  "problem_id": "P12",
+  "name": "shield_mode",
+  "planet": "conditions",
+  "world": "shield",
+  "family": "branch_bands",
+  "split": "train",
+  "difficulty": 2,
+  "prompt": "Return 0 when energy is below 30, 1 when it is below 70, and 2 otherwise.",
+  "signature": "int shield_mode(int energy)",
+  "starter": "int shield_mode(int energy) {\n    // TODO\n}",
+  "correct_variants": [
+    "int shield_mode(int energy) {\n    if (energy < 30) {\n        return 0;\n    }\n    if (energy < 70) {\n        return 1;\n    }\n    return 2;\n}",
+    "int shield_mode(int energy) {\n    int mode = 2;\n    if (energy < 70) {\n        mode = 1;\n    }\n    if (energy < 30) {\n        mode = 0;\n    }\n    return mode;\n}",
+    "int shield_mode(int energy) {\n    return energy < 30 ? 0 : energy < 70 ? 1 : 2;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        29
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        70
+      ],
+      "expect": {
+        "returned": 2
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        69
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "adversarial": "A bound of <= 70 and a bound of < 70 both return 1 at 69"
+    },
+    {
+      "args": [
+        30
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        0
+      ],
+      "expect": {
+        "returned": 0
+      }
+    },
+    {
+      "args": [
+        100
+      ],
+      "expect": {
+        "returned": 2
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P12",
+    "code": "int energy = 10;\nint mode = 2;\nif (energy = 30) {\n    mode = 0;\n}",
+    "question": "What is mode afterwards?",
+    "options": [
+      "0",
+      "2",
+      "30"
+    ],
+    "correct": "0",
+    "belief": {
+      "M06": "2"
+    }
+  },
+  "allowed_ops": [
+    "m06_*",
+    "m07_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "M06": 0.7,
+    "M07": 0.7
+  },
+  "markers": [],
+  "forbid": [],
+  "display_test": 0
+}

@@ -1,0 +1,105 @@
+{
+  "problem_id": "Q04",
+  "name": "contains",
+  "sector": "searching",
+  "world": "beacon_scan",
+  "family": "flag_search",
+  "split": "holdout_problem",
+  "prompt": "Return 1 if x appears, otherwise 0. Use a found flag.",
+  "signature": "int contains(int a[], int n, int x)",
+  "starter": "int contains(int a[], int n, int x) {\n    // TODO\n}",
+  "correct_variants": [
+    "int contains(int a[], int n, int x) {\n    int found = 0;\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            found = 1;\n        }\n    }\n    return found;\n}",
+    "int contains(int a[], int n, int x) {\n    int found = 0;\n    int i = 0;\n    while (i < n) {\n        if (a[i] == x) {\n            found = 1;\n        }\n        i++;\n    }\n    return found;\n}",
+    "int contains(int a[], int n, int x) {\n    int found = 0;\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        if (a[i] == x) found = 1;\n    }\n    return found;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          2,
+          5,
+          9
+        ],
+        3,
+        5
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          4
+        ],
+        1,
+        4
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "sample": true,
+      "adversarial": "D01 that clears the flag on a miss never sees a later cell when the match is the only cell"
+    },
+    {
+      "args": [
+        [
+          2,
+          5,
+          9
+        ],
+        3,
+        1
+      ],
+      "expect": {
+        "returned": 0
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        3,
+        3
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        [
+          8,
+          8
+        ],
+        2,
+        7
+      ],
+      "expect": {
+        "returned": 0
+      }
+    }
+  ],
+  "markers": [
+    "i"
+  ],
+  "allowed_ops": [
+    "d01_*",
+    "m05_*",
+    "m06_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D01": 0.7,
+    "M05": 0.4,
+    "M06": 0.4
+  },
+  "difficulty": 1,
+  "forbid": [],
+  "display_test": 0
+}

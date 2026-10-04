@@ -1,0 +1,81 @@
+{
+  "problem_id": "Q17",
+  "name": "factorial",
+  "sector": "recursion",
+  "world": "warp_gates",
+  "family": "rec_product",
+  "split": "train",
+  "difficulty": 1,
+  "prompt": "Return n! using recursion. factorial(0) is 1.",
+  "signature": "int factorial(int n)",
+  "starter": "int factorial(int n) {\n    // TODO: use recursion\n}",
+  "correct_variants": [
+    "int factorial(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * factorial(n - 1);\n}",
+    "int factorial(int n) {\n    if (n == 0) return 1;\n    return n * factorial(n - 1);\n}",
+    "int factorial(int n) {\n    int rest;\n    if (n < 2) {\n        return 1;\n    }\n    rest = factorial(n - 1);\n    return rest * n;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        3
+      ],
+      "expect": {
+        "returned": 6,
+        "max_depth_le": 30
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        0
+      ],
+      "expect": {
+        "returned": 1,
+        "max_depth_le": 30
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        1
+      ],
+      "expect": {
+        "returned": 1,
+        "max_depth_le": 30
+      },
+      "adversarial": "D07 discards the recursive call only after the base case, so n = 1 still returns 1"
+    },
+    {
+      "args": [
+        5
+      ],
+      "expect": {
+        "returned": 120,
+        "max_depth_le": 30
+      }
+    },
+    {
+      "args": [
+        10
+      ],
+      "expect": {
+        "returned": 3628800,
+        "max_depth_le": 30
+      }
+    }
+  ],
+  "display_test": 0,
+  "allowed_ops": [
+    "d05_*",
+    "d06_*",
+    "d07_discard",
+    "oth_*"
+  ],
+  "markers": [],
+  "forbid": [],
+  "exposure": {
+    "D05": 0.7,
+    "D06": 0.7,
+    "D07": 0.7
+  }
+}

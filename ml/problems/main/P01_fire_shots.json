@@ -1,0 +1,92 @@
+{
+  "problem_id": "P01",
+  "name": "fire_shots",
+  "planet": "loops",
+  "world": "cannon",
+  "family": "count_loop",
+  "split": "train",
+  "prompt": "Fire once for every count from 0 up to n, not including n.",
+  "signature": "void fire_shots(int n)",
+  "starter": "void fire_shots(int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "void fire_shots(int n) {\n    for (int i = 0; i < n; i++) {\n        fire();\n    }\n}",
+    "void fire_shots(int n) {\n    int i = 0;\n    while (i < n) {\n        fire();\n        i++;\n    }\n}",
+    "void fire_shots(int n) {\n    int i;\n    for (i = n; i > 0; i--) {\n        fire();\n    }\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        3
+      ],
+      "expect": {
+        "fire": 3
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        1
+      ],
+      "expect": {
+        "fire": 1
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        0
+      ],
+      "expect": {
+        "fire": 0
+      },
+      "adversarial": "M01 that stops one early also fires 0 times when n is 0"
+    },
+    {
+      "args": [
+        5
+      ],
+      "expect": {
+        "fire": 5
+      }
+    },
+    {
+      "args": [
+        2
+      ],
+      "expect": {
+        "fire": 2
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P01",
+    "code": "int n = 3;\nfor (int i = 0; i <= n; i++) {\n    fire();\n}",
+    "question": "How many times does fire run?",
+    "options": [
+      "3",
+      "4",
+      "2"
+    ],
+    "correct": "4",
+    "belief": {
+      "M01": "3"
+    }
+  },
+  "allowed_ops": [
+    "m01_*",
+    "m02_*",
+    "m07_*",
+    "oth_*"
+  ],
+  "markers": [
+    "i"
+  ],
+  "exposure": {
+    "M01": 0.7,
+    "M02": 0.7,
+    "M07": 0.4
+  },
+  "difficulty": 1,
+  "forbid": [],
+  "display_test": 0
+}

@@ -1,0 +1,124 @@
+{
+  "problem_id": "Q07",
+  "name": "selection_sort",
+  "sector": "sorting",
+  "world": "cargo_hold",
+  "family": "selection_sort",
+  "split": "train",
+  "difficulty": 3,
+  "prompt": "Sort the array in place, smallest first, with selection sort.",
+  "signature": "void selection_sort(int a[], int n)",
+  "starter": "void selection_sort(int a[], int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "void selection_sort(int a[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        int m = i;\n        for (int j = i + 1; j < n; j++) {\n            if (a[j] < a[m]) m = j;\n        }\n        int t = a[i];\n        a[i] = a[m];\n        a[m] = t;\n    }\n}",
+    "void selection_sort(int a[], int n) {\n    int i = 0;\n    while (i < n - 1) {\n        int m = i;\n        int j = i + 1;\n        while (j < n) {\n            if (a[j] < a[m]) m = j;\n            j++;\n        }\n        int t = a[i];\n        a[i] = a[m];\n        a[m] = t;\n        i++;\n    }\n}",
+    "void selection_sort(int a[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        int m = i;\n        for (int j = i + 1; j < n; j++) {\n            if (a[j] < a[m]) m = j;\n        }\n        if (m != i) {\n            int t = a[m];\n            a[m] = a[i];\n            a[i] = t;\n        }\n    }\n}"
+  ],
+  "one_pass": "void selection_one_pass(int a[], int n) {\n    int m = 0;\n    for (int j = 1; j < n; j++) {\n        if (a[j] < a[m]) m = j;\n    }\n    int t = a[0];\n    a[0] = a[m];\n    a[m] = t;\n}",
+  "tests": [
+    {
+      "args": [
+        [
+          3,
+          1,
+          2
+        ],
+        3
+      ],
+      "expect": {
+        "array0": [
+          1,
+          2,
+          3
+        ]
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ],
+        2
+      ],
+      "expect": {
+        "array0": [
+          1,
+          2
+        ]
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        3
+      ],
+      "expect": {
+        "array0": [
+          1,
+          2,
+          3
+        ]
+      },
+      "adversarial": "D03 swapping a cell with itself still leaves a sorted array sorted"
+    },
+    {
+      "args": [
+        [
+          4,
+          3,
+          2,
+          1
+        ],
+        4
+      ],
+      "expect": {
+        "array0": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        1
+      ],
+      "expect": {
+        "array0": [
+          1
+        ]
+      }
+    }
+  ],
+  "markers": [
+    "i",
+    "j"
+  ],
+  "allowed_ops": [
+    "d03_*",
+    "d04_*",
+    "m01_*",
+    "m05_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D03": 0.7,
+    "D04": 0.7,
+    "M01": 0.4,
+    "M05": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

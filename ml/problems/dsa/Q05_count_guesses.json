@@ -1,0 +1,90 @@
+{
+  "problem_id": "Q05",
+  "name": "count_guesses",
+  "sector": "searching",
+  "world": "beacon_scan",
+  "family": "guess_halving",
+  "split": "train",
+  "difficulty": 2,
+  "prompt": "Guess the secret by halving the inclusive range lo..hi. Return how many guesses it takes. The secret is always inside the range.",
+  "signature": "int count_guesses(int secret, int lo, int hi)",
+  "starter": "int count_guesses(int secret, int lo, int hi) {\n    // TODO\n}",
+  "correct_variants": [
+    "int count_guesses(int secret, int lo, int hi) {\n    int guesses = 0;\n    while (lo <= hi) {\n        int mid = lo + (hi - lo) / 2;\n        guesses++;\n        if (mid == secret) {\n            return guesses;\n        }\n        if (mid < secret) {\n            lo = mid + 1;\n        } else {\n            hi = mid - 1;\n        }\n    }\n    return guesses;\n}",
+    "int count_guesses(int secret, int lo, int hi) {\n    int guesses = 0;\n    for (; lo <= hi; ) {\n        int mid = lo + (hi - lo) / 2;\n        guesses++;\n        if (mid == secret) return guesses;\n        if (mid < secret) lo = mid + 1;\n        else hi = mid - 1;\n    }\n    return guesses;\n}",
+    "int count_guesses(int secret, int lo, int hi) {\n    int guesses = 0;\n    while (lo <= hi) {\n        int mid = (lo + hi) / 2;\n        guesses = guesses + 1;\n        if (mid == secret) return guesses;\n        if (secret > mid) lo = mid + 1;\n        else hi = mid - 1;\n    }\n    return guesses;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        4,
+        0,
+        8
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "sample": true,
+      "adversarial": "D02 that sets low = mid still returns 1 when the first mid is the secret"
+    },
+    {
+      "args": [
+        0,
+        0,
+        8
+      ],
+      "expect": {
+        "returned": 3
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        8,
+        0,
+        8
+      ],
+      "expect": {
+        "returned": 4
+      }
+    },
+    {
+      "args": [
+        2,
+        0,
+        8
+      ],
+      "expect": {
+        "returned": 3
+      }
+    },
+    {
+      "args": [
+        6,
+        0,
+        8
+      ],
+      "expect": {
+        "returned": 2
+      }
+    }
+  ],
+  "markers": [
+    "lo",
+    "mid",
+    "hi"
+  ],
+  "allowed_ops": [
+    "d02_*",
+    "m02_*",
+    "m04_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D02": 0.7,
+    "M02": 0.4,
+    "M04": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

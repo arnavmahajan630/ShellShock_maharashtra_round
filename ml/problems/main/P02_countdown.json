@@ -1,0 +1,97 @@
+{
+  "problem_id": "P02",
+  "name": "countdown",
+  "planet": "loops",
+  "world": "launchpad",
+  "family": "countdown_loop",
+  "split": "train",
+  "prompt": "Print n, then n-1, down to 1, one number per line. Then launch.",
+  "signature": "void countdown(int n)",
+  "starter": "void countdown(int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "void countdown(int n) {\n    for (int i = n; i >= 1; i--) {\n        printf(\"%d\\n\", i);\n    }\n    launch();\n}",
+    "void countdown(int n) {\n    int i = n;\n    while (i >= 1) {\n        printf(\"%d\\n\", i);\n        i--;\n    }\n    launch();\n}",
+    "void countdown(int n) {\n    int i;\n    for (i = 1; i <= n; i++) {\n        printf(\"%d\\n\", n - i + 1);\n    }\n    launch();\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        3
+      ],
+      "expect": {
+        "printed": "3\n2\n1\n",
+        "launch": 1
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        1
+      ],
+      "expect": {
+        "printed": "1\n",
+        "launch": 1
+      },
+      "sample": true,
+      "adversarial": "M01 using i > 0 instead of i >= 1 still prints 1 when n is 1"
+    },
+    {
+      "args": [
+        2
+      ],
+      "expect": {
+        "printed": "2\n1\n",
+        "launch": 1
+      }
+    },
+    {
+      "args": [
+        5
+      ],
+      "expect": {
+        "printed": "5\n4\n3\n2\n1\n",
+        "launch": 1
+      }
+    },
+    {
+      "args": [
+        0
+      ],
+      "expect": {
+        "printed": "",
+        "launch": 1
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P02",
+    "code": "int n = 3;\nint i = n;\nwhile (i > 0) {\n    i--;\n}",
+    "question": "How many numbers are printed if the body prints i and then does i-- from 3 with i > 0?",
+    "options": [
+      "3",
+      "2",
+      "4"
+    ],
+    "correct": "3",
+    "belief": {
+      "M01": "2"
+    }
+  },
+  "allowed_ops": [
+    "m01_*",
+    "m02_*",
+    "m07_*",
+    "oth_*"
+  ],
+  "markers": [
+    "i"
+  ],
+  "exposure": {
+    "M01": 0.7,
+    "M02": 0.7,
+    "M07": 0.4
+  },
+  "difficulty": 1,
+  "forbid": [],
+  "display_test": 0
+}

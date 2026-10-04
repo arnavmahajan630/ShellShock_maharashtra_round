@@ -1,0 +1,93 @@
+{
+  "problem_id": "P14",
+  "name": "distance",
+  "planet": "functions",
+  "world": "radar",
+  "family": "return_value",
+  "split": "train",
+  "prompt": "Return the absolute difference of the two positions.",
+  "signature": "int distance(int a, int b)",
+  "starter": "int distance(int a, int b) {\n    // TODO\n}",
+  "correct_variants": [
+    "int distance(int a, int b) {\n    if (a >= b) {\n        return a - b;\n    }\n    return b - a;\n}",
+    "int distance(int a, int b) {\n    int diff = a - b;\n    if (diff < 0) {\n        diff = -diff;\n    }\n    return diff;\n}",
+    "int distance(int a, int b) {\n    return a >= b ? a - b : b - a;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        1,
+        4
+      ],
+      "expect": {
+        "returned": 3
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        4,
+        1
+      ],
+      "expect": {
+        "returned": 3
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        5,
+        5
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "adversarial": "M10 that prints the distance and returns 0 still passes when the distance is 0"
+    },
+    {
+      "args": [
+        -2,
+        3
+      ],
+      "expect": {
+        "returned": 5
+      }
+    },
+    {
+      "args": [
+        10,
+        7
+      ],
+      "expect": {
+        "returned": 3
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P14",
+    "code": "int a = 4;\nint b = 1;\nprintf(\"%d\", a - b);\nreturn 0;",
+    "question": "What does the function return?",
+    "options": [
+      "0",
+      "3",
+      "4"
+    ],
+    "correct": "0",
+    "belief": {
+      "M10": "3"
+    }
+  },
+  "allowed_ops": [
+    "m10_*",
+    "m06_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "M10": 0.7,
+    "M06": 0.7
+  },
+  "difficulty": 1,
+  "markers": [],
+  "forbid": [],
+  "display_test": 0
+}

@@ -1,0 +1,119 @@
+{
+  "problem_id": "P09",
+  "name": "max_shield",
+  "planet": "arrays",
+  "world": "shield_grid",
+  "family": "array_max",
+  "split": "holdout_problem",
+  "difficulty": 2,
+  "prompt": "Return the largest shield value. n is at least 1.",
+  "signature": "int max_shield(int s[], int n)",
+  "starter": "int max_shield(int s[], int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "int max_shield(int s[], int n) {\n    int best = s[0];\n    for (int i = 1; i < n; i++) {\n        if (s[i] > best) {\n            best = s[i];\n        }\n    }\n    return best;\n}",
+    "int max_shield(int s[], int n) {\n    int best = s[0];\n    int i = 1;\n    while (i < n) {\n        if (s[i] > best) {\n            best = s[i];\n        }\n        i++;\n    }\n    return best;\n}",
+    "int max_shield(int s[], int n) {\n    int best = s[n - 1];\n    int i;\n    for (i = 0; i < n - 1; i++) {\n        if (s[i] > best) {\n            best = s[i];\n        }\n    }\n    return best;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          1,
+          4,
+          2
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 4
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          5,
+          5,
+          5
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 5
+      },
+      "sample": true,
+      "adversarial": "M08 that skips the first cell still passes when every value is equal"
+    },
+    {
+      "args": [
+        [
+          9,
+          1,
+          3
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 9
+      }
+    },
+    {
+      "args": [
+        [
+          2
+        ],
+        1
+      ],
+      "expect": {
+        "returned": 2
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          8,
+          3
+        ],
+        4
+      ],
+      "expect": {
+        "returned": 8
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P09",
+    "code": "int s[3] = {1, 4, 2};\nint best = s[1];\nfor (int i = 1; i <= 3; i++) {\n    if (s[i] > best) best = s[i];\n}",
+    "question": "What is the last valid index of an array of 3?",
+    "options": [
+      "2",
+      "3",
+      "1"
+    ],
+    "correct": "2",
+    "belief": {
+      "M08": "3"
+    }
+  },
+  "allowed_ops": [
+    "m01_*",
+    "m05_*",
+    "m06_*",
+    "m08_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "markers": [
+    "i"
+  ],
+  "exposure": {
+    "M08": 0.7,
+    "M05": 0.7,
+    "M01": 0.4,
+    "M06": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

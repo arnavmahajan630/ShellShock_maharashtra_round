@@ -1,0 +1,119 @@
+{
+  "problem_id": "Q10",
+  "name": "reverse",
+  "sector": "array_tech",
+  "world": "convoy",
+  "family": "two_pointer_swap",
+  "split": "train",
+  "difficulty": 2,
+  "prompt": "Reverse the array in place.",
+  "signature": "void reverse(int a[], int n)",
+  "starter": "void reverse(int a[], int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "void reverse(int a[], int n) {\n    for (int i = 0; i < n / 2; i++) {\n        int t = a[i];\n        a[i] = a[n - 1 - i];\n        a[n - 1 - i] = t;\n    }\n}",
+    "void reverse(int a[], int n) {\n    int i = 0;\n    int j = n - 1;\n    while (i < j) {\n        int t = a[i];\n        a[i] = a[j];\n        a[j] = t;\n        i++;\n        j--;\n    }\n}",
+    "void reverse(int a[], int n) {\n    int i = 0;\n    while (i < n / 2) {\n        int t = a[n - 1 - i];\n        a[n - 1 - i] = a[i];\n        a[i] = t;\n        i++;\n    }\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4
+      ],
+      "expect": {
+        "array0": [
+          4,
+          3,
+          2,
+          1
+        ]
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        2
+      ],
+      "expect": {
+        "array0": [
+          2,
+          1
+        ]
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ],
+        2
+      ],
+      "expect": {
+        "array0": [
+          1,
+          1
+        ]
+      },
+      "adversarial": "D03 swapping without a temp still leaves two equal cells unchanged"
+    },
+    {
+      "args": [
+        [
+          7
+        ],
+        1
+      ],
+      "expect": {
+        "array0": [
+          7
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        3
+      ],
+      "expect": {
+        "array0": [
+          3,
+          2,
+          1
+        ]
+      }
+    }
+  ],
+  "markers": [
+    "i",
+    "j"
+  ],
+  "allowed_ops": [
+    "d03_*",
+    "m01_*",
+    "m08_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D03": 0.7,
+    "M01": 0.4,
+    "M08": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

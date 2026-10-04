@@ -1,0 +1,105 @@
+{
+  "problem_id": "Q08",
+  "name": "is_sorted",
+  "sector": "sorting",
+  "world": "cargo_hold",
+  "family": "pairwise_check",
+  "split": "train",
+  "prompt": "Return 1 if the array is in non-decreasing order, otherwise 0.",
+  "signature": "int is_sorted(int a[], int n)",
+  "starter": "int is_sorted(int a[], int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "int is_sorted(int a[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        if (a[i] > a[i + 1]) {\n            return 0;\n        }\n    }\n    return 1;\n}",
+    "int is_sorted(int a[], int n) {\n    int i = 0;\n    while (i < n - 1) {\n        if (a[i] > a[i + 1]) return 0;\n        i++;\n    }\n    return 1;\n}",
+    "int is_sorted(int a[], int n) {\n    int ok = 1;\n    for (int i = 1; i < n; i++) {\n        if (a[i] < a[i - 1]) ok = 0;\n    }\n    return ok;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          2,
+          3
+        ],
+        4
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          1,
+          3,
+          2
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        1
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "adversarial": "D01 that returns on the first miss still returns 1 when there is no pair to compare"
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ],
+        2
+      ],
+      "expect": {
+        "returned": 0
+      }
+    },
+    {
+      "args": [
+        [
+          5,
+          5
+        ],
+        2
+      ],
+      "expect": {
+        "returned": 1
+      }
+    }
+  ],
+  "markers": [
+    "i"
+  ],
+  "allowed_ops": [
+    "d01_*",
+    "m01_*",
+    "m08_*",
+    "m06_*",
+    "m10_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D01": 0.7,
+    "M01": 0.4,
+    "M08": 0.4,
+    "M06": 0.4,
+    "M10": 0.4
+  },
+  "difficulty": 1,
+  "forbid": [],
+  "display_test": 0
+}

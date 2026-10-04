@@ -1,0 +1,93 @@
+{
+  "problem_id": "P13",
+  "name": "fuel_percent",
+  "planet": "variables",
+  "world": "gauge",
+  "family": "ratio",
+  "split": "holdout_problem",
+  "prompt": "Return the fuel as a percent of the capacity. Keep the fraction.",
+  "signature": "float fuel_percent(int fuel, int cap)",
+  "starter": "float fuel_percent(int fuel, int cap) {\n    // TODO\n}",
+  "correct_variants": [
+    "float fuel_percent(int fuel, int cap) {\n    return (float)fuel / cap * 100;\n}",
+    "float fuel_percent(int fuel, int cap) {\n    return fuel / (float)cap * 100;\n}",
+    "float fuel_percent(int fuel, int cap) {\n    float ratio = (float)fuel / (float)cap;\n    return ratio * 100;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        50,
+        100
+      ],
+      "expect": {
+        "returned": 50.0
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        100,
+        100
+      ],
+      "expect": {
+        "returned": 100.0
+      },
+      "sample": true,
+      "adversarial": "M04 int division is exact when the tank is full, so 100 / 100 * 100 is still 100"
+    },
+    {
+      "args": [
+        1,
+        2
+      ],
+      "expect": {
+        "returned": 50.0
+      }
+    },
+    {
+      "args": [
+        1,
+        4
+      ],
+      "expect": {
+        "returned": 25.0
+      }
+    },
+    {
+      "args": [
+        0,
+        5
+      ],
+      "expect": {
+        "returned": 0.0
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P13",
+    "code": "int fuel = 1;\nint cap = 2;\nfloat pct = fuel / cap * 100;",
+    "question": "What is pct?",
+    "options": [
+      "0",
+      "50",
+      "100"
+    ],
+    "correct": "0",
+    "belief": {
+      "M04": "50"
+    }
+  },
+  "allowed_ops": [
+    "m04_*",
+    "m10_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "M04": 0.7,
+    "M10": 0.7
+  },
+  "difficulty": 1,
+  "markers": [],
+  "forbid": [],
+  "display_test": 0
+}

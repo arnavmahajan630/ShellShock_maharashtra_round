@@ -1,0 +1,80 @@
+{
+  "problem_id": "Q14",
+  "name": "count_vowels",
+  "sector": "strings",
+  "world": "signal_decoder",
+  "family": "string_count",
+  "split": "train",
+  "prompt": "Return how many of a, e, i, o, u appear. The string is lowercase.",
+  "signature": "int count_vowels(char s[])",
+  "starter": "int count_vowels(char s[]) {\n    // TODO\n}",
+  "correct_variants": [
+    "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i] != '\\0') {\n        char ch = s[i];\n        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+    "int count_vowels(char s[]) {\n    int count = 0;\n    for (int i = 0; s[i] != '\\0'; i++) {\n        if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u') {\n            count++;\n        }\n    }\n    return count;\n}",
+    "int count_vowels(char s[]) {\n    int count = 0;\n    int i = 0;\n    while (s[i]) {\n        int vowel = s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u';\n        if (vowel) count = count + 1;\n        i++;\n    }\n    return count;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        "aei"
+      ],
+      "expect": {
+        "returned": 3
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        "xyz"
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true,
+      "adversarial": "D08 comparing a character with a string literal never matches, so a string with no vowels still returns 0"
+    },
+    {
+      "args": [
+        "queue"
+      ],
+      "expect": {
+        "returned": 4
+      }
+    },
+    {
+      "args": [
+        "a"
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        "education"
+      ],
+      "expect": {
+        "returned": 5
+      }
+    }
+  ],
+  "markers": [
+    "i"
+  ],
+  "allowed_ops": [
+    "d08_*",
+    "m03_*",
+    "m05_*",
+    "m06_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D08": 0.7,
+    "M03": 0.4,
+    "M05": 0.4,
+    "M06": 0.4
+  },
+  "difficulty": 1,
+  "forbid": [],
+  "display_test": 0
+}

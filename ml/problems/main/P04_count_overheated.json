@@ -1,0 +1,126 @@
+{
+  "problem_id": "P04",
+  "name": "count_overheated",
+  "planet": "loops",
+  "world": "reactor",
+  "family": "array_count_if",
+  "split": "holdout_problem",
+  "difficulty": 2,
+  "prompt": "Return how many readings are strictly above the limit.",
+  "signature": "int count_overheated(int t[], int n, int limit)",
+  "starter": "int count_overheated(int t[], int n, int limit) {\n    // TODO\n}",
+  "correct_variants": [
+    "int count_overheated(int t[], int n, int limit) {\n    int count = 0;\n    for (int i = 0; i < n; i++) {\n        if (t[i] > limit) {\n            count++;\n        }\n    }\n    return count;\n}",
+    "int count_overheated(int t[], int n, int limit) {\n    int count = 0;\n    int i = 0;\n    while (i < n) {\n        if (t[i] > limit) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+    "int count_overheated(int t[], int n, int limit) {\n    int count = 0;\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        if (t[i] > limit) {\n            count = count + 1;\n        }\n    }\n    return count;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          30,
+          80,
+          90
+        ],
+        3,
+        70
+      ],
+      "expect": {
+        "returned": 2
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          10,
+          20
+        ],
+        2,
+        50
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true,
+      "adversarial": "M03 resetting the count each pass still returns 0 when nothing is overheated"
+    },
+    {
+      "args": [
+        [
+          100
+        ],
+        1,
+        100
+      ],
+      "expect": {
+        "returned": 0
+      }
+    },
+    {
+      "args": [
+        [
+          71,
+          70,
+          69
+        ],
+        3,
+        70
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4,
+        0
+      ],
+      "expect": {
+        "returned": 4
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P04",
+    "code": "int t[3] = {30, 80, 90};\nint count = 0;\nfor (int i = 0; i <= 3; i++) {\n    if (t[i] > 70) count++;\n}",
+    "question": "How many cells does this loop try to read?",
+    "options": [
+      "3",
+      "4",
+      "2"
+    ],
+    "correct": "4",
+    "belief": {
+      "M01": "3",
+      "M08": "3"
+    }
+  },
+  "allowed_ops": [
+    "m01_*",
+    "m03_*",
+    "m05_*",
+    "m06_*",
+    "m08_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "markers": [
+    "i"
+  ],
+  "exposure": {
+    "M01": 0.7,
+    "M08": 0.7,
+    "M03": 0.4,
+    "M05": 0.4,
+    "M06": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

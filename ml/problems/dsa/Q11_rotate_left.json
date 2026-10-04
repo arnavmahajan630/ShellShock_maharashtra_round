@@ -1,0 +1,122 @@
+{
+  "problem_id": "Q11",
+  "name": "rotate_left",
+  "sector": "array_tech",
+  "world": "convoy",
+  "family": "shift",
+  "split": "train",
+  "difficulty": 2,
+  "prompt": "Rotate the array left by one position, in place.",
+  "signature": "void rotate_left(int a[], int n)",
+  "starter": "void rotate_left(int a[], int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "void rotate_left(int a[], int n) {\n    if (n <= 1) return;\n    int first = a[0];\n    for (int i = 0; i < n - 1; i++) {\n        a[i] = a[i + 1];\n    }\n    a[n - 1] = first;\n}",
+    "void rotate_left(int a[], int n) {\n    if (n <= 1) return;\n    int first = a[0];\n    int i = 0;\n    while (i < n - 1) {\n        a[i] = a[i + 1];\n        i++;\n    }\n    a[n - 1] = first;\n}",
+    "void rotate_left(int a[], int n) {\n    if (n <= 1) return;\n    int saved = a[0];\n    int i;\n    for (i = 1; i < n; i++) {\n        a[i - 1] = a[i];\n    }\n    a[n - 1] = saved;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4
+      ],
+      "expect": {
+        "array0": [
+          2,
+          3,
+          4,
+          1
+        ]
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        2
+      ],
+      "expect": {
+        "array0": [
+          2,
+          1
+        ]
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          5
+        ],
+        1
+      ],
+      "expect": {
+        "array0": [
+          5
+        ]
+      },
+      "adversarial": "D03 that forgets to save the first cell still passes when there is only one cell"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        3
+      ],
+      "expect": {
+        "array0": [
+          2,
+          3,
+          1
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          9,
+          8,
+          7,
+          6
+        ],
+        4
+      ],
+      "expect": {
+        "array0": [
+          8,
+          7,
+          6,
+          9
+        ]
+      }
+    }
+  ],
+  "markers": [
+    "i"
+  ],
+  "allowed_ops": [
+    "d03_*",
+    "m08_*",
+    "m01_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D03": 0.7,
+    "M08": 0.7,
+    "M01": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

@@ -1,0 +1,118 @@
+{
+  "problem_id": "P07",
+  "name": "avg_fuel",
+  "planet": "arrays",
+  "world": "fuel_gauge",
+  "family": "average",
+  "split": "train",
+  "prompt": "Return the average of the tanks as a float. Do not drop the fraction.",
+  "signature": "float avg_fuel(int tanks[], int n)",
+  "starter": "float avg_fuel(int tanks[], int n) {\n    // TODO\n}",
+  "correct_variants": [
+    "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += tanks[i];\n    }\n    return (float)sum / n;\n}",
+    "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    int i = 0;\n    while (i < n) {\n        sum = sum + tanks[i];\n        i++;\n    }\n    return sum / (float)n;\n}",
+    "float avg_fuel(int tanks[], int n) {\n    int sum = 0;\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        sum += tanks[i];\n    }\n    return (float)sum / (float)n;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        2
+      ],
+      "expect": {
+        "returned": 1.5
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          2,
+          4,
+          6
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 4.0
+      },
+      "sample": true,
+      "adversarial": "M04 int division is exact when the total divides the count, so 12 / 3 is still 4"
+    },
+    {
+      "args": [
+        [
+          5
+        ],
+        1
+      ],
+      "expect": {
+        "returned": 5.0
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1,
+          2
+        ],
+        4
+      ],
+      "expect": {
+        "returned": 1.25
+      }
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          9
+        ],
+        3
+      ],
+      "expect": {
+        "returned": 3.0
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P07",
+    "code": "int sum = 7;\nint n = 2;\nfloat avg = sum / n;",
+    "question": "What is avg?",
+    "options": [
+      "3",
+      "3.5",
+      "4"
+    ],
+    "correct": "3",
+    "belief": {
+      "M04": "3.5"
+    }
+  },
+  "allowed_ops": [
+    "m03_*",
+    "m04_*",
+    "m05_*",
+    "m08_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "markers": [
+    "i"
+  ],
+  "exposure": {
+    "M04": 0.7,
+    "M08": 0.7,
+    "M03": 0.4,
+    "M05": 0.4
+  },
+  "difficulty": 1,
+  "forbid": [],
+  "display_test": 0
+}

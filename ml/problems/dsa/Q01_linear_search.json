@@ -1,0 +1,111 @@
+{
+  "problem_id": "Q01",
+  "name": "linear_search",
+  "sector": "searching",
+  "world": "beacon_scan",
+  "family": "linear_search",
+  "split": "train",
+  "difficulty": 1,
+  "prompt": "Return the index of x, or -1 if it is not there.",
+  "signature": "int linear_search(int a[], int n, int x)",
+  "starter": "int linear_search(int a[], int n, int x) {\n    // TODO\n}",
+  "correct_variants": [
+    "int linear_search(int a[], int n, int x) {\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}",
+    "int linear_search(int a[], int n, int x) {\n    int i = 0;\n    while (i < n) {\n        if (a[i] == x) {\n            return i;\n        }\n        i++;\n    }\n    return -1;\n}",
+    "int linear_search(int a[], int n, int x) {\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        if (a[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          2,
+          5,
+          9
+        ],
+        3,
+        5
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          2,
+          5,
+          9
+        ],
+        3,
+        2
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true,
+      "adversarial": "D01 that returns on the first miss still returns 0 when the target is the first cell"
+    },
+    {
+      "args": [
+        [
+          2,
+          5,
+          9
+        ],
+        3,
+        9
+      ],
+      "expect": {
+        "returned": 2
+      }
+    },
+    {
+      "args": [
+        [
+          2,
+          5,
+          9
+        ],
+        3,
+        1
+      ],
+      "expect": {
+        "returned": -1
+      }
+    },
+    {
+      "args": [
+        [
+          4
+        ],
+        1,
+        4
+      ],
+      "expect": {
+        "returned": 0
+      }
+    }
+  ],
+  "markers": [
+    "i"
+  ],
+  "allowed_ops": [
+    "d01_*",
+    "m01_*",
+    "m08_*",
+    "m06_*",
+    "m07_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D01": 0.7,
+    "M01": 0.7,
+    "M08": 0.7,
+    "M06": 0.4,
+    "M07": 0.4
+  },
+  "forbid": [],
+  "display_test": 0
+}

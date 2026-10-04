@@ -1,0 +1,99 @@
+{
+  "problem_id": "P16",
+  "name": "in_range",
+  "planet": "conditions",
+  "world": "shield_gate",
+  "family": "range_check",
+  "split": "train",
+  "prompt": "Return 1 when lo < x < hi, both ends excluded. Otherwise return 0.",
+  "signature": "int in_range(int x, int lo, int hi)",
+  "starter": "int in_range(int x, int lo, int hi) {\n    // TODO\n}",
+  "correct_variants": [
+    "int in_range(int x, int lo, int hi) {\n    if (lo < x && x < hi) {\n        return 1;\n    }\n    return 0;\n}",
+    "int in_range(int x, int lo, int hi) {\n    int inside = 0;\n    if (x > lo) {\n        if (x < hi) {\n            inside = 1;\n        }\n    }\n    return inside;\n}",
+    "int in_range(int x, int lo, int hi) {\n    return lo < x && x < hi ? 1 : 0;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        5,
+        0,
+        10
+      ],
+      "expect": {
+        "returned": 1
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        0,
+        0,
+        10
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true,
+      "adversarial": "M07 with an empty if still returns 0 when x is outside the range"
+    },
+    {
+      "args": [
+        10,
+        0,
+        10
+      ],
+      "expect": {
+        "returned": 0
+      }
+    },
+    {
+      "args": [
+        -1,
+        -5,
+        0
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        3,
+        3,
+        4
+      ],
+      "expect": {
+        "returned": 0
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P16",
+    "code": "int x = 5;\nint lo = 0;\nint hi = 10;\nif (lo < x < hi) {\n    return 1;\n}",
+    "question": "In C, is 0 < 5 < 10 a range check?",
+    "options": [
+      "no",
+      "yes",
+      "error"
+    ],
+    "correct": "no",
+    "belief": {
+      "OTHER": "yes"
+    }
+  },
+  "allowed_ops": [
+    "m06_*",
+    "m07_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "M06": 0.7,
+    "M07": 0.7,
+    "OTHER": 0.4
+  },
+  "difficulty": 1,
+  "markers": [],
+  "forbid": [],
+  "display_test": 0
+}

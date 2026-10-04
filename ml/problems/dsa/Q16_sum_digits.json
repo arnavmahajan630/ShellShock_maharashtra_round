@@ -1,0 +1,81 @@
+{
+  "problem_id": "Q16",
+  "name": "sum_digits",
+  "sector": "recursion",
+  "world": "warp_gates",
+  "family": "rec_digits",
+  "split": "holdout_problem",
+  "difficulty": 2,
+  "prompt": "Return the sum of the decimal digits of n, using recursion. n is not negative.",
+  "signature": "int sum_digits(int n)",
+  "starter": "int sum_digits(int n) {\n    // TODO: use recursion\n}",
+  "correct_variants": [
+    "int sum_digits(int n) {\n    if (n < 10) return n;\n    return n % 10 + sum_digits(n / 10);\n}",
+    "int sum_digits(int n) {\n    if (n == 0) return 0;\n    return n % 10 + sum_digits(n / 10);\n}",
+    "int sum_digits(int n) {\n    if (n < 10) return n;\n    int rest = sum_digits(n / 10);\n    return rest + n % 10;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        123
+      ],
+      "expect": {
+        "returned": 6,
+        "max_depth_le": 30
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        5
+      ],
+      "expect": {
+        "returned": 5,
+        "max_depth_le": 30
+      },
+      "sample": true,
+      "adversarial": "D07 never makes a recursive call on a single digit, so it still returns that digit"
+    },
+    {
+      "args": [
+        0
+      ],
+      "expect": {
+        "returned": 0,
+        "max_depth_le": 30
+      }
+    },
+    {
+      "args": [
+        99
+      ],
+      "expect": {
+        "returned": 18,
+        "max_depth_le": 30
+      }
+    },
+    {
+      "args": [
+        1000
+      ],
+      "expect": {
+        "returned": 1,
+        "max_depth_le": 30
+      }
+    }
+  ],
+  "markers": [],
+  "allowed_ops": [
+    "d05_*",
+    "d06_*",
+    "d07_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "D05": 0.7,
+    "D06": 0.7,
+    "D07": 0.7
+  },
+  "forbid": [],
+  "display_test": 0
+}

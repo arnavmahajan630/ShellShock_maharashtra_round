@@ -1,0 +1,112 @@
+{
+  "problem_id": "Q02",
+  "name": "count_occurrences",
+  "sector": "searching",
+  "world": "beacon_scan",
+  "family": "count_match",
+  "split": "train",
+  "prompt": "Return how many times x appears.",
+  "signature": "int count_occurrences(int a[], int n, int x)",
+  "starter": "int count_occurrences(int a[], int n, int x) {\n    // TODO\n}",
+  "correct_variants": [
+    "int count_occurrences(int a[], int n, int x) {\n    int count = 0;\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            count++;\n        }\n    }\n    return count;\n}",
+    "int count_occurrences(int a[], int n, int x) {\n    int count = 0;\n    int i = 0;\n    while (i < n) {\n        if (a[i] == x) {\n            count++;\n        }\n        i++;\n    }\n    return count;\n}",
+    "int count_occurrences(int a[], int n, int x) {\n    int count = 0;\n    int i;\n    for (i = n - 1; i >= 0; i--) {\n        if (a[i] == x) {\n            count = count + 1;\n        }\n    }\n    return count;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          1,
+          1
+        ],
+        4,
+        1
+      ],
+      "expect": {
+        "returned": 3
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          1,
+          1
+        ],
+        4,
+        3
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true,
+      "adversarial": "M03 resetting the count each pass still returns 0 when x never appears"
+    },
+    {
+      "args": [
+        [
+          5
+        ],
+        1,
+        5
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          1,
+          1
+        ],
+        4,
+        2
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ],
+        3,
+        0
+      ],
+      "expect": {
+        "returned": 3
+      }
+    }
+  ],
+  "markers": [
+    "i"
+  ],
+  "allowed_ops": [
+    "m03_*",
+    "m05_*",
+    "m06_*",
+    "m08_*",
+    "amb_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "M03": 0.7,
+    "M08": 0.7,
+    "M05": 0.4,
+    "M06": 0.4
+  },
+  "difficulty": 1,
+  "forbid": [],
+  "display_test": 0
+}

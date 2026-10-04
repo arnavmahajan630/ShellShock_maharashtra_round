@@ -1,0 +1,102 @@
+{
+  "problem_id": "P17",
+  "name": "max_of_three",
+  "planet": "conditions",
+  "world": "radar",
+  "family": "nested_branch",
+  "split": "train",
+  "difficulty": 2,
+  "prompt": "Return the largest of the three numbers.",
+  "signature": "int max_of_three(int a, int b, int c)",
+  "starter": "int max_of_three(int a, int b, int c) {\n    // TODO\n}",
+  "correct_variants": [
+    "int max_of_three(int a, int b, int c) {\n    int best = a;\n    if (b > best) {\n        best = b;\n    }\n    if (c > best) {\n        best = c;\n    }\n    return best;\n}",
+    "int max_of_three(int a, int b, int c) {\n    if (a >= b && a >= c) {\n        return a;\n    }\n    if (b >= c) {\n        return b;\n    }\n    return c;\n}",
+    "int max_of_three(int a, int b, int c) {\n    int best = a > b ? a : b;\n    return best > c ? best : c;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        1,
+        2,
+        3
+      ],
+      "expect": {
+        "returned": 3
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        3,
+        2,
+        1
+      ],
+      "expect": {
+        "returned": 3
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        4,
+        4,
+        4
+      ],
+      "expect": {
+        "returned": 4
+      },
+      "adversarial": "M07 with empty comparisons still returns the first value, which is the max when all three are equal"
+    },
+    {
+      "args": [
+        5,
+        9,
+        5
+      ],
+      "expect": {
+        "returned": 9
+      }
+    },
+    {
+      "args": [
+        -1,
+        -5,
+        -3
+      ],
+      "expect": {
+        "returned": -1
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P17",
+    "code": "int a = 1;\nint b = 9;\nint best;\nif (b > a) best = b;",
+    "question": "What is best if it was never given a starting value and the branch is skipped?",
+    "options": [
+      "unpredictable",
+      "0",
+      "9"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M05": "0"
+    }
+  },
+  "allowed_ops": [
+    "m05_*",
+    "m06_*",
+    "m07_*",
+    "m10_*",
+    "oth_*"
+  ],
+  "exposure": {
+    "M06": 0.7,
+    "M07": 0.7,
+    "M05": 0.4,
+    "M10": 0.4
+  },
+  "markers": [],
+  "forbid": [],
+  "display_test": 0
+}

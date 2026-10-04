@@ -1,0 +1,99 @@
+{
+  "problem_id": "P05",
+  "name": "charge_steps",
+  "planet": "loops",
+  "world": "charger",
+  "family": "while_progress",
+  "split": "train",
+  "prompt": "Each step adds 7 to the level. Return how many steps it takes to reach the target. Return 0 if the level is already high enough.",
+  "signature": "int charge_steps(int level, int target)",
+  "starter": "int charge_steps(int level, int target) {\n    // TODO\n}",
+  "correct_variants": [
+    "int charge_steps(int level, int target) {\n    int steps = 0;\n    while (level < target) {\n        level += 7;\n        steps++;\n    }\n    return steps;\n}",
+    "int charge_steps(int level, int target) {\n    int steps = 0;\n    for (; level < target; steps++) {\n        level = level + 7;\n    }\n    return steps;\n}",
+    "int charge_steps(int level, int target) {\n    int steps = 0;\n    int now = level;\n    while (now < target) {\n        now += 7;\n        steps = steps + 1;\n    }\n    return steps;\n}"
+  ],
+  "tests": [
+    {
+      "args": [
+        1,
+        10
+      ],
+      "expect": {
+        "returned": 2
+      },
+      "sample": true
+    },
+    {
+      "args": [
+        10,
+        10
+      ],
+      "expect": {
+        "returned": 0
+      },
+      "sample": true,
+      "adversarial": "M02 with a missing update never enters, so it still returns 0 when the level is already at the target"
+    },
+    {
+      "args": [
+        3,
+        5
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        0,
+        1
+      ],
+      "expect": {
+        "returned": 1
+      }
+    },
+    {
+      "args": [
+        20,
+        21
+      ],
+      "expect": {
+        "returned": 1
+      }
+    }
+  ],
+  "predict_item": {
+    "item_id": "PR_P05",
+    "code": "int level = 0;\nwhile (level < 3) {\n    level++;\n}",
+    "question": "What is level when the loop stops?",
+    "options": [
+      "3",
+      "2",
+      "4"
+    ],
+    "correct": "3",
+    "belief": {
+      "M02": "2"
+    }
+  },
+  "allowed_ops": [
+    "m02_*",
+    "m05_*",
+    "m06_*",
+    "m07_*",
+    "oth_*"
+  ],
+  "markers": [
+    "level"
+  ],
+  "exposure": {
+    "M02": 0.7,
+    "M06": 0.7,
+    "M05": 0.4,
+    "M07": 0.4
+  },
+  "difficulty": 1,
+  "forbid": [],
+  "display_test": 0
+}
