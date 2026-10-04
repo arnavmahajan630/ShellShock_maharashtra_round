@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int calc_hull(void) {\n 2      int hull = 80;\n 3      if (hull < 50);\n 4      {\n 5          hull = hull + 10;\n 6      }\n 7      return hull;\n 8  }\n\nQuestion: What does calc_hull() give?\nThe right answer, found by running the code: 90\nCommon wrong answer: a student who believes \"A `;` after the header is harmless\" expects 80\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 3: the `;` right after the if header ends that statement, so it controls nothing after it.\n- Values when the shown code finished: hull = 90.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The semicolon after `if (hull < 50)` ends that statement, so the block always runs. `hull` starts at 80, adds 10, and returns 90.\"}",
+  "parsed": {
+    "explain": "The semicolon after `if (hull < 50)` ends that statement, so the block always runs. `hull` starts at 80, adds 10, and returns 90."
+  },
+  "usage": {
+    "prompt_tokens": 400,
+    "completion_tokens": 281
+  }
+}

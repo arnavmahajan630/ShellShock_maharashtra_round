@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int fuel = 10;\n 2  int burn = 0;\n 3  for (burn = 0; burn < 3; ) {\n 4      fuel = fuel - 2;\n 5  }\n\nQuestion: What is burn right after line 4 has run for the 2nd time?\nThe right answer, found by running the code: 0\nCommon wrong answer: a student who believes \"The loop variable advances by itself and the loop ends by itself\" expects 1\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run never ends.\n- Values that no longer change while it runs: burn = 0.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\":\"The for loop initializes burn to 0 and has no update, so burn stays 0 forever. Line 4 only changes fuel. After it runs a second time, burn is still 0.\"}",
+  "parsed": {
+    "explain": "The for loop initializes burn to 0 and has no update, so burn stays 0 forever. Line 4 only changes fuel. After it runs a second time, burn is still 0."
+  },
+  "usage": {
+    "prompt_tokens": 380,
+    "completion_tokens": 405
+  }
+}

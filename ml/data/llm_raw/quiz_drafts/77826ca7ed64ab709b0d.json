@@ -1,0 +1,79 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 5 exercises about one beginner mistake.\n\nThe mistake: Loop variable never moves toward the exit.\nA student who makes it believes: \"The loop variable advances by itself and the loop ends by itself\".\nHow it shows in code: a `while` loop (or a `for` loop with an empty update part) whose loop variable never changes, or changes only inside an `if` that is not taken, so the loop never ends.\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with the missing update (for example `i++;`) added as the last line of the loop body, so the loop ends normally. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: multiple choice about a value.\n- `code` prints nothing.\n- `question` asks for one value once the code has run, for example \"What is total after the loop?\" or \"What does depth(3) give?\".\n- `tail` is one printf statement that prints exactly that value. I append it to both fragments, so both must use the same names.\n- `distractors`: two other values a student might guess, written the way the tail prints them.\nJSON shape: {\"items\": [{\"code\": \"...\", \"question\": \"...\", \"tail\": \"printf(...);\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 5 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int i = 0;\\nint total = 0;\\nwhile (i < 5) {\\n    total = total + i;\\n}\",\n      \"question\": \"What is total after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", total);\",\n      \"belief_code\": \"int i = 0;\\nint total = 0;\\nwhile (i < 5) {\\n    total = total + i;\\n    i = i + 1;\\n}\",\n      \"distractors\": [\"6\", \"15\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int nums[] = {3, 5, 7, 9};\\nint sum = 0;\\nint i;\\nfor (i = 0; i < 4; ) {\\n    sum = sum + nums[i];\\n}\",\n      \"question\": \"What is sum after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", sum);\",\n      \"belief_code\": \"int nums[] = {3, 5, 7, 9};\\nint sum = 0;\\nint i;\\nfor (i = 0; i < 4; ) {\\n    sum = sum + nums[i];\\n    i = i + 1;\\n}\",\n      \"distractors\": [\"15\", \"21\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int count_to(int n) {\\n    int i = 0;\\n    int total = 0;\\n    while (i < n) {\\n        total = total + i;\\n    }\\n    return total;\\n}\\nint result = count_to(4);\",\n      \"question\": \"What is result after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", result);\",\n      \"belief_code\": \"int count_to(int n) {\\n    int i = 0;\\n    int total = 0;\\n    while (i < n) {\\n        total = total + i;\\n        i = i + 1;\\n    }\\n    return total;\\n}\\nint result = count_to(4);\",\n      \"distractors\": [\"10\", \"3\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int i = 0;\\nint sum = 0;\\nwhile (i < 6) {\\n    sum = sum + i;\\n    if (i > 100) {\\n        i = i + 1;\\n    }\\n}\",\n      \"question\": \"What is sum after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", sum);\",\n      \"belief_code\": \"int i = 0;\\nint sum = 0;\\nwhile (i < 6) {\\n    sum = sum + i;\\n    if (i > 100) {\\n        i = i + 1;\\n    }\\n    i = i + 1;\\n}\",\n      \"distractors\": [\"10\", \"21\"],\n      \"difficulty\": 3\n    },\n    {\n      \"code\": \"int fuel = 5;\\nint burned = 0;\\nwhile (fuel > 0) {\\n    burned = burned + 1;\\n}\",\n      \"question\": \"What is burned after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", burned);\",\n      \"belief_code\": \"int fuel = 5;\\nint burned = 0;\\nwhile (fuel > 0) {\\n    burned = burned + 1;\\n    fuel = fuel - 1;\\n}\",\n      \"distractors\": [\"4\", \"6\"],\n      \"difficulty\": 1\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int i = 0;\nint total = 0;\nwhile (i < 5) {\n    total = total + i;\n}",
+        "question": "What is total after the loop?",
+        "tail": "printf(\"%d\", total);",
+        "belief_code": "int i = 0;\nint total = 0;\nwhile (i < 5) {\n    total = total + i;\n    i = i + 1;\n}",
+        "distractors": [
+          "6",
+          "15"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int nums[] = {3, 5, 7, 9};\nint sum = 0;\nint i;\nfor (i = 0; i < 4; ) {\n    sum = sum + nums[i];\n}",
+        "question": "What is sum after the loop?",
+        "tail": "printf(\"%d\", sum);",
+        "belief_code": "int nums[] = {3, 5, 7, 9};\nint sum = 0;\nint i;\nfor (i = 0; i < 4; ) {\n    sum = sum + nums[i];\n    i = i + 1;\n}",
+        "distractors": [
+          "15",
+          "21"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int count_to(int n) {\n    int i = 0;\n    int total = 0;\n    while (i < n) {\n        total = total + i;\n    }\n    return total;\n}\nint result = count_to(4);",
+        "question": "What is result after the loop?",
+        "tail": "printf(\"%d\", result);",
+        "belief_code": "int count_to(int n) {\n    int i = 0;\n    int total = 0;\n    while (i < n) {\n        total = total + i;\n        i = i + 1;\n    }\n    return total;\n}\nint result = count_to(4);",
+        "distractors": [
+          "10",
+          "3"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int i = 0;\nint sum = 0;\nwhile (i < 6) {\n    sum = sum + i;\n    if (i > 100) {\n        i = i + 1;\n    }\n}",
+        "question": "What is sum after the loop?",
+        "tail": "printf(\"%d\", sum);",
+        "belief_code": "int i = 0;\nint sum = 0;\nwhile (i < 6) {\n    sum = sum + i;\n    if (i > 100) {\n        i = i + 1;\n    }\n    i = i + 1;\n}",
+        "distractors": [
+          "10",
+          "21"
+        ],
+        "difficulty": 3
+      },
+      {
+        "code": "int fuel = 5;\nint burned = 0;\nwhile (fuel > 0) {\n    burned = burned + 1;\n}",
+        "question": "What is burned after the loop?",
+        "tail": "printf(\"%d\", burned);",
+        "belief_code": "int fuel = 5;\nint burned = 0;\nwhile (fuel > 0) {\n    burned = burned + 1;\n    fuel = fuel - 1;\n}",
+        "distractors": [
+          "4",
+          "6"
+        ],
+        "difficulty": 1
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 759,
+    "completion_tokens": 13230
+  }
+}

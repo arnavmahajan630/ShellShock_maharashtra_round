@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int total;\n 2  for (int i = 1; i <= 5; i++) {\n 3      total = total + i;\n 4  }\n\nQuestion: What is the value of total after the loop?\nThe right answer, found by running the code: unpredictable\nCommon wrong answer: a student who believes \"Local variables start at 0\" expects 15\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 2 ran its body 5 times.\n- Line 3 reads total before it was given a value; C does not define what it holds.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The first time line 3 runs, it reads total before assigning it any value. C leaves an uninitialized local variable's value undefined, so the five additions produce an unpredictable final value.\"}",
+  "parsed": {
+    "explain": "The first time line 3 runs, it reads total before assigning it any value. C leaves an uninitialized local variable's value undefined, so the five additions produce an unpredictable final value."
+  },
+  "usage": {
+    "prompt_tokens": 375,
+    "completion_tokens": 334
+  }
+}

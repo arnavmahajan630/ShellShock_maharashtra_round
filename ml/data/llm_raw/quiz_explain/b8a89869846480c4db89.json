@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  char s[] = \"hello\";\n 2  printf(\"%c\", s[1]);\n\nQuestion: This prints \"e\". A classmate expected \"h\". In one sentence: why?\nThe right answer, found by running the code: e\nCommon wrong answer: a student who believes \"Arrays are indexed 1..n\" expects h\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The shown code printed: 'e'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"Array indexing starts at 0, so s[1] selects the second character of \\\"hello\\\", which is 'e'.\"}",
+  "parsed": {
+    "explain": "Array indexing starts at 0, so s[1] selects the second character of \"hello\", which is 'e'."
+  },
+  "usage": {
+    "prompt_tokens": 340,
+    "completion_tokens": 160
+  }
+}

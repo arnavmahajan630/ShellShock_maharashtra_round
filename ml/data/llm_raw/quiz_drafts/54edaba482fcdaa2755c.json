@@ -1,0 +1,76 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 4 exercises about one beginner mistake.\n\nThe mistake: Loop runs one step too many or too few.\nA student who makes it believes: \"`i<=n` (from 0) runs n times; whether the bound is the last value included or excluded is mixed up\".\nHow it shows in code: a counting loop whose number of passes is easy to misjudge by one: `i <= n` counting from 0, `i < n - 1`, a loop that starts at 1 with `<`, or a countdown with `>= 0`. Do not index an array with the loop variable..\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with the comparison the student imagines (`<=` read as `<`, or `<` read as `<=`), so the loop makes one pass fewer or one pass more. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: predict the next state.\n- `code` has a loop or a recursive function and prints nothing.\n- Choose one line of `code` that is a plain assignment statement alone on its line inside braces (never a for, while or if header). `after_line` is its 1-based line number in `code`.\n- `var` is an int variable that is in scope on that line. `hit` is 2, 3 or 4.\n- The learner is asked: what is `var` right after that line has run for the `hit`-th time?\n- `belief_after_line` is the line number of the same statement in `belief_code`.\n- At that moment the real value and the value the student expects must differ.\n- `distractors`: two other numbers a student might guess.\nJSON shape: {\"items\": [{\"code\": \"...\", \"var\": \"...\", \"after_line\": 3, \"hit\": 2, \"belief_code\": \"...\", \"belief_after_line\": 3, \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 4 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"void run(void) {\\n    int fuel = 10, total = 0;\\n    int i;\\n    int j;\\n    for (i = 0; i <= 3; i++) {\\n        fuel = fuel - 2;\\n    }\\n    for (j = 0; j < 5; j++) {\\n        total = total + fuel;\\n    }\\n}\\nrun();\",\n      \"var\": \"total\",\n      \"after_line\": 9,\n      \"hit\": 3,\n      \"belief_code\": \"void run(void) {\\n    int fuel = 10, total = 0;\\n    int i;\\n    int j;\\n    for (i = 0; i < 3; i++) {\\n        fuel = fuel - 2;\\n    }\\n    for (j = 0; j < 5; j++) {\\n        total = total + fuel;\\n    }\\n}\\nrun();\",\n      \"belief_after_line\": 9,\n      \"distractors\": [\"8\", \"10\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"void simulate(void) {\\n    int shield = 30, charge = 0;\\n    int i;\\n    int j;\\n    for (i = 4; i >= 0; i--) {\\n        shield = shield - 3;\\n    }\\n    for (j = 0; j < 4; j++) {\\n        charge = charge + shield;\\n    }\\n}\\nsimulate();\",\n      \"var\": \"charge\",\n      \"after_line\": 9,\n      \"hit\": 2,\n      \"belief_code\": \"void simulate(void) {\\n    int shield = 30, charge = 0;\\n    int i;\\n    int j;\\n    for (i = 4; i > 0; i--) {\\n        shield = shield - 3;\\n    }\\n    for (j = 0; j < 4; j++) {\\n        charge = charge + shield;\\n    }\\n}\\nsimulate();\",\n      \"belief_after_line\": 9,\n      \"distractors\": [\"20\", \"40\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"void launch(void) {\\n    int cargo = 20, power = 0;\\n    int i, j = 0;\\n    for (i = 1; i < 5; i++) {\\n        cargo = cargo + 2;\\n    }\\n    while (j < 3) {\\n        power = power + cargo;\\n        j = j + 1;\\n    }\\n}\\nlaunch();\",\n      \"var\": \"power\",\n      \"after_line\": 8,\n      \"hit\": 2,\n      \"belief_code\": \"void launch(void) {\\n    int cargo = 20, power = 0;\\n    int i, j = 0;\\n    for (i = 1; i <= 5; i++) {\\n        cargo = cargo + 2;\\n    }\\n    while (j < 3) {\\n        power = power + cargo;\\n        j = j + 1;\\n    }\\n}\\nlaunch();\",\n      \"belief_after_line\": 8,\n      \"distractors\": [\"50\", \"70\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"void scan(void) {\\n    int hull = 40, result = 0;\\n    int i = 3;\\n    while (i >= 0) {\\n        hull = hull - 5;\\n        i = i - 1;\\n    }\\n    for (i = 0; i < 4; i++) {\\n        result = result + hull;\\n    }\\n}\\nscan();\",\n      \"var\": \"result\",\n      \"after_line\": 9,\n      \"hit\": 3,\n      \"belief_code\": \"void scan(void) {\\n    int hull = 40, result = 0;\\n    int i = 3;\\n    while (i > 0) {\\n        hull = hull - 5;\\n        i = i - 1;\\n    }\\n    for (i = 0; i < 4; i++) {\\n        result = result + hull;\\n    }\\n}\\nscan();\",\n      \"belief_after_line\": 9,\n      \"distractors\": [\"70\", \"80\"],\n      \"difficulty\": 3\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "void run(void) {\n    int fuel = 10, total = 0;\n    int i;\n    int j;\n    for (i = 0; i <= 3; i++) {\n        fuel = fuel - 2;\n    }\n    for (j = 0; j < 5; j++) {\n        total = total + fuel;\n    }\n}\nrun();",
+        "var": "total",
+        "after_line": 9,
+        "hit": 3,
+        "belief_code": "void run(void) {\n    int fuel = 10, total = 0;\n    int i;\n    int j;\n    for (i = 0; i < 3; i++) {\n        fuel = fuel - 2;\n    }\n    for (j = 0; j < 5; j++) {\n        total = total + fuel;\n    }\n}\nrun();",
+        "belief_after_line": 9,
+        "distractors": [
+          "8",
+          "10"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "void simulate(void) {\n    int shield = 30, charge = 0;\n    int i;\n    int j;\n    for (i = 4; i >= 0; i--) {\n        shield = shield - 3;\n    }\n    for (j = 0; j < 4; j++) {\n        charge = charge + shield;\n    }\n}\nsimulate();",
+        "var": "charge",
+        "after_line": 9,
+        "hit": 2,
+        "belief_code": "void simulate(void) {\n    int shield = 30, charge = 0;\n    int i;\n    int j;\n    for (i = 4; i > 0; i--) {\n        shield = shield - 3;\n    }\n    for (j = 0; j < 4; j++) {\n        charge = charge + shield;\n    }\n}\nsimulate();",
+        "belief_after_line": 9,
+        "distractors": [
+          "20",
+          "40"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "void launch(void) {\n    int cargo = 20, power = 0;\n    int i, j = 0;\n    for (i = 1; i < 5; i++) {\n        cargo = cargo + 2;\n    }\n    while (j < 3) {\n        power = power + cargo;\n        j = j + 1;\n    }\n}\nlaunch();",
+        "var": "power",
+        "after_line": 8,
+        "hit": 2,
+        "belief_code": "void launch(void) {\n    int cargo = 20, power = 0;\n    int i, j = 0;\n    for (i = 1; i <= 5; i++) {\n        cargo = cargo + 2;\n    }\n    while (j < 3) {\n        power = power + cargo;\n        j = j + 1;\n    }\n}\nlaunch();",
+        "belief_after_line": 8,
+        "distractors": [
+          "50",
+          "70"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "void scan(void) {\n    int hull = 40, result = 0;\n    int i = 3;\n    while (i >= 0) {\n        hull = hull - 5;\n        i = i - 1;\n    }\n    for (i = 0; i < 4; i++) {\n        result = result + hull;\n    }\n}\nscan();",
+        "var": "result",
+        "after_line": 9,
+        "hit": 3,
+        "belief_code": "void scan(void) {\n    int hull = 40, result = 0;\n    int i = 3;\n    while (i > 0) {\n        hull = hull - 5;\n        i = i - 1;\n    }\n    for (i = 0; i < 4; i++) {\n        result = result + hull;\n    }\n}\nscan();",
+        "belief_after_line": 9,
+        "distractors": [
+          "70",
+          "80"
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 890,
+    "completion_tokens": 14338
+  }
+}

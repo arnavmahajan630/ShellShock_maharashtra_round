@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int sum_from_one(int a[], int n) {\n 2      if (n == 1) {\n 3          return a[1];\n 4      } else {\n 5          return a[n] + sum_from_one(a, n - 1);\n 6      }\n 7  }\n 8  int arr[5] = {5, 10, 15, 20, 25};\n 9  int result = sum_from_one(arr, 4);\n\nQuestion: What is result after the call?\nThe right answer, found by running the code: 70\nCommon wrong answer: a student who believes \"Arrays are indexed 1..n\" expects 50\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Values when the shown code finished: result = 70.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The call returns a[4] plus recursion down to base case n==1, which returns a[1]; it sums indices 1 through 4: 10, 15, 20, 25, totaling 70.\"}",
+  "parsed": {
+    "explain": "The call returns a[4] plus recursion down to base case n==1, which returns a[1]; it sums indices 1 through 4: 10, 15, 20, 25, totaling 70."
+  },
+  "usage": {
+    "prompt_tokens": 417,
+    "completion_tokens": 545
+  }
+}

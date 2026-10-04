@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int probe(int n) {\n 2      if (n == 1) {\n 3          return 0;\n 4      }\n 5      return 1 + probe(n / 3);\n 6  }\n 7  printf(\"%d\", probe(2));\n\nQuestion: This never stops. A classmate expected it to print \"1\". In one sentence: why does it not stop?\nThe right answer, found by running the code: never stops\nCommon wrong answer: a student who believes \"Recursion stops by itself when the work is done\" expects 1\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run never ends.\n- Values that no longer change while it runs: n = 0.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"When n is 2, 2/3 becomes 0, so probe(2) calls probe(0). Since n is 0, not 1, probe(0) calls probe(0/3), which is still 0, forever.\"}",
+  "parsed": {
+    "explain": "When n is 2, 2/3 becomes 0, so probe(2) calls probe(0). Since n is 0, not 1, probe(0) calls probe(0/3), which is still 0, forever."
+  },
+  "usage": {
+    "prompt_tokens": 395,
+    "completion_tokens": 554
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int down(int n) {\n 2      if (n == 0) {\n 3          return 0;\n 4      }\n 5      return 1 + down(n - 2);\n 6  }\n 7  int total = 0;\n 8  for (int k = 2; k <= 4; k++) {\n 9      total = total + down(k);\n10  }\n\nQuestion: What is total right after line 9 has run for the 2nd time?\nThe right answer, found by running the code: never stops\nCommon wrong answer: a student who believes \"Recursion stops by itself when the work is done\" expects 3\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run never ends.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"On its second iteration the loop calls down(3), which keeps subtracting 2 through odd values and never reaches 0, so the call recurses forever and line 9 never finishes.\"}",
+  "parsed": {
+    "explain": "On its second iteration the loop calls down(3), which keeps subtracting 2 through odd values and never reaches 0, so the call recurses forever and line 9 never finishes."
+  },
+  "usage": {
+    "prompt_tokens": 403,
+    "completion_tokens": 381
+  }
+}

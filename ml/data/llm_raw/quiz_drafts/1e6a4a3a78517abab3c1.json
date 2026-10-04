@@ -1,0 +1,79 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 5 exercises about one beginner mistake.\n\nThe mistake: The search gives up after the first miss.\nA student who makes it believes: \"The else branch means 'not this one, keep looking'; it doesn't end or overwrite anything\".\nHow it shows in code: a search over an array with `if (a[i] == x) return i; else return -1;` inside the loop, or the flag form `if (a[i] == x) found = 1; else found = 0;`. The wanted value must not be in the first cell, and for the flag form not in the last cell either..\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code without the `else` part (so the loop keeps looking and nothing is overwritten). Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: multiple choice about a value.\n- `code` prints nothing.\n- `question` asks for one value once the code has run, for example \"What is total after the loop?\" or \"What does depth(3) give?\".\n- `tail` is one printf statement that prints exactly that value. I append it to both fragments, so both must use the same names.\n- `distractors`: two other values a student might guess, written the way the tail prints them.\nJSON shape: {\"items\": [{\"code\": \"...\", \"question\": \"...\", \"tail\": \"printf(...);\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 5 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int find(int a[], int x) {\\n    for (int i = 0; i < 4; i = i + 1) {\\n        if (a[i] == x) {\\n            return i;\\n        } else {\\n            return -1;\\n        }\\n    }\\n    return -1;\\n}\\nint vals[4] = {2, 5, 8, 3};\\nint result = find(vals, 8);\",\n      \"question\": \"What is result after the code runs?\",\n      \"tail\": \"printf(\\\"%d\\\", result);\",\n      \"belief_code\": \"int find(int a[], int x) {\\n    for (int i = 0; i < 4; i = i + 1) {\\n        if (a[i] == x) {\\n            return i;\\n        }\\n    }\\n    return -1;\\n}\\nint vals[4] = {2, 5, 8, 3};\\nint result = find(vals, 8);\",\n      \"distractors\": [\"0\", \"2\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int nums[5] = {3, 7, 1, 4, 9};\\nint found = 0;\\nfor (int i = 0; i < 5; i = i + 1) {\\n    if (nums[i] == 4) {\\n        found = 1;\\n    } else {\\n        found = 0;\\n    }\\n}\",\n      \"question\": \"What is found after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", found);\",\n      \"belief_code\": \"int nums[5] = {3, 7, 1, 4, 9};\\nint found = 0;\\nfor (int i = 0; i < 5; i = i + 1) {\\n    if (nums[i] == 4) {\\n        found = 1;\\n    }\\n}\",\n      \"distractors\": [\"1\", \"4\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int numbers[4] = {2, 9, 5, 1};\\nint located = 0;\\nint i = 0;\\nwhile (i < 4) {\\n    if (numbers[i] == 5) {\\n        located = 1;\\n    } else {\\n        located = 0;\\n    }\\n    i = i + 1;\\n}\",\n      \"question\": \"What is located after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", located);\",\n      \"belief_code\": \"int numbers[4] = {2, 9, 5, 1};\\nint located = 0;\\nint i = 0;\\nwhile (i < 4) {\\n    if (numbers[i] == 5) {\\n        located = 1;\\n    }\\n    i = i + 1;\\n}\",\n      \"distractors\": [\"1\", \"5\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"float get_temp(float temps[], float target) {\\n    for (int i = 0; i < 4; i = i + 1) {\\n        if (temps[i] == target) {\\n            return target;\\n        } else {\\n            return -1.0;\\n        }\\n    }\\n    return -1.0;\\n}\\nfloat readings[4] = {10.5, 20.5, 30.5, 40.5};\\nfloat result = get_temp(readings, 30.5);\",\n      \"question\": \"What is result after the code runs?\",\n      \"tail\": \"printf(\\\"%.1f\\\", result);\",\n      \"belief_code\": \"float get_temp(float temps[], float target) {\\n    for (int i = 0; i < 4; i = i + 1) {\\n        if (temps[i] == target) {\\n            return target;\\n        }\\n    }\\n    return -1.0;\\n}\\nfloat readings[4] = {10.5, 20.5, 30.5, 40.5};\\nfloat result = get_temp(readings, 30.5);\",\n      \"distractors\": [\"30.5\", \"40.5\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int find_rec(int a[], int start, int x) {\\n    if (start >= 4) {\\n        return -1;\\n    }\\n    if (a[start] == x) {\\n        return start;\\n    } else {\\n        return -1;\\n    }\\n    return find_rec(a, start + 1, x);\\n}\\nint data[4] = {4, 1, 2, 7};\",\n      \"question\": \"What does find_rec(data, 0, 2) return?\",\n      \"tail\": \"printf(\\\"%d\\\", find_rec(data, 0, 2));\",\n      \"belief_code\": \"int find_rec(int a[], int start, int x) {\\n    if (start >= 4) {\\n        return -1;\\n    }\\n    if (a[start] == x) {\\n        return start;\\n    }\\n    return find_rec(a, start + 1, x);\\n}\\nint data[4] = {4, 1, 2, 7};\",\n      \"distractors\": [\"2\", \"0\"],\n      \"difficulty\": 3\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int find(int a[], int x) {\n    for (int i = 0; i < 4; i = i + 1) {\n        if (a[i] == x) {\n            return i;\n        } else {\n            return -1;\n        }\n    }\n    return -1;\n}\nint vals[4] = {2, 5, 8, 3};\nint result = find(vals, 8);",
+        "question": "What is result after the code runs?",
+        "tail": "printf(\"%d\", result);",
+        "belief_code": "int find(int a[], int x) {\n    for (int i = 0; i < 4; i = i + 1) {\n        if (a[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}\nint vals[4] = {2, 5, 8, 3};\nint result = find(vals, 8);",
+        "distractors": [
+          "0",
+          "2"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int nums[5] = {3, 7, 1, 4, 9};\nint found = 0;\nfor (int i = 0; i < 5; i = i + 1) {\n    if (nums[i] == 4) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n}",
+        "question": "What is found after the loop?",
+        "tail": "printf(\"%d\", found);",
+        "belief_code": "int nums[5] = {3, 7, 1, 4, 9};\nint found = 0;\nfor (int i = 0; i < 5; i = i + 1) {\n    if (nums[i] == 4) {\n        found = 1;\n    }\n}",
+        "distractors": [
+          "1",
+          "4"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int numbers[4] = {2, 9, 5, 1};\nint located = 0;\nint i = 0;\nwhile (i < 4) {\n    if (numbers[i] == 5) {\n        located = 1;\n    } else {\n        located = 0;\n    }\n    i = i + 1;\n}",
+        "question": "What is located after the loop?",
+        "tail": "printf(\"%d\", located);",
+        "belief_code": "int numbers[4] = {2, 9, 5, 1};\nint located = 0;\nint i = 0;\nwhile (i < 4) {\n    if (numbers[i] == 5) {\n        located = 1;\n    }\n    i = i + 1;\n}",
+        "distractors": [
+          "1",
+          "5"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "float get_temp(float temps[], float target) {\n    for (int i = 0; i < 4; i = i + 1) {\n        if (temps[i] == target) {\n            return target;\n        } else {\n            return -1.0;\n        }\n    }\n    return -1.0;\n}\nfloat readings[4] = {10.5, 20.5, 30.5, 40.5};\nfloat result = get_temp(readings, 30.5);",
+        "question": "What is result after the code runs?",
+        "tail": "printf(\"%.1f\", result);",
+        "belief_code": "float get_temp(float temps[], float target) {\n    for (int i = 0; i < 4; i = i + 1) {\n        if (temps[i] == target) {\n            return target;\n        }\n    }\n    return -1.0;\n}\nfloat readings[4] = {10.5, 20.5, 30.5, 40.5};\nfloat result = get_temp(readings, 30.5);",
+        "distractors": [
+          "30.5",
+          "40.5"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int find_rec(int a[], int start, int x) {\n    if (start >= 4) {\n        return -1;\n    }\n    if (a[start] == x) {\n        return start;\n    } else {\n        return -1;\n    }\n    return find_rec(a, start + 1, x);\n}\nint data[4] = {4, 1, 2, 7};",
+        "question": "What does find_rec(data, 0, 2) return?",
+        "tail": "printf(\"%d\", find_rec(data, 0, 2));",
+        "belief_code": "int find_rec(int a[], int start, int x) {\n    if (start >= 4) {\n        return -1;\n    }\n    if (a[start] == x) {\n        return start;\n    }\n    return find_rec(a, start + 1, x);\n}\nint data[4] = {4, 1, 2, 7};",
+        "distractors": [
+          "2",
+          "0"
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 792,
+    "completion_tokens": 15887
+  }
+}

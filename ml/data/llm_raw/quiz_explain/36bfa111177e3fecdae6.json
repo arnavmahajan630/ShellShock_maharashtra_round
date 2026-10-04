@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int low = 0, high = 6;\n 2  int steps = 0;\n 3  while (low < high) {\n 4      int mid = (low + high) / 2;\n 5      low = mid;\n 6      steps++;\n 7  }\n\nQuestion: Does this loop ever end?\nThe right answer, found by running the code: never stops\nCommon wrong answer: a student who believes \"mid is excluded from the window automatically\" expects yes; a student who believes \"The loop variable advances by itself and the loop ends by itself\" expects yes\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run never ends.\n- Values that no longer change while it runs: low = 5, high = 6, mid = 5.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"When low is 5 and high is 6, mid becomes 5, so low is set back to 5. The condition 5 < 6 remains true and no value ever changes, so the loop never stops.\"}",
+  "parsed": {
+    "explain": "When low is 5 and high is 6, mid becomes 5, so low is set back to 5. The condition 5 < 6 remains true and no value ever changes, so the loop never stops."
+  },
+  "usage": {
+    "prompt_tokens": 409,
+    "completion_tokens": 377
+  }
+}

@@ -1,0 +1,3273 @@
+[
+  {
+    "item_id": "qz_d01_mcq_01",
+    "type": "mcq",
+    "concept": "searching",
+    "classes": [
+      "D01"
+    ],
+    "code": "int numbers[4] = {2, 9, 5, 1};\nint located = 0;\nint i = 0;\nwhile (i < 4) {\n    if (numbers[i] == 5) {\n        located = 1;\n    } else {\n        located = 0;\n    }\n    i = i + 1;\n}",
+    "question": "What is located after the loop?",
+    "options": [
+      "1",
+      "5",
+      "0"
+    ],
+    "correct": "0",
+    "belief": {
+      "D01": "1"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop keeps checking every element, and the else branch sets located back to 0 whenever the current number is not 5. Since the final element, 1, is not 5, located ends as 0.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d01_mcq_02",
+    "type": "mcq",
+    "concept": "searching",
+    "classes": [
+      "D01"
+    ],
+    "code": "float get_temp(float temps[], float target) {\n    for (int i = 0; i < 4; i = i + 1) {\n        if (temps[i] == target) {\n            return target;\n        } else {\n            return -1.0;\n        }\n    }\n    return -1.0;\n}\nfloat readings[4] = {10.5, 20.5, 30.5, 40.5};\nfloat result = get_temp(readings, 30.5);",
+    "question": "What is result after the code runs?",
+    "options": [
+      "40.5",
+      "-1.0",
+      "30.5"
+    ],
+    "correct": "-1.0",
+    "belief": {
+      "D01": "30.5"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop runs once with i=0; temps[0] is 10.5, not 30.5, so the else branch immediately returns -1.0, making result -1.0.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d01_ns_01",
+    "type": "next_state",
+    "concept": "searching",
+    "classes": [
+      "D01"
+    ],
+    "code": "int found = 0;\nint a[5] = {7, 2, 9, 4, 6};\nint x = 9;\nint sum = 0;\nfor (int i = 0; i < 5; i++) {\n    if (a[i] == x) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n    sum = sum + a[i];\n}",
+    "question": "What is found right after line 11 has run for the 4th time?",
+    "options": [
+      "0",
+      "1",
+      "5"
+    ],
+    "correct": "0",
+    "belief": {
+      "D01": "1"
+    },
+    "state_query": {
+      "var": "found",
+      "after_line": 11,
+      "hit": 4
+    },
+    "expected": null,
+    "explain": "On the fourth pass, a[3] is 4, not 9, so the else branch runs and sets found to 0, overwriting the earlier 1.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d01_po_01",
+    "type": "predict_output",
+    "concept": "searching",
+    "classes": [
+      "D01"
+    ],
+    "code": "int find(int a[], int n, int x) {\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            return i;\n        } else {\n            return -1;\n        }\n    }\n    return -1;\n}\nint a[] = {4, 7, 2};\nprintf(\"%d\", find(a, 3, 2));",
+    "question": "What does this print?",
+    "options": [
+      "3",
+      "-1",
+      "2",
+      "0"
+    ],
+    "correct": "-1",
+    "belief": {
+      "D01": "2"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop checks only the first element. Since a[0] is 4, not 2, the else branch returns -1 immediately, so the function never looks at later elements and main prints -1.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d01_po_02",
+    "type": "predict_output",
+    "concept": "searching",
+    "classes": [
+      "D01"
+    ],
+    "code": "int a[] = {5, 1, 3, 7};\nint found = 0;\nfor (int i = 0; i < 4; i++) {\n    if (a[i] == 3) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n}\nprintf(\"%d\", found);",
+    "question": "What does this print?",
+    "options": [
+      "1",
+      "4",
+      "0",
+      "2"
+    ],
+    "correct": "0",
+    "belief": {
+      "D01": "1"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop sets found on every element: after a[2] equals 3 it becomes 1, but then a[3] equals 7 executes the else and sets found back to 0. The final value 0 is printed.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d01_rs_01",
+    "type": "reasoning",
+    "concept": "searching",
+    "classes": [
+      "D01"
+    ],
+    "code": "char a[] = {'h','u','f','f','l','e'};\nint found = 0;\nint i = 0;\nwhile (i < 6) {\n    if (a[i] == 'f') {\n        found = 1;\n    } else {\n        found = 0;\n    }\n    i++;\n}\nprintf(\"%d\", found);",
+    "question": "This prints \"0\". A classmate expected \"1\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "The loop checks every character and resets found each time; the last character is 'e', not 'f', so the final assignment sets found to 0, which is printed.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d01m03_mcq_01",
+    "type": "mcq",
+    "concept": "searching",
+    "classes": [
+      "D01",
+      "M03"
+    ],
+    "code": "int marks[5] = {4, 4, 9, 4, 2};\nint seen = 0;\nfor (int i = 0; i < 5; i++) {\n    if (marks[i] == 4) {\n        seen++;\n    } else {\n        seen = 0;\n    }\n}",
+    "question": "What is seen after the loop?",
+    "options": [
+      "1",
+      "2",
+      "0",
+      "3"
+    ],
+    "correct": "0",
+    "belief": {
+      "D01": "3",
+      "M03": "3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Each time an element is not 4, the else branch sets seen to 0. The last element is 2, so the final pass resets seen to 0 and that value remains.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d01m03_po_01",
+    "type": "predict_output",
+    "concept": "searching",
+    "classes": [
+      "D01",
+      "M03"
+    ],
+    "code": "int crew[4] = {3, 8, 5, 6};\nint found = 0;\nfor (int i = 0; i < 4; i++) {\n    if (crew[i] == 8) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n}\nprintf(\"%d\", found);",
+    "question": "What does this print?",
+    "options": [
+      "8",
+      "2",
+      "0",
+      "1"
+    ],
+    "correct": "0",
+    "belief": {
+      "D01": "1",
+      "M03": "1"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Each loop iteration overwrites found: it becomes 1 only when crew[i] is 8, otherwise 0. The last element is 6, so the final assignment sets found to 0.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d02_mcq_01",
+    "type": "mcq",
+    "concept": "searching",
+    "classes": [
+      "D02"
+    ],
+    "code": "int secret = 42;\nint low = 0, high = 100;\nint steps = 4;\nwhile (steps > 0) {\n    int guess = (low + high) / 2;\n    if (guess < secret) {\n        low = guess;\n    } else {\n        high = guess - 1;\n    }\n    steps = steps - 1;\n}",
+    "question": "What is low after the loop?",
+    "options": [
+      "36",
+      "100",
+      "38",
+      "0"
+    ],
+    "correct": "36",
+    "belief": {
+      "D02": "38"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The final iteration set guess to (36 + 49) / 2 = 42; since 42 < 42 is false, the else branch set high to 41 and left low unchanged at 36.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d02_mcq_02",
+    "type": "mcq",
+    "concept": "searching",
+    "classes": [
+      "D02"
+    ],
+    "code": "int find(int arr[], int lo, int hi, int val, int dep) {\n    if (dep == 0) {\n        return lo;\n    }\n    int mid = (lo + hi) / 2;\n    if (arr[mid] < val) {\n        return find(arr, mid, hi, val, dep - 1);\n    }\n    return find(arr, lo, mid - 1, val, dep - 1);\n}\nint a[4] = {1, 4, 6, 9};\nint result = find(a, 0, 3, 7, 3);",
+    "question": "What does find(a, 0, 3, 7, 3) return?",
+    "options": [
+      "3",
+      "2",
+      "4",
+      "1"
+    ],
+    "correct": "2",
+    "belief": {
+      "D02": "3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "When arr[mid] is less than val, the code keeps mid as the new lower bound and recurses. After three calls dep reaches 0, so it returns lo, which is 2.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d02_ns_01",
+    "type": "next_state",
+    "concept": "searching",
+    "classes": [
+      "D02"
+    ],
+    "code": "int arr[] = {1, 3, 5, 7, 9};\nint low = 0, high = 4, target = 8;\nwhile (low <= high) {\n    int mid = (low + high) / 2;\n    if (arr[mid] < target) {\n        low = mid;\n    } else if (arr[mid] > target) {\n        high = mid - 1;\n    } else {\n        low = high + 1;\n    }\n}",
+    "question": "What is mid right after line 4 has run for the 3rd time?",
+    "options": [
+      "4",
+      "2",
+      "3"
+    ],
+    "correct": "3",
+    "belief": {
+      "D02": "4"
+    },
+    "state_query": {
+      "var": "mid",
+      "after_line": 4,
+      "hit": 3
+    },
+    "expected": null,
+    "explain": "The code sets low to mid, not mid+1, when arr[mid] < target. After the second pass mid is 3 and low becomes 3, so the third pass computes (3+4)/2, which is 3.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d02_po_01",
+    "type": "predict_output",
+    "concept": "searching",
+    "classes": [
+      "D02"
+    ],
+    "code": "int a[5] = {2, 4, 6, 8, 10};\nint target = 8;\nint low = 0, high = 4;\nfor (int i = 0; i < 5; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (a[mid] < target) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", low);",
+    "question": "What does this print?",
+    "options": [
+      "4",
+      "0",
+      "3",
+      "2"
+    ],
+    "correct": "2",
+    "belief": {
+      "D02": "3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "After the first iteration low is 2. The second iteration sets high to 2, and then mid is 2 each remaining time; since a[2] is 6, below 8, line 7 keeps setting low to 2. So it prints 2.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d02_po_02",
+    "type": "predict_output",
+    "concept": "searching",
+    "classes": [
+      "D02"
+    ],
+    "code": "int arr[8] = {1, 3, 5, 7, 9, 11, 13, 15};\nint target = 13;\nint left = 0, right = 7;\nfor (int count = 0; count < 6; count = count + 1) {\n    int mid = (left + right) / 2;\n    if (arr[mid] < target) {\n        left = mid;\n    } else {\n        right = mid - 1;\n    }\n}\nprintf(\"%d\\n\", left);",
+    "question": "What does this print?",
+    "options": [
+      "6",
+      "4",
+      "7",
+      "5"
+    ],
+    "correct": "5",
+    "belief": {
+      "D02": "6"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The code sets left to mid whenever arr[mid] is less than 13. On the second pass mid is 5, so left becomes 5; later passes never increase left beyond 5, so printf prints 5.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d02_rs_01",
+    "type": "reasoning",
+    "concept": "searching",
+    "classes": [
+      "D02"
+    ],
+    "code": "int secret = 80;\nint low = 0, high = 99;\nint guess;\nfor (int attempts = 0; attempts < 7; attempts = attempts + 1) {\n    guess = (low + high) / 2;\n    if (guess < secret) {\n        low = guess;\n    } else {\n        high = guess - 1;\n    }\n}\nprintf(\"%d\\n\", low);",
+    "question": "This prints \"79\". A classmate expected \"80\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "The code sets high = guess - 1 even when guess equals secret, so once guess reaches 80 it excludes secret; low remains 79 and is printed.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d02m02_mcq_01",
+    "type": "mcq",
+    "concept": "searching",
+    "classes": [
+      "D02",
+      "M02"
+    ],
+    "code": "int low = 0, high = 6;\nint steps = 0;\nwhile (low < high) {\n    int mid = (low + high) / 2;\n    low = mid;\n    steps++;\n}",
+    "question": "Does this loop ever end?",
+    "options": [
+      "yes",
+      "it does not compile",
+      "never stops"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D02": "yes",
+      "M02": "yes"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "When low is 5 and high is 6, mid becomes 5, so low is set back to 5. The condition 5 < 6 remains true and no value ever changes, so the loop never stops.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d02m02_po_01",
+    "type": "predict_output",
+    "concept": "searching",
+    "classes": [
+      "D02",
+      "M02"
+    ],
+    "code": "int secret = 7;\nint low = 1, high = 8;\nint guesses = 0;\nwhile (low < high) {\n    int mid = (low + high) / 2;\n    guesses++;\n    if (mid < secret) {\n        low = mid;\n    } else {\n        high = mid;\n    }\n}\nprintf(\"%d\", guesses);",
+    "question": "What does this print?",
+    "options": [
+      "4",
+      "2",
+      "never stops",
+      "3"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D02": "3",
+      "M02": "3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "When low is 6 and high is 7, mid becomes 6; since mid < secret, low = mid leaves low at 6. Thus low < high remains true forever, so guesses keeps incrementing.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d03_mcq_01",
+    "type": "mcq",
+    "concept": "array_tech",
+    "classes": [
+      "D03"
+    ],
+    "code": "int a[2] = {5, 9};\nint i = 0;\nint j = 1;\na[i] = a[j];\na[j] = a[i];",
+    "question": "What is a[1] after the code runs?",
+    "options": [
+      "14",
+      "5",
+      "9"
+    ],
+    "correct": "9",
+    "belief": {
+      "D03": "5"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The assignments run one after another. After `a[i] = a[j]`, a[0] is 9; then `a[j] = a[i]` copies that 9 into a[1], leaving it 9.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d03_mcq_02",
+    "type": "mcq",
+    "concept": "array_tech",
+    "classes": [
+      "D03"
+    ],
+    "code": "int vals[4] = {5, 1, 9, 4};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    vals[i] = vals[i + 1];\n    vals[i + 1] = vals[i];\n}",
+    "question": "What is vals[3] after the loop?",
+    "options": [
+      "5",
+      "9",
+      "4"
+    ],
+    "correct": "4",
+    "belief": {
+      "D03": "5"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "On the last iteration i=2, line 4 copies vals[3] (4) into vals[2], then line 5 copies vals[2] back into vals[3]. So vals[3] keeps its original value 4.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d03_ns_01",
+    "type": "next_state",
+    "concept": "array_tech",
+    "classes": [
+      "D03"
+    ],
+    "code": "int x = 3;\nint y = 5;\nint i = 0;\nwhile (i < 3) {\n    x = y;\n    y = x;\n    i = i + 1;\n}",
+    "question": "What is x right after line 5 has run for the 2nd time?",
+    "options": [
+      "3",
+      "0",
+      "5"
+    ],
+    "correct": "5",
+    "belief": {
+      "D03": "3"
+    },
+    "state_query": {
+      "var": "x",
+      "after_line": 5,
+      "hit": 2
+    },
+    "expected": null,
+    "explain": "Line 5 is a copy: it sets x to y's current value. When line 5 runs the second time, y is 5, so x becomes 5.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d03_po_01",
+    "type": "predict_output",
+    "concept": "array_tech",
+    "classes": [
+      "D03"
+    ],
+    "code": "int a[2] = {3, 7};\na[0] = a[1];\na[1] = a[0];\nprintf(\"%d %d\", a[0], a[1]);",
+    "question": "What does this print?",
+    "options": [
+      "7 7",
+      "3 3",
+      "7 3",
+      "3 7"
+    ],
+    "correct": "7 7",
+    "belief": {
+      "D03": "7 3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The assignments run in order: first a[0] gets a[1]'s value 7, then a[1] gets a[0]'s current value 7, so both print as 7.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d03_po_02",
+    "type": "predict_output",
+    "concept": "array_tech",
+    "classes": [
+      "D03"
+    ],
+    "code": "char s[3] = {'a', 'b', '\\0'};\nint i = 0;\nint j = 1;\ns[i] = s[j];\ns[j] = s[i];\nprintf(\"%c%c\", s[0], s[1]);",
+    "question": "What does this print?",
+    "options": [
+      "ba",
+      "ab",
+      "aa",
+      "bb"
+    ],
+    "correct": "bb",
+    "belief": {
+      "D03": "ba"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The first assignment sets s[0] to s[1]'s 'b'; the second copies that same value from s[0] back to s[1], so both characters become 'b'.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d03_rs_01",
+    "type": "reasoning",
+    "concept": "array_tech",
+    "classes": [
+      "D03"
+    ],
+    "code": "void swap(int a[], int i, int j) {\n    a[i] = a[j];\n    a[j] = a[i];\n}\nint data[3] = {5, 9, 4};\nswap(data, 0, 2);\nprintf(\"%d %d %d\", data[0], data[1], data[2]);",
+    "question": "This prints \"4 9 4\". A classmate expected \"4 9 5\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "The first assignment overwrites data[0] with data[2]'s 4, so the second assignment copies that 4 back into data[2]; data[1] never changes, giving 4 9 4.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d04_mcq_01",
+    "type": "mcq",
+    "concept": "sorting",
+    "classes": [
+      "D04"
+    ],
+    "code": "int nums[5] = {5, 3, 8, 1, 2};\nint i;\nint tmp;\nfor (i = 0; i < 4; i = i + 1) {\n    if (nums[i] > nums[i + 1]) {\n        tmp = nums[i];\n        nums[i] = nums[i + 1];\n        nums[i + 1] = tmp;\n    }\n}",
+    "question": "What is nums[0] after the code runs?",
+    "options": [
+      "1",
+      "3",
+      "5"
+    ],
+    "correct": "3",
+    "belief": {
+      "D04": "1"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop makes a single pass of adjacent swaps. At i=0 it swaps 5 and 3, so nums[0] becomes 3; the remaining comparisons only affect later elements, leaving index 0 unchanged.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d04_mcq_02",
+    "type": "mcq",
+    "concept": "sorting",
+    "classes": [
+      "D04"
+    ],
+    "code": "int crew[5] = {4, 6, 2, 5, 1};\nint i;\nint tmp;\nfor (i = 3; i >= 0; i = i - 1) {\n    if (crew[i] > crew[i + 1]) {\n        tmp = crew[i];\n        crew[i] = crew[i + 1];\n        crew[i + 1] = tmp;\n    }\n}",
+    "question": "What is crew[2] after the code runs?",
+    "options": [
+      "5",
+      "4",
+      "6"
+    ],
+    "correct": "6",
+    "belief": {
+      "D04": "4"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop makes four adjacent swaps from i=3 down to i=0: indices 3 and 4, 2 and 3, 1 and 2, then 0 and 1. The 6 initially at index 1 moves to index 2.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d04_ns_01",
+    "type": "next_state",
+    "concept": "sorting",
+    "classes": [
+      "D04"
+    ],
+    "code": "int a[4] = {4, 3, 2, 1};\nfor (int j = 0; j < 3; j++) {\n    if (a[j] > a[j + 1]) {\n        int t = a[j];\n        a[j] = a[j + 1];\n        a[j + 1] = t;\n    }\n}\nint sum = 0;\nfor (int k = 0; k < 4; k++) {\n    sum = sum + a[k];\n}",
+    "question": "What is sum right after line 11 has run for the 2nd time?",
+    "options": [
+      "7",
+      "3",
+      "6",
+      "5"
+    ],
+    "correct": "5",
+    "belief": {
+      "D04": "3"
+    },
+    "state_query": {
+      "var": "sum",
+      "after_line": 11,
+      "hit": 2
+    },
+    "expected": null,
+    "explain": "The first loop swaps adjacent elements, moving 4 to the end; the array becomes {3,2,1,4}. The sum loop adds a[0]=3 on its first execution, then a[1]=2 on its second, so sum becomes 5.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d04_po_01",
+    "type": "predict_output",
+    "concept": "sorting",
+    "classes": [
+      "D04"
+    ],
+    "code": "int a[] = {5, 1, 4, 2, 3};\nint n = 5;\nfor (int i = 0; i < n - 1; i = i + 1) {\n    if (a[i] > a[i + 1]) {\n        int t = a[i];\n        a[i] = a[i + 1];\n        a[i + 1] = t;\n    }\n}\nprintf(\"%d %d %d %d %d\", a[0], a[1], a[2], a[3], a[4]);",
+    "question": "What does this print?",
+    "options": [
+      "1 4 3 2 5",
+      "5 1 4 2 3",
+      "1 2 3 4 5",
+      "1 4 2 3 5"
+    ],
+    "correct": "1 4 2 3 5",
+    "belief": {
+      "D04": "1 2 3 4 5"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop makes only one left-to-right pass, swapping adjacent out-of-order pairs; this moves 5 to the end but does not sort the rest, leaving 1,4,2,3,5.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d04_po_02",
+    "type": "predict_output",
+    "concept": "sorting",
+    "classes": [
+      "D04"
+    ],
+    "code": "float f[] = {2.5, 1.0, 3.0, 1.5};\nint n = 4;\nfor (int i = 0; i < n - 1; i = i + 1) {\n    if (f[i] > f[i + 1]) {\n        float t = f[i];\n        f[i] = f[i + 1];\n        f[i + 1] = t;\n    }\n}\nprintf(\"%.1f %.1f %.1f %.1f\", f[0], f[1], f[2], f[3]);",
+    "question": "What does this print?",
+    "options": [
+      "1.0 2.5 1.5 3.0",
+      "2.5 1.0 3.0 1.5",
+      "1.0 2.5 3.0 1.5",
+      "1.0 1.5 2.5 3.0"
+    ],
+    "correct": "1.0 2.5 1.5 3.0",
+    "belief": {
+      "D04": "1.0 1.5 2.5 3.0"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop only swaps adjacent out-of-order pairs once, so it moves 2.5 past 1.0 and 3.0 past 1.5, leaving 2.5 before 3.0; the final values are 1.0, 2.5, 1.5, 3.0.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d04_rs_01",
+    "type": "reasoning",
+    "concept": "sorting",
+    "classes": [
+      "D04"
+    ],
+    "code": "char c[] = {'d', 'b', 'c', 'a'};\nint n = 4;\nfor (int i = 0; i < n - 1; i = i + 1) {\n    if (c[i] > c[i + 1]) {\n        char t = c[i];\n        c[i] = c[i + 1];\n        c[i + 1] = t;\n    }\n}\nprintf(\"%c %c %c %c\", c[0], c[1], c[2], c[3]);",
+    "question": "This prints \"b c a d\". A classmate expected \"a b c d\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "The loop makes just one pass and swaps adjacent out-of-order pairs, so 'd' bubbles past 'b', 'c', and 'a' to the end, leaving b, c, a, d.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d05_mcq_01",
+    "type": "mcq",
+    "concept": "recursion",
+    "classes": [
+      "D05"
+    ],
+    "code": "int sum_odd(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + sum_odd(n - 2);\n}\nint total = sum_odd(5);",
+    "question": "What is total after the code runs?",
+    "options": [
+      "9",
+      "never stops",
+      "6",
+      "8"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D05": "9"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The function subtracts 2 on each call and only returns without recursing when n is 0. Starting from 5, the calls go 5, 3, 1, -1, -3, never reaching 0, so it keeps calling forever.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d05_mcq_02",
+    "type": "mcq",
+    "concept": "recursion",
+    "classes": [
+      "D05"
+    ],
+    "code": "int fact(int n) {\n    if (n == 1) {\n        return 1;\n    }\n    return n * fact(n - 1);\n}\nint result = fact(0);",
+    "question": "What is result after the code runs?",
+    "options": [
+      "6",
+      "1",
+      "0",
+      "never stops"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D05": "1"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The call fact(0) skips the n == 1 base case and returns 0 * fact(-1), then fact(-1) calls fact(-2), and so on, so the recursion never reaches a stopping condition.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d05_ns_01",
+    "type": "next_state",
+    "concept": "recursion",
+    "classes": [
+      "D05"
+    ],
+    "code": "int down(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return 1 + down(n - 2);\n}\nint total = 0;\nfor (int k = 2; k <= 4; k++) {\n    total = total + down(k);\n}",
+    "question": "What is total right after line 9 has run for the 2nd time?",
+    "options": [
+      "2",
+      "never stops",
+      "3",
+      "1"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D05": "3"
+    },
+    "state_query": {
+      "var": "total",
+      "after_line": 9,
+      "hit": 2
+    },
+    "expected": null,
+    "explain": "On its second iteration the loop calls down(3), which keeps subtracting 2 through odd values and never reaches 0, so the call recurses forever and line 9 never finishes.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d05_po_01",
+    "type": "predict_output",
+    "concept": "recursion",
+    "classes": [
+      "D05"
+    ],
+    "code": "int countdown(int n) {\n    return countdown(n - 1);\n}\nprintf(\"%d\", countdown(3));",
+    "question": "What does this print?",
+    "options": [
+      "1",
+      "never stops",
+      "3",
+      "0"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D05": "0"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The function calls itself immediately with n-1 and has no condition that returns without recursing, so countdown(3) never returns and printf is never reached; the run never ends.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d05_po_02",
+    "type": "predict_output",
+    "concept": "recursion",
+    "classes": [
+      "D05"
+    ],
+    "code": "int mystery(int n) {\n    if (n == 0) {\n        return 1;\n    }\n    return n * mystery(n - 2);\n}\nprintf(\"%d\", mystery(5));",
+    "question": "What does this print?",
+    "options": [
+      "15",
+      "5",
+      "3",
+      "never stops"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D05": "15"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "mystery(5) calls mystery(3), then mystery(1), then mystery(-1), then mystery(-3), and so on; n never equals 0, so recursive calls continue forever and printf is never reached.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d05_rs_01",
+    "type": "reasoning",
+    "concept": "recursion",
+    "classes": [
+      "D05"
+    ],
+    "code": "int probe(int n) {\n    if (n == 1) {\n        return 0;\n    }\n    return 1 + probe(n / 3);\n}\nprintf(\"%d\", probe(2));",
+    "question": "This never stops. A classmate expected it to print \"1\". In one sentence: why does it not stop?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "When n is 2, 2/3 becomes 0, so probe(2) calls probe(0). Since n is 0, not 1, probe(0) calls probe(0/3), which is still 0, forever.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d05d06_mcq_01",
+    "type": "mcq",
+    "concept": "recursion",
+    "classes": [
+      "D05",
+      "D06"
+    ],
+    "code": "int count(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return 1 + count(n - 2);\n}",
+    "question": "Does count(5) ever give a result?",
+    "options": [
+      "never stops",
+      "yes",
+      "it does not compile"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D05": "yes",
+      "D06": "yes"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "count(5) calls count(3), then count(1), then count(-1), and keeps subtracting 2; n never equals 0, so the base case never runs and the calls never stop.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d05d06_mcq_02",
+    "type": "mcq",
+    "concept": "recursion",
+    "classes": [
+      "D05",
+      "D06"
+    ],
+    "code": "int climb(int height) {\n    if (height == 10) {\n        return 0;\n    }\n    return 1 + climb(height + 3);\n}",
+    "question": "Does climb(2) ever give a result?",
+    "options": [
+      "it does not compile",
+      "yes",
+      "never stops"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D05": "yes",
+      "D06": "yes"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "climb(2) checks only equality with 10; its recursive calls use heights 2, 5, 8, 11, 14, increasing by 3, so height never equals 10 and the recursion never reaches a return.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d06_mcq_01",
+    "type": "mcq",
+    "concept": "recursion",
+    "classes": [
+      "D06"
+    ],
+    "code": "int steps(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return 1 + steps(n);\n}\nint total = steps(4);",
+    "question": "What is total after the code runs?",
+    "options": [
+      "never stops",
+      "0",
+      "5",
+      "4"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D06": "4"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "steps(4) returns 1 + steps(4), so the same call repeats with n equal to 4 and never reaches the n == 0 case.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d06_mcq_02",
+    "type": "mcq",
+    "concept": "recursion",
+    "classes": [
+      "D06"
+    ],
+    "code": "int burns(int fuel) {\n    if (fuel <= 0) {\n        return 0;\n    }\n    return burns(fuel + 2) + 1;\n}\nint count = burns(6);",
+    "question": "What is count after the code runs?",
+    "options": [
+      "6",
+      "3",
+      "never stops",
+      "0"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D06": "3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The call burns(6) calls burns(8), then burns(10), and so on; fuel moves further above the base case fuel <= 0, so the recursion never ends.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d06_ns_01",
+    "type": "next_state",
+    "concept": "recursion",
+    "classes": [
+      "D06"
+    ],
+    "code": "int countdown(int n) {\n    int last = 0;\n    if (n <= 0) {\n        return 0;\n    }\n    last = n;\n    return countdown(n);\n}\ncountdown(3);",
+    "question": "What is last right after line 6 has run for the 2nd time?",
+    "options": [
+      "2",
+      "0",
+      "3",
+      "4"
+    ],
+    "correct": "3",
+    "belief": {
+      "D06": "2"
+    },
+    "state_query": {
+      "var": "last",
+      "after_line": 6,
+      "hit": 2
+    },
+    "expected": null,
+    "explain": "The code never changes n before the recursive call, so countdown is called with 3 each time. Line 6 sets last = n, so after the second run last is 3.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d06_po_01",
+    "type": "predict_output",
+    "concept": "recursion",
+    "classes": [
+      "D06"
+    ],
+    "code": "int sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + sum(n);\n}\nprintf(\"%d\", sum(5));",
+    "question": "What does this print?",
+    "options": [
+      "10",
+      "15",
+      "5",
+      "never stops"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D06": "15"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The call sum(5) returns 5 + sum(5), calling itself again with n still 5, so n never becomes 0 and the recursion never terminates.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d06_po_02",
+    "type": "predict_output",
+    "concept": "recursion",
+    "classes": [
+      "D06"
+    ],
+    "code": "int power(int base, int exp) {\n    if (exp == 0) {\n        return 1;\n    }\n    return base * power(base, exp);\n}\nprintf(\"%d\", power(2, 5));",
+    "question": "What does this print?",
+    "options": [
+      "10",
+      "32",
+      "never stops",
+      "64"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D06": "32"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The recursive call passes exp unchanged, so power(2, 5) keeps calling power(2, 5). Since exp never becomes 0, the base case is never reached.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d06_rs_01",
+    "type": "reasoning",
+    "concept": "recursion",
+    "classes": [
+      "D06"
+    ],
+    "code": "int gcd(int a, int b) {\n    if (b == 0) {\n        return a;\n    }\n    return gcd(a, b);\n}\nprintf(\"%d\", gcd(48, 18));",
+    "question": "This never stops. A classmate expected it to print \"6\". In one sentence: why does it not stop?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "When b is 18, the function calls gcd(48, 18) again with the same a and b, so execution repeats forever and never reaches b == 0.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d07_mcq_01",
+    "type": "mcq",
+    "concept": "recursion",
+    "classes": [
+      "D07"
+    ],
+    "code": "int add_up(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    add_up(n - 1);\n    return n;\n}\nint total = add_up(4);",
+    "question": "What is total after the code runs?",
+    "options": [
+      "4",
+      "0",
+      "10"
+    ],
+    "correct": "4",
+    "belief": {
+      "D07": "10"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Line 5 calls add_up(n - 1) but ignores its return value, so no results are added. The outermost call simply returns its own n, so add_up(4) returns 4.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d07_mcq_02",
+    "type": "mcq",
+    "concept": "recursion",
+    "classes": [
+      "D07"
+    ],
+    "code": "int sum_array(int arr[], int n) {\n    if (n == 0) {\n        return arr[0];\n    }\n    sum_array(arr, n - 1);\n    return arr[n];\n}\nint values[] = {2, 5, 3, 8};\nint total = sum_array(values, 3);",
+    "question": "What is total after the code runs?",
+    "options": [
+      "2",
+      "18",
+      "8"
+    ],
+    "correct": "8",
+    "belief": {
+      "D07": "18"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The function keeps calling itself and ignores each recursive result. The original call with n=3 reaches line 6 and returns arr[3], which is 8, so total becomes 8.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d07_ns_01",
+    "type": "next_state",
+    "concept": "recursion",
+    "classes": [
+      "D07"
+    ],
+    "code": "int f(int n) {\n    if (n == 0) return 0;\n    f(n - 1);\n    return n;\n}\nint s = 0;\nfor (int i = 1; i <= 4; i++) {\n    s = s + f(i);\n}",
+    "question": "What is s right after line 8 has run for the 2nd time?",
+    "options": [
+      "6",
+      "1",
+      "3",
+      "4"
+    ],
+    "correct": "3",
+    "belief": {
+      "D07": "4"
+    },
+    "state_query": {
+      "var": "s",
+      "after_line": 8,
+      "hit": 2
+    },
+    "expected": null,
+    "explain": "For n > 0, f(n) throws away the recursive call's result and returns n, so f(1)=1 and f(2)=2. After two loop iterations, s = 0 + 1 + 2 = 3.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d07_po_01",
+    "type": "predict_output",
+    "concept": "recursion",
+    "classes": [
+      "D07"
+    ],
+    "code": "int sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    sum(n - 1);\n    return n;\n}\nprintf(\"%d\", sum(4));",
+    "question": "What does this print?",
+    "options": [
+      "4",
+      "6",
+      "10"
+    ],
+    "correct": "4",
+    "belief": {
+      "D07": "10"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The recursive calls return values, but sum ignores them; sum(4) returns 4, and sum(3) down to sum(1) also return their n without changing anything, so only the top-level return 4 reaches printf.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d07_po_02",
+    "type": "predict_output",
+    "concept": "recursion",
+    "classes": [
+      "D07"
+    ],
+    "code": "int chars(char s[], int i) {\n    if (s[i] == '\\0') {\n        return 0;\n    }\n    chars(s, i + 1);\n    return 1;\n}\nprintf(\"%d\", chars(\"abc\", 0));",
+    "question": "What does this print?",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "3"
+    ],
+    "correct": "1",
+    "belief": {
+      "D07": "3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The top-level call sees s[0] is not null, calls chars(\"abc\", 1) but ignores its return value, then returns 1. The printed result is that returned 1.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d07_rs_01",
+    "type": "reasoning",
+    "concept": "recursion",
+    "classes": [
+      "D07"
+    ],
+    "code": "int total(int a[], int n) {\n    if (n == 0) {\n        return 0;\n    }\n    total(a, n - 1);\n    return a[n - 1];\n}\nint a[] = {3, 4, 5};\nprintf(\"%d\", total(a, 3));",
+    "question": "This prints \"5\". A classmate expected \"12\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "The function returns a[n-1] after calling total(a, n-1) and discarding that result. For total(a,3), line 6 returns a[2], which is 5.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d08_mcq_01",
+    "type": "mcq",
+    "concept": "strings",
+    "classes": [
+      "D08"
+    ],
+    "code": "char s[] = \"banana\";\nint count = 0;\nint i = 0;\nwhile (i < strlen(s)) {\n    if (s[i] == \"a\") {\n        count = count + 1;\n    }\n    i = i + 1;\n}",
+    "question": "What is count after the loop?",
+    "options": [
+      "0",
+      "1",
+      "3",
+      "6"
+    ],
+    "correct": "0",
+    "belief": {
+      "D08": "3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The condition s[i] == \"a\" compares a character to a string literal, not to the character 'a', so it is always false. Therefore count stays 0 after all six loop iterations.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d08_mcq_02",
+    "type": "mcq",
+    "concept": "strings",
+    "classes": [
+      "D08"
+    ],
+    "code": "int fuel_check(char c) {\n    if (c == \"F\") {\n        return 100;\n    }\n    return 0;\n}\nint fuel = fuel_check('F');",
+    "question": "What is fuel after fuel_check('F') runs?",
+    "options": [
+      "0",
+      "50",
+      "100"
+    ],
+    "correct": "0",
+    "belief": {
+      "D08": "100"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "In C, 'F' is a character, but \"F\" is a string literal's address; comparing them is false. The if body is skipped, so fuel_check returns 0 and fuel is 0.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d08_ns_01",
+    "type": "next_state",
+    "concept": "strings",
+    "classes": [
+      "D08"
+    ],
+    "code": "char s[] = \"ab\";\nint i = 0;\nint total = 0;\nint bonus = 0;\nwhile (s[i] != '\\0') {\n    if (s[i] == \"a\") {\n        bonus = bonus + 1;\n    }\n    total = total + bonus;\n    i = i + 1;\n}",
+    "question": "What is total right after line 9 has run for the 2nd time?",
+    "options": [
+      "2",
+      "3",
+      "1",
+      "0"
+    ],
+    "correct": "0",
+    "belief": {
+      "D08": "2"
+    },
+    "state_query": {
+      "var": "total",
+      "after_line": 9,
+      "hit": 2
+    },
+    "expected": null,
+    "explain": "Line 6 compares the char s[i] with the address of the string literal \"a\"; that comparison is false. Since bonus stays 0, line 9 adds 0 to total both times.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d08_po_01",
+    "type": "predict_output",
+    "concept": "strings",
+    "classes": [
+      "D08"
+    ],
+    "code": "char word[] = \"cat\";\nif (word[1] == \"a\") {\n    printf(\"vowel\");\n} else {\n    printf(\"not vowel\");\n}",
+    "question": "What does this print?",
+    "options": [
+      "cat",
+      "vowel",
+      "not vowel"
+    ],
+    "correct": "not vowel",
+    "belief": {
+      "D08": "vowel"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "In C, `word[1]` is a char (`'a'`), while `\"a\"` is a string literal pointer; comparing a char to a pointer is false, so the `else` branch runs and prints `not vowel`.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d08_po_02",
+    "type": "predict_output",
+    "concept": "strings",
+    "classes": [
+      "D08"
+    ],
+    "code": "int count = 0;\nchar s[] = \"banana\";\nfor (int i = 0; i < 6; i = i + 1) {\n    if (s[i] == \"a\") {\n        count = count + 1;\n    }\n}\nprintf(\"%d\", count);",
+    "question": "What does this print?",
+    "options": [
+      "3",
+      "0",
+      "2",
+      "1"
+    ],
+    "correct": "0",
+    "belief": {
+      "D08": "3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop runs six times, but each s[i] is a char while \"a\" is a string literal; those never compare equal, so count stays 0 and printf prints 0.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_d08_rs_01",
+    "type": "reasoning",
+    "concept": "strings",
+    "classes": [
+      "D08"
+    ],
+    "code": "int is_vowel(char c) {\n    if (c == \"a\") {\n        return 1;\n    }\n    return 0;\n}\nchar word[] = \"apple\";\nif (is_vowel(word[0])) {\n    printf(\"yes\");\n} else {\n    printf(\"no\");\n}",
+    "question": "This prints \"no\". A classmate expected \"yes\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "In C, \"a\" is a string literal treated as a pointer, so c == \"a\" compares a character code with an address. They are not equal, is_vowel returns 0, and the code prints \"no\".",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01_mcq_01",
+    "type": "mcq",
+    "concept": "loops",
+    "classes": [
+      "M01"
+    ],
+    "code": "int total = 0;\nint i;\nfor (i = 0; i <= 3; i = i + 1) {\n    total = total + 2;\n}",
+    "question": "What is total after the loop?",
+    "options": [
+      "10",
+      "8",
+      "6"
+    ],
+    "correct": "8",
+    "belief": {
+      "M01": "6"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The condition i <= 3 is true for i = 0, 1, 2, and 3, so line 4 runs four times, adding 2 each time; 4 times 2 makes total 8.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01_mcq_02",
+    "type": "mcq",
+    "concept": "loops",
+    "classes": [
+      "M01"
+    ],
+    "code": "int hull = 4;\nwhile (hull >= 0) {\n    hull = hull - 1;\n}",
+    "question": "What is hull after the loop?",
+    "options": [
+      "0",
+      "1",
+      "-1"
+    ],
+    "correct": "-1",
+    "belief": {
+      "M01": "0"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop condition checks before each iteration, so hull values 4, 3, 2, 1, and 0 all enter the body, each subtracting 1. The fifth subtraction sets hull to -1, then the condition fails.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01_ns_01",
+    "type": "next_state",
+    "concept": "loops",
+    "classes": [
+      "M01"
+    ],
+    "code": "void run(void) {\n    int fuel = 10, total = 0;\n    int i;\n    int j;\n    for (i = 0; i <= 3; i++) {\n        fuel = fuel - 2;\n    }\n    for (j = 0; j < 5; j++) {\n        total = total + fuel;\n    }\n}\nrun();",
+    "question": "What is total right after line 9 has run for the 3rd time?",
+    "options": [
+      "6",
+      "12",
+      "8",
+      "10"
+    ],
+    "correct": "6",
+    "belief": {
+      "M01": "12"
+    },
+    "state_query": {
+      "var": "total",
+      "after_line": 9,
+      "hit": 3
+    },
+    "expected": null,
+    "explain": "The first loop subtracts 2 from fuel four times, leaving fuel at 2. Then each execution of line 9 adds 2 to total, so after the third execution total is 6.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01_po_01",
+    "type": "predict_output",
+    "concept": "loops",
+    "classes": [
+      "M01"
+    ],
+    "code": "int n = 4;\nint sum = 0;\nint i;\nfor (i = 0; i <= n; i++) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+    "question": "What does this print?",
+    "options": [
+      "10",
+      "4",
+      "15",
+      "6"
+    ],
+    "correct": "10",
+    "belief": {
+      "M01": "6"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop condition i <= n lets i take 0, 1, 2, 3, and 4, so the body runs five times. The sum becomes 0+1+2+3+4, which equals 10.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01_po_02",
+    "type": "predict_output",
+    "concept": "loops",
+    "classes": [
+      "M01"
+    ],
+    "code": "int i = 5;\nint count = 0;\nwhile (i >= 0) {\n    count = count + 1;\n    i = i - 1;\n}\nprintf(\"%d\", count);",
+    "question": "What does this print?",
+    "options": [
+      "4",
+      "7",
+      "5",
+      "6"
+    ],
+    "correct": "6",
+    "belief": {
+      "M01": "5"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop starts at i=5 and runs while i is at least 0, so it executes for i equal to 5,4,3,2,1,0, incrementing count six times, then prints count as 6.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01_rs_01",
+    "type": "reasoning",
+    "concept": "loops",
+    "classes": [
+      "M01"
+    ],
+    "code": "int fuel = 5;\nint product = 1;\nint i;\nfor (i = fuel; i >= 0; i--) {\n    product = product * i;\n}\nprintf(\"%d\", product);",
+    "question": "This prints \"0\". A classmate expected \"120\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "The loop includes i = 0 as its final iteration, so product is multiplied by 0 at that point, making the final product 0.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01m08_mcq_01",
+    "type": "mcq",
+    "concept": "arrays",
+    "classes": [
+      "M01",
+      "M08"
+    ],
+    "code": "int hull[3] = {8, 2, 5};\nint best = hull[0];\nfor (int i = 1; i <= 3; i++) {\n    if (hull[i] > best) {\n        best = hull[i];\n    }\n}",
+    "question": "What is best after the loop?",
+    "options": [
+      "5",
+      "2",
+      "unpredictable",
+      "8"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M01": "8",
+      "M08": "8"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop reads hull[3], but hull has valid indexes only 0 to 2. Accessing hull[3] is undefined behavior, so best has no defined value after the loop.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01m08_mcq_02",
+    "type": "mcq",
+    "concept": "arrays",
+    "classes": [
+      "M01",
+      "M08"
+    ],
+    "code": "int shots[4] = {1, 0, 1, 1};\nint hits = 0;\nfor (int i = 0; i <= 4; i++) {\n    if (shots[i] == 1) {\n        hits++;\n    }\n}",
+    "question": "What is hits after the loop?",
+    "options": [
+      "3",
+      "unpredictable",
+      "4",
+      "2"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M01": "3",
+      "M08": "3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop runs five times, and the last iteration reads shots[4], which is outside the 4-cell array; C does not define that read, so hits can end with any value.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01m08_po_01",
+    "type": "predict_output",
+    "concept": "arrays",
+    "classes": [
+      "M01",
+      "M08"
+    ],
+    "code": "int cells[3] = {2, 4, 6};\nint total = 0;\nfor (int i = 0; i <= 3; i++) {\n    total += cells[i];\n}\nprintf(\"%d\", total);",
+    "question": "What does this print?",
+    "options": [
+      "unpredictable",
+      "6",
+      "18",
+      "12"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M01": "12",
+      "M08": "12"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop runs four times because i<=3, so it reads cells[3], which is outside the 3-element array. C does not define the result of that out-of-bounds access.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01m08_po_02",
+    "type": "predict_output",
+    "concept": "arrays",
+    "classes": [
+      "M01",
+      "M08"
+    ],
+    "code": "int fuel[4] = {7, 3, 9, 5};\nint last = 0;\nfor (int i = 0; i <= 4; i++) {\n    last = fuel[i];\n}\nprintf(\"%d\", last);",
+    "question": "What does this print?",
+    "options": [
+      "9",
+      "0",
+      "5",
+      "unpredictable"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M01": "5",
+      "M08": "5"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop runs 5 times, and its last iteration reads fuel[4], one past the array. That out-of-bounds access is undefined in C, so the printed value is unpredictable.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m01m08_po_03",
+    "type": "predict_output",
+    "concept": "sorting",
+    "classes": [
+      "M01",
+      "M08"
+    ],
+    "code": "int a[4] = {1, 5, 2, 8};\nint drops = 0;\nfor (int j = 0; j < 4; j++) {\n    if (a[j] > a[j + 1]) {\n        drops++;\n    }\n}\nprintf(\"%d\", drops);",
+    "question": "What does this print?",
+    "options": [
+      "2",
+      "1",
+      "0",
+      "unpredictable"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M01": "1",
+      "M08": "1"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop runs while j<4, so when j is 3 it reads a[4], which is outside the array; C leaves that access undefined, so the value compared and the resulting count are unpredictable.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m02_mcq_01",
+    "type": "mcq",
+    "concept": "loops",
+    "classes": [
+      "M02"
+    ],
+    "code": "int i = 0;\nint total = 0;\nwhile (i < 5) {\n    total = total + i;\n}",
+    "question": "What is total after the loop?",
+    "options": [
+      "15",
+      "never stops",
+      "6",
+      "10"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "M02": "10"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The condition i < 5 is checked with i fixed at 0; i is never changed inside the loop, so the condition remains true forever and the loop never ends.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m02_mcq_02",
+    "type": "mcq",
+    "concept": "loops",
+    "classes": [
+      "M02"
+    ],
+    "code": "int nums[] = {3, 5, 7, 9};\nint sum = 0;\nint i;\nfor (i = 0; i < 4; ) {\n    sum = sum + nums[i];\n}",
+    "question": "What is sum after the loop?",
+    "options": [
+      "24",
+      "never stops",
+      "21",
+      "15"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "M02": "24"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop never changes i, so i stays 0 and the condition i < 4 remains true, making the loop run forever.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m02_ns_01",
+    "type": "next_state",
+    "concept": "loops",
+    "classes": [
+      "M02"
+    ],
+    "code": "int fuel = 10;\nint burn = 0;\nfor (burn = 0; burn < 3; ) {\n    fuel = fuel - 2;\n}",
+    "question": "What is burn right after line 4 has run for the 2nd time?",
+    "options": [
+      "0",
+      "3",
+      "1"
+    ],
+    "correct": "0",
+    "belief": {
+      "M02": "1"
+    },
+    "state_query": {
+      "var": "burn",
+      "after_line": 4,
+      "hit": 2
+    },
+    "expected": null,
+    "explain": "The for loop initializes burn to 0 and has no update, so burn stays 0 forever. Line 4 only changes fuel. After it runs a second time, burn is still 0.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m02_po_01",
+    "type": "predict_output",
+    "concept": "loops",
+    "classes": [
+      "M02"
+    ],
+    "code": "int i = 0;\nint sum = 0;\nint arr[5] = {2, 3, 5, 7, 11};\nwhile (i < 5) {\n    sum = sum + arr[i];\n}\nprintf(\"%d\", sum);",
+    "question": "What does this print?",
+    "options": [
+      "never stops",
+      "28",
+      "17",
+      "21"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "M02": "28"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop checks i < 5, but i is never changed inside the loop, so it stays 0. The condition remains true forever, so printf never runs.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m02_po_02",
+    "type": "predict_output",
+    "concept": "loops",
+    "classes": [
+      "M02"
+    ],
+    "code": "int i;\nint total = 0;\nfor (i = 0; i < 4; ) {\n    total = total + i;\n}\nprintf(\"%d\", total);",
+    "question": "What does this print?",
+    "options": [
+      "3",
+      "10",
+      "never stops",
+      "6"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "M02": "6"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop starts with i = 0 and its body never changes i, so i < 4 stays true forever. It keeps adding 0 to total, so nothing changes and it never stops.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m02_rs_01",
+    "type": "reasoning",
+    "concept": "loops",
+    "classes": [
+      "M02"
+    ],
+    "code": "char word[6] = \"hello\";\nint i = 0;\nint count = 0;\nwhile (i < 5) {\n    if (word[i] == 'z') {\n        i++;\n    }\n    count++;\n}\nprintf(\"%d\", count);",
+    "question": "This never stops. A classmate expected it to print \"5\". In one sentence: why does it not stop?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "word[0] is 'h', not 'z', so the if body never runs; i stays 0, the condition i < 5 remains true, and count++ repeats forever.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m02m07_mcq_01",
+    "type": "mcq",
+    "concept": "loops",
+    "classes": [
+      "M02",
+      "M07"
+    ],
+    "code": "int i = 0;\nwhile (i < 3);\n{\n    i++;\n}",
+    "question": "Does this code ever finish?",
+    "options": [
+      "it does not compile",
+      "yes",
+      "never stops"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "M02": "yes",
+      "M07": "yes"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Line 2 ends the while statement with a semicolon, so the loop has an empty body and never changes i from 0. Since 0 < 3 always holds, it repeats forever.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m02m07_mcq_02",
+    "type": "mcq",
+    "concept": "loops",
+    "classes": [
+      "M02",
+      "M07"
+    ],
+    "code": "int fuel = 5;\nwhile (fuel > 0);\n    fuel = fuel - 5;\nfire();",
+    "question": "How many shots are fired?",
+    "options": [
+      "5",
+      "1",
+      "0",
+      "never stops"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "M02": "1",
+      "M07": "1"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The while header on line 2 is followed by `;`, so the loop body is empty and `fuel` stays 5 forever. Since `fuel > 0` is always true, the loop never exits and `fire()` is never reached.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m03_mcq_01",
+    "type": "mcq",
+    "concept": "loops",
+    "classes": [
+      "M03"
+    ],
+    "code": "int sum = 0;\nint nums[3] = {2, 3, 4};\nint i = 0;\nwhile (i < 3) {\n    sum = 0;\n    sum = sum + nums[i];\n    i = i + 1;\n}",
+    "question": "What is sum after the loop?",
+    "options": [
+      "0",
+      "9",
+      "4"
+    ],
+    "correct": "4",
+    "belief": {
+      "M03": "9"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Line 5 resets sum to 0 at the start of each pass, so only the last pass's addition remains. On the final pass, sum becomes 0 plus nums[2], which is 4.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m03_mcq_02",
+    "type": "mcq",
+    "concept": "loops",
+    "classes": [
+      "M03"
+    ],
+    "code": "int total = 0;\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 2; j++) {\n        total = 0;\n        total = total + i + j;\n    }\n}",
+    "question": "What is total after the loops?",
+    "options": [
+      "3",
+      "9",
+      "6"
+    ],
+    "correct": "3",
+    "belief": {
+      "M03": "9"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The inner loop resets total to 0 on every one of its 6 runs, so only the last addition matters: when i=2 and j=1, total becomes 0+2+1, leaving 3.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m03_ns_01",
+    "type": "next_state",
+    "concept": "loops",
+    "classes": [
+      "M03"
+    ],
+    "code": "void run() {\n    int total = 0;\n    int i = 0;\n    for (i = 0; i < 4; i = i + 1) {\n        total = 0;\n        total = total + 2;\n    }\n}\nrun();",
+    "question": "What is total right after line 6 has run for the 3rd time?",
+    "options": [
+      "4",
+      "8",
+      "6",
+      "2"
+    ],
+    "correct": "2",
+    "belief": {
+      "M03": "6"
+    },
+    "state_query": {
+      "var": "total",
+      "after_line": 6,
+      "hit": 3
+    },
+    "expected": null,
+    "explain": "Line 5 sets total to 0 at the start of every loop pass, then line 6 adds 2, so after the third pass total is 2.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m03_po_01",
+    "type": "predict_output",
+    "concept": "loops",
+    "classes": [
+      "M03"
+    ],
+    "code": "int total = 0;\nfor (int i = 1; i <= 4; i = i + 1)\n{\n    total = 0;\n    total = total + i;\n}\nprintf(\"%d\", total);",
+    "question": "What does this print?",
+    "options": [
+      "3",
+      "0",
+      "4",
+      "10"
+    ],
+    "correct": "4",
+    "belief": {
+      "M03": "10"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Inside each loop pass, total is set to 0 before adding i, so after the final pass (i = 4) total becomes 4; printing total outputs 4.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m03_po_02",
+    "type": "predict_output",
+    "concept": "loops",
+    "classes": [
+      "M03"
+    ],
+    "code": "int vals[] = {5, 2, 7, 1};\nint total = 0;\nint i = 0;\nwhile (i < 4)\n{\n    total = 0;\n    total = total + vals[i];\n    i = i + 1;\n}\nprintf(\"%d\", total);",
+    "question": "What does this print?",
+    "options": [
+      "5",
+      "1",
+      "15",
+      "0"
+    ],
+    "correct": "1",
+    "belief": {
+      "M03": "15"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop sets total to 0 at the start of each pass, then adds the current array element. On the final pass it adds vals[3], which is 1, so total ends as 1.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m03_rs_01",
+    "type": "reasoning",
+    "concept": "loops",
+    "classes": [
+      "M03"
+    ],
+    "code": "char s[] = \"abracadabra\";\nint total = 0;\nfor (int i = 0; s[i] != '\\0'; i = i + 1)\n{\n    total = 0;\n    if (s[i] == 'a')\n    {\n        total = total + 1;\n    }\n}\nprintf(\"%d\", total);",
+    "question": "This prints \"1\". A classmate expected \"5\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "The loop sets total to 0 at the start of every iteration, so only the final character matters; the last character is 'a', making total 1.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m04_mcq_01",
+    "type": "mcq",
+    "concept": "variables",
+    "classes": [
+      "M04"
+    ],
+    "code": "int a = 5;\nint b = 2;\nfloat result = a / b;",
+    "question": "What is result after the code runs?",
+    "options": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "correct": "2.0",
+    "belief": {
+      "M04": "2.5"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Line 3 performs integer division on a and b, so it drops the fractional part and produces 2, which is then stored in the float variable result as 2.0.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m04_mcq_02",
+    "type": "mcq",
+    "concept": "variables",
+    "classes": [
+      "M04"
+    ],
+    "code": "float total = 0.0;\nint i;\nfor (i = 1; i <= 3; i = i + 1) {\n    total = total + i / 2;\n}",
+    "question": "What is total after the loop?",
+    "options": [
+      "1.5",
+      "3.0",
+      "2.0"
+    ],
+    "correct": "2.0",
+    "belief": {
+      "M04": "3.0"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Line 4 does integer division before storing into a float: 1/2 gives 0, 2/2 gives 1, 3/2 gives 1, so total becomes 0.0 + 0 + 1 + 1 = 2.0.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m04_ns_01",
+    "type": "next_state",
+    "concept": "variables",
+    "classes": [
+      "M04"
+    ],
+    "code": "int fuel = 7;\nint crew = 4;\nfloat rate = fuel / crew;\nint scaled = 0;\nfor (int i = 1; i <= 4; i = i + 1) {\n    scaled = rate * i;\n}",
+    "question": "What is scaled right after line 6 has run for the 3rd time?",
+    "options": [
+      "3",
+      "5",
+      "6",
+      "4"
+    ],
+    "correct": "3",
+    "belief": {
+      "M04": "5"
+    },
+    "state_query": {
+      "var": "scaled",
+      "after_line": 6,
+      "hit": 3
+    },
+    "expected": null,
+    "explain": "Since / between ints drops the fraction, rate becomes 1.0. Third pass has i = 3, so scaled = 1.0 * 3, which is 3.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m04_po_01",
+    "type": "predict_output",
+    "concept": "variables",
+    "classes": [
+      "M04"
+    ],
+    "code": "int a = 9;\nint b = 2;\nfloat result = a / b;\nprintf(\"%.1f\", result);",
+    "question": "What does this print?",
+    "options": [
+      "4.0",
+      "4.5",
+      "5.0"
+    ],
+    "correct": "4.0",
+    "belief": {
+      "M04": "4.5"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "In C, dividing two ints performs integer division: 9 / 2 yields 4, and only then is that 4 stored in result as a float. The printf with %.1f prints it as 4.0.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m04_po_02",
+    "type": "predict_output",
+    "concept": "variables",
+    "classes": [
+      "M04"
+    ],
+    "code": "int nums[3] = {11, 3, 5};\nfloat result = nums[0] / nums[1];\nprintf(\"%.1f\", result);",
+    "question": "What does this print?",
+    "options": [
+      "3.7",
+      "3.0",
+      "3.6"
+    ],
+    "correct": "3.0",
+    "belief": {
+      "M04": "3.7"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Integer division happens first: 11 / 3 yields the int 3, discarding the remainder. That int 3 is then converted to the float 3.0, so the printf prints 3.0.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m04_rs_01",
+    "type": "reasoning",
+    "concept": "variables",
+    "classes": [
+      "M04"
+    ],
+    "code": "float divide(int x, int y) {\n    return x / y;\n}\nint a = 10;\nint b = 4;\nfloat result = divide(a, b);\nprintf(\"%.1f\", result);",
+    "question": "This prints \"2.0\". A classmate expected \"2.5\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "Line 2 performs integer division on x and y, so 10 / 4 drops the fraction to 2; only then is that 2 converted to the float 2.0.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m05_mcq_01",
+    "type": "mcq",
+    "concept": "variables",
+    "classes": [
+      "M05"
+    ],
+    "code": "int total;\nfor (int i = 1; i <= 5; i++) {\n    total = total + i;\n}",
+    "question": "What is the value of total after the loop?",
+    "options": [
+      "unpredictable",
+      "15",
+      "10",
+      "20"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M05": "15"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The first time line 3 runs, it reads total before assigning it any value. C leaves an uninitialized local variable's value undefined, so the five additions produce an unpredictable final value.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m05_mcq_02",
+    "type": "mcq",
+    "concept": "variables",
+    "classes": [
+      "M05"
+    ],
+    "code": "int depth(int n) {\n    if (n == 0) {\n        int value;\n        return value;\n    }\n    return 1 + depth(n - 1);\n}\nint d = depth(3);",
+    "question": "What is the value of d after the call depth(3)?",
+    "options": [
+      "3",
+      "0",
+      "4",
+      "unpredictable"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M05": "3"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "When n reaches 0, the function returns the local variable value, which was never assigned. C does not initialize it, so its contents are indeterminate and d is unpredictable.",
+    "difficulty": 3,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m05_ns_01",
+    "type": "next_state",
+    "concept": "variables",
+    "classes": [
+      "M05"
+    ],
+    "code": "int fuel;\nint burned;\nburned = 0;\nwhile (burned < 3) {\n    fuel = fuel + 2;\n    burned = burned + 1;\n}",
+    "question": "What is fuel right after line 5 has run for the 2nd time?",
+    "options": [
+      "6",
+      "2",
+      "4",
+      "unpredictable"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M05": "4"
+    },
+    "state_query": {
+      "var": "fuel",
+      "after_line": 5,
+      "hit": 2
+    },
+    "expected": null,
+    "explain": "Line 5 reads fuel before any value was assigned to it, so because C does not define what uninitialized fuel holds, the result after the second run is unpredictable.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m05_po_01",
+    "type": "predict_output",
+    "concept": "variables",
+    "classes": [
+      "M05"
+    ],
+    "code": "int total;\ntotal = total + 4;\nprintf(\"%d\\n\", total);",
+    "question": "What does this print?",
+    "options": [
+      "0",
+      "unpredictable",
+      "8",
+      "4"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M05": "4"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Line 2 reads `total` before it has been assigned a value, so C does not define what it holds; the program may print any value.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m05_po_02",
+    "type": "predict_output",
+    "concept": "variables",
+    "classes": [
+      "M05"
+    ],
+    "code": "int hull;\nif (hull == 0) {\n    printf(\"safe\\n\");\n} else {\n    printf(\"damaged\\n\");\n}",
+    "question": "What does this print?",
+    "options": [
+      "safe",
+      "damaged",
+      "unpredictable",
+      "unknown"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M05": "safe"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The local variable hull is read before being assigned a value; C does not define what it holds, so the if condition can evaluate either way and the output is unpredictable.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m05_rs_01",
+    "type": "reasoning",
+    "concept": "variables",
+    "classes": [
+      "M05"
+    ],
+    "code": "int add_bonus(int base) {\n    int extra;\n    extra = extra + base;\n    return extra;\n}\nprintf(\"%d\\n\", add_bonus(7));",
+    "question": "What this prints cannot be predicted. A classmate expected \"7\". In one sentence: why can it not be predicted?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "On line 3, the code adds base to extra before ever assigning extra a value; C does not define what an uninitialized local variable holds, so the returned value is unpredictable.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": false,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m06_mcq_01",
+    "type": "mcq",
+    "concept": "conditions",
+    "classes": [
+      "M06"
+    ],
+    "code": "int mode = 5;\nint total = 0;\nif (mode = 2)\n{\n    total = total + 10;\n}\nelse\n{\n    total = total + 1;\n}",
+    "question": "What is total after the if/else?",
+    "options": [
+      "2",
+      "1",
+      "10"
+    ],
+    "correct": "10",
+    "belief": {
+      "M06": "1"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Line 3 is an assignment: it stores 2 in mode. That stored value 2 is truthy, so the if branch executes and total becomes 10.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m06_mcq_02",
+    "type": "mcq",
+    "concept": "conditions",
+    "classes": [
+      "M06"
+    ],
+    "code": "int fuel = 5;\nint burn = 0;\nint spare = 4;\nwhile (fuel = spare)\n{\n    spare = spare - 1;\n    burn = burn + fuel;\n}",
+    "question": "What is burn after the loop?",
+    "options": [
+      "10",
+      "0",
+      "4"
+    ],
+    "correct": "10",
+    "belief": {
+      "M06": "0"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The condition `fuel = spare` assigns spare to fuel, so it is true for spare 4, 3, 2, 1. The body adds each assigned fuel to burn: 4+3+2+1 = 10.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m06_ns_01",
+    "type": "next_state",
+    "concept": "conditions",
+    "classes": [
+      "M06"
+    ],
+    "code": "int x = 3;\nint y = 0;\nint i = 0;\nwhile (i < 4) {\n    if (x = 1) {\n        y = y + 5;\n    } else {\n        y = y + 10;\n    }\n    y = y + x;\n    i = i + 1;\n}",
+    "question": "What is y right after line 10 has run for the 2nd time?",
+    "options": [
+      "23",
+      "12",
+      "6",
+      "26"
+    ],
+    "correct": "12",
+    "belief": {
+      "M06": "26"
+    },
+    "state_query": {
+      "var": "y",
+      "after_line": 10,
+      "hit": 2
+    },
+    "expected": null,
+    "explain": "Line 5 assigns 1 to x and is true, so the if branch runs; line 10 adds that 1. Each loop adds 6 to y, so after line 10's second execution y is 12.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m06_po_01",
+    "type": "predict_output",
+    "concept": "conditions",
+    "classes": [
+      "M06"
+    ],
+    "code": "int mode = 1;\nif (mode = 2) {\n    printf(\"fast\");\n} else {\n    printf(\"slow\");\n}",
+    "question": "What does this print?",
+    "options": [
+      "fast",
+      "slow",
+      "2"
+    ],
+    "correct": "fast",
+    "belief": {
+      "M06": "slow"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Line 2 assigns 2 to mode with `=`, and the condition uses that stored value 2, so the if branch runs and prints \"fast\".",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m06_po_02",
+    "type": "predict_output",
+    "concept": "conditions",
+    "classes": [
+      "M06"
+    ],
+    "code": "int fuel = 0;\nwhile (fuel = 0) {\n    printf(\"burn\");\n    fuel = 1;\n}\nprintf(\"off\");",
+    "question": "What does this print?",
+    "options": [
+      "burnoff",
+      "burn",
+      "off"
+    ],
+    "correct": "off",
+    "belief": {
+      "M06": "burnoff"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The while condition `fuel = 0` is an assignment; it stores 0 in fuel and yields 0, so the condition is false and the loop body never runs. The program then prints `off`.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m06_rs_01",
+    "type": "reasoning",
+    "concept": "conditions",
+    "classes": [
+      "M06"
+    ],
+    "code": "float rate = 0.0;\nif (rate = 1.0) {\n    printf(\"%.1f\", rate);\n} else {\n    printf(\"zero\");\n}",
+    "question": "This prints \"1.0\". A classmate expected \"zero\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "Line 2 is an assignment, so it stores 1.0 in rate; that value is nonzero, so the if branch runs and prints rate as 1.0.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m07_mcq_01",
+    "type": "mcq",
+    "concept": "conditions",
+    "classes": [
+      "M07"
+    ],
+    "code": "int calc_hull(void) {\n    int hull = 80;\n    if (hull < 50);\n    {\n        hull = hull + 10;\n    }\n    return hull;\n}",
+    "question": "What does calc_hull() give?",
+    "options": [
+      "90",
+      "80",
+      "50"
+    ],
+    "correct": "90",
+    "belief": {
+      "M07": "80"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The semicolon after `if (hull < 50)` ends that statement, so the block always runs. `hull` starts at 80, adds 10, and returns 90.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m07_mcq_02",
+    "type": "mcq",
+    "concept": "conditions",
+    "classes": [
+      "M07"
+    ],
+    "code": "int calc_count(void) {\n    int count = 0;\n    while (count > 0);\n    {\n        count = count + 2;\n    }\n    return count;\n}",
+    "question": "What does calc_count() give?",
+    "options": [
+      "2",
+      "1",
+      "0"
+    ],
+    "correct": "2",
+    "belief": {
+      "M07": "0"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The semicolon after the while condition ends that statement, so the while body is empty. Since count starts at 0, the condition is false, the loop is skipped, and the block sets count to 2.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m07_ns_01",
+    "type": "next_state",
+    "concept": "conditions",
+    "classes": [
+      "M07"
+    ],
+    "code": "int x = 0;\nfor (int i = 0; i < 4; i = i + 1) {\n    if (i > 0);\n    {\n        x = x + i;\n    }\n}",
+    "question": "What is x right after line 5 has run for the 3rd time?",
+    "options": [
+      "5",
+      "3",
+      "6"
+    ],
+    "correct": "3",
+    "belief": {
+      "M07": "6"
+    },
+    "state_query": {
+      "var": "x",
+      "after_line": 5,
+      "hit": 3
+    },
+    "expected": null,
+    "explain": "The semicolon after `if (i > 0)` ends the if with an empty body, so the block below runs on every loop iteration. By the third run, i is 2, so x = 0 + 0 + 1 + 2 = 3.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m07_po_01",
+    "type": "predict_output",
+    "concept": "conditions",
+    "classes": [
+      "M07"
+    ],
+    "code": "int fuel = 3;\nif (fuel > 5);\n{\n    printf(\"launch\");\n}\nprintf(\"idle\");",
+    "question": "What does this print?",
+    "options": [
+      "idle",
+      "launchidle",
+      "launch",
+      "abort"
+    ],
+    "correct": "launchidle",
+    "belief": {
+      "M07": "idle"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The semicolon after `if (fuel > 5)` ends that if statement with an empty body, so the following block is independent and always runs, printing `launch`, then `idle` prints.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m07_po_02",
+    "type": "predict_output",
+    "concept": "conditions",
+    "classes": [
+      "M07"
+    ],
+    "code": "int probe;\nfor (probe = 2; probe < 5; probe++);\n{\n    printf(\"%d\", probe);\n}",
+    "question": "What does this print?",
+    "options": [
+      "5",
+      "4",
+      "2345",
+      "234"
+    ],
+    "correct": "5",
+    "belief": {
+      "M07": "234"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The semicolon after the for header is the loop's empty body, so the loop only increments probe from 2 to 5. The following block runs once after the loop and prints 5.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m07_rs_01",
+    "type": "reasoning",
+    "concept": "conditions",
+    "classes": [
+      "M07"
+    ],
+    "code": "int crew = 3;\nwhile (crew < 3);\n{\n    crew = crew + 1;\n}\nprintf(\"%d\", crew);",
+    "question": "This prints \"4\". A classmate expected \"3\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "The semicolon immediately after `while (crew < 3)` ends that statement, so the loop controls nothing. The following block runs once, increasing `crew` from 3 to 4, so `printf` prints 4.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m08_mcq_01",
+    "type": "mcq",
+    "concept": "arrays",
+    "classes": [
+      "M08"
+    ],
+    "code": "int arr[5] = {10, 20, 30, 40, 50};\nint total = 0;\nfor (int i = 1; i < 5; i = i + 1) {\n    total = total + arr[i];\n}",
+    "question": "What is total after the loop?",
+    "options": [
+      "150",
+      "100",
+      "140"
+    ],
+    "correct": "140",
+    "belief": {
+      "M08": "100"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop starts i at 1 and runs while i < 5, so it adds arr[1], arr[2], arr[3], and arr[4]: 20 + 30 + 40 + 50 = 140.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m08_mcq_02",
+    "type": "mcq",
+    "concept": "arrays",
+    "classes": [
+      "M08"
+    ],
+    "code": "int sum_from_one(int a[], int n) {\n    if (n == 1) {\n        return a[1];\n    } else {\n        return a[n] + sum_from_one(a, n - 1);\n    }\n}\nint arr[5] = {5, 10, 15, 20, 25};\nint result = sum_from_one(arr, 4);",
+    "question": "What is result after the call?",
+    "options": [
+      "70",
+      "50",
+      "75"
+    ],
+    "correct": "70",
+    "belief": {
+      "M08": "50"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The call returns a[4] plus recursion down to base case n==1, which returns a[1]; it sums indices 1 through 4: 10, 15, 20, 25, totaling 70.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m08_ns_01",
+    "type": "next_state",
+    "concept": "arrays",
+    "classes": [
+      "M08"
+    ],
+    "code": "int a[4] = {10, 20, 30, 40};\nint sum = 0;\nfor (int i = 1; i < 4; i++) {\n    sum = sum + a[i];\n}",
+    "question": "What is sum right after line 4 has run for the 2nd time?",
+    "options": [
+      "40",
+      "30",
+      "50"
+    ],
+    "correct": "50",
+    "belief": {
+      "M08": "30"
+    },
+    "state_query": {
+      "var": "sum",
+      "after_line": 4,
+      "hit": 2
+    },
+    "expected": null,
+    "explain": "In C, array indexing starts at 0, so a[1] is 20 and a[2] is 30. After the first loop iteration sum is 20; after the second it becomes 20 + 30 = 50.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m08_po_01",
+    "type": "predict_output",
+    "concept": "arrays",
+    "classes": [
+      "M08"
+    ],
+    "code": "int a[] = {9, 4, 6, 2};\nprintf(\"%d\", a[1]);",
+    "question": "What does this print?",
+    "options": [
+      "9",
+      "2",
+      "6",
+      "4"
+    ],
+    "correct": "4",
+    "belief": {
+      "M08": "9"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "In C, array indices start at 0, so a[1] accesses the second element of {9,4,6,2}, which is 4.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m08_po_02",
+    "type": "predict_output",
+    "concept": "arrays",
+    "classes": [
+      "M08"
+    ],
+    "code": "int a[] = {1, 2, 3, 4};\nint s = 0;\nint i;\nfor (i = 1; i < 4; i++) {\n    s = s + a[i];\n}\nprintf(\"%d\", s);",
+    "question": "What does this print?",
+    "options": [
+      "5",
+      "10",
+      "6",
+      "9"
+    ],
+    "correct": "9",
+    "belief": {
+      "M08": "6"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The loop starts at i=1 and runs while i<4, so it adds a[1], a[2], and a[3] (2+3+4) to s, yielding 9.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m08_rs_01",
+    "type": "reasoning",
+    "concept": "arrays",
+    "classes": [
+      "M08"
+    ],
+    "code": "char s[] = \"hello\";\nprintf(\"%c\", s[1]);",
+    "question": "This prints \"e\". A classmate expected \"h\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "Array indexing starts at 0, so s[1] selects the second character of \"hello\", which is 'e'.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m10_mcq_01",
+    "type": "mcq",
+    "concept": "functions",
+    "classes": [
+      "M10"
+    ],
+    "code": "int fuel_left(int reserve) {\n    int left = reserve * 2;\n    printf(\"%d \", left);\n    return 0;\n}\nint fuel = fuel_left(5);",
+    "question": "What is fuel after the code runs?",
+    "options": [
+      "10",
+      "2",
+      "5",
+      "0"
+    ],
+    "correct": "0",
+    "belief": {
+      "M10": "10"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The function prints 10 but returns 0. Since `fuel` is assigned the function's return value, not the printed output, fuel ends as 0.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m10_mcq_02",
+    "type": "mcq",
+    "concept": "functions",
+    "classes": [
+      "M10"
+    ],
+    "code": "int depth(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    int below = depth(n - 1);\n    printf(\"%d \", n + below);\n    return 0;\n}\nint result = depth(3);",
+    "question": "What is result after the code runs?",
+    "options": [
+      "6",
+      "1",
+      "0",
+      "3"
+    ],
+    "correct": "0",
+    "belief": {
+      "M10": "6"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "Each call returns 0, so depth(2) returns 0; depth(3) prints 3 and returns 0. Printing the values does not change what the calls return, so result is 0.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m10_ns_01",
+    "type": "next_state",
+    "concept": "functions",
+    "classes": [
+      "M10"
+    ],
+    "code": "int get_value(int x) {\n    printf(\"%d \", x);\n    return 0;\n}\nint total = 0;\nfor (int i = 1; i <= 3; i++) {\n    total = total + get_value(i);\n}\nprintf(\"%d\", total);",
+    "question": "What is total right after line 7 has run for the 3rd time?",
+    "options": [
+      "3",
+      "0",
+      "6",
+      "1"
+    ],
+    "correct": "0",
+    "belief": {
+      "M10": "6"
+    },
+    "state_query": {
+      "var": "total",
+      "after_line": 7,
+      "hit": 3
+    },
+    "expected": null,
+    "explain": "The function `get_value` prints its argument but returns `0` every call, so line 7 adds `0` each time. After the third call `total` remains `0`, matching the final printed `0`.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m10_po_01",
+    "type": "predict_output",
+    "concept": "functions",
+    "classes": [
+      "M10"
+    ],
+    "code": "int add(int a, int b) {\n    int sum = a + b;\n    printf(\"%d \", sum);\n    return 0;\n}\nint result = add(3, 4);\nprintf(\"%d\", result);",
+    "question": "What does this print?",
+    "options": [
+      "7 0",
+      "7",
+      "7 7"
+    ],
+    "correct": "7 0",
+    "belief": {
+      "M10": "7 7"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The add call prints sum (7), then returns 0. That return value is stored in result, so the final printf prints 0, giving 7 0.",
+    "difficulty": 1,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m10_po_02",
+    "type": "predict_output",
+    "concept": "functions",
+    "classes": [
+      "M10"
+    ],
+    "code": "float average(int a, int b) {\n    float avg = (a + b) / 2.0;\n    printf(\"%.1f \", avg);\n    return 0;\n}\nfloat result = average(5, 6);\nprintf(\"%.1f\", result);",
+    "question": "What does this print?",
+    "options": [
+      "5.5 5.5",
+      "5.5",
+      "5.5 0.0"
+    ],
+    "correct": "5.5 0.0",
+    "belief": {
+      "M10": "5.5 5.5"
+    },
+    "state_query": null,
+    "expected": null,
+    "explain": "The function prints 5.5 itself, then returns 0, not avg. The caller stores that 0 in result and prints it as 0.0.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  },
+  {
+    "item_id": "qz_m10_rs_01",
+    "type": "reasoning",
+    "concept": "functions",
+    "classes": [
+      "M10"
+    ],
+    "code": "int sum(int arr[], int n) {\n    int total = 0;\n    for (int i = 0; i < n; i = i + 1) {\n        total = total + arr[i];\n    }\n    printf(\"%d \", total);\n    return 0;\n}\nint nums[3] = {2, 4, 6};\nint s = sum(nums, 3);\nprintf(\"%d\", s + 10);",
+    "question": "This prints \"12 10\". A classmate expected \"12 22\". In one sentence: why?",
+    "options": [],
+    "correct": null,
+    "belief": {},
+    "state_query": null,
+    "expected": "CORRECT_REASON",
+    "explain": "The function prints the total 12, then returns 0; the caller sets s to 0, so s + 10 is 10, giving the output 12 10.",
+    "difficulty": 2,
+    "verified": {
+      "interp": true,
+      "gcc": true,
+      "manual": false
+    }
+  }
+]

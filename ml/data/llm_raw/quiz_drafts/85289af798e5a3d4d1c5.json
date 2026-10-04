@@ -1,0 +1,79 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 5 exercises about one beginner mistake.\n\nThe mistake: Arrays start at 0; last cell is n−1.\nA student who makes it believes: \"Arrays are indexed 1..n\".\nHow it shows in code: an `int` array with an initialiser that is read as if its first cell were index 1: `a[1]` used as the first value, or a loop `for (i = 1; i < n; i++)` that skips `a[0]`. Every index must stay inside the array..\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with every array index shifted down by one (`a[i]` becomes `a[i - 1]`, `a[1]` becomes `a[0]`): the cells a student who counts from 1 thinks are being read. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: multiple choice about a value.\n- `code` prints nothing.\n- `question` asks for one value once the code has run, for example \"What is total after the loop?\" or \"What does depth(3) give?\".\n- `tail` is one printf statement that prints exactly that value. I append it to both fragments, so both must use the same names.\n- `distractors`: two other values a student might guess, written the way the tail prints them.\nJSON shape: {\"items\": [{\"code\": \"...\", \"question\": \"...\", \"tail\": \"printf(...);\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 5 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int arr[5] = {10, 20, 30, 40, 50};\\nint total = 0;\\nfor (int i = 1; i < 5; i = i + 1) {\\n    total = total + arr[i];\\n}\\n\",\n      \"question\": \"What is total after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", total);\",\n      \"belief_code\": \"int arr[5] = {10, 20, 30, 40, 50};\\nint total = 0;\\nfor (int i = 1; i < 5; i = i + 1) {\\n    total = total + arr[i - 1];\\n}\\n\",\n      \"distractors\": [\"100\", \"150\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int sum_from_one(int a[], int n) {\\n    if (n == 1) {\\n        return a[1];\\n    } else {\\n        return a[n] + sum_from_one(a, n - 1);\\n    }\\n}\\nint arr[5] = {5, 10, 15, 20, 25};\\nint result = sum_from_one(arr, 4);\\n\",\n      \"question\": \"What is result after the call?\",\n      \"tail\": \"printf(\\\"%d\\\", result);\",\n      \"belief_code\": \"int sum_from_one(int a[], int n) {\\n    if (n == 1) {\\n        return a[0];\\n    } else {\\n        return a[n - 1] + sum_from_one(a, n - 1);\\n    }\\n}\\nint arr[5] = {5, 10, 15, 20, 25};\\nint result = sum_from_one(arr, 4);\\n\",\n      \"distractors\": [\"50\", \"75\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"char word[] = \\\"banana\\\";\\nint count = 0;\\nfor (int i = 1; word[i] != '\\\\0'; i = i + 1) {\\n    if (word[i] == 'a') {\\n        count = count + 1;\\n    }\\n}\\n\",\n      \"question\": \"What is count after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", count);\",\n      \"belief_code\": \"char word[] = \\\"banana\\\";\\nint count = 0;\\nfor (int i = 1; word[i - 1] != '\\\\0'; i = i + 1) {\\n    if (word[i - 1] == 'a') {\\n        count = count + 1;\\n    }\\n}\\n\",\n      \"distractors\": [\"2\", \"1\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int values[5] = {100, 30, 40, 20, 50};\\nint max = values[1];\\nfor (int i = 2; i < 5; i = i + 1) {\\n    if (values[i] > max) {\\n        max = values[i];\\n    }\\n}\\n\",\n      \"question\": \"What is max after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", max);\",\n      \"belief_code\": \"int values[5] = {100, 30, 40, 20, 50};\\nint max = values[0];\\nfor (int i = 2; i < 5; i = i + 1) {\\n    if (values[i - 1] > max) {\\n        max = values[i - 1];\\n    }\\n}\\n\",\n      \"distractors\": [\"100\", \"40\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int mystery(int a[], int n) {\\n    int i = n;\\n    while (i > 0) {\\n        if (a[i] < a[1]) {\\n            return i;\\n        }\\n        i = i - 1;\\n    }\\n    return 0;\\n}\\nint arr[6] = {50, 30, 40, 20, 60, 10};\\nint result = mystery(arr, 5);\\n\",\n      \"question\": \"What is result after the call?\",\n      \"tail\": \"printf(\\\"%d\\\", result);\",\n      \"belief_code\": \"int mystery(int a[], int n) {\\n    int i = n;\\n    while (i > 0) {\\n        if (a[i - 1] < a[0]) {\\n            return i;\\n        }\\n        i = i - 1;\\n    }\\n    return 0;\\n}\\nint arr[6] = {50, 30, 40, 20, 60, 10};\\nint result = mystery(arr, 5);\\n\",\n      \"distractors\": [\"4\", \"1\"],\n      \"difficulty\": 3\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int arr[5] = {10, 20, 30, 40, 50};\nint total = 0;\nfor (int i = 1; i < 5; i = i + 1) {\n    total = total + arr[i];\n}\n",
+        "question": "What is total after the loop?",
+        "tail": "printf(\"%d\", total);",
+        "belief_code": "int arr[5] = {10, 20, 30, 40, 50};\nint total = 0;\nfor (int i = 1; i < 5; i = i + 1) {\n    total = total + arr[i - 1];\n}\n",
+        "distractors": [
+          "100",
+          "150"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int sum_from_one(int a[], int n) {\n    if (n == 1) {\n        return a[1];\n    } else {\n        return a[n] + sum_from_one(a, n - 1);\n    }\n}\nint arr[5] = {5, 10, 15, 20, 25};\nint result = sum_from_one(arr, 4);\n",
+        "question": "What is result after the call?",
+        "tail": "printf(\"%d\", result);",
+        "belief_code": "int sum_from_one(int a[], int n) {\n    if (n == 1) {\n        return a[0];\n    } else {\n        return a[n - 1] + sum_from_one(a, n - 1);\n    }\n}\nint arr[5] = {5, 10, 15, 20, 25};\nint result = sum_from_one(arr, 4);\n",
+        "distractors": [
+          "50",
+          "75"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "char word[] = \"banana\";\nint count = 0;\nfor (int i = 1; word[i] != '\\0'; i = i + 1) {\n    if (word[i] == 'a') {\n        count = count + 1;\n    }\n}\n",
+        "question": "What is count after the loop?",
+        "tail": "printf(\"%d\", count);",
+        "belief_code": "char word[] = \"banana\";\nint count = 0;\nfor (int i = 1; word[i - 1] != '\\0'; i = i + 1) {\n    if (word[i - 1] == 'a') {\n        count = count + 1;\n    }\n}\n",
+        "distractors": [
+          "2",
+          "1"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int values[5] = {100, 30, 40, 20, 50};\nint max = values[1];\nfor (int i = 2; i < 5; i = i + 1) {\n    if (values[i] > max) {\n        max = values[i];\n    }\n}\n",
+        "question": "What is max after the loop?",
+        "tail": "printf(\"%d\", max);",
+        "belief_code": "int values[5] = {100, 30, 40, 20, 50};\nint max = values[0];\nfor (int i = 2; i < 5; i = i + 1) {\n    if (values[i - 1] > max) {\n        max = values[i - 1];\n    }\n}\n",
+        "distractors": [
+          "100",
+          "40"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int mystery(int a[], int n) {\n    int i = n;\n    while (i > 0) {\n        if (a[i] < a[1]) {\n            return i;\n        }\n        i = i - 1;\n    }\n    return 0;\n}\nint arr[6] = {50, 30, 40, 20, 60, 10};\nint result = mystery(arr, 5);\n",
+        "question": "What is result after the call?",
+        "tail": "printf(\"%d\", result);",
+        "belief_code": "int mystery(int a[], int n) {\n    int i = n;\n    while (i > 0) {\n        if (a[i - 1] < a[0]) {\n            return i;\n        }\n        i = i - 1;\n    }\n    return 0;\n}\nint arr[6] = {50, 30, 40, 20, 60, 10};\nint result = mystery(arr, 5);\n",
+        "distractors": [
+          "4",
+          "1"
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 808,
+    "completion_tokens": 16409
+  }
+}

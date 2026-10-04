@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  float f[] = {2.5, 1.0, 3.0, 1.5};\n 2  int n = 4;\n 3  for (int i = 0; i < n - 1; i = i + 1) {\n 4      if (f[i] > f[i + 1]) {\n 5          float t = f[i];\n 6          f[i] = f[i + 1];\n 7          f[i + 1] = t;\n 8      }\n 9  }\n10  printf(\"%.1f %.1f %.1f %.1f\", f[0], f[1], f[2], f[3]);\n\nQuestion: What does this print?\nThe right answer, found by running the code: 1.0 2.5 1.5 3.0\nCommon wrong answer: a student who believes \"One pass over the array sorts it\" expects 1.0 1.5 2.5 3.0\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 3 ran its body 3 times.\n- Values when the shown code finished: n = 4, i = 3, t = 3.0.\n- The shown code printed: '1.0 2.5 1.5 3.0'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The loop only swaps adjacent out-of-order pairs once, so it moves 2.5 past 1.0 and 3.0 past 1.5, leaving 2.5 before 3.0; the final values are 1.0, 2.5, 1.5, 3.0.\"}",
+  "parsed": {
+    "explain": "The loop only swaps adjacent out-of-order pairs once, so it moves 2.5 past 1.0 and 3.0 past 1.5, leaving 2.5 before 3.0; the final values are 1.0, 2.5, 1.5, 3.0."
+  },
+  "usage": {
+    "prompt_tokens": 542,
+    "completion_tokens": 682
+  }
+}

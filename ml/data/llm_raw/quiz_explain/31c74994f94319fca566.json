@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int a = 5;\n 2  int b = 2;\n 3  float result = a / b;\n\nQuestion: What is result after the code runs?\nThe right answer, found by running the code: 2.0\nCommon wrong answer: a student who believes \"int / int gives the exact decimal\" expects 2.5\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 3 divides two ints, so the fraction is dropped before the result is stored in a float.\n- Values when the shown code finished: a = 5, b = 2, result = 2.0.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"Line 3 performs integer division on a and b, so it drops the fractional part and produces 2, which is then stored in the float variable result as 2.0.\"}",
+  "parsed": {
+    "explain": "Line 3 performs integer division on a and b, so it drops the fractional part and produces 2, which is then stored in the float variable result as 2.0."
+  },
+  "usage": {
+    "prompt_tokens": 382,
+    "completion_tokens": 289
+  }
+}

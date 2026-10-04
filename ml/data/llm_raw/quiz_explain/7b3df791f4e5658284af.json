@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int arr[5] = {10, 20, 30, 40, 50};\n 2  int total = 0;\n 3  for (int i = 1; i < 5; i = i + 1) {\n 4      total = total + arr[i];\n 5  }\n\nQuestion: What is total after the loop?\nThe right answer, found by running the code: 140\nCommon wrong answer: a student who believes \"Arrays are indexed 1..n\" expects 100\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 3 ran its body 4 times.\n- Values when the shown code finished: total = 140, i = 5.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The loop starts i at 1 and runs while i < 5, so it adds arr[1], arr[2], arr[3], and arr[4]: 20 + 30 + 40 + 50 = 140.\"}",
+  "parsed": {
+    "explain": "The loop starts i at 1 and runs while i < 5, so it adds arr[1], arr[2], arr[3], and arr[4]: 20 + 30 + 40 + 50 = 140."
+  },
+  "usage": {
+    "prompt_tokens": 404,
+    "completion_tokens": 233
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int find(int arr[], int lo, int hi, int val, int dep) {\n 2      if (dep == 0) {\n 3          return lo;\n 4      }\n 5      int mid = (lo + hi) / 2;\n 6      if (arr[mid] < val) {\n 7          return find(arr, mid, hi, val, dep - 1);\n 8      }\n 9      return find(arr, lo, mid - 1, val, dep - 1);\n10  }\n11  int a[4] = {1, 4, 6, 9};\n12  int result = find(a, 0, 3, 7, 3);\n\nQuestion: What does find(a, 0, 3, 7, 3) return?\nThe right answer, found by running the code: 2\nCommon wrong answer: a student who believes \"mid is excluded from the window automatically\" expects 3\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Values when the shown code finished: result = 2.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"When arr[mid] is less than val, the code keeps mid as the new lower bound and recurses. After three calls dep reaches 0, so it returns lo, which is 2.\"}",
+  "parsed": {
+    "explain": "When arr[mid] is less than val, the code keeps mid as the new lower bound and recurses. After three calls dep reaches 0, so it returns lo, which is 2."
+  },
+  "usage": {
+    "prompt_tokens": 481,
+    "completion_tokens": 392
+  }
+}

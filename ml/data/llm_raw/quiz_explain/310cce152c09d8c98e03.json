@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int crew[5] = {4, 6, 2, 5, 1};\n 2  int i;\n 3  int tmp;\n 4  for (i = 3; i >= 0; i = i - 1) {\n 5      if (crew[i] > crew[i + 1]) {\n 6          tmp = crew[i];\n 7          crew[i] = crew[i + 1];\n 8          crew[i + 1] = tmp;\n 9      }\n10  }\n\nQuestion: What is crew[2] after the code runs?\nThe right answer, found by running the code: 6\nCommon wrong answer: a student who believes \"One pass over the array sorts it\" expects 4\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 4 ran its body 4 times.\n- Values when the shown code finished: i = -1, tmp = 4.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\":\"The loop makes four adjacent swaps from i=3 down to i=0: indices 3 and 4, 2 and 3, 1 and 2, then 0 and 1. The 6 initially at index 1 moves to index 2.\"}",
+  "parsed": {
+    "explain": "The loop makes four adjacent swaps from i=3 down to i=0: indices 3 and 4, 2 and 3, 1 and 2, then 0 and 1. The 6 initially at index 1 moves to index 2."
+  },
+  "usage": {
+    "prompt_tokens": 452,
+    "completion_tokens": 919
+  }
+}

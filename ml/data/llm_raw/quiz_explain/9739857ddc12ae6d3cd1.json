@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int fuel;\n 2  int burned;\n 3  burned = 0;\n 4  while (burned < 3) {\n 5      fuel = fuel + 2;\n 6      burned = burned + 1;\n 7  }\n\nQuestion: What is fuel right after line 5 has run for the 2nd time?\nThe right answer, found by running the code: unpredictable\nCommon wrong answer: a student who believes \"Local variables start at 0\" expects 4\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 4 ran its body 3 times.\n- Line 5 reads fuel before it was given a value; C does not define what it holds.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"Line 5 reads fuel before any value was assigned to it, so because C does not define what uninitialized fuel holds, the result after the second run is unpredictable.\"}",
+  "parsed": {
+    "explain": "Line 5 reads fuel before any value was assigned to it, so because C does not define what uninitialized fuel holds, the result after the second run is unpredictable."
+  },
+  "usage": {
+    "prompt_tokens": 400,
+    "completion_tokens": 816
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  void run(void) {\n 2      int fuel = 10, total = 0;\n 3      int i;\n 4      int j;\n 5      for (i = 0; i <= 3; i++) {\n 6          fuel = fuel - 2;\n 7      }\n 8      for (j = 0; j < 5; j++) {\n 9          total = total + fuel;\n10      }\n11  }\n12  run();\n\nQuestion: What is total right after line 9 has run for the 3rd time?\nThe right answer, found by running the code: 6\nCommon wrong answer: a student who believes \"`i<=n` (from 0) runs n times; whether the bound is the last value included or excluded is mixed up\" expects 12\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 5 ran its body 4 times.\n- The loop on line 8 ran its body 5 times.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The first loop subtracts 2 from fuel four times, leaving fuel at 2. Then each execution of line 9 adds 2 to total, so after the third execution total is 6.\"}",
+  "parsed": {
+    "explain": "The first loop subtracts 2 from fuel four times, leaving fuel at 2. Then each execution of line 9 adds 2 to total, so after the third execution total is 6."
+  },
+  "usage": {
+    "prompt_tokens": 462,
+    "completion_tokens": 267
+  }
+}

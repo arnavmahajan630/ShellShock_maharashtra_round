@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int sum_odd(int n) {\n 2      if (n == 0) {\n 3          return 0;\n 4      }\n 5      return n + sum_odd(n - 2);\n 6  }\n 7  int total = sum_odd(5);\n\nQuestion: What is total after the code runs?\nThe right answer, found by running the code: never stops\nCommon wrong answer: a student who believes \"Recursion stops by itself when the work is done\" expects 9\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run never ends.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The function subtracts 2 on each call and only returns without recursing when n is 0. Starting from 5, the calls go 5, 3, 1, -1, -3, never reaching 0, so it keeps calling forever.\"}",
+  "parsed": {
+    "explain": "The function subtracts 2 on each call and only returns without recursing when n is 0. Starting from 5, the calls go 5, 3, 1, -1, -3, never reaching 0, so it keeps calling forever."
+  },
+  "usage": {
+    "prompt_tokens": 368,
+    "completion_tokens": 640
+  }
+}

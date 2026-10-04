@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int secret = 7;\n 2  int low = 1, high = 8;\n 3  int guesses = 0;\n 4  while (low < high) {\n 5      int mid = (low + high) / 2;\n 6      guesses++;\n 7      if (mid < secret) {\n 8          low = mid;\n 9      } else {\n10          high = mid;\n11      }\n12  }\n13  printf(\"%d\", guesses);\n\nQuestion: What does this print?\nThe right answer, found by running the code: never stops\nCommon wrong answer: a student who believes \"mid is excluded from the window automatically\" expects 3; a student who believes \"The loop variable advances by itself and the loop ends by itself\" expects 3\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run never ends.\n- Values that no longer change while it runs: secret = 7, low = 6, high = 7, mid = 6.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"When low is 6 and high is 7, mid becomes 6; since mid < secret, low = mid leaves low at 6. Thus low < high remains true forever, so guesses keeps incrementing.\"}",
+  "parsed": {
+    "explain": "When low is 6 and high is 7, mid becomes 6; since mid < secret, low = mid leaves low at 6. Thus low < high remains true forever, so guesses keeps incrementing."
+  },
+  "usage": {
+    "prompt_tokens": 456,
+    "completion_tokens": 622
+  }
+}

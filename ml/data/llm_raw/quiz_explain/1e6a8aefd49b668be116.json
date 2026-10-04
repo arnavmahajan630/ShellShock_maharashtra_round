@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int secret = 80;\n 2  int low = 0, high = 99;\n 3  int guess;\n 4  for (int attempts = 0; attempts < 7; attempts = attempts + 1) {\n 5      guess = (low + high) / 2;\n 6      if (guess < secret) {\n 7          low = guess;\n 8      } else {\n 9          high = guess - 1;\n10      }\n11  }\n12  printf(\"%d\\n\", low);\n\nQuestion: This prints \"79\". A classmate expected \"80\". In one sentence: why?\nThe right answer, found by running the code: 79\nCommon wrong answer: a student who believes \"mid is excluded from the window automatically\" expects 80\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 4 ran its body 7 times.\n- Values when the shown code finished: secret = 80, low = 79, high = 79, guess = 79, attempts = 7.\n- The shown code printed: '79\\n'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The code sets high = guess - 1 even when guess equals secret, so once guess reaches 80 it excludes secret; low remains 79 and is printed.\"}",
+  "parsed": {
+    "explain": "The code sets high = guess - 1 even when guess equals secret, so once guess reaches 80 it excludes secret; low remains 79 and is printed."
+  },
+  "usage": {
+    "prompt_tokens": 484,
+    "completion_tokens": 410
+  }
+}

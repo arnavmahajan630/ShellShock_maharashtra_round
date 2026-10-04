@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int burns(int fuel) {\n 2      if (fuel <= 0) {\n 3          return 0;\n 4      }\n 5      return burns(fuel + 2) + 1;\n 6  }\n 7  int count = burns(6);\n\nQuestion: What is count after the code runs?\nThe right answer, found by running the code: never stops\nCommon wrong answer: a student who believes \"The recursive call moves toward the base case on its own\" expects 3\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run never ends.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The call burns(6) calls burns(8), then burns(10), and so on; fuel moves further above the base case fuel <= 0, so the recursion never ends.\"}",
+  "parsed": {
+    "explain": "The call burns(6) calls burns(8), then burns(10), and so on; fuel moves further above the base case fuel <= 0, so the recursion never ends."
+  },
+  "usage": {
+    "prompt_tokens": 366,
+    "completion_tokens": 363
+  }
+}

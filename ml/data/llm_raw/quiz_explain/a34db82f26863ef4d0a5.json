@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  char s[] = \"ab\";\n 2  int i = 0;\n 3  int total = 0;\n 4  int bonus = 0;\n 5  while (s[i] != '\\0') {\n 6      if (s[i] == \"a\") {\n 7          bonus = bonus + 1;\n 8      }\n 9      total = total + bonus;\n10      i = i + 1;\n11  }\n\nQuestion: What is total right after line 9 has run for the 2nd time?\nThe right answer, found by running the code: 0\nCommon wrong answer: a student who believes \"`==` compares text\" expects 2\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 5 ran its body 2 times.\n- Line 6 compares a char with a string literal; that comparison is false.\n- Values when the shown code finished: i = 2, total = 0, bonus = 0.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"Line 6 compares the char s[i] with the address of the string literal \\\"a\\\"; that comparison is false. Since bonus stays 0, line 9 adds 0 to total both times.\"}",
+  "parsed": {
+    "explain": "Line 6 compares the char s[i] with the address of the string literal \"a\"; that comparison is false. Since bonus stays 0, line 9 adds 0 to total both times."
+  },
+  "usage": {
+    "prompt_tokens": 461,
+    "completion_tokens": 320
+  }
+}

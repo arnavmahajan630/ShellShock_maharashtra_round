@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int secret = 42;\n 2  int low = 0, high = 100;\n 3  int steps = 4;\n 4  while (steps > 0) {\n 5      int guess = (low + high) / 2;\n 6      if (guess < secret) {\n 7          low = guess;\n 8      } else {\n 9          high = guess - 1;\n10      }\n11      steps = steps - 1;\n12  }\n\nQuestion: What is low after the loop?\nThe right answer, found by running the code: 36\nCommon wrong answer: a student who believes \"mid is excluded from the window automatically\" expects 38\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 4 ran its body 4 times.\n- Values when the shown code finished: secret = 42, low = 36, high = 41, steps = 0, guess = 42.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The final iteration set guess to (36 + 49) / 2 = 42; since 42 < 42 is false, the else branch set high to 41 and left low unchanged at 36.\"}",
+  "parsed": {
+    "explain": "The final iteration set guess to (36 + 49) / 2 = 42; since 42 < 42 is false, the else branch set high to 41 and left low unchanged at 36."
+  },
+  "usage": {
+    "prompt_tokens": 454,
+    "completion_tokens": 665
+  }
+}

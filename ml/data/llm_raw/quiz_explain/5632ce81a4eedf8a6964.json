@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int depth(int n) {\n 2      if (n == 0) {\n 3          return 0;\n 4      }\n 5      int below = depth(n - 1);\n 6      printf(\"%d \", n + below);\n 7      return 0;\n 8  }\n 9  int result = depth(3);\n\nQuestion: What is result after the code runs?\nThe right answer, found by running the code: 0\nCommon wrong answer: a student who believes \"Printing the value hands it back to the caller\" expects 6\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Values when the shown code finished: result = 0.\n- The shown code printed: '1 2 3 '.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\":\"Each call returns 0, so depth(2) returns 0; depth(3) prints 3 and returns 0. Printing the values does not change what the calls return, so result is 0.\"}",
+  "parsed": {
+    "explain": "Each call returns 0, so depth(2) returns 0; depth(3) prints 3 and returns 0. Printing the values does not change what the calls return, so result is 0."
+  },
+  "usage": {
+    "prompt_tokens": 407,
+    "completion_tokens": 438
+  }
+}

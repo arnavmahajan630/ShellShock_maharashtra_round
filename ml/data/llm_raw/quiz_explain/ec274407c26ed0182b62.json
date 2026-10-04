@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int a[4] = {10, 20, 30, 40};\n 2  int sum = 0;\n 3  for (int i = 1; i < 4; i++) {\n 4      sum = sum + a[i];\n 5  }\n\nQuestion: What is sum right after line 4 has run for the 2nd time?\nThe right answer, found by running the code: 50\nCommon wrong answer: a student who believes \"Arrays are indexed 1..n\" expects 30\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 3 ran its body 3 times.\n- Values when the shown code finished: sum = 90, i = 4.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"In C, array indexing starts at 0, so a[1] is 20 and a[2] is 30. After the first loop iteration sum is 20; after the second it becomes 20 + 30 = 50.\"}",
+  "parsed": {
+    "explain": "In C, array indexing starts at 0, so a[1] is 20 and a[2] is 30. After the first loop iteration sum is 20; after the second it becomes 20 + 30 = 50."
+  },
+  "usage": {
+    "prompt_tokens": 406,
+    "completion_tokens": 456
+  }
+}

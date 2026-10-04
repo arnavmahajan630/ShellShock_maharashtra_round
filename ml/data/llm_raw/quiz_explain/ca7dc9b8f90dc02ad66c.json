@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int fuel = 3;\n 2  if (fuel > 5);\n 3  {\n 4      printf(\"launch\");\n 5  }\n 6  printf(\"idle\");\n\nQuestion: What does this print?\nThe right answer, found by running the code: launchidle\nCommon wrong answer: a student who believes \"A `;` after the header is harmless\" expects idle\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 2: the `;` right after the if header ends that statement, so it controls nothing after it.\n- Values when the shown code finished: fuel = 3.\n- The shown code printed: 'launchidle'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The semicolon after `if (fuel > 5)` ends that if statement with an empty body, so the following block is independent and always runs, printing `launch`, then `idle` prints.\"}",
+  "parsed": {
+    "explain": "The semicolon after `if (fuel > 5)` ends that if statement with an empty body, so the following block is independent and always runs, printing `launch`, then `idle` prints."
+  },
+  "usage": {
+    "prompt_tokens": 394,
+    "completion_tokens": 338
+  }
+}

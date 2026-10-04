@@ -1,0 +1,78 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 6 exercises about one beginner mistake.\n\nThe mistake: Binary search window never shrinks (`low = mid`).\nA student who makes it believes: \"mid is excluded from the window automatically\".\nHow it shows in code: a binary search over a sorted array (or a number-guessing loop) that narrows the window with `low = mid;` instead of `low = mid + 1;`, with values chosen so that the window stops shrinking and the loop never ends.\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with `low = mid + 1;` (and `high = mid - 1;`). Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: predict the output.\n- `code` prints its result with printf as one short line (at most 20 characters).\n- `belief_code` prints what the student expects, in the same format.\n- `distractors`: two other short outputs a student might guess, in the same format.\nJSON shape: {\"items\": [{\"code\": \"...\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 6 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int a[5] = {2, 4, 6, 8, 10};\\nint target = 8;\\nint low = 0, high = 4;\\nfor (int i = 0; i < 5; i = i + 1) {\\n    int mid = (low + high) / 2;\\n    if (a[mid] < target) {\\n        low = mid;\\n    } else {\\n        high = mid - 1;\\n    }\\n}\\nprintf(\\\"%d\\\\n\\\", low);\",\n      \"belief_code\": \"int a[5] = {2, 4, 6, 8, 10};\\nint target = 8;\\nint low = 0, high = 4;\\nfor (int i = 0; i < 5; i = i + 1) {\\n    int mid = (low + high) / 2;\\n    if (a[mid] < target) {\\n        low = mid + 1;\\n    } else {\\n        high = mid - 1;\\n    }\\n}\\nprintf(\\\"%d\\\\n\\\", low);\",\n      \"distractors\": [\"4\\n\", \"0\\n\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int arr[8] = {1, 3, 5, 7, 9, 11, 13, 15};\\nint target = 13;\\nint left = 0, right = 7;\\nfor (int count = 0; count < 6; count = count + 1) {\\n    int mid = (left + right) / 2;\\n    if (arr[mid] < target) {\\n        left = mid;\\n    } else {\\n        right = mid - 1;\\n    }\\n}\\nprintf(\\\"%d\\\\n\\\", left);\",\n      \"belief_code\": \"int arr[8] = {1, 3, 5, 7, 9, 11, 13, 15};\\nint target = 13;\\nint left = 0, right = 7;\\nfor (int count = 0; count < 6; count = count + 1) {\\n    int mid = (left + right) / 2;\\n    if (arr[mid] < target) {\\n        left = mid + 1;\\n    } else {\\n        right = mid - 1;\\n    }\\n}\\nprintf(\\\"%d\\\\n\\\", left);\",\n      \"distractors\": [\"7\\n\", \"4\\n\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int secret = 80;\\nint low = 0, high = 99;\\nint guess;\\nfor (int attempts = 0; attempts < 7; attempts = attempts + 1) {\\n    guess = (low + high) / 2;\\n    if (guess < secret) {\\n        low = guess;\\n    } else {\\n        high = guess - 1;\\n    }\\n}\\nprintf(\\\"%d\\\\n\\\", low);\",\n      \"belief_code\": \"int secret = 80;\\nint low = 0, high = 99;\\nint guess;\\nfor (int attempts = 0; attempts < 7; attempts = attempts + 1) {\\n    guess = (low + high) / 2;\\n    if (guess < secret) {\\n        low = guess + 1;\\n    } else {\\n        high = guess - 1;\\n    }\\n}\\nprintf(\\\"%d\\\\n\\\", low);\",\n      \"distractors\": [\"78\\n\", \"81\\n\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int nums[6] = {3, 6, 9, 12, 15, 18};\\nint goal = 18;\\nint low = 0, high = 5;\\nfor (int i = 0; i < 6; i = i + 1) {\\n    int mid = (low + high) / 2;\\n    if (nums[mid] < goal) {\\n        low = mid;\\n    } else {\\n        high = mid - 1;\\n    }\\n}\\nprintf(\\\"%d\\\\n\\\", nums[low]);\",\n      \"belief_code\": \"int nums[6] = {3, 6, 9, 12, 15, 18};\\nint goal = 18;\\nint low = 0, high = 5;\\nfor (int i = 0; i < 6; i = i + 1) {\\n    int mid = (low + high) / 2;\\n    if (nums[mid] < goal) {\\n        low = mid + 1;\\n    } else {\\n        high = mid - 1;\\n    }\\n}\\nprintf(\\\"%d\\\\n\\\", nums[low]);\",\n      \"distractors\": [\"12\\n\", \"9\\n\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"char letters[7] = {'a', 'c', 'e', 'g', 'i', 'k', 'm'};\\nchar target = 'k';\\nint low = 0, high = 6;\\nfor (int steps = 0; steps < 5; steps = steps + 1) {\\n    int mid = (low + high) / 2;\\n    if (letters[mid] < target) {\\n        low = mid;\\n    } else {\\n        high = mid - 1;\\n    }\\n}\\nprintf(\\\"%c\\\\n\\\", letters[low]);\",\n      \"belief_code\": \"char letters[7] = {'a', 'c', 'e', 'g', 'i', 'k', 'm'};\\nchar target = 'k';\\nint low = 0, high = 6;\\nfor (int steps = 0; steps < 5; steps = steps + 1) {\\n    int mid = (low + high) / 2;\\n    if (letters[mid] < target) {\\n        low = mid + 1;\\n    } else {\\n        high = mid - 1;\\n    }\\n}\\nprintf(\\\"%c\\\\n\\\", letters[low]);\",\n      \"distractors\": [\"g\\n\", \"m\\n\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int secret = 90;\\nint low = 0, high = 100;\\nfor (int tries = 0; tries < 10; tries = tries + 1) {\\n    int mid = (low + high) / 2;\\n    if (mid < secret) {\\n        low = mid;\\n    } else {\\n        high = mid - 1;\\n    }\\n}\\nprintf(\\\"%d\\\\n\\\", low + high);\",\n      \"belief_code\": \"int secret = 90;\\nint low = 0, high = 100;\\nfor (int tries = 0; tries < 10; tries = tries + 1) {\\n    int mid = (low + high) / 2;\\n    if (mid < secret) {\\n        low = mid + 1;\\n    } else {\\n        high = mid - 1;\\n    }\\n}\\nprintf(\\\"%d\\\\n\\\", low + high);\",\n      \"distractors\": [\"180\\n\", \"177\\n\"],\n      \"difficulty\": 3\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int a[5] = {2, 4, 6, 8, 10};\nint target = 8;\nint low = 0, high = 4;\nfor (int i = 0; i < 5; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (a[mid] < target) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", low);",
+        "belief_code": "int a[5] = {2, 4, 6, 8, 10};\nint target = 8;\nint low = 0, high = 4;\nfor (int i = 0; i < 5; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (a[mid] < target) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", low);",
+        "distractors": [
+          "4\n",
+          "0\n"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int arr[8] = {1, 3, 5, 7, 9, 11, 13, 15};\nint target = 13;\nint left = 0, right = 7;\nfor (int count = 0; count < 6; count = count + 1) {\n    int mid = (left + right) / 2;\n    if (arr[mid] < target) {\n        left = mid;\n    } else {\n        right = mid - 1;\n    }\n}\nprintf(\"%d\\n\", left);",
+        "belief_code": "int arr[8] = {1, 3, 5, 7, 9, 11, 13, 15};\nint target = 13;\nint left = 0, right = 7;\nfor (int count = 0; count < 6; count = count + 1) {\n    int mid = (left + right) / 2;\n    if (arr[mid] < target) {\n        left = mid + 1;\n    } else {\n        right = mid - 1;\n    }\n}\nprintf(\"%d\\n\", left);",
+        "distractors": [
+          "7\n",
+          "4\n"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int secret = 80;\nint low = 0, high = 99;\nint guess;\nfor (int attempts = 0; attempts < 7; attempts = attempts + 1) {\n    guess = (low + high) / 2;\n    if (guess < secret) {\n        low = guess;\n    } else {\n        high = guess - 1;\n    }\n}\nprintf(\"%d\\n\", low);",
+        "belief_code": "int secret = 80;\nint low = 0, high = 99;\nint guess;\nfor (int attempts = 0; attempts < 7; attempts = attempts + 1) {\n    guess = (low + high) / 2;\n    if (guess < secret) {\n        low = guess + 1;\n    } else {\n        high = guess - 1;\n    }\n}\nprintf(\"%d\\n\", low);",
+        "distractors": [
+          "78\n",
+          "81\n"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int nums[6] = {3, 6, 9, 12, 15, 18};\nint goal = 18;\nint low = 0, high = 5;\nfor (int i = 0; i < 6; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (nums[mid] < goal) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", nums[low]);",
+        "belief_code": "int nums[6] = {3, 6, 9, 12, 15, 18};\nint goal = 18;\nint low = 0, high = 5;\nfor (int i = 0; i < 6; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (nums[mid] < goal) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", nums[low]);",
+        "distractors": [
+          "12\n",
+          "9\n"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "char letters[7] = {'a', 'c', 'e', 'g', 'i', 'k', 'm'};\nchar target = 'k';\nint low = 0, high = 6;\nfor (int steps = 0; steps < 5; steps = steps + 1) {\n    int mid = (low + high) / 2;\n    if (letters[mid] < target) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%c\\n\", letters[low]);",
+        "belief_code": "char letters[7] = {'a', 'c', 'e', 'g', 'i', 'k', 'm'};\nchar target = 'k';\nint low = 0, high = 6;\nfor (int steps = 0; steps < 5; steps = steps + 1) {\n    int mid = (low + high) / 2;\n    if (letters[mid] < target) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%c\\n\", letters[low]);",
+        "distractors": [
+          "g\n",
+          "m\n"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int secret = 90;\nint low = 0, high = 100;\nfor (int tries = 0; tries < 10; tries = tries + 1) {\n    int mid = (low + high) / 2;\n    if (mid < secret) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", low + high);",
+        "belief_code": "int secret = 90;\nint low = 0, high = 100;\nfor (int tries = 0; tries < 10; tries = tries + 1) {\n    int mid = (low + high) / 2;\n    if (mid < secret) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", low + high);",
+        "distractors": [
+          "180\n",
+          "177\n"
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 711,
+    "completion_tokens": 24200
+  }
+}

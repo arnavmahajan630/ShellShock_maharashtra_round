@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int total = 0;\n 2  int i;\n 3  for (i = 0; i <= 3; i = i + 1) {\n 4      total = total + 2;\n 5  }\n\nQuestion: What is total after the loop?\nThe right answer, found by running the code: 8\nCommon wrong answer: a student who believes \"`i<=n` (from 0) runs n times; whether the bound is the last value included or excluded is mixed up\" expects 6\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 3 ran its body 4 times.\n- Values when the shown code finished: total = 8, i = 4.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The condition i <= 3 is true for i = 0, 1, 2, and 3, so line 4 runs four times, adding 2 each time; 4 times 2 makes total 8.\"}",
+  "parsed": {
+    "explain": "The condition i <= 3 is true for i = 0, 1, 2, and 3, so line 4 runs four times, adding 2 each time; 4 times 2 makes total 8."
+  },
+  "usage": {
+    "prompt_tokens": 405,
+    "completion_tokens": 186
+  }
+}

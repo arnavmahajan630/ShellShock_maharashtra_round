@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int total;\n 2  total = total + 4;\n 3  printf(\"%d\\n\", total);\n\nQuestion: What does this print?\nThe right answer, found by running the code: unpredictable\nCommon wrong answer: a student who believes \"Local variables start at 0\" expects 4\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 2 reads total before it was given a value; C does not define what it holds.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"Line 2 reads `total` before it has been assigned a value, so C does not define what it holds; the program may print any value.\"}",
+  "parsed": {
+    "explain": "Line 2 reads `total` before it has been assigned a value, so C does not define what it holds; the program may print any value."
+  },
+  "usage": {
+    "prompt_tokens": 344,
+    "completion_tokens": 161
+  }
+}

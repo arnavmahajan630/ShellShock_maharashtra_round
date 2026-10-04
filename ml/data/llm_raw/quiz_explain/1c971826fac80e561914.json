@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int n = 4;\n 2  int sum = 0;\n 3  int i;\n 4  for (i = 0; i <= n; i++) {\n 5      sum = sum + i;\n 6  }\n 7  printf(\"%d\", sum);\n\nQuestion: What does this print?\nThe right answer, found by running the code: 10\nCommon wrong answer: a student who believes \"`i<=n` (from 0) runs n times; whether the bound is the last value included or excluded is mixed up\" expects 6\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 4 ran its body 5 times.\n- Values when the shown code finished: n = 4, sum = 10, i = 5.\n- The shown code printed: '10'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The loop condition i <= n lets i take 0, 1, 2, 3, and 4, so the body runs five times. The sum becomes 0+1+2+3+4, which equals 10.\"}",
+  "parsed": {
+    "explain": "The loop condition i <= n lets i take 0, 1, 2, 3, and 4, so the body runs five times. The sum becomes 0+1+2+3+4, which equals 10."
+  },
+  "usage": {
+    "prompt_tokens": 428,
+    "completion_tokens": 272
+  }
+}

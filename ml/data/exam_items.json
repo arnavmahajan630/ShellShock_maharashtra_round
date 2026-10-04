@@ -1,0 +1,445 @@
+[
+  {
+    "item_id": "xt_search_1",
+    "kind": "trace",
+    "sector": "searching",
+    "difficulty": 3,
+    "code": "int a[5] = {1, 3, 5, 7, 9};\nint low = 0, high = 4, checks = 0;\nwhile (low <= high) {\n    int mid = (low + high) / 2;\n    checks++;\n    if (a[mid] == 9) break;\n    if (a[mid] < 9) low = mid; else high = mid - 1;\n}",
+    "question": "How many times is a[mid] checked?",
+    "options": [
+      "3",
+      "never stops",
+      "2"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D02": "3"
+    }
+  },
+  {
+    "item_id": "xt_search_2",
+    "kind": "trace",
+    "sector": "searching",
+    "difficulty": 1,
+    "code": "int a[4] = {2, 7, 4, 1};\nint found = 0;\nfor (int i = 0; i < 4; i++) {\n    if (a[i] == 7) found = 1; else found = 0;\n}",
+    "question": "What is found after the loop?",
+    "options": [
+      "0",
+      "1",
+      "7"
+    ],
+    "correct": "0",
+    "belief": {
+      "D01": "1"
+    }
+  },
+  {
+    "item_id": "xt_search_3",
+    "kind": "trace",
+    "sector": "searching",
+    "difficulty": 2,
+    "code": "int a[5] = {4, 9, 1, 7, 3};\nint steps = 0;\nfor (int i = 1; i <= 4; i++) {\n    steps++;\n    if (a[i] == 7) break;\n}",
+    "question": "What is steps after the loop?",
+    "options": [
+      "3",
+      "4",
+      "5"
+    ],
+    "correct": "3",
+    "belief": {
+      "M08": "4"
+    }
+  },
+  {
+    "item_id": "xt_search_4",
+    "kind": "trace",
+    "sector": "searching",
+    "difficulty": 1,
+    "code": "int a[5] = {3, 1, 3, 3, 2};\nint count;\nfor (int i = 0; i < 5; i++) {\n    count = 0;\n    if (a[i] == 3) count++;\n}",
+    "question": "What is count after the loop?",
+    "options": [
+      "0",
+      "3",
+      "1"
+    ],
+    "correct": "0",
+    "belief": {
+      "M03": "3"
+    }
+  },
+  {
+    "item_id": "xt_search_5",
+    "kind": "trace",
+    "sector": "searching",
+    "difficulty": 2,
+    "code": "int a[3] = {4, 6, 8};\nint hits = 0;\nfor (int i = 0; i < 3; i++) {\n    if (a[i] = 6) hits++;\n}",
+    "question": "What is hits after the loop?",
+    "options": [
+      "3",
+      "1",
+      "0"
+    ],
+    "correct": "3",
+    "belief": {
+      "M06": "1"
+    }
+  },
+  {
+    "item_id": "xt_search_6",
+    "kind": "trace",
+    "sector": "searching",
+    "difficulty": 1,
+    "code": "int low = 3, high = 8;\nfloat mid = (low + high) / 2;",
+    "question": "What is mid?",
+    "options": [
+      "5.0",
+      "5.5",
+      "6.0"
+    ],
+    "correct": "5.0",
+    "belief": {
+      "M04": "5.5"
+    }
+  },
+  {
+    "item_id": "xt_sort_1",
+    "kind": "trace",
+    "sector": "sorting",
+    "difficulty": 2,
+    "code": "int a[4] = {3, 4, 1, 2};\nint min = 0;\nfor (int j = 1; j < 4; j++) {\n    if (a[j] < a[min]) min = j;\n}\nint t = a[0];\na[0] = a[min];\na[min] = t;",
+    "question": "What is a afterwards?",
+    "options": [
+      "{1, 2, 3, 4}",
+      "{1, 4, 3, 2}",
+      "{3, 4, 1, 2}"
+    ],
+    "correct": "{1, 4, 3, 2}",
+    "belief": {
+      "D04": "{1, 2, 3, 4}"
+    }
+  },
+  {
+    "item_id": "xt_sort_2",
+    "kind": "trace",
+    "sector": "sorting",
+    "difficulty": 2,
+    "code": "int a[3] = {9, 2, 5};\nfor (int j = 0; j < 2; j++) {\n    if (a[j] > a[j + 1]) {\n        a[j] = a[j + 1];\n        a[j + 1] = a[j];\n    }\n}",
+    "question": "What is a after the loop?",
+    "options": [
+      "{2, 5, 9}",
+      "{2, 2, 5}",
+      "{9, 2, 5}"
+    ],
+    "correct": "{2, 2, 5}",
+    "belief": {
+      "D03": "{2, 5, 9}"
+    }
+  },
+  {
+    "item_id": "xt_sort_3",
+    "kind": "trace",
+    "sector": "sorting",
+    "difficulty": 1,
+    "code": "int passes = 0;\nfor (int i = 0; i < 3; i++);\n{\n    passes++;\n}",
+    "question": "What is passes afterwards?",
+    "options": [
+      "1",
+      "3",
+      "0"
+    ],
+    "correct": "1",
+    "belief": {
+      "M07": "3"
+    }
+  },
+  {
+    "item_id": "xt_sort_4",
+    "kind": "trace",
+    "sector": "sorting",
+    "difficulty": 2,
+    "code": "int a[4] = {2, 6, 4, 8};\nint bad = 0;\nfor (int j = 0; j < 4; j++) {\n    if (a[j] > a[j + 1]) bad++;\n}",
+    "question": "On the last pass of the loop, what is a[j + 1]?",
+    "options": [
+      "8, the last cell",
+      "outside the array",
+      "4"
+    ],
+    "correct": "outside the array",
+    "belief": {
+      "M01": "8, the last cell",
+      "M08": "8, the last cell"
+    }
+  },
+  {
+    "item_id": "xt_sort_5",
+    "kind": "trace",
+    "sector": "sorting",
+    "difficulty": 2,
+    "code": "int is_sorted(int a[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        if (a[i] > a[i + 1]) return 0; else return 1;\n    }\n    return 1;\n}\nint a[4] = {1, 2, 9, 3};",
+    "question": "What does is_sorted(a, 4) give?",
+    "options": [
+      "1",
+      "0",
+      "never stops"
+    ],
+    "correct": "1",
+    "belief": {
+      "D01": "0"
+    }
+  },
+  {
+    "item_id": "xt_array_1",
+    "kind": "trace",
+    "sector": "array_tech",
+    "difficulty": 2,
+    "code": "int a[3] = {1, 2, 3};\nfor (int i = 0; i < 3; i++) {\n    int t = a[i];\n    a[i] = a[2 - i];\n    a[2 - i] = t;\n}",
+    "question": "What is a after the loop?",
+    "options": [
+      "{3, 2, 1}",
+      "{1, 2, 3}",
+      "{2, 1, 3}"
+    ],
+    "correct": "{1, 2, 3}",
+    "belief": {
+      "M01": "{3, 2, 1}"
+    }
+  },
+  {
+    "item_id": "xt_array_2",
+    "kind": "trace",
+    "sector": "array_tech",
+    "difficulty": 2,
+    "code": "int a[4] = {1, 2, 3, 4};\nfor (int i = 0; i < 3; i++) {\n    a[i] = a[i + 1];\n}\na[3] = a[0];",
+    "question": "What is a afterwards?",
+    "options": [
+      "{2, 3, 4, 1}",
+      "{2, 3, 4, 2}",
+      "{4, 1, 2, 3}"
+    ],
+    "correct": "{2, 3, 4, 2}",
+    "belief": {
+      "D03": "{2, 3, 4, 1}"
+    }
+  },
+  {
+    "item_id": "xt_array_3",
+    "kind": "trace",
+    "sector": "array_tech",
+    "difficulty": 1,
+    "code": "int a[3] = {4, 9, 6};\nint best;\nfor (int i = 0; i < 3; i++) {\n    if (a[i] > best) best = a[i];\n}",
+    "question": "What is best after the loop?",
+    "options": [
+      "9",
+      "unpredictable",
+      "4"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M05": "9"
+    }
+  },
+  {
+    "item_id": "xt_array_4",
+    "kind": "trace",
+    "sector": "array_tech",
+    "difficulty": 3,
+    "code": "int a[4] = {1, 3, 5, 7};\nint left = 0, right = 3;\nwhile (left < right) {\n    if (a[left] + a[right] == 4) break;\n    if (a[left] + a[right] < 4) left++;\n}",
+    "question": "What are left and right when the loop ends?",
+    "options": [
+      "0 and 1",
+      "never stops",
+      "0 and 3"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "M02": "0 and 1"
+    }
+  },
+  {
+    "item_id": "xt_array_5",
+    "kind": "trace",
+    "sector": "array_tech",
+    "difficulty": 2,
+    "code": "int a[4] = {9, 2, 7, 5};\nint max = a[1];\nfor (int i = 2; i <= 3; i++) {\n    if (a[i] > max) max = a[i];\n}",
+    "question": "What is max after the loop?",
+    "options": [
+      "7",
+      "9",
+      "5"
+    ],
+    "correct": "7",
+    "belief": {
+      "M08": "9"
+    }
+  },
+  {
+    "item_id": "xt_str_1",
+    "kind": "trace",
+    "sector": "strings",
+    "difficulty": 1,
+    "code": "char s[] = \"abc\";\nint n = strlen(s);",
+    "question": "What is n?",
+    "options": [
+      "3",
+      "4",
+      "2"
+    ],
+    "correct": "3",
+    "belief": {
+      "M01": "4"
+    }
+  },
+  {
+    "item_id": "xt_str_2",
+    "kind": "trace",
+    "sector": "strings",
+    "difficulty": 1,
+    "code": "char s[] = \"banana\";\nint count = 0;\nfor (int i = 0; s[i] != '\\0'; i++) {\n    if (s[i] == \"a\") count++;\n}",
+    "question": "What is count after the loop?",
+    "options": [
+      "3",
+      "0",
+      "6"
+    ],
+    "correct": "0",
+    "belief": {
+      "D08": "3"
+    }
+  },
+  {
+    "item_id": "xt_str_3",
+    "kind": "trace",
+    "sector": "strings",
+    "difficulty": 2,
+    "code": "char s[] = \"abca\";\nint n = 4;\nint same = 0;\nif (s[0] == s[n]) same = 1;",
+    "question": "What is same afterwards?",
+    "options": [
+      "1",
+      "0",
+      "error"
+    ],
+    "correct": "0",
+    "belief": {
+      "M08": "1"
+    }
+  },
+  {
+    "item_id": "xt_str_4",
+    "kind": "trace",
+    "sector": "strings",
+    "difficulty": 1,
+    "code": "char s[] = \"level\";\nint count;\nfor (int i = 0; s[i] != '\\0'; i++) {\n    if (s[i] == 'e') count++;\n}",
+    "question": "What is count after the loop?",
+    "options": [
+      "2",
+      "unpredictable",
+      "5"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M05": "2"
+    }
+  },
+  {
+    "item_id": "xt_str_5",
+    "kind": "trace",
+    "sector": "strings",
+    "difficulty": 3,
+    "code": "int is_pal(char s[], int n) {\n    for (int i = 0; i < n / 2; i++) {\n        if (s[i] == s[n - 1 - i]) return 1; else return 0;\n    }\n    return 1;\n}\nchar s[] = \"abxa\";",
+    "question": "What does is_pal(s, 4) give?",
+    "options": [
+      "1",
+      "0",
+      "never stops"
+    ],
+    "correct": "1",
+    "belief": {
+      "D01": "0"
+    }
+  },
+  {
+    "item_id": "xt_rec_1",
+    "kind": "trace",
+    "sector": "recursion",
+    "difficulty": 2,
+    "code": "int down(int n) {\n    if (n == 0) return 0;\n    return 1 + down(n - 2);\n}",
+    "question": "What does down(5) give?",
+    "options": [
+      "3",
+      "never stops",
+      "2"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D05": "3"
+    }
+  },
+  {
+    "item_id": "xt_rec_2",
+    "kind": "trace",
+    "sector": "recursion",
+    "difficulty": 2,
+    "code": "int sum_digits(int n) {\n    if (n < 10) return n;\n    return n % 10 + sum_digits(n);\n}",
+    "question": "What does sum_digits(47) give?",
+    "options": [
+      "11",
+      "never stops",
+      "7"
+    ],
+    "correct": "never stops",
+    "belief": {
+      "D06": "11"
+    }
+  },
+  {
+    "item_id": "xt_rec_3",
+    "kind": "trace",
+    "sector": "recursion",
+    "difficulty": 2,
+    "code": "int sum(int a[], int n) {\n    if (n == 0) return 0;\n    sum(a, n - 1);\n    return a[n - 1];\n}\nint a[3] = {4, 5, 6};",
+    "question": "What does sum(a, 3) give?",
+    "options": [
+      "15",
+      "6",
+      "4"
+    ],
+    "correct": "6",
+    "belief": {
+      "D07": "15"
+    }
+  },
+  {
+    "item_id": "xt_rec_4",
+    "kind": "trace",
+    "sector": "recursion",
+    "difficulty": 3,
+    "code": "int total(int n) {\n    if (n == 0) return 0;\n    printf(\"%d \", n + total(n - 1));\n    return 0;\n}\nint r = total(3);",
+    "question": "What is r?",
+    "options": [
+      "6",
+      "0",
+      "3"
+    ],
+    "correct": "0",
+    "belief": {
+      "M10": "6"
+    }
+  },
+  {
+    "item_id": "xt_rec_5",
+    "kind": "trace",
+    "sector": "recursion",
+    "difficulty": 2,
+    "code": "int sum(int a[], int n) {\n    if (n == 0) return 0;\n    return a[n] + sum(a, n - 1);\n}\nint a[3] = {4, 5, 6};",
+    "question": "What does sum(a, 3) give?",
+    "options": [
+      "15",
+      "unpredictable",
+      "11"
+    ],
+    "correct": "unpredictable",
+    "belief": {
+      "M08": "15"
+    }
+  }
+]

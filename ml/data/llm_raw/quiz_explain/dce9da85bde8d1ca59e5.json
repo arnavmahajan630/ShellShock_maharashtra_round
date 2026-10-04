@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  float rate = 0.0;\n 2  if (rate = 1.0) {\n 3      printf(\"%.1f\", rate);\n 4  } else {\n 5      printf(\"zero\");\n 6  }\n\nQuestion: This prints \"1.0\". A classmate expected \"zero\". In one sentence: why?\nThe right answer, found by running the code: 1.0\nCommon wrong answer: a student who believes \"`=` compares\" expects zero\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 2: the condition stores 1.0 in rate (it is an assignment), and that stored value decides the branch.\n- Values when the shown code finished: rate = 1.0.\n- The shown code printed: '1.0'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"Line 2 is an assignment, so it stores 1.0 in rate; that value is nonzero, so the if branch runs and prints rate as 1.0.\"}",
+  "parsed": {
+    "explain": "Line 2 is an assignment, so it stores 1.0 in rate; that value is nonzero, so the if branch runs and prints rate as 1.0."
+  },
+  "usage": {
+    "prompt_tokens": 417,
+    "completion_tokens": 299
+  }
+}

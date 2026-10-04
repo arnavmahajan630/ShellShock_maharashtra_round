@@ -1,0 +1,79 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 5 exercises about one beginner mistake.\n\nThe mistake: `==` doesn't compare text in C.\nA student who makes it believes: \"`==` compares text\".\nHow it shows in code: a `char` compared with a string literal using `==` (for example `s[i] == \"a\"`), on a char array declared as `char s[] = \"...\";`.\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with a char literal (`'a'`) in that comparison. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: multiple choice about a value.\n- `code` prints nothing.\n- `question` asks for one value once the code has run, for example \"What is total after the loop?\" or \"What does depth(3) give?\".\n- `tail` is one printf statement that prints exactly that value. I append it to both fragments, so both must use the same names.\n- `distractors`: two other values a student might guess, written the way the tail prints them.\nJSON shape: {\"items\": [{\"code\": \"...\", \"question\": \"...\", \"tail\": \"printf(...);\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 5 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"char s[] = \\\"banana\\\";\\nint count = 0;\\nint i = 0;\\nwhile (i < strlen(s)) {\\n    if (s[i] == \\\"a\\\") {\\n        count = count + 1;\\n    }\\n    i = i + 1;\\n}\",\n      \"question\": \"What is count after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", count);\",\n      \"belief_code\": \"char s[] = \\\"banana\\\";\\nint count = 0;\\nint i = 0;\\nwhile (i < strlen(s)) {\\n    if (s[i] == 'a') {\\n        count = count + 1;\\n    }\\n    i = i + 1;\\n}\",\n      \"distractors\": [\"6\", \"1\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int fuel_check(char c) {\\n    if (c == \\\"F\\\") {\\n        return 100;\\n    }\\n    return 0;\\n}\\nint fuel = fuel_check('F');\",\n      \"question\": \"What is fuel after fuel_check('F') runs?\",\n      \"tail\": \"printf(\\\"%d\\\", fuel);\",\n      \"belief_code\": \"int fuel_check(char c) {\\n    if (c == 'F') {\\n        return 100;\\n    }\\n    return 0;\\n}\\nint fuel = fuel_check('F');\",\n      \"distractors\": [\"100\", \"50\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"char code[] = \\\"B7\\\";\\nint level;\\nif (code[0] == \\\"B\\\") {\\n    level = 3;\\n} else {\\n    level = 1;\\n}\",\n      \"question\": \"What is level after the if/else?\",\n      \"tail\": \"printf(\\\"%d\\\", level);\",\n      \"belief_code\": \"char code[] = \\\"B7\\\";\\nint level;\\nif (code[0] == 'B') {\\n    level = 3;\\n} else {\\n    level = 1;\\n}\",\n      \"distractors\": [\"3\", \"7\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"char word[] = \\\"falcon\\\";\\nint found = 0;\\nint i;\\nfor (i = 0; i < strlen(word); i = i + 1) {\\n    if (word[i] == \\\"l\\\") {\\n        found = 1;\\n    }\\n}\",\n      \"question\": \"What is found after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", found);\",\n      \"belief_code\": \"char word[] = \\\"falcon\\\";\\nint found = 0;\\nint i;\\nfor (i = 0; i < strlen(word); i = i + 1) {\\n    if (word[i] == 'l') {\\n        found = 1;\\n    }\\n}\",\n      \"distractors\": [\"1\", \"6\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int count_e(char s[], int i) {\\n    if (i == strlen(s)) {\\n        return 0;\\n    }\\n    if (s[i] == \\\"e\\\") {\\n        return 1 + count_e(s, i + 1);\\n    }\\n    return count_e(s, i + 1);\\n}\\nint total = count_e(\\\"engine\\\", 0);\",\n      \"question\": \"What is total after calling count_e(\\\"engine\\\", 0)?\",\n      \"tail\": \"printf(\\\"%d\\\", total);\",\n      \"belief_code\": \"int count_e(char s[], int i) {\\n    if (i == strlen(s)) {\\n        return 0;\\n    }\\n    if (s[i] == 'e') {\\n        return 1 + count_e(s, i + 1);\\n    }\\n    return count_e(s, i + 1);\\n}\\nint total = count_e(\\\"engine\\\", 0);\",\n      \"distractors\": [\"1\", \"6\"],\n      \"difficulty\": 3\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "char s[] = \"banana\";\nint count = 0;\nint i = 0;\nwhile (i < strlen(s)) {\n    if (s[i] == \"a\") {\n        count = count + 1;\n    }\n    i = i + 1;\n}",
+        "question": "What is count after the loop?",
+        "tail": "printf(\"%d\", count);",
+        "belief_code": "char s[] = \"banana\";\nint count = 0;\nint i = 0;\nwhile (i < strlen(s)) {\n    if (s[i] == 'a') {\n        count = count + 1;\n    }\n    i = i + 1;\n}",
+        "distractors": [
+          "6",
+          "1"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int fuel_check(char c) {\n    if (c == \"F\") {\n        return 100;\n    }\n    return 0;\n}\nint fuel = fuel_check('F');",
+        "question": "What is fuel after fuel_check('F') runs?",
+        "tail": "printf(\"%d\", fuel);",
+        "belief_code": "int fuel_check(char c) {\n    if (c == 'F') {\n        return 100;\n    }\n    return 0;\n}\nint fuel = fuel_check('F');",
+        "distractors": [
+          "100",
+          "50"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "char code[] = \"B7\";\nint level;\nif (code[0] == \"B\") {\n    level = 3;\n} else {\n    level = 1;\n}",
+        "question": "What is level after the if/else?",
+        "tail": "printf(\"%d\", level);",
+        "belief_code": "char code[] = \"B7\";\nint level;\nif (code[0] == 'B') {\n    level = 3;\n} else {\n    level = 1;\n}",
+        "distractors": [
+          "3",
+          "7"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "char word[] = \"falcon\";\nint found = 0;\nint i;\nfor (i = 0; i < strlen(word); i = i + 1) {\n    if (word[i] == \"l\") {\n        found = 1;\n    }\n}",
+        "question": "What is found after the loop?",
+        "tail": "printf(\"%d\", found);",
+        "belief_code": "char word[] = \"falcon\";\nint found = 0;\nint i;\nfor (i = 0; i < strlen(word); i = i + 1) {\n    if (word[i] == 'l') {\n        found = 1;\n    }\n}",
+        "distractors": [
+          "1",
+          "6"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int count_e(char s[], int i) {\n    if (i == strlen(s)) {\n        return 0;\n    }\n    if (s[i] == \"e\") {\n        return 1 + count_e(s, i + 1);\n    }\n    return count_e(s, i + 1);\n}\nint total = count_e(\"engine\", 0);",
+        "question": "What is total after calling count_e(\"engine\", 0)?",
+        "tail": "printf(\"%d\", total);",
+        "belief_code": "int count_e(char s[], int i) {\n    if (i == strlen(s)) {\n        return 0;\n    }\n    if (s[i] == 'e') {\n        return 1 + count_e(s, i + 1);\n    }\n    return count_e(s, i + 1);\n}\nint total = count_e(\"engine\", 0);",
+        "distractors": [
+          "1",
+          "6"
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 737,
+    "completion_tokens": 12925
+  }
+}

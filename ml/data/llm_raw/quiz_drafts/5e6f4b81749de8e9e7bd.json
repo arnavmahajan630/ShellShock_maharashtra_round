@@ -1,0 +1,76 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 4 exercises about one beginner mistake.\n\nThe mistake: `=` stores a value; `==` compares.\nA student who makes it believes: \"`=` compares\".\nHow it shows in code: a single `=` inside an `if` or `while` condition (for example `if (mode = 2)`), where `==` would give a different result. The code must still end..\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with `==` in that condition. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: predict the next state.\n- `code` has a loop or a recursive function and prints nothing.\n- Choose one line of `code` that is a plain assignment statement alone on its line inside braces (never a for, while or if header). `after_line` is its 1-based line number in `code`.\n- `var` is an int variable that is in scope on that line. `hit` is 2, 3 or 4.\n- The learner is asked: what is `var` right after that line has run for the `hit`-th time?\n- `belief_after_line` is the line number of the same statement in `belief_code`.\n- At that moment the real value and the value the student expects must differ.\n- `distractors`: two other numbers a student might guess.\nJSON shape: {\"items\": [{\"code\": \"...\", \"var\": \"...\", \"after_line\": 3, \"hit\": 2, \"belief_code\": \"...\", \"belief_after_line\": 3, \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 4 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\"items\":[{\"code\":\"int x = 3;\\nint y = 0;\\nint i = 0;\\nwhile (i < 4) {\\n    if (x = 1) {\\n        y = y + 5;\\n    } else {\\n        y = y + 10;\\n    }\\n    y = y + x;\\n    i = i + 1;\\n}\",\"var\":\"y\",\"after_line\":10,\"hit\":2,\"belief_code\":\"int x = 3;\\nint y = 0;\\nint i = 0;\\nwhile (i < 4) {\\n    if (x == 1) {\\n        y = y + 5;\\n    } else {\\n        y = y + 10;\\n    }\\n    y = y + x;\\n    i = i + 1;\\n}\",\"belief_after_line\":10,\"distractors\":[\"6\",\"23\"],\"difficulty\":1},{\"code\":\"int dive(int depth, int mode) {\\n    int value = 2;\\n    if (mode = 1) {\\n        value = 1;\\n    }\\n    if (depth > 0) {\\n        value = value + dive(depth - 1, mode);\\n    }\\n    return value;\\n}\\ndive(3, 2);\",\"var\":\"value\",\"after_line\":7,\"hit\":3,\"belief_code\":\"int dive(int depth, int mode) {\\n    int value = 2;\\n    if (mode == 1) {\\n        value = 1;\\n    }\\n    if (depth > 0) {\\n        value = value + dive(depth - 1, mode);\\n    }\\n    return value;\\n}\\ndive(3, 2);\",\"belief_after_line\":7,\"distractors\":[\"3\",\"6\"],\"difficulty\":3},{\"code\":\"int shield = 5;\\nint energy = 0;\\nint i;\\nfor (i = 0; i < 4; i = i + 1) {\\n    if (shield = 3) {\\n        energy = energy + 2;\\n    } else {\\n        energy = energy + 5;\\n    }\\n    energy = energy + shield;\\n}\",\"var\":\"energy\",\"after_line\":10,\"hit\":2,\"belief_code\":\"int shield = 5;\\nint energy = 0;\\nint i;\\nfor (i = 0; i < 4; i = i + 1) {\\n    if (shield == 3) {\\n        energy = energy + 2;\\n    } else {\\n        energy = energy + 5;\\n    }\\n    energy = energy + shield;\\n}\",\"belief_after_line\":10,\"distractors\":[\"5\",\"15\"],\"difficulty\":2},{\"code\":\"int mode = 0;\\nint count = 0;\\nint i = 0;\\nwhile (i < 5) {\\n    if (mode = 2) {\\n        count = count + 1;\\n    }\\n    mode = mode + 1;\\n    i = i + 1;\\n}\",\"var\":\"mode\",\"after_line\":8,\"hit\":2,\"belief_code\":\"int mode = 0;\\nint count = 0;\\nint i = 0;\\nwhile (i < 5) {\\n    if (mode == 2) {\\n        count = count + 1;\\n    }\\n    mode = mode + 1;\\n    i = i + 1;\\n}\",\"belief_after_line\":8,\"distractors\":[\"1\",\"4\"],\"difficulty\":1}]}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int x = 3;\nint y = 0;\nint i = 0;\nwhile (i < 4) {\n    if (x = 1) {\n        y = y + 5;\n    } else {\n        y = y + 10;\n    }\n    y = y + x;\n    i = i + 1;\n}",
+        "var": "y",
+        "after_line": 10,
+        "hit": 2,
+        "belief_code": "int x = 3;\nint y = 0;\nint i = 0;\nwhile (i < 4) {\n    if (x == 1) {\n        y = y + 5;\n    } else {\n        y = y + 10;\n    }\n    y = y + x;\n    i = i + 1;\n}",
+        "belief_after_line": 10,
+        "distractors": [
+          "6",
+          "23"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int dive(int depth, int mode) {\n    int value = 2;\n    if (mode = 1) {\n        value = 1;\n    }\n    if (depth > 0) {\n        value = value + dive(depth - 1, mode);\n    }\n    return value;\n}\ndive(3, 2);",
+        "var": "value",
+        "after_line": 7,
+        "hit": 3,
+        "belief_code": "int dive(int depth, int mode) {\n    int value = 2;\n    if (mode == 1) {\n        value = 1;\n    }\n    if (depth > 0) {\n        value = value + dive(depth - 1, mode);\n    }\n    return value;\n}\ndive(3, 2);",
+        "belief_after_line": 7,
+        "distractors": [
+          "3",
+          "6"
+        ],
+        "difficulty": 3
+      },
+      {
+        "code": "int shield = 5;\nint energy = 0;\nint i;\nfor (i = 0; i < 4; i = i + 1) {\n    if (shield = 3) {\n        energy = energy + 2;\n    } else {\n        energy = energy + 5;\n    }\n    energy = energy + shield;\n}",
+        "var": "energy",
+        "after_line": 10,
+        "hit": 2,
+        "belief_code": "int shield = 5;\nint energy = 0;\nint i;\nfor (i = 0; i < 4; i = i + 1) {\n    if (shield == 3) {\n        energy = energy + 2;\n    } else {\n        energy = energy + 5;\n    }\n    energy = energy + shield;\n}",
+        "belief_after_line": 10,
+        "distractors": [
+          "5",
+          "15"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int mode = 0;\nint count = 0;\nint i = 0;\nwhile (i < 5) {\n    if (mode = 2) {\n        count = count + 1;\n    }\n    mode = mode + 1;\n    i = i + 1;\n}",
+        "var": "mode",
+        "after_line": 8,
+        "hit": 2,
+        "belief_code": "int mode = 0;\nint count = 0;\nint i = 0;\nwhile (i < 5) {\n    if (mode == 2) {\n        count = count + 1;\n    }\n    mode = mode + 1;\n    i = i + 1;\n}",
+        "belief_after_line": 8,
+        "distractors": [
+          "1",
+          "4"
+        ],
+        "difficulty": 1
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 818,
+    "completion_tokens": 20446
+  }
+}

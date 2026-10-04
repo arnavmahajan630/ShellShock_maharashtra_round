@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int a[2] = {5, 9};\n 2  int i = 0;\n 3  int j = 1;\n 4  a[i] = a[j];\n 5  a[j] = a[i];\n\nQuestion: What is a[1] after the code runs?\nThe right answer, found by running the code: 9\nCommon wrong answer: a student who believes \"Two assignments happen at the same time\" expects 5\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Values when the shown code finished: i = 0, j = 1.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The assignments run one after another. After `a[i] = a[j]`, a[0] is 9; then `a[j] = a[i]` copies that 9 into a[1], leaving it 9.\"}",
+  "parsed": {
+    "explain": "The assignments run one after another. After `a[i] = a[j]`, a[0] is 9; then `a[j] = a[i]` copies that 9 into a[1], leaving it 9."
+  },
+  "usage": {
+    "prompt_tokens": 376,
+    "completion_tokens": 312
+  }
+}

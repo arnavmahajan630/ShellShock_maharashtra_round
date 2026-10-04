@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int depth(int n) {\n 2      if (n == 0) {\n 3          int value;\n 4          return value;\n 5      }\n 6      return 1 + depth(n - 1);\n 7  }\n 8  int d = depth(3);\n\nQuestion: What is the value of d after the call depth(3)?\nThe right answer, found by running the code: unpredictable\nCommon wrong answer: a student who believes \"Local variables start at 0\" expects 3\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 4 reads value before it was given a value; C does not define what it holds.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"When n reaches 0, the function returns the local variable value, which was never assigned. C does not initialize it, so its contents are indeterminate and d is unpredictable.\"}",
+  "parsed": {
+    "explain": "When n reaches 0, the function returns the local variable value, which was never assigned. C does not initialize it, so its contents are indeterminate and d is unpredictable."
+  },
+  "usage": {
+    "prompt_tokens": 389,
+    "completion_tokens": 235
+  }
+}

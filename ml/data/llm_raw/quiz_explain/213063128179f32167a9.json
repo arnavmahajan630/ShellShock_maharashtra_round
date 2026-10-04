@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int add_up(int n) {\n 2      if (n == 0) {\n 3          return 0;\n 4      }\n 5      add_up(n - 1);\n 6      return n;\n 7  }\n 8  int total = add_up(4);\n\nQuestion: What is total after the code runs?\nThe right answer, found by running the code: 4\nCommon wrong answer: a student who believes \"The recursive call's result is combined automatically\" expects 10\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 5 calls add_up and throws its result away.\n- Values when the shown code finished: total = 4.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"Line 5 calls add_up(n - 1) but ignores its return value, so no results are added. The outermost call simply returns its own n, so add_up(4) returns 4.\"}",
+  "parsed": {
+    "explain": "Line 5 calls add_up(n - 1) but ignores its return value, so no results are added. The outermost call simply returns its own n, so add_up(4) returns 4."
+  },
+  "usage": {
+    "prompt_tokens": 392,
+    "completion_tokens": 172
+  }
+}

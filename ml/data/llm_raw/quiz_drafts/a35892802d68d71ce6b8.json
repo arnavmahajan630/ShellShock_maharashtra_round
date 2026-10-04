@@ -1,0 +1,78 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 6 exercises about one beginner mistake.\n\nThe mistake: `==` doesn't compare text in C.\nA student who makes it believes: \"`==` compares text\".\nHow it shows in code: a `char` compared with a string literal using `==` (for example `s[i] == \"a\"`), on a char array declared as `char s[] = \"...\";`.\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with a char literal (`'a'`) in that comparison. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: predict the output.\n- `code` prints its result with printf as one short line (at most 20 characters).\n- `belief_code` prints what the student expects, in the same format.\n- `distractors`: two other short outputs a student might guess, in the same format.\nJSON shape: {\"items\": [{\"code\": \"...\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 6 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"char word[] = \\\"cat\\\";\\nif (word[1] == \\\"a\\\") {\\n    printf(\\\"vowel\\\");\\n} else {\\n    printf(\\\"not vowel\\\");\\n}\",\n      \"belief_code\": \"char word[] = \\\"cat\\\";\\nif (word[1] == 'a') {\\n    printf(\\\"vowel\\\");\\n} else {\\n    printf(\\\"not vowel\\\");\\n}\",\n      \"distractors\": [\"vowel\", \"cat\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int count = 0;\\nchar s[] = \\\"banana\\\";\\nfor (int i = 0; i < 6; i = i + 1) {\\n    if (s[i] == \\\"a\\\") {\\n        count = count + 1;\\n    }\\n}\\nprintf(\\\"%d\\\", count);\",\n      \"belief_code\": \"int count = 0;\\nchar s[] = \\\"banana\\\";\\nfor (int i = 0; i < 6; i = i + 1) {\\n    if (s[i] == 'a') {\\n        count = count + 1;\\n    }\\n}\\nprintf(\\\"%d\\\", count);\",\n      \"distractors\": [\"1\", \"2\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int is_vowel(char c) {\\n    if (c == \\\"a\\\") {\\n        return 1;\\n    }\\n    return 0;\\n}\\nchar word[] = \\\"apple\\\";\\nif (is_vowel(word[0])) {\\n    printf(\\\"yes\\\");\\n} else {\\n    printf(\\\"no\\\");\\n}\",\n      \"belief_code\": \"int is_vowel(char c) {\\n    if (c == 'a') {\\n        return 1;\\n    }\\n    return 0;\\n}\\nchar word[] = \\\"apple\\\";\\nif (is_vowel(word[0])) {\\n    printf(\\\"yes\\\");\\n} else {\\n    printf(\\\"no\\\");\\n}\",\n      \"distractors\": [\"yes\", \"0\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"char cmd[] = \\\"start\\\";\\nif (cmd[3] == \\\"r\\\") {\\n    printf(\\\"run\\\");\\n} else if (cmd[0] == 's') {\\n    printf(\\\"stop\\\");\\n} else {\\n    printf(\\\"unknown\\\");\\n}\",\n      \"belief_code\": \"char cmd[] = \\\"start\\\";\\nif (cmd[3] == 'r') {\\n    printf(\\\"run\\\");\\n} else if (cmd[0] == 's') {\\n    printf(\\\"stop\\\");\\n} else {\\n    printf(\\\"unknown\\\");\\n}\",\n      \"distractors\": [\"run\", \"unknown\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int i = 0;\\nchar s[] = \\\"hello\\\";\\nint found = 0;\\nwhile (i < 5) {\\n    if (s[i] == \\\"l\\\") {\\n        found = 1;\\n    }\\n    i = i + 1;\\n}\\nif (found == 1) {\\n    printf(\\\"found\\\");\\n} else {\\n    printf(\\\"none\\\");\\n}\",\n      \"belief_code\": \"int i = 0;\\nchar s[] = \\\"hello\\\";\\nint found = 0;\\nwhile (i < 5) {\\n    if (s[i] == 'l') {\\n        found = 1;\\n    }\\n    i = i + 1;\\n}\\nif (found == 1) {\\n    printf(\\\"found\\\");\\n} else {\\n    printf(\\\"none\\\");\\n}\",\n      \"distractors\": [\"found\", \"hello\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int check(char c, int n) {\\n    if (n == 0) {\\n        return 0;\\n    }\\n    if (c == \\\"a\\\") {\\n        return 1;\\n    }\\n    return check(c, n - 1);\\n}\\nchar s[] = \\\"abc\\\";\\nif (check(s[0], 3) == 1) {\\n    printf(\\\"yes\\\");\\n} else {\\n    printf(\\\"no\\\");\\n}\",\n      \"belief_code\": \"int check(char c, int n) {\\n    if (n == 0) {\\n        return 0;\\n    }\\n    if (c == 'a') {\\n        return 1;\\n    }\\n    return check(c, n - 1);\\n}\\nchar s[] = \\\"abc\\\";\\nif (check(s[0], 3) == 1) {\\n    printf(\\\"yes\\\");\\n} else {\\n    printf(\\\"no\\\");\\n}\",\n      \"distractors\": [\"yes\", \"0\"],\n      \"difficulty\": 3\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "char word[] = \"cat\";\nif (word[1] == \"a\") {\n    printf(\"vowel\");\n} else {\n    printf(\"not vowel\");\n}",
+        "belief_code": "char word[] = \"cat\";\nif (word[1] == 'a') {\n    printf(\"vowel\");\n} else {\n    printf(\"not vowel\");\n}",
+        "distractors": [
+          "vowel",
+          "cat"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int count = 0;\nchar s[] = \"banana\";\nfor (int i = 0; i < 6; i = i + 1) {\n    if (s[i] == \"a\") {\n        count = count + 1;\n    }\n}\nprintf(\"%d\", count);",
+        "belief_code": "int count = 0;\nchar s[] = \"banana\";\nfor (int i = 0; i < 6; i = i + 1) {\n    if (s[i] == 'a') {\n        count = count + 1;\n    }\n}\nprintf(\"%d\", count);",
+        "distractors": [
+          "1",
+          "2"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int is_vowel(char c) {\n    if (c == \"a\") {\n        return 1;\n    }\n    return 0;\n}\nchar word[] = \"apple\";\nif (is_vowel(word[0])) {\n    printf(\"yes\");\n} else {\n    printf(\"no\");\n}",
+        "belief_code": "int is_vowel(char c) {\n    if (c == 'a') {\n        return 1;\n    }\n    return 0;\n}\nchar word[] = \"apple\";\nif (is_vowel(word[0])) {\n    printf(\"yes\");\n} else {\n    printf(\"no\");\n}",
+        "distractors": [
+          "yes",
+          "0"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "char cmd[] = \"start\";\nif (cmd[3] == \"r\") {\n    printf(\"run\");\n} else if (cmd[0] == 's') {\n    printf(\"stop\");\n} else {\n    printf(\"unknown\");\n}",
+        "belief_code": "char cmd[] = \"start\";\nif (cmd[3] == 'r') {\n    printf(\"run\");\n} else if (cmd[0] == 's') {\n    printf(\"stop\");\n} else {\n    printf(\"unknown\");\n}",
+        "distractors": [
+          "run",
+          "unknown"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int i = 0;\nchar s[] = \"hello\";\nint found = 0;\nwhile (i < 5) {\n    if (s[i] == \"l\") {\n        found = 1;\n    }\n    i = i + 1;\n}\nif (found == 1) {\n    printf(\"found\");\n} else {\n    printf(\"none\");\n}",
+        "belief_code": "int i = 0;\nchar s[] = \"hello\";\nint found = 0;\nwhile (i < 5) {\n    if (s[i] == 'l') {\n        found = 1;\n    }\n    i = i + 1;\n}\nif (found == 1) {\n    printf(\"found\");\n} else {\n    printf(\"none\");\n}",
+        "distractors": [
+          "found",
+          "hello"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int check(char c, int n) {\n    if (n == 0) {\n        return 0;\n    }\n    if (c == \"a\") {\n        return 1;\n    }\n    return check(c, n - 1);\n}\nchar s[] = \"abc\";\nif (check(s[0], 3) == 1) {\n    printf(\"yes\");\n} else {\n    printf(\"no\");\n}",
+        "belief_code": "int check(char c, int n) {\n    if (n == 0) {\n        return 0;\n    }\n    if (c == 'a') {\n        return 1;\n    }\n    return check(c, n - 1);\n}\nchar s[] = \"abc\";\nif (check(s[0], 3) == 1) {\n    printf(\"yes\");\n} else {\n    printf(\"no\");\n}",
+        "distractors": [
+          "yes",
+          "0"
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 685,
+    "completion_tokens": 7880
+  }
+}

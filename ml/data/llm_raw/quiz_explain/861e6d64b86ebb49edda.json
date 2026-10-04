@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  char word[] = \"cat\";\n 2  if (word[1] == \"a\") {\n 3      printf(\"vowel\");\n 4  } else {\n 5      printf(\"not vowel\");\n 6  }\n\nQuestion: What does this print?\nThe right answer, found by running the code: not vowel\nCommon wrong answer: a student who believes \"`==` compares text\" expects vowel\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 2 compares a char with a string literal; that comparison is false.\n- The shown code printed: 'not vowel'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"In C, `word[1]` is a char (`'a'`), while `\\\"a\\\"` is a string literal pointer; comparing a char to a pointer is false, so the `else` branch runs and prints `not vowel`.\"}",
+  "parsed": {
+    "explain": "In C, `word[1]` is a char (`'a'`), while `\"a\"` is a string literal pointer; comparing a char to a pointer is false, so the `else` branch runs and prints `not vowel`."
+  },
+  "usage": {
+    "prompt_tokens": 373,
+    "completion_tokens": 265
+  }
+}

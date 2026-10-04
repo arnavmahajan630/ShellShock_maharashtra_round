@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int is_vowel(char c) {\n 2      if (c == \"a\") {\n 3          return 1;\n 4      }\n 5      return 0;\n 6  }\n 7  char word[] = \"apple\";\n 8  if (is_vowel(word[0])) {\n 9      printf(\"yes\");\n10  } else {\n11      printf(\"no\");\n12  }\n\nQuestion: This prints \"no\". A classmate expected \"yes\". In one sentence: why?\nThe right answer, found by running the code: no\nCommon wrong answer: a student who believes \"`==` compares text\" expects yes\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 2 compares a char with a string literal; that comparison is false.\n- The shown code printed: 'no'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"In C, \\\"a\\\" is a string literal treated as a pointer, so c == \\\"a\\\" compares a character code with an address. They are not equal, is_vowel returns 0, and the code prints \\\"no\\\".\"}",
+  "parsed": {
+    "explain": "In C, \"a\" is a string literal treated as a pointer, so c == \"a\" compares a character code with an address. They are not equal, is_vowel returns 0, and the code prints \"no\"."
+  },
+  "usage": {
+    "prompt_tokens": 422,
+    "completion_tokens": 260
+  }
+}

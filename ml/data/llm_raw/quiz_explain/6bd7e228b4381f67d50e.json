@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int vals[4] = {5, 1, 9, 4};\n 2  int i;\n 3  for (i = 0; i < 3; i = i + 1) {\n 4      vals[i] = vals[i + 1];\n 5      vals[i + 1] = vals[i];\n 6  }\n\nQuestion: What is vals[3] after the loop?\nThe right answer, found by running the code: 4\nCommon wrong answer: a student who believes \"Two assignments happen at the same time\" expects 5\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 3 ran its body 3 times.\n- Values when the shown code finished: i = 3.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"On the last iteration i=2, line 4 copies vals[3] (4) into vals[2], then line 5 copies vals[2] back into vals[3]. So vals[3] keeps its original value 4.\"}",
+  "parsed": {
+    "explain": "On the last iteration i=2, line 4 copies vals[3] (4) into vals[2], then line 5 copies vals[2] back into vals[3]. So vals[3] keeps its original value 4."
+  },
+  "usage": {
+    "prompt_tokens": 411,
+    "completion_tokens": 690
+  }
+}

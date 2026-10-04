@@ -1,0 +1,3504 @@
+[
+  {
+    "draft_id": "M01_mcq_1",
+    "class": "M01",
+    "type": "mcq",
+    "code": "int total = 0;\nint i;\nfor (i = 0; i <= 3; i = i + 1) {\n    total = total + 2;\n}",
+    "question": "What is total after the loop?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int total = 0;\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    total = total + 2;\n}",
+    "distractors": [
+      "6",
+      "10"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M01_mcq_2",
+    "class": "M01",
+    "type": "mcq",
+    "code": "int hull = 4;\nwhile (hull >= 0) {\n    hull = hull - 1;\n}",
+    "question": "What is hull after the loop?",
+    "tail": "printf(\"%d\", hull);",
+    "belief_code": "int hull = 4;\nwhile (hull > 0) {\n    hull = hull - 1;\n}",
+    "distractors": [
+      "0",
+      "1"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M01_mcq_3",
+    "class": "M01",
+    "type": "mcq",
+    "code": "int sum_to(int n) {\n    int sum = 0;\n    int i;\n    for (i = 1; i <= n; i = i + 1) {\n        sum = sum + i;\n    }\n    return sum;\n}",
+    "question": "What does sum_to(3) return?",
+    "tail": "printf(\"%d\", sum_to(3));",
+    "belief_code": "int sum_to(int n) {\n    int sum = 0;\n    int i;\n    for (i = 1; i < n; i = i + 1) {\n        sum = sum + i;\n    }\n    return sum;\n}",
+    "distractors": [
+      "3",
+      "10"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M01_mcq_4",
+    "class": "M01",
+    "type": "mcq",
+    "code": "int probe = 0;\nint i;\nfor (i = 5; i > 0; i = i - 1) {\n    probe = probe + 3;\n}",
+    "question": "What is probe after the loop?",
+    "tail": "printf(\"%d\", probe);",
+    "belief_code": "int probe = 0;\nint i;\nfor (i = 5; i >= 0; i = i - 1) {\n    probe = probe + 3;\n}",
+    "distractors": [
+      "18",
+      "12"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M01_mcq_5",
+    "class": "M01",
+    "type": "mcq",
+    "code": "int cells = 0;\nint row;\nint col;\nfor (row = 0; row < 3; row = row + 1) {\n    for (col = 0; col <= 2; col = col + 1) {\n        cells = cells + 1;\n    }\n}",
+    "question": "What is cells after the loops?",
+    "tail": "printf(\"%d\", cells);",
+    "belief_code": "int cells = 0;\nint row;\nint col;\nfor (row = 0; row < 3; row = row + 1) {\n    for (col = 0; col < 2; col = col + 1) {\n        cells = cells + 1;\n    }\n}",
+    "distractors": [
+      "6",
+      "12"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M01_next_state_1",
+    "class": "M01",
+    "type": "next_state",
+    "code": "void run(void) {\n    int fuel = 10, total = 0;\n    int i;\n    int j;\n    for (i = 0; i <= 3; i++) {\n        fuel = fuel - 2;\n    }\n    for (j = 0; j < 5; j++) {\n        total = total + fuel;\n    }\n}\nrun();",
+    "var": "total",
+    "after_line": 9,
+    "hit": 3,
+    "belief_code": "void run(void) {\n    int fuel = 10, total = 0;\n    int i;\n    int j;\n    for (i = 0; i < 3; i++) {\n        fuel = fuel - 2;\n    }\n    for (j = 0; j < 5; j++) {\n        total = total + fuel;\n    }\n}\nrun();",
+    "belief_after_line": 9,
+    "distractors": [
+      "8",
+      "10"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M01_next_state_2",
+    "class": "M01",
+    "type": "next_state",
+    "code": "void simulate(void) {\n    int shield = 30, charge = 0;\n    int i;\n    int j;\n    for (i = 4; i >= 0; i--) {\n        shield = shield - 3;\n    }\n    for (j = 0; j < 4; j++) {\n        charge = charge + shield;\n    }\n}\nsimulate();",
+    "var": "charge",
+    "after_line": 9,
+    "hit": 2,
+    "belief_code": "void simulate(void) {\n    int shield = 30, charge = 0;\n    int i;\n    int j;\n    for (i = 4; i > 0; i--) {\n        shield = shield - 3;\n    }\n    for (j = 0; j < 4; j++) {\n        charge = charge + shield;\n    }\n}\nsimulate();",
+    "belief_after_line": 9,
+    "distractors": [
+      "20",
+      "40"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M01_next_state_3",
+    "class": "M01",
+    "type": "next_state",
+    "code": "void launch(void) {\n    int cargo = 20, power = 0;\n    int i, j = 0;\n    for (i = 1; i < 5; i++) {\n        cargo = cargo + 2;\n    }\n    while (j < 3) {\n        power = power + cargo;\n        j = j + 1;\n    }\n}\nlaunch();",
+    "var": "power",
+    "after_line": 8,
+    "hit": 2,
+    "belief_code": "void launch(void) {\n    int cargo = 20, power = 0;\n    int i, j = 0;\n    for (i = 1; i <= 5; i++) {\n        cargo = cargo + 2;\n    }\n    while (j < 3) {\n        power = power + cargo;\n        j = j + 1;\n    }\n}\nlaunch();",
+    "belief_after_line": 8,
+    "distractors": [
+      "50",
+      "70"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M01_next_state_4",
+    "class": "M01",
+    "type": "next_state",
+    "code": "void scan(void) {\n    int hull = 40, result = 0;\n    int i = 3;\n    while (i >= 0) {\n        hull = hull - 5;\n        i = i - 1;\n    }\n    for (i = 0; i < 4; i++) {\n        result = result + hull;\n    }\n}\nscan();",
+    "var": "result",
+    "after_line": 9,
+    "hit": 3,
+    "belief_code": "void scan(void) {\n    int hull = 40, result = 0;\n    int i = 3;\n    while (i > 0) {\n        hull = hull - 5;\n        i = i - 1;\n    }\n    for (i = 0; i < 4; i++) {\n        result = result + hull;\n    }\n}\nscan();",
+    "belief_after_line": 9,
+    "distractors": [
+      "70",
+      "80"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M01_predict_output_1",
+    "class": "M01",
+    "type": "predict_output",
+    "code": "int n = 4;\nint sum = 0;\nint i;\nfor (i = 0; i <= n; i++) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+    "belief_code": "int n = 4;\nint sum = 0;\nint i;\nfor (i = 0; i < n; i++) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+    "distractors": [
+      "15",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M01_predict_output_2",
+    "class": "M01",
+    "type": "predict_output",
+    "code": "int n = 5;\nint sum = 0;\nint i;\nfor (i = 1; i < n; i++) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+    "belief_code": "int n = 5;\nint sum = 0;\nint i;\nfor (i = 1; i <= n; i++) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+    "distractors": [
+      "6",
+      "21"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M01_predict_output_3",
+    "class": "M01",
+    "type": "predict_output",
+    "code": "int i = 5;\nint count = 0;\nwhile (i >= 0) {\n    count = count + 1;\n    i = i - 1;\n}\nprintf(\"%d\", count);",
+    "belief_code": "int i = 5;\nint count = 0;\nwhile (i > 0) {\n    count = count + 1;\n    i = i - 1;\n}\nprintf(\"%d\", count);",
+    "distractors": [
+      "4",
+      "7"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M01_predict_output_4",
+    "class": "M01",
+    "type": "predict_output",
+    "code": "int n = 10;\nint sum = 0;\nint i;\nfor (i = 0; i <= n; i = i + 2) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+    "belief_code": "int n = 10;\nint sum = 0;\nint i;\nfor (i = 0; i < n; i = i + 2) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+    "distractors": [
+      "25",
+      "35"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M01_predict_output_5",
+    "class": "M01",
+    "type": "predict_output",
+    "code": "int n = 6;\nint count = 0;\nint i;\nfor (i = 0; i < n - 1; i++) {\n    count = count + 1;\n}\nprintf(\"%d\", count);",
+    "belief_code": "int n = 6;\nint count = 0;\nint i;\nfor (i = 0; i <= n - 1; i++) {\n    count = count + 1;\n}\nprintf(\"%d\", count);",
+    "distractors": [
+      "4",
+      "7"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M01_predict_output_6",
+    "class": "M01",
+    "type": "predict_output",
+    "code": "int fuel = 5;\nint product = 1;\nint i;\nfor (i = fuel; i >= 0; i--) {\n    product = product * i;\n}\nprintf(\"%d\", product);",
+    "belief_code": "int fuel = 5;\nint product = 1;\nint i;\nfor (i = fuel; i > 0; i--) {\n    product = product * i;\n}\nprintf(\"%d\", product);",
+    "distractors": [
+      "1",
+      "60"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M02_mcq_1",
+    "class": "M02",
+    "type": "mcq",
+    "code": "int i = 0;\nint total = 0;\nwhile (i < 5) {\n    total = total + i;\n}",
+    "question": "What is total after the loop?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int i = 0;\nint total = 0;\nwhile (i < 5) {\n    total = total + i;\n    i = i + 1;\n}",
+    "distractors": [
+      "6",
+      "15"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M02_mcq_2",
+    "class": "M02",
+    "type": "mcq",
+    "code": "int nums[] = {3, 5, 7, 9};\nint sum = 0;\nint i;\nfor (i = 0; i < 4; ) {\n    sum = sum + nums[i];\n}",
+    "question": "What is sum after the loop?",
+    "tail": "printf(\"%d\", sum);",
+    "belief_code": "int nums[] = {3, 5, 7, 9};\nint sum = 0;\nint i;\nfor (i = 0; i < 4; ) {\n    sum = sum + nums[i];\n    i = i + 1;\n}",
+    "distractors": [
+      "15",
+      "21"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M02_mcq_3",
+    "class": "M02",
+    "type": "mcq",
+    "code": "int count_to(int n) {\n    int i = 0;\n    int total = 0;\n    while (i < n) {\n        total = total + i;\n    }\n    return total;\n}\nint result = count_to(4);",
+    "question": "What is result after the loop?",
+    "tail": "printf(\"%d\", result);",
+    "belief_code": "int count_to(int n) {\n    int i = 0;\n    int total = 0;\n    while (i < n) {\n        total = total + i;\n        i = i + 1;\n    }\n    return total;\n}\nint result = count_to(4);",
+    "distractors": [
+      "10",
+      "3"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M02_mcq_4",
+    "class": "M02",
+    "type": "mcq",
+    "code": "int i = 0;\nint sum = 0;\nwhile (i < 6) {\n    sum = sum + i;\n    if (i > 100) {\n        i = i + 1;\n    }\n}",
+    "question": "What is sum after the loop?",
+    "tail": "printf(\"%d\", sum);",
+    "belief_code": "int i = 0;\nint sum = 0;\nwhile (i < 6) {\n    sum = sum + i;\n    if (i > 100) {\n        i = i + 1;\n    }\n    i = i + 1;\n}",
+    "distractors": [
+      "10",
+      "21"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M02_mcq_5",
+    "class": "M02",
+    "type": "mcq",
+    "code": "int fuel = 5;\nint burned = 0;\nwhile (fuel > 0) {\n    burned = burned + 1;\n}",
+    "question": "What is burned after the loop?",
+    "tail": "printf(\"%d\", burned);",
+    "belief_code": "int fuel = 5;\nint burned = 0;\nwhile (fuel > 0) {\n    burned = burned + 1;\n    fuel = fuel - 1;\n}",
+    "distractors": [
+      "4",
+      "6"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M02_next_state_1",
+    "class": "M02",
+    "type": "next_state",
+    "code": "int i = 0;\nint total = 0;\nwhile (i < 4) {\n    total = total + i;\n}",
+    "var": "total",
+    "after_line": 4,
+    "hit": 2,
+    "belief_code": "int i = 0;\nint total = 0;\nwhile (i < 4) {\n    total = total + i;\n    i++;\n}",
+    "belief_after_line": 4,
+    "distractors": [
+      "1",
+      "2"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M02_next_state_2",
+    "class": "M02",
+    "type": "next_state",
+    "code": "int fuel = 10;\nint burn = 0;\nfor (burn = 0; burn < 3; ) {\n    fuel = fuel - 2;\n}",
+    "var": "burn",
+    "after_line": 4,
+    "hit": 2,
+    "belief_code": "int fuel = 10;\nint burn = 0;\nfor (burn = 0; burn < 3; ) {\n    fuel = fuel - 2;\n    burn++;\n}",
+    "belief_after_line": 4,
+    "distractors": [
+      "1",
+      "3"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M02_next_state_3",
+    "class": "M02",
+    "type": "next_state",
+    "code": "char word[5] = \"abba\";\nint i = 0;\nint count = 0;\nwhile (i < 4) {\n    if (word[i] == 'a') {\n        count = count + 1;\n    }\n}",
+    "var": "i",
+    "after_line": 6,
+    "hit": 2,
+    "belief_code": "char word[5] = \"abba\";\nint i = 0;\nint count = 0;\nwhile (i < 4) {\n    if (word[i] == 'a') {\n        count = count + 1;\n    }\n    i++;\n}",
+    "belief_after_line": 6,
+    "distractors": [
+      "1",
+      "3"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M02_next_state_4",
+    "class": "M02",
+    "type": "next_state",
+    "code": "int count_down(int n) {\n    int steps = 0;\n    while (n > 0) {\n        steps = steps + 1;\n    }\n    return steps;\n}\nint result = count_down(3);",
+    "var": "n",
+    "after_line": 4,
+    "hit": 2,
+    "belief_code": "int count_down(int n) {\n    int steps = 0;\n    while (n > 0) {\n        steps = steps + 1;\n        n--;\n    }\n    return steps;\n}\nint result = count_down(3);",
+    "belief_after_line": 4,
+    "distractors": [
+      "1",
+      "2"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M02_predict_output_1",
+    "class": "M02",
+    "type": "predict_output",
+    "code": "int i = 0;\nint sum = 0;\nint arr[5] = {2, 3, 5, 7, 11};\nwhile (i < 5) {\n    sum = sum + arr[i];\n}\nprintf(\"%d\", sum);",
+    "belief_code": "int i = 0;\nint sum = 0;\nint arr[5] = {2, 3, 5, 7, 11};\nwhile (i < 5) {\n    sum = sum + arr[i];\n    i++;\n}\nprintf(\"%d\", sum);",
+    "distractors": [
+      "17",
+      "21"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M02_predict_output_2",
+    "class": "M02",
+    "type": "predict_output",
+    "code": "int i;\nint total = 0;\nfor (i = 0; i < 4; ) {\n    total = total + i;\n}\nprintf(\"%d\", total);",
+    "belief_code": "int i;\nint total = 0;\nfor (i = 0; i < 4; ) {\n    total = total + i;\n    i++;\n}\nprintf(\"%d\", total);",
+    "distractors": [
+      "3",
+      "10"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M02_predict_output_3",
+    "class": "M02",
+    "type": "predict_output",
+    "code": "char word[6] = \"hello\";\nint i = 0;\nint count = 0;\nwhile (i < 5) {\n    if (word[i] == 'z') {\n        i++;\n    }\n    count++;\n}\nprintf(\"%d\", count);",
+    "belief_code": "char word[6] = \"hello\";\nint i = 0;\nint count = 0;\nwhile (i < 5) {\n    if (word[i] == 'z') {\n        i++;\n    }\n    count++;\n    i++;\n}\nprintf(\"%d\", count);",
+    "distractors": [
+      "4",
+      "6"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M02_predict_output_4",
+    "class": "M02",
+    "type": "predict_output",
+    "code": "int i;\nint count = 0;\nfor (i = 0; i < 5; ) {\n    if (i == 3) {\n        i = i + 1;\n    }\n    count = count + 1;\n}\nprintf(\"%d\", count);",
+    "belief_code": "int i;\nint count = 0;\nfor (i = 0; i < 5; ) {\n    if (i == 3) {\n        i = i + 1;\n    }\n    count = count + 1;\n    i++;\n}\nprintf(\"%d\", count);",
+    "distractors": [
+      "5",
+      "3"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M02_predict_output_5",
+    "class": "M02",
+    "type": "predict_output",
+    "code": "int n = 1;\nint i = 0;\nwhile (i < 4) {\n    n = n * 2;\n}\nprintf(\"%d\", n);",
+    "belief_code": "int n = 1;\nint i = 0;\nwhile (i < 4) {\n    n = n * 2;\n    i++;\n}\nprintf(\"%d\", n);",
+    "distractors": [
+      "8",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M02_predict_output_6",
+    "class": "M02",
+    "type": "predict_output",
+    "code": "float arr[4] = {1.5, 2.5, 3.5, 4.5};\nint i = 0;\nfloat total = 0.0;\nwhile (i < 4) {\n    total = total + arr[i];\n}\nprintf(\"%.1f\", total);",
+    "belief_code": "float arr[4] = {1.5, 2.5, 3.5, 4.5};\nint i = 0;\nfloat total = 0.0;\nwhile (i < 4) {\n    total = total + arr[i];\n    i++;\n}\nprintf(\"%.1f\", total);",
+    "distractors": [
+      "6.0",
+      "10.0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M03_mcq_1",
+    "class": "M03",
+    "type": "mcq",
+    "code": "int total = 0;\nfor (int i = 1; i <= 5; i++) {\n    total = 0;\n    total = total + i;\n}",
+    "question": "What is total after the loop?",
+    "tail": "printf(\"%d\\n\", total);",
+    "belief_code": "int total = 0;\nfor (int i = 1; i <= 5; i++) {\n    total = total + i;\n}",
+    "distractors": [
+      "15",
+      "0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M03_mcq_2",
+    "class": "M03",
+    "type": "mcq",
+    "code": "int sum = 0;\nint nums[3] = {2, 3, 4};\nint i = 0;\nwhile (i < 3) {\n    sum = 0;\n    sum = sum + nums[i];\n    i = i + 1;\n}",
+    "question": "What is sum after the loop?",
+    "tail": "printf(\"%d\\n\", sum);",
+    "belief_code": "int sum = 0;\nint nums[3] = {2, 3, 4};\nint i = 0;\nwhile (i < 3) {\n    sum = sum + nums[i];\n    i = i + 1;\n}",
+    "distractors": [
+      "9",
+      "0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M03_mcq_3",
+    "class": "M03",
+    "type": "mcq",
+    "code": "int total = 0;\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 2; j++) {\n        total = 0;\n        total = total + i + j;\n    }\n}",
+    "question": "What is total after the loops?",
+    "tail": "printf(\"%d\\n\", total);",
+    "belief_code": "int total = 0;\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 2; j++) {\n        total = total + i + j;\n    }\n}",
+    "distractors": [
+      "9",
+      "6"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M03_mcq_4",
+    "class": "M03",
+    "type": "mcq",
+    "code": "int count_creatures(int n) {\n    int total = 0;\n    for (int i = 0; i < n; i++) {\n        total = 0;\n        total = total + 2;\n    }\n    return total;\n}\nint result = count_creatures(3);",
+    "question": "What does result equal after the call?",
+    "tail": "printf(\"%d\\n\", result);",
+    "belief_code": "int count_creatures(int n) {\n    int total = 0;\n    for (int i = 0; i < n; i++) {\n        total = total + 2;\n    }\n    return total;\n}\nint result = count_creatures(3);",
+    "distractors": [
+      "6",
+      "0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M03_mcq_5",
+    "class": "M03",
+    "type": "mcq",
+    "code": "char word[7] = \"banana\";\nint count = 0;\nint len = strlen(word);\nfor (int i = 0; i < len; i++) {\n    count = 0;\n    if (word[i] == 'a') {\n        count = count + 1;\n    }\n}",
+    "question": "What is count after the loop?",
+    "tail": "printf(\"%d\\n\", count);",
+    "belief_code": "char word[7] = \"banana\";\nint count = 0;\nint len = strlen(word);\nfor (int i = 0; i < len; i++) {\n    if (word[i] == 'a') {\n        count = count + 1;\n    }\n}",
+    "distractors": [
+      "3",
+      "0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M03_next_state_1",
+    "class": "M03",
+    "type": "next_state",
+    "code": "void run() {\n    int total = 0;\n    int i = 0;\n    for (i = 0; i < 4; i = i + 1) {\n        total = 0;\n        total = total + 2;\n    }\n}\nrun();",
+    "var": "total",
+    "after_line": 6,
+    "hit": 3,
+    "belief_code": "void run() {\n    int total = 0;\n    int i = 0;\n    for (i = 0; i < 4; i = i + 1) {\n        total = total + 2;\n    }\n}\nrun();",
+    "belief_after_line": 5,
+    "distractors": [
+      "4",
+      "8"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M03_next_state_2",
+    "class": "M03",
+    "type": "next_state",
+    "code": "void load_cargo() {\n    int cargo = 0;\n    int box = 5;\n    while (box > 0) {\n        cargo = 0;\n        cargo = cargo + box;\n        box = box - 1;\n    }\n}\nload_cargo();",
+    "var": "cargo",
+    "after_line": 6,
+    "hit": 2,
+    "belief_code": "void load_cargo() {\n    int cargo = 0;\n    int box = 5;\n    while (box > 0) {\n        cargo = cargo + box;\n        box = box - 1;\n    }\n}\nload_cargo();",
+    "belief_after_line": 5,
+    "distractors": [
+      "5",
+      "7"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M03_next_state_3",
+    "class": "M03",
+    "type": "next_state",
+    "code": "void tank_check() {\n    int fuel = 0;\n    int tanks[3] = {4, 7, 2};\n    int i = 0;\n    for (i = 0; i < 3; i = i + 1) {\n        fuel = 0;\n        fuel = fuel + tanks[i];\n    }\n}\ntank_check();",
+    "var": "fuel",
+    "after_line": 7,
+    "hit": 2,
+    "belief_code": "void tank_check() {\n    int fuel = 0;\n    int tanks[3] = {4, 7, 2};\n    int i = 0;\n    for (i = 0; i < 3; i = i + 1) {\n        fuel = fuel + tanks[i];\n    }\n}\ntank_check();",
+    "belief_after_line": 6,
+    "distractors": [
+      "4",
+      "13"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M03_next_state_4",
+    "class": "M03",
+    "type": "next_state",
+    "code": "void multiply_probes() {\n    int product = 1;\n    int n = 3;\n    while (n < 7) {\n        product = 1;\n        product = product * n;\n        n = n + 1;\n    }\n}\nmultiply_probes();",
+    "var": "product",
+    "after_line": 6,
+    "hit": 4,
+    "belief_code": "void multiply_probes() {\n    int product = 1;\n    int n = 3;\n    while (n < 7) {\n        product = product * n;\n        n = n + 1;\n    }\n}\nmultiply_probes();",
+    "belief_after_line": 5,
+    "distractors": [
+      "60",
+      "18"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M03_predict_output_1",
+    "class": "M03",
+    "type": "predict_output",
+    "code": "int total = 0;\nfor (int i = 1; i <= 4; i = i + 1)\n{\n    total = 0;\n    total = total + i;\n}\nprintf(\"%d\", total);",
+    "belief_code": "int total = 0;\nfor (int i = 1; i <= 4; i = i + 1)\n{\n    total = total + i;\n}\nprintf(\"%d\", total);",
+    "distractors": [
+      "0",
+      "3"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M03_predict_output_2",
+    "class": "M03",
+    "type": "predict_output",
+    "code": "int vals[] = {5, 2, 7, 1};\nint total = 0;\nint i = 0;\nwhile (i < 4)\n{\n    total = 0;\n    total = total + vals[i];\n    i = i + 1;\n}\nprintf(\"%d\", total);",
+    "belief_code": "int vals[] = {5, 2, 7, 1};\nint total = 0;\nint i = 0;\nwhile (i < 4)\n{\n    total = total + vals[i];\n    i = i + 1;\n}\nprintf(\"%d\", total);",
+    "distractors": [
+      "0",
+      "5"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M03_predict_output_3",
+    "class": "M03",
+    "type": "predict_output",
+    "code": "int total = 1;\nfor (int i = 2; i <= 5; i = i + 1)\n{\n    total = 1;\n    total = total * i;\n}\nprintf(\"%d\", total);",
+    "belief_code": "int total = 1;\nfor (int i = 2; i <= 5; i = i + 1)\n{\n    total = total * i;\n}\nprintf(\"%d\", total);",
+    "distractors": [
+      "1",
+      "24"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M03_predict_output_4",
+    "class": "M03",
+    "type": "predict_output",
+    "code": "char s[] = \"abracadabra\";\nint total = 0;\nfor (int i = 0; s[i] != '\\0'; i = i + 1)\n{\n    total = 0;\n    if (s[i] == 'a')\n    {\n        total = total + 1;\n    }\n}\nprintf(\"%d\", total);",
+    "belief_code": "char s[] = \"abracadabra\";\nint total = 0;\nfor (int i = 0; s[i] != '\\0'; i = i + 1)\n{\n    if (s[i] == 'a')\n    {\n        total = total + 1;\n    }\n}\nprintf(\"%d\", total);",
+    "distractors": [
+      "0",
+      "11"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M03_predict_output_5",
+    "class": "M03",
+    "type": "predict_output",
+    "code": "int sum_squares(int n)\n{\n    int total = 0;\n    for (int i = 1; i <= n; i = i + 1)\n    {\n        total = 0;\n        total = total + i * i;\n    }\n    return total;\n}\nprintf(\"%d\", sum_squares(3));",
+    "belief_code": "int sum_squares(int n)\n{\n    int total = 0;\n    for (int i = 1; i <= n; i = i + 1)\n    {\n        total = total + i * i;\n    }\n    return total;\n}\nprintf(\"%d\", sum_squares(3));",
+    "distractors": [
+      "0",
+      "5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M03_predict_output_6",
+    "class": "M03",
+    "type": "predict_output",
+    "code": "int data[] = {2, 3, 4};\nint total = 0;\nfor (int i = 0; i < 3; i = i + 1)\n{\n    for (int j = 0; j < 2; j = j + 1)\n    {\n        total = 0;\n        total = total + data[i] + j;\n    }\n}\nprintf(\"%d\", total);",
+    "belief_code": "int data[] = {2, 3, 4};\nint total = 0;\nfor (int i = 0; i < 3; i = i + 1)\n{\n    for (int j = 0; j < 2; j = j + 1)\n    {\n        total = total + data[i] + j;\n    }\n}\nprintf(\"%d\", total);",
+    "distractors": [
+      "0",
+      "9"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M04_mcq_1",
+    "class": "M04",
+    "type": "mcq",
+    "code": "int a = 5;\nint b = 2;\nfloat result = a / b;",
+    "question": "What is result after the code runs?",
+    "tail": "printf(\"%.1f\", result);",
+    "belief_code": "int a = 5;\nint b = 2;\nfloat result = (float)a / b;",
+    "distractors": [
+      "2.5",
+      "3.0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M04_mcq_2",
+    "class": "M04",
+    "type": "mcq",
+    "code": "float total = 0.0;\nint i;\nfor (i = 1; i <= 3; i = i + 1) {\n    total = total + i / 2;\n}",
+    "question": "What is total after the loop?",
+    "tail": "printf(\"%.1f\", total);",
+    "belief_code": "float total = 0.0;\nint i;\nfor (i = 1; i <= 3; i = i + 1) {\n    total = total + (float)i / 2;\n}",
+    "distractors": [
+      "3.0",
+      "1.5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M04_mcq_3",
+    "class": "M04",
+    "type": "mcq",
+    "code": "float ratio(int a, int b) {\n    float result = a / b;\n    return result;\n}\nint x = 5;\nint y = 2;\nfloat r = ratio(x, y);",
+    "question": "What does ratio(5, 2) give?",
+    "tail": "printf(\"%.1f\", r);",
+    "belief_code": "float ratio(int a, int b) {\n    float result = (float)a / b;\n    return result;\n}\nint x = 5;\nint y = 2;\nfloat r = ratio(x, y);",
+    "distractors": [
+      "2.5",
+      "5.0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M04_mcq_4",
+    "class": "M04",
+    "type": "mcq",
+    "code": "int crew = 5;\nint jobs = 2;\nfloat per_job = crew / jobs;\nint status = 0;\nif (per_job > 2.0) {\n    status = 1;\n} else {\n    status = 2;\n}",
+    "question": "What is status after the if/else?",
+    "tail": "printf(\"%d\", status);",
+    "belief_code": "int crew = 5;\nint jobs = 2;\nfloat per_job = (float)crew / jobs;\nint status = 0;\nif (per_job > 2.0) {\n    status = 1;\n} else {\n    status = 2;\n}",
+    "distractors": [
+      "1",
+      "0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M04_mcq_5",
+    "class": "M04",
+    "type": "mcq",
+    "code": "int total = 5;\nint divisor = 2;\nfloat step = total / divisor;\nint count = 0;\nwhile (step > 0.0) {\n    total = total - divisor;\n    step = step - 1.0;\n    count = count + 1;\n}",
+    "question": "What is count after the while loop?",
+    "tail": "printf(\"%d\", count);",
+    "belief_code": "int total = 5;\nint divisor = 2;\nfloat step = (float)total / divisor;\nint count = 0;\nwhile (step > 0.0) {\n    total = total - divisor;\n    step = step - 1.0;\n    count = count + 1;\n}",
+    "distractors": [
+      "1",
+      "3"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M04_next_state_1",
+    "class": "M04",
+    "type": "next_state",
+    "code": "int fuel = 7;\nint crew = 4;\nfloat rate = fuel / crew;\nint scaled = 0;\nfor (int i = 1; i <= 4; i = i + 1) {\n    scaled = rate * i;\n}",
+    "var": "scaled",
+    "after_line": 6,
+    "hit": 3,
+    "belief_code": "int fuel = 7;\nint crew = 4;\nfloat rate = (float) fuel / crew;\nint scaled = 0;\nfor (int i = 1; i <= 4; i = i + 1) {\n    scaled = rate * i;\n}",
+    "belief_after_line": 6,
+    "distractors": [
+      "4",
+      "6"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M04_next_state_2",
+    "class": "M04",
+    "type": "next_state",
+    "code": "int total(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    int hull = 9;\n    int shield = 4;\n    float repair = hull / shield;\n    int part = repair * 10;\n    return total(n - 1) + part;\n}\nint y = total(3);",
+    "var": "part",
+    "after_line": 8,
+    "hit": 2,
+    "belief_code": "int total(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    int hull = 9;\n    int shield = 4;\n    float repair = (float) hull / shield;\n    int part = repair * 10;\n    return total(n - 1) + part;\n}\nint y = total(3);",
+    "belief_after_line": 8,
+    "distractors": [
+      "18",
+      "24"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M04_next_state_3",
+    "class": "M04",
+    "type": "next_state",
+    "code": "int power = 11;\nint cells = 4;\nfloat ratio = power / cells;\nint charge = 0;\nint t = 1;\nwhile (t <= 4) {\n    charge = ratio * t;\n    t = t + 1;\n}",
+    "var": "charge",
+    "after_line": 7,
+    "hit": 3,
+    "belief_code": "int power = 11;\nint cells = 4;\nfloat ratio = (float) power / cells;\nint charge = 0;\nint t = 1;\nwhile (t <= 4) {\n    charge = ratio * t;\n    t = t + 1;\n}",
+    "belief_after_line": 7,
+    "distractors": [
+      "5",
+      "9"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M04_next_state_4",
+    "class": "M04",
+    "type": "next_state",
+    "code": "int fill(int n) {\n    int i = 0;\n    int total = 0;\n    int a = 17;\n    int b = 5;\n    float f = a / b;\n    while (i < n) {\n        total = f * n;\n        i = i + 1;\n    }\n    return total;\n}\nint result = fill(3);",
+    "var": "total",
+    "after_line": 8,
+    "hit": 2,
+    "belief_code": "int fill(int n) {\n    int i = 0;\n    int total = 0;\n    int a = 17;\n    int b = 5;\n    float f = (float) a / b;\n    while (i < n) {\n        total = f * n;\n        i = i + 1;\n    }\n    return total;\n}\nint result = fill(3);",
+    "belief_after_line": 8,
+    "distractors": [
+      "8",
+      "12"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M04_predict_output_1",
+    "class": "M04",
+    "type": "predict_output",
+    "code": "int a = 9;\nint b = 2;\nfloat result = a / b;\nprintf(\"%.1f\", result);",
+    "belief_code": "int a = 9;\nint b = 2;\nfloat result = (float) a / b;\nprintf(\"%.1f\", result);",
+    "distractors": [
+      "4",
+      "5.0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M04_predict_output_2",
+    "class": "M04",
+    "type": "predict_output",
+    "code": "int nums[3] = {11, 3, 5};\nfloat result = nums[0] / nums[1];\nprintf(\"%.1f\", result);",
+    "belief_code": "int nums[3] = {11, 3, 5};\nfloat result = (float) nums[0] / nums[1];\nprintf(\"%.1f\", result);",
+    "distractors": [
+      "3",
+      "3.6"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M04_predict_output_3",
+    "class": "M04",
+    "type": "predict_output",
+    "code": "float divide(int x, int y) {\n    return x / y;\n}\nint a = 10;\nint b = 4;\nfloat result = divide(a, b);\nprintf(\"%.1f\", result);",
+    "belief_code": "float divide(int x, int y) {\n    return (float) x / y;\n}\nint a = 10;\nint b = 4;\nfloat result = divide(a, b);\nprintf(\"%.1f\", result);",
+    "distractors": [
+      "2",
+      "3.0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M04_predict_output_4",
+    "class": "M04",
+    "type": "predict_output",
+    "code": "int fuel = 17;\nint crew = 5;\nif (crew > 0) {\n    float per_person = fuel / crew;\n    printf(\"%.1f\", per_person);\n}",
+    "belief_code": "int fuel = 17;\nint crew = 5;\nif (crew > 0) {\n    float per_person = (float) fuel / crew;\n    printf(\"%.1f\", per_person);\n}",
+    "distractors": [
+      "3",
+      "4.0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M04_predict_output_5",
+    "class": "M04",
+    "type": "predict_output",
+    "code": "int total = 0;\nint count = 0;\nint data[4] = {5, 8, 3, 6};\nfor (int i = 0; i < 4; i = i + 1) {\n    total = total + data[i];\n    count = count + 1;\n}\nfloat avg = total / count;\nprintf(\"%.1f\", avg);",
+    "belief_code": "int total = 0;\nint count = 0;\nint data[4] = {5, 8, 3, 6};\nfor (int i = 0; i < 4; i = i + 1) {\n    total = total + data[i];\n    count = count + 1;\n}\nfloat avg = (float) total / count;\nprintf(\"%.1f\", avg);",
+    "distractors": [
+      "5",
+      "6.0"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M04_predict_output_6",
+    "class": "M04",
+    "type": "predict_output",
+    "code": "char word[14] = \"spaceshuttles\";\nint len = strlen(word);\nfloat half = len / 2;\nprintf(\"%.1f\", half);",
+    "belief_code": "char word[14] = \"spaceshuttles\";\nint len = strlen(word);\nfloat half = (float) len / 2;\nprintf(\"%.1f\", half);",
+    "distractors": [
+      "6",
+      "7.0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M05_mcq_1",
+    "class": "M05",
+    "type": "mcq",
+    "code": "int total;\nfor (int i = 1; i <= 5; i++) {\n    total = total + i;\n}\n",
+    "question": "What is the value of total after the loop?",
+    "tail": "printf(\"%d\\n\", total);",
+    "belief_code": "int total = 0;\nfor (int i = 1; i <= 5; i++) {\n    total = total + i;\n}\n",
+    "distractors": [
+      "10",
+      "20"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M05_mcq_2",
+    "class": "M05",
+    "type": "mcq",
+    "code": "int depth(int n) {\n    if (n == 0) {\n        int value;\n        return value;\n    }\n    return 1 + depth(n - 1);\n}\nint d = depth(3);\n",
+    "question": "What is the value of d after the call depth(3)?",
+    "tail": "printf(\"%d\\n\", d);",
+    "belief_code": "int depth(int n) {\n    if (n == 0) {\n        int value = 0;\n        return value;\n    }\n    return 1 + depth(n - 1);\n}\nint d = depth(3);\n",
+    "distractors": [
+      "0",
+      "4"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M05_mcq_3",
+    "class": "M05",
+    "type": "mcq",
+    "code": "int fuel;\nwhile (fuel < 5) {\n    fuel = fuel + 1;\n}\n",
+    "question": "What is the value of fuel after the loop?",
+    "tail": "printf(\"%d\\n\", fuel);",
+    "belief_code": "int fuel = 0;\nwhile (fuel < 5) {\n    fuel = fuel + 1;\n}\n",
+    "distractors": [
+      "4",
+      "6"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M05_mcq_4",
+    "class": "M05",
+    "type": "mcq",
+    "code": "int sum_evens(int n) {\n    int acc;\n    for (int i = 2; i <= n; i += 2) {\n        acc = acc + i;\n    }\n    return acc;\n}\nint result = sum_evens(10);\n",
+    "question": "What is the value of result after calling sum_evens(10)?",
+    "tail": "printf(\"%d\\n\", result);",
+    "belief_code": "int sum_evens(int n) {\n    int acc = 0;\n    for (int i = 2; i <= n; i += 2) {\n        acc = acc + i;\n    }\n    return acc;\n}\nint result = sum_evens(10);\n",
+    "distractors": [
+      "20",
+      "40"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M05_mcq_5",
+    "class": "M05",
+    "type": "mcq",
+    "code": "float average;\nfloat scores[3] = {2.5, 3.5, 4.0};\nfor (int i = 0; i < 3; i++) {\n    average = average + scores[i];\n}\naverage = average / 3;\n",
+    "question": "What is the value of average after the loop and division?",
+    "tail": "printf(\"%.1f\\n\", average);",
+    "belief_code": "float average = 0.0;\nfloat scores[3] = {2.5, 3.5, 4.0};\nfor (int i = 0; i < 3; i++) {\n    average = average + scores[i];\n}\naverage = average / 3;\n",
+    "distractors": [
+      "3.0",
+      "3.5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M05_next_state_1",
+    "class": "M05",
+    "type": "next_state",
+    "code": "int fuel;\nint burned;\nburned = 0;\nwhile (burned < 3) {\n    fuel = fuel + 2;\n    burned = burned + 1;\n}",
+    "var": "fuel",
+    "after_line": 5,
+    "hit": 2,
+    "belief_code": "int fuel = 0;\nint burned;\nburned = 0;\nwhile (burned < 3) {\n    fuel = fuel + 2;\n    burned = burned + 1;\n}",
+    "belief_after_line": 5,
+    "distractors": [
+      2,
+      6
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M05_next_state_2",
+    "class": "M05",
+    "type": "next_state",
+    "code": "int shield;\nint i;\nfor (i = 0; i < 4; i = i + 1) {\n    shield = shield - 1;\n}",
+    "var": "shield",
+    "after_line": 4,
+    "hit": 3,
+    "belief_code": "int shield = 0;\nint i;\nfor (i = 0; i < 4; i = i + 1) {\n    shield = shield - 1;\n}",
+    "belief_after_line": 4,
+    "distractors": [
+      -2,
+      -4
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M05_next_state_3",
+    "class": "M05",
+    "type": "next_state",
+    "code": "void burn(int n) {\n    int fuel;\n    fuel = fuel + n;\n    if (n > 1) {\n        burn(n - 1);\n    }\n}\nburn(3);",
+    "var": "fuel",
+    "after_line": 3,
+    "hit": 2,
+    "belief_code": "void burn(int n) {\n    int fuel = 0;\n    fuel = fuel + n;\n    if (n > 1) {\n        burn(n - 1);\n    }\n}\nburn(3);",
+    "belief_after_line": 3,
+    "distractors": [
+      3,
+      1
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M05_next_state_4",
+    "class": "M05",
+    "type": "next_state",
+    "code": "int crew;\nint i;\ni = 0;\nwhile (i < 5) {\n    if (i < 3) {\n        crew = crew + 1;\n    }\n    i = i + 1;\n}",
+    "var": "crew",
+    "after_line": 6,
+    "hit": 2,
+    "belief_code": "int crew = 0;\nint i;\ni = 0;\nwhile (i < 5) {\n    if (i < 3) {\n        crew = crew + 1;\n    }\n    i = i + 1;\n}",
+    "belief_after_line": 6,
+    "distractors": [
+      1,
+      3
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M05_predict_output_1",
+    "class": "M05",
+    "type": "predict_output",
+    "code": "int total;\ntotal = total + 4;\nprintf(\"%d\\n\", total);",
+    "belief_code": "int total = 0;\ntotal = total + 4;\nprintf(\"%d\\n\", total);",
+    "distractors": [
+      "0\\n",
+      "8\\n"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M05_predict_output_2",
+    "class": "M05",
+    "type": "predict_output",
+    "code": "int hull;\nif (hull == 0) {\n    printf(\"safe\\n\");\n} else {\n    printf(\"damaged\\n\");\n}",
+    "belief_code": "int hull = 0;\nif (hull == 0) {\n    printf(\"safe\\n\");\n} else {\n    printf(\"damaged\\n\");\n}",
+    "distractors": [
+      "damaged\\n",
+      "unknown\\n"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M05_predict_output_3",
+    "class": "M05",
+    "type": "predict_output",
+    "code": "int add_bonus(int base) {\n    int extra;\n    extra = extra + base;\n    return extra;\n}\nprintf(\"%d\\n\", add_bonus(7));",
+    "belief_code": "int add_bonus(int base) {\n    int extra = 0;\n    extra = extra + base;\n    return extra;\n}\nprintf(\"%d\\n\", add_bonus(7));",
+    "distractors": [
+      "0\\n",
+      "14\\n"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M05_predict_output_4",
+    "class": "M05",
+    "type": "predict_output",
+    "code": "int scores[3] = {2, 4, 6};\nint sum;\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    sum = sum + scores[i];\n}\nprintf(\"%d\\n\", sum);",
+    "belief_code": "int scores[3] = {2, 4, 6};\nint sum = 0;\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    sum = sum + scores[i];\n}\nprintf(\"%d\\n\", sum);",
+    "distractors": [
+      "0\\n",
+      "6\\n"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M05_predict_output_5",
+    "class": "M05",
+    "type": "predict_output",
+    "code": "int fuel;\nint steps;\nsteps = 0;\nwhile (steps < 2) {\n    fuel = fuel + 1;\n    steps = steps + 1;\n}\nprintf(\"%d\\n\", fuel);",
+    "belief_code": "int fuel = 0;\nint steps;\nsteps = 0;\nwhile (steps < 2) {\n    fuel = fuel + 1;\n    steps = steps + 1;\n}\nprintf(\"%d\\n\", fuel);",
+    "distractors": [
+      "0\\n",
+      "1\\n"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M05_predict_output_6",
+    "class": "M05",
+    "type": "predict_output",
+    "code": "int boost(int n) {\n    int bonus;\n    if (n == 0) {\n        return 0;\n    }\n    bonus = bonus + n;\n    return bonus + boost(n - 1);\n}\nprintf(\"%d\\n\", boost(3));",
+    "belief_code": "int boost(int n) {\n    int bonus = 0;\n    if (n == 0) {\n        return 0;\n    }\n    bonus = bonus + n;\n    return bonus + boost(n - 1);\n}\nprintf(\"%d\\n\", boost(3));",
+    "distractors": [
+      "0\\n",
+      "3\\n"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M06_mcq_1",
+    "class": "M06",
+    "type": "mcq",
+    "code": "int mode = 5;\nint total = 0;\nif (mode = 2)\n{\n    total = total + 10;\n}\nelse\n{\n    total = total + 1;\n}",
+    "question": "What is total after the if/else?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int mode = 5;\nint total = 0;\nif (mode == 2)\n{\n    total = total + 10;\n}\nelse\n{\n    total = total + 1;\n}",
+    "distractors": [
+      "1",
+      "2"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M06_mcq_2",
+    "class": "M06",
+    "type": "mcq",
+    "code": "int fuel = 5;\nint burn = 0;\nint spare = 4;\nwhile (fuel = spare)\n{\n    spare = spare - 1;\n    burn = burn + fuel;\n}",
+    "question": "What is burn after the loop?",
+    "tail": "printf(\"%d\", burn);",
+    "belief_code": "int fuel = 5;\nint burn = 0;\nint spare = 4;\nwhile (fuel == spare)\n{\n    spare = spare - 1;\n    burn = burn + fuel;\n}",
+    "distractors": [
+      "0",
+      "4"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M06_mcq_3",
+    "class": "M06",
+    "type": "mcq",
+    "code": "int sensor()\n{\n    return 4;\n}\nint level = 5;\nint result = 3;\nif (level = sensor())\n{\n    result = 10;\n}",
+    "question": "What is result after the if?",
+    "tail": "printf(\"%d\", result);",
+    "belief_code": "int sensor()\n{\n    return 4;\n}\nint level = 5;\nint result = 3;\nif (level == sensor())\n{\n    result = 10;\n}",
+    "distractors": [
+      "3",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M06_mcq_4",
+    "class": "M06",
+    "type": "mcq",
+    "code": "int i;\nint count = 4;\nint sum = 0;\nfor (i = 0; i = count; i = i + 1)\n{\n    count = count - 1;\n    sum = sum + i;\n}",
+    "question": "What is sum after the for loop?",
+    "tail": "printf(\"%d\", sum);",
+    "belief_code": "int i;\nint count = 4;\nint sum = 0;\nfor (i = 0; i == count; i = i + 1)\n{\n    count = count - 1;\n    sum = sum + i;\n}",
+    "distractors": [
+      "0",
+      "4"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M06_mcq_5",
+    "class": "M06",
+    "type": "mcq",
+    "code": "int depth(int n)\n{\n    if (n = 1)\n    {\n        return 1;\n    }\n    return 1 + depth(n - 1);\n}\nint x = depth(3);",
+    "question": "What does depth(3) give?",
+    "tail": "printf(\"%d\", x);",
+    "belief_code": "int depth(int n)\n{\n    if (n == 1)\n    {\n        return 1;\n    }\n    return 1 + depth(n - 1);\n}\nint x = depth(3);",
+    "distractors": [
+      "3",
+      "0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M06_next_state_1",
+    "class": "M06",
+    "type": "next_state",
+    "code": "int x = 3;\nint y = 0;\nint i = 0;\nwhile (i < 4) {\n    if (x = 1) {\n        y = y + 5;\n    } else {\n        y = y + 10;\n    }\n    y = y + x;\n    i = i + 1;\n}",
+    "var": "y",
+    "after_line": 10,
+    "hit": 2,
+    "belief_code": "int x = 3;\nint y = 0;\nint i = 0;\nwhile (i < 4) {\n    if (x == 1) {\n        y = y + 5;\n    } else {\n        y = y + 10;\n    }\n    y = y + x;\n    i = i + 1;\n}",
+    "belief_after_line": 10,
+    "distractors": [
+      "6",
+      "23"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M06_next_state_2",
+    "class": "M06",
+    "type": "next_state",
+    "code": "int dive(int depth, int mode) {\n    int value = 2;\n    if (mode = 1) {\n        value = 1;\n    }\n    if (depth > 0) {\n        value = value + dive(depth - 1, mode);\n    }\n    return value;\n}\ndive(3, 2);",
+    "var": "value",
+    "after_line": 7,
+    "hit": 3,
+    "belief_code": "int dive(int depth, int mode) {\n    int value = 2;\n    if (mode == 1) {\n        value = 1;\n    }\n    if (depth > 0) {\n        value = value + dive(depth - 1, mode);\n    }\n    return value;\n}\ndive(3, 2);",
+    "belief_after_line": 7,
+    "distractors": [
+      "3",
+      "6"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M06_next_state_3",
+    "class": "M06",
+    "type": "next_state",
+    "code": "int shield = 5;\nint energy = 0;\nint i;\nfor (i = 0; i < 4; i = i + 1) {\n    if (shield = 3) {\n        energy = energy + 2;\n    } else {\n        energy = energy + 5;\n    }\n    energy = energy + shield;\n}",
+    "var": "energy",
+    "after_line": 10,
+    "hit": 2,
+    "belief_code": "int shield = 5;\nint energy = 0;\nint i;\nfor (i = 0; i < 4; i = i + 1) {\n    if (shield == 3) {\n        energy = energy + 2;\n    } else {\n        energy = energy + 5;\n    }\n    energy = energy + shield;\n}",
+    "belief_after_line": 10,
+    "distractors": [
+      "5",
+      "15"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M06_next_state_4",
+    "class": "M06",
+    "type": "next_state",
+    "code": "int mode = 0;\nint count = 0;\nint i = 0;\nwhile (i < 5) {\n    if (mode = 2) {\n        count = count + 1;\n    }\n    mode = mode + 1;\n    i = i + 1;\n}",
+    "var": "mode",
+    "after_line": 8,
+    "hit": 2,
+    "belief_code": "int mode = 0;\nint count = 0;\nint i = 0;\nwhile (i < 5) {\n    if (mode == 2) {\n        count = count + 1;\n    }\n    mode = mode + 1;\n    i = i + 1;\n}",
+    "belief_after_line": 8,
+    "distractors": [
+      "1",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M06_predict_output_1",
+    "class": "M06",
+    "type": "predict_output",
+    "code": "int mode = 1;\nif (mode = 2) {\n    printf(\"fast\");\n} else {\n    printf(\"slow\");\n}",
+    "belief_code": "int mode = 1;\nif (mode == 2) {\n    printf(\"fast\");\n} else {\n    printf(\"slow\");\n}",
+    "distractors": [
+      "slow",
+      "2"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M06_predict_output_2",
+    "class": "M06",
+    "type": "predict_output",
+    "code": "int fuel = 0;\nwhile (fuel = 0) {\n    printf(\"burn\");\n    fuel = 1;\n}\nprintf(\"off\");",
+    "belief_code": "int fuel = 0;\nwhile (fuel == 0) {\n    printf(\"burn\");\n    fuel = 1;\n}\nprintf(\"off\");",
+    "distractors": [
+      "burn",
+      "burnoff"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M06_predict_output_3",
+    "class": "M06",
+    "type": "predict_output",
+    "code": "float rate = 0.0;\nif (rate = 1.0) {\n    printf(\"%.1f\", rate);\n} else {\n    printf(\"zero\");\n}",
+    "belief_code": "float rate = 0.0;\nif (rate == 1.0) {\n    printf(\"%.1f\", rate);\n} else {\n    printf(\"zero\");\n}",
+    "distractors": [
+      "zero",
+      "0.0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M06_predict_output_4",
+    "class": "M06",
+    "type": "predict_output",
+    "code": "int nums[3] = {1, 2, 3};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    if (nums[i] = 2) {\n        printf(\"two\");\n    }\n}",
+    "belief_code": "int nums[3] = {1, 2, 3};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    if (nums[i] == 2) {\n        printf(\"two\");\n    }\n}",
+    "distractors": [
+      "two",
+      "twotwo"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M06_predict_output_5",
+    "class": "M06",
+    "type": "predict_output",
+    "code": "int check(int x) {\n    if (x = 1) {\n        return 1;\n    }\n    return 0;\n}\nint result = check(7);\nprintf(\"%d\", result);",
+    "belief_code": "int check(int x) {\n    if (x == 1) {\n        return 1;\n    }\n    return 0;\n}\nint result = check(7);\nprintf(\"%d\", result);",
+    "distractors": [
+      "0",
+      "7"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M06_predict_output_6",
+    "class": "M06",
+    "type": "predict_output",
+    "code": "char signal = 'a';\nif (signal = 'b') {\n    printf(\"%c\", signal);\n} else if (signal == 'a') {\n    printf(\"a\");\n} else {\n    printf(\"z\");\n}",
+    "belief_code": "char signal = 'a';\nif (signal == 'b') {\n    printf(\"%c\", signal);\n} else if (signal == 'a') {\n    printf(\"a\");\n} else {\n    printf(\"z\");\n}",
+    "distractors": [
+      "a",
+      "z"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M07_mcq_1",
+    "class": "M07",
+    "type": "mcq",
+    "code": "int calc_hull(void) {\n    int hull = 80;\n    if (hull < 50);\n    {\n        hull = hull + 10;\n    }\n    return hull;\n}",
+    "question": "What does calc_hull() give?",
+    "tail": "printf(\"%d\", calc_hull());",
+    "belief_code": "int calc_hull(void) {\n    int hull = 80;\n    if (hull < 50)\n    {\n        hull = hull + 10;\n    }\n    return hull;\n}",
+    "distractors": [
+      "80",
+      "50"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M07_mcq_2",
+    "class": "M07",
+    "type": "mcq",
+    "code": "int calc_count(void) {\n    int count = 0;\n    while (count > 0);\n    {\n        count = count + 2;\n    }\n    return count;\n}",
+    "question": "What does calc_count() give?",
+    "tail": "printf(\"%d\", calc_count());",
+    "belief_code": "int calc_count(void) {\n    int count = 0;\n    while (count > 0)\n    {\n        count = count + 2;\n    }\n    return count;\n}",
+    "distractors": [
+      "0",
+      "1"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M07_mcq_3",
+    "class": "M07",
+    "type": "mcq",
+    "code": "int calc_total(void) {\n    int total = 0;\n    int i;\n    for (i = 1; i <= 4; i = i + 1);\n    {\n        total = total + i;\n    }\n    return total;\n}",
+    "question": "What does calc_total() give?",
+    "tail": "printf(\"%d\", calc_total());",
+    "belief_code": "int calc_total(void) {\n    int total = 0;\n    int i;\n    for (i = 1; i <= 4; i = i + 1)\n    {\n        total = total + i;\n    }\n    return total;\n}",
+    "distractors": [
+      "10",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M07_mcq_4",
+    "class": "M07",
+    "type": "mcq",
+    "code": "int depth(int n) {\n    if (n <= 0);\n    {\n        return 2;\n    }\n    return n + depth(n - 1);\n}",
+    "question": "What does depth(3) give?",
+    "tail": "printf(\"%d\", depth(3));",
+    "belief_code": "int depth(int n) {\n    if (n <= 0)\n    {\n        return 2;\n    }\n    return n + depth(n - 1);\n}",
+    "distractors": [
+      "8",
+      "5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M07_mcq_5",
+    "class": "M07",
+    "type": "mcq",
+    "code": "int calc_sum(void) {\n    int values[] = {2, 4, 6, 8, 10};\n    int total = 0;\n    int i;\n    for (i = 0; i < 4; i = i + 1);\n    {\n        total = total + values[i];\n    }\n    return total;\n}",
+    "question": "What does calc_sum() give?",
+    "tail": "printf(\"%d\", calc_sum());",
+    "belief_code": "int calc_sum(void) {\n    int values[] = {2, 4, 6, 8, 10};\n    int total = 0;\n    int i;\n    for (i = 0; i < 4; i = i + 1)\n    {\n        total = total + values[i];\n    }\n    return total;\n}",
+    "distractors": [
+      "20",
+      "12"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M07_next_state_1",
+    "class": "M07",
+    "type": "next_state",
+    "code": "int x = 0;\nfor (int i = 0; i < 4; i = i + 1) {\n    if (i > 0);\n    {\n        x = x + i;\n    }\n}\n",
+    "var": "x",
+    "after_line": 5,
+    "hit": 3,
+    "belief_code": "int x = 0;\nfor (int i = 0; i < 4; i = i + 1) {\n    if (i > 0)\n    {\n        x = x + i;\n    }\n}\n",
+    "belief_after_line": 5,
+    "distractors": [
+      6,
+      5
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M07_next_state_2",
+    "class": "M07",
+    "type": "next_state",
+    "code": "int x = 0;\nfor (int i = 0; i < 3; i = i + 1) {\n    for (int j = 0; j < 3; j = j + 1);\n    {\n        x = x + i;\n    }\n}\n",
+    "var": "x",
+    "after_line": 5,
+    "hit": 3,
+    "belief_code": "int x = 0;\nfor (int i = 0; i < 3; i = i + 1) {\n    for (int j = 0; j < 3; j = j + 1)\n    {\n        x = x + i;\n    }\n}\n",
+    "belief_after_line": 5,
+    "distractors": [
+      0,
+      1
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M07_next_state_3",
+    "class": "M07",
+    "type": "next_state",
+    "code": "int f(int n, int acc) {\n    if (n == 0) return acc;\n    if (n % 2 == 0);\n    {\n        acc = acc + n;\n    }\n    return f(n - 1, acc);\n}\nf(4, 0);\n",
+    "var": "acc",
+    "after_line": 5,
+    "hit": 2,
+    "belief_code": "int f(int n, int acc) {\n    if (n == 0) return acc;\n    if (n % 2 == 0)\n    {\n        acc = acc + n;\n    }\n    return f(n - 1, acc);\n}\nf(4, 0);\n",
+    "belief_after_line": 5,
+    "distractors": [
+      6,
+      5
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M07_next_state_4",
+    "class": "M07",
+    "type": "next_state",
+    "code": "int x = 0;\nint i;\nfor (i = 0; i < 2; i = i + 1);\n{\n    for (int j = 0; j < 3; j = j + 1) {\n        x = x + i + j;\n    }\n}\n",
+    "var": "x",
+    "after_line": 6,
+    "hit": 3,
+    "belief_code": "int x = 0;\nint i;\nfor (i = 0; i < 2; i = i + 1)\n{\n    for (int j = 0; j < 3; j = j + 1) {\n        x = x + i + j;\n    }\n}\n",
+    "belief_after_line": 6,
+    "distractors": [
+      3,
+      5
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M07_predict_output_1",
+    "class": "M07",
+    "type": "predict_output",
+    "code": "int fuel = 3;\nif (fuel > 5);\n{\n    printf(\"launch\");\n}\nprintf(\"idle\");",
+    "belief_code": "int fuel = 3;\nif (fuel > 5)\n{\n    printf(\"launch\");\n}\nprintf(\"idle\");",
+    "distractors": [
+      "launch",
+      "abort"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M07_predict_output_2",
+    "class": "M07",
+    "type": "predict_output",
+    "code": "int probe;\nfor (probe = 2; probe < 5; probe++);\n{\n    printf(\"%d\", probe);\n}",
+    "belief_code": "int probe;\nfor (probe = 2; probe < 5; probe++)\n{\n    printf(\"%d\", probe);\n}",
+    "distractors": [
+      "4",
+      "2345"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M07_predict_output_3",
+    "class": "M07",
+    "type": "predict_output",
+    "code": "int crew = 3;\nwhile (crew < 3);\n{\n    crew = crew + 1;\n}\nprintf(\"%d\", crew);",
+    "belief_code": "int crew = 3;\nwhile (crew < 3)\n{\n    crew = crew + 1;\n}\nprintf(\"%d\", crew);",
+    "distractors": [
+      "2",
+      "5"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M07_predict_output_4",
+    "class": "M07",
+    "type": "predict_output",
+    "code": "float cargo = 0.5;\nint i;\nfor (i = 0; i < 4; i++);\n{\n    cargo = cargo + i;\n}\nprintf(\"%.1f\", cargo);",
+    "belief_code": "float cargo = 0.5;\nint i;\nfor (i = 0; i < 4; i++)\n{\n    cargo = cargo + i;\n}\nprintf(\"%.1f\", cargo);",
+    "distractors": [
+      "4.0",
+      "7.0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M07_predict_output_5",
+    "class": "M07",
+    "type": "predict_output",
+    "code": "char code[5] = {'a', 'b', 'c', 'd', '\\0'};\nint i;\nfor (i = 0; i < 3; i++);\n{\n    printf(\"%c\", code[i]);\n}",
+    "belief_code": "char code[5] = {'a', 'b', 'c', 'd', '\\0'};\nint i;\nfor (i = 0; i < 3; i++)\n{\n    printf(\"%c\", code[i]);\n}",
+    "distractors": [
+      "a",
+      "abcd"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M07_predict_output_6",
+    "class": "M07",
+    "type": "predict_output",
+    "code": "int check(int power)\n{\n    if (power > 2);\n    {\n        return 1;\n    }\n    return 0;\n}\nint hull = 1;\nprintf(\"%d\", check(hull));",
+    "belief_code": "int check(int power)\n{\n    if (power > 2)\n    {\n        return 1;\n    }\n    return 0;\n}\nint hull = 1;\nprintf(\"%d\", check(hull));",
+    "distractors": [
+      "2",
+      "3"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M08_mcq_1",
+    "class": "M08",
+    "type": "mcq",
+    "code": "int arr[5] = {10, 20, 30, 40, 50};\nint total = 0;\nfor (int i = 1; i < 5; i = i + 1) {\n    total = total + arr[i];\n}\n",
+    "question": "What is total after the loop?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int arr[5] = {10, 20, 30, 40, 50};\nint total = 0;\nfor (int i = 1; i < 5; i = i + 1) {\n    total = total + arr[i - 1];\n}\n",
+    "distractors": [
+      "100",
+      "150"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M08_mcq_2",
+    "class": "M08",
+    "type": "mcq",
+    "code": "int sum_from_one(int a[], int n) {\n    if (n == 1) {\n        return a[1];\n    } else {\n        return a[n] + sum_from_one(a, n - 1);\n    }\n}\nint arr[5] = {5, 10, 15, 20, 25};\nint result = sum_from_one(arr, 4);\n",
+    "question": "What is result after the call?",
+    "tail": "printf(\"%d\", result);",
+    "belief_code": "int sum_from_one(int a[], int n) {\n    if (n == 1) {\n        return a[0];\n    } else {\n        return a[n - 1] + sum_from_one(a, n - 1);\n    }\n}\nint arr[5] = {5, 10, 15, 20, 25};\nint result = sum_from_one(arr, 4);\n",
+    "distractors": [
+      "50",
+      "75"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M08_mcq_3",
+    "class": "M08",
+    "type": "mcq",
+    "code": "char word[] = \"banana\";\nint count = 0;\nfor (int i = 1; word[i] != '\\0'; i = i + 1) {\n    if (word[i] == 'a') {\n        count = count + 1;\n    }\n}\n",
+    "question": "What is count after the loop?",
+    "tail": "printf(\"%d\", count);",
+    "belief_code": "char word[] = \"banana\";\nint count = 0;\nfor (int i = 1; word[i - 1] != '\\0'; i = i + 1) {\n    if (word[i - 1] == 'a') {\n        count = count + 1;\n    }\n}\n",
+    "distractors": [
+      "2",
+      "1"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M08_mcq_4",
+    "class": "M08",
+    "type": "mcq",
+    "code": "int values[5] = {100, 30, 40, 20, 50};\nint max = values[1];\nfor (int i = 2; i < 5; i = i + 1) {\n    if (values[i] > max) {\n        max = values[i];\n    }\n}\n",
+    "question": "What is max after the loop?",
+    "tail": "printf(\"%d\", max);",
+    "belief_code": "int values[5] = {100, 30, 40, 20, 50};\nint max = values[0];\nfor (int i = 2; i < 5; i = i + 1) {\n    if (values[i - 1] > max) {\n        max = values[i - 1];\n    }\n}\n",
+    "distractors": [
+      "100",
+      "40"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M08_mcq_5",
+    "class": "M08",
+    "type": "mcq",
+    "code": "int mystery(int a[], int n) {\n    int i = n;\n    while (i > 0) {\n        if (a[i] < a[1]) {\n            return i;\n        }\n        i = i - 1;\n    }\n    return 0;\n}\nint arr[6] = {50, 30, 40, 20, 60, 10};\nint result = mystery(arr, 5);\n",
+    "question": "What is result after the call?",
+    "tail": "printf(\"%d\", result);",
+    "belief_code": "int mystery(int a[], int n) {\n    int i = n;\n    while (i > 0) {\n        if (a[i - 1] < a[0]) {\n            return i;\n        }\n        i = i - 1;\n    }\n    return 0;\n}\nint arr[6] = {50, 30, 40, 20, 60, 10};\nint result = mystery(arr, 5);\n",
+    "distractors": [
+      "4",
+      "1"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M08_next_state_1",
+    "class": "M08",
+    "type": "next_state",
+    "code": "int a[4] = {10, 20, 30, 40};\nint sum = 0;\nfor (int i = 1; i < 4; i++) {\n    sum = sum + a[i];\n}",
+    "var": "sum",
+    "after_line": 4,
+    "hit": 2,
+    "belief_code": "int a[4] = {10, 20, 30, 40};\nint sum = 0;\nfor (int i = 1; i < 4; i++) {\n    sum = sum + a[i - 1];\n}",
+    "belief_after_line": 4,
+    "distractors": [
+      "30",
+      "40"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M08_next_state_2",
+    "class": "M08",
+    "type": "next_state",
+    "code": "int fuel[5] = {2, 3, 4, 5, 6};\nint prod = 1;\nint i = 1;\nwhile (i < 5) {\n    prod = prod * fuel[i];\n    i = i + 1;\n}",
+    "var": "prod",
+    "after_line": 5,
+    "hit": 2,
+    "belief_code": "int fuel[5] = {2, 3, 4, 5, 6};\nint prod = 1;\nint i = 1;\nwhile (i < 5) {\n    prod = prod * fuel[i - 1];\n    i = i + 1;\n}",
+    "belief_after_line": 5,
+    "distractors": [
+      "6",
+      "24"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M08_next_state_3",
+    "class": "M08",
+    "type": "next_state",
+    "code": "int sum_up(int a[], int i) {\n    if (i == 1) {\n        return a[1];\n    }\n    int rest = sum_up(a, i - 1);\n    rest = rest + a[i];\n    return rest;\n}\nint arr[5] = {10, 20, 30, 40, 50};\nint result = sum_up(arr, 4);",
+    "var": "rest",
+    "after_line": 6,
+    "hit": 2,
+    "belief_code": "int sum_up(int a[], int i) {\n    if (i == 1) {\n        return a[0];\n    }\n    int rest = sum_up(a, i - 1);\n    rest = rest + a[i - 1];\n    return rest;\n}\nint arr[5] = {10, 20, 30, 40, 50};\nint result = sum_up(arr, 4);",
+    "belief_after_line": 6,
+    "distractors": [
+      "60",
+      "120"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M08_next_state_4",
+    "class": "M08",
+    "type": "next_state",
+    "code": "int hull[6] = {10, 30, 20, 50, 40, 60};\nint max = 0;\nfor (int i = 1; i < 6; i++) {\n    if (hull[i] > max) {\n        max = hull[i];\n    }\n}",
+    "var": "max",
+    "after_line": 5,
+    "hit": 2,
+    "belief_code": "int hull[6] = {10, 30, 20, 50, 40, 60};\nint max = 0;\nfor (int i = 1; i < 6; i++) {\n    if (hull[i - 1] > max) {\n        max = hull[i - 1];\n    }\n}",
+    "belief_after_line": 5,
+    "distractors": [
+      "30",
+      "60"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M08_predict_output_1",
+    "class": "M08",
+    "type": "predict_output",
+    "code": "int a[] = {9, 4, 6, 2};\nprintf(\"%d\", a[1]);",
+    "belief_code": "int a[] = {9, 4, 6, 2};\nprintf(\"%d\", a[0]);",
+    "distractors": [
+      "6",
+      "2"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M08_predict_output_2",
+    "class": "M08",
+    "type": "predict_output",
+    "code": "int a[] = {1, 2, 3, 4};\nint s = 0;\nint i;\nfor (i = 1; i < 4; i++) {\n    s = s + a[i];\n}\nprintf(\"%d\", s);",
+    "belief_code": "int a[] = {1, 2, 3, 4};\nint s = 0;\nint i;\nfor (i = 1; i < 4; i++) {\n    s = s + a[i - 1];\n}\nprintf(\"%d\", s);",
+    "distractors": [
+      "10",
+      "5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M08_predict_output_3",
+    "class": "M08",
+    "type": "predict_output",
+    "code": "char s[] = \"hello\";\nprintf(\"%c\", s[1]);",
+    "belief_code": "char s[] = \"hello\";\nprintf(\"%c\", s[0]);",
+    "distractors": [
+      "l",
+      "o"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M08_predict_output_4",
+    "class": "M08",
+    "type": "predict_output",
+    "code": "int arr[] = {5, 1, 2, 3};\nint max = arr[1];\nint i;\nfor (i = 2; i < 4; i++) {\n    if (arr[i] > max) {\n        max = arr[i];\n    }\n}\nprintf(\"%d\", max);",
+    "belief_code": "int arr[] = {5, 1, 2, 3};\nint max = arr[0];\nint i;\nfor (i = 2; i < 4; i++) {\n    if (arr[i - 1] > max) {\n        max = arr[i - 1];\n    }\n}\nprintf(\"%d\", max);",
+    "distractors": [
+      "1",
+      "2"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M08_predict_output_5",
+    "class": "M08",
+    "type": "predict_output",
+    "code": "int vals[] = {3, 8, 2, 6};\nint i = 1;\nint total = 0;\nwhile (i < 4) {\n    total = total + vals[i];\n    i = i + 1;\n}\nprintf(\"%d\", total);",
+    "belief_code": "int vals[] = {3, 8, 2, 6};\nint i = 1;\nint total = 0;\nwhile (i < 4) {\n    total = total + vals[i - 1];\n    i = i + 1;\n}\nprintf(\"%d\", total);",
+    "distractors": [
+      "19",
+      "10"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M08_predict_output_6",
+    "class": "M08",
+    "type": "predict_output",
+    "code": "char s[] = \"abcdef\";\nint i;\nfor (i = 1; i < 6; i++) {\n    printf(\"%c\", s[i]);\n}",
+    "belief_code": "char s[] = \"abcdef\";\nint i;\nfor (i = 1; i < 6; i++) {\n    printf(\"%c\", s[i - 1]);\n}",
+    "distractors": [
+      "abcdef",
+      "cdef"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M10_mcq_1",
+    "class": "M10",
+    "type": "mcq",
+    "code": "int square(int n) {\n    printf(\"%d \", n * n);\n    return 0;\n}",
+    "question": "What does square(4) return?",
+    "tail": "printf(\"%d\", square(4));",
+    "belief_code": "int square(int n) {\n    printf(\"%d \", n * n);\n    return n * n;\n}",
+    "distractors": [
+      "16",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M10_mcq_2",
+    "class": "M10",
+    "type": "mcq",
+    "code": "float half(float x) {\n    printf(\"%.1f \", x / 2);\n    return 0;\n}",
+    "question": "What does half(5) return?",
+    "tail": "printf(\"%.1f\", half(5));",
+    "belief_code": "float half(float x) {\n    printf(\"%.1f \", x / 2);\n    return x / 2;\n}",
+    "distractors": [
+      "2.5",
+      "5.0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M10_mcq_3",
+    "class": "M10",
+    "type": "mcq",
+    "code": "int classify(int x) {\n    int result;\n    if (x < 0) {\n        result = -x;\n    } else {\n        result = x;\n    }\n    printf(\"%d \", result);\n    return 0;\n}",
+    "question": "What does classify(-7) return?",
+    "tail": "printf(\"%d\", classify(-7));",
+    "belief_code": "int classify(int x) {\n    int result;\n    if (x < 0) {\n        result = -x;\n    } else {\n        result = x;\n    }\n    printf(\"%d \", result);\n    return result;\n}",
+    "distractors": [
+      "7",
+      "-7"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M10_mcq_4",
+    "class": "M10",
+    "type": "mcq",
+    "code": "int total(int n) {\n    int sum = 0;\n    int i;\n    for (i = 1; i <= n; i = i + 1) {\n        sum = sum + i;\n    }\n    printf(\"%d \", sum);\n    return 0;\n}",
+    "question": "What does total(4) return?",
+    "tail": "printf(\"%d\", total(4));",
+    "belief_code": "int total(int n) {\n    int sum = 0;\n    int i;\n    for (i = 1; i <= n; i = i + 1) {\n        sum = sum + i;\n    }\n    printf(\"%d \", sum);\n    return sum;\n}",
+    "distractors": [
+      "10",
+      "4"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M10_mcq_5",
+    "class": "M10",
+    "type": "mcq",
+    "code": "int depth(int n) {\n    int result;\n    if (n == 0) {\n        result = 0;\n    } else {\n        result = 1 + depth(n - 1);\n    }\n    printf(\"%d \", result);\n    return 0;\n}",
+    "question": "What does depth(3) return?",
+    "tail": "printf(\"%d\", depth(3));",
+    "belief_code": "int depth(int n) {\n    int result;\n    if (n == 0) {\n        result = 0;\n    } else {\n        result = 1 + depth(n - 1);\n    }\n    printf(\"%d \", result);\n    return result;\n}",
+    "distractors": [
+      "3",
+      "1"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M10_next_state_1",
+    "class": "M10",
+    "type": "next_state",
+    "code": "int get_value(int x) {\n    printf(\"%d \", x);\n    return 0;\n}\nint total = 0;\nfor (int i = 1; i <= 3; i++) {\n    total = total + get_value(i);\n}\nprintf(\"%d\", total);",
+    "var": "total",
+    "after_line": 7,
+    "hit": 3,
+    "belief_code": "int get_value(int x) {\n    printf(\"%d \", x);\n    return x;\n}\nint total = 0;\nfor (int i = 1; i <= 3; i++) {\n    total = total + get_value(i);\n}\nprintf(\"%d\", total);",
+    "belief_after_line": 7,
+    "distractors": [
+      "3",
+      "1"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M10_next_state_2",
+    "class": "M10",
+    "type": "next_state",
+    "code": "int fact(int n) {\n    int f;\n    if (n <= 1) {\n        f = 1;\n    } else {\n        f = n * fact(n - 1);\n    }\n    printf(\"%d \", f);\n    return 0;\n}\nint result = fact(3);\nprintf(\"%d\", result);",
+    "var": "f",
+    "after_line": 6,
+    "hit": 2,
+    "belief_code": "int fact(int n) {\n    int f;\n    if (n <= 1) {\n        f = 1;\n    } else {\n        f = n * fact(n - 1);\n    }\n    printf(\"%d \", f);\n    return f;\n}\nint result = fact(3);\nprintf(\"%d\", result);",
+    "belief_after_line": 6,
+    "distractors": [
+      "1",
+      "6"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M10_next_state_3",
+    "class": "M10",
+    "type": "next_state",
+    "code": "int consume(int f) {\n    printf(\"%d \", f);\n    return 0;\n}\nint fuel = 10;\nfor (int i = 0; i < 3; i++) {\n    fuel = fuel - consume(fuel);\n}\nprintf(\"%d\", fuel);",
+    "var": "fuel",
+    "after_line": 7,
+    "hit": 3,
+    "belief_code": "int consume(int f) {\n    printf(\"%d \", f);\n    return f;\n}\nint fuel = 10;\nfor (int i = 0; i < 3; i++) {\n    fuel = fuel - consume(fuel);\n}\nprintf(\"%d\", fuel);",
+    "belief_after_line": 7,
+    "distractors": [
+      "0",
+      "5"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M10_next_state_4",
+    "class": "M10",
+    "type": "next_state",
+    "code": "int scale(int x) {\n    printf(\"%d \", x);\n    return 0;\n}\nint product = 1;\nint vals[3] = {2, 3, 4};\nfor (int i = 0; i < 3; i++) {\n    product = product * scale(vals[i]);\n}\nprintf(\"%d\", product);",
+    "var": "product",
+    "after_line": 8,
+    "hit": 3,
+    "belief_code": "int scale(int x) {\n    printf(\"%d \", x);\n    return x;\n}\nint product = 1;\nint vals[3] = {2, 3, 4};\nfor (int i = 0; i < 3; i++) {\n    product = product * scale(vals[i]);\n}\nprintf(\"%d\", product);",
+    "belief_after_line": 8,
+    "distractors": [
+      "6",
+      "12"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M10_predict_output_1",
+    "class": "M10",
+    "type": "predict_output",
+    "code": "int add(int a, int b) {\n    int sum = a + b;\n    printf(\"%d \", sum);\n    return 0;\n}\nint result = add(3, 4);\nprintf(\"%d\", result);",
+    "belief_code": "int add(int a, int b) {\n    int sum = a + b;\n    printf(\"%d \", sum);\n    return sum;\n}\nint result = add(3, 4);\nprintf(\"%d\", result);",
+    "distractors": [
+      "7 7",
+      "7"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M10_predict_output_2",
+    "class": "M10",
+    "type": "predict_output",
+    "code": "float average(int a, int b) {\n    float avg = (a + b) / 2.0;\n    printf(\"%.1f \", avg);\n    return 0;\n}\nfloat result = average(5, 6);\nprintf(\"%.1f\", result);",
+    "belief_code": "float average(int a, int b) {\n    float avg = (a + b) / 2.0;\n    printf(\"%.1f \", avg);\n    return avg;\n}\nfloat result = average(5, 6);\nprintf(\"%.1f\", result);",
+    "distractors": [
+      "5.5 5.5",
+      "5.5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M10_predict_output_3",
+    "class": "M10",
+    "type": "predict_output",
+    "code": "int sum(int arr[], int n) {\n    int total = 0;\n    for (int i = 0; i < n; i = i + 1) {\n        total = total + arr[i];\n    }\n    printf(\"%d \", total);\n    return 0;\n}\nint nums[3] = {2, 4, 6};\nint s = sum(nums, 3);\nprintf(\"%d\", s + 10);",
+    "belief_code": "int sum(int arr[], int n) {\n    int total = 0;\n    for (int i = 0; i < n; i = i + 1) {\n        total = total + arr[i];\n    }\n    printf(\"%d \", total);\n    return total;\n}\nint nums[3] = {2, 4, 6};\nint s = sum(nums, 3);\nprintf(\"%d\", s + 10);",
+    "distractors": [
+      "12 22",
+      "12"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "M10_predict_output_4",
+    "class": "M10",
+    "type": "predict_output",
+    "code": "int word_length(char word[]) {\n    int len = strlen(word);\n    printf(\"%d \", len);\n    return 0;\n}\nchar name[7] = \"rocket\";\nint len = word_length(name);\nprintf(\"%d\", len + 2);",
+    "belief_code": "int word_length(char word[]) {\n    int len = strlen(word);\n    printf(\"%d \", len);\n    return len;\n}\nchar name[7] = \"rocket\";\nint len = word_length(name);\nprintf(\"%d\", len + 2);",
+    "distractors": [
+      "6 8",
+      "2"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "M10_predict_output_5",
+    "class": "M10",
+    "type": "predict_output",
+    "code": "int boost(int n) {\n    int doubled = n * 2;\n    printf(\"%d \", doubled);\n    return 0;\n}\nint total = 0;\nfor (int i = 1; i <= 3; i = i + 1) {\n    total = total + boost(i);\n}\nprintf(\"%d\", total);",
+    "belief_code": "int boost(int n) {\n    int doubled = n * 2;\n    printf(\"%d \", doubled);\n    return doubled;\n}\nint total = 0;\nfor (int i = 1; i <= 3; i = i + 1) {\n    total = total + boost(i);\n}\nprintf(\"%d\", total);",
+    "distractors": [
+      "2 4 6 12",
+      "2 4 6"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "M10_predict_output_6",
+    "class": "M10",
+    "type": "predict_output",
+    "code": "int status_code(int fuel) {\n    int code;\n    if (fuel < 10) {\n        code = 1;\n    } else {\n        code = 2;\n    }\n    printf(\"%d \", code);\n    return 0;\n}\nint s = status_code(5);\nif (s == 1) {\n    printf(\"low\");\n} else {\n    printf(\"ok\");\n}",
+    "belief_code": "int status_code(int fuel) {\n    int code;\n    if (fuel < 10) {\n        code = 1;\n    } else {\n        code = 2;\n    }\n    printf(\"%d \", code);\n    return code;\n}\nint s = status_code(5);\nif (s == 1) {\n    printf(\"low\");\n} else {\n    printf(\"ok\");\n}",
+    "distractors": [
+      "1 low",
+      "ok"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D01_mcq_1",
+    "class": "D01",
+    "type": "mcq",
+    "code": "int find(int a[], int x) {\n    for (int i = 0; i < 4; i = i + 1) {\n        if (a[i] == x) {\n            return i;\n        } else {\n            return -1;\n        }\n    }\n    return -1;\n}\nint vals[4] = {2, 5, 8, 3};\nint result = find(vals, 8);",
+    "question": "What is result after the code runs?",
+    "tail": "printf(\"%d\", result);",
+    "belief_code": "int find(int a[], int x) {\n    for (int i = 0; i < 4; i = i + 1) {\n        if (a[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}\nint vals[4] = {2, 5, 8, 3};\nint result = find(vals, 8);",
+    "distractors": [
+      "0",
+      "2"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D01_mcq_2",
+    "class": "D01",
+    "type": "mcq",
+    "code": "int nums[5] = {3, 7, 1, 4, 9};\nint found = 0;\nfor (int i = 0; i < 5; i = i + 1) {\n    if (nums[i] == 4) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n}",
+    "question": "What is found after the loop?",
+    "tail": "printf(\"%d\", found);",
+    "belief_code": "int nums[5] = {3, 7, 1, 4, 9};\nint found = 0;\nfor (int i = 0; i < 5; i = i + 1) {\n    if (nums[i] == 4) {\n        found = 1;\n    }\n}",
+    "distractors": [
+      "1",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D01_mcq_3",
+    "class": "D01",
+    "type": "mcq",
+    "code": "int numbers[4] = {2, 9, 5, 1};\nint located = 0;\nint i = 0;\nwhile (i < 4) {\n    if (numbers[i] == 5) {\n        located = 1;\n    } else {\n        located = 0;\n    }\n    i = i + 1;\n}",
+    "question": "What is located after the loop?",
+    "tail": "printf(\"%d\", located);",
+    "belief_code": "int numbers[4] = {2, 9, 5, 1};\nint located = 0;\nint i = 0;\nwhile (i < 4) {\n    if (numbers[i] == 5) {\n        located = 1;\n    }\n    i = i + 1;\n}",
+    "distractors": [
+      "1",
+      "5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D01_mcq_4",
+    "class": "D01",
+    "type": "mcq",
+    "code": "float get_temp(float temps[], float target) {\n    for (int i = 0; i < 4; i = i + 1) {\n        if (temps[i] == target) {\n            return target;\n        } else {\n            return -1.0;\n        }\n    }\n    return -1.0;\n}\nfloat readings[4] = {10.5, 20.5, 30.5, 40.5};\nfloat result = get_temp(readings, 30.5);",
+    "question": "What is result after the code runs?",
+    "tail": "printf(\"%.1f\", result);",
+    "belief_code": "float get_temp(float temps[], float target) {\n    for (int i = 0; i < 4; i = i + 1) {\n        if (temps[i] == target) {\n            return target;\n        }\n    }\n    return -1.0;\n}\nfloat readings[4] = {10.5, 20.5, 30.5, 40.5};\nfloat result = get_temp(readings, 30.5);",
+    "distractors": [
+      "30.5",
+      "40.5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D01_mcq_5",
+    "class": "D01",
+    "type": "mcq",
+    "code": "int find_rec(int a[], int start, int x) {\n    if (start >= 4) {\n        return -1;\n    }\n    if (a[start] == x) {\n        return start;\n    } else {\n        return -1;\n    }\n    return find_rec(a, start + 1, x);\n}\nint data[4] = {4, 1, 2, 7};",
+    "question": "What does find_rec(data, 0, 2) return?",
+    "tail": "printf(\"%d\", find_rec(data, 0, 2));",
+    "belief_code": "int find_rec(int a[], int start, int x) {\n    if (start >= 4) {\n        return -1;\n    }\n    if (a[start] == x) {\n        return start;\n    }\n    return find_rec(a, start + 1, x);\n}\nint data[4] = {4, 1, 2, 7};",
+    "distractors": [
+      "2",
+      "0"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D01_next_state_1",
+    "class": "D01",
+    "type": "next_state",
+    "code": "int found = 0;\nint a[5] = {7, 2, 9, 4, 6};\nint x = 9;\nint sum = 0;\nfor (int i = 0; i < 5; i++) {\n    if (a[i] == x) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n    sum = sum + a[i];\n}",
+    "var": "found",
+    "after_line": 11,
+    "hit": 4,
+    "belief_code": "int found = 0;\nint a[5] = {7, 2, 9, 4, 6};\nint x = 9;\nint sum = 0;\nfor (int i = 0; i < 5; i++) {\n    if (a[i] == x) {\n        found = 1;\n    }\n    sum = sum + a[i];\n}",
+    "belief_after_line": 9,
+    "distractors": [
+      1,
+      5
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D01_next_state_2",
+    "class": "D01",
+    "type": "next_state",
+    "code": "int all_pos = 0;\nint nums[4] = {3, -1, 5, -2};\nint i = 0;\nwhile (i < 4) {\n    if (nums[i] > 0) {\n        all_pos = 1;\n    } else {\n        all_pos = 0;\n    }\n    i = i + 1;\n}",
+    "var": "all_pos",
+    "after_line": 10,
+    "hit": 2,
+    "belief_code": "int all_pos = 0;\nint nums[4] = {3, -1, 5, -2};\nint i = 0;\nwhile (i < 4) {\n    if (nums[i] > 0) {\n        all_pos = 1;\n    }\n    i = i + 1;\n}",
+    "belief_after_line": 8,
+    "distractors": [
+      1,
+      2
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D01_next_state_3",
+    "class": "D01",
+    "type": "next_state",
+    "code": "int found = 0;\nint data[5] = {4, 8, 2, 6, 9};\nint target = 2;\nint visits = 0;\nfor (int k = 4; k >= 0; k = k - 1) {\n    if (data[k] == target) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n    visits = visits + 1;\n}",
+    "var": "found",
+    "after_line": 11,
+    "hit": 4,
+    "belief_code": "int found = 0;\nint data[5] = {4, 8, 2, 6, 9};\nint target = 2;\nint visits = 0;\nfor (int k = 4; k >= 0; k = k - 1) {\n    if (data[k] == target) {\n        found = 1;\n    }\n    visits = visits + 1;\n}",
+    "belief_after_line": 9,
+    "distractors": [
+      1,
+      4
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D01_next_state_4",
+    "class": "D01",
+    "type": "next_state",
+    "code": "int found = 0;\nfloat temps[5] = {36.5, 37.5, 38.2, 39.1, 40.0};\nfloat target = 37.5;\nint scans = 0;\nfor (int s = 0; s < 5; s++) {\n    if (temps[s] == target) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n    scans = scans + 1;\n}",
+    "var": "found",
+    "after_line": 11,
+    "hit": 3,
+    "belief_code": "int found = 0;\nfloat temps[5] = {36.5, 37.5, 38.2, 39.1, 40.0};\nfloat target = 37.5;\nint scans = 0;\nfor (int s = 0; s < 5; s++) {\n    if (temps[s] == target) {\n        found = 1;\n    }\n    scans = scans + 1;\n}",
+    "belief_after_line": 9,
+    "distractors": [
+      1,
+      3
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D01_predict_output_1",
+    "class": "D01",
+    "type": "predict_output",
+    "code": "int find(int a[], int n, int x) {\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            return i;\n        } else {\n            return -1;\n        }\n    }\n    return -1;\n}\nint a[] = {4, 7, 2};\nprintf(\"%d\", find(a, 3, 2));",
+    "belief_code": "int find(int a[], int n, int x) {\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}\nint a[] = {4, 7, 2};\nprintf(\"%d\", find(a, 3, 2));",
+    "distractors": [
+      "0",
+      "3"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D01_predict_output_2",
+    "class": "D01",
+    "type": "predict_output",
+    "code": "int a[] = {5, 1, 3, 7};\nint found = 0;\nfor (int i = 0; i < 4; i++) {\n    if (a[i] == 3) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n}\nprintf(\"%d\", found);",
+    "belief_code": "int a[] = {5, 1, 3, 7};\nint found = 0;\nfor (int i = 0; i < 4; i++) {\n    if (a[i] == 3) {\n        found = 1;\n    }\n}\nprintf(\"%d\", found);",
+    "distractors": [
+      "2",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D01_predict_output_3",
+    "class": "D01",
+    "type": "predict_output",
+    "code": "char a[] = {'h','u','f','f','l','e'};\nint found = 0;\nint i = 0;\nwhile (i < 6) {\n    if (a[i] == 'f') {\n        found = 1;\n    } else {\n        found = 0;\n    }\n    i++;\n}\nprintf(\"%d\", found);",
+    "belief_code": "char a[] = {'h','u','f','f','l','e'};\nint found = 0;\nint i = 0;\nwhile (i < 6) {\n    if (a[i] == 'f') {\n        found = 1;\n    }\n    i++;\n}\nprintf(\"%d\", found);",
+    "distractors": [
+      "2",
+      "6"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D01_predict_output_4",
+    "class": "D01",
+    "type": "predict_output",
+    "code": "int find(char s[], char x) {\n    for (int i = 0; i < 5; i++) {\n        if (s[i] == x) {\n            return i;\n        } else {\n            return -1;\n        }\n    }\n    return -1;\n}\nchar s[] = \"spark\";\nprintf(\"%d\", find(s, 'r'));",
+    "belief_code": "int find(char s[], char x) {\n    for (int i = 0; i < 5; i++) {\n        if (s[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}\nchar s[] = \"spark\";\nprintf(\"%d\", find(s, 'r'));",
+    "distractors": [
+      "0",
+      "5"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D01_predict_output_5",
+    "class": "D01",
+    "type": "predict_output",
+    "code": "float a[] = {1.5, 2.5, 3.5, 4.5};\nint found = 0;\nfor (int i = 0; i < 4; i++) {\n    if (a[i] == 3.5) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n}\nprintf(\"%d\", found);",
+    "belief_code": "float a[] = {1.5, 2.5, 3.5, 4.5};\nint found = 0;\nfor (int i = 0; i < 4; i++) {\n    if (a[i] == 3.5) {\n        found = 1;\n    }\n}\nprintf(\"%d\", found);",
+    "distractors": [
+      "2",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D01_predict_output_6",
+    "class": "D01",
+    "type": "predict_output",
+    "code": "int find(int a[], int n, int x) {\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            return i;\n        } else {\n            return -1;\n        }\n    }\n    return -1;\n}\nint a[] = {8, 3, 6, 2};\nprintf(\"%d,%d\", find(a, 4, 3), find(a, 4, 6));",
+    "belief_code": "int find(int a[], int n, int x) {\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}\nint a[] = {8, 3, 6, 2};\nprintf(\"%d,%d\", find(a, 4, 3), find(a, 4, 6));",
+    "distractors": [
+      "-1,2",
+      "1,-1"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D02_mcq_1",
+    "class": "D02",
+    "type": "mcq",
+    "code": "int cargo[5] = {2, 4, 6, 8, 10};\nint low = 0;\nint high = 4;\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (cargo[mid] < 7) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}",
+    "question": "What is low after the loop?",
+    "tail": "printf(\"%d\", low);",
+    "belief_code": "int cargo[5] = {2, 4, 6, 8, 10};\nint low = 0;\nint high = 4;\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (cargo[mid] < 7) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}",
+    "distractors": [
+      "0",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D02_mcq_2",
+    "class": "D02",
+    "type": "mcq",
+    "code": "int secret = 42;\nint low = 0, high = 100;\nint steps = 4;\nwhile (steps > 0) {\n    int guess = (low + high) / 2;\n    if (guess < secret) {\n        low = guess;\n    } else {\n        high = guess - 1;\n    }\n    steps = steps - 1;\n}",
+    "question": "What is low after the loop?",
+    "tail": "printf(\"%d\", low);",
+    "belief_code": "int secret = 42;\nint low = 0, high = 100;\nint steps = 4;\nwhile (steps > 0) {\n    int guess = (low + high) / 2;\n    if (guess < secret) {\n        low = guess + 1;\n    } else {\n        high = guess - 1;\n    }\n    steps = steps - 1;\n}",
+    "distractors": [
+      "0",
+      "100"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D02_mcq_3",
+    "class": "D02",
+    "type": "mcq",
+    "code": "int find(int arr[], int lo, int hi, int val, int dep) {\n    if (dep == 0) {\n        return lo;\n    }\n    int mid = (lo + hi) / 2;\n    if (arr[mid] < val) {\n        return find(arr, mid, hi, val, dep - 1);\n    }\n    return find(arr, lo, mid - 1, val, dep - 1);\n}\nint a[4] = {1, 4, 6, 9};\nint result = find(a, 0, 3, 7, 3);",
+    "question": "What does find(a, 0, 3, 7, 3) return?",
+    "tail": "printf(\"%d\", result);",
+    "belief_code": "int find(int arr[], int lo, int hi, int val, int dep) {\n    if (dep == 0) {\n        return lo;\n    }\n    int mid = (lo + hi) / 2;\n    if (arr[mid] < val) {\n        return find(arr, mid + 1, hi, val, dep - 1);\n    }\n    return find(arr, lo, mid - 1, val, dep - 1);\n}\nint a[4] = {1, 4, 6, 9};\nint result = find(a, 0, 3, 7, 3);",
+    "distractors": [
+      "1",
+      "4"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D02_mcq_4",
+    "class": "D02",
+    "type": "mcq",
+    "code": "int fuel[6] = {1, 3, 5, 7, 9, 11};\nint low = 0, high = 5, steps = 3;\nwhile (steps > 0) {\n    int mid = (low + high) / 2;\n    if (fuel[mid] < 10) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n    steps = steps - 1;\n}",
+    "question": "What is high after the loop?",
+    "tail": "printf(\"%d\", high);",
+    "belief_code": "int fuel[6] = {1, 3, 5, 7, 9, 11};\nint low = 0, high = 5, steps = 3;\nwhile (steps > 0) {\n    int mid = (low + high) / 2;\n    if (fuel[mid] < 10) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n    steps = steps - 1;\n}",
+    "distractors": [
+      "3",
+      "4"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D02_mcq_5",
+    "class": "D02",
+    "type": "mcq",
+    "code": "int probe[5] = {1, 3, 5, 7, 9};\nint low = 0, high = 4, steps = 3;\nint mid;\nwhile (steps > 0) {\n    mid = (low + high) / 2;\n    if (probe[mid] < 8) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n    steps = steps - 1;\n}",
+    "question": "What is mid after the loop?",
+    "tail": "printf(\"%d\", mid);",
+    "belief_code": "int probe[5] = {1, 3, 5, 7, 9};\nint low = 0, high = 4, steps = 3;\nint mid;\nwhile (steps > 0) {\n    mid = (low + high) / 2;\n    if (probe[mid] < 8) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n    steps = steps - 1;\n}",
+    "distractors": [
+      "2",
+      "4"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D02_next_state_1",
+    "class": "D02",
+    "type": "next_state",
+    "code": "int arr[] = {1, 3, 5, 7, 9};\nint low = 0, high = 4, target = 8;\nwhile (low <= high) {\n    int mid = (low + high) / 2;\n    if (arr[mid] < target) {\n        low = mid;\n    } else if (arr[mid] > target) {\n        high = mid - 1;\n    } else {\n        low = high + 1;\n    }\n}\n",
+    "var": "mid",
+    "after_line": 4,
+    "hit": 3,
+    "belief_code": "int arr[] = {1, 3, 5, 7, 9};\nint low = 0, high = 4, target = 8;\nwhile (low <= high) {\n    int mid = (low + high) / 2;\n    if (arr[mid] < target) {\n        low = mid + 1;\n    } else if (arr[mid] > target) {\n        high = mid - 1;\n    } else {\n        low = high + 1;\n    }\n}\n",
+    "belief_after_line": 4,
+    "distractors": [
+      "2",
+      "4"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D02_next_state_2",
+    "class": "D02",
+    "type": "next_state",
+    "code": "int arr[] = {2, 5, 8, 12, 17, 23};\nint left = 0, right = 5, goal = 15;\nwhile (left <= right) {\n    int mid = (left + right) / 2;\n    if (arr[mid] < goal) {\n        left = mid;\n    } else if (arr[mid] > goal) {\n        right = mid - 1;\n    } else {\n        left = right + 1;\n    }\n}\n",
+    "var": "left",
+    "after_line": 6,
+    "hit": 2,
+    "belief_code": "int arr[] = {2, 5, 8, 12, 17, 23};\nint left = 0, right = 5, goal = 15;\nwhile (left <= right) {\n    int mid = (left + right) / 2;\n    if (arr[mid] < goal) {\n        left = mid + 1;\n    } else if (arr[mid] > goal) {\n        right = mid - 1;\n    } else {\n        left = right + 1;\n    }\n}\n",
+    "belief_after_line": 6,
+    "distractors": [
+      "2",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D02_next_state_3",
+    "class": "D02",
+    "type": "next_state",
+    "code": "int probes[] = {10, 20, 30, 40, 50, 60, 70, 80};\nint low = 0, high = 7;\nint target = 45;\nfor (int i = 0; i < 3; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (probes[mid] < target) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}\n",
+    "var": "mid",
+    "after_line": 5,
+    "hit": 3,
+    "belief_code": "int probes[] = {10, 20, 30, 40, 50, 60, 70, 80};\nint low = 0, high = 7;\nint target = 45;\nfor (int i = 0; i < 3; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (probes[mid] < target) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\n",
+    "belief_after_line": 5,
+    "distractors": [
+      "5",
+      "4"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D02_next_state_4",
+    "class": "D02",
+    "type": "next_state",
+    "code": "int min = 1, max = 20, secret = 14;\nwhile (min <= max) {\n    int guess = (min + max) / 2;\n    if (guess < secret) {\n        min = guess;\n    } else if (guess > secret) {\n        max = guess - 1;\n    } else {\n        min = max + 1;\n    }\n}\n",
+    "var": "min",
+    "after_line": 5,
+    "hit": 3,
+    "belief_code": "int min = 1, max = 20, secret = 14;\nwhile (min <= max) {\n    int guess = (min + max) / 2;\n    if (guess < secret) {\n        min = guess + 1;\n    } else if (guess > secret) {\n        max = guess - 1;\n    } else {\n        min = max + 1;\n    }\n}\n",
+    "belief_after_line": 5,
+    "distractors": [
+      "12",
+      "14"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D02_predict_output_1",
+    "class": "D02",
+    "type": "predict_output",
+    "code": "int a[5] = {2, 4, 6, 8, 10};\nint target = 8;\nint low = 0, high = 4;\nfor (int i = 0; i < 5; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (a[mid] < target) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", low);",
+    "belief_code": "int a[5] = {2, 4, 6, 8, 10};\nint target = 8;\nint low = 0, high = 4;\nfor (int i = 0; i < 5; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (a[mid] < target) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", low);",
+    "distractors": [
+      "4\n",
+      "0\n"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D02_predict_output_2",
+    "class": "D02",
+    "type": "predict_output",
+    "code": "int arr[8] = {1, 3, 5, 7, 9, 11, 13, 15};\nint target = 13;\nint left = 0, right = 7;\nfor (int count = 0; count < 6; count = count + 1) {\n    int mid = (left + right) / 2;\n    if (arr[mid] < target) {\n        left = mid;\n    } else {\n        right = mid - 1;\n    }\n}\nprintf(\"%d\\n\", left);",
+    "belief_code": "int arr[8] = {1, 3, 5, 7, 9, 11, 13, 15};\nint target = 13;\nint left = 0, right = 7;\nfor (int count = 0; count < 6; count = count + 1) {\n    int mid = (left + right) / 2;\n    if (arr[mid] < target) {\n        left = mid + 1;\n    } else {\n        right = mid - 1;\n    }\n}\nprintf(\"%d\\n\", left);",
+    "distractors": [
+      "7\n",
+      "4\n"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D02_predict_output_3",
+    "class": "D02",
+    "type": "predict_output",
+    "code": "int secret = 80;\nint low = 0, high = 99;\nint guess;\nfor (int attempts = 0; attempts < 7; attempts = attempts + 1) {\n    guess = (low + high) / 2;\n    if (guess < secret) {\n        low = guess;\n    } else {\n        high = guess - 1;\n    }\n}\nprintf(\"%d\\n\", low);",
+    "belief_code": "int secret = 80;\nint low = 0, high = 99;\nint guess;\nfor (int attempts = 0; attempts < 7; attempts = attempts + 1) {\n    guess = (low + high) / 2;\n    if (guess < secret) {\n        low = guess + 1;\n    } else {\n        high = guess - 1;\n    }\n}\nprintf(\"%d\\n\", low);",
+    "distractors": [
+      "78\n",
+      "81\n"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D02_predict_output_4",
+    "class": "D02",
+    "type": "predict_output",
+    "code": "int nums[6] = {3, 6, 9, 12, 15, 18};\nint goal = 18;\nint low = 0, high = 5;\nfor (int i = 0; i < 6; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (nums[mid] < goal) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", nums[low]);",
+    "belief_code": "int nums[6] = {3, 6, 9, 12, 15, 18};\nint goal = 18;\nint low = 0, high = 5;\nfor (int i = 0; i < 6; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (nums[mid] < goal) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", nums[low]);",
+    "distractors": [
+      "12\n",
+      "9\n"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D02_predict_output_5",
+    "class": "D02",
+    "type": "predict_output",
+    "code": "char letters[7] = {'a', 'c', 'e', 'g', 'i', 'k', 'm'};\nchar target = 'k';\nint low = 0, high = 6;\nfor (int steps = 0; steps < 5; steps = steps + 1) {\n    int mid = (low + high) / 2;\n    if (letters[mid] < target) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%c\\n\", letters[low]);",
+    "belief_code": "char letters[7] = {'a', 'c', 'e', 'g', 'i', 'k', 'm'};\nchar target = 'k';\nint low = 0, high = 6;\nfor (int steps = 0; steps < 5; steps = steps + 1) {\n    int mid = (low + high) / 2;\n    if (letters[mid] < target) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%c\\n\", letters[low]);",
+    "distractors": [
+      "g\n",
+      "m\n"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D02_predict_output_6",
+    "class": "D02",
+    "type": "predict_output",
+    "code": "int secret = 90;\nint low = 0, high = 100;\nfor (int tries = 0; tries < 10; tries = tries + 1) {\n    int mid = (low + high) / 2;\n    if (mid < secret) {\n        low = mid;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", low + high);",
+    "belief_code": "int secret = 90;\nint low = 0, high = 100;\nfor (int tries = 0; tries < 10; tries = tries + 1) {\n    int mid = (low + high) / 2;\n    if (mid < secret) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", low + high);",
+    "distractors": [
+      "180\n",
+      "177\n"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D03_mcq_1",
+    "class": "D03",
+    "type": "mcq",
+    "code": "int a[2] = {5, 9};\nint i = 0;\nint j = 1;\na[i] = a[j];\na[j] = a[i];",
+    "question": "What is a[1] after the code runs?",
+    "tail": "printf(\"%d\", a[1]);",
+    "belief_code": "int a[2] = {5, 9};\nint i = 0;\nint j = 1;\nint temp = a[i];\na[i] = a[j];\na[j] = temp;",
+    "distractors": [
+      "5",
+      "14"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D03_mcq_2",
+    "class": "D03",
+    "type": "mcq",
+    "code": "int vals[4] = {5, 1, 9, 4};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    vals[i] = vals[i + 1];\n    vals[i + 1] = vals[i];\n}",
+    "question": "What is vals[3] after the loop?",
+    "tail": "printf(\"%d\", vals[3]);",
+    "belief_code": "int vals[4] = {5, 1, 9, 4};\nint i;\nint temp;\nfor (i = 0; i < 3; i = i + 1) {\n    temp = vals[i];\n    vals[i] = vals[i + 1];\n    vals[i + 1] = temp;\n}",
+    "distractors": [
+      "5",
+      "9"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D03_mcq_3",
+    "class": "D03",
+    "type": "mcq",
+    "code": "int cargo[4] = {8, 4, 6, 2};\ncargo[0] = cargo[1];\ncargo[1] = cargo[2];\ncargo[2] = cargo[3];\ncargo[3] = cargo[0];",
+    "question": "What is cargo[3] after the code runs?",
+    "tail": "printf(\"%d\", cargo[3]);",
+    "belief_code": "int cargo[4] = {8, 4, 6, 2};\nint temp = cargo[0];\ncargo[0] = cargo[1];\ncargo[1] = cargo[2];\ncargo[2] = cargo[3];\ncargo[3] = temp;",
+    "distractors": [
+      "8",
+      "2"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D03_mcq_4",
+    "class": "D03",
+    "type": "mcq",
+    "code": "int f(int x) {\n    int pair[2] = {x, x + 3};\n    pair[0] = pair[1];\n    pair[1] = pair[0];\n    return pair[0] + pair[1];\n}",
+    "question": "What does f(4) return?",
+    "tail": "printf(\"%d\", f(4));",
+    "belief_code": "int f(int x) {\n    int pair[2] = {x, x + 3};\n    int temp = pair[0];\n    pair[0] = pair[1];\n    pair[1] = temp;\n    return pair[0] + pair[1];\n}",
+    "distractors": [
+      "11",
+      "7"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D03_mcq_5",
+    "class": "D03",
+    "type": "mcq",
+    "code": "char letters[3] = {'a', 'b', 'c'};\nint i = 0;\nint j = 2;\nletters[i] = letters[j];\nletters[j] = letters[i];",
+    "question": "What character is letters[2] after the code runs?",
+    "tail": "printf(\"%c\", letters[j]);",
+    "belief_code": "char letters[3] = {'a', 'b', 'c'};\nint i = 0;\nint j = 2;\nchar temp = letters[i];\nletters[i] = letters[j];\nletters[j] = temp;",
+    "distractors": [
+      "a",
+      "b"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D03_next_state_1",
+    "class": "D03",
+    "type": "next_state",
+    "code": "int a[2] = {1, 2};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    a[0] = a[1];\n    a[1] = a[0];\n}",
+    "var": "a[0]",
+    "after_line": 4,
+    "hit": 2,
+    "belief_code": "int a[2] = {1, 2};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    int temp = a[0];\n    a[0] = a[1];\n    a[1] = temp;\n}",
+    "belief_after_line": 5,
+    "distractors": [
+      "1",
+      "0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D03_next_state_2",
+    "class": "D03",
+    "type": "next_state",
+    "code": "int x = 3;\nint y = 5;\nint i = 0;\nwhile (i < 3) {\n    x = y;\n    y = x;\n    i = i + 1;\n}",
+    "var": "x",
+    "after_line": 5,
+    "hit": 2,
+    "belief_code": "int x = 3;\nint y = 5;\nint i = 0;\nwhile (i < 3) {\n    int temp = x;\n    x = y;\n    y = temp;\n    i = i + 1;\n}",
+    "belief_after_line": 6,
+    "distractors": [
+      "3",
+      "0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D03_next_state_3",
+    "class": "D03",
+    "type": "next_state",
+    "code": "int a[2] = {3, 4};\nint i;\nfor (i = 0; i < 4; i = i + 1) {\n    if (i % 2 == 0) {\n        a[0] = a[1];\n        a[1] = a[0];\n    }\n}",
+    "var": "a[0]",
+    "after_line": 5,
+    "hit": 2,
+    "belief_code": "int a[2] = {3, 4};\nint i;\nfor (i = 0; i < 4; i = i + 1) {\n    if (i % 2 == 0) {\n        int temp = a[0];\n        a[0] = a[1];\n        a[1] = temp;\n    }\n}",
+    "belief_after_line": 6,
+    "distractors": [
+      "3",
+      "0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D03_next_state_4",
+    "class": "D03",
+    "type": "next_state",
+    "code": "int a[4] = {1, 2, 3, 4};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    a[i] = a[i+1];\n    a[i+1] = a[i];\n}",
+    "var": "a[2]",
+    "after_line": 5,
+    "hit": 2,
+    "belief_code": "int a[4] = {1, 2, 3, 4};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    int temp = a[i];\n    a[i] = a[i+1];\n    a[i+1] = temp;\n}",
+    "belief_after_line": 6,
+    "distractors": [
+      "1",
+      "4"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D03_predict_output_1",
+    "class": "D03",
+    "type": "predict_output",
+    "code": "int a[2] = {3, 7};\na[0] = a[1];\na[1] = a[0];\nprintf(\"%d %d\", a[0], a[1]);",
+    "belief_code": "int a[2] = {3, 7};\nint t = a[0];\na[0] = a[1];\na[1] = t;\nprintf(\"%d %d\", a[0], a[1]);",
+    "distractors": [
+      "3 7",
+      "3 3"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D03_predict_output_2",
+    "class": "D03",
+    "type": "predict_output",
+    "code": "int a[3] = {1, 2, 3};\na[0] = a[1];\na[1] = a[2];\na[2] = a[0];\nprintf(\"%d %d %d\", a[0], a[1], a[2]);",
+    "belief_code": "int a[3] = {1, 2, 3};\nint first = a[0];\na[0] = a[1];\na[1] = a[2];\na[2] = first;\nprintf(\"%d %d %d\", a[0], a[1], a[2]);",
+    "distractors": [
+      "1 2 3",
+      "2 2 3"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D03_predict_output_3",
+    "class": "D03",
+    "type": "predict_output",
+    "code": "char s[3] = {'a', 'b', '\\0'};\nint i = 0;\nint j = 1;\ns[i] = s[j];\ns[j] = s[i];\nprintf(\"%c%c\", s[0], s[1]);",
+    "belief_code": "char s[3] = {'a', 'b', '\\0'};\nint i = 0;\nint j = 1;\nchar t = s[i];\ns[i] = s[j];\ns[j] = t;\nprintf(\"%c%c\", s[0], s[1]);",
+    "distractors": [
+      "ab",
+      "aa"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D03_predict_output_4",
+    "class": "D03",
+    "type": "predict_output",
+    "code": "void swap(int a[], int i, int j) {\n    a[i] = a[j];\n    a[j] = a[i];\n}\nint data[3] = {5, 9, 4};\nswap(data, 0, 2);\nprintf(\"%d %d %d\", data[0], data[1], data[2]);",
+    "belief_code": "void swap(int a[], int i, int j) {\n    int t = a[i];\n    a[i] = a[j];\n    a[j] = t;\n}\nint data[3] = {5, 9, 4};\nswap(data, 0, 2);\nprintf(\"%d %d %d\", data[0], data[1], data[2]);",
+    "distractors": [
+      "4 9 5",
+      "5 9 4"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D03_predict_output_5",
+    "class": "D03",
+    "type": "predict_output",
+    "code": "float f[2] = {2.5, 6.5};\nf[0] = f[1];\nf[1] = f[0];\nprintf(\"%.1f %.1f\", f[0], f[1]);",
+    "belief_code": "float f[2] = {2.5, 6.5};\nfloat t = f[0];\nf[0] = f[1];\nf[1] = t;\nprintf(\"%.1f %.1f\", f[0], f[1]);",
+    "distractors": [
+      "2.5 6.5",
+      "2.5 2.5"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D03_predict_output_6",
+    "class": "D03",
+    "type": "predict_output",
+    "code": "int a[4] = {1, 2, 3, 4};\nint i, j;\nfor (i = 0, j = 3; i < j; i++, j--) {\n    a[i] = a[j];\n    a[j] = a[i];\n}\nprintf(\"%d %d %d %d\", a[0], a[1], a[2], a[3]);",
+    "belief_code": "int a[4] = {1, 2, 3, 4};\nint i, j;\nfor (i = 0, j = 3; i < j; i++, j--) {\n    int t = a[i];\n    a[i] = a[j];\n    a[j] = t;\n}\nprintf(\"%d %d %d %d\", a[0], a[1], a[2], a[3]);",
+    "distractors": [
+      "1 2 3 4",
+      "4 2 3 4"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D04_mcq_1",
+    "class": "D04",
+    "type": "mcq",
+    "code": "int nums[5] = {5, 3, 8, 1, 2};\nint i;\nint tmp;\nfor (i = 0; i < 4; i = i + 1) {\n    if (nums[i] > nums[i + 1]) {\n        tmp = nums[i];\n        nums[i] = nums[i + 1];\n        nums[i + 1] = tmp;\n    }\n}",
+    "question": "What is nums[0] after the code runs?",
+    "tail": "printf(\"%d\", nums[0]);",
+    "belief_code": "int nums[5] = {5, 3, 8, 1, 2};\nint i;\nint tmp;\nfor (int pass = 0; pass < 4; pass = pass + 1) {\n    for (i = 0; i < 4; i = i + 1) {\n        if (nums[i] > nums[i + 1]) {\n            tmp = nums[i];\n            nums[i] = nums[i + 1];\n            nums[i + 1] = tmp;\n        }\n    }\n}",
+    "distractors": [
+      "1",
+      "5"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D04_mcq_2",
+    "class": "D04",
+    "type": "mcq",
+    "code": "int crew[5] = {4, 6, 2, 5, 1};\nint i;\nint tmp;\nfor (i = 3; i >= 0; i = i - 1) {\n    if (crew[i] > crew[i + 1]) {\n        tmp = crew[i];\n        crew[i] = crew[i + 1];\n        crew[i + 1] = tmp;\n    }\n}",
+    "question": "What is crew[2] after the code runs?",
+    "tail": "printf(\"%d\", crew[2]);",
+    "belief_code": "int crew[5] = {4, 6, 2, 5, 1};\nint i;\nint tmp;\nfor (int pass = 0; pass < 4; pass = pass + 1) {\n    for (i = 3; i >= 0; i = i - 1) {\n        if (crew[i] > crew[i + 1]) {\n            tmp = crew[i];\n            crew[i] = crew[i + 1];\n            crew[i + 1] = tmp;\n        }\n    }\n}",
+    "distractors": [
+      "4",
+      "5"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D04_mcq_3",
+    "class": "D04",
+    "type": "mcq",
+    "code": "char ship[5] = {'c', 'a', 'd', 'b', 'e'};\nint i;\nchar tmp;\nfor (i = 0; i < 4; i = i + 1) {\n    if (ship[i] > ship[i + 1]) {\n        tmp = ship[i];\n        ship[i] = ship[i + 1];\n        ship[i + 1] = tmp;\n    }\n}",
+    "question": "What is ship[1] after the code runs?",
+    "tail": "printf(\"%c\", ship[1]);",
+    "belief_code": "char ship[5] = {'c', 'a', 'd', 'b', 'e'};\nint i;\nchar tmp;\nfor (int pass = 0; pass < 4; pass = pass + 1) {\n    for (i = 0; i < 4; i = i + 1) {\n        if (ship[i] > ship[i + 1]) {\n            tmp = ship[i];\n            ship[i] = ship[i + 1];\n            ship[i + 1] = tmp;\n        }\n    }\n}",
+    "distractors": [
+      "b",
+      "d"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D04_mcq_4",
+    "class": "D04",
+    "type": "mcq",
+    "code": "float power[4] = {4.2, 1.5, 3.7, 2.9};\nint i;\nfloat tmp;\nfor (i = 0; i < 3; i = i + 1) {\n    if (power[i] > power[i + 1]) {\n        tmp = power[i];\n        power[i] = power[i + 1];\n        power[i + 1] = tmp;\n    }\n}",
+    "question": "What is power[1] after the code runs?",
+    "tail": "printf(\"%.1f\", power[1]);",
+    "belief_code": "float power[4] = {4.2, 1.5, 3.7, 2.9};\nint i;\nfloat tmp;\nfor (int pass = 0; pass < 3; pass = pass + 1) {\n    for (i = 0; i < 3; i = i + 1) {\n        if (power[i] > power[i + 1]) {\n            tmp = power[i];\n            power[i] = power[i + 1];\n            power[i + 1] = tmp;\n        }\n    }\n}",
+    "distractors": [
+      "2.9",
+      "4.2"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D04_mcq_5",
+    "class": "D04",
+    "type": "mcq",
+    "code": "int hull[6] = {9, 2, 7, 4, 6, 3};\nint swaps = 0;\nfor (int i = 0; i < 5; i = i + 1) {\n    if (hull[i] > hull[i + 1]) {\n        int tmp = hull[i];\n        hull[i] = hull[i + 1];\n        hull[i + 1] = tmp;\n        swaps = swaps + 1;\n    }\n}",
+    "question": "What is swaps after the code runs?",
+    "tail": "printf(\"%d\", swaps);",
+    "belief_code": "int hull[6] = {9, 2, 7, 4, 6, 3};\nint swaps = 0;\nfor (int pass = 0; pass < 5; pass = pass + 1) {\n    for (int i = 0; i < 5; i = i + 1) {\n        if (hull[i] > hull[i + 1]) {\n            int tmp = hull[i];\n            hull[i] = hull[i + 1];\n            hull[i + 1] = tmp;\n            swaps = swaps + 1;\n        }\n    }\n}",
+    "distractors": [
+      "10",
+      "0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D04_next_state_1",
+    "class": "D04",
+    "type": "next_state",
+    "code": "int arr[5] = {2, 5, 1, 3, 4};\nint i, tmp;\nfor (i = 0; i < 4; i++) {\n    if (arr[i] > arr[i+1]) {\n        tmp = arr[i];\n        arr[i] = arr[i+1];\n        arr[i+1] = tmp;\n    }\n}\n",
+    "var": "tmp",
+    "after_line": 5,
+    "hit": 4,
+    "belief_code": "int arr[5] = {2, 5, 1, 3, 4};\nint i, tmp, pass;\nfor (pass = 0; pass < 4; pass++) {\n    for (i = 0; i < 4 - pass; i++) {\n        if (arr[i] > arr[i+1]) {\n            tmp = arr[i];\n            arr[i] = arr[i+1];\n            arr[i+1] = tmp;\n        }\n    }\n}\n",
+    "belief_after_line": 6,
+    "distractors": [
+      "4",
+      "1"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D04_next_state_2",
+    "class": "D04",
+    "type": "next_state",
+    "code": "int arr[5] = {5, 3, 1, 4, 2};\nint i, temp;\nfor (i = 1; i < 5; i++) {\n    if (arr[i] < arr[0]) {\n        temp = arr[0];\n        arr[0] = arr[i];\n        arr[i] = temp;\n    }\n}\n",
+    "var": "temp",
+    "after_line": 5,
+    "hit": 3,
+    "belief_code": "int arr[5] = {5, 3, 1, 4, 2};\nint i, temp, pos;\nfor (pos = 0; pos < 4; pos++) {\n    for (i = pos + 1; i < 5; i++) {\n        if (arr[i] < arr[pos]) {\n            temp = arr[pos];\n            arr[pos] = arr[i];\n            arr[i] = temp;\n        }\n    }\n}\n",
+    "belief_after_line": 6,
+    "distractors": [
+      "1",
+      "4"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D04_next_state_3",
+    "class": "D04",
+    "type": "next_state",
+    "code": "int arr[5] = {4, 3, 2, 1, 5};\nint i, tmp;\nfor (i = 3; i >= 0; i--) {\n    if (arr[i] > arr[i+1]) {\n        tmp = arr[i];\n        arr[i] = arr[i+1];\n        arr[i+1] = tmp;\n    }\n}\n",
+    "var": "tmp",
+    "after_line": 5,
+    "hit": 4,
+    "belief_code": "int arr[5] = {4, 3, 2, 1, 5};\nint i, tmp, pass;\nfor (pass = 0; pass < 4; pass++) {\n    for (i = 3; i >= pass; i--) {\n        if (arr[i] > arr[i+1]) {\n            tmp = arr[i];\n            arr[i] = arr[i+1];\n            arr[i+1] = tmp;\n        }\n    }\n}\n",
+    "belief_after_line": 6,
+    "distractors": [
+      "5",
+      "1"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D04_next_state_4",
+    "class": "D04",
+    "type": "next_state",
+    "code": "int arr[5] = {2, 4, 1, 5, 3};\nint i, tmp;\ni = 0;\nwhile (i < 4) {\n    if (arr[i] > arr[i+1]) {\n        tmp = arr[i];\n        arr[i] = arr[i+1];\n        arr[i+1] = tmp;\n    }\n    i = i + 1;\n}\n",
+    "var": "tmp",
+    "after_line": 6,
+    "hit": 3,
+    "belief_code": "int arr[5] = {2, 4, 1, 5, 3};\nint i, tmp, pass;\nfor (pass = 0; pass < 4; pass++, i = 0) {\n    while (i < 4) {\n        if (arr[i] > arr[i+1]) {\n            tmp = arr[i];\n            arr[i] = arr[i+1];\n            arr[i+1] = tmp;\n        }\n        i = i + 1;\n    }\n}\n",
+    "belief_after_line": 6,
+    "distractors": [
+      "4",
+      "1"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D04_predict_output_1",
+    "class": "D04",
+    "type": "predict_output",
+    "code": "int a[] = {5, 1, 4, 2, 3};\nint n = 5;\nfor (int i = 0; i < n - 1; i = i + 1) {\n    if (a[i] > a[i + 1]) {\n        int t = a[i];\n        a[i] = a[i + 1];\n        a[i + 1] = t;\n    }\n}\nprintf(\"%d %d %d %d %d\", a[0], a[1], a[2], a[3], a[4]);",
+    "belief_code": "int a[] = {5, 1, 4, 2, 3};\nint n = 5;\nfor (int j = 0; j < n - 1; j = j + 1) {\n    for (int i = 0; i < n - 1; i = i + 1) {\n        if (a[i] > a[i + 1]) {\n            int t = a[i];\n            a[i] = a[i + 1];\n            a[i + 1] = t;\n        }\n    }\n}\nprintf(\"%d %d %d %d %d\", a[0], a[1], a[2], a[3], a[4]);",
+    "distractors": [
+      "5 1 4 2 3",
+      "1 4 3 2 5"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D04_predict_output_2",
+    "class": "D04",
+    "type": "predict_output",
+    "code": "int a[] = {3, 1, 4, 2};\nint n = 4;\nfor (int i = 0; i < n - 1; i = i + 1) {\n    if (a[i] > a[i + 1]) {\n        int t = a[i];\n        a[i] = a[i + 1];\n        a[i + 1] = t;\n    }\n}\nprintf(\"%d %d %d %d\", a[0], a[1], a[2], a[3]);",
+    "belief_code": "int a[] = {3, 1, 4, 2};\nint n = 4;\nfor (int j = 0; j < n - 1; j = j + 1) {\n    for (int i = 0; i < n - 1; i = i + 1) {\n        if (a[i] > a[i + 1]) {\n            int t = a[i];\n            a[i] = a[i + 1];\n            a[i + 1] = t;\n        }\n    }\n}\nprintf(\"%d %d %d %d\", a[0], a[1], a[2], a[3]);",
+    "distractors": [
+      "3 1 4 2",
+      "1 4 2 3"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D04_predict_output_3",
+    "class": "D04",
+    "type": "predict_output",
+    "code": "int a[] = {4, 3, 5, 1, 2};\nint n = 5;\nfor (int i = n - 2; i >= 0; i = i - 1) {\n    if (a[i] > a[i + 1]) {\n        int t = a[i];\n        a[i] = a[i + 1];\n        a[i + 1] = t;\n    }\n}\nprintf(\"%d %d %d %d %d\", a[0], a[1], a[2], a[3], a[4]);",
+    "belief_code": "int a[] = {4, 3, 5, 1, 2};\nint n = 5;\nfor (int j = 0; j < n - 1; j = j + 1) {\n    for (int i = n - 2; i >= 0; i = i - 1) {\n        if (a[i] > a[i + 1]) {\n            int t = a[i];\n            a[i] = a[i + 1];\n            a[i + 1] = t;\n        }\n    }\n}\nprintf(\"%d %d %d %d %d\", a[0], a[1], a[2], a[3], a[4]);",
+    "distractors": [
+      "4 3 5 1 2",
+      "1 3 4 5 2"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D04_predict_output_4",
+    "class": "D04",
+    "type": "predict_output",
+    "code": "int a[] = {2, 3, 1};\nint n = 3;\nfor (int i = 0; i < n - 1; i = i + 1) {\n    if (a[i] > a[i + 1]) {\n        int t = a[i];\n        a[i] = a[i + 1];\n        a[i + 1] = t;\n    }\n}\nprintf(\"%d %d %d\", a[0], a[1], a[2]);",
+    "belief_code": "int a[] = {2, 3, 1};\nint n = 3;\nfor (int j = 0; j < n - 1; j = j + 1) {\n    for (int i = 0; i < n - 1; i = i + 1) {\n        if (a[i] > a[i + 1]) {\n            int t = a[i];\n            a[i] = a[i + 1];\n            a[i + 1] = t;\n        }\n    }\n}\nprintf(\"%d %d %d\", a[0], a[1], a[2]);",
+    "distractors": [
+      "2 3 1",
+      "1 3 2"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D04_predict_output_5",
+    "class": "D04",
+    "type": "predict_output",
+    "code": "float f[] = {2.5, 1.0, 3.0, 1.5};\nint n = 4;\nfor (int i = 0; i < n - 1; i = i + 1) {\n    if (f[i] > f[i + 1]) {\n        float t = f[i];\n        f[i] = f[i + 1];\n        f[i + 1] = t;\n    }\n}\nprintf(\"%.1f %.1f %.1f %.1f\", f[0], f[1], f[2], f[3]);",
+    "belief_code": "float f[] = {2.5, 1.0, 3.0, 1.5};\nint n = 4;\nfor (int j = 0; j < n - 1; j = j + 1) {\n    for (int i = 0; i < n - 1; i = i + 1) {\n        if (f[i] > f[i + 1]) {\n            float t = f[i];\n            f[i] = f[i + 1];\n            f[i + 1] = t;\n        }\n    }\n}\nprintf(\"%.1f %.1f %.1f %.1f\", f[0], f[1], f[2], f[3]);",
+    "distractors": [
+      "2.5 1.0 3.0 1.5",
+      "1.0 2.5 3.0 1.5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D04_predict_output_6",
+    "class": "D04",
+    "type": "predict_output",
+    "code": "char c[] = {'d', 'b', 'c', 'a'};\nint n = 4;\nfor (int i = 0; i < n - 1; i = i + 1) {\n    if (c[i] > c[i + 1]) {\n        char t = c[i];\n        c[i] = c[i + 1];\n        c[i + 1] = t;\n    }\n}\nprintf(\"%c %c %c %c\", c[0], c[1], c[2], c[3]);",
+    "belief_code": "char c[] = {'d', 'b', 'c', 'a'};\nint n = 4;\nfor (int j = 0; j < n - 1; j = j + 1) {\n    for (int i = 0; i < n - 1; i = i + 1) {\n        if (c[i] > c[i + 1]) {\n            char t = c[i];\n            c[i] = c[i + 1];\n            c[i + 1] = t;\n        }\n    }\n}\nprintf(\"%c %c %c %c\", c[0], c[1], c[2], c[3]);",
+    "distractors": [
+      "d b c a",
+      "b d c a"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D05_mcq_1",
+    "class": "D05",
+    "type": "mcq",
+    "code": "int sum_odd(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + sum_odd(n - 2);\n}\nint total = sum_odd(5);",
+    "question": "What is total after the code runs?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int sum_odd(int n) {\n    if (n <= 0) {\n        return 0;\n    }\n    return n + sum_odd(n - 2);\n}\nint total = sum_odd(5);",
+    "distractors": [
+      "8",
+      "6"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D05_mcq_2",
+    "class": "D05",
+    "type": "mcq",
+    "code": "int count_down(int n) {\n    return count_down(n - 1);\n}\nint result = count_down(3);",
+    "question": "What is result after the code runs?",
+    "tail": "printf(\"%d\", result);",
+    "belief_code": "int count_down(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return count_down(n - 1);\n}\nint result = count_down(3);",
+    "distractors": [
+      "3",
+      "1"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D05_mcq_3",
+    "class": "D05",
+    "type": "mcq",
+    "code": "int fact(int n) {\n    if (n == 1) {\n        return 1;\n    }\n    return n * fact(n - 1);\n}\nint result = fact(0);",
+    "question": "What is result after the code runs?",
+    "tail": "printf(\"%d\", result);",
+    "belief_code": "int fact(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * fact(n - 1);\n}\nint result = fact(0);",
+    "distractors": [
+      "0",
+      "6"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D05_mcq_4",
+    "class": "D05",
+    "type": "mcq",
+    "code": "int steps_3(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return 1 + steps_3(n - 3);\n}\nint total = steps_3(10);",
+    "question": "What is total after the code runs?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int steps_3(int n) {\n    if (n <= 0) {\n        return 0;\n    }\n    return 1 + steps_3(n - 3);\n}\nint total = steps_3(10);",
+    "distractors": [
+      "3",
+      "5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D05_mcq_5",
+    "class": "D05",
+    "type": "mcq",
+    "code": "int sum_arr(int a[], int i, int len) {\n    if (i == len) {\n        return 0;\n    }\n    return a[i] + sum_arr(a, i - 1, len);\n}\nint arr[4] = {3, 1, 4, 1};\nint total = sum_arr(arr, 3, 4);",
+    "question": "What is total after the code runs?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int sum_arr(int a[], int i, int len) {\n    if (i < 0) {\n        return 0;\n    }\n    return a[i] + sum_arr(a, i - 1, len);\n}\nint arr[4] = {3, 1, 4, 1};\nint total = sum_arr(arr, 3, 4);",
+    "distractors": [
+      "8",
+      "5"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D05_next_state_1",
+    "class": "D05",
+    "type": "next_state",
+    "code": "int f(int n) {\n    int x;\n    if (n == 0) {\n        return 0;\n    }\n    x = n;\n    x = x + f(n - 2);\n    return x;\n}\nf(3);",
+    "var": "x",
+    "after_line": 6,
+    "hit": 3,
+    "belief_code": "int f(int n) {\n    int x;\n    if (n <= 0) {\n        return 0;\n    }\n    x = n;\n    x = x + f(n - 2);\n    return x;\n}\nf(3);",
+    "belief_after_line": 6,
+    "distractors": [
+      "1",
+      "-3"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D05_next_state_2",
+    "class": "D05",
+    "type": "next_state",
+    "code": "int g(int n) {\n    int y;\n    y = n * n;\n    y = y + g(n + 1);\n    return y;\n}\ng(1);",
+    "var": "y",
+    "after_line": 3,
+    "hit": 6,
+    "belief_code": "int g(int n) {\n    int y;\n    if (n > 5) {\n        return 0;\n    }\n    y = n * n;\n    y = y + g(n + 1);\n    return y;\n}\ng(1);",
+    "belief_after_line": 6,
+    "distractors": [
+      "25",
+      "16"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D05_next_state_3",
+    "class": "D05",
+    "type": "next_state",
+    "code": "int h(int n) {\n    int z;\n    if (n == 0) {\n        return 1;\n    }\n    z = n;\n    z = z + h(n - 1) + h(n - 2);\n    return z;\n}\nh(3);",
+    "var": "z",
+    "after_line": 6,
+    "hit": 4,
+    "belief_code": "int h(int n) {\n    int z;\n    if (n <= 0) {\n        return 1;\n    }\n    z = n;\n    z = z + h(n - 1) + h(n - 2);\n    return z;\n}\nh(3);",
+    "belief_after_line": 6,
+    "distractors": [
+      "1",
+      "-2"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D05_next_state_4",
+    "class": "D05",
+    "type": "next_state",
+    "code": "int m(int n) {\n    int p;\n    if (n == 0) {\n        return 1;\n    }\n    p = n;\n    p = p * m(n - 2);\n    return p;\n}\nm(3);",
+    "var": "p",
+    "after_line": 6,
+    "hit": 3,
+    "belief_code": "int m(int n) {\n    int p;\n    if (n <= 0) {\n        return 1;\n    }\n    p = n;\n    p = p * m(n - 2);\n    return p;\n}\nm(3);",
+    "belief_after_line": 6,
+    "distractors": [
+      "1",
+      "-3"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D05_predict_output_1",
+    "class": "D05",
+    "type": "predict_output",
+    "code": "int countdown(int n) {\n    return countdown(n - 1);\n}\nprintf(\"%d\", countdown(3));",
+    "belief_code": "int countdown(int n) {\n    if (n <= 0) {\n        return 0;\n    }\n    return countdown(n - 1);\n}\nprintf(\"%d\", countdown(3));",
+    "distractors": [
+      "3",
+      "1"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D05_predict_output_2",
+    "class": "D05",
+    "type": "predict_output",
+    "code": "int mystery(int n) {\n    if (n == 0) {\n        return 1;\n    }\n    return n * mystery(n - 2);\n}\nprintf(\"%d\", mystery(5));",
+    "belief_code": "int mystery(int n) {\n    if (n <= 0) {\n        return 1;\n    }\n    return n * mystery(n - 2);\n}\nprintf(\"%d\", mystery(5));",
+    "distractors": [
+      "5",
+      "3"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D05_predict_output_3",
+    "class": "D05",
+    "type": "predict_output",
+    "code": "int fuel(int level) {\n    if (level == 0) {\n        return 1;\n    }\n    return fuel(level + 1);\n}\nprintf(\"%d\", fuel(5));",
+    "belief_code": "int fuel(int level) {\n    if (level >= 10) {\n        return level;\n    }\n    return fuel(level + 1);\n}\nprintf(\"%d\", fuel(5));",
+    "distractors": [
+      "5",
+      "1"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D05_predict_output_4",
+    "class": "D05",
+    "type": "predict_output",
+    "code": "int sum_to_one(int n) {\n    if (n == 1) {\n        return 1;\n    }\n    return n + sum_to_one(n - 1);\n}\nprintf(\"%d\", sum_to_one(0));",
+    "belief_code": "int sum_to_one(int n) {\n    if (n <= 0) {\n        return 0;\n    }\n    return n + sum_to_one(n - 1);\n}\nprintf(\"%d\", sum_to_one(0));",
+    "distractors": [
+      "1",
+      "-1"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D05_predict_output_5",
+    "class": "D05",
+    "type": "predict_output",
+    "code": "int probe(int n) {\n    if (n == 1) {\n        return 0;\n    }\n    return 1 + probe(n / 3);\n}\nprintf(\"%d\", probe(2));",
+    "belief_code": "int probe(int n) {\n    if (n <= 1) {\n        return 0;\n    }\n    return 1 + probe(n / 3);\n}\nprintf(\"%d\", probe(2));",
+    "distractors": [
+      "0",
+      "2"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D05_predict_output_6",
+    "class": "D05",
+    "type": "predict_output",
+    "code": "int shield(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return shield(-n);\n}\nprintf(\"%d\", shield(5));",
+    "belief_code": "int shield(int n) {\n    if (n == -5) {\n        return 0;\n    }\n    return shield(-n);\n}\nprintf(\"%d\", shield(5));",
+    "distractors": [
+      "5",
+      "-5"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D06_mcq_1",
+    "class": "D06",
+    "type": "mcq",
+    "code": "int depth(int n) {\n    static int calls = 0;\n    calls = calls + 1;\n    if (calls > 5) {\n        return 999;\n    }\n    if (n == 0) {\n        return calls;\n    }\n    return depth(n);\n}\nint result = depth(3);",
+    "question": "What is result after the code runs?",
+    "tail": "printf(\"%d\", result);",
+    "belief_code": "int depth(int n) {\n    static int calls = 0;\n    calls = calls + 1;\n    if (calls > 5) {\n        return 999;\n    }\n    if (n == 0) {\n        return calls;\n    }\n    return depth(n - 1);\n}\nint result = depth(3);",
+    "distractors": [
+      "4",
+      "3"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D06_mcq_2",
+    "class": "D06",
+    "type": "mcq",
+    "code": "int fuel(int n) {\n    static int burns = 0;\n    burns = burns + 1;\n    if (burns > 4) {\n        return -1;\n    }\n    if (n == 1) {\n        return burns;\n    }\n    return fuel(n);\n}\nint reserve = fuel(4);",
+    "question": "What is reserve after the code runs?",
+    "tail": "printf(\"%d\", reserve);",
+    "belief_code": "int fuel(int n) {\n    static int burns = 0;\n    burns = burns + 1;\n    if (burns > 4) {\n        return -1;\n    }\n    if (n == 1) {\n        return burns;\n    }\n    return fuel(n - 1);\n}\nint reserve = fuel(4);",
+    "distractors": [
+      "4",
+      "3"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D06_mcq_3",
+    "class": "D06",
+    "type": "mcq",
+    "code": "int shield(int n) {\n    static int hits = 0;\n    hits = hits + 1;\n    if (hits > 3) {\n        return 0;\n    }\n    if (n == 0) {\n        return hits;\n    }\n    return shield(n + 1);\n}\nint strength = shield(2);",
+    "question": "What is strength after the code runs?",
+    "tail": "printf(\"%d\", strength);",
+    "belief_code": "int shield(int n) {\n    static int hits = 0;\n    hits = hits + 1;\n    if (hits > 3) {\n        return 0;\n    }\n    if (n == 0) {\n        return hits;\n    }\n    return shield(n - 1);\n}\nint strength = shield(2);",
+    "distractors": [
+      "3",
+      "2"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D06_mcq_4",
+    "class": "D06",
+    "type": "mcq",
+    "code": "int crew(int n) {\n    static int count = 0;\n    count = count + 1;\n    if (count > 4) {\n        return -99;\n    }\n    if (n == 2) {\n        return count;\n    }\n    return crew(n);\n}\nint members = crew(5);",
+    "question": "What is members after the code runs?",
+    "tail": "printf(\"%d\", members);",
+    "belief_code": "int crew(int n) {\n    static int count = 0;\n    count = count + 1;\n    if (count > 4) {\n        return -99;\n    }\n    if (n == 2) {\n        return count;\n    }\n    return crew(n - 1);\n}\nint members = crew(5);",
+    "distractors": [
+      "4",
+      "5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D06_mcq_5",
+    "class": "D06",
+    "type": "mcq",
+    "code": "float temp(int n) {\n    static int count = 0;\n    count = count + 1;\n    if (count > 5) {\n        return -1.0;\n    }\n    if (n == 0) {\n        return 2.5;\n    }\n    return temp(n);\n}\nfloat reading = temp(4);",
+    "question": "What is reading after the code runs?",
+    "tail": "printf(\"%.1f\", reading);",
+    "belief_code": "float temp(int n) {\n    static int count = 0;\n    count = count + 1;\n    if (count > 5) {\n        return -1.0;\n    }\n    if (n == 0) {\n        return 2.5;\n    }\n    return temp(n - 1);\n}\nfloat reading = temp(4);",
+    "distractors": [
+      "2.5",
+      "5.0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D06_next_state_1",
+    "class": "D06",
+    "type": "next_state",
+    "code": "int countdown(int n) {\n    int last = 0;\n    if (n <= 0) {\n        return 0;\n    }\n    last = n;\n    return countdown(n);\n}\ncountdown(3);",
+    "var": "last",
+    "after_line": 6,
+    "hit": 2,
+    "belief_code": "int countdown(int n) {\n    int last = 0;\n    if (n <= 0) {\n        return 0;\n    }\n    last = n;\n    return countdown(n - 1);\n}\ncountdown(3);",
+    "belief_after_line": 6,
+    "distractors": [
+      "0",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D06_next_state_2",
+    "class": "D06",
+    "type": "next_state",
+    "code": "int climb(int n) {\n    int step = 0;\n    if (n <= 0) {\n        return 0;\n    }\n    step = n;\n    return climb(n + 1);\n}\nclimb(2);",
+    "var": "step",
+    "after_line": 6,
+    "hit": 2,
+    "belief_code": "int climb(int n) {\n    int step = 0;\n    if (n <= 0) {\n        return 0;\n    }\n    step = n;\n    return climb(n - 1);\n}\nclimb(2);",
+    "belief_after_line": 6,
+    "distractors": [
+      "2",
+      "4"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D06_next_state_3",
+    "class": "D06",
+    "type": "next_state",
+    "code": "int burn(int fuel, int rate) {\n    int left = 0;\n    if (fuel <= 0) {\n        return 0;\n    }\n    left = fuel;\n    return burn(fuel, rate);\n}\nburn(5, 1);",
+    "var": "left",
+    "after_line": 6,
+    "hit": 2,
+    "belief_code": "int burn(int fuel, int rate) {\n    int left = 0;\n    if (fuel <= 0) {\n        return 0;\n    }\n    left = fuel;\n    return burn(fuel - 1, rate);\n}\nburn(5, 1);",
+    "belief_after_line": 6,
+    "distractors": [
+      "4",
+      "0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D06_next_state_4",
+    "class": "D06",
+    "type": "next_state",
+    "code": "int scan(int arr[], int i) {\n    int val = 0;\n    if (i < 0) {\n        return -1;\n    }\n    val = arr[i];\n    return scan(arr, i);\n}\nint data[3] = {5, 8, 2};\nscan(data, 2);",
+    "var": "val",
+    "after_line": 6,
+    "hit": 2,
+    "belief_code": "int scan(int arr[], int i) {\n    int val = 0;\n    if (i < 0) {\n        return -1;\n    }\n    val = arr[i];\n    return scan(arr, i - 1);\n}\nint data[3] = {5, 8, 2};\nscan(data, 2);",
+    "belief_after_line": 6,
+    "distractors": [
+      "8",
+      "5"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D06_predict_output_1",
+    "class": "D06",
+    "type": "predict_output",
+    "code": "int sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + sum(n);\n}\nprintf(\"%d\", sum(5));",
+    "belief_code": "int sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + sum(n - 1);\n}\nprintf(\"%d\", sum(5));",
+    "distractors": [
+      "5",
+      "10"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D06_predict_output_2",
+    "class": "D06",
+    "type": "predict_output",
+    "code": "int fact(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * fact(n + 1);\n}\nprintf(\"%d\", fact(5));",
+    "belief_code": "int fact(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * fact(n - 1);\n}\nprintf(\"%d\", fact(5));",
+    "distractors": [
+      "24",
+      "720"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D06_predict_output_3",
+    "class": "D06",
+    "type": "predict_output",
+    "code": "int digit_sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n % 10 + digit_sum(n);\n}\nprintf(\"%d\", digit_sum(123));",
+    "belief_code": "int digit_sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n % 10 + digit_sum(n / 10);\n}\nprintf(\"%d\", digit_sum(123));",
+    "distractors": [
+      "3",
+      "12"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D06_predict_output_4",
+    "class": "D06",
+    "type": "predict_output",
+    "code": "int fib(int n) {\n    if (n <= 1) {\n        return n;\n    }\n    return fib(n - 1) + fib(n);\n}\nprintf(\"%d\", fib(6));",
+    "belief_code": "int fib(int n) {\n    if (n <= 1) {\n        return n;\n    }\n    return fib(n - 1) + fib(n - 2);\n}\nprintf(\"%d\", fib(6));",
+    "distractors": [
+      "5",
+      "13"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D06_predict_output_5",
+    "class": "D06",
+    "type": "predict_output",
+    "code": "int power(int base, int exp) {\n    if (exp == 0) {\n        return 1;\n    }\n    return base * power(base, exp);\n}\nprintf(\"%d\", power(2, 5));",
+    "belief_code": "int power(int base, int exp) {\n    if (exp == 0) {\n        return 1;\n    }\n    return base * power(base, exp - 1);\n}\nprintf(\"%d\", power(2, 5));",
+    "distractors": [
+      "10",
+      "64"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D06_predict_output_6",
+    "class": "D06",
+    "type": "predict_output",
+    "code": "int gcd(int a, int b) {\n    if (b == 0) {\n        return a;\n    }\n    return gcd(a, b);\n}\nprintf(\"%d\", gcd(48, 18));",
+    "belief_code": "int gcd(int a, int b) {\n    if (b == 0) {\n        return a;\n    }\n    return gcd(b, a % b);\n}\nprintf(\"%d\", gcd(48, 18));",
+    "distractors": [
+      "48",
+      "18"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D07_mcq_1",
+    "class": "D07",
+    "type": "mcq",
+    "code": "int add_up(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    add_up(n - 1);\n    return n;\n}\nint total = add_up(4);",
+    "question": "What is total after the code runs?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int add_up(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + add_up(n - 1);\n}\nint total = add_up(4);",
+    "distractors": [
+      "0",
+      "10"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D07_mcq_2",
+    "class": "D07",
+    "type": "mcq",
+    "code": "int fact(int n) {\n    if (n == 0) {\n        return 1;\n    }\n    fact(n - 1);\n    return n;\n}\nint total = fact(5);",
+    "question": "What is total after the code runs?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int fact(int n) {\n    if (n == 0) {\n        return 1;\n    }\n    return n * fact(n - 1);\n}\nint total = fact(5);",
+    "distractors": [
+      "1",
+      "120"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D07_mcq_3",
+    "class": "D07",
+    "type": "mcq",
+    "code": "int sum_array(int arr[], int n) {\n    if (n == 0) {\n        return arr[0];\n    }\n    sum_array(arr, n - 1);\n    return arr[n];\n}\nint values[] = {2, 5, 3, 8};\nint total = sum_array(values, 3);",
+    "question": "What is total after the code runs?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int sum_array(int arr[], int n) {\n    if (n == 0) {\n        return arr[0];\n    }\n    return arr[n] + sum_array(arr, n - 1);\n}\nint values[] = {2, 5, 3, 8};\nint total = sum_array(values, 3);",
+    "distractors": [
+      "2",
+      "18"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D07_mcq_4",
+    "class": "D07",
+    "type": "mcq",
+    "code": "int count_digits(int n) {\n    if (n < 10) {\n        return 1;\n    }\n    count_digits(n / 10);\n    return 1;\n}\nint total = count_digits(987);",
+    "question": "What is total after the code runs?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int count_digits(int n) {\n    if (n < 10) {\n        return 1;\n    }\n    return 1 + count_digits(n / 10);\n}\nint total = count_digits(987);",
+    "distractors": [
+      "0",
+      "3"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D07_mcq_5",
+    "class": "D07",
+    "type": "mcq",
+    "code": "int gcd(int a, int b) {\n    if (b == 0) {\n        return a;\n    }\n    gcd(b, a % b);\n    return a;\n}\nint total = gcd(12, 8);",
+    "question": "What is total after the code runs?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int gcd(int a, int b) {\n    if (b == 0) {\n        return a;\n    }\n    return gcd(b, a % b);\n}\nint total = gcd(12, 8);",
+    "distractors": [
+      "4",
+      "8"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D07_next_state_1",
+    "class": "D07",
+    "type": "next_state",
+    "code": "int f(int n) {\n    if (n == 0) return 0;\n    f(n - 1);\n    return n;\n}\nint s = 0;\nfor (int i = 1; i <= 4; i++) {\n    s = s + f(i);\n}",
+    "var": "s",
+    "after_line": 8,
+    "hit": 2,
+    "belief_code": "int f(int n) {\n    if (n == 0) return 0;\n    return n + f(n - 1);\n}\nint s = 0;\nfor (int i = 1; i <= 4; i++) {\n    s = s + f(i);\n}",
+    "belief_after_line": 7,
+    "distractors": [
+      1,
+      6
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D07_next_state_2",
+    "class": "D07",
+    "type": "next_state",
+    "code": "int g(int n) {\n    if (n == 0) return 1;\n    g(n - 1);\n    return n;\n}\nint p = 1;\nfor (int i = 1; i <= 4; i++) {\n    p = p * g(i);\n}",
+    "var": "p",
+    "after_line": 8,
+    "hit": 3,
+    "belief_code": "int g(int n) {\n    if (n == 0) return 1;\n    return n * g(n - 1);\n}\nint p = 1;\nfor (int i = 1; i <= 4; i++) {\n    p = p * g(i);\n}",
+    "belief_after_line": 7,
+    "distractors": [
+      4,
+      24
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D07_next_state_3",
+    "class": "D07",
+    "type": "next_state",
+    "code": "int h(int n) {\n    if (n <= 1) return 1;\n    h(n - 1);\n    return h(n - 2);\n}\nint acc = 0;\nfor (int i = 1; i <= 4; i++) {\n    acc = acc + h(i);\n}",
+    "var": "acc",
+    "after_line": 8,
+    "hit": 3,
+    "belief_code": "int h(int n) {\n    if (n <= 1) return 1;\n    return h(n - 1) + h(n - 2);\n}\nint acc = 0;\nfor (int i = 1; i <= 4; i++) {\n    acc = acc + h(i);\n}",
+    "belief_after_line": 7,
+    "distractors": [
+      2,
+      4
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D07_next_state_4",
+    "class": "D07",
+    "type": "next_state",
+    "code": "int f(int n) {\n    if (n == 0) return 0;\n    f(n - 1);\n    return 1;\n}\nint arr[3] = {1, 2, 3};\nint total = 0;\nfor (int i = 0; i < 3; i++) {\n    total = total + f(arr[i]);\n}",
+    "var": "total",
+    "after_line": 9,
+    "hit": 2,
+    "belief_code": "int f(int n) {\n    if (n == 0) return 0;\n    return 1 + f(n - 1);\n}\nint arr[3] = {1, 2, 3};\nint total = 0;\nfor (int i = 0; i < 3; i++) {\n    total = total + f(arr[i]);\n}",
+    "belief_after_line": 8,
+    "distractors": [
+      1,
+      4
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D07_predict_output_1",
+    "class": "D07",
+    "type": "predict_output",
+    "code": "int sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    sum(n - 1);\n    return n;\n}\nprintf(\"%d\", sum(4));",
+    "belief_code": "int sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + sum(n - 1);\n}\nprintf(\"%d\", sum(4));",
+    "distractors": [
+      "4",
+      "6"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D07_predict_output_2",
+    "class": "D07",
+    "type": "predict_output",
+    "code": "int fuel(int n) {\n    if (n == 0) {\n        return 1;\n    }\n    fuel(n - 1);\n    return n;\n}\nprintf(\"%d\", fuel(5));",
+    "belief_code": "int fuel(int n) {\n    if (n == 0) {\n        return 1;\n    }\n    return n * fuel(n - 1);\n}\nprintf(\"%d\", fuel(5));",
+    "distractors": [
+      "25",
+      "24"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D07_predict_output_3",
+    "class": "D07",
+    "type": "predict_output",
+    "code": "int chars(char s[], int i) {\n    if (s[i] == '\\0') {\n        return 0;\n    }\n    chars(s, i + 1);\n    return 1;\n}\nprintf(\"%d\", chars(\"abc\", 0));",
+    "belief_code": "int chars(char s[], int i) {\n    if (s[i] == '\\0') {\n        return 0;\n    }\n    return 1 + chars(s, i + 1);\n}\nprintf(\"%d\", chars(\"abc\", 0));",
+    "distractors": [
+      "2",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D07_predict_output_4",
+    "class": "D07",
+    "type": "predict_output",
+    "code": "int total(int a[], int n) {\n    if (n == 0) {\n        return 0;\n    }\n    total(a, n - 1);\n    return a[n - 1];\n}\nint a[] = {3, 4, 5};\nprintf(\"%d\", total(a, 3));",
+    "belief_code": "int total(int a[], int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return a[n - 1] + total(a, n - 1);\n}\nint a[] = {3, 4, 5};\nprintf(\"%d\", total(a, 3));",
+    "distractors": [
+      "9",
+      "15"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D07_predict_output_5",
+    "class": "D07",
+    "type": "predict_output",
+    "code": "int dig(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    dig(n / 10);\n    return n % 10;\n}\nprintf(\"%d\", dig(123));",
+    "belief_code": "int dig(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n % 10 + dig(n / 10);\n}\nprintf(\"%d\", dig(123));",
+    "distractors": [
+      "1",
+      "9"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D07_predict_output_6",
+    "class": "D07",
+    "type": "predict_output",
+    "code": "int power(int b, int e) {\n    if (e == 0) {\n        return 1;\n    }\n    power(b, e - 1);\n    return b;\n}\nprintf(\"%d\", power(2, 3));",
+    "belief_code": "int power(int b, int e) {\n    if (e == 0) {\n        return 1;\n    }\n    return b * power(b, e - 1);\n}\nprintf(\"%d\", power(2, 3));",
+    "distractors": [
+      "4",
+      "6"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D08_mcq_1",
+    "class": "D08",
+    "type": "mcq",
+    "code": "char s[] = \"banana\";\nint count = 0;\nint i = 0;\nwhile (i < strlen(s)) {\n    if (s[i] == \"a\") {\n        count = count + 1;\n    }\n    i = i + 1;\n}",
+    "question": "What is count after the loop?",
+    "tail": "printf(\"%d\", count);",
+    "belief_code": "char s[] = \"banana\";\nint count = 0;\nint i = 0;\nwhile (i < strlen(s)) {\n    if (s[i] == 'a') {\n        count = count + 1;\n    }\n    i = i + 1;\n}",
+    "distractors": [
+      "6",
+      "1"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D08_mcq_2",
+    "class": "D08",
+    "type": "mcq",
+    "code": "int fuel_check(char c) {\n    if (c == \"F\") {\n        return 100;\n    }\n    return 0;\n}\nint fuel = fuel_check('F');",
+    "question": "What is fuel after fuel_check('F') runs?",
+    "tail": "printf(\"%d\", fuel);",
+    "belief_code": "int fuel_check(char c) {\n    if (c == 'F') {\n        return 100;\n    }\n    return 0;\n}\nint fuel = fuel_check('F');",
+    "distractors": [
+      "100",
+      "50"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D08_mcq_3",
+    "class": "D08",
+    "type": "mcq",
+    "code": "char code[] = \"B7\";\nint level;\nif (code[0] == \"B\") {\n    level = 3;\n} else {\n    level = 1;\n}",
+    "question": "What is level after the if/else?",
+    "tail": "printf(\"%d\", level);",
+    "belief_code": "char code[] = \"B7\";\nint level;\nif (code[0] == 'B') {\n    level = 3;\n} else {\n    level = 1;\n}",
+    "distractors": [
+      "3",
+      "7"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D08_mcq_4",
+    "class": "D08",
+    "type": "mcq",
+    "code": "char word[] = \"falcon\";\nint found = 0;\nint i;\nfor (i = 0; i < strlen(word); i = i + 1) {\n    if (word[i] == \"l\") {\n        found = 1;\n    }\n}",
+    "question": "What is found after the loop?",
+    "tail": "printf(\"%d\", found);",
+    "belief_code": "char word[] = \"falcon\";\nint found = 0;\nint i;\nfor (i = 0; i < strlen(word); i = i + 1) {\n    if (word[i] == 'l') {\n        found = 1;\n    }\n}",
+    "distractors": [
+      "1",
+      "6"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D08_mcq_5",
+    "class": "D08",
+    "type": "mcq",
+    "code": "int count_e(char s[], int i) {\n    if (i == strlen(s)) {\n        return 0;\n    }\n    if (s[i] == \"e\") {\n        return 1 + count_e(s, i + 1);\n    }\n    return count_e(s, i + 1);\n}\nint total = count_e(\"engine\", 0);",
+    "question": "What is total after calling count_e(\"engine\", 0)?",
+    "tail": "printf(\"%d\", total);",
+    "belief_code": "int count_e(char s[], int i) {\n    if (i == strlen(s)) {\n        return 0;\n    }\n    if (s[i] == 'e') {\n        return 1 + count_e(s, i + 1);\n    }\n    return count_e(s, i + 1);\n}\nint total = count_e(\"engine\", 0);",
+    "distractors": [
+      "1",
+      "6"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D08_next_state_1",
+    "class": "D08",
+    "type": "next_state",
+    "code": "char s[] = \"ab\";\nint i = 0;\nint total = 0;\nint bonus = 0;\nwhile (s[i] != '\\0') {\n    if (s[i] == \"a\") {\n        bonus = bonus + 1;\n    }\n    total = total + bonus;\n    i = i + 1;\n}",
+    "var": "total",
+    "after_line": 9,
+    "hit": 2,
+    "belief_code": "char s[] = \"ab\";\nint i = 0;\nint total = 0;\nint bonus = 0;\nwhile (s[i] != '\\0') {\n    if (s[i] == 'a') {\n        bonus = bonus + 1;\n    }\n    total = total + bonus;\n    i = i + 1;\n}",
+    "belief_after_line": 9,
+    "distractors": [
+      "1",
+      "3"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D08_next_state_2",
+    "class": "D08",
+    "type": "next_state",
+    "code": "int collect(int i) {\n    char s[] = \"aa\";\n    int found = 0;\n    if (s[i] == \"a\") {\n        found = 1;\n    }\n    if (s[i] != '\\0') {\n        found = found + collect(i + 1);\n    }\n    return found;\n}\nint result = collect(0);",
+    "var": "found",
+    "after_line": 8,
+    "hit": 2,
+    "belief_code": "int collect(int i) {\n    char s[] = \"aa\";\n    int found = 0;\n    if (s[i] == 'a') {\n        found = 1;\n    }\n    if (s[i] != '\\0') {\n        found = found + collect(i + 1);\n    }\n    return found;\n}\nint result = collect(0);",
+    "belief_after_line": 8,
+    "distractors": [
+      "2",
+      "3"
+    ],
+    "difficulty": 3
+  },
+  {
+    "draft_id": "D08_next_state_3",
+    "class": "D08",
+    "type": "next_state",
+    "code": "char s[] = \"xxy\";\nint fuel = 0;\nint shield = 0;\nfor (int i = 0; s[i] != '\\0'; i = i + 1) {\n    if (s[i] == \"x\") {\n        shield = shield + 1;\n    }\n    fuel = fuel + shield;\n}",
+    "var": "fuel",
+    "after_line": 8,
+    "hit": 3,
+    "belief_code": "char s[] = \"xxy\";\nint fuel = 0;\nint shield = 0;\nfor (int i = 0; s[i] != '\\0'; i = i + 1) {\n    if (s[i] == 'x') {\n        shield = shield + 1;\n    }\n    fuel = fuel + shield;\n}",
+    "belief_after_line": 8,
+    "distractors": [
+      "1",
+      "3"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D08_next_state_4",
+    "class": "D08",
+    "type": "next_state",
+    "code": "char s[] = \"aaa\";\nint hull = 0;\nint crew = 0;\nfor (int i = 0; s[i] != '\\0'; i = i + 1) {\n    if (s[i] == \"a\") {\n        crew = crew + 1;\n    } else {\n        crew = 0;\n    }\n    hull = hull + crew;\n}",
+    "var": "hull",
+    "after_line": 10,
+    "hit": 3,
+    "belief_code": "char s[] = \"aaa\";\nint hull = 0;\nint crew = 0;\nfor (int i = 0; s[i] != '\\0'; i = i + 1) {\n    if (s[i] == 'a') {\n        crew = crew + 1;\n    } else {\n        crew = 0;\n    }\n    hull = hull + crew;\n}",
+    "belief_after_line": 10,
+    "distractors": [
+      "3",
+      "5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D08_predict_output_1",
+    "class": "D08",
+    "type": "predict_output",
+    "code": "char word[] = \"cat\";\nif (word[1] == \"a\") {\n    printf(\"vowel\");\n} else {\n    printf(\"not vowel\");\n}",
+    "belief_code": "char word[] = \"cat\";\nif (word[1] == 'a') {\n    printf(\"vowel\");\n} else {\n    printf(\"not vowel\");\n}",
+    "distractors": [
+      "vowel",
+      "cat"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D08_predict_output_2",
+    "class": "D08",
+    "type": "predict_output",
+    "code": "int count = 0;\nchar s[] = \"banana\";\nfor (int i = 0; i < 6; i = i + 1) {\n    if (s[i] == \"a\") {\n        count = count + 1;\n    }\n}\nprintf(\"%d\", count);",
+    "belief_code": "int count = 0;\nchar s[] = \"banana\";\nfor (int i = 0; i < 6; i = i + 1) {\n    if (s[i] == 'a') {\n        count = count + 1;\n    }\n}\nprintf(\"%d\", count);",
+    "distractors": [
+      "1",
+      "2"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D08_predict_output_3",
+    "class": "D08",
+    "type": "predict_output",
+    "code": "int is_vowel(char c) {\n    if (c == \"a\") {\n        return 1;\n    }\n    return 0;\n}\nchar word[] = \"apple\";\nif (is_vowel(word[0])) {\n    printf(\"yes\");\n} else {\n    printf(\"no\");\n}",
+    "belief_code": "int is_vowel(char c) {\n    if (c == 'a') {\n        return 1;\n    }\n    return 0;\n}\nchar word[] = \"apple\";\nif (is_vowel(word[0])) {\n    printf(\"yes\");\n} else {\n    printf(\"no\");\n}",
+    "distractors": [
+      "yes",
+      "0"
+    ],
+    "difficulty": 1
+  },
+  {
+    "draft_id": "D08_predict_output_4",
+    "class": "D08",
+    "type": "predict_output",
+    "code": "char cmd[] = \"start\";\nif (cmd[3] == \"r\") {\n    printf(\"run\");\n} else if (cmd[0] == 's') {\n    printf(\"stop\");\n} else {\n    printf(\"unknown\");\n}",
+    "belief_code": "char cmd[] = \"start\";\nif (cmd[3] == 'r') {\n    printf(\"run\");\n} else if (cmd[0] == 's') {\n    printf(\"stop\");\n} else {\n    printf(\"unknown\");\n}",
+    "distractors": [
+      "run",
+      "unknown"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D08_predict_output_5",
+    "class": "D08",
+    "type": "predict_output",
+    "code": "int i = 0;\nchar s[] = \"hello\";\nint found = 0;\nwhile (i < 5) {\n    if (s[i] == \"l\") {\n        found = 1;\n    }\n    i = i + 1;\n}\nif (found == 1) {\n    printf(\"found\");\n} else {\n    printf(\"none\");\n}",
+    "belief_code": "int i = 0;\nchar s[] = \"hello\";\nint found = 0;\nwhile (i < 5) {\n    if (s[i] == 'l') {\n        found = 1;\n    }\n    i = i + 1;\n}\nif (found == 1) {\n    printf(\"found\");\n} else {\n    printf(\"none\");\n}",
+    "distractors": [
+      "found",
+      "hello"
+    ],
+    "difficulty": 2
+  },
+  {
+    "draft_id": "D08_predict_output_6",
+    "class": "D08",
+    "type": "predict_output",
+    "code": "int check(char c, int n) {\n    if (n == 0) {\n        return 0;\n    }\n    if (c == \"a\") {\n        return 1;\n    }\n    return check(c, n - 1);\n}\nchar s[] = \"abc\";\nif (check(s[0], 3) == 1) {\n    printf(\"yes\");\n} else {\n    printf(\"no\");\n}",
+    "belief_code": "int check(char c, int n) {\n    if (n == 0) {\n        return 0;\n    }\n    if (c == 'a') {\n        return 1;\n    }\n    return check(c, n - 1);\n}\nchar s[] = \"abc\";\nif (check(s[0], 3) == 1) {\n    printf(\"yes\");\n} else {\n    printf(\"no\");\n}",
+    "distractors": [
+      "yes",
+      "0"
+    ],
+    "difficulty": 3
+  }
+]

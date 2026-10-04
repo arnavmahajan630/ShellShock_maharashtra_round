@@ -1,0 +1,78 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 6 exercises about one beginner mistake.\n\nThe mistake: Swapping without a temp loses a value.\nA student who makes it believes: \"Two assignments happen at the same time\".\nHow it shows in code: two array cells 'swapped' with two plain assignments and no temporary variable (`a[i] = a[j]; a[j] = a[i];`), or a shift that overwrites a cell before its value was saved.\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with a correct swap through a temporary variable. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: predict the output.\n- `code` prints its result with printf as one short line (at most 20 characters).\n- `belief_code` prints what the student expects, in the same format.\n- `distractors`: two other short outputs a student might guess, in the same format.\nJSON shape: {\"items\": [{\"code\": \"...\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 6 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int a[2] = {3, 7};\\na[0] = a[1];\\na[1] = a[0];\\nprintf(\\\"%d %d\\\", a[0], a[1]);\",\n      \"belief_code\": \"int a[2] = {3, 7};\\nint t = a[0];\\na[0] = a[1];\\na[1] = t;\\nprintf(\\\"%d %d\\\", a[0], a[1]);\",\n      \"distractors\": [\"3 7\", \"3 3\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int a[3] = {1, 2, 3};\\na[0] = a[1];\\na[1] = a[2];\\na[2] = a[0];\\nprintf(\\\"%d %d %d\\\", a[0], a[1], a[2]);\",\n      \"belief_code\": \"int a[3] = {1, 2, 3};\\nint first = a[0];\\na[0] = a[1];\\na[1] = a[2];\\na[2] = first;\\nprintf(\\\"%d %d %d\\\", a[0], a[1], a[2]);\",\n      \"distractors\": [\"1 2 3\", \"2 2 3\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"char s[3] = {'a', 'b', '\\\\0'};\\nint i = 0;\\nint j = 1;\\ns[i] = s[j];\\ns[j] = s[i];\\nprintf(\\\"%c%c\\\", s[0], s[1]);\",\n      \"belief_code\": \"char s[3] = {'a', 'b', '\\\\0'};\\nint i = 0;\\nint j = 1;\\nchar t = s[i];\\ns[i] = s[j];\\ns[j] = t;\\nprintf(\\\"%c%c\\\", s[0], s[1]);\",\n      \"distractors\": [\"ab\", \"aa\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"void swap(int a[], int i, int j) {\\n    a[i] = a[j];\\n    a[j] = a[i];\\n}\\nint data[3] = {5, 9, 4};\\nswap(data, 0, 2);\\nprintf(\\\"%d %d %d\\\", data[0], data[1], data[2]);\",\n      \"belief_code\": \"void swap(int a[], int i, int j) {\\n    int t = a[i];\\n    a[i] = a[j];\\n    a[j] = t;\\n}\\nint data[3] = {5, 9, 4};\\nswap(data, 0, 2);\\nprintf(\\\"%d %d %d\\\", data[0], data[1], data[2]);\",\n      \"distractors\": [\"4 9 5\", \"5 9 4\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"float f[2] = {2.5, 6.5};\\nf[0] = f[1];\\nf[1] = f[0];\\nprintf(\\\"%.1f %.1f\\\", f[0], f[1]);\",\n      \"belief_code\": \"float f[2] = {2.5, 6.5};\\nfloat t = f[0];\\nf[0] = f[1];\\nf[1] = t;\\nprintf(\\\"%.1f %.1f\\\", f[0], f[1]);\",\n      \"distractors\": [\"2.5 6.5\", \"2.5 2.5\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int a[4] = {1, 2, 3, 4};\\nint i, j;\\nfor (i = 0, j = 3; i < j; i++, j--) {\\n    a[i] = a[j];\\n    a[j] = a[i];\\n}\\nprintf(\\\"%d %d %d %d\\\", a[0], a[1], a[2], a[3]);\",\n      \"belief_code\": \"int a[4] = {1, 2, 3, 4};\\nint i, j;\\nfor (i = 0, j = 3; i < j; i++, j--) {\\n    int t = a[i];\\n    a[i] = a[j];\\n    a[j] = t;\\n}\\nprintf(\\\"%d %d %d %d\\\", a[0], a[1], a[2], a[3]);\",\n      \"distractors\": [\"1 2 3 4\", \"4 2 3 4\"],\n      \"difficulty\": 3\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int a[2] = {3, 7};\na[0] = a[1];\na[1] = a[0];\nprintf(\"%d %d\", a[0], a[1]);",
+        "belief_code": "int a[2] = {3, 7};\nint t = a[0];\na[0] = a[1];\na[1] = t;\nprintf(\"%d %d\", a[0], a[1]);",
+        "distractors": [
+          "3 7",
+          "3 3"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int a[3] = {1, 2, 3};\na[0] = a[1];\na[1] = a[2];\na[2] = a[0];\nprintf(\"%d %d %d\", a[0], a[1], a[2]);",
+        "belief_code": "int a[3] = {1, 2, 3};\nint first = a[0];\na[0] = a[1];\na[1] = a[2];\na[2] = first;\nprintf(\"%d %d %d\", a[0], a[1], a[2]);",
+        "distractors": [
+          "1 2 3",
+          "2 2 3"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "char s[3] = {'a', 'b', '\\0'};\nint i = 0;\nint j = 1;\ns[i] = s[j];\ns[j] = s[i];\nprintf(\"%c%c\", s[0], s[1]);",
+        "belief_code": "char s[3] = {'a', 'b', '\\0'};\nint i = 0;\nint j = 1;\nchar t = s[i];\ns[i] = s[j];\ns[j] = t;\nprintf(\"%c%c\", s[0], s[1]);",
+        "distractors": [
+          "ab",
+          "aa"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "void swap(int a[], int i, int j) {\n    a[i] = a[j];\n    a[j] = a[i];\n}\nint data[3] = {5, 9, 4};\nswap(data, 0, 2);\nprintf(\"%d %d %d\", data[0], data[1], data[2]);",
+        "belief_code": "void swap(int a[], int i, int j) {\n    int t = a[i];\n    a[i] = a[j];\n    a[j] = t;\n}\nint data[3] = {5, 9, 4};\nswap(data, 0, 2);\nprintf(\"%d %d %d\", data[0], data[1], data[2]);",
+        "distractors": [
+          "4 9 5",
+          "5 9 4"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "float f[2] = {2.5, 6.5};\nf[0] = f[1];\nf[1] = f[0];\nprintf(\"%.1f %.1f\", f[0], f[1]);",
+        "belief_code": "float f[2] = {2.5, 6.5};\nfloat t = f[0];\nf[0] = f[1];\nf[1] = t;\nprintf(\"%.1f %.1f\", f[0], f[1]);",
+        "distractors": [
+          "2.5 6.5",
+          "2.5 2.5"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int a[4] = {1, 2, 3, 4};\nint i, j;\nfor (i = 0, j = 3; i < j; i++, j--) {\n    a[i] = a[j];\n    a[j] = a[i];\n}\nprintf(\"%d %d %d %d\", a[0], a[1], a[2], a[3]);",
+        "belief_code": "int a[4] = {1, 2, 3, 4};\nint i, j;\nfor (i = 0, j = 3; i < j; i++, j--) {\n    int t = a[i];\n    a[i] = a[j];\n    a[j] = t;\n}\nprintf(\"%d %d %d %d\", a[0], a[1], a[2], a[3]);",
+        "distractors": [
+          "1 2 3 4",
+          "4 2 3 4"
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 688,
+    "completion_tokens": 6958
+  }
+}

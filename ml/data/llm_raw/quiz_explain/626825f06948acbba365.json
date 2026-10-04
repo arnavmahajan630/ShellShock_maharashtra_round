@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int fuel = 0;\n 2  while (fuel = 0) {\n 3      printf(\"burn\");\n 4      fuel = 1;\n 5  }\n 6  printf(\"off\");\n\nQuestion: What does this print?\nThe right answer, found by running the code: off\nCommon wrong answer: a student who believes \"`=` compares\" expects burnoff\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 2: the condition stores 0 in fuel (it is an assignment), and that stored value decides the branch.\n- Values when the shown code finished: fuel = 0.\n- The shown code printed: 'off'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\":\"The while condition `fuel = 0` is an assignment; it stores 0 in fuel and yields 0, so the condition is false and the loop body never runs. The program then prints `off`.\"}",
+  "parsed": {
+    "explain": "The while condition `fuel = 0` is an assignment; it stores 0 in fuel and yields 0, so the condition is false and the loop body never runs. The program then prints `off`."
+  },
+  "usage": {
+    "prompt_tokens": 388,
+    "completion_tokens": 573
+  }
+}

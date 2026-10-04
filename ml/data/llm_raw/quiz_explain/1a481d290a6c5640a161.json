@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  char s[3] = {'a', 'b', '\\0'};\n 2  int i = 0;\n 3  int j = 1;\n 4  s[i] = s[j];\n 5  s[j] = s[i];\n 6  printf(\"%c%c\", s[0], s[1]);\n\nQuestion: What does this print?\nThe right answer, found by running the code: bb\nCommon wrong answer: a student who believes \"Two assignments happen at the same time\" expects ba\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Values when the shown code finished: i = 0, j = 1.\n- The shown code printed: 'bb'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The first assignment sets s[0] to s[1]'s 'b'; the second copies that same value from s[0] back to s[1], so both characters become 'b'.\"}",
+  "parsed": {
+    "explain": "The first assignment sets s[0] to s[1]'s 'b'; the second copies that same value from s[0] back to s[1], so both characters become 'b'."
+  },
+  "usage": {
+    "prompt_tokens": 398,
+    "completion_tokens": 292
+  }
+}

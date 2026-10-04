@@ -1,0 +1,79 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 5 exercises about one beginner mistake.\n\nThe mistake: One pass doesn't sort the whole array.\nA student who makes it believes: \"One pass over the array sorts it\".\nHow it shows in code: exactly one pass of bubble sort (one loop over neighbouring pairs, no outer loop) or one selection step, on an array that needs more than one pass to become sorted.\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with the outer loop added, so the array ends up fully sorted. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: multiple choice about a value.\n- `code` prints nothing.\n- `question` asks for one value once the code has run, for example \"What is total after the loop?\" or \"What does depth(3) give?\".\n- `tail` is one printf statement that prints exactly that value. I append it to both fragments, so both must use the same names.\n- `distractors`: two other values a student might guess, written the way the tail prints them.\nJSON shape: {\"items\": [{\"code\": \"...\", \"question\": \"...\", \"tail\": \"printf(...);\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 5 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int nums[5] = {5, 3, 8, 1, 2};\\nint i;\\nint tmp;\\nfor (i = 0; i < 4; i = i + 1) {\\n    if (nums[i] > nums[i + 1]) {\\n        tmp = nums[i];\\n        nums[i] = nums[i + 1];\\n        nums[i + 1] = tmp;\\n    }\\n}\",\n      \"question\": \"What is nums[0] after the code runs?\",\n      \"tail\": \"printf(\\\"%d\\\", nums[0]);\",\n      \"belief_code\": \"int nums[5] = {5, 3, 8, 1, 2};\\nint i;\\nint tmp;\\nfor (int pass = 0; pass < 4; pass = pass + 1) {\\n    for (i = 0; i < 4; i = i + 1) {\\n        if (nums[i] > nums[i + 1]) {\\n            tmp = nums[i];\\n            nums[i] = nums[i + 1];\\n            nums[i + 1] = tmp;\\n        }\\n    }\\n}\",\n      \"distractors\": [\"1\", \"5\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int crew[5] = {4, 6, 2, 5, 1};\\nint i;\\nint tmp;\\nfor (i = 3; i >= 0; i = i - 1) {\\n    if (crew[i] > crew[i + 1]) {\\n        tmp = crew[i];\\n        crew[i] = crew[i + 1];\\n        crew[i + 1] = tmp;\\n    }\\n}\",\n      \"question\": \"What is crew[2] after the code runs?\",\n      \"tail\": \"printf(\\\"%d\\\", crew[2]);\",\n      \"belief_code\": \"int crew[5] = {4, 6, 2, 5, 1};\\nint i;\\nint tmp;\\nfor (int pass = 0; pass < 4; pass = pass + 1) {\\n    for (i = 3; i >= 0; i = i - 1) {\\n        if (crew[i] > crew[i + 1]) {\\n            tmp = crew[i];\\n            crew[i] = crew[i + 1];\\n            crew[i + 1] = tmp;\\n        }\\n    }\\n}\",\n      \"distractors\": [\"4\", \"5\"],\n      \"difficulty\": 3\n    },\n    {\n      \"code\": \"char ship[5] = {'c', 'a', 'd', 'b', 'e'};\\nint i;\\nchar tmp;\\nfor (i = 0; i < 4; i = i + 1) {\\n    if (ship[i] > ship[i + 1]) {\\n        tmp = ship[i];\\n        ship[i] = ship[i + 1];\\n        ship[i + 1] = tmp;\\n    }\\n}\",\n      \"question\": \"What is ship[1] after the code runs?\",\n      \"tail\": \"printf(\\\"%c\\\", ship[1]);\",\n      \"belief_code\": \"char ship[5] = {'c', 'a', 'd', 'b', 'e'};\\nint i;\\nchar tmp;\\nfor (int pass = 0; pass < 4; pass = pass + 1) {\\n    for (i = 0; i < 4; i = i + 1) {\\n        if (ship[i] > ship[i + 1]) {\\n            tmp = ship[i];\\n            ship[i] = ship[i + 1];\\n            ship[i + 1] = tmp;\\n        }\\n    }\\n}\",\n      \"distractors\": [\"b\", \"d\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"float power[4] = {4.2, 1.5, 3.7, 2.9};\\nint i;\\nfloat tmp;\\nfor (i = 0; i < 3; i = i + 1) {\\n    if (power[i] > power[i + 1]) {\\n        tmp = power[i];\\n        power[i] = power[i + 1];\\n        power[i + 1] = tmp;\\n    }\\n}\",\n      \"question\": \"What is power[1] after the code runs?\",\n      \"tail\": \"printf(\\\"%.1f\\\", power[1]);\",\n      \"belief_code\": \"float power[4] = {4.2, 1.5, 3.7, 2.9};\\nint i;\\nfloat tmp;\\nfor (int pass = 0; pass < 3; pass = pass + 1) {\\n    for (i = 0; i < 3; i = i + 1) {\\n        if (power[i] > power[i + 1]) {\\n            tmp = power[i];\\n            power[i] = power[i + 1];\\n            power[i + 1] = tmp;\\n        }\\n    }\\n}\",\n      \"distractors\": [\"2.9\", \"4.2\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int hull[6] = {9, 2, 7, 4, 6, 3};\\nint swaps = 0;\\nfor (int i = 0; i < 5; i = i + 1) {\\n    if (hull[i] > hull[i + 1]) {\\n        int tmp = hull[i];\\n        hull[i] = hull[i + 1];\\n        hull[i + 1] = tmp;\\n        swaps = swaps + 1;\\n    }\\n}\",\n      \"question\": \"What is swaps after the code runs?\",\n      \"tail\": \"printf(\\\"%d\\\", swaps);\",\n      \"belief_code\": \"int hull[6] = {9, 2, 7, 4, 6, 3};\\nint swaps = 0;\\nfor (int pass = 0; pass < 5; pass = pass + 1) {\\n    for (int i = 0; i < 5; i = i + 1) {\\n        if (hull[i] > hull[i + 1]) {\\n            int tmp = hull[i];\\n            hull[i] = hull[i + 1];\\n            hull[i + 1] = tmp;\\n            swaps = swaps + 1;\\n        }\\n    }\\n}\",\n      \"distractors\": [\"10\", \"0\"],\n      \"difficulty\": 2\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int nums[5] = {5, 3, 8, 1, 2};\nint i;\nint tmp;\nfor (i = 0; i < 4; i = i + 1) {\n    if (nums[i] > nums[i + 1]) {\n        tmp = nums[i];\n        nums[i] = nums[i + 1];\n        nums[i + 1] = tmp;\n    }\n}",
+        "question": "What is nums[0] after the code runs?",
+        "tail": "printf(\"%d\", nums[0]);",
+        "belief_code": "int nums[5] = {5, 3, 8, 1, 2};\nint i;\nint tmp;\nfor (int pass = 0; pass < 4; pass = pass + 1) {\n    for (i = 0; i < 4; i = i + 1) {\n        if (nums[i] > nums[i + 1]) {\n            tmp = nums[i];\n            nums[i] = nums[i + 1];\n            nums[i + 1] = tmp;\n        }\n    }\n}",
+        "distractors": [
+          "1",
+          "5"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int crew[5] = {4, 6, 2, 5, 1};\nint i;\nint tmp;\nfor (i = 3; i >= 0; i = i - 1) {\n    if (crew[i] > crew[i + 1]) {\n        tmp = crew[i];\n        crew[i] = crew[i + 1];\n        crew[i + 1] = tmp;\n    }\n}",
+        "question": "What is crew[2] after the code runs?",
+        "tail": "printf(\"%d\", crew[2]);",
+        "belief_code": "int crew[5] = {4, 6, 2, 5, 1};\nint i;\nint tmp;\nfor (int pass = 0; pass < 4; pass = pass + 1) {\n    for (i = 3; i >= 0; i = i - 1) {\n        if (crew[i] > crew[i + 1]) {\n            tmp = crew[i];\n            crew[i] = crew[i + 1];\n            crew[i + 1] = tmp;\n        }\n    }\n}",
+        "distractors": [
+          "4",
+          "5"
+        ],
+        "difficulty": 3
+      },
+      {
+        "code": "char ship[5] = {'c', 'a', 'd', 'b', 'e'};\nint i;\nchar tmp;\nfor (i = 0; i < 4; i = i + 1) {\n    if (ship[i] > ship[i + 1]) {\n        tmp = ship[i];\n        ship[i] = ship[i + 1];\n        ship[i + 1] = tmp;\n    }\n}",
+        "question": "What is ship[1] after the code runs?",
+        "tail": "printf(\"%c\", ship[1]);",
+        "belief_code": "char ship[5] = {'c', 'a', 'd', 'b', 'e'};\nint i;\nchar tmp;\nfor (int pass = 0; pass < 4; pass = pass + 1) {\n    for (i = 0; i < 4; i = i + 1) {\n        if (ship[i] > ship[i + 1]) {\n            tmp = ship[i];\n            ship[i] = ship[i + 1];\n            ship[i + 1] = tmp;\n        }\n    }\n}",
+        "distractors": [
+          "b",
+          "d"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "float power[4] = {4.2, 1.5, 3.7, 2.9};\nint i;\nfloat tmp;\nfor (i = 0; i < 3; i = i + 1) {\n    if (power[i] > power[i + 1]) {\n        tmp = power[i];\n        power[i] = power[i + 1];\n        power[i + 1] = tmp;\n    }\n}",
+        "question": "What is power[1] after the code runs?",
+        "tail": "printf(\"%.1f\", power[1]);",
+        "belief_code": "float power[4] = {4.2, 1.5, 3.7, 2.9};\nint i;\nfloat tmp;\nfor (int pass = 0; pass < 3; pass = pass + 1) {\n    for (i = 0; i < 3; i = i + 1) {\n        if (power[i] > power[i + 1]) {\n            tmp = power[i];\n            power[i] = power[i + 1];\n            power[i + 1] = tmp;\n        }\n    }\n}",
+        "distractors": [
+          "2.9",
+          "4.2"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int hull[6] = {9, 2, 7, 4, 6, 3};\nint swaps = 0;\nfor (int i = 0; i < 5; i = i + 1) {\n    if (hull[i] > hull[i + 1]) {\n        int tmp = hull[i];\n        hull[i] = hull[i + 1];\n        hull[i + 1] = tmp;\n        swaps = swaps + 1;\n    }\n}",
+        "question": "What is swaps after the code runs?",
+        "tail": "printf(\"%d\", swaps);",
+        "belief_code": "int hull[6] = {9, 2, 7, 4, 6, 3};\nint swaps = 0;\nfor (int pass = 0; pass < 5; pass = pass + 1) {\n    for (int i = 0; i < 5; i = i + 1) {\n        if (hull[i] > hull[i + 1]) {\n            int tmp = hull[i];\n            hull[i] = hull[i + 1];\n            hull[i + 1] = tmp;\n            swaps = swaps + 1;\n        }\n    }\n}",
+        "distractors": [
+          "10",
+          "0"
+        ],
+        "difficulty": 2
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 734,
+    "completion_tokens": 21762
+  }
+}

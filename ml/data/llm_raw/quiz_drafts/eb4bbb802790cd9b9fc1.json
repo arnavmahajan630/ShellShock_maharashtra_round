@@ -1,0 +1,76 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 4 exercises about one beginner mistake.\n\nThe mistake: The recursive call's result is thrown away.\nA student who makes it believes: \"The recursive call's result is combined automatically\".\nHow it shows in code: a recursive function that calls itself as a bare statement (`f(n - 1);`) and then returns only its own part (`return n;`), so the result of the call is thrown away.\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code where the result of the recursive call is combined into the return value (`return n + f(n - 1);`). Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: predict the next state.\n- `code` has a loop or a recursive function and prints nothing.\n- Choose one line of `code` that is a plain assignment statement alone on its line inside braces (never a for, while or if header). `after_line` is its 1-based line number in `code`.\n- `var` is an int variable that is in scope on that line. `hit` is 2, 3 or 4.\n- The learner is asked: what is `var` right after that line has run for the `hit`-th time?\n- `belief_after_line` is the line number of the same statement in `belief_code`.\n- At that moment the real value and the value the student expects must differ.\n- `distractors`: two other numbers a student might guess.\nJSON shape: {\"items\": [{\"code\": \"...\", \"var\": \"...\", \"after_line\": 3, \"hit\": 2, \"belief_code\": \"...\", \"belief_after_line\": 3, \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 4 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int f(int n) {\\n    if (n == 0) return 0;\\n    f(n - 1);\\n    return n;\\n}\\nint s = 0;\\nfor (int i = 1; i <= 4; i++) {\\n    s = s + f(i);\\n}\",\n      \"var\": \"s\",\n      \"after_line\": 8,\n      \"hit\": 2,\n      \"belief_code\": \"int f(int n) {\\n    if (n == 0) return 0;\\n    return n + f(n - 1);\\n}\\nint s = 0;\\nfor (int i = 1; i <= 4; i++) {\\n    s = s + f(i);\\n}\",\n      \"belief_after_line\": 7,\n      \"distractors\": [1, 6],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int g(int n) {\\n    if (n == 0) return 1;\\n    g(n - 1);\\n    return n;\\n}\\nint p = 1;\\nfor (int i = 1; i <= 4; i++) {\\n    p = p * g(i);\\n}\",\n      \"var\": \"p\",\n      \"after_line\": 8,\n      \"hit\": 3,\n      \"belief_code\": \"int g(int n) {\\n    if (n == 0) return 1;\\n    return n * g(n - 1);\\n}\\nint p = 1;\\nfor (int i = 1; i <= 4; i++) {\\n    p = p * g(i);\\n}\",\n      \"belief_after_line\": 7,\n      \"distractors\": [4, 24],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int h(int n) {\\n    if (n <= 1) return 1;\\n    h(n - 1);\\n    return h(n - 2);\\n}\\nint acc = 0;\\nfor (int i = 1; i <= 4; i++) {\\n    acc = acc + h(i);\\n}\",\n      \"var\": \"acc\",\n      \"after_line\": 8,\n      \"hit\": 3,\n      \"belief_code\": \"int h(int n) {\\n    if (n <= 1) return 1;\\n    return h(n - 1) + h(n - 2);\\n}\\nint acc = 0;\\nfor (int i = 1; i <= 4; i++) {\\n    acc = acc + h(i);\\n}\",\n      \"belief_after_line\": 7,\n      \"distractors\": [2, 4],\n      \"difficulty\": 3\n    },\n    {\n      \"code\": \"int f(int n) {\\n    if (n == 0) return 0;\\n    f(n - 1);\\n    return 1;\\n}\\nint arr[3] = {1, 2, 3};\\nint total = 0;\\nfor (int i = 0; i < 3; i++) {\\n    total = total + f(arr[i]);\\n}\",\n      \"var\": \"total\",\n      \"after_line\": 9,\n      \"hit\": 2,\n      \"belief_code\": \"int f(int n) {\\n    if (n == 0) return 0;\\n    return 1 + f(n - 1);\\n}\\nint arr[3] = {1, 2, 3};\\nint total = 0;\\nfor (int i = 0; i < 3; i++) {\\n    total = total + f(arr[i]);\\n}\",\n      \"belief_after_line\": 8,\n      \"distractors\": [1, 4],\n      \"difficulty\": 1\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int f(int n) {\n    if (n == 0) return 0;\n    f(n - 1);\n    return n;\n}\nint s = 0;\nfor (int i = 1; i <= 4; i++) {\n    s = s + f(i);\n}",
+        "var": "s",
+        "after_line": 8,
+        "hit": 2,
+        "belief_code": "int f(int n) {\n    if (n == 0) return 0;\n    return n + f(n - 1);\n}\nint s = 0;\nfor (int i = 1; i <= 4; i++) {\n    s = s + f(i);\n}",
+        "belief_after_line": 7,
+        "distractors": [
+          1,
+          6
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int g(int n) {\n    if (n == 0) return 1;\n    g(n - 1);\n    return n;\n}\nint p = 1;\nfor (int i = 1; i <= 4; i++) {\n    p = p * g(i);\n}",
+        "var": "p",
+        "after_line": 8,
+        "hit": 3,
+        "belief_code": "int g(int n) {\n    if (n == 0) return 1;\n    return n * g(n - 1);\n}\nint p = 1;\nfor (int i = 1; i <= 4; i++) {\n    p = p * g(i);\n}",
+        "belief_after_line": 7,
+        "distractors": [
+          4,
+          24
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int h(int n) {\n    if (n <= 1) return 1;\n    h(n - 1);\n    return h(n - 2);\n}\nint acc = 0;\nfor (int i = 1; i <= 4; i++) {\n    acc = acc + h(i);\n}",
+        "var": "acc",
+        "after_line": 8,
+        "hit": 3,
+        "belief_code": "int h(int n) {\n    if (n <= 1) return 1;\n    return h(n - 1) + h(n - 2);\n}\nint acc = 0;\nfor (int i = 1; i <= 4; i++) {\n    acc = acc + h(i);\n}",
+        "belief_after_line": 7,
+        "distractors": [
+          2,
+          4
+        ],
+        "difficulty": 3
+      },
+      {
+        "code": "int f(int n) {\n    if (n == 0) return 0;\n    f(n - 1);\n    return 1;\n}\nint arr[3] = {1, 2, 3};\nint total = 0;\nfor (int i = 0; i < 3; i++) {\n    total = total + f(arr[i]);\n}",
+        "var": "total",
+        "after_line": 9,
+        "hit": 2,
+        "belief_code": "int f(int n) {\n    if (n == 0) return 0;\n    return 1 + f(n - 1);\n}\nint arr[3] = {1, 2, 3};\nint total = 0;\nfor (int i = 0; i < 3; i++) {\n    total = total + f(arr[i]);\n}",
+        "belief_after_line": 8,
+        "distractors": [
+          1,
+          4
+        ],
+        "difficulty": 1
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 837,
+    "completion_tokens": 11711
+  }
+}

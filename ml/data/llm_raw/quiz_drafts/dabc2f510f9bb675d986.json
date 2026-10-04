@@ -1,0 +1,76 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 4 exercises about one beginner mistake.\n\nThe mistake: The search gives up after the first miss.\nA student who makes it believes: \"The else branch means 'not this one, keep looking'; it doesn't end or overwrite anything\".\nHow it shows in code: a search over an array with `if (a[i] == x) return i; else return -1;` inside the loop, or the flag form `if (a[i] == x) found = 1; else found = 0;`. The wanted value must not be in the first cell, and for the flag form not in the last cell either..\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code without the `else` part (so the loop keeps looking and nothing is overwritten). Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: predict the next state.\n- `code` has a loop or a recursive function and prints nothing.\n- Choose one line of `code` that is a plain assignment statement alone on its line inside braces (never a for, while or if header). `after_line` is its 1-based line number in `code`.\n- `var` is an int variable that is in scope on that line. `hit` is 2, 3 or 4.\n- The learner is asked: what is `var` right after that line has run for the `hit`-th time?\n- `belief_after_line` is the line number of the same statement in `belief_code`.\n- At that moment the real value and the value the student expects must differ.\n- `distractors`: two other numbers a student might guess.\nJSON shape: {\"items\": [{\"code\": \"...\", \"var\": \"...\", \"after_line\": 3, \"hit\": 2, \"belief_code\": \"...\", \"belief_after_line\": 3, \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 4 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int found = 0;\\nint a[5] = {7, 2, 9, 4, 6};\\nint x = 9;\\nint sum = 0;\\nfor (int i = 0; i < 5; i++) {\\n    if (a[i] == x) {\\n        found = 1;\\n    } else {\\n        found = 0;\\n    }\\n    sum = sum + a[i];\\n}\",\n      \"var\": \"found\",\n      \"after_line\": 11,\n      \"hit\": 4,\n      \"belief_code\": \"int found = 0;\\nint a[5] = {7, 2, 9, 4, 6};\\nint x = 9;\\nint sum = 0;\\nfor (int i = 0; i < 5; i++) {\\n    if (a[i] == x) {\\n        found = 1;\\n    }\\n    sum = sum + a[i];\\n}\",\n      \"belief_after_line\": 9,\n      \"distractors\": [1, 5],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int all_pos = 0;\\nint nums[4] = {3, -1, 5, -2};\\nint i = 0;\\nwhile (i < 4) {\\n    if (nums[i] > 0) {\\n        all_pos = 1;\\n    } else {\\n        all_pos = 0;\\n    }\\n    i = i + 1;\\n}\",\n      \"var\": \"all_pos\",\n      \"after_line\": 10,\n      \"hit\": 2,\n      \"belief_code\": \"int all_pos = 0;\\nint nums[4] = {3, -1, 5, -2};\\nint i = 0;\\nwhile (i < 4) {\\n    if (nums[i] > 0) {\\n        all_pos = 1;\\n    }\\n    i = i + 1;\\n}\",\n      \"belief_after_line\": 8,\n      \"distractors\": [1, 2],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int found = 0;\\nint data[5] = {4, 8, 2, 6, 9};\\nint target = 2;\\nint visits = 0;\\nfor (int k = 4; k >= 0; k = k - 1) {\\n    if (data[k] == target) {\\n        found = 1;\\n    } else {\\n        found = 0;\\n    }\\n    visits = visits + 1;\\n}\",\n      \"var\": \"found\",\n      \"after_line\": 11,\n      \"hit\": 4,\n      \"belief_code\": \"int found = 0;\\nint data[5] = {4, 8, 2, 6, 9};\\nint target = 2;\\nint visits = 0;\\nfor (int k = 4; k >= 0; k = k - 1) {\\n    if (data[k] == target) {\\n        found = 1;\\n    }\\n    visits = visits + 1;\\n}\",\n      \"belief_after_line\": 9,\n      \"distractors\": [1, 4],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int found = 0;\\nfloat temps[5] = {36.5, 37.5, 38.2, 39.1, 40.0};\\nfloat target = 37.5;\\nint scans = 0;\\nfor (int s = 0; s < 5; s++) {\\n    if (temps[s] == target) {\\n        found = 1;\\n    } else {\\n        found = 0;\\n    }\\n    scans = scans + 1;\\n}\",\n      \"var\": \"found\",\n      \"after_line\": 11,\n      \"hit\": 3,\n      \"belief_code\": \"int found = 0;\\nfloat temps[5] = {36.5, 37.5, 38.2, 39.1, 40.0};\\nfloat target = 37.5;\\nint scans = 0;\\nfor (int s = 0; s < 5; s++) {\\n    if (temps[s] == target) {\\n        found = 1;\\n    }\\n    scans = scans + 1;\\n}\",\n      \"belief_after_line\": 9,\n      \"distractors\": [1, 3],\n      \"difficulty\": 2\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int found = 0;\nint a[5] = {7, 2, 9, 4, 6};\nint x = 9;\nint sum = 0;\nfor (int i = 0; i < 5; i++) {\n    if (a[i] == x) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n    sum = sum + a[i];\n}",
+        "var": "found",
+        "after_line": 11,
+        "hit": 4,
+        "belief_code": "int found = 0;\nint a[5] = {7, 2, 9, 4, 6};\nint x = 9;\nint sum = 0;\nfor (int i = 0; i < 5; i++) {\n    if (a[i] == x) {\n        found = 1;\n    }\n    sum = sum + a[i];\n}",
+        "belief_after_line": 9,
+        "distractors": [
+          1,
+          5
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int all_pos = 0;\nint nums[4] = {3, -1, 5, -2};\nint i = 0;\nwhile (i < 4) {\n    if (nums[i] > 0) {\n        all_pos = 1;\n    } else {\n        all_pos = 0;\n    }\n    i = i + 1;\n}",
+        "var": "all_pos",
+        "after_line": 10,
+        "hit": 2,
+        "belief_code": "int all_pos = 0;\nint nums[4] = {3, -1, 5, -2};\nint i = 0;\nwhile (i < 4) {\n    if (nums[i] > 0) {\n        all_pos = 1;\n    }\n    i = i + 1;\n}",
+        "belief_after_line": 8,
+        "distractors": [
+          1,
+          2
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int found = 0;\nint data[5] = {4, 8, 2, 6, 9};\nint target = 2;\nint visits = 0;\nfor (int k = 4; k >= 0; k = k - 1) {\n    if (data[k] == target) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n    visits = visits + 1;\n}",
+        "var": "found",
+        "after_line": 11,
+        "hit": 4,
+        "belief_code": "int found = 0;\nint data[5] = {4, 8, 2, 6, 9};\nint target = 2;\nint visits = 0;\nfor (int k = 4; k >= 0; k = k - 1) {\n    if (data[k] == target) {\n        found = 1;\n    }\n    visits = visits + 1;\n}",
+        "belief_after_line": 9,
+        "distractors": [
+          1,
+          4
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int found = 0;\nfloat temps[5] = {36.5, 37.5, 38.2, 39.1, 40.0};\nfloat target = 37.5;\nint scans = 0;\nfor (int s = 0; s < 5; s++) {\n    if (temps[s] == target) {\n        found = 1;\n    } else {\n        found = 0;\n    }\n    scans = scans + 1;\n}",
+        "var": "found",
+        "after_line": 11,
+        "hit": 3,
+        "belief_code": "int found = 0;\nfloat temps[5] = {36.5, 37.5, 38.2, 39.1, 40.0};\nfloat target = 37.5;\nint scans = 0;\nfor (int s = 0; s < 5; s++) {\n    if (temps[s] == target) {\n        found = 1;\n    }\n    scans = scans + 1;\n}",
+        "belief_after_line": 9,
+        "distractors": [
+          1,
+          3
+        ],
+        "difficulty": 2
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 877,
+    "completion_tokens": 25210
+  }
+}

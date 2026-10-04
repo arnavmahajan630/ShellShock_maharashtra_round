@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int fuel[4] = {7, 3, 9, 5};\n 2  int last = 0;\n 3  for (int i = 0; i <= 4; i++) {\n 4      last = fuel[i];\n 5  }\n 6  printf(\"%d\", last);\n\nQuestion: What does this print?\nThe right answer, found by running the code: unpredictable\nCommon wrong answer: a student who believes \"`i<=n` (from 0) runs n times; whether the bound is the last value included or excluded is mixed up\" expects 5; a student who believes \"Arrays are indexed 1..n\" expects 5\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 3 ran its body 5 times.\n- Line 4 uses fuel[4], but fuel has only 4 cells (indexes 0 to 3); C does not define the result.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The loop runs 5 times, and its last iteration reads fuel[4], one past the array. That out-of-bounds access is undefined in C, so the printed value is unpredictable.\"}",
+  "parsed": {
+    "explain": "The loop runs 5 times, and its last iteration reads fuel[4], one past the array. That out-of-bounds access is undefined in C, so the printed value is unpredictable."
+  },
+  "usage": {
+    "prompt_tokens": 451,
+    "completion_tokens": 210
+  }
+}

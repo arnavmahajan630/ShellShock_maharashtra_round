@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  char c[] = {'d', 'b', 'c', 'a'};\n 2  int n = 4;\n 3  for (int i = 0; i < n - 1; i = i + 1) {\n 4      if (c[i] > c[i + 1]) {\n 5          char t = c[i];\n 6          c[i] = c[i + 1];\n 7          c[i + 1] = t;\n 8      }\n 9  }\n10  printf(\"%c %c %c %c\", c[0], c[1], c[2], c[3]);\n\nQuestion: This prints \"b c a d\". A classmate expected \"a b c d\". In one sentence: why?\nThe right answer, found by running the code: b c a d\nCommon wrong answer: a student who believes \"One pass over the array sorts it\" expects a b c d\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 3 ran its body 3 times.\n- Values when the shown code finished: n = 4, i = 3, t = 100.\n- The shown code printed: 'b c a d'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The loop makes just one pass and swaps adjacent out-of-order pairs, so 'd' bubbles past 'b', 'c', and 'a' to the end, leaving b, c, a, d.\"}",
+  "parsed": {
+    "explain": "The loop makes just one pass and swaps adjacent out-of-order pairs, so 'd' bubbles past 'b', 'c', and 'a' to the end, leaving b, c, a, d."
+  },
+  "usage": {
+    "prompt_tokens": 512,
+    "completion_tokens": 352
+  }
+}

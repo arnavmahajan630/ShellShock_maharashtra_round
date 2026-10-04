@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int countdown(int n) {\n 2      return countdown(n - 1);\n 3  }\n 4  printf(\"%d\", countdown(3));\n\nQuestion: What does this print?\nThe right answer, found by running the code: never stops\nCommon wrong answer: a student who believes \"Recursion stops by itself when the work is done\" expects 0\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run never ends.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The function calls itself immediately with n-1 and has no condition that returns without recursing, so countdown(3) never returns and printf is never reached; the run never ends.\"}",
+  "parsed": {
+    "explain": "The function calls itself immediately with n-1 and has no condition that returns without recursing, so countdown(3) never returns and printf is never reached; the run never ends."
+  },
+  "usage": {
+    "prompt_tokens": 339,
+    "completion_tokens": 292
+  }
+}

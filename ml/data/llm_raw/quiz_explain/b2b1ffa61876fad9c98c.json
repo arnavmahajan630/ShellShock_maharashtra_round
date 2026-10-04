@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  char word[6] = \"hello\";\n 2  int i = 0;\n 3  int count = 0;\n 4  while (i < 5) {\n 5      if (word[i] == 'z') {\n 6          i++;\n 7      }\n 8      count++;\n 9  }\n10  printf(\"%d\", count);\n\nQuestion: This never stops. A classmate expected it to print \"5\". In one sentence: why does it not stop?\nThe right answer, found by running the code: never stops\nCommon wrong answer: a student who believes \"The loop variable advances by itself and the loop ends by itself\" expects 5\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run never ends.\n- Values that no longer change while it runs: i = 0.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"word[0] is 'h', not 'z', so the if body never runs; i stays 0, the condition i < 5 remains true, and count++ repeats forever.\"}",
+  "parsed": {
+    "explain": "word[0] is 'h', not 'z', so the if body never runs; i stays 0, the condition i < 5 remains true, and count++ repeats forever."
+  },
+  "usage": {
+    "prompt_tokens": 418,
+    "completion_tokens": 422
+  }
+}

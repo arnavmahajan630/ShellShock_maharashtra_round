@@ -1,0 +1,79 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 5 exercises about one beginner mistake.\n\nThe mistake: The recursive call doesn't move toward the base case.\nA student who makes it believes: \"The recursive call moves toward the base case on its own\".\nHow it shows in code: a recursive function with a correct base case whose recursive call passes the same or a larger argument (`f(n)` or `f(n + 1)`), so it never reaches the base case.\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with the argument made smaller in the recursive call (`f(n - 1)`). Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: multiple choice about a value.\n- `code` prints nothing.\n- `question` asks for one value once the code has run, for example \"What is total after the loop?\" or \"What does depth(3) give?\".\n- `tail` is one printf statement that prints exactly that value. I append it to both fragments, so both must use the same names.\n- `distractors`: two other values a student might guess, written the way the tail prints them.\nJSON shape: {\"items\": [{\"code\": \"...\", \"question\": \"...\", \"tail\": \"printf(...);\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 5 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int depth(int n) {\\n    static int calls = 0;\\n    calls = calls + 1;\\n    if (calls > 5) {\\n        return 999;\\n    }\\n    if (n == 0) {\\n        return calls;\\n    }\\n    return depth(n);\\n}\\nint result = depth(3);\",\n      \"question\": \"What is result after the code runs?\",\n      \"tail\": \"printf(\\\"%d\\\", result);\",\n      \"belief_code\": \"int depth(int n) {\\n    static int calls = 0;\\n    calls = calls + 1;\\n    if (calls > 5) {\\n        return 999;\\n    }\\n    if (n == 0) {\\n        return calls;\\n    }\\n    return depth(n - 1);\\n}\\nint result = depth(3);\",\n      \"distractors\": [\"4\", \"3\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int fuel(int n) {\\n    static int burns = 0;\\n    burns = burns + 1;\\n    if (burns > 4) {\\n        return -1;\\n    }\\n    if (n == 1) {\\n        return burns;\\n    }\\n    return fuel(n);\\n}\\nint reserve = fuel(4);\",\n      \"question\": \"What is reserve after the code runs?\",\n      \"tail\": \"printf(\\\"%d\\\", reserve);\",\n      \"belief_code\": \"int fuel(int n) {\\n    static int burns = 0;\\n    burns = burns + 1;\\n    if (burns > 4) {\\n        return -1;\\n    }\\n    if (n == 1) {\\n        return burns;\\n    }\\n    return fuel(n - 1);\\n}\\nint reserve = fuel(4);\",\n      \"distractors\": [\"4\", \"3\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int shield(int n) {\\n    static int hits = 0;\\n    hits = hits + 1;\\n    if (hits > 3) {\\n        return 0;\\n    }\\n    if (n == 0) {\\n        return hits;\\n    }\\n    return shield(n + 1);\\n}\\nint strength = shield(2);\",\n      \"question\": \"What is strength after the code runs?\",\n      \"tail\": \"printf(\\\"%d\\\", strength);\",\n      \"belief_code\": \"int shield(int n) {\\n    static int hits = 0;\\n    hits = hits + 1;\\n    if (hits > 3) {\\n        return 0;\\n    }\\n    if (n == 0) {\\n        return hits;\\n    }\\n    return shield(n - 1);\\n}\\nint strength = shield(2);\",\n      \"distractors\": [\"3\", \"2\"],\n      \"difficulty\": 3\n    },\n    {\n      \"code\": \"int crew(int n) {\\n    static int count = 0;\\n    count = count + 1;\\n    if (count > 4) {\\n        return -99;\\n    }\\n    if (n == 2) {\\n        return count;\\n    }\\n    return crew(n);\\n}\\nint members = crew(5);\",\n      \"question\": \"What is members after the code runs?\",\n      \"tail\": \"printf(\\\"%d\\\", members);\",\n      \"belief_code\": \"int crew(int n) {\\n    static int count = 0;\\n    count = count + 1;\\n    if (count > 4) {\\n        return -99;\\n    }\\n    if (n == 2) {\\n        return count;\\n    }\\n    return crew(n - 1);\\n}\\nint members = crew(5);\",\n      \"distractors\": [\"4\", \"5\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"float temp(int n) {\\n    static int count = 0;\\n    count = count + 1;\\n    if (count > 5) {\\n        return -1.0;\\n    }\\n    if (n == 0) {\\n        return 2.5;\\n    }\\n    return temp(n);\\n}\\nfloat reading = temp(4);\",\n      \"question\": \"What is reading after the code runs?\",\n      \"tail\": \"printf(\\\"%.1f\\\", reading);\",\n      \"belief_code\": \"float temp(int n) {\\n    static int count = 0;\\n    count = count + 1;\\n    if (count > 5) {\\n        return -1.0;\\n    }\\n    if (n == 0) {\\n        return 2.5;\\n    }\\n    return temp(n - 1);\\n}\\nfloat reading = temp(4);\",\n      \"distractors\": [\"2.5\", \"5.0\"],\n      \"difficulty\": 2\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int depth(int n) {\n    static int calls = 0;\n    calls = calls + 1;\n    if (calls > 5) {\n        return 999;\n    }\n    if (n == 0) {\n        return calls;\n    }\n    return depth(n);\n}\nint result = depth(3);",
+        "question": "What is result after the code runs?",
+        "tail": "printf(\"%d\", result);",
+        "belief_code": "int depth(int n) {\n    static int calls = 0;\n    calls = calls + 1;\n    if (calls > 5) {\n        return 999;\n    }\n    if (n == 0) {\n        return calls;\n    }\n    return depth(n - 1);\n}\nint result = depth(3);",
+        "distractors": [
+          "4",
+          "3"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int fuel(int n) {\n    static int burns = 0;\n    burns = burns + 1;\n    if (burns > 4) {\n        return -1;\n    }\n    if (n == 1) {\n        return burns;\n    }\n    return fuel(n);\n}\nint reserve = fuel(4);",
+        "question": "What is reserve after the code runs?",
+        "tail": "printf(\"%d\", reserve);",
+        "belief_code": "int fuel(int n) {\n    static int burns = 0;\n    burns = burns + 1;\n    if (burns > 4) {\n        return -1;\n    }\n    if (n == 1) {\n        return burns;\n    }\n    return fuel(n - 1);\n}\nint reserve = fuel(4);",
+        "distractors": [
+          "4",
+          "3"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int shield(int n) {\n    static int hits = 0;\n    hits = hits + 1;\n    if (hits > 3) {\n        return 0;\n    }\n    if (n == 0) {\n        return hits;\n    }\n    return shield(n + 1);\n}\nint strength = shield(2);",
+        "question": "What is strength after the code runs?",
+        "tail": "printf(\"%d\", strength);",
+        "belief_code": "int shield(int n) {\n    static int hits = 0;\n    hits = hits + 1;\n    if (hits > 3) {\n        return 0;\n    }\n    if (n == 0) {\n        return hits;\n    }\n    return shield(n - 1);\n}\nint strength = shield(2);",
+        "distractors": [
+          "3",
+          "2"
+        ],
+        "difficulty": 3
+      },
+      {
+        "code": "int crew(int n) {\n    static int count = 0;\n    count = count + 1;\n    if (count > 4) {\n        return -99;\n    }\n    if (n == 2) {\n        return count;\n    }\n    return crew(n);\n}\nint members = crew(5);",
+        "question": "What is members after the code runs?",
+        "tail": "printf(\"%d\", members);",
+        "belief_code": "int crew(int n) {\n    static int count = 0;\n    count = count + 1;\n    if (count > 4) {\n        return -99;\n    }\n    if (n == 2) {\n        return count;\n    }\n    return crew(n - 1);\n}\nint members = crew(5);",
+        "distractors": [
+          "4",
+          "5"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "float temp(int n) {\n    static int count = 0;\n    count = count + 1;\n    if (count > 5) {\n        return -1.0;\n    }\n    if (n == 0) {\n        return 2.5;\n    }\n    return temp(n);\n}\nfloat reading = temp(4);",
+        "question": "What is reading after the code runs?",
+        "tail": "printf(\"%.1f\", reading);",
+        "belief_code": "float temp(int n) {\n    static int count = 0;\n    count = count + 1;\n    if (count > 5) {\n        return -1.0;\n    }\n    if (n == 0) {\n        return 2.5;\n    }\n    return temp(n - 1);\n}\nfloat reading = temp(4);",
+        "distractors": [
+          "2.5",
+          "5.0"
+        ],
+        "difficulty": 2
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 747,
+    "completion_tokens": 14707
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 5 exercises about one beginner mistake.\n\nThe mistake: Variable used before it was given a value.\nA student who makes it believes: \"Local variables start at 0\".\nHow it shows in code: a local variable declared without a value (for example `int total;`) and then read (`total += ...`, `total++`, or used in a condition).\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with the declaration giving 0 (`int total = 0;`). Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: multiple choice about a value.\n- `code` prints nothing.\n- `question` asks for one value once the code has run, for example \"What is total after the loop?\" or \"What does depth(3) give?\".\n- `tail` is one printf statement that prints exactly that value. I append it to both fragments, so both must use the same names.\n- `distractors`: two other values a student might guess, written the way the tail prints them.\nJSON shape: {\"items\": [{\"code\": \"...\", \"question\": \"...\", \"tail\": \"printf(...);\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 5 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int total;\\nfor (int i = 1; i <= 5; i++) {\\n    total = total + i;\\n}\\n\",\n      \"question\": \"What is the value of total after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\\n\\\", total);\",\n      \"belief_code\": \"int total = 0;\\nfor (int i = 1; i <= 5; i++) {\\n    total = total + i;\\n}\\n\",\n      \"distractors\": [\"10\", \"20\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int depth(int n) {\\n    if (n == 0) {\\n        int value;\\n        return value;\\n    }\\n    return 1 + depth(n - 1);\\n}\\nint d = depth(3);\\n\",\n      \"question\": \"What is the value of d after the call depth(3)?\",\n      \"tail\": \"printf(\\\"%d\\\\n\\\", d);\",\n      \"belief_code\": \"int depth(int n) {\\n    if (n == 0) {\\n        int value = 0;\\n        return value;\\n    }\\n    return 1 + depth(n - 1);\\n}\\nint d = depth(3);\\n\",\n      \"distractors\": [\"0\", \"4\"],\n      \"difficulty\": 3\n    },\n    {\n      \"code\": \"int fuel;\\nwhile (fuel < 5) {\\n    fuel = fuel + 1;\\n}\\n\",\n      \"question\": \"What is the value of fuel after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\\n\\\", fuel);\",\n      \"belief_code\": \"int fuel = 0;\\nwhile (fuel < 5) {\\n    fuel = fuel + 1;\\n}\\n\",\n      \"distractors\": [\"4\", \"6\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int sum_evens(int n) {\\n    int acc;\\n    for (int i = 2; i <= n; i += 2) {\\n        acc = acc + i;\\n    }\\n    return acc;\\n}\\nint result = sum_evens(10);\\n\",\n      \"question\": \"What is the value of result after calling sum_evens(10)?\",\n      \"tail\": \"printf(\\\"%d\\\\n\\\", result);\",\n      \"belief_code\": \"int sum_evens(int n) {\\n    int acc = 0;\\n    for (int i = 2; i <= n; i += 2) {\\n        acc = acc + i;\\n    }\\n    return acc;\\n}\\nint result = sum_evens(10);\\n\",\n      \"distractors\": [\"20\", \"40\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"float average;\\nfloat scores[3] = {2.5, 3.5, 4.0};\\nfor (int i = 0; i < 3; i++) {\\n    average = average + scores[i];\\n}\\naverage = average / 3;\\n\",\n      \"question\": \"What is the value of average after the loop and division?\",\n      \"tail\": \"printf(\\\"%.1f\\\\n\\\", average);\",\n      \"belief_code\": \"float average = 0.0;\\nfloat scores[3] = {2.5, 3.5, 4.0};\\nfor (int i = 0; i < 3; i++) {\\n    average = average + scores[i];\\n}\\naverage = average / 3;\\n\",\n      \"distractors\": [\"3.0\", \"3.5\"],\n      \"difficulty\": 2\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int total;\nfor (int i = 1; i <= 5; i++) {\n    total = total + i;\n}\n",
+        "question": "What is the value of total after the loop?",
+        "tail": "printf(\"%d\\n\", total);",
+        "belief_code": "int total = 0;\nfor (int i = 1; i <= 5; i++) {\n    total = total + i;\n}\n",
+        "distractors": [
+          "10",
+          "20"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int depth(int n) {\n    if (n == 0) {\n        int value;\n        return value;\n    }\n    return 1 + depth(n - 1);\n}\nint d = depth(3);\n",
+        "question": "What is the value of d after the call depth(3)?",
+        "tail": "printf(\"%d\\n\", d);",
+        "belief_code": "int depth(int n) {\n    if (n == 0) {\n        int value = 0;\n        return value;\n    }\n    return 1 + depth(n - 1);\n}\nint d = depth(3);\n",
+        "distractors": [
+          "0",
+          "4"
+        ],
+        "difficulty": 3
+      },
+      {
+        "code": "int fuel;\nwhile (fuel < 5) {\n    fuel = fuel + 1;\n}\n",
+        "question": "What is the value of fuel after the loop?",
+        "tail": "printf(\"%d\\n\", fuel);",
+        "belief_code": "int fuel = 0;\nwhile (fuel < 5) {\n    fuel = fuel + 1;\n}\n",
+        "distractors": [
+          "4",
+          "6"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int sum_evens(int n) {\n    int acc;\n    for (int i = 2; i <= n; i += 2) {\n        acc = acc + i;\n    }\n    return acc;\n}\nint result = sum_evens(10);\n",
+        "question": "What is the value of result after calling sum_evens(10)?",
+        "tail": "printf(\"%d\\n\", result);",
+        "belief_code": "int sum_evens(int n) {\n    int acc = 0;\n    for (int i = 2; i <= n; i += 2) {\n        acc = acc + i;\n    }\n    return acc;\n}\nint result = sum_evens(10);\n",
+        "distractors": [
+          "20",
+          "40"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "float average;\nfloat scores[3] = {2.5, 3.5, 4.0};\nfor (int i = 0; i < 3; i++) {\n    average = average + scores[i];\n}\naverage = average / 3;\n",
+        "question": "What is the value of average after the loop and division?",
+        "tail": "printf(\"%.1f\\n\", average);",
+        "belief_code": "float average = 0.0;\nfloat scores[3] = {2.5, 3.5, 4.0};\nfor (int i = 0; i < 3; i++) {\n    average = average + scores[i];\n}\naverage = average / 3;\n",
+        "distractors": [
+          "3.0",
+          "3.5"
+        ],
+        "difficulty": 2
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 732,
+    "completion_tokens": 9878
+  }
+}

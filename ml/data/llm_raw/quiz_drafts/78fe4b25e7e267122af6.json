@@ -1,0 +1,78 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 6 exercises about one beginner mistake.\n\nThe mistake: The recursive call doesn't move toward the base case.\nA student who makes it believes: \"The recursive call moves toward the base case on its own\".\nHow it shows in code: a recursive function with a correct base case whose recursive call passes the same or a larger argument (`f(n)` or `f(n + 1)`), so it never reaches the base case.\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with the argument made smaller in the recursive call (`f(n - 1)`). Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: predict the output.\n- `code` prints its result with printf as one short line (at most 20 characters).\n- `belief_code` prints what the student expects, in the same format.\n- `distractors`: two other short outputs a student might guess, in the same format.\nJSON shape: {\"items\": [{\"code\": \"...\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 6 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int sum(int n) {\\n    if (n == 0) {\\n        return 0;\\n    }\\n    return n + sum(n);\\n}\\nprintf(\\\"%d\\\", sum(5));\",\n      \"belief_code\": \"int sum(int n) {\\n    if (n == 0) {\\n        return 0;\\n    }\\n    return n + sum(n - 1);\\n}\\nprintf(\\\"%d\\\", sum(5));\",\n      \"distractors\": [\"5\", \"10\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int fact(int n) {\\n    if (n <= 1) {\\n        return 1;\\n    }\\n    return n * fact(n + 1);\\n}\\nprintf(\\\"%d\\\", fact(5));\",\n      \"belief_code\": \"int fact(int n) {\\n    if (n <= 1) {\\n        return 1;\\n    }\\n    return n * fact(n - 1);\\n}\\nprintf(\\\"%d\\\", fact(5));\",\n      \"distractors\": [\"24\", \"720\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int digit_sum(int n) {\\n    if (n == 0) {\\n        return 0;\\n    }\\n    return n % 10 + digit_sum(n);\\n}\\nprintf(\\\"%d\\\", digit_sum(123));\",\n      \"belief_code\": \"int digit_sum(int n) {\\n    if (n == 0) {\\n        return 0;\\n    }\\n    return n % 10 + digit_sum(n / 10);\\n}\\nprintf(\\\"%d\\\", digit_sum(123));\",\n      \"distractors\": [\"3\", \"12\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int fib(int n) {\\n    if (n <= 1) {\\n        return n;\\n    }\\n    return fib(n - 1) + fib(n);\\n}\\nprintf(\\\"%d\\\", fib(6));\",\n      \"belief_code\": \"int fib(int n) {\\n    if (n <= 1) {\\n        return n;\\n    }\\n    return fib(n - 1) + fib(n - 2);\\n}\\nprintf(\\\"%d\\\", fib(6));\",\n      \"distractors\": [\"5\", \"13\"],\n      \"difficulty\": 3\n    },\n    {\n      \"code\": \"int power(int base, int exp) {\\n    if (exp == 0) {\\n        return 1;\\n    }\\n    return base * power(base, exp);\\n}\\nprintf(\\\"%d\\\", power(2, 5));\",\n      \"belief_code\": \"int power(int base, int exp) {\\n    if (exp == 0) {\\n        return 1;\\n    }\\n    return base * power(base, exp - 1);\\n}\\nprintf(\\\"%d\\\", power(2, 5));\",\n      \"distractors\": [\"10\", \"64\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int gcd(int a, int b) {\\n    if (b == 0) {\\n        return a;\\n    }\\n    return gcd(a, b);\\n}\\nprintf(\\\"%d\\\", gcd(48, 18));\",\n      \"belief_code\": \"int gcd(int a, int b) {\\n    if (b == 0) {\\n        return a;\\n    }\\n    return gcd(b, a % b);\\n}\\nprintf(\\\"%d\\\", gcd(48, 18));\",\n      \"distractors\": [\"48\", \"18\"],\n      \"difficulty\": 3\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + sum(n);\n}\nprintf(\"%d\", sum(5));",
+        "belief_code": "int sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + sum(n - 1);\n}\nprintf(\"%d\", sum(5));",
+        "distractors": [
+          "5",
+          "10"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int fact(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * fact(n + 1);\n}\nprintf(\"%d\", fact(5));",
+        "belief_code": "int fact(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * fact(n - 1);\n}\nprintf(\"%d\", fact(5));",
+        "distractors": [
+          "24",
+          "720"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int digit_sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n % 10 + digit_sum(n);\n}\nprintf(\"%d\", digit_sum(123));",
+        "belief_code": "int digit_sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n % 10 + digit_sum(n / 10);\n}\nprintf(\"%d\", digit_sum(123));",
+        "distractors": [
+          "3",
+          "12"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int fib(int n) {\n    if (n <= 1) {\n        return n;\n    }\n    return fib(n - 1) + fib(n);\n}\nprintf(\"%d\", fib(6));",
+        "belief_code": "int fib(int n) {\n    if (n <= 1) {\n        return n;\n    }\n    return fib(n - 1) + fib(n - 2);\n}\nprintf(\"%d\", fib(6));",
+        "distractors": [
+          "5",
+          "13"
+        ],
+        "difficulty": 3
+      },
+      {
+        "code": "int power(int base, int exp) {\n    if (exp == 0) {\n        return 1;\n    }\n    return base * power(base, exp);\n}\nprintf(\"%d\", power(2, 5));",
+        "belief_code": "int power(int base, int exp) {\n    if (exp == 0) {\n        return 1;\n    }\n    return base * power(base, exp - 1);\n}\nprintf(\"%d\", power(2, 5));",
+        "distractors": [
+          "10",
+          "64"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int gcd(int a, int b) {\n    if (b == 0) {\n        return a;\n    }\n    return gcd(a, b);\n}\nprintf(\"%d\", gcd(48, 18));",
+        "belief_code": "int gcd(int a, int b) {\n    if (b == 0) {\n        return a;\n    }\n    return gcd(b, a % b);\n}\nprintf(\"%d\", gcd(48, 18));",
+        "distractors": [
+          "48",
+          "18"
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 695,
+    "completion_tokens": 15487
+  }
+}

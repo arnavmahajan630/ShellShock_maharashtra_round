@@ -1,0 +1,1029 @@
+{
+  "qz_d01_mcq_01": {
+    "draft": "D01_mcq_3",
+    "kind": "tail",
+    "belief_code": {
+      "D01": "int numbers[4] = {2, 9, 5, 1};\nint located = 0;\nint i = 0;\nwhile (i < 4) {\n    if (numbers[i] == 5) {\n        located = 1;\n    }\n    i = i + 1;\n}"
+    },
+    "tail": "printf(\"%d\", located);"
+  },
+  "qz_d01_mcq_02": {
+    "draft": "D01_mcq_4",
+    "kind": "tail",
+    "belief_code": {
+      "D01": "float get_temp(float temps[], float target) {\n    for (int i = 0; i < 4; i = i + 1) {\n        if (temps[i] == target) {\n            return target;\n        }\n    }\n    return -1.0;\n}\nfloat readings[4] = {10.5, 20.5, 30.5, 40.5};\nfloat result = get_temp(readings, 30.5);"
+    },
+    "tail": "printf(\"%.1f\", result);"
+  },
+  "qz_d01_ns_01": {
+    "draft": "D01_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "D01": "int found = 0;\nint a[5] = {7, 2, 9, 4, 6};\nint x = 9;\nint sum = 0;\nfor (int i = 0; i < 5; i++) {\n    if (a[i] == x) {\n        found = 1;\n    }\n    sum = sum + a[i];\n}"
+    },
+    "belief_query": {
+      "var": "found",
+      "after_line": 9,
+      "hit": 4
+    }
+  },
+  "qz_d01_po_01": {
+    "draft": "D01_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "D01": "int find(int a[], int n, int x) {\n    for (int i = 0; i < n; i++) {\n        if (a[i] == x) {\n            return i;\n        }\n    }\n    return -1;\n}\nint a[] = {4, 7, 2};\nprintf(\"%d\", find(a, 3, 2));"
+    }
+  },
+  "qz_d01_po_02": {
+    "draft": "D01_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "D01": "int a[] = {5, 1, 3, 7};\nint found = 0;\nfor (int i = 0; i < 4; i++) {\n    if (a[i] == 3) {\n        found = 1;\n    }\n}\nprintf(\"%d\", found);"
+    }
+  },
+  "qz_d01_rs_01": {
+    "draft": "D01_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "D01": "char a[] = {'h','u','f','f','l','e'};\nint found = 0;\nint i = 0;\nwhile (i < 6) {\n    if (a[i] == 'f') {\n        found = 1;\n    }\n    i++;\n}\nprintf(\"%d\", found);"
+    },
+    "expect": "0",
+    "belief_answers": {
+      "D01": "1"
+    }
+  },
+  "qz_d01m03_mcq_01": {
+    "draft": "col_t9_streak",
+    "kind": "tail",
+    "belief_code": {
+      "D01": "int marks[5] = {4, 4, 9, 4, 2};\nint seen = 0;\nfor (int i = 0; i < 5; i++) {\n    if (marks[i] == 4) {\n        seen++;\n    }\n}",
+      "M03": "int marks[5] = {4, 4, 9, 4, 2};\nint seen = 0;\nfor (int i = 0; i < 5; i++) {\n    if (marks[i] == 4) {\n        seen++;\n    }\n}"
+    },
+    "tail": "printf(\"%d\", seen);"
+  },
+  "qz_d01m03_po_01": {
+    "draft": "col_t9_flag",
+    "kind": "printed",
+    "belief_code": {
+      "D01": "int crew[4] = {3, 8, 5, 6};\nint found = 0;\nfor (int i = 0; i < 4; i++) {\n    if (crew[i] == 8) {\n        found = 1;\n    }\n}\nprintf(\"%d\", found);",
+      "M03": "int crew[4] = {3, 8, 5, 6};\nint found = 0;\nfor (int i = 0; i < 4; i++) {\n    if (crew[i] == 8) {\n        found = 1;\n    }\n}\nprintf(\"%d\", found);"
+    }
+  },
+  "qz_d02_mcq_01": {
+    "draft": "D02_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "D02": "int secret = 42;\nint low = 0, high = 100;\nint steps = 4;\nwhile (steps > 0) {\n    int guess = (low + high) / 2;\n    if (guess < secret) {\n        low = guess + 1;\n    } else {\n        high = guess - 1;\n    }\n    steps = steps - 1;\n}"
+    },
+    "tail": "printf(\"%d\", low);"
+  },
+  "qz_d02_mcq_02": {
+    "draft": "D02_mcq_3",
+    "kind": "tail",
+    "belief_code": {
+      "D02": "int find(int arr[], int lo, int hi, int val, int dep) {\n    if (dep == 0) {\n        return lo;\n    }\n    int mid = (lo + hi) / 2;\n    if (arr[mid] < val) {\n        return find(arr, mid + 1, hi, val, dep - 1);\n    }\n    return find(arr, lo, mid - 1, val, dep - 1);\n}\nint a[4] = {1, 4, 6, 9};\nint result = find(a, 0, 3, 7, 3);"
+    },
+    "tail": "printf(\"%d\", result);"
+  },
+  "qz_d02_ns_01": {
+    "draft": "D02_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "D02": "int arr[] = {1, 3, 5, 7, 9};\nint low = 0, high = 4, target = 8;\nwhile (low <= high) {\n    int mid = (low + high) / 2;\n    if (arr[mid] < target) {\n        low = mid + 1;\n    } else if (arr[mid] > target) {\n        high = mid - 1;\n    } else {\n        low = high + 1;\n    }\n}"
+    },
+    "belief_query": {
+      "var": "mid",
+      "after_line": 4,
+      "hit": 3
+    }
+  },
+  "qz_d02_po_01": {
+    "draft": "D02_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "D02": "int a[5] = {2, 4, 6, 8, 10};\nint target = 8;\nint low = 0, high = 4;\nfor (int i = 0; i < 5; i = i + 1) {\n    int mid = (low + high) / 2;\n    if (a[mid] < target) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\nprintf(\"%d\\n\", low);"
+    }
+  },
+  "qz_d02_po_02": {
+    "draft": "D02_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "D02": "int arr[8] = {1, 3, 5, 7, 9, 11, 13, 15};\nint target = 13;\nint left = 0, right = 7;\nfor (int count = 0; count < 6; count = count + 1) {\n    int mid = (left + right) / 2;\n    if (arr[mid] < target) {\n        left = mid + 1;\n    } else {\n        right = mid - 1;\n    }\n}\nprintf(\"%d\\n\", left);"
+    }
+  },
+  "qz_d02_rs_01": {
+    "draft": "D02_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "D02": "int secret = 80;\nint low = 0, high = 99;\nint guess;\nfor (int attempts = 0; attempts < 7; attempts = attempts + 1) {\n    guess = (low + high) / 2;\n    if (guess < secret) {\n        low = guess + 1;\n    } else {\n        high = guess - 1;\n    }\n}\nprintf(\"%d\\n\", low);"
+    },
+    "expect": "79",
+    "belief_answers": {
+      "D02": "80"
+    }
+  },
+  "qz_d02m02_mcq_01": {
+    "draft": "col_t6_end",
+    "kind": "tail",
+    "belief_code": {
+      "D02": "int low = 0, high = 6;\nint steps = 0;\nwhile (low < high) {\n    int mid = (low + high) / 2;\n    low = mid + 1;\n    steps++;\n}",
+      "M02": "int low = 0, high = 6;\nint steps = 0;\nwhile (low < high) {\n    int mid = (low + high) / 2;\n    low = mid + 1;\n    steps++;\n}"
+    },
+    "tail": "printf(\"yes\");"
+  },
+  "qz_d02m02_po_01": {
+    "draft": "col_t6_guess",
+    "kind": "printed",
+    "belief_code": {
+      "D02": "int secret = 7;\nint low = 1, high = 8;\nint guesses = 0;\nwhile (low < high) {\n    int mid = (low + high) / 2;\n    guesses++;\n    if (mid < secret) {\n        low = mid + 1;\n    } else {\n        high = mid;\n    }\n}\nprintf(\"%d\", guesses);",
+      "M02": "int secret = 7;\nint low = 1, high = 8;\nint guesses = 0;\nwhile (low < high) {\n    int mid = (low + high) / 2;\n    guesses++;\n    if (mid < secret) {\n        low = mid + 1;\n    } else {\n        high = mid;\n    }\n}\nprintf(\"%d\", guesses);"
+    }
+  },
+  "qz_d03_mcq_01": {
+    "draft": "D03_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "D03": "int a[2] = {5, 9};\nint i = 0;\nint j = 1;\nint temp = a[i];\na[i] = a[j];\na[j] = temp;"
+    },
+    "tail": "printf(\"%d\", a[1]);"
+  },
+  "qz_d03_mcq_02": {
+    "draft": "D03_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "D03": "int vals[4] = {5, 1, 9, 4};\nint i;\nint temp;\nfor (i = 0; i < 3; i = i + 1) {\n    temp = vals[i];\n    vals[i] = vals[i + 1];\n    vals[i + 1] = temp;\n}"
+    },
+    "tail": "printf(\"%d\", vals[3]);"
+  },
+  "qz_d03_ns_01": {
+    "draft": "D03_next_state_2",
+    "kind": "state",
+    "belief_code": {
+      "D03": "int x = 3;\nint y = 5;\nint i = 0;\nwhile (i < 3) {\n    int temp = x;\n    x = y;\n    y = temp;\n    i = i + 1;\n}"
+    },
+    "belief_query": {
+      "var": "x",
+      "after_line": 6,
+      "hit": 2
+    }
+  },
+  "qz_d03_po_01": {
+    "draft": "D03_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "D03": "int a[2] = {3, 7};\nint t = a[0];\na[0] = a[1];\na[1] = t;\nprintf(\"%d %d\", a[0], a[1]);"
+    }
+  },
+  "qz_d03_po_02": {
+    "draft": "D03_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "D03": "char s[3] = {'a', 'b', '\\0'};\nint i = 0;\nint j = 1;\nchar t = s[i];\ns[i] = s[j];\ns[j] = t;\nprintf(\"%c%c\", s[0], s[1]);"
+    }
+  },
+  "qz_d03_rs_01": {
+    "draft": "D03_predict_output_4",
+    "kind": "printed",
+    "belief_code": {
+      "D03": "void swap(int a[], int i, int j) {\n    int t = a[i];\n    a[i] = a[j];\n    a[j] = t;\n}\nint data[3] = {5, 9, 4};\nswap(data, 0, 2);\nprintf(\"%d %d %d\", data[0], data[1], data[2]);"
+    },
+    "expect": "4 9 4",
+    "belief_answers": {
+      "D03": "4 9 5"
+    }
+  },
+  "qz_d04_mcq_01": {
+    "draft": "D04_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "D04": "int nums[5] = {5, 3, 8, 1, 2};\nint i;\nint tmp;\nfor (int pass = 0; pass < 4; pass = pass + 1) {\n    for (i = 0; i < 4; i = i + 1) {\n        if (nums[i] > nums[i + 1]) {\n            tmp = nums[i];\n            nums[i] = nums[i + 1];\n            nums[i + 1] = tmp;\n        }\n    }\n}"
+    },
+    "tail": "printf(\"%d\", nums[0]);"
+  },
+  "qz_d04_mcq_02": {
+    "draft": "D04_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "D04": "int crew[5] = {4, 6, 2, 5, 1};\nint i;\nint tmp;\nfor (int pass = 0; pass < 4; pass = pass + 1) {\n    for (i = 3; i >= 0; i = i - 1) {\n        if (crew[i] > crew[i + 1]) {\n            tmp = crew[i];\n            crew[i] = crew[i + 1];\n            crew[i + 1] = tmp;\n        }\n    }\n}"
+    },
+    "tail": "printf(\"%d\", crew[2]);"
+  },
+  "qz_d04_ns_01": {
+    "draft": "fill_d04_sum",
+    "kind": "state",
+    "belief_code": {
+      "D04": "int a[4] = {4, 3, 2, 1};\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 3; j++) {\n        if (a[j] > a[j + 1]) {\n            int t = a[j];\n            a[j] = a[j + 1];\n            a[j + 1] = t;\n        }\n    }\n}\nint sum = 0;\nfor (int k = 0; k < 4; k++) {\n    sum = sum + a[k];\n}"
+    },
+    "belief_query": {
+      "var": "sum",
+      "after_line": 13,
+      "hit": 2
+    }
+  },
+  "qz_d04_po_01": {
+    "draft": "D04_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "D04": "int a[] = {5, 1, 4, 2, 3};\nint n = 5;\nfor (int j = 0; j < n - 1; j = j + 1) {\n    for (int i = 0; i < n - 1; i = i + 1) {\n        if (a[i] > a[i + 1]) {\n            int t = a[i];\n            a[i] = a[i + 1];\n            a[i + 1] = t;\n        }\n    }\n}\nprintf(\"%d %d %d %d %d\", a[0], a[1], a[2], a[3], a[4]);"
+    }
+  },
+  "qz_d04_po_02": {
+    "draft": "D04_predict_output_5",
+    "kind": "printed",
+    "belief_code": {
+      "D04": "float f[] = {2.5, 1.0, 3.0, 1.5};\nint n = 4;\nfor (int j = 0; j < n - 1; j = j + 1) {\n    for (int i = 0; i < n - 1; i = i + 1) {\n        if (f[i] > f[i + 1]) {\n            float t = f[i];\n            f[i] = f[i + 1];\n            f[i + 1] = t;\n        }\n    }\n}\nprintf(\"%.1f %.1f %.1f %.1f\", f[0], f[1], f[2], f[3]);"
+    }
+  },
+  "qz_d04_rs_01": {
+    "draft": "D04_predict_output_6",
+    "kind": "printed",
+    "belief_code": {
+      "D04": "char c[] = {'d', 'b', 'c', 'a'};\nint n = 4;\nfor (int j = 0; j < n - 1; j = j + 1) {\n    for (int i = 0; i < n - 1; i = i + 1) {\n        if (c[i] > c[i + 1]) {\n            char t = c[i];\n            c[i] = c[i + 1];\n            c[i + 1] = t;\n        }\n    }\n}\nprintf(\"%c %c %c %c\", c[0], c[1], c[2], c[3]);"
+    },
+    "expect": "b c a d",
+    "belief_answers": {
+      "D04": "a b c d"
+    }
+  },
+  "qz_d05_mcq_01": {
+    "draft": "D05_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "D05": "int sum_odd(int n) {\n    if (n <= 0) {\n        return 0;\n    }\n    return n + sum_odd(n - 2);\n}\nint total = sum_odd(5);"
+    },
+    "tail": "printf(\"%d\", total);"
+  },
+  "qz_d05_mcq_02": {
+    "draft": "D05_mcq_3",
+    "kind": "tail",
+    "belief_code": {
+      "D05": "int fact(int n) {\n    if (n <= 1) {\n        return 1;\n    }\n    return n * fact(n - 1);\n}\nint result = fact(0);"
+    },
+    "tail": "printf(\"%d\", result);"
+  },
+  "qz_d05_ns_01": {
+    "draft": "fill_d05_total",
+    "kind": "state",
+    "belief_code": {
+      "D05": "int down(int n) {\n    if (n <= 0) {\n        return 0;\n    }\n    return 1 + down(n - 2);\n}\nint total = 0;\nfor (int k = 2; k <= 4; k++) {\n    total = total + down(k);\n}"
+    },
+    "belief_query": {
+      "var": "total",
+      "after_line": 9,
+      "hit": 2
+    }
+  },
+  "qz_d05_po_01": {
+    "draft": "D05_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "D05": "int countdown(int n) {\n    if (n <= 0) {\n        return 0;\n    }\n    return countdown(n - 1);\n}\nprintf(\"%d\", countdown(3));"
+    }
+  },
+  "qz_d05_po_02": {
+    "draft": "D05_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "D05": "int mystery(int n) {\n    if (n <= 0) {\n        return 1;\n    }\n    return n * mystery(n - 2);\n}\nprintf(\"%d\", mystery(5));"
+    }
+  },
+  "qz_d05_rs_01": {
+    "draft": "D05_predict_output_5",
+    "kind": "printed",
+    "belief_code": {
+      "D05": "int probe(int n) {\n    if (n <= 1) {\n        return 0;\n    }\n    return 1 + probe(n / 3);\n}\nprintf(\"%d\", probe(2));"
+    },
+    "expect": "never stops",
+    "belief_answers": {
+      "D05": "1"
+    }
+  },
+  "qz_d05d06_mcq_01": {
+    "draft": "col_t7_skip",
+    "kind": "tail",
+    "belief_code": {
+      "D05": "int count(int n) {\n    if (n <= 0) {\n        return 0;\n    }\n    return 1 + count(n - 2);\n}",
+      "D06": "int count(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return 1 + count(n - 1);\n}"
+    },
+    "tail": "count(5);\nprintf(\"yes\");"
+  },
+  "qz_d05d06_mcq_02": {
+    "draft": "col_t7_climb",
+    "kind": "tail",
+    "belief_code": {
+      "D05": "int climb(int height) {\n    if (height >= 10) {\n        return 0;\n    }\n    return 1 + climb(height + 3);\n}",
+      "D06": "int climb(int height) {\n    if (height == 10) {\n        return 0;\n    }\n    return 1 + climb(height + 1);\n}"
+    },
+    "tail": "climb(2);\nprintf(\"yes\");"
+  },
+  "qz_d06_mcq_01": {
+    "draft": "fill_d06_steps",
+    "kind": "tail",
+    "belief_code": {
+      "D06": "int steps(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return 1 + steps(n - 1);\n}\nint total = steps(4);"
+    },
+    "tail": "printf(\"%d\", total);"
+  },
+  "qz_d06_mcq_02": {
+    "draft": "fill_d06_burns",
+    "kind": "tail",
+    "belief_code": {
+      "D06": "int burns(int fuel) {\n    if (fuel <= 0) {\n        return 0;\n    }\n    return burns(fuel - 2) + 1;\n}\nint count = burns(6);"
+    },
+    "tail": "printf(\"%d\", count);"
+  },
+  "qz_d06_ns_01": {
+    "draft": "D06_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "D06": "int countdown(int n) {\n    int last = 0;\n    if (n <= 0) {\n        return 0;\n    }\n    last = n;\n    return countdown(n - 1);\n}\ncountdown(3);"
+    },
+    "belief_query": {
+      "var": "last",
+      "after_line": 6,
+      "hit": 2
+    }
+  },
+  "qz_d06_po_01": {
+    "draft": "D06_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "D06": "int sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + sum(n - 1);\n}\nprintf(\"%d\", sum(5));"
+    }
+  },
+  "qz_d06_po_02": {
+    "draft": "D06_predict_output_5",
+    "kind": "printed",
+    "belief_code": {
+      "D06": "int power(int base, int exp) {\n    if (exp == 0) {\n        return 1;\n    }\n    return base * power(base, exp - 1);\n}\nprintf(\"%d\", power(2, 5));"
+    }
+  },
+  "qz_d06_rs_01": {
+    "draft": "D06_predict_output_6",
+    "kind": "printed",
+    "belief_code": {
+      "D06": "int gcd(int a, int b) {\n    if (b == 0) {\n        return a;\n    }\n    return gcd(b, a % b);\n}\nprintf(\"%d\", gcd(48, 18));"
+    },
+    "expect": "never stops",
+    "belief_answers": {
+      "D06": "6"
+    }
+  },
+  "qz_d07_mcq_01": {
+    "draft": "D07_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "D07": "int add_up(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + add_up(n - 1);\n}\nint total = add_up(4);"
+    },
+    "tail": "printf(\"%d\", total);"
+  },
+  "qz_d07_mcq_02": {
+    "draft": "D07_mcq_3",
+    "kind": "tail",
+    "belief_code": {
+      "D07": "int sum_array(int arr[], int n) {\n    if (n == 0) {\n        return arr[0];\n    }\n    return arr[n] + sum_array(arr, n - 1);\n}\nint values[] = {2, 5, 3, 8};\nint total = sum_array(values, 3);"
+    },
+    "tail": "printf(\"%d\", total);"
+  },
+  "qz_d07_ns_01": {
+    "draft": "D07_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "D07": "int f(int n) {\n    if (n == 0) return 0;\n    return n + f(n - 1);\n}\nint s = 0;\nfor (int i = 1; i <= 4; i++) {\n    s = s + f(i);\n}"
+    },
+    "belief_query": {
+      "var": "s",
+      "after_line": 7,
+      "hit": 2
+    }
+  },
+  "qz_d07_po_01": {
+    "draft": "D07_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "D07": "int sum(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return n + sum(n - 1);\n}\nprintf(\"%d\", sum(4));"
+    }
+  },
+  "qz_d07_po_02": {
+    "draft": "D07_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "D07": "int chars(char s[], int i) {\n    if (s[i] == '\\0') {\n        return 0;\n    }\n    return 1 + chars(s, i + 1);\n}\nprintf(\"%d\", chars(\"abc\", 0));"
+    }
+  },
+  "qz_d07_rs_01": {
+    "draft": "D07_predict_output_4",
+    "kind": "printed",
+    "belief_code": {
+      "D07": "int total(int a[], int n) {\n    if (n == 0) {\n        return 0;\n    }\n    return a[n - 1] + total(a, n - 1);\n}\nint a[] = {3, 4, 5};\nprintf(\"%d\", total(a, 3));"
+    },
+    "expect": "5",
+    "belief_answers": {
+      "D07": "12"
+    }
+  },
+  "qz_d08_mcq_01": {
+    "draft": "D08_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "D08": "char s[] = \"banana\";\nint count = 0;\nint i = 0;\nwhile (i < strlen(s)) {\n    if (s[i] == 'a') {\n        count = count + 1;\n    }\n    i = i + 1;\n}"
+    },
+    "tail": "printf(\"%d\", count);"
+  },
+  "qz_d08_mcq_02": {
+    "draft": "D08_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "D08": "int fuel_check(char c) {\n    if (c == 'F') {\n        return 100;\n    }\n    return 0;\n}\nint fuel = fuel_check('F');"
+    },
+    "tail": "printf(\"%d\", fuel);"
+  },
+  "qz_d08_ns_01": {
+    "draft": "D08_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "D08": "char s[] = \"ab\";\nint i = 0;\nint total = 0;\nint bonus = 0;\nwhile (s[i] != '\\0') {\n    if (s[i] == 'a') {\n        bonus = bonus + 1;\n    }\n    total = total + bonus;\n    i = i + 1;\n}"
+    },
+    "belief_query": {
+      "var": "total",
+      "after_line": 9,
+      "hit": 2
+    }
+  },
+  "qz_d08_po_01": {
+    "draft": "D08_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "D08": "char word[] = \"cat\";\nif (word[1] == 'a') {\n    printf(\"vowel\");\n} else {\n    printf(\"not vowel\");\n}"
+    }
+  },
+  "qz_d08_po_02": {
+    "draft": "D08_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "D08": "int count = 0;\nchar s[] = \"banana\";\nfor (int i = 0; i < 6; i = i + 1) {\n    if (s[i] == 'a') {\n        count = count + 1;\n    }\n}\nprintf(\"%d\", count);"
+    }
+  },
+  "qz_d08_rs_01": {
+    "draft": "D08_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "D08": "int is_vowel(char c) {\n    if (c == 'a') {\n        return 1;\n    }\n    return 0;\n}\nchar word[] = \"apple\";\nif (is_vowel(word[0])) {\n    printf(\"yes\");\n} else {\n    printf(\"no\");\n}"
+    },
+    "expect": "no",
+    "belief_answers": {
+      "D08": "yes"
+    }
+  },
+  "qz_m01_mcq_01": {
+    "draft": "M01_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "M01": "int total = 0;\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    total = total + 2;\n}"
+    },
+    "tail": "printf(\"%d\", total);"
+  },
+  "qz_m01_mcq_02": {
+    "draft": "M01_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "M01": "int hull = 4;\nwhile (hull > 0) {\n    hull = hull - 1;\n}"
+    },
+    "tail": "printf(\"%d\", hull);"
+  },
+  "qz_m01_ns_01": {
+    "draft": "M01_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "M01": "void run(void) {\n    int fuel = 10, total = 0;\n    int i;\n    int j;\n    for (i = 0; i < 3; i++) {\n        fuel = fuel - 2;\n    }\n    for (j = 0; j < 5; j++) {\n        total = total + fuel;\n    }\n}\nrun();"
+    },
+    "belief_query": {
+      "var": "total",
+      "after_line": 9,
+      "hit": 3
+    }
+  },
+  "qz_m01_po_01": {
+    "draft": "M01_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "M01": "int n = 4;\nint sum = 0;\nint i;\nfor (i = 0; i < n; i++) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);"
+    }
+  },
+  "qz_m01_po_02": {
+    "draft": "M01_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "M01": "int i = 5;\nint count = 0;\nwhile (i > 0) {\n    count = count + 1;\n    i = i - 1;\n}\nprintf(\"%d\", count);"
+    }
+  },
+  "qz_m01_rs_01": {
+    "draft": "M01_predict_output_6",
+    "kind": "printed",
+    "belief_code": {
+      "M01": "int fuel = 5;\nint product = 1;\nint i;\nfor (i = fuel; i > 0; i--) {\n    product = product * i;\n}\nprintf(\"%d\", product);"
+    },
+    "expect": "0",
+    "belief_answers": {
+      "M01": "120"
+    }
+  },
+  "qz_m01m08_mcq_01": {
+    "draft": "col_t1_max",
+    "kind": "tail",
+    "belief_code": {
+      "M01": "int hull[3] = {8, 2, 5};\nint best = hull[0];\nfor (int i = 1; i < 3; i++) {\n    if (hull[i] > best) {\n        best = hull[i];\n    }\n}",
+      "M08": "int hull[3] = {8, 2, 5};\nint best = hull[0];\nfor (int i = 1; i < 3; i++) {\n    if (hull[i] > best) {\n        best = hull[i];\n    }\n}"
+    },
+    "tail": "printf(\"%d\", best);",
+    "says": {
+      "oob": "unpredictable"
+    }
+  },
+  "qz_m01m08_mcq_02": {
+    "draft": "col_t1_count",
+    "kind": "tail",
+    "belief_code": {
+      "M01": "int shots[4] = {1, 0, 1, 1};\nint hits = 0;\nfor (int i = 0; i < 4; i++) {\n    if (shots[i] == 1) {\n        hits++;\n    }\n}",
+      "M08": "int shots[4] = {1, 0, 1, 1};\nint hits = 0;\nfor (int i = 0; i < 4; i++) {\n    if (shots[i] == 1) {\n        hits++;\n    }\n}"
+    },
+    "tail": "printf(\"%d\", hits);",
+    "says": {
+      "oob": "unpredictable"
+    }
+  },
+  "qz_m01m08_po_01": {
+    "draft": "col_t1_sum",
+    "kind": "printed",
+    "belief_code": {
+      "M01": "int cells[3] = {2, 4, 6};\nint total = 0;\nfor (int i = 0; i < 3; i++) {\n    total += cells[i];\n}\nprintf(\"%d\", total);",
+      "M08": "int cells[3] = {2, 4, 6};\nint total = 0;\nfor (int i = 0; i < 3; i++) {\n    total += cells[i];\n}\nprintf(\"%d\", total);"
+    },
+    "says": {
+      "oob": "unpredictable"
+    }
+  },
+  "qz_m01m08_po_02": {
+    "draft": "col_t1_last",
+    "kind": "printed",
+    "belief_code": {
+      "M01": "int fuel[4] = {7, 3, 9, 5};\nint last = 0;\nfor (int i = 0; i < 4; i++) {\n    last = fuel[i];\n}\nprintf(\"%d\", last);",
+      "M08": "int fuel[4] = {7, 3, 9, 5};\nint last = 0;\nfor (int i = 0; i < 4; i++) {\n    last = fuel[i];\n}\nprintf(\"%d\", last);"
+    },
+    "says": {
+      "oob": "unpredictable"
+    }
+  },
+  "qz_m01m08_po_03": {
+    "draft": "col_t1_pairs",
+    "kind": "printed",
+    "belief_code": {
+      "M01": "int a[4] = {1, 5, 2, 8};\nint drops = 0;\nfor (int j = 0; j < 3; j++) {\n    if (a[j] > a[j + 1]) {\n        drops++;\n    }\n}\nprintf(\"%d\", drops);",
+      "M08": "int a[4] = {1, 5, 2, 8};\nint drops = 0;\nfor (int j = 0; j < 3; j++) {\n    if (a[j] > a[j + 1]) {\n        drops++;\n    }\n}\nprintf(\"%d\", drops);"
+    },
+    "says": {
+      "oob": "unpredictable"
+    }
+  },
+  "qz_m02_mcq_01": {
+    "draft": "M02_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "M02": "int i = 0;\nint total = 0;\nwhile (i < 5) {\n    total = total + i;\n    i = i + 1;\n}"
+    },
+    "tail": "printf(\"%d\", total);"
+  },
+  "qz_m02_mcq_02": {
+    "draft": "M02_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "M02": "int nums[] = {3, 5, 7, 9};\nint sum = 0;\nint i;\nfor (i = 0; i < 4; ) {\n    sum = sum + nums[i];\n    i = i + 1;\n}"
+    },
+    "tail": "printf(\"%d\", sum);"
+  },
+  "qz_m02_ns_01": {
+    "draft": "M02_next_state_2",
+    "kind": "state",
+    "belief_code": {
+      "M02": "int fuel = 10;\nint burn = 0;\nfor (burn = 0; burn < 3; ) {\n    fuel = fuel - 2;\n    burn++;\n}"
+    },
+    "belief_query": {
+      "var": "burn",
+      "after_line": 4,
+      "hit": 2
+    }
+  },
+  "qz_m02_po_01": {
+    "draft": "M02_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "M02": "int i = 0;\nint sum = 0;\nint arr[5] = {2, 3, 5, 7, 11};\nwhile (i < 5) {\n    sum = sum + arr[i];\n    i++;\n}\nprintf(\"%d\", sum);"
+    }
+  },
+  "qz_m02_po_02": {
+    "draft": "M02_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "M02": "int i;\nint total = 0;\nfor (i = 0; i < 4; ) {\n    total = total + i;\n    i++;\n}\nprintf(\"%d\", total);"
+    }
+  },
+  "qz_m02_rs_01": {
+    "draft": "M02_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "M02": "char word[6] = \"hello\";\nint i = 0;\nint count = 0;\nwhile (i < 5) {\n    if (word[i] == 'z') {\n        i++;\n    }\n    count++;\n    i++;\n}\nprintf(\"%d\", count);"
+    },
+    "expect": "never stops",
+    "belief_answers": {
+      "M02": "5"
+    }
+  },
+  "qz_m02m07_mcq_01": {
+    "draft": "col_t2_finish",
+    "kind": "tail",
+    "belief_code": {
+      "M02": "int i = 0;\nwhile (i < 3) {\n    i++;\n}\n{\n    i++;\n}",
+      "M07": "int i = 0;\nwhile (i < 3)\n{\n    i++;\n}"
+    },
+    "tail": "printf(\"yes\");"
+  },
+  "qz_m02m07_mcq_02": {
+    "draft": "col_t2_shots",
+    "kind": "count:fire",
+    "belief_code": {
+      "M02": "int fuel = 5;\nwhile (fuel > 0) {\n    fuel = fuel - 1;\n}\nfuel = fuel - 5;\nfire();",
+      "M07": "int fuel = 5;\nwhile (fuel > 0)\n    fuel = fuel - 5;\nfire();"
+    }
+  },
+  "qz_m03_mcq_01": {
+    "draft": "M03_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "M03": "int sum = 0;\nint nums[3] = {2, 3, 4};\nint i = 0;\nwhile (i < 3) {\n    sum = sum + nums[i];\n    i = i + 1;\n}"
+    },
+    "tail": "printf(\"%d\", sum);"
+  },
+  "qz_m03_mcq_02": {
+    "draft": "M03_mcq_3",
+    "kind": "tail",
+    "belief_code": {
+      "M03": "int total = 0;\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 2; j++) {\n        total = total + i + j;\n    }\n}"
+    },
+    "tail": "printf(\"%d\", total);"
+  },
+  "qz_m03_ns_01": {
+    "draft": "M03_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "M03": "void run() {\n    int total = 0;\n    int i = 0;\n    for (i = 0; i < 4; i = i + 1) {\n        total = total + 2;\n    }\n}\nrun();"
+    },
+    "belief_query": {
+      "var": "total",
+      "after_line": 5,
+      "hit": 3
+    }
+  },
+  "qz_m03_po_01": {
+    "draft": "M03_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "M03": "int total = 0;\nfor (int i = 1; i <= 4; i = i + 1)\n{\n    total = total + i;\n}\nprintf(\"%d\", total);"
+    }
+  },
+  "qz_m03_po_02": {
+    "draft": "M03_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "M03": "int vals[] = {5, 2, 7, 1};\nint total = 0;\nint i = 0;\nwhile (i < 4)\n{\n    total = total + vals[i];\n    i = i + 1;\n}\nprintf(\"%d\", total);"
+    }
+  },
+  "qz_m03_rs_01": {
+    "draft": "M03_predict_output_4",
+    "kind": "printed",
+    "belief_code": {
+      "M03": "char s[] = \"abracadabra\";\nint total = 0;\nfor (int i = 0; s[i] != '\\0'; i = i + 1)\n{\n    if (s[i] == 'a')\n    {\n        total = total + 1;\n    }\n}\nprintf(\"%d\", total);"
+    },
+    "expect": "1",
+    "belief_answers": {
+      "M03": "5"
+    }
+  },
+  "qz_m04_mcq_01": {
+    "draft": "M04_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "M04": "int a = 5;\nint b = 2;\nfloat result = (float)a / b;"
+    },
+    "tail": "printf(\"%.1f\", result);"
+  },
+  "qz_m04_mcq_02": {
+    "draft": "M04_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "M04": "float total = 0.0;\nint i;\nfor (i = 1; i <= 3; i = i + 1) {\n    total = total + (float)i / 2;\n}"
+    },
+    "tail": "printf(\"%.1f\", total);"
+  },
+  "qz_m04_ns_01": {
+    "draft": "M04_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "M04": "int fuel = 7;\nint crew = 4;\nfloat rate = (float) fuel / crew;\nint scaled = 0;\nfor (int i = 1; i <= 4; i = i + 1) {\n    scaled = rate * i;\n}"
+    },
+    "belief_query": {
+      "var": "scaled",
+      "after_line": 6,
+      "hit": 3
+    }
+  },
+  "qz_m04_po_01": {
+    "draft": "M04_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "M04": "int a = 9;\nint b = 2;\nfloat result = (float) a / b;\nprintf(\"%.1f\", result);"
+    }
+  },
+  "qz_m04_po_02": {
+    "draft": "M04_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "M04": "int nums[3] = {11, 3, 5};\nfloat result = (float) nums[0] / nums[1];\nprintf(\"%.1f\", result);"
+    }
+  },
+  "qz_m04_rs_01": {
+    "draft": "M04_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "M04": "float divide(int x, int y) {\n    return (float) x / y;\n}\nint a = 10;\nint b = 4;\nfloat result = divide(a, b);\nprintf(\"%.1f\", result);"
+    },
+    "expect": "2.0",
+    "belief_answers": {
+      "M04": "2.5"
+    }
+  },
+  "qz_m05_mcq_01": {
+    "draft": "M05_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "M05": "int total = 0;\nfor (int i = 1; i <= 5; i++) {\n    total = total + i;\n}"
+    },
+    "tail": "printf(\"%d\", total);"
+  },
+  "qz_m05_mcq_02": {
+    "draft": "M05_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "M05": "int depth(int n) {\n    if (n == 0) {\n        int value = 0;\n        return value;\n    }\n    return 1 + depth(n - 1);\n}\nint d = depth(3);"
+    },
+    "tail": "printf(\"%d\", d);"
+  },
+  "qz_m05_ns_01": {
+    "draft": "M05_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "M05": "int fuel = 0;\nint burned;\nburned = 0;\nwhile (burned < 3) {\n    fuel = fuel + 2;\n    burned = burned + 1;\n}"
+    },
+    "belief_query": {
+      "var": "fuel",
+      "after_line": 5,
+      "hit": 2
+    }
+  },
+  "qz_m05_po_01": {
+    "draft": "M05_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "M05": "int total = 0;\ntotal = total + 4;\nprintf(\"%d\\n\", total);"
+    }
+  },
+  "qz_m05_po_02": {
+    "draft": "M05_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "M05": "int hull = 0;\nif (hull == 0) {\n    printf(\"safe\\n\");\n} else {\n    printf(\"damaged\\n\");\n}"
+    }
+  },
+  "qz_m05_rs_01": {
+    "draft": "M05_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "M05": "int add_bonus(int base) {\n    int extra = 0;\n    extra = extra + base;\n    return extra;\n}\nprintf(\"%d\\n\", add_bonus(7));"
+    },
+    "expect": "unpredictable",
+    "belief_answers": {
+      "M05": "7"
+    }
+  },
+  "qz_m06_mcq_01": {
+    "draft": "M06_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "M06": "int mode = 5;\nint total = 0;\nif (mode == 2)\n{\n    total = total + 10;\n}\nelse\n{\n    total = total + 1;\n}"
+    },
+    "tail": "printf(\"%d\", total);"
+  },
+  "qz_m06_mcq_02": {
+    "draft": "M06_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "M06": "int fuel = 5;\nint burn = 0;\nint spare = 4;\nwhile (fuel == spare)\n{\n    spare = spare - 1;\n    burn = burn + fuel;\n}"
+    },
+    "tail": "printf(\"%d\", burn);"
+  },
+  "qz_m06_ns_01": {
+    "draft": "M06_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "M06": "int x = 3;\nint y = 0;\nint i = 0;\nwhile (i < 4) {\n    if (x == 1) {\n        y = y + 5;\n    } else {\n        y = y + 10;\n    }\n    y = y + x;\n    i = i + 1;\n}"
+    },
+    "belief_query": {
+      "var": "y",
+      "after_line": 10,
+      "hit": 2
+    }
+  },
+  "qz_m06_po_01": {
+    "draft": "M06_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "M06": "int mode = 1;\nif (mode == 2) {\n    printf(\"fast\");\n} else {\n    printf(\"slow\");\n}"
+    }
+  },
+  "qz_m06_po_02": {
+    "draft": "M06_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "M06": "int fuel = 0;\nwhile (fuel == 0) {\n    printf(\"burn\");\n    fuel = 1;\n}\nprintf(\"off\");"
+    }
+  },
+  "qz_m06_rs_01": {
+    "draft": "M06_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "M06": "float rate = 0.0;\nif (rate == 1.0) {\n    printf(\"%.1f\", rate);\n} else {\n    printf(\"zero\");\n}"
+    },
+    "expect": "1.0",
+    "belief_answers": {
+      "M06": "zero"
+    }
+  },
+  "qz_m07_mcq_01": {
+    "draft": "M07_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "M07": "int calc_hull(void) {\n    int hull = 80;\n    if (hull < 50)\n    {\n        hull = hull + 10;\n    }\n    return hull;\n}"
+    },
+    "tail": "printf(\"%d\", calc_hull());"
+  },
+  "qz_m07_mcq_02": {
+    "draft": "M07_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "M07": "int calc_count(void) {\n    int count = 0;\n    while (count > 0)\n    {\n        count = count + 2;\n    }\n    return count;\n}"
+    },
+    "tail": "printf(\"%d\", calc_count());"
+  },
+  "qz_m07_ns_01": {
+    "draft": "M07_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "M07": "int x = 0;\nfor (int i = 0; i < 4; i = i + 1) {\n    if (i > 0)\n    {\n        x = x + i;\n    }\n}"
+    },
+    "belief_query": {
+      "var": "x",
+      "after_line": 5,
+      "hit": 3
+    }
+  },
+  "qz_m07_po_01": {
+    "draft": "M07_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "M07": "int fuel = 3;\nif (fuel > 5)\n{\n    printf(\"launch\");\n}\nprintf(\"idle\");"
+    }
+  },
+  "qz_m07_po_02": {
+    "draft": "M07_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "M07": "int probe;\nfor (probe = 2; probe < 5; probe++)\n{\n    printf(\"%d\", probe);\n}"
+    }
+  },
+  "qz_m07_rs_01": {
+    "draft": "M07_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "M07": "int crew = 3;\nwhile (crew < 3)\n{\n    crew = crew + 1;\n}\nprintf(\"%d\", crew);"
+    },
+    "expect": "4",
+    "belief_answers": {
+      "M07": "3"
+    }
+  },
+  "qz_m08_mcq_01": {
+    "draft": "M08_mcq_1",
+    "kind": "tail",
+    "belief_code": {
+      "M08": "int arr[5] = {10, 20, 30, 40, 50};\nint total = 0;\nfor (int i = 1; i < 5; i = i + 1) {\n    total = total + arr[i - 1];\n}"
+    },
+    "tail": "printf(\"%d\", total);"
+  },
+  "qz_m08_mcq_02": {
+    "draft": "M08_mcq_2",
+    "kind": "tail",
+    "belief_code": {
+      "M08": "int sum_from_one(int a[], int n) {\n    if (n == 1) {\n        return a[0];\n    } else {\n        return a[n - 1] + sum_from_one(a, n - 1);\n    }\n}\nint arr[5] = {5, 10, 15, 20, 25};\nint result = sum_from_one(arr, 4);"
+    },
+    "tail": "printf(\"%d\", result);"
+  },
+  "qz_m08_ns_01": {
+    "draft": "M08_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "M08": "int a[4] = {10, 20, 30, 40};\nint sum = 0;\nfor (int i = 1; i < 4; i++) {\n    sum = sum + a[i - 1];\n}"
+    },
+    "belief_query": {
+      "var": "sum",
+      "after_line": 4,
+      "hit": 2
+    }
+  },
+  "qz_m08_po_01": {
+    "draft": "M08_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "M08": "int a[] = {9, 4, 6, 2};\nprintf(\"%d\", a[0]);"
+    }
+  },
+  "qz_m08_po_02": {
+    "draft": "M08_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "M08": "int a[] = {1, 2, 3, 4};\nint s = 0;\nint i;\nfor (i = 1; i < 4; i++) {\n    s = s + a[i - 1];\n}\nprintf(\"%d\", s);"
+    }
+  },
+  "qz_m08_rs_01": {
+    "draft": "M08_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "M08": "char s[] = \"hello\";\nprintf(\"%c\", s[0]);"
+    },
+    "expect": "e",
+    "belief_answers": {
+      "M08": "h"
+    }
+  },
+  "qz_m10_mcq_01": {
+    "draft": "fill_m10_fuel",
+    "kind": "tail",
+    "belief_code": {
+      "M10": "int fuel_left(int reserve) {\n    int left = reserve * 2;\n    printf(\"%d \", left);\n    return left;\n}\nint fuel = fuel_left(5);"
+    },
+    "tail": "printf(\"%d\", fuel);"
+  },
+  "qz_m10_mcq_02": {
+    "draft": "fill_m10_depth",
+    "kind": "tail",
+    "belief_code": {
+      "M10": "int depth(int n) {\n    if (n == 0) {\n        return 0;\n    }\n    int below = depth(n - 1);\n    printf(\"%d \", n + below);\n    return n + below;\n}\nint result = depth(3);"
+    },
+    "tail": "printf(\"%d\", result);"
+  },
+  "qz_m10_ns_01": {
+    "draft": "M10_next_state_1",
+    "kind": "state",
+    "belief_code": {
+      "M10": "int get_value(int x) {\n    printf(\"%d \", x);\n    return x;\n}\nint total = 0;\nfor (int i = 1; i <= 3; i++) {\n    total = total + get_value(i);\n}\nprintf(\"%d\", total);"
+    },
+    "belief_query": {
+      "var": "total",
+      "after_line": 7,
+      "hit": 3
+    }
+  },
+  "qz_m10_po_01": {
+    "draft": "M10_predict_output_1",
+    "kind": "printed",
+    "belief_code": {
+      "M10": "int add(int a, int b) {\n    int sum = a + b;\n    printf(\"%d \", sum);\n    return sum;\n}\nint result = add(3, 4);\nprintf(\"%d\", result);"
+    }
+  },
+  "qz_m10_po_02": {
+    "draft": "M10_predict_output_2",
+    "kind": "printed",
+    "belief_code": {
+      "M10": "float average(int a, int b) {\n    float avg = (a + b) / 2.0;\n    printf(\"%.1f \", avg);\n    return avg;\n}\nfloat result = average(5, 6);\nprintf(\"%.1f\", result);"
+    }
+  },
+  "qz_m10_rs_01": {
+    "draft": "M10_predict_output_3",
+    "kind": "printed",
+    "belief_code": {
+      "M10": "int sum(int arr[], int n) {\n    int total = 0;\n    for (int i = 0; i < n; i = i + 1) {\n        total = total + arr[i];\n    }\n    printf(\"%d \", total);\n    return total;\n}\nint nums[3] = {2, 4, 6};\nint s = sum(nums, 3);\nprintf(\"%d\", s + 10);"
+    },
+    "expect": "12 10",
+    "belief_answers": {
+      "M10": "12 22"
+    }
+  }
+}

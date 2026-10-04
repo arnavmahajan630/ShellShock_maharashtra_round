@@ -1,0 +1,78 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 6 exercises about one beginner mistake.\n\nThe mistake: Loop runs one step too many or too few.\nA student who makes it believes: \"`i<=n` (from 0) runs n times; whether the bound is the last value included or excluded is mixed up\".\nHow it shows in code: a counting loop whose number of passes is easy to misjudge by one: `i <= n` counting from 0, `i < n - 1`, a loop that starts at 1 with `<`, or a countdown with `>= 0`. Do not index an array with the loop variable..\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with the comparison the student imagines (`<=` read as `<`, or `<` read as `<=`), so the loop makes one pass fewer or one pass more. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: predict the output.\n- `code` prints its result with printf as one short line (at most 20 characters).\n- `belief_code` prints what the student expects, in the same format.\n- `distractors`: two other short outputs a student might guess, in the same format.\nJSON shape: {\"items\": [{\"code\": \"...\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 6 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int n = 4;\\nint sum = 0;\\nint i;\\nfor (i = 0; i <= n; i++) {\\n    sum = sum + i;\\n}\\nprintf(\\\"%d\\\", sum);\",\n      \"belief_code\": \"int n = 4;\\nint sum = 0;\\nint i;\\nfor (i = 0; i < n; i++) {\\n    sum = sum + i;\\n}\\nprintf(\\\"%d\\\", sum);\",\n      \"distractors\": [\"15\", \"4\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int n = 5;\\nint sum = 0;\\nint i;\\nfor (i = 1; i < n; i++) {\\n    sum = sum + i;\\n}\\nprintf(\\\"%d\\\", sum);\",\n      \"belief_code\": \"int n = 5;\\nint sum = 0;\\nint i;\\nfor (i = 1; i <= n; i++) {\\n    sum = sum + i;\\n}\\nprintf(\\\"%d\\\", sum);\",\n      \"distractors\": [\"6\", \"21\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int i = 5;\\nint count = 0;\\nwhile (i >= 0) {\\n    count = count + 1;\\n    i = i - 1;\\n}\\nprintf(\\\"%d\\\", count);\",\n      \"belief_code\": \"int i = 5;\\nint count = 0;\\nwhile (i > 0) {\\n    count = count + 1;\\n    i = i - 1;\\n}\\nprintf(\\\"%d\\\", count);\",\n      \"distractors\": [\"4\", \"7\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int n = 10;\\nint sum = 0;\\nint i;\\nfor (i = 0; i <= n; i = i + 2) {\\n    sum = sum + i;\\n}\\nprintf(\\\"%d\\\", sum);\",\n      \"belief_code\": \"int n = 10;\\nint sum = 0;\\nint i;\\nfor (i = 0; i < n; i = i + 2) {\\n    sum = sum + i;\\n}\\nprintf(\\\"%d\\\", sum);\",\n      \"distractors\": [\"25\", \"35\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int n = 6;\\nint count = 0;\\nint i;\\nfor (i = 0; i < n - 1; i++) {\\n    count = count + 1;\\n}\\nprintf(\\\"%d\\\", count);\",\n      \"belief_code\": \"int n = 6;\\nint count = 0;\\nint i;\\nfor (i = 0; i <= n - 1; i++) {\\n    count = count + 1;\\n}\\nprintf(\\\"%d\\\", count);\",\n      \"distractors\": [\"4\", \"7\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int fuel = 5;\\nint product = 1;\\nint i;\\nfor (i = fuel; i >= 0; i--) {\\n    product = product * i;\\n}\\nprintf(\\\"%d\\\", product);\",\n      \"belief_code\": \"int fuel = 5;\\nint product = 1;\\nint i;\\nfor (i = fuel; i > 0; i--) {\\n    product = product * i;\\n}\\nprintf(\\\"%d\\\", product);\",\n      \"distractors\": [\"1\", \"60\"],\n      \"difficulty\": 3\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int n = 4;\nint sum = 0;\nint i;\nfor (i = 0; i <= n; i++) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+        "belief_code": "int n = 4;\nint sum = 0;\nint i;\nfor (i = 0; i < n; i++) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+        "distractors": [
+          "15",
+          "4"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int n = 5;\nint sum = 0;\nint i;\nfor (i = 1; i < n; i++) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+        "belief_code": "int n = 5;\nint sum = 0;\nint i;\nfor (i = 1; i <= n; i++) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+        "distractors": [
+          "6",
+          "21"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int i = 5;\nint count = 0;\nwhile (i >= 0) {\n    count = count + 1;\n    i = i - 1;\n}\nprintf(\"%d\", count);",
+        "belief_code": "int i = 5;\nint count = 0;\nwhile (i > 0) {\n    count = count + 1;\n    i = i - 1;\n}\nprintf(\"%d\", count);",
+        "distractors": [
+          "4",
+          "7"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int n = 10;\nint sum = 0;\nint i;\nfor (i = 0; i <= n; i = i + 2) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+        "belief_code": "int n = 10;\nint sum = 0;\nint i;\nfor (i = 0; i < n; i = i + 2) {\n    sum = sum + i;\n}\nprintf(\"%d\", sum);",
+        "distractors": [
+          "25",
+          "35"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int n = 6;\nint count = 0;\nint i;\nfor (i = 0; i < n - 1; i++) {\n    count = count + 1;\n}\nprintf(\"%d\", count);",
+        "belief_code": "int n = 6;\nint count = 0;\nint i;\nfor (i = 0; i <= n - 1; i++) {\n    count = count + 1;\n}\nprintf(\"%d\", count);",
+        "distractors": [
+          "4",
+          "7"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int fuel = 5;\nint product = 1;\nint i;\nfor (i = fuel; i >= 0; i--) {\n    product = product * i;\n}\nprintf(\"%d\", product);",
+        "belief_code": "int fuel = 5;\nint product = 1;\nint i;\nfor (i = fuel; i > 0; i--) {\n    product = product * i;\n}\nprintf(\"%d\", product);",
+        "distractors": [
+          "1",
+          "60"
+        ],
+        "difficulty": 3
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 753,
+    "completion_tokens": 8038
+  }
+}

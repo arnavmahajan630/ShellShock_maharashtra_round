@@ -1,0 +1,79 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 5 exercises about one beginner mistake.\n\nThe mistake: Swapping without a temp loses a value.\nA student who makes it believes: \"Two assignments happen at the same time\".\nHow it shows in code: two array cells 'swapped' with two plain assignments and no temporary variable (`a[i] = a[j]; a[j] = a[i];`), or a shift that overwrites a cell before its value was saved.\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with a correct swap through a temporary variable. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: multiple choice about a value.\n- `code` prints nothing.\n- `question` asks for one value once the code has run, for example \"What is total after the loop?\" or \"What does depth(3) give?\".\n- `tail` is one printf statement that prints exactly that value. I append it to both fragments, so both must use the same names.\n- `distractors`: two other values a student might guess, written the way the tail prints them.\nJSON shape: {\"items\": [{\"code\": \"...\", \"question\": \"...\", \"tail\": \"printf(...);\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 5 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int a[2] = {5, 9};\\nint i = 0;\\nint j = 1;\\na[i] = a[j];\\na[j] = a[i];\",\n      \"question\": \"What is a[1] after the code runs?\",\n      \"tail\": \"printf(\\\"%d\\\", a[1]);\",\n      \"belief_code\": \"int a[2] = {5, 9};\\nint i = 0;\\nint j = 1;\\nint temp = a[i];\\na[i] = a[j];\\na[j] = temp;\",\n      \"distractors\": [\"5\", \"14\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int vals[4] = {5, 1, 9, 4};\\nint i;\\nfor (i = 0; i < 3; i = i + 1) {\\n    vals[i] = vals[i + 1];\\n    vals[i + 1] = vals[i];\\n}\",\n      \"question\": \"What is vals[3] after the loop?\",\n      \"tail\": \"printf(\\\"%d\\\", vals[3]);\",\n      \"belief_code\": \"int vals[4] = {5, 1, 9, 4};\\nint i;\\nint temp;\\nfor (i = 0; i < 3; i = i + 1) {\\n    temp = vals[i];\\n    vals[i] = vals[i + 1];\\n    vals[i + 1] = temp;\\n}\",\n      \"distractors\": [\"5\", \"9\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"int cargo[4] = {8, 4, 6, 2};\\ncargo[0] = cargo[1];\\ncargo[1] = cargo[2];\\ncargo[2] = cargo[3];\\ncargo[3] = cargo[0];\",\n      \"question\": \"What is cargo[3] after the code runs?\",\n      \"tail\": \"printf(\\\"%d\\\", cargo[3]);\",\n      \"belief_code\": \"int cargo[4] = {8, 4, 6, 2};\\nint temp = cargo[0];\\ncargo[0] = cargo[1];\\ncargo[1] = cargo[2];\\ncargo[2] = cargo[3];\\ncargo[3] = temp;\",\n      \"distractors\": [\"8\", \"2\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int f(int x) {\\n    int pair[2] = {x, x + 3};\\n    pair[0] = pair[1];\\n    pair[1] = pair[0];\\n    return pair[0] + pair[1];\\n}\",\n      \"question\": \"What does f(4) return?\",\n      \"tail\": \"printf(\\\"%d\\\", f(4));\",\n      \"belief_code\": \"int f(int x) {\\n    int pair[2] = {x, x + 3};\\n    int temp = pair[0];\\n    pair[0] = pair[1];\\n    pair[1] = temp;\\n    return pair[0] + pair[1];\\n}\",\n      \"distractors\": [\"11\", \"7\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"char letters[3] = {'a', 'b', 'c'};\\nint i = 0;\\nint j = 2;\\nletters[i] = letters[j];\\nletters[j] = letters[i];\",\n      \"question\": \"What character is letters[2] after the code runs?\",\n      \"tail\": \"printf(\\\"%c\\\", letters[j]);\",\n      \"belief_code\": \"char letters[3] = {'a', 'b', 'c'};\\nint i = 0;\\nint j = 2;\\nchar temp = letters[i];\\nletters[i] = letters[j];\\nletters[j] = temp;\",\n      \"distractors\": [\"a\", \"b\"],\n      \"difficulty\": 1\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int a[2] = {5, 9};\nint i = 0;\nint j = 1;\na[i] = a[j];\na[j] = a[i];",
+        "question": "What is a[1] after the code runs?",
+        "tail": "printf(\"%d\", a[1]);",
+        "belief_code": "int a[2] = {5, 9};\nint i = 0;\nint j = 1;\nint temp = a[i];\na[i] = a[j];\na[j] = temp;",
+        "distractors": [
+          "5",
+          "14"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int vals[4] = {5, 1, 9, 4};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    vals[i] = vals[i + 1];\n    vals[i + 1] = vals[i];\n}",
+        "question": "What is vals[3] after the loop?",
+        "tail": "printf(\"%d\", vals[3]);",
+        "belief_code": "int vals[4] = {5, 1, 9, 4};\nint i;\nint temp;\nfor (i = 0; i < 3; i = i + 1) {\n    temp = vals[i];\n    vals[i] = vals[i + 1];\n    vals[i + 1] = temp;\n}",
+        "distractors": [
+          "5",
+          "9"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "int cargo[4] = {8, 4, 6, 2};\ncargo[0] = cargo[1];\ncargo[1] = cargo[2];\ncargo[2] = cargo[3];\ncargo[3] = cargo[0];",
+        "question": "What is cargo[3] after the code runs?",
+        "tail": "printf(\"%d\", cargo[3]);",
+        "belief_code": "int cargo[4] = {8, 4, 6, 2};\nint temp = cargo[0];\ncargo[0] = cargo[1];\ncargo[1] = cargo[2];\ncargo[2] = cargo[3];\ncargo[3] = temp;",
+        "distractors": [
+          "8",
+          "2"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int f(int x) {\n    int pair[2] = {x, x + 3};\n    pair[0] = pair[1];\n    pair[1] = pair[0];\n    return pair[0] + pair[1];\n}",
+        "question": "What does f(4) return?",
+        "tail": "printf(\"%d\", f(4));",
+        "belief_code": "int f(int x) {\n    int pair[2] = {x, x + 3};\n    int temp = pair[0];\n    pair[0] = pair[1];\n    pair[1] = temp;\n    return pair[0] + pair[1];\n}",
+        "distractors": [
+          "11",
+          "7"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "char letters[3] = {'a', 'b', 'c'};\nint i = 0;\nint j = 2;\nletters[i] = letters[j];\nletters[j] = letters[i];",
+        "question": "What character is letters[2] after the code runs?",
+        "tail": "printf(\"%c\", letters[j]);",
+        "belief_code": "char letters[3] = {'a', 'b', 'c'};\nint i = 0;\nint j = 2;\nchar temp = letters[i];\nletters[i] = letters[j];\nletters[j] = temp;",
+        "distractors": [
+          "a",
+          "b"
+        ],
+        "difficulty": 1
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 740,
+    "completion_tokens": 11774
+  }
+}

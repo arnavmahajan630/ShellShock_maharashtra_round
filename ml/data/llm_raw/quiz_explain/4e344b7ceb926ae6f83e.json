@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int hull[3] = {8, 2, 5};\n 2  int best = hull[0];\n 3  for (int i = 1; i <= 3; i++) {\n 4      if (hull[i] > best) {\n 5          best = hull[i];\n 6      }\n 7  }\n\nQuestion: What is best after the loop?\nThe right answer, found by running the code: unpredictable\nCommon wrong answer: a student who believes \"`i<=n` (from 0) runs n times; whether the bound is the last value included or excluded is mixed up\" expects 8; a student who believes \"Arrays are indexed 1..n\" expects 8\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- The loop on line 3 ran its body 3 times.\n- Line 4 uses hull[3], but hull has only 3 cells (indexes 0 to 2); C does not define the result.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"The loop reads hull[3], but hull has valid indexes only 0 to 2. Accessing hull[3] is undefined behavior, so best has no defined value after the loop.\"}",
+  "parsed": {
+    "explain": "The loop reads hull[3], but hull has valid indexes only 0 to 2. Accessing hull[3] is undefined behavior, so best has no defined value after the loop."
+  },
+  "usage": {
+    "prompt_tokens": 459,
+    "completion_tokens": 162
+  }
+}

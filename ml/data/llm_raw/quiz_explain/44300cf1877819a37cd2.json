@@ -1,0 +1,23 @@
+{
+  "job": "quiz_explain",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.3,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You explain C to beginners in plain, exact words. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "A student was shown this C code. It is the body of a function, so its variables are local, and it runs exactly as written:\n\n 1  int nums[3] = {11, 3, 5};\n 2  float result = nums[0] / nums[1];\n 3  printf(\"%.1f\", result);\n\nQuestion: What does this print?\nThe right answer, found by running the code: 3.0\nCommon wrong answer: a student who believes \"int / int gives the exact decimal\" expects 3.7\n\nFacts measured while the code ran (trust these over your own tracing):\n- The run ends normally.\n- Line 2 divides two ints, so the fraction is dropped before the result is stored in a float.\n- Values when the shown code finished: result = 3.0.\n- The shown code printed: '3.0'.\n\nWrite `explain`: one or two plain sentences (at most 35 words) that say why the right answer is right, by pointing at what this code actually does. Every number and every claim in it must agree with the facts above. Do not mention any other answer as if it were true, do not name the mistake, do not start with \"Because\".\nJSON shape: {\"explain\": \"...\"}"
+    }
+  ],
+  "content": "{\"explain\": \"Integer division happens first: 11 / 3 yields the int 3, discarding the remainder. That int 3 is then converted to the float 3.0, so the printf prints 3.0.\"}",
+  "parsed": {
+    "explain": "Integer division happens first: 11 / 3 yields the int 3, discarding the remainder. That int 3 is then converted to the float 3.0, so the printf prints 3.0."
+  },
+  "usage": {
+    "prompt_tokens": 396,
+    "completion_tokens": 1260
+  }
+}

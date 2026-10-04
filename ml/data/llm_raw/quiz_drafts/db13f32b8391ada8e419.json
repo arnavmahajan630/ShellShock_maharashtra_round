@@ -1,0 +1,78 @@
+{
+  "job": "quiz_drafts",
+  "model": "deepseek-v4-pro",
+  "temperature": 1.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write short C exercises for first-year programming students. You reply with one JSON object and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Write 6 exercises about one beginner mistake.\n\nThe mistake: `=` stores a value; `==` compares.\nA student who makes it believes: \"`=` compares\".\nHow it shows in code: a single `=` inside an `if` or `while` condition (for example `if (mode = 2)`), where `==` would give a different result. The code must still end..\n\nFor each exercise write two fragments:\n- `code`: what the student is shown. It contains exactly this one mistake and is otherwise ordinary, correct C.\n- `belief_code`: the program this student THINKS they are reading: the same code with `==` in that condition. Apart from that change it is the same as `code`, line for line.\nWhen run, the two fragments must give different results. I run both myself. Do not tell me any result.\n\nType: predict the output.\n- `code` prints its result with printf as one short line (at most 20 characters).\n- `belief_code` prints what the student expects, in the same format.\n- `distractors`: two other short outputs a student might guess, in the same format.\nJSON shape: {\"items\": [{\"code\": \"...\", \"belief_code\": \"...\", \"distractors\": [\"...\", \"...\"], \"difficulty\": 1}]}\n`difficulty`: 1 = one idea, 2 = several steps to trace, 3 = tricky.\n\nMake the 6 exercises clearly different from each other: different code shapes, data and names.\n\nRules for every fragment:\n- A fragment is C without main(): zero or more function definitions first, then plain statements. It is run exactly as written.\n- Allowed: int, float, char, 1D arrays with initialisers, if/else, for, while, functions, recursion, printf with %d %c %s %.1f, strlen.\n- Not allowed: pointers, &, struct, scanf, switch, global variables, #include, #define, comments, do-while, the ?: operator, ++ or -- inside a larger expression.\n- The game functions fire(); and open_door(); exist (no arguments, no result). Use them rarely.\n- At most 12 lines, at most 60 characters per line, 4-space indentation. One statement per line. Loop and if bodies in braces.\n- Keep every value that matters between -99 and 999.\n- Except where the mistake itself needs it, never read a variable that has no value and never index outside an array.\n- Space-ship names are welcome (fuel, shield, crew, cargo, hull, probe); plain names are fine too."
+    }
+  ],
+  "content": "{\n  \"items\": [\n    {\n      \"code\": \"int mode = 1;\\nif (mode = 2) {\\n    printf(\\\"fast\\\");\\n} else {\\n    printf(\\\"slow\\\");\\n}\",\n      \"belief_code\": \"int mode = 1;\\nif (mode == 2) {\\n    printf(\\\"fast\\\");\\n} else {\\n    printf(\\\"slow\\\");\\n}\",\n      \"distractors\": [\"slow\", \"2\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int fuel = 0;\\nwhile (fuel = 0) {\\n    printf(\\\"burn\\\");\\n    fuel = 1;\\n}\\nprintf(\\\"off\\\");\",\n      \"belief_code\": \"int fuel = 0;\\nwhile (fuel == 0) {\\n    printf(\\\"burn\\\");\\n    fuel = 1;\\n}\\nprintf(\\\"off\\\");\",\n      \"distractors\": [\"burn\", \"burnoff\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"float rate = 0.0;\\nif (rate = 1.0) {\\n    printf(\\\"%.1f\\\", rate);\\n} else {\\n    printf(\\\"zero\\\");\\n}\",\n      \"belief_code\": \"float rate = 0.0;\\nif (rate == 1.0) {\\n    printf(\\\"%.1f\\\", rate);\\n} else {\\n    printf(\\\"zero\\\");\\n}\",\n      \"distractors\": [\"zero\", \"0.0\"],\n      \"difficulty\": 1\n    },\n    {\n      \"code\": \"int nums[3] = {1, 2, 3};\\nint i;\\nfor (i = 0; i < 3; i = i + 1) {\\n    if (nums[i] = 2) {\\n        printf(\\\"two\\\");\\n    }\\n}\",\n      \"belief_code\": \"int nums[3] = {1, 2, 3};\\nint i;\\nfor (i = 0; i < 3; i = i + 1) {\\n    if (nums[i] == 2) {\\n        printf(\\\"two\\\");\\n    }\\n}\",\n      \"distractors\": [\"two\", \"twotwo\"],\n      \"difficulty\": 3\n    },\n    {\n      \"code\": \"int check(int x) {\\n    if (x = 1) {\\n        return 1;\\n    }\\n    return 0;\\n}\\nint result = check(7);\\nprintf(\\\"%d\\\", result);\",\n      \"belief_code\": \"int check(int x) {\\n    if (x == 1) {\\n        return 1;\\n    }\\n    return 0;\\n}\\nint result = check(7);\\nprintf(\\\"%d\\\", result);\",\n      \"distractors\": [\"0\", \"7\"],\n      \"difficulty\": 2\n    },\n    {\n      \"code\": \"char signal = 'a';\\nif (signal = 'b') {\\n    printf(\\\"%c\\\", signal);\\n} else if (signal == 'a') {\\n    printf(\\\"a\\\");\\n} else {\\n    printf(\\\"z\\\");\\n}\",\n      \"belief_code\": \"char signal = 'a';\\nif (signal == 'b') {\\n    printf(\\\"%c\\\", signal);\\n} else if (signal == 'a') {\\n    printf(\\\"a\\\");\\n} else {\\n    printf(\\\"z\\\");\\n}\",\n      \"distractors\": [\"a\", \"z\"],\n      \"difficulty\": 2\n    }\n  ]\n}",
+  "parsed": {
+    "items": [
+      {
+        "code": "int mode = 1;\nif (mode = 2) {\n    printf(\"fast\");\n} else {\n    printf(\"slow\");\n}",
+        "belief_code": "int mode = 1;\nif (mode == 2) {\n    printf(\"fast\");\n} else {\n    printf(\"slow\");\n}",
+        "distractors": [
+          "slow",
+          "2"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int fuel = 0;\nwhile (fuel = 0) {\n    printf(\"burn\");\n    fuel = 1;\n}\nprintf(\"off\");",
+        "belief_code": "int fuel = 0;\nwhile (fuel == 0) {\n    printf(\"burn\");\n    fuel = 1;\n}\nprintf(\"off\");",
+        "distractors": [
+          "burn",
+          "burnoff"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "float rate = 0.0;\nif (rate = 1.0) {\n    printf(\"%.1f\", rate);\n} else {\n    printf(\"zero\");\n}",
+        "belief_code": "float rate = 0.0;\nif (rate == 1.0) {\n    printf(\"%.1f\", rate);\n} else {\n    printf(\"zero\");\n}",
+        "distractors": [
+          "zero",
+          "0.0"
+        ],
+        "difficulty": 1
+      },
+      {
+        "code": "int nums[3] = {1, 2, 3};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    if (nums[i] = 2) {\n        printf(\"two\");\n    }\n}",
+        "belief_code": "int nums[3] = {1, 2, 3};\nint i;\nfor (i = 0; i < 3; i = i + 1) {\n    if (nums[i] == 2) {\n        printf(\"two\");\n    }\n}",
+        "distractors": [
+          "two",
+          "twotwo"
+        ],
+        "difficulty": 3
+      },
+      {
+        "code": "int check(int x) {\n    if (x = 1) {\n        return 1;\n    }\n    return 0;\n}\nint result = check(7);\nprintf(\"%d\", result);",
+        "belief_code": "int check(int x) {\n    if (x == 1) {\n        return 1;\n    }\n    return 0;\n}\nint result = check(7);\nprintf(\"%d\", result);",
+        "distractors": [
+          "0",
+          "7"
+        ],
+        "difficulty": 2
+      },
+      {
+        "code": "char signal = 'a';\nif (signal = 'b') {\n    printf(\"%c\", signal);\n} else if (signal == 'a') {\n    printf(\"a\");\n} else {\n    printf(\"z\");\n}",
+        "belief_code": "char signal = 'a';\nif (signal == 'b') {\n    printf(\"%c\", signal);\n} else if (signal == 'a') {\n    printf(\"a\");\n} else {\n    printf(\"z\");\n}",
+        "distractors": [
+          "a",
+          "z"
+        ],
+        "difficulty": 2
+      }
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 681,
+    "completion_tokens": 14748
+  }
+}
