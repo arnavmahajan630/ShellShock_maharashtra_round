@@ -6,6 +6,9 @@ import { PLANETS } from "../fixtures/planets";
 const PLANET_ROUTES: Record<string, string> = {
   "aegis-grid": "/planet/conditions",
   "miners-belt": "/planet/loops",
+  "lost-fleet": "/planet/arrays",
+  "nav-core": "/planet/variables",
+  "module-deck": "/planet/functions",
 };
 
 export default function MapScreen() {

@@ -11,7 +11,8 @@ from fastapi.testclient import TestClient
 
 from ml import runner
 from ml.contracts import schemas as S
-from ml.contracts.classes import CLASS_INFO, LABELS, MISCONCEPTIONS, REASON_LABELS, TWIN_SETS, band
+from ml.contracts.classes import (CLASS_INFO, LABELS, MISCONCEPTIONS, REASON_LABELS, STRONG_CLASSES,
+                                  TWIN_SETS, band)
 from ml.contracts.feature_names import (
     CLASS_DEFINING_FEATURES, FEATURES, GROUPS, MASK_PRECONDITIONS, OFFLINE_FEATURES,
 )
@@ -31,9 +32,11 @@ def load(path):
 def test_class_lists():
     assert len(MISCONCEPTIONS) == 17 and len(LABELS) == 19 and len(REASON_LABELS) == 18
     assert LABELS[-2:] == ["CORRECT", "OTHER"]
-    assert set(LABELS) == set(CLASS_INFO)
+    # A Strong class (M09) has display text and a twin set, but is not a model label.
+    assert not set(STRONG_CLASSES) & set(LABELS)
+    assert set(CLASS_INFO) == set(LABELS) | set(STRONG_CLASSES)
     for info in TWIN_SETS.values():
-        assert set(info["members"]) <= set(MISCONCEPTIONS)
+        assert set(info["members"]) <= set(MISCONCEPTIONS) | set(STRONG_CLASSES)
     assert [band(p) for p in (0.9, 0.5, 0.2)] == ["Likely", "Possible", "Unsure"]
 
 

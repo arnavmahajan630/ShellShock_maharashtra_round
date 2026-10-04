@@ -63,6 +63,12 @@ def option_problems(item_id, item):
     return out
 
 
+def core_twin_sets():
+    """Twin sets whose members are all model classes. A set with a Strong class (T5 with M09)
+    needs no probes until that class is trained."""
+    return [set_id for set_id, info in TWIN_SETS.items() if set(info["members"]) <= set(MISCONCEPTIONS)]
+
+
 def structure_problems(banks, checks):
     """Everything that can be checked without running code. A list of sentences; empty means sound."""
     out, seen_ids = [], set()
@@ -83,13 +89,13 @@ def structure_problems(banks, checks):
     for extra in sorted(set(checks) - seen_ids):
         out.append(f"{extra}: check without an item")
 
-    per_set = dict.fromkeys(TWIN_SETS, 0)
+    per_set = dict.fromkeys(core_twin_sets(), 0)
     for probe in banks["probes.json"]:
         for set_id in probe.get("twin_sets", []):
             if set_id not in TWIN_SETS:
                 out.append(f"{probe['probe_id']}: unknown twin set {set_id}")
                 continue
-            per_set[set_id] += 1
+            per_set[set_id] = per_set.get(set_id, 0) + 1
             a, b = TWIN_SETS[set_id]["members"]
             belief = probe["belief"]
             if a not in belief or b not in belief:

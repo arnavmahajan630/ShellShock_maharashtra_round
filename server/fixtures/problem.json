@@ -242,6 +242,106 @@
         {"args": [-1, -2, -3], "expect": {"returned": -1}}
       ]
     },
+    "P08": {
+      "problem_id": "P08",
+      "name": "last_beacon",
+      "planet": "arrays",
+      "sector": null,
+      "difficulty": 1,
+      "world": "beacon",
+      "signature": "int last_beacon(int ids[], int n)",
+      "starter": "int last_beacon(int ids[], int n) {\n    // TODO: return the last of the n beacon ids\n}",
+      "prompt": "Return the last of the n beacon ids in ids.",
+      "predict_item": {
+        "item_id": "PR_P08",
+        "code": "int ids[3] = {101, 204, 309};\nint beacon = ids[3];",
+        "question": "What is stored in beacon?",
+        "options": ["309", "Out-of-bounds memory / undefined", "204"],
+        "correct": "Out-of-bounds memory / undefined"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [[10, 20, 30], 3], "expect": {"returned": 30}},
+        {"args": [[99], 1], "expect": {"returned": 99}},
+        {"args": [[5, 4, 3, 2, 1], 5], "expect": {"returned": 1}},
+        {"args": [[42, 17], 2], "expect": {"returned": 17}}
+      ]
+    },
+    "P07": {
+      "problem_id": "P07",
+      "name": "avg_fuel",
+      "planet": "arrays",
+      "sector": null,
+      "difficulty": 1,
+      "world": "fuel_gauge",
+      "signature": "float avg_fuel(int tanks[], int n)",
+      "starter": "float avg_fuel(int tanks[], int n) {\n    // TODO: compute and return average fuel level\n}",
+      "prompt": "Compute and return the average fuel level across all n tanks.",
+      "predict_item": {
+        "item_id": "PR_P07",
+        "code": "int sum = 7;\nint n = 2;\nfloat avg = sum / n;",
+        "question": "What is avg after this runs?",
+        "options": ["3.5", "3.0 — int division truncates", "0.0"],
+        "correct": "3.0 — int division truncates"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [[10, 20, 30], 3], "expect": {"returned": 20.0}},
+        {"args": [[5, 6], 2], "expect": {"returned": 5.5}},
+        {"args": [[1, 2, 4], 3], "expect": {"returned": 2.333333}},
+        {"args": [[100], 1], "expect": {"returned": 100.0}}
+      ]
+    },
+    "P10": {
+      "problem_id": "P10",
+      "name": "sum_first_k",
+      "planet": "arrays",
+      "sector": null,
+      "difficulty": 1,
+      "world": "cargo",
+      "signature": "int sum_first_k(int a[], int n, int k)",
+      "starter": "int sum_first_k(int a[], int n, int k) {\n    // TODO: return sum of first k elements\n}",
+      "prompt": "Return the sum of the first k elements of array a (0 <= k <= n).",
+      "predict_item": {
+        "item_id": "PR_P10",
+        "code": "int a[4] = {2, 3, 5, 7};\nint k = 2;\nint sum = 0;\nfor (int i = 0; i <= k; i++) sum += a[i];",
+        "question": "What is sum?",
+        "options": ["5", "10", "2"],
+        "correct": "10"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [[2, 3, 5, 7], 4, 2], "expect": {"returned": 5}},
+        {"args": [[1, 2, 3, 4], 4, 0], "expect": {"returned": 0}},
+        {"args": [[10, 20, 30], 3, 3], "expect": {"returned": 60}},
+        {"args": [[4, 6, 8], 3, 1], "expect": {"returned": 4}}
+      ]
+    },
+    "P09": {
+      "problem_id": "P09",
+      "name": "max_shield",
+      "planet": "arrays",
+      "sector": null,
+      "difficulty": 2,
+      "world": "shield_grid",
+      "signature": "int max_shield(int s[], int n)",
+      "starter": "int max_shield(int s[], int n) {\n    // TODO: return maximum value in shield array s\n}",
+      "prompt": "Find and return the maximum shield value in array s.",
+      "predict_item": {
+        "item_id": "PR_P09",
+        "code": "int s[3] = {12, 45, 30};\nint m = 0;\nfor (int i = 0; i < 3; i++) {\n    if (s[i] > m) m = s[i];\n}",
+        "question": "What is m after this runs?",
+        "options": ["45", "12", "30"],
+        "correct": "45"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [[12, 45, 30], 3], "expect": {"returned": 45}},
+        {"args": [[99], 1], "expect": {"returned": 99}},
+        {"args": [[5, 10, 3, 8], 4], "expect": {"returned": 10}},
+        {"args": [[50, 40, 30, 20], 4], "expect": {"returned": 50}}
+      ]
+    },
     "Q17": {
       "problem_id": "Q17",
       "name": "factorial",
@@ -273,6 +373,206 @@
             "max_depth_le": 30
           }
         }
+      ]
+    },
+    "P13": {
+      "problem_id": "P13",
+      "name": "sync_ratio",
+      "planet": "variables",
+      "sector": null,
+      "difficulty": 1,
+      "world": "gauge",
+      "signature": "float sync_ratio(int synced, int total)",
+      "starter": "float sync_ratio(int synced, int total) {\n    // TODO: return sync percentage with decimals\n}",
+      "prompt": "Compute and return the sync percentage of synced nodes over total (0 to 100), with decimals.",
+      "predict_item": {
+        "item_id": "PR_P13",
+        "code": "int synced = 1, total = 4;\nfloat pct = synced / total * 100;",
+        "question": "What is pct after this runs?",
+        "options": ["25.0", "0.0 — int division truncates", "25"],
+        "correct": "0.0 — int division truncates"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [4, 5], "expect": {"returned": 80.0}},
+        {"args": [1, 4], "expect": {"returned": 25.0}},
+        {"args": [0, 10], "expect": {"returned": 0.0}},
+        {"args": [3, 3], "expect": {"returned": 100.0}}
+      ]
+    },
+    "P14": {
+      "problem_id": "P14",
+      "name": "signal_diff",
+      "planet": "variables",
+      "sector": null,
+      "difficulty": 1,
+      "world": "radar",
+      "signature": "int signal_diff(int a, int b)",
+      "starter": "int signal_diff(int a, int b) {\n    // TODO: return absolute difference\n}",
+      "prompt": "Return the absolute difference between node signal a and node signal b.",
+      "predict_item": {
+        "item_id": "PR_P14",
+        "code": "int signal_diff(int a, int b) {\n    printf(\"%d\", a > b ? a - b : b - a);\n}",
+        "question": "What does signal_diff(10, 4) return to its caller?",
+        "options": ["6", "Unpredictable — printf does not return", "0"],
+        "correct": "Unpredictable — printf does not return"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [10, 4], "expect": {"returned": 6}},
+        {"args": [3, 9], "expect": {"returned": 6}},
+        {"args": [5, 5], "expect": {"returned": 0}},
+        {"args": [-2, 3], "expect": {"returned": 5}}
+      ]
+    },
+    "P18": {
+      "problem_id": "P18",
+      "name": "state_balance",
+      "planet": "variables",
+      "sector": null,
+      "difficulty": 1,
+      "world": "reactor",
+      "signature": "int state_balance(int initial, int delta)",
+      "starter": "int state_balance(int initial, int delta) {\n    // TODO: return updated state\n}",
+      "prompt": "Calculate and return updated state: initial plus delta.",
+      "predict_item": {
+        "item_id": "PR_P18",
+        "code": "int balance;\nbalance += 5;",
+        "question": "What is balance after this runs?",
+        "options": ["5", "Unpredictable garbage value", "0"],
+        "correct": "Unpredictable garbage value"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [10, 5], "expect": {"returned": 15}},
+        {"args": [0, 7], "expect": {"returned": 7}},
+        {"args": [20, -5], "expect": {"returned": 15}},
+        {"args": [100, 0], "expect": {"returned": 100}}
+      ]
+    },
+    "P19": {
+      "problem_id": "P19",
+      "name": "coordinate_nodes",
+      "planet": "variables",
+      "sector": null,
+      "difficulty": 2,
+      "world": "amplifier",
+      "signature": "int coordinate_nodes(int primary, int replica)",
+      "starter": "int coordinate_nodes(int primary, int replica) {\n    // TODO: return total active capacity\n}",
+      "prompt": "Return total active capacity: if both are active (> 0), return primary + replica; otherwise return the active one (or 0 if neither).",
+      "predict_item": {
+        "item_id": "PR_P19",
+        "code": "int primary = 10, replica = 0;\nif (primary = 0) {\n    return replica;\n}\nreturn primary;",
+        "question": "What is returned?",
+        "options": ["10", "0 — assignment in condition sets primary to 0", "unpredictable"],
+        "correct": "0 — assignment in condition sets primary to 0"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [10, 20], "expect": {"returned": 30}},
+        {"args": [15, 0], "expect": {"returned": 15}},
+        {"args": [0, 25], "expect": {"returned": 25}},
+        {"args": [0, 0], "expect": {"returned": 0}}
+      ]
+    },
+    "P20": {
+      "problem_id": "P20",
+      "name": "clamp_range",
+      "planet": "functions",
+      "sector": null,
+      "difficulty": 1,
+      "world": "limiter",
+      "signature": "int clamp_range(int val, int lo, int hi)",
+      "starter": "int clamp_range(int val, int lo, int hi) {\n    // TODO: return val clamped to [lo, hi]\n}",
+      "prompt": "Keep modular signal output within operational limits. Return val clamped to the range [lo, hi].",
+      "predict_item": {
+        "item_id": "PR_P20",
+        "code": "int clamp_range(int val, int lo, int hi) {\n    if (val < lo) printf(\"%d\", lo);\n    else if (val > hi) printf(\"%d\", hi);\n    else printf(\"%d\", val);\n}",
+        "question": "What does clamp_range(120, 0, 100) return to its caller?",
+        "options": ["100", "Unpredictable garbage — printf does not return a value", "0"],
+        "correct": "Unpredictable garbage — printf does not return a value"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [25, 0, 100], "expect": {"returned": 25}},
+        {"args": [-10, 0, 100], "expect": {"returned": 0}},
+        {"args": [150, 0, 100], "expect": {"returned": 100}},
+        {"args": [50, 50, 50], "expect": {"returned": 50}}
+      ]
+    },
+    "P21": {
+      "problem_id": "P21",
+      "name": "boost_shield",
+      "planet": "functions",
+      "sector": null,
+      "difficulty": 1,
+      "world": "shield_module",
+      "signature": "int boost_shield(int shield, int boost)",
+      "starter": "int boost_shield(int shield, int boost) {\n    // TODO: return updated shield (shield + boost, capped at 100)\n}",
+      "prompt": "Calculate boosted shield capacity: return shield plus boost, capped at 100. Changes must be returned to the caller.",
+      "predict_item": {
+        "item_id": "PR_P21",
+        "code": "void add_power(int s, int b) {\n    s += b;\n}\nint boost_shield(int shield, int boost) {\n    add_power(shield, boost);\n    return shield;\n}",
+        "question": "What does boost_shield(40, 30) return?",
+        "options": ["40 — C parameters are passed by value, so shield is unchanged", "70", "100"],
+        "correct": "40 — C parameters are passed by value, so shield is unchanged"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [40, 30], "expect": {"returned": 70}},
+        {"args": [80, 50], "expect": {"returned": 100}},
+        {"args": [100, 20], "expect": {"returned": 100}},
+        {"args": [0, 45], "expect": {"returned": 45}}
+      ]
+    },
+    "P22": {
+      "problem_id": "P22",
+      "name": "compose_pipeline",
+      "planet": "functions",
+      "sector": null,
+      "difficulty": 1,
+      "world": "pipeline",
+      "signature": "int compose_pipeline(int x)",
+      "starter": "int compose_pipeline(int x) {\n    // TODO: return 2 * (x * x) + 1\n}",
+      "prompt": "Compose a transformation pipeline: return 2 * (x * x) + 1. Using helper functions is encouraged!",
+      "predict_item": {
+        "item_id": "PR_P22",
+        "code": "int step_sq(int n) { return n * n; }\nint compose_pipeline(int x) {\n    int res;\n    res += step_sq(x);\n    return res;\n}",
+        "question": "What is the flaw in this modular pipeline?",
+        "options": ["res is uninitialized before += is used", "step_sq cannot be called", "res must be a float"],
+        "correct": "res is uninitialized before += is used"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [3], "expect": {"returned": 19}},
+        {"args": [0], "expect": {"returned": 1}},
+        {"args": [5], "expect": {"returned": 51}},
+        {"args": [-2], "expect": {"returned": 9}}
+      ]
+    },
+    "P23": {
+      "problem_id": "P23",
+      "name": "integrate_subsystem",
+      "planet": "functions",
+      "sector": null,
+      "difficulty": 2,
+      "world": "orbital_dock",
+      "signature": "int integrate_subsystem(int mode, int a, int b)",
+      "starter": "int integrate_subsystem(int mode, int a, int b) {\n    // TODO: mode 1 -> a + b; mode 2 -> max(a, b); else -> -1\n}",
+      "prompt": "Integrate subsystem signals: if mode is 1, return a + b; if mode is 2, return the larger of a and b; for any other mode, return -1.",
+      "predict_item": {
+        "item_id": "PR_P23",
+        "code": "int integrate_subsystem(int mode, int a, int b) {\n    if (mode = 1) {\n        return a + b;\n    }\n    return -1;\n}",
+        "question": "What happens when integrate_subsystem(2, 5, 5) is called?",
+        "options": ["Returns 10 — assignment mode = 1 makes the if true", "Returns -1", "Returns 5"],
+        "correct": "Returns 10 — assignment mode = 1 makes the if true"
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [1, 10, 20], "expect": {"returned": 30}},
+        {"args": [2, 15, 42], "expect": {"returned": 42}},
+        {"args": [2, 50, 12], "expect": {"returned": 50}},
+        {"args": [3, 10, 20], "expect": {"returned": -1}}
       ]
     }
   },

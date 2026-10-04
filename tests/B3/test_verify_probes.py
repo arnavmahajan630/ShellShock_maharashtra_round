@@ -36,8 +36,9 @@ def test_structure_is_sound():
 
 
 def test_every_twin_set_has_two_probes_that_split_it():
-    for set_id, info in TWIN_SETS.items():
-        a, b = info["members"]
+    assert "T1" in V.core_twin_sets() and len(V.core_twin_sets()) == 8
+    for set_id in V.core_twin_sets():
+        a, b = TWIN_SETS[set_id]["members"]
         probes = [p for p in BANKS["probes.json"] if set_id in p["twin_sets"]]
         assert len(probes) >= 2, set_id
         assert all(p["belief"][a] != p["belief"][b] for p in probes), set_id
