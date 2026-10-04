@@ -1,4 +1,4 @@
-"""Checks the quiz bank (plans/05 §3.1).
+"""Checks the quiz bank (ml_plan/05 §3.1).
 
     python -m ml.items.verify_quiz                    interpreter and gcc
     python -m ml.items.verify_quiz --backend interp

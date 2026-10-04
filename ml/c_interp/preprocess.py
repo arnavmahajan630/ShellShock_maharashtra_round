@@ -1,4 +1,4 @@
-"""Text clean-up before pycparser sees the learner's file (plans/03 §2.5).
+"""Text clean-up before pycparser sees the learner's file (ml_plan/03 §2.5).
 
   1. normalise smart quotes and other non-ASCII punctuation (gate G8),
   2. replace `//` and `/* */` comments with spaces, keeping every newline,

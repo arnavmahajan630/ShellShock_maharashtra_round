@@ -1,4 +1,4 @@
-"""Group A: AST structure features (plans/03 §4.1), package F1.
+"""Group A: AST structure features (ml_plan/03 §4.1), package F1.
 
     feats, meta = ast_features(code, entry=None, trace=None, display_test=0)
 

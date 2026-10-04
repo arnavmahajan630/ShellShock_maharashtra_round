@@ -1,6 +1,6 @@
 """Hand-set numbers shared by the Bayes layer, knowledge model, exam and simulations.
 
-Contract: plans/03 §5.5, §6, §8 and plans/05 §4. These are design assumptions, not fitted
+Contract: ml_plan/03 §5.5, §6, §8 and ml_plan/05 §4. These are design assumptions, not fitted
 values. Read them from here so every package uses the same ones.
 """
 

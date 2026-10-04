@@ -1,6 +1,6 @@
 {
   "_doc": {
-    "contract": "plans/03 §5.6. One entry per feature that can be shown as evidence, plus `f_fix` for the post-model fixer sentence (not a model feature).",
+    "contract": "ml_plan/03 §5.6. One entry per feature that can be shown as evidence, plus `f_fix` for the post-model fixer sentence (not a model feature).",
     "type": "CODE for group A (what the code looks like), RUN for groups B and R (what happened when it ran).",
     "sentences": "`text` is used when the feature value is not 0; `positive` / `negative` when it is above / below 0 (they win over `text`); `zero` when it is exactly 0. `neutral` is a value that says nothing (no sentence). `variants` replace `text` when the listed other features have the listed values. `requires` lists other features that must be non-zero for the entry to apply at all. A feature with no sentence for its current value is skipped by the evidence generator.",
     "placeholders": "Filled from meta['values'][feature] returned by ml.features.extract.extract (the allowed names per feature are in extract.TEMPLATE_FIELDS). `<key>_fallback` is used when a placeholder of `<key>` is missing or empty."

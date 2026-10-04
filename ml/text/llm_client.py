@@ -1,4 +1,4 @@
-"""DeepSeek client for offline data generation (plans/05 §7).
+"""DeepSeek client for offline data generation (ml_plan/05 §7).
 
 Reads DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL and DEEPSEEK_MODEL from the root .env.
 Every response is saved under ml/data/llm_raw/<job>/<hash>.json, so a rerun reads from

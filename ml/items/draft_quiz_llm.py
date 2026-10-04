@@ -1,4 +1,4 @@
-"""Drafts quiz-item candidates with DeepSeek (plans/05 §3.1, §7), and writes their explanations.
+"""Drafts quiz-item candidates with DeepSeek (ml_plan/05 §3.1, §7), and writes their explanations.
 
     python -m ml.items.draft_quiz_llm drafts                 all classes and types
     python -m ml.items.draft_quiz_llm drafts --classes M01 D05

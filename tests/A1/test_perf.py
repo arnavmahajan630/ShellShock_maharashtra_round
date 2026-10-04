@@ -1,4 +1,4 @@
-"""Performance budget of plans/03 §2.5: a problem's whole test suite in under 30 ms."""
+"""Performance budget of ml_plan/03 §2.5: a problem's whole test suite in under 30 ms."""
 import time
 
 import pytest

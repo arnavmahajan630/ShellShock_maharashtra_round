@@ -1,4 +1,4 @@
-"""One test (or more) per row of the table in plans/03 §2.2, in table order."""
+"""One test (or more) per row of the table in ml_plan/03 §2.2, in table order."""
 from ml.contracts.subset import DEPTH_CAP, GARBAGE, STEP_CAP
 
 from .util import effects, events, lines, run, trace

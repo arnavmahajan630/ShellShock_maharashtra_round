@@ -1,4 +1,4 @@
-"""The C interpreter for the frozen subset (package A1, plans/03 §2).
+"""The C interpreter for the frozen subset (package A1, ml_plan/03 §2).
 
     preprocess.py  text clean-up before parsing (comments, #include, #define, smart quotes)
     values.py      values, literals, printf formatting

@@ -2,7 +2,7 @@
 
 Each entry lists every feature that is not 0 for that snippet; all other group-A
 features must be exactly 0. The values were worked out from the feature definitions in
-plans/03 §4.1 and the rules in ml/features/ast_feats.py, snippet by snippet.
+ml_plan/03 §4.1 and the rules in ml/features/ast_feats.py, snippet by snippet.
 """
 
 EXPECTED = {

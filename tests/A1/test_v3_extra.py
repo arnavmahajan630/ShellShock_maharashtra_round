@@ -1,4 +1,4 @@
-"""The 'v3 extra unit tests' list of plans/03 §2.5, plus the rest of the string support."""
+"""The 'v3 extra unit tests' list of ml_plan/03 §2.5, plus the rest of the string support."""
 from ml.contracts.subset import DEPTH_CAP
 
 from .util import effects, events, run, trace

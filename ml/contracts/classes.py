@@ -1,6 +1,6 @@
 """Class ids and their display text.
 
-Contract: plans/03 §3.1 (ids, wrong beliefs), plans/02 §2.3 (ship names, subtitles).
+Contract: ml_plan/03 §3.1 (ids, wrong beliefs), design_plan/02 §2.3 (ship names, subtitles).
 Do not rename or reorder anything here.
 """
 

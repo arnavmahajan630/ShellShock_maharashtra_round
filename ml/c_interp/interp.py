@@ -1,4 +1,4 @@
-"""Evaluator for the frozen C subset (plans/03 §2.1, §2.2, §2.5).
+"""Evaluator for the frozen C subset (ml_plan/03 §2.1, §2.2, §2.5).
 
 The pycparser tree is walked once per source file. Each node becomes a Python closure
 (one `_x_<Node>` / `_s_<Node>` method per node type builds it), and running a test calls

@@ -1,4 +1,4 @@
-"""harness.py: run_tests and trace shapes (plans/03 §2.3, §2.4; notes/W0.md 2-5, 7)."""
+"""harness.py: run_tests and trace shapes (ml_plan/03 §2.3, §2.4; notes/W0.md 2-5, 7)."""
 import copy
 import json
 

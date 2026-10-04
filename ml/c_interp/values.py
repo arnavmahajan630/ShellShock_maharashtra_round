@@ -1,4 +1,4 @@
-"""Values of the C subset and the helpers that work on them (plans/03 §2.1, §2.2, §2.5).
+"""Values of the C subset and the helpers that work on them (ml_plan/03 §2.1, §2.2, §2.5).
 
 A C `int` (and `char`, `long`, `short`, `unsigned`) is a Python `int` kept inside 32 bits.
 A C `float` or `double` is a Python `float`. The Python type is the type tag.

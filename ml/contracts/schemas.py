@@ -1,6 +1,6 @@
 """Shapes of every JSON object that crosses a package or the API.
 
-Contract: plans/03 §2.4, §3.3, §3.6, §6.3, §8.3, §9.4, §11 and plans/05 §3, §5, §7.
+Contract: ml_plan/03 §2.4, §3.3, §3.6, §6.3, §8.3, §9.4, §11 and ml_plan/05 §3, §5, §7.
 Field names are fixed. Where 03 and 05 leave an inner shape open, the shape chosen here
 is marked "W0 decision".
 

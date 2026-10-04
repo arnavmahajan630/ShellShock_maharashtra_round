@@ -1,4 +1,4 @@
-"""Builds ml/data/quiz_items.json from drafts by running them (plans/05 §3.1).
+"""Builds ml/data/quiz_items.json from drafts by running them (ml_plan/05 §3.1).
 
     python -m ml.items.build_quiz
 

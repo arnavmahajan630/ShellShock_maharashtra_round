@@ -1,4 +1,4 @@
-"""Differential check against gcc (plans/03 §2.5).
+"""Differential check against gcc (ml_plan/03 §2.5).
 
 Each program is defined behaviour in C: its trace has none of uninit_read, oob_read,
 overflow, str_literal_compare. gcc compiles and runs it; the interpreter must print the

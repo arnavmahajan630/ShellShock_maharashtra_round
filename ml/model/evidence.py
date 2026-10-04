@@ -1,4 +1,4 @@
-"""Evidence generation (plans/03 §5.6), package M1.
+"""Evidence generation (ml_plan/03 §5.6), package M1.
 
 1. `booster.predict(x, pred_contrib=True)` gives SHAP-style contributions per class; the slice
    for the top class is taken.

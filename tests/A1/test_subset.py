@@ -1,4 +1,4 @@
-"""The frozen C subset of plans/03 §2.1: what runs, and what is rejected (gate G4)."""
+"""The frozen C subset of ml_plan/03 §2.1: what runs, and what is rejected (gate G4)."""
 import pytest
 
 from ml.c_interp import harness

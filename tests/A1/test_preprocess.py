@@ -1,4 +1,4 @@
-"""preprocess.py: plans/03 §2.5 (comments become spaces, newlines stay) and gate G8."""
+"""preprocess.py: ml_plan/03 §2.5 (comments become spaces, newlines stay) and gate G8."""
 import pytest
 from pycparser import c_parser
 

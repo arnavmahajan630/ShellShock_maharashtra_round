@@ -3,7 +3,7 @@
 Run from the repo root:
     .venv\\Scripts\\python -m uvicorn server.app.main:app --host 0.0.0.0 --port 8000
 
-Every endpoint in plans/03 §11 and plans/05 §5 is listed in FIXTURE_ROUTES. A module in
+Every endpoint in ml_plan/03 §11 and ml_plan/05 §5 is listed in FIXTURE_ROUTES. A module in
 server/app/routes/ that defines `router` is loaded automatically and takes over its paths;
 any path without a live router answers from server/fixtures/. Nobody needs to edit this file
 to add an endpoint: add a routes module.

@@ -1,6 +1,6 @@
 """A second, differently made test set of reason sentences: a stand-in for classmates' answers.
 
-plans/05 §7 asks for 50 or more sentences typed by real classmates, as the honest test of the
+ml_plan/05 §7 asks for 50 or more sentences typed by real classmates, as the honest test of the
 sentence reader. The team could not collect them, so this builds the nearest thing an LLM can
 give: a different model (deepseek-v4-pro, not the deepseek-flash that wrote the training
 sentences) role-plays one student at a time. The student is given a character and how C works

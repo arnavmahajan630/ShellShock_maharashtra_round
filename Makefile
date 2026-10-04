@@ -17,7 +17,7 @@ fixtures:
 serve:
 	$(PY) -m uvicorn server.app.main:app --host 0.0.0.0 --port 8000
 
-# The targets below call modules that later packages provide (plans/06).
+# The targets below call modules that later packages provide (ml_plan/06).
 data:
 	$(PY) -m ml.generate.build_dataset
 

@@ -1,4 +1,4 @@
-"""Baselines for E8 (plans/03 §5.7), package M1.
+"""Baselines for E8 (ml_plan/03 §5.7), package M1.
 
 1. majority class
 2. rules: one predicate per class over the extracted features, tried in the fixed priority

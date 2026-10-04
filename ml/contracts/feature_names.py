@@ -1,6 +1,6 @@
 """The ordered feature list: the agreement between the feature packages and the model.
 
-Contract: plans/03 §4. Order matters; `FEATURES` is the column order of every matrix.
+Contract: ml_plan/03 §4. Order matters; `FEATURES` is the column order of every matrix.
 `OFFLINE_FEATURES` (group F) are computed after the model, for the top-3 classes only,
 and are not columns of the training matrix (03 §4.4, §5.5).
 

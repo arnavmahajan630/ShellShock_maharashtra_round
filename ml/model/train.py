@@ -1,4 +1,4 @@
-"""Train the diagnoser (plans/03 §5.2–5.3), package M1.
+"""Train the diagnoser (ml_plan/03 §5.2–5.3), package M1.
 
     python -m ml.model.train                         # ml/data/dataset.jsonl -> ml/artifacts/
     python -m ml.model.train --data tests/fixtures/features_synth.npz --out <dir> [--no-grid]

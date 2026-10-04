@@ -1,4 +1,4 @@
-"""Group R: output-relation features (plans/03 §4.3), package F2.
+"""Group R: output-relation features (ml_plan/03 §4.3), package F2.
 
     feats, meta = relation_features(problem, outputs, run_reference, recursive=...)
 

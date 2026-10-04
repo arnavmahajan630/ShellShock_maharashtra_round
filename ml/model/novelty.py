@@ -1,4 +1,4 @@
-"""Novelty score and thresholds (plans/03 §4.8), package M1.
+"""Novelty score and thresholds (ml_plan/03 §4.8), package M1.
 
 knn_dist  mean Euclidean distance to the 5 nearest training rows in standardised A+B+R space
           (NaN -> column median, zero-variance columns dropped).

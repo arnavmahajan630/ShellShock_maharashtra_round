@@ -1,4 +1,4 @@
-"""Runs a problem's tests on learner code with the interpreter (plans/03 §2.3, §2.4).
+"""Runs a problem's tests on learner code with the interpreter (ml_plan/03 §2.3, §2.4).
 
     run_tests(problem, code, sample_only=False) -> schemas.RunResult shape
     trace(problem, code, test_index=None)       -> schemas.Trace shape

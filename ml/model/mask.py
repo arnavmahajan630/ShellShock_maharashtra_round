@@ -1,4 +1,4 @@
-"""Structural class masking (plans/03 §4.1b), package M1.
+"""Structural class masking (ml_plan/03 §4.1b), package M1.
 
 A class is impossible unless one of its precondition features is present in the code
 (`MASK_PRECONDITIONS` in ml/contracts/feature_names.py). After calibration its probability is

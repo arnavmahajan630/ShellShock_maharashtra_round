@@ -1,4 +1,4 @@
-"""Group B: execution / trace features (plans/03 §4.2), package F2.
+"""Group B: execution / trace features (ml_plan/03 §4.2), package F2.
 
     feats, meta = trace_features(trace, reference_trace, problem,
                                  loops=..., ref_loops=..., run_result=...)

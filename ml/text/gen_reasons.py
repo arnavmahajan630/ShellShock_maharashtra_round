@@ -1,4 +1,4 @@
-"""Generates the reason sentences the sentence reader trains on (plans/05 §7).
+"""Generates the reason sentences the sentence reader trains on (ml_plan/05 §7).
 
 For each (class, context, voice) DeepSeek writes a few one-line explanations a student
 with that wrong belief might type. The sentences are filtered, split by context and

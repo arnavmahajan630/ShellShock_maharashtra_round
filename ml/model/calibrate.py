@@ -1,4 +1,4 @@
-"""Temperature scaling and calibration measures (plans/03 §5.4), package M1.
+"""Temperature scaling and calibration measures (ml_plan/03 §5.4), package M1.
 
 One scalar T is fitted on out-of-fold logits by minimising the negative log-likelihood of
 softmax(logits / T), bounds [0.5, 5]. ECE uses 10 equal-width confidence bins.

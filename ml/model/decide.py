@@ -1,4 +1,4 @@
-"""Decision logic (plans/03 §5.5), package M1.
+"""Decision logic (ml_plan/03 §5.5), package M1.
 
 `decide` turns a posterior into the `diagnosis` object of 03 §11.1 (without evidence, which
 `evidence.py` adds). It gets everything that belongs to other packages as arguments:

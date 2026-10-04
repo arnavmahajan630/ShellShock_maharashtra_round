@@ -1,6 +1,6 @@
 """The frozen C subset, interpreter limits, trace events and gate messages.
 
-Contract: plans/03 §2.1, §2.2, §2.4, §3.7.1.
+Contract: ml_plan/03 §2.1, §2.2, §2.4, §3.7.1.
 """
 
 GARBAGE = -858993460        # value of an uninitialised read or an out-of-bounds read

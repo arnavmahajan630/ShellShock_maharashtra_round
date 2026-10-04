@@ -1,6 +1,6 @@
 """Student-style test programs written by an LLM: a stand-in for the hand-written R sets.
 
-plans/03 §3.4 asks for realistic programs written by hand. The team could not do that, so
+ml_plan/03 §3.4 asks for realistic programs written by hand. The team could not do that, so
 DeepSeek role-plays a first-semester student instead. It is told the student's wrong belief
 (the "Wrong belief" text only, never our mutation rules) and a messy personal style.
 Rows are marked source "R-llm" and must never be reported as hand-written or as real

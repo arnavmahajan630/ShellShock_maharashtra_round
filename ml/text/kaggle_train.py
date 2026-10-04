@@ -1,4 +1,4 @@
-"""Fine-tunes the sentence reader on a cloud GPU (Colab or Kaggle). plans/05 §6.
+"""Fine-tunes the sentence reader on a cloud GPU (Colab or Kaggle). ml_plan/05 §6.
 
 Self-contained: it imports nothing from this repo. Upload this file and
 ml/data/reasons_bundle.json, then run

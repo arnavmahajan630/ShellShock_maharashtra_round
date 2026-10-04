@@ -1,4 +1,4 @@
-"""Checks the probe, trap and exam-item banks (plans/03 §6.3, §6.6, §8.3, §8.5.1).
+"""Checks the probe, trap and exam-item banks (ml_plan/03 §6.3, §6.6, §8.3, §8.5.1).
 
     python -m ml.bayes.verify_probes                 interpreter and gcc
     python -m ml.bayes.verify_probes --backend interp
