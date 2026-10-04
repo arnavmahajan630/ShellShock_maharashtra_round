@@ -11,7 +11,7 @@ from ml.contracts.classes import CLASS_INFO, band
 
 FLOOR = 0.003
 ALL_CLASSES = [
-    "M01", "M02", "M03", "M04", "M05", "M06", "M07", "M08", "M10",
+    "M01", "M02", "M03", "M04", "M05", "M06", "M07", "M08", "M09", "M10",
     "D01", "D02", "D03", "D04", "D05", "D06", "D07", "D08",
 ]
 
@@ -27,6 +27,7 @@ CLASS_MODALITY = {
     "M08": "memory_strip",
     "M05": "value_meter",
     "M04": "value_meter",
+    "M09": "trace_timeline",
 }
 
 
@@ -75,6 +76,12 @@ TRAP_ITEMS = {
         "options": ["The sum of all cells", "Just the last cell's value — each pass overwrites it", "0"],
         "correct": 1,
     },
+    "M04": {
+        "prompt": "`int total = 5; int n = 2; float avg = total / n;` — what is stored in avg?",
+        "code": "int total = 5;\nint n = 2;\nfloat avg = total / n;",
+        "options": ["2.5", "2.0 — int division drops the fractional part", "0.0"],
+        "correct": 1,
+    },
     "M05": {
         "prompt": "`int m;` then `if (b > m)` on the very next line — what is `m` the first time?",
         "code": "int m;\nif (b > m) {\n    m = b;\n}",
@@ -97,6 +104,12 @@ TRAP_ITEMS = {
         "prompt": "`int a[5];` — what is the index of the last valid cell?",
         "code": "int a[5];",
         "options": ["5", "4", "depends on values"],
+        "correct": 1,
+    },
+    "M09": {
+        "prompt": "`void add(int x) { x += 10; }` is called with `int a = 5; add(a);` — what is `a` after?",
+        "code": "void add(int x) {\n    x += 10;\n}\nint a = 5;\nadd(a);",
+        "options": ["15", "5 — parameters are passed by value", "0"],
         "correct": 1,
     },
     "M10": {

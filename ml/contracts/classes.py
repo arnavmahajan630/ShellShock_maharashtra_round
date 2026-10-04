@@ -68,6 +68,12 @@ CLASS_INFO = {
         "subtitle": "Arrays start at 0; last cell is n−1",
         "belief": "Arrays are indexed 1..n",
     },
+    "M09": {
+        "code_name": "PASS_BY_VALUE",
+        "name": "Copy Module",
+        "subtitle": "Parameters are copies; changes don't affect caller",
+        "belief": "Modifying a parameter modifies the caller's variable",
+    },
     "M10": {
         "code_name": "PRINT_NOT_RETURN",
         "name": "Silent Messenger",
@@ -140,6 +146,7 @@ TWIN_SETS = {
     "T2": {"type": "STRUCTURAL", "members": ["M02", "M07"]},
     "T3": {"type": "STRUCTURAL", "members": ["M06", "M07"]},
     "T4": {"type": "STRUCTURAL", "members": ["M03", "M05"]},
+    "T5": {"type": "STRUCTURAL", "members": ["M09", "M10"]},
     "T6": {"type": "STRUCTURAL", "members": ["D02", "M02"]},
     "T7": {"type": "STRUCTURAL", "members": ["D05", "D06"]},
     "T8": {"type": "STRUCTURAL", "members": ["D07", "M10"]},

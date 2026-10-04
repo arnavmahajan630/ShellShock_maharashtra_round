@@ -20,10 +20,12 @@ _COPY = {
     "M01": ["The loop's stopping condition includes one extra (or one too few) pass.", "Check whether the last value of the loop variable is still inside the valid range."],
     "M02": ["The loop's test never becomes false because the variable it checks never changes inside the loop body.", "Something inside the loop needs to move the variable toward the exit."],
     "M03": ["Reassigning the accumulator with `=` replaces its value instead of building on it.", "Use `+=` (or the matching combine operator) so each pass adds to the last."],
+    "M04": ["int ÷ int drops any fractional part — it truncates toward zero instead of giving a decimal.", "Cast at least one side to (float) before dividing: `(float)total / n`."],
     "M05": ["A local variable has no starting value until you give it one.", "Reading it before that first assignment is garbage, not 0."],
     "M06": ["`=` inside a condition stores a value; `==` compares two values.", "The condition becomes true whenever the assigned value isn't 0 — every time, here."],
     "M07": ["A `;` right after the loop/if header ends the statement there — the `{ }` block after it runs on its own.", "The condition never actually gates anything."],
     "M08": ["Arrays are indexed 0 through n−1, not 1 through n.", "The last valid cell of an n-element array is cell n−1, not cell n."],
+    "M09": ["In C, scalar parameters are passed by value — the function receives a private copy.", "Modifying the parameter has no effect on the variable in the caller. Return the new value instead."],
     "M10": ["`printf` only shows a value on screen — it doesn't hand anything back to whoever called the function.", "Without `return`, the caller gets an unpredictable value."],
 }
 

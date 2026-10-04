@@ -13,14 +13,23 @@ from pathlib import Path
 from fastapi import APIRouter, Request
 
 from ml.c_interp import harness
-from server.app import conditions_rules, gate as gate_module, loops_rules
+from server.app import arrays_rules, conditions_rules, functions_rules, gate as gate_module, loops_rules, variables_rules
 
 router = APIRouter()
 
 FIXTURES = Path(__file__).resolve().parent.parent.parent / "fixtures"
 CONDITIONS_IDS = {"P11", "P12", "P16", "P17"}
 LOOPS_IDS = {"P01", "P03", "P05", "P06"}
-RULES_BY_ID = {**{pid: conditions_rules for pid in CONDITIONS_IDS}, **{pid: loops_rules for pid in LOOPS_IDS}}
+ARRAYS_IDS = {"P08", "P07", "P10", "P09"}
+VARIABLES_IDS = {"P13", "P14", "P18", "P19"}
+FUNCTIONS_IDS = {"P20", "P21", "P22", "P23"}
+RULES_BY_ID = {
+    **{pid: conditions_rules for pid in CONDITIONS_IDS},
+    **{pid: loops_rules for pid in LOOPS_IDS},
+    **{pid: arrays_rules for pid in ARRAYS_IDS},
+    **{pid: variables_rules for pid in VARIABLES_IDS},
+    **{pid: functions_rules for pid in FUNCTIONS_IDS},
+}
 
 
 def _problems_catalog():
