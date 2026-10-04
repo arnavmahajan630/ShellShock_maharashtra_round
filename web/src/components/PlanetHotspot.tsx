@@ -10,9 +10,10 @@ const GLOW_BY_STATUS: Record<Planet["status"], string> = {
 interface PlanetHotspotProps {
   planet: Planet;
   index: number;
+  onActivate?: () => void;
 }
 
-export default function PlanetHotspot({ planet, index }: PlanetHotspotProps) {
+export default function PlanetHotspot({ planet, index, onActivate }: PlanetHotspotProps) {
   const interactive = planet.status !== "locked";
   const glow = GLOW_BY_STATUS[planet.status];
 
@@ -47,9 +48,7 @@ export default function PlanetHotspot({ planet, index }: PlanetHotspotProps) {
       type="button"
       whileHover={{ scale: 1.08, boxShadow: `0 0 28px 6px ${glow}` }}
       whileTap={{ scale: 0.94 }}
-      onClick={() => {
-        /* Phase 1: hover/press feedback only, no navigation. */
-      }}
+      onClick={onActivate ?? (() => {})}
     />
   );
 }
