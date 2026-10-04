@@ -1,0 +1,499 @@
+{
+  "id": "E14",
+  "title": "Adaptive exam versus fixed and random on simulated learners",
+  "population": "simulated",
+  "learner_population": "simulated learners (not real students)",
+  "slice": "simulated learners \u00d7 {adaptive, fixed blueprint, random}; not real students",
+  "caveat": "Simulated learners follow our assumptions; this shows the selection logic works as designed, not that it is optimal for real learners.",
+  "seed": 1414,
+  "n_seeds": 20,
+  "learners_per_seed": 2000,
+  "n": 40000,
+  "length": {
+    "coding": 5,
+    "trace": 5
+  },
+  "blueprint": [
+    "Q01",
+    "xt_sort_1",
+    "Q06",
+    "xt_rec_1",
+    "Q17",
+    "xt_str_1",
+    "Q14",
+    "xt_search_1",
+    "Q10",
+    "xt_search_6"
+  ],
+  "diagnoser_noise": {
+    "source": "E1 out-of-fold confusion on TRAIN (calibrated, masked argmax | dataset label)",
+    "note": "P(argmax | dataset label) on TRAIN out-of-fold, after the shipped temperature and mask. A draw of CORRECT or OTHER on a failed attempt is a failure with no signature. Same matrix for every policy. The learners are simulated.",
+    "e1": {
+      "n": 5815,
+      "model_version": "diagnoser_40e8e6ff",
+      "temperature": 2.4468147074242865,
+      "empty_rows": [],
+      "mean_diagonal_misconceptions": 0.71011483495669
+    },
+    "simulated_learners": true
+  },
+  "skill_noise": {
+    "low": 0.85,
+    "high": 1.0,
+    "note": "03 \u00a79.3b names skill noise and does not give a range."
+  },
+  "stable_enter_p": 0.12,
+  "items_to_first_finding_censor": "Learners with no hidden active class are left out. A learner who is never found counts as 10 items.",
+  "curves": {
+    "adaptive": [
+      {
+        "item": 1,
+        "profile_f1": {
+          "mean": 0.158185,
+          "lo": 0.155245,
+          "hi": 0.161124,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 2,
+        "profile_f1": {
+          "mean": 0.26282,
+          "lo": 0.260148,
+          "hi": 0.265492,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 3,
+        "profile_f1": {
+          "mean": 0.323917,
+          "lo": 0.320496,
+          "hi": 0.327338,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 4,
+        "profile_f1": {
+          "mean": 0.389734,
+          "lo": 0.386113,
+          "hi": 0.393356,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 5,
+        "profile_f1": {
+          "mean": 0.416563,
+          "lo": 0.413118,
+          "hi": 0.420009,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 6,
+        "profile_f1": {
+          "mean": 0.40546,
+          "lo": 0.402349,
+          "hi": 0.40857,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 7,
+        "profile_f1": {
+          "mean": 0.421378,
+          "lo": 0.41854,
+          "hi": 0.424217,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 8,
+        "profile_f1": {
+          "mean": 0.443093,
+          "lo": 0.440877,
+          "hi": 0.44531,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 9,
+        "profile_f1": {
+          "mean": 0.468012,
+          "lo": 0.465488,
+          "hi": 0.470537,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 10,
+        "profile_f1": {
+          "mean": 0.494899,
+          "lo": 0.492607,
+          "hi": 0.497191,
+          "n_seeds": 20
+        },
+        "simulated": true
+      }
+    ],
+    "fixed": [
+      {
+        "item": 1,
+        "profile_f1": {
+          "mean": 0.16008,
+          "lo": 0.15744,
+          "hi": 0.16272,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 2,
+        "profile_f1": {
+          "mean": 0.219155,
+          "lo": 0.216659,
+          "hi": 0.22165,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 3,
+        "profile_f1": {
+          "mean": 0.205311,
+          "lo": 0.202638,
+          "hi": 0.207985,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 4,
+        "profile_f1": {
+          "mean": 0.261131,
+          "lo": 0.258648,
+          "hi": 0.263614,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 5,
+        "profile_f1": {
+          "mean": 0.343304,
+          "lo": 0.340253,
+          "hi": 0.346355,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 6,
+        "profile_f1": {
+          "mean": 0.361317,
+          "lo": 0.358336,
+          "hi": 0.364298,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 7,
+        "profile_f1": {
+          "mean": 0.397327,
+          "lo": 0.393689,
+          "hi": 0.400964,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 8,
+        "profile_f1": {
+          "mean": 0.440245,
+          "lo": 0.436561,
+          "hi": 0.443929,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 9,
+        "profile_f1": {
+          "mean": 0.464258,
+          "lo": 0.4609,
+          "hi": 0.467617,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 10,
+        "profile_f1": {
+          "mean": 0.463731,
+          "lo": 0.460355,
+          "hi": 0.467107,
+          "n_seeds": 20
+        },
+        "simulated": true
+      }
+    ],
+    "random": [
+      {
+        "item": 1,
+        "profile_f1": {
+          "mean": 0.087678,
+          "lo": 0.085875,
+          "hi": 0.089481,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 2,
+        "profile_f1": {
+          "mean": 0.142738,
+          "lo": 0.141122,
+          "hi": 0.144355,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 3,
+        "profile_f1": {
+          "mean": 0.189173,
+          "lo": 0.18674,
+          "hi": 0.191605,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 4,
+        "profile_f1": {
+          "mean": 0.23075,
+          "lo": 0.22829,
+          "hi": 0.23321,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 5,
+        "profile_f1": {
+          "mean": 0.267042,
+          "lo": 0.264379,
+          "hi": 0.269705,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 6,
+        "profile_f1": {
+          "mean": 0.300547,
+          "lo": 0.297975,
+          "hi": 0.30312,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 7,
+        "profile_f1": {
+          "mean": 0.333083,
+          "lo": 0.330108,
+          "hi": 0.336059,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 8,
+        "profile_f1": {
+          "mean": 0.363823,
+          "lo": 0.361523,
+          "hi": 0.366123,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 9,
+        "profile_f1": {
+          "mean": 0.393754,
+          "lo": 0.391576,
+          "hi": 0.395931,
+          "n_seeds": 20
+        },
+        "simulated": true
+      },
+      {
+        "item": 10,
+        "profile_f1": {
+          "mean": 0.425637,
+          "lo": 0.423393,
+          "hi": 0.42788,
+          "n_seeds": 20
+        },
+        "simulated": true
+      }
+    ]
+  },
+  "rows": [
+    {
+      "policy": "adaptive",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "profile_f1": {
+        "mean": 0.494899,
+        "lo": 0.492607,
+        "hi": 0.497191,
+        "n_seeds": 20
+      },
+      "brier": {
+        "mean": 0.137372,
+        "lo": 0.136409,
+        "hi": 0.138334,
+        "n_seeds": 20
+      },
+      "stable_recheck": {
+        "mean": 0.937757,
+        "lo": 0.934693,
+        "hi": 0.940821,
+        "n_seeds": 20
+      },
+      "items_to_first_finding": {
+        "mean": 3.716996,
+        "lo": 3.676182,
+        "hi": 3.757809,
+        "n_seeds": 20
+      },
+      "mean_items": {
+        "mean": 10.0,
+        "lo": 10.0,
+        "hi": 10.0,
+        "n_seeds": 20
+      }
+    },
+    {
+      "policy": "fixed",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "profile_f1": {
+        "mean": 0.463731,
+        "lo": 0.460355,
+        "hi": 0.467107,
+        "n_seeds": 20
+      },
+      "brier": {
+        "mean": 0.130501,
+        "lo": 0.129792,
+        "hi": 0.131209,
+        "n_seeds": 20
+      },
+      "stable_recheck": {
+        "mean": 0.78171,
+        "lo": 0.776936,
+        "hi": 0.786484,
+        "n_seeds": 20
+      },
+      "items_to_first_finding": {
+        "mean": 4.29465,
+        "lo": 4.257989,
+        "hi": 4.33131,
+        "n_seeds": 20
+      },
+      "mean_items": {
+        "mean": 10.0,
+        "lo": 10.0,
+        "hi": 10.0,
+        "n_seeds": 20
+      }
+    },
+    {
+      "policy": "random",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "profile_f1": {
+        "mean": 0.425637,
+        "lo": 0.423393,
+        "hi": 0.42788,
+        "n_seeds": 20
+      },
+      "brier": {
+        "mean": 0.131554,
+        "lo": 0.130699,
+        "hi": 0.132409,
+        "n_seeds": 20
+      },
+      "stable_recheck": {
+        "mean": 0.748524,
+        "lo": 0.742173,
+        "hi": 0.754874,
+        "n_seeds": 20
+      },
+      "items_to_first_finding": {
+        "mean": 5.610686,
+        "lo": 5.580778,
+        "hi": 5.640593,
+        "n_seeds": 20
+      },
+      "mean_items": {
+        "mean": 10.0,
+        "lo": 10.0,
+        "hi": 10.0,
+        "n_seeds": 20
+      }
+    }
+  ],
+  "acceptance": {
+    "claim": "profile-recovery F1 on simulated learners: adaptive > fixed by >= 10% relative",
+    "population": "simulated learners (not real students)",
+    "adaptive": 0.494899,
+    "fixed": 0.463731,
+    "relative_gain": 0.06721,
+    "met": false
+  },
+  "stand_in_comparison": {
+    "population": "simulated learners (not real students)",
+    "note": "Previous full E14 run used the stand-in matrix. Same seed 1414, 2000 simulated learners per seed, 20 seeds.",
+    "profile_f1": {
+      "adaptive": {
+        "stand_in": 0.481579,
+        "e1": 0.494899,
+        "delta": 0.01332
+      },
+      "fixed": {
+        "stand_in": 0.453387,
+        "e1": 0.463731,
+        "delta": 0.010344
+      },
+      "random": {
+        "stand_in": 0.417303,
+        "e1": 0.425637,
+        "delta": 0.008334
+      }
+    },
+    "relative_gain_stand_in": 0.062181,
+    "relative_gain_e1": 0.06721,
+    "relative_gain_delta": 0.005029,
+    "ten_percent_bar_stand_in": false,
+    "ten_percent_bar_e1": false
+  },
+  "plots": [
+    "e14_curve.png"
+  ]
+}

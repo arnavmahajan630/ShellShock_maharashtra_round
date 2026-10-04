@@ -1,0 +1,350 @@
+{
+  "id": "E10",
+  "title": "Resolution policies on simulated learners",
+  "population": "simulated",
+  "learner_population": "simulated learners (not real students)",
+  "slice": "simulated learners \u00d7 {naive, 4-check, ours}; not real students",
+  "caveat": "Simulated learners embody our assumptions about learner behaviour. The table shows how the policies behave if learners act like this, not that real learners do.",
+  "seed": 1010,
+  "n_seeds": 20,
+  "learners_per_type_per_seed": 2000,
+  "n_per_cell": 40000,
+  "budget": {
+    "followups": 4,
+    "ghost": 1
+  },
+  "parameter_draw": "uniform \u00b150% around the engine g, s, and p_b, per learner",
+  "rows": [
+    {
+      "policy": "naive",
+      "type": "truly_fixed",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": null,
+      "false_not_yet": {
+        "mean": 0.000125,
+        "lo": -4e-06,
+        "hi": 0.000254,
+        "n_seeds": 20
+      },
+      "items_to_decision": {
+        "mean": 1.1172,
+        "lo": 1.112029,
+        "hi": 1.122371,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "4-check",
+      "type": "truly_fixed",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": null,
+      "false_not_yet": {
+        "mean": 0.01855,
+        "lo": 0.016783,
+        "hi": 0.020317,
+        "n_seeds": 20
+      },
+      "items_to_decision": {
+        "mean": 2.241175,
+        "lo": 2.236493,
+        "hi": 2.245857,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "ours",
+      "type": "truly_fixed",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": null,
+      "false_not_yet": {
+        "mean": 0.18195,
+        "lo": 0.176347,
+        "hi": 0.187553,
+        "n_seeds": 20
+      },
+      "items_to_decision": {
+        "mean": 3.312125,
+        "lo": 3.305853,
+        "hi": 3.318397,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "naive",
+      "type": "pattern_copier",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.96815,
+        "lo": 0.966536,
+        "hi": 0.969764,
+        "n_seeds": 20
+      },
+      "false_not_yet": null,
+      "items_to_decision": {
+        "mean": 1.1891,
+        "lo": 1.184159,
+        "hi": 1.194041,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "4-check",
+      "type": "pattern_copier",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.390175,
+        "lo": 0.385714,
+        "hi": 0.394636,
+        "n_seeds": 20
+      },
+      "false_not_yet": null,
+      "items_to_decision": {
+        "mean": 3.535575,
+        "lo": 3.529555,
+        "hi": 3.541595,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "ours",
+      "type": "pattern_copier",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.10575,
+        "lo": 0.102863,
+        "hi": 0.108637,
+        "n_seeds": 20
+      },
+      "false_not_yet": null,
+      "items_to_decision": {
+        "mean": 3.960925,
+        "lo": 3.957353,
+        "hi": 3.964497,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "naive",
+      "type": "lucky_guesser",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.81175,
+        "lo": 0.807993,
+        "hi": 0.815507,
+        "n_seeds": 20
+      },
+      "false_not_yet": null,
+      "items_to_decision": {
+        "mean": 2.35365,
+        "lo": 2.340907,
+        "hi": 2.366393,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "4-check",
+      "type": "lucky_guesser",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.370625,
+        "lo": 0.365748,
+        "hi": 0.375502,
+        "n_seeds": 20
+      },
+      "false_not_yet": null,
+      "items_to_decision": {
+        "mean": 2.7692,
+        "lo": 2.759715,
+        "hi": 2.778685,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "ours",
+      "type": "lucky_guesser",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.09365,
+        "lo": 0.090042,
+        "hi": 0.097258,
+        "n_seeds": 20
+      },
+      "false_not_yet": null,
+      "items_to_decision": {
+        "mean": 3.959175,
+        "lo": 3.954146,
+        "hi": 3.964204,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "naive",
+      "type": "forgetful",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.999749,
+        "lo": 0.999565,
+        "hi": 0.999933,
+        "n_seeds": 20
+      },
+      "false_not_yet": {
+        "mean": 0.000249,
+        "lo": 1e-05,
+        "hi": 0.000489,
+        "n_seeds": 20
+      },
+      "items_to_decision": {
+        "mean": 1.12025,
+        "lo": 1.115878,
+        "hi": 1.124622,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "4-check",
+      "type": "forgetful",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.981234,
+        "lo": 0.979082,
+        "hi": 0.983386,
+        "n_seeds": 20
+      },
+      "false_not_yet": {
+        "mean": 0.018965,
+        "lo": 0.016349,
+        "hi": 0.02158,
+        "n_seeds": 20
+      },
+      "items_to_decision": {
+        "mean": 2.244575,
+        "lo": 2.240587,
+        "hi": 2.248563,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "ours",
+      "type": "forgetful",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.477045,
+        "lo": 0.46848,
+        "hi": 0.48561,
+        "n_seeds": 20
+      },
+      "false_not_yet": {
+        "mean": 0.180986,
+        "lo": 0.176523,
+        "hi": 0.185448,
+        "n_seeds": 20
+      },
+      "items_to_decision": {
+        "mean": 3.312175,
+        "lo": 3.307225,
+        "hi": 3.317125,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "naive",
+      "type": "slow",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.718625,
+        "lo": 0.714357,
+        "hi": 0.722893,
+        "n_seeds": 20
+      },
+      "false_not_yet": null,
+      "items_to_decision": {
+        "mean": 2.292875,
+        "lo": 2.277533,
+        "hi": 2.308217,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "4-check",
+      "type": "slow",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.267175,
+        "lo": 0.263346,
+        "hi": 0.271004,
+        "n_seeds": 20
+      },
+      "false_not_yet": null,
+      "items_to_decision": {
+        "mean": 2.969125,
+        "lo": 2.957882,
+        "hi": 2.980368,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    },
+    {
+      "policy": "ours",
+      "type": "slow",
+      "simulated": true,
+      "learner_population": "simulated learners (not real students)",
+      "false_resolve": {
+        "mean": 0.272066,
+        "lo": 0.253732,
+        "hi": 0.290399,
+        "n_seeds": 20
+      },
+      "false_not_yet": {
+        "mean": 0.274391,
+        "lo": 0.270192,
+        "hi": 0.27859,
+        "n_seeds": 20
+      },
+      "items_to_decision": {
+        "mean": 4.223375,
+        "lo": 4.217378,
+        "hi": 4.229372,
+        "n_seeds": 20
+      },
+      "n_per_seed": 2000
+    }
+  ],
+  "acceptance": {
+    "claim": "false-resolve on simulated pattern-copiers: ours <= 1/2 \u00d7 naive",
+    "population": "simulated learners (not real students)",
+    "ours": 0.10575,
+    "naive": 0.96815,
+    "ratio": 0.109229,
+    "met": true
+  },
+  "plots": [
+    "e10_bars.png"
+  ]
+}
