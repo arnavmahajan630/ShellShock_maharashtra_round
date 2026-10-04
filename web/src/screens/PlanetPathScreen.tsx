@@ -46,9 +46,9 @@ export default function PlanetPathScreen() {
       <motion.button
         type="button"
         onClick={() => navigate("/map")}
-        whileHover={{ scale: 1.04, boxShadow: "0 0 20px 4px var(--color-warp-cyan)" }}
-        whileTap={{ scale: 0.96 }}
-        className="absolute cursor-pointer rounded outline-none focus-visible:ring-4 focus-visible:ring-warp-cyan/70"
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.98, y: 1 }}
+        className="absolute cursor-pointer rounded-lg outline-none transition-all duration-200 hover:border-2 hover:border-cyan-300 hover:bg-cyan-400/20 hover:backdrop-brightness-125 hover:shadow-[0_0_20px_rgba(6,182,212,0.7),inset_0_0_10px_rgba(255,255,255,0.4)] focus-visible:ring-4 focus-visible:ring-cyan-400/70"
         style={{
           top: `${planet.backButton.top}%`,
           left: `${planet.backButton.left}%`,
@@ -67,12 +67,41 @@ export default function PlanetPathScreen() {
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.1 + index * 0.08, duration: 0.35 }}
-            whileHover={{ scale: 1.1, boxShadow: "0 0 24px 6px var(--color-warp-cyan)" }}
-            whileTap={{ scale: 0.92 }}
-            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full outline-none cursor-pointer focus-visible:ring-4 focus-visible:ring-warp-cyan/70"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.94 }}
+            className="group absolute -translate-x-1/2 -translate-y-1/2 rounded-full outline-none cursor-pointer focus-visible:ring-4 focus-visible:ring-cyan-400/70 select-none"
             style={{ top: `${node.position.top}%`, left: `${node.position.left}%`, width: "8%", aspectRatio: "1 / 1" }}
             aria-label={`${node.label}${state === "done" ? " (done)" : ""}`}
-          />
+          >
+            {/* Ambient Idle Ring */}
+            <div
+              className={`absolute inset-0 rounded-full border border-dashed transition-all duration-200 ${
+                state === "done"
+                  ? "border-amber-400/30 group-hover:border-amber-400"
+                  : "border-cyan-400/30 group-hover:border-cyan-400"
+              }`}
+            />
+
+            {/* Glowing Luminous Ring on Hover */}
+            <div
+              className={`absolute inset-0 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 border-2 ${
+                state === "done"
+                  ? "border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.8),inset_0_0_10px_rgba(251,191,36,0.3)]"
+                  : "border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.8),inset_0_0_10px_rgba(6,182,212,0.3)]"
+              } backdrop-brightness-120`}
+            />
+
+            {/* Floating Title Pill on Hover */}
+            <div className="absolute -top-7 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-30">
+              <span
+                className={`px-2 py-0.5 rounded text-[10px] font-mono tracking-wider uppercase bg-black/90 border ${
+                  state === "done" ? "border-amber-400/80 text-amber-300" : "border-cyan-400/80 text-cyan-300"
+                } shadow-[0_0_10px_rgba(0,0,0,0.8)]`}
+              >
+                {node.label} {state === "done" ? "✓" : ""}
+              </span>
+            </div>
+          </motion.button>
         );
       })}
 

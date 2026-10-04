@@ -14,16 +14,15 @@ export default function LandingScreen() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
         whileHover={{
-          scale: 1.04,
-          boxShadow: "0 0 32px 8px var(--color-starlight)",
+          scale: 1.01,
         }}
-        whileTap={{ scale: 0.96 }}
-        className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-md outline-none focus-visible:ring-4 focus-visible:ring-warp-cyan/70"
+        whileTap={{ scale: 0.98, y: 2 }}
+        className="absolute cursor-pointer rounded-[18px] outline-none transition-all duration-200 hover:border-2 hover:border-white/80 hover:bg-yellow-300/20 hover:backdrop-brightness-125 hover:shadow-[0_0_30px_rgba(251,191,36,0.75),inset_0_0_15px_rgba(255,255,255,0.4)] focus-visible:ring-4 focus-visible:ring-yellow-300/70"
         style={{
-          top: "65.8%",
-          left: "48.8%",
-          width: "21.5%",
-          height: "6.9%",
+          top: "59.62%",
+          left: "33.61%",
+          width: "29.49%",
+          height: "15.20%",
         }}
         aria-label="Start Journey"
       />
