@@ -1,0 +1,311 @@
+[
+  {
+    "problem_id": "T1_two_sum",
+    "name": "two_sum",
+    "title": "Two Sum",
+    "sector": "arrays",
+    "difficulty": 1,
+    "difficulty_label": "Easy",
+    "prompt": "Given an array of integers `nums` and an integer `target`, return `1` if there exist two distinct elements that add up to `target`, otherwise return `0`.",
+    "signature": "int two_sum(int nums[], int n, int target)",
+    "starter": "int two_sum(int nums[], int n, int target) {\n    // TODO: return 1 if a pair sums to target, else 0\n}",
+    "examples": [
+      {
+        "input": "nums = [2, 7, 11, 15], n = 4, target = 9",
+        "output": "1",
+        "explanation": "nums[0] + nums[1] == 9, so a valid pair exists."
+      },
+      {
+        "input": "nums = [3, 2, 4], n = 3, target = 6",
+        "output": "1",
+        "explanation": "nums[1] + nums[2] == 6."
+      },
+      {
+        "input": "nums = [1, 5, 8], n = 3, target = 10",
+        "output": "0",
+        "explanation": "No two numbers sum to 10."
+      }
+    ],
+    "constraints": [
+      "2 <= n <= 100",
+      "-1000 <= nums[i] <= 1000",
+      "-2000 <= target <= 2000"
+    ],
+    "sample_tests": [
+      {"args": [[2, 7, 11, 15], 4, 9], "expect": {"returned": 1}},
+      {"args": [[3, 2, 4], 3, 6], "expect": {"returned": 1}},
+      {"args": [[1, 5, 8], 3, 10], "expect": {"returned": 0}}
+    ],
+    "hidden_tests": [
+      {"args": [[3, 3], 2, 6], "expect": {"returned": 1}},
+      {"args": [[0, 4, 3, 0], 4, 0], "expect": {"returned": 1}},
+      {"args": [[-1, -2, -3, -4], 4, -8], "expect": {"returned": 0}}
+    ],
+    "predict_item": {
+      "item_id": "PR_T1",
+      "code": "int count = 0;\nfor (int i = 0; i <= 3; i++) {\n    count += a[i];\n}",
+      "question": "If array a has size 3, what happens in the loop above?",
+      "call_stack": ["main()", "two_sum(a, 3, target)"],
+      "stdout": ["Iter 0: a[0]=2", "Iter 1: a[1]=7", "Iter 2: a[2]=11", "Iter 3: a[3]=OOB!"],
+      "options": [
+        "A: Loop reads valid elements only",
+        "B: Loop reads out-of-bounds at i=3 (Boundary Drift)",
+        "C: Loop does not execute",
+        "D: Syntax error"
+      ],
+      "correct": 1
+    },
+    "hints": [
+      "Use two nested loops to check each unique pair (i, j) where j > i.",
+      "Be careful with loop boundaries: the outer loop runs to n - 1, and the inner loop runs to n.",
+      "Return 1 immediately once a valid pair is found; return 0 only after checking all pairs."
+    ]
+  },
+  {
+    "problem_id": "T2_binary_search",
+    "name": "binary_search",
+    "title": "Binary Search",
+    "sector": "searching",
+    "difficulty": 1,
+    "difficulty_label": "Easy",
+    "prompt": "Given a sorted array of integers `nums` and a `target` value, return the index of `target` if it exists in the array. If not found, return `-1`.",
+    "signature": "int binary_search(int nums[], int n, int target)",
+    "starter": "int binary_search(int nums[], int n, int target) {\n    // TODO: return index of target or -1\n}",
+    "examples": [
+      {
+        "input": "nums = [1, 3, 5, 7, 9], n = 5, target = 7",
+        "output": "3",
+        "explanation": "7 is located at index 3."
+      },
+      {
+        "input": "nums = [2, 4, 6, 8], n = 4, target = 2",
+        "output": "0",
+        "explanation": "2 is located at index 0."
+      },
+      {
+        "input": "nums = [1, 5, 9], n = 3, target = 10",
+        "output": "-1",
+        "explanation": "10 does not exist in the array."
+      }
+    ],
+    "constraints": [
+      "1 <= n <= 100",
+      "nums is sorted in strictly ascending order",
+      "-1000 <= nums[i] <= 1000"
+    ],
+    "sample_tests": [
+      {"args": [[1, 3, 5, 7, 9], 5, 7], "expect": {"returned": 3}},
+      {"args": [[2, 4, 6, 8], 4, 2], "expect": {"returned": 0}},
+      {"args": [[1, 5, 9], 3, 10], "expect": {"returned": -1}}
+    ],
+    "hidden_tests": [
+      {"args": [[10], 1, 10], "expect": {"returned": 0}},
+      {"args": [[10], 1, 5], "expect": {"returned": -1}},
+      {"args": [[1, 2, 3, 4, 5, 6], 6, 5], "expect": {"returned": 4}}
+    ],
+    "predict_item": {
+      "item_id": "PR_T2",
+      "code": "int lo = 0, hi = n - 1;\nwhile (lo <= hi) {\n    int mid = (lo + hi) / 2;\n    if (a[mid] == target) return mid;\n    return -1; // inside loop!\n}",
+      "question": "What is the consequence of placing `return -1;` inside the while loop?",
+      "call_stack": ["binary_search(nums, 5, 7)", "mid=2 (val=5)"],
+      "stdout": ["Checked index 2", "Returning -1 early!"],
+      "options": [
+        "A: Correctly returns -1 if not found",
+        "B: Premature Abort (D01) — aborts after only checking the first midpoint",
+        "C: Compiles with warning",
+        "D: Infinite loop"
+      ],
+      "correct": 1
+    },
+    "hints": [
+      "Maintain search bounds: lo = 0, hi = n - 1.",
+      "In each iteration, calculate mid = lo + (hi - lo) / 2.",
+      "If nums[mid] < target, advance lo to mid + 1. If nums[mid] > target, retreat hi to mid - 1.",
+      "Do NOT return -1 inside the loop on mismatch — let the loop exhaust its search range first!"
+    ]
+  },
+  {
+    "problem_id": "T3_bubble_sort",
+    "name": "bubble_sort",
+    "title": "Bubble Sort",
+    "sector": "sorting",
+    "difficulty": 2,
+    "difficulty_label": "Medium",
+    "prompt": "Sort the array of crate weights `a` in ascending order (smallest first) in place using bubble sort.",
+    "signature": "void bubble_sort(int a[], int n)",
+    "starter": "void bubble_sort(int a[], int n) {\n    // TODO: sort array a in place\n}",
+    "examples": [
+      {
+        "input": "a = [3, 1, 2], n = 3",
+        "output": "[1, 2, 3]",
+        "explanation": "3 and 1 swap, then 3 and 2 swap, resulting in [1, 2, 3]."
+      },
+      {
+        "input": "a = [4, 3, 2, 1], n = 4",
+        "output": "[1, 2, 3, 4]",
+        "explanation": "Array is sorted into [1, 2, 3, 4]."
+      },
+      {
+        "input": "a = [5], n = 1",
+        "output": "[5]",
+        "explanation": "Single element is already sorted."
+      }
+    ],
+    "constraints": [
+      "1 <= n <= 50",
+      "0 <= a[i] <= 1000",
+      "Sort must modify array in place"
+    ],
+    "sample_tests": [
+      {"args": [[3, 1, 2], 3], "expect": {"array0": [1, 2, 3]}},
+      {"args": [[4, 3, 2, 1], 4], "expect": {"array0": [1, 2, 3, 4]}},
+      {"args": [[5], 1], "expect": {"array0": [5]}}
+    ],
+    "hidden_tests": [
+      {"args": [[2, 1], 2], "expect": {"array0": [1, 2]}},
+      {"args": [[1, 2, 3], 3], "expect": {"array0": [1, 2, 3]}},
+      {"args": [[10, 9, 8, 7, 6], 5], "expect": {"array0": [6, 7, 8, 9, 10]}}
+    ],
+    "predict_item": {
+      "item_id": "PR_T3",
+      "code": "if (a[j] > a[j + 1]) {\n    a[j] = a[j + 1];\n    a[j + 1] = a[j];\n}",
+      "question": "What happens when swapping a[j] and a[j+1] without a temporary variable?",
+      "call_stack": ["bubble_sort(a, 3)", "swap(a[0], a[1])"],
+      "stdout": ["Before: [3, 1, 2]", "After: [1, 1, 2] (3 lost!)"],
+      "options": [
+        "A: The two elements swap successfully",
+        "B: Cargo Overwrite (D03) — a[j] is overwritten, duplicating a[j+1] and losing the original value",
+        "C: Compiler creates a temporary variable automatically",
+        "D: Causes segmentation fault"
+      ],
+      "correct": 1
+    },
+    "hints": [
+      "Bubble sort uses nested loops: outer loop runs n - 1 passes, inner loop compares adjacent elements.",
+      "When a[j] > a[j+1], swap them using a temporary variable: int t = a[j]; a[j] = a[j+1]; a[j+1] = t;",
+      "Remember that a single pass only floats the largest element to the end; multiple passes are required!"
+    ]
+  },
+  {
+    "problem_id": "T4_is_palindrome",
+    "name": "is_palindrome",
+    "title": "Valid Palindrome",
+    "sector": "strings",
+    "difficulty": 1,
+    "difficulty_label": "Easy",
+    "prompt": "Determine if the null-terminated string `s` is a palindrome (reads the same forwards and backwards). Return `1` if true, otherwise `0`.",
+    "signature": "int is_palindrome(char s[])",
+    "starter": "int is_palindrome(char s[]) {\n    // TODO: return 1 if palindrome, else 0\n}",
+    "examples": [
+      {
+        "input": "s = \"racecar\"",
+        "output": "1",
+        "explanation": "\"racecar\" spelled backwards is \"racecar\"."
+      },
+      {
+        "input": "s = \"space\"",
+        "output": "0",
+        "explanation": "\"space\" backwards is \"ecaps\"."
+      },
+      {
+        "input": "s = \"a\"",
+        "output": "1",
+        "explanation": "Single character string is symmetric."
+      }
+    ],
+    "constraints": [
+      "1 <= strlen(s) <= 50",
+      "s contains lowercase English letters and is null-terminated ('\\0')"
+    ],
+    "sample_tests": [
+      {"args": ["racecar"], "expect": {"returned": 1}},
+      {"args": ["space"], "expect": {"returned": 0}},
+      {"args": ["a"], "expect": {"returned": 1}}
+    ],
+    "hidden_tests": [
+      {"args": ["level"], "expect": {"returned": 1}},
+      {"args": ["noon"], "expect": {"returned": 1}},
+      {"args": ["ab"], "expect": {"returned": 0}}
+    ],
+    "predict_item": {
+      "item_id": "PR_T4",
+      "code": "char s[] = \"level\";\nchar rev[] = \"level\";\nif (s == rev) return 1;",
+      "question": "What does `s == rev` compare in C?",
+      "call_stack": ["is_palindrome(\"level\")"],
+      "stdout": ["Evaluating s == rev...", "Comparing pointer addresses, not string text!"],
+      "options": [
+        "A: Compares the character contents of the strings",
+        "B: Signal Mismatch (D08) — compares array memory addresses, not text contents",
+        "C: Causes compile error",
+        "D: Returns string length"
+      ],
+      "correct": 1
+    },
+    "hints": [
+      "First measure the string length: int n = 0; while (s[n] != '\\0') n++;",
+      "Use two pointers: i starting at 0, j starting at n - 1.",
+      "Compare s[i] and s[j] moving toward the center (i++, j--). If any mismatch is found, return 0."
+    ]
+  },
+  {
+    "problem_id": "T5_recursive_cascade",
+    "name": "solve_cascade",
+    "title": "Recursive Cascade",
+    "sector": "recursion",
+    "difficulty": 2,
+    "difficulty_label": "Medium",
+    "prompt": "Compute the sum of integers from `1` up to `n` using recursion. If `n <= 0`, return `0`.",
+    "signature": "int solve_cascade(int n)",
+    "starter": "int solve_cascade(int n) {\n    // TODO: compute sum from 1 to n recursively\n}",
+    "examples": [
+      {
+        "input": "n = 4",
+        "output": "10",
+        "explanation": "4 + 3 + 2 + 1 = 10."
+      },
+      {
+        "input": "n = 1",
+        "output": "1",
+        "explanation": "Base step returns 1."
+      },
+      {
+        "input": "n = 0",
+        "output": "0",
+        "explanation": "n <= 0 returns 0."
+      }
+    ],
+    "constraints": [
+      "0 <= n <= 20",
+      "Must use recursion (depth <= 25)"
+    ],
+    "sample_tests": [
+      {"args": [4], "expect": {"returned": 10, "max_depth_le": 10}},
+      {"args": [1], "expect": {"returned": 1, "max_depth_le": 5}},
+      {"args": [0], "expect": {"returned": 0, "max_depth_le": 5}}
+    ],
+    "hidden_tests": [
+      {"args": [5], "expect": {"returned": 15, "max_depth_le": 10}},
+      {"args": [3], "expect": {"returned": 6, "max_depth_le": 10}},
+      {"args": [-5], "expect": {"returned": 0, "max_depth_le": 5}}
+    ],
+    "predict_item": {
+      "item_id": "PR_T5",
+      "code": "int solve_cascade(int n) {\n    return n + solve_cascade(n - 1);\n}",
+      "question": "What happens when solve_cascade(3) runs without a base case?",
+      "call_stack": ["solve_cascade(3)", "solve_cascade(2)", "solve_cascade(1)", "solve_cascade(0)", "solve_cascade(-1)...", "DEPTH CAP HIT (100)"],
+      "stdout": ["Depth 1: n=3", "Depth 2: n=2", "Depth 3: n=1", "Depth 4: n=0", "Endless recursion!"],
+      "options": [
+        "A: Returns 6",
+        "B: Endless Warp (D05) — recursion never reaches a base case and overflows the stack",
+        "C: Returns 0 automatically when n reaches 0",
+        "D: Compiles with syntax error"
+      ],
+      "correct": 1
+    },
+    "hints": [
+      "Every recursive function needs a base case that halts the recursion without calling itself.",
+      "Base case: if (n <= 0) return 0;",
+      "Recursive step: return n + solve_cascade(n - 1);"
+    ]
+  }
+]

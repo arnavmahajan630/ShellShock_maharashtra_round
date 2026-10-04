@@ -9,6 +9,7 @@ const PLANET_ROUTES: Record<string, string> = {
   "lost-fleet": "/planet/arrays",
   "nav-core": "/planet/variables",
   "module-deck": "/planet/functions",
+  "deep-space-trials": "/trials/warp",
 };
 
 export default function MapScreen() {

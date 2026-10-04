@@ -9,6 +9,10 @@ import ProbeScreen from "./screens/ProbeScreen";
 import InterventionScreen from "./screens/InterventionScreen";
 import TransferTrapScreen from "./screens/TransferTrapScreen";
 import VerdictScreen from "./screens/VerdictScreen";
+import TrialsWarpScreen from "./screens/TrialsWarpScreen";
+import TrialsLandingScreen from "./screens/TrialsLandingScreen";
+import TrialsExamScreen from "./screens/TrialsExamScreen";
+import TrialsDebriefScreen from "./screens/TrialsDebriefScreen";
 
 export default function App() {
   return (
@@ -23,6 +27,12 @@ export default function App() {
         <Route path="/planet/:planet/intervention" element={<InterventionScreen />} />
         <Route path="/planet/:planet/trap" element={<TransferTrapScreen />} />
         <Route path="/planet/:planet/verdict" element={<VerdictScreen />} />
+
+        {/* Deep Space Trials (Black Hole) */}
+        <Route path="/trials/warp" element={<TrialsWarpScreen />} />
+        <Route path="/trials" element={<TrialsLandingScreen />} />
+        <Route path="/trials/exam" element={<TrialsExamScreen />} />
+        <Route path="/trials/debrief" element={<TrialsDebriefScreen />} />
       </Routes>
     </MotionConfig>
   );
