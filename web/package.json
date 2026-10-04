@@ -10,9 +10,10 @@
     "lint": "oxlint ."
   },
   "dependencies": {
-    "@uiw/react-codemirror": "^4.25.12",
     "@codemirror/lang-cpp": "^6.0.3",
+    "@uiw/react-codemirror": "^4.25.12",
     "framer-motion": "^14.0.0",
+    "jspdf": "^4.2.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.4",

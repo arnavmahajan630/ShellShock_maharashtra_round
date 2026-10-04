@@ -12,6 +12,18 @@ export default function TrialsDebriefScreen() {
   const [compilingProgress, setCompilingProgress] = useState(15);
   const [activeChecklist, setActiveChecklist] = useState(0);
   const [report, setReport] = useState<DebriefReport | null>(null);
+  const [preparingPdf, setPreparingPdf] = useState(false);
+
+  async function handleDownloadPdf() {
+    if (!report || preparingPdf) return;
+    setPreparingPdf(true);
+    try {
+      const { downloadDebriefPdf } = await import("../lib/reportPdf");
+      downloadDebriefPdf(report);
+    } finally {
+      setPreparingPdf(false);
+    }
+  }
 
   // Fetch / Finish report from backend
   useEffect(() => {
@@ -192,8 +204,8 @@ export default function TrialsDebriefScreen() {
             {/* Left & Middle Column (8 of 12): Debrief Performance Overview */}
             <div className="col-span-8 space-y-4">
               {/* Header Score Card */}
-              <div className="p-5 rounded-2xl bg-deep-space/90 border border-warp-cyan/40 shadow-[0_0_30px_rgba(0,240,255,0.15)] flex items-center justify-between">
-                <div>
+              <div className="p-5 rounded-2xl bg-deep-space/90 border border-warp-cyan/40 shadow-[0_0_30px_rgba(0,240,255,0.15)] flex items-center justify-between gap-4">
+                <div className="min-w-0">
                   <div className="text-xs font-mono text-warp-cyan uppercase tracking-widest font-bold flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-warp-cyan shadow-[0_0_8px_#00f0ff]" />
                     DEBRIEF REPORT (D18)
@@ -202,18 +214,34 @@ export default function TrialsDebriefScreen() {
                     Your Performance Overview
                   </h1>
                   <p className="text-xs text-white/60 font-mono mt-0.5">
-                    Completed 5 canonical trials across Searching, Sorting, Arrays, Strings & Recursion.
+                    {report.sectors.length > 0
+                      ? `Completed ${report.items_total} trial${report.items_total === 1 ? "" : "s"} across ${report.sectors.map((s) => s.name).join(", ")}.`
+                      : "No trials attempted yet."}
                   </p>
                 </div>
 
-                {/* Score Circular Badge */}
-                <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-black/60 border border-warp-cyan/50 min-w-[120px] shadow-inner">
-                  <span className="font-display text-3xl font-bold text-warp-cyan drop-shadow-[0_0_10px_#00f0ff]">
-                    {report.score_pct}%
-                  </span>
-                  <span className="text-[10px] font-mono text-white/60">
-                    {report.items_passed} / {report.items_total} Cleared
-                  </span>
+                <div className="flex items-center gap-3 shrink-0">
+                  {/* Download PDF */}
+                  <button
+                    type="button"
+                    onClick={handleDownloadPdf}
+                    disabled={preparingPdf}
+                    title="Download this report as a PDF"
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-warp-cyan/50 bg-warp-cyan/10 hover:bg-warp-cyan/20 text-warp-cyan font-ui text-xs font-bold tracking-wide transition-all cursor-pointer whitespace-nowrap disabled:opacity-50 disabled:cursor-wait"
+                  >
+                    <span>{preparingPdf ? "⏳" : "⬇"}</span>
+                    <span>{preparingPdf ? "Preparing…" : "Download PDF"}</span>
+                  </button>
+
+                  {/* Score Circular Badge */}
+                  <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-black/60 border border-warp-cyan/50 min-w-[120px] shadow-inner">
+                    <span className="font-display text-3xl font-bold text-warp-cyan drop-shadow-[0_0_10px_#00f0ff]">
+                      {report.score_pct}%
+                    </span>
+                    <span className="text-[10px] font-mono text-white/60 whitespace-nowrap">
+                      {report.items_passed} / {report.items_total} Cleared
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -221,36 +249,44 @@ export default function TrialsDebriefScreen() {
               <div className="p-5 rounded-2xl bg-deep-space/80 border border-white/10 space-y-3">
                 <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-white/70 flex items-center gap-1.5">
                   <span>📊</span> Sector Performance
+                  <span className="text-white/30 font-normal">({report.sectors.length} attempted)</span>
                 </h3>
 
-                <div className="grid grid-cols-5 gap-2.5">
-                  {report.sectors.map((sec, idx) => (
-                    <div
-                      key={idx}
-                      className={`p-3 rounded-xl border text-center space-y-1.5 font-mono ${
-                        sec.passed > 0
-                          ? "bg-emerald-950/20 border-emerald-500/40 text-emerald-300"
-                          : "bg-rose-950/20 border-rose-500/40 text-rose-300"
-                      }`}
-                    >
-                      <div className="text-[10px] text-white/40 uppercase tracking-widest truncate">
-                        {sec.sector}
+                {report.sectors.length > 0 ? (
+                  <div className="flex flex-wrap gap-2.5">
+                    {report.sectors.map((sec, idx) => (
+                      <div
+                        key={idx}
+                        className={`flex-1 min-w-[120px] p-3 rounded-xl border text-center space-y-1.5 font-mono ${
+                          sec.passed > 0
+                            ? "bg-emerald-950/20 border-emerald-500/40 text-emerald-300"
+                            : "bg-rose-950/20 border-rose-500/40 text-rose-300"
+                        }`}
+                      >
+                        <div className="text-[10px] text-white/40 uppercase tracking-widest truncate" title={sec.name}>
+                          {sec.name}
+                        </div>
+                        <div className="text-lg font-bold">
+                          {sec.passed > 0 ? "PASSED" : "REVIEW"}
+                        </div>
+                        <div className="text-[10px] text-white/60">
+                          Rating: {sec.rating_after}
+                        </div>
                       </div>
-                      <div className="text-lg font-bold">
-                        {sec.passed > 0 ? "PASSED" : "REVIEW"}
-                      </div>
-                      <div className="text-[10px] text-white/60">
-                        Rating: {sec.rating_after}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs font-mono text-white/40">Nothing attempted in this session.</p>
+                )}
               </div>
 
               {/* Misconceptions Identified Card */}
               <div className="p-5 rounded-2xl bg-deep-space/80 border border-white/10 space-y-3">
                 <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
                   <span>⚡</span> Misconceptions Identified
+                  {report.findings.length > 0 && (
+                    <span className="text-white/30 font-normal">({report.findings.length})</span>
+                  )}
                 </h3>
 
                 {report.findings.length > 0 ? (
@@ -260,7 +296,7 @@ export default function TrialsDebriefScreen() {
                         key={idx}
                         className="p-4 rounded-xl bg-black/60 border border-rose-500/40 text-xs font-mono space-y-2 shadow-inner"
                       >
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between flex-wrap gap-1">
                           <div className="flex items-center gap-2">
                             <span className="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 font-bold border border-rose-500/40">
                               {f.class}
@@ -275,9 +311,16 @@ export default function TrialsDebriefScreen() {
                         </p>
 
                         {f.evidence && f.evidence.length > 0 && (
-                          <div className="p-2.5 rounded bg-rose-950/30 border border-rose-500/20 text-[11px] text-rose-200">
-                            <span className="font-bold">Diagnosis: </span>
-                            {f.evidence[0].text}
+                          <div className="space-y-1.5">
+                            {f.evidence.map((ev, evIdx) => (
+                              <div
+                                key={evIdx}
+                                className="p-2.5 rounded bg-rose-950/30 border border-rose-500/20 text-[11px] text-rose-200"
+                              >
+                                <span className="font-bold">{ev.type === "RUN" ? "Diagnosis: " : ev.type === "YOU PREDICTED" ? "Your prediction: " : `${ev.type}: `}</span>
+                                {ev.text}
+                              </div>
+                            ))}
                           </div>
                         )}
                       </div>
@@ -286,7 +329,10 @@ export default function TrialsDebriefScreen() {
                 ) : (
                   <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/30 text-emerald-400 text-xs font-mono flex items-center gap-2">
                     <span>✓</span>
-                    <span>No active misconceptions detected! Solid understanding across all 5 DSA sectors.</span>
+                    <span>
+                      No active misconceptions detected in the {report.items_total} trial
+                      {report.items_total === 1 ? "" : "s"} you attempted.
+                    </span>
                   </div>
                 )}
               </div>
@@ -298,26 +344,34 @@ export default function TrialsDebriefScreen() {
                 11. NEXT STEPS
               </div>
 
-              {/* Action Card 1: Train This */}
-              <motion.button
-                type="button"
-                whileHover={{ scale: 1.02, x: 2 }}
-                onClick={() => navigate("/map")}
-                className="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/40 to-deep-space border border-emerald-500/50 hover:border-emerald-400 text-left cursor-pointer transition-all shadow-[0_0_15px_rgba(16,185,129,0.1)] group flex items-start justify-between"
-              >
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 text-emerald-400 font-display text-sm font-bold">
-                    <span>📖</span>
-                    <span>Train This</span>
-                  </div>
-                  <p className="text-xs text-white/70 font-ui leading-relaxed">
-                    Practice problems for weak topics. Get targeted challenges based on your performance.
-                  </p>
-                </div>
-                <span className="text-emerald-400 text-lg group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
-              </motion.button>
+              {/* Recommendations driven by what this attempt actually found */}
+              {report.recommendations.map((rec, idx) => {
+                const isMastery = rec.sector === "mastery";
+                return (
+                  <motion.button
+                    key={idx}
+                    type="button"
+                    whileHover={{ scale: 1.02, x: 2 }}
+                    onClick={() => navigate(rec.route)}
+                    className={`p-4 rounded-2xl text-left cursor-pointer transition-all group flex items-start justify-between ${
+                      isMastery
+                        ? "bg-gradient-to-r from-emerald-950/40 to-deep-space border border-emerald-500/50 hover:border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+                        : "bg-gradient-to-r from-amber-950/40 to-deep-space border border-amber-500/50 hover:border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.1)]"
+                    }`}
+                  >
+                    <div className="space-y-1">
+                      <div className={`flex items-center gap-2 font-display text-sm font-bold ${isMastery ? "text-emerald-400" : "text-amber-400"}`}>
+                        <span>{isMastery ? "🏆" : "🎯"}</span>
+                        <span>{rec.title}</span>
+                      </div>
+                      <p className="text-xs text-white/70 font-ui leading-relaxed">{rec.description}</p>
+                    </div>
+                    <span className={`text-lg group-hover:translate-x-1 transition-transform ${isMastery ? "text-emerald-400" : "text-amber-400"}`}>
+                      →
+                    </span>
+                  </motion.button>
+                );
+              })}
 
               {/* Action Card 2: Retake Exam */}
               <motion.button
@@ -336,27 +390,6 @@ export default function TrialsDebriefScreen() {
                   </p>
                 </div>
                 <span className="text-purple-400 text-lg group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
-              </motion.button>
-
-              {/* Action Card 3: Review Concepts */}
-              <motion.button
-                type="button"
-                whileHover={{ scale: 1.02, x: 2 }}
-                onClick={() => navigate("/map")}
-                className="p-4 rounded-2xl bg-gradient-to-r from-amber-950/40 to-deep-space border border-amber-500/50 hover:border-amber-400 text-left cursor-pointer transition-all shadow-[0_0_15px_rgba(245,158,11,0.1)] group flex items-start justify-between"
-              >
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 text-amber-400 font-display text-sm font-bold">
-                    <span>🎯</span>
-                    <span>Review Concepts</span>
-                  </div>
-                  <p className="text-xs text-white/70 font-ui leading-relaxed">
-                    Study the key topic invariants. Go through explanations and learning resources.
-                  </p>
-                </div>
-                <span className="text-amber-400 text-lg group-hover:translate-x-1 transition-transform">
                   →
                 </span>
               </motion.button>
