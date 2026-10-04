@@ -11,6 +11,14 @@ from ml.c_interp import harness
 from ml.contracts.classes import CLASS_INFO, band
 from server.app.diagnosis_common import FLOOR, card, posterior
 
+_PREDICT_CLASS = {
+    "T1_two_sum": "M01",
+    "T2_binary_search": "D01",
+    "T3_bubble_sort": "D03",
+    "T4_is_palindrome": "D08",
+    "T5_recursive_cascade": "D05",
+}
+
 _DSA_EVIDENCE = {
     "D01": "The function returns `-1` on the very first comparison failure inside the loop — the search aborts before examining the remaining elements (Premature Abort).",
     "D02": "The search window does not shrink (`lo = mid` instead of `lo = mid + 1` or `hi = mid`), causing an infinite loop (Frozen Window).",
@@ -94,7 +102,13 @@ def reference_fix(problem_id: str) -> Dict[str, Any] | None:
     return {"code": code, "verified": True}
 
 
-def diagnose_trial(trial: Dict[str, Any], code: str) -> Dict[str, Any]:
+def diagnose_trial(trial: Dict[str, Any], code: str, predict_answer: Any = None) -> Dict[str, Any]:
+    """`predict_answer` is the option index chosen for the trial's predict_item MCQ (D11-style
+    comprehension check), if any. Each trial's predict_item names the exact misconception its
+    correct option tests for (`_PREDICT_CLASS`) — getting it wrong is itself evidence of that
+    misconception, independent of whether the submitted code happens to pass. Previously this
+    answer was only logged, never diagnosed, so a wrong MCQ pick never showed up in the report.
+    """
     problem_id = trial["problem_id"]
     tests = trial.get("sample_tests", []) + trial.get("hidden_tests", [])
     internal_problem = {
@@ -111,19 +125,41 @@ def diagnose_trial(trial: Dict[str, Any], code: str) -> Dict[str, Any]:
     passed = run["tests"]["passed"]
     total = run["tests"]["total"]
 
-    def result(status: str, top_id: str | None, p: float, evidence_text: str | None):
+    def result(status: str, top_id: str | None, p: float, evidence_text: str | None, extra_evidence: list | None = None):
         top = [card(top_id, p)] if top_id and top_id in CLASS_INFO else []
+        evidence = [{"type": "RUN", "text": evidence_text}] if evidence_text else []
+        evidence += extra_evidence or []
         return {
             "status": status,
             "top": top,
-            "evidence": [{"type": "RUN", "text": evidence_text}] if evidence_text else [],
+            "evidence": evidence,
             "posterior": posterior(primary=top_id, p_primary=p if top_id else 0.0),
             "passed": passed,
             "total": total,
             "is_correct": passed == total,
         }
 
+    predict_item = trial.get("predict_item") or {}
+    predict_wrong = (
+        predict_answer is not None and predict_item
+        and str(predict_answer) != str(predict_item.get("correct"))
+    )
+    predict_evidence = (
+        [{"type": "YOU PREDICTED", "text": f"You predicted option {predict_answer} for \"{predict_item.get('question')}\"; "
+                                            f"the correct option was {predict_item.get('correct')}."}]
+        if predict_wrong else []
+    )
+
     if total and passed == total:
+        if predict_wrong and problem_id in _PREDICT_CLASS:
+            cls = _PREDICT_CLASS[problem_id]
+            return result(
+                "confident", cls, 0.6,
+                f"Your code passes every test, but you predicted the wrong behavior for the classic "
+                f"{CLASS_INFO[cls]['name']} pattern this trial is built around — worth reviewing why "
+                f"your version avoids it.",
+                extra_evidence=predict_evidence,
+            )
         return result("correct", "CORRECT", 0.95, None)
 
     # 1. Trial 1: Two Sum (Arrays)
@@ -188,7 +224,19 @@ def diagnose_trial(trial: Dict[str, Any], code: str) -> Dict[str, Any]:
     if any(e["type"] == "missing_return" for e in events) and trace.get("printed"):
         return result("confident", "M10", 0.85, _DSA_EVIDENCE["M10"])
 
-    return result("novel", "OTHER", 0.50, "Solution failed one or more test cases.")
+    # None of the code-pattern checks above matched (or the bug isn't one of the specific
+    # regexes they look for), but a wrong predict answer still names the exact misconception
+    # this trial targets — surface that instead of falling through to an unhelpful "novel".
+    if predict_wrong and problem_id in _PREDICT_CLASS:
+        cls = _PREDICT_CLASS[problem_id]
+        return result(
+            "confident", cls, 0.70,
+            f"Your predicted behavior for this pattern doesn't match {CLASS_INFO[cls]['name']} — "
+            f"that's the misconception this trial is built around.",
+            extra_evidence=predict_evidence,
+        )
+
+    return result("novel", "OTHER", 0.50, "Solution failed one or more test cases.", extra_evidence=predict_evidence)
 
 
 def compile_debrief(exam_id: str, answers: List[Dict[str, Any]], trials: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -219,43 +267,48 @@ def compile_debrief(exam_id: str, answers: List[Dict[str, Any]], trials: List[Di
             sec["items"].append(pid)
 
         code = ans.get("code") or ""
-        diag = diagnose_trial(trial, code)
+        diag = diagnose_trial(trial, code, ans.get("predict_answer"))
 
         if diag["is_correct"]:
             total_passed += 1
             if sec:
                 sec["passed"] += 1
                 sec["rating_after"] += 40
-        else:
-            if sec:
-                sec["rating_after"] = max(1100, sec["rating_after"] - 30)
+        elif sec:
+            sec["rating_after"] = max(1100, sec["rating_after"] - 30)
 
-            top = diag.get("top") or []
-            if top:
-                top_id = top[0]["id"]
-                if top_id not in ("CORRECT", "OTHER") and top_id not in seen_misconceptions:
-                    seen_misconceptions.add(top_id)
-                    info = CLASS_INFO.get(top_id, {})
-                    findings.append({
-                        "class": top_id,
-                        "status": "ACTIVE",
-                        "p_active": top[0]["p"],
-                        "name": info.get("name", top_id),
-                        "subtitle": info.get("subtitle", ""),
-                        "belief": info.get("belief", ""),
-                        "item_id": pid,
-                        "trial_title": trial.get("title", pid),
-                        "evidence": diag.get("evidence", []),
-                    })
+        # Findings come from the diagnosed class regardless of pass/fail — a predict-item miss
+        # on otherwise-passing code is still real evidence of a misconception (diagnose_trial
+        # already keeps `is_correct` accurate for the score; this only gates what's reported).
+        top = diag.get("top") or []
+        if top:
+            top_id = top[0]["id"]
+            if top_id not in ("CORRECT", "OTHER") and top_id not in seen_misconceptions:
+                seen_misconceptions.add(top_id)
+                info = CLASS_INFO.get(top_id, {})
+                findings.append({
+                    "class": top_id,
+                    "status": "ACTIVE",
+                    "p_active": top[0]["p"],
+                    "name": info.get("name", top_id),
+                    "subtitle": info.get("subtitle", ""),
+                    "belief": info.get("belief", ""),
+                    "item_id": pid,
+                    "trial_title": trial.get("title", pid),
+                    "evidence": diag.get("evidence", []),
+                })
 
     # Only report on sectors the pilot actually attempted — a 1-trial run shouldn't
     # show the other four sectors as "REVIEW" when nothing was tried there.
     attempted_sector_data = [sectors_map[k] for k in sectors_map if k in attempted_sectors]
 
-    # Build recommendations based on weak sectors, scoped to what was attempted.
+    # Build recommendations based on weak sectors, scoped to what was attempted. A sector with
+    # an active finding needs review even if its code happened to pass (a wrong predict answer
+    # on passing code is still a misconception worth sending the pilot back to practice).
+    finding_sectors = {trial_map[f["item_id"]].get("sector", "arrays") for f in findings if f["item_id"] in trial_map}
     recommendations = []
     for s_data in attempted_sector_data:
-        if s_data["passed"] == 0:
+        if s_data["passed"] == 0 or s_data["sector"] in finding_sectors:
             recommendations.append({
                 "sector": s_data["sector"],
                 "title": f"Review {s_data['name']}",

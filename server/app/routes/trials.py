@@ -109,7 +109,7 @@ async def answer_trial(request: Request):
         return {"error": f"Unknown trial '{item_id}'"}
 
     # Diagnostic & test verification
-    diag = dsa_rules.diagnose_trial(trial, code)
+    diag = dsa_rules.diagnose_trial(trial, code, predict_answer)
 
     sess = _SESSIONS.get(exam_id)
     if not sess:
