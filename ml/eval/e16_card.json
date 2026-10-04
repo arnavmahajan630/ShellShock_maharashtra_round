@@ -1,0 +1,1637 @@
+{
+  "id": "E16",
+  "title": "How well does the sentence reader work?",
+  "slice": "Held-out contexts (test split of reasons.jsonl; LLM-written, same generator as training)",
+  "n": 539,
+  "metrics": {
+    "reader": "tfidf",
+    "macro_f1": 0.714448,
+    "accuracy": 0.719852,
+    "top3": 0.875696,
+    "answers": 0.538033,
+    "right_when_it_answers": 0.893103
+  },
+  "per_class": {
+    "M01": {
+      "n": 30,
+      "precision": 0.684,
+      "recall": 0.433,
+      "f1": 0.531
+    },
+    "M02": {
+      "n": 30,
+      "precision": 0.514,
+      "recall": 0.6,
+      "f1": 0.554
+    },
+    "M03": {
+      "n": 30,
+      "precision": 0.737,
+      "recall": 0.467,
+      "f1": 0.571
+    },
+    "M04": {
+      "n": 30,
+      "precision": 1.0,
+      "recall": 0.933,
+      "f1": 0.966
+    },
+    "M05": {
+      "n": 29,
+      "precision": 0.846,
+      "recall": 0.759,
+      "f1": 0.8
+    },
+    "M06": {
+      "n": 30,
+      "precision": 0.525,
+      "recall": 0.7,
+      "f1": 0.6
+    },
+    "M07": {
+      "n": 30,
+      "precision": 0.516,
+      "recall": 0.533,
+      "f1": 0.525
+    },
+    "M08": {
+      "n": 30,
+      "precision": 0.829,
+      "recall": 0.967,
+      "f1": 0.892
+    },
+    "M10": {
+      "n": 30,
+      "precision": 0.8,
+      "recall": 0.933,
+      "f1": 0.862
+    },
+    "D01": {
+      "n": 30,
+      "precision": 0.9,
+      "recall": 0.6,
+      "f1": 0.72
+    },
+    "D02": {
+      "n": 30,
+      "precision": 0.967,
+      "recall": 0.967,
+      "f1": 0.967
+    },
+    "D03": {
+      "n": 30,
+      "precision": 0.725,
+      "recall": 0.967,
+      "f1": 0.829
+    },
+    "D04": {
+      "n": 30,
+      "precision": 0.882,
+      "recall": 1.0,
+      "f1": 0.938
+    },
+    "D05": {
+      "n": 30,
+      "precision": 0.808,
+      "recall": 0.7,
+      "f1": 0.75
+    },
+    "D06": {
+      "n": 30,
+      "precision": 0.6,
+      "recall": 0.4,
+      "f1": 0.48
+    },
+    "D07": {
+      "n": 30,
+      "precision": 0.765,
+      "recall": 0.867,
+      "f1": 0.812
+    },
+    "D08": {
+      "n": 30,
+      "precision": 0.853,
+      "recall": 0.967,
+      "f1": 0.906
+    },
+    "CORRECT_REASON": {
+      "n": 30,
+      "precision": 0.152,
+      "recall": 0.167,
+      "f1": 0.159
+    }
+  },
+  "plots": [],
+  "caveat": "The training sentences are LLM-written, and so are both test sets. Only Mohler is real student text, and it has no labels for our classes, so it can only show how often a reader stays unsure. No number on this card measures accuracy on real students' sentences.",
+  "generated_at": "2026-10-04",
+  "default_reader": "tfidf",
+  "reader_order": [
+    "tfidf",
+    "biencoder",
+    "frozen"
+  ],
+  "readers": {
+    "tfidf": {
+      "loaded": true,
+      "threshold": 0.584,
+      "version": "89d0e16d",
+      "threshold_from": "val split, accepted answers at least 90% right there"
+    },
+    "biencoder": {
+      "loaded": true,
+      "threshold": 0.871,
+      "version": "9d7b8962",
+      "threshold_from": "val split, accepted answers at least 90% right there"
+    },
+    "frozen": {
+      "loaded": true,
+      "threshold": 0.585,
+      "version": "dfdaf841",
+      "threshold_from": "val split, accepted answers at least 90% right there"
+    }
+  },
+  "columns": {
+    "accuracy": "top answer is right, no threshold",
+    "macro_f1": "over the 18 labels, no threshold",
+    "top3": "right label among the best three",
+    "answers": "share of sentences at or above the reader's threshold (the rest are 'unsure')",
+    "right_when_it_answers": "accuracy on the sentences it answers",
+    "accuracy_ci95": "1000 resamples of whole contexts"
+  },
+  "rows": [
+    {
+      "reader": "tfidf",
+      "set": "test",
+      "set_label": "Held-out contexts (test split of reasons.jsonl; LLM-written, same generator as training)",
+      "n": 539,
+      "accuracy": 0.719852,
+      "macro_f1": 0.714448,
+      "top3": 0.875696,
+      "answers": 0.538033,
+      "right_when_it_answers": 0.893103,
+      "accuracy_ci95": [
+        0.631,
+        0.816
+      ]
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona",
+      "set_label": "LLM-written stand-in for classmates' sentences",
+      "n": 270,
+      "accuracy": 0.72963,
+      "macro_f1": 0.761905,
+      "top3": 0.9,
+      "answers": 0.607407,
+      "right_when_it_answers": 0.829268,
+      "accuracy_ci95": [
+        0.667,
+        0.789
+      ]
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona_picked_by_itself",
+      "set_label": "LLM-written stand-in for classmates' sentences: the writer picked the option by itself",
+      "n": 163,
+      "accuracy": 0.680982,
+      "macro_f1": 0.695011,
+      "top3": 0.895706,
+      "answers": 0.582822,
+      "right_when_it_answers": 0.768421,
+      "accuracy_ci95": [
+        0.583,
+        0.762
+      ]
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona_told",
+      "set_label": "LLM-written stand-in for classmates' sentences: the writer was told which option (voice ends in _told)",
+      "n": 107,
+      "accuracy": 0.803738,
+      "macro_f1": 0.829292,
+      "top3": 0.906542,
+      "answers": 0.64486,
+      "right_when_it_answers": 0.913043,
+      "accuracy_ci95": [
+        0.706,
+        0.887
+      ]
+    },
+    {
+      "reader": "biencoder",
+      "set": "test",
+      "set_label": "Held-out contexts (test split of reasons.jsonl; LLM-written, same generator as training)",
+      "n": 539,
+      "accuracy": 0.717996,
+      "macro_f1": 0.702452,
+      "top3": 0.890538,
+      "answers": 0.543599,
+      "right_when_it_answers": 0.935154,
+      "accuracy_ci95": [
+        0.618,
+        0.824
+      ]
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona",
+      "set_label": "LLM-written stand-in for classmates' sentences",
+      "n": 270,
+      "accuracy": 0.707407,
+      "macro_f1": 0.762426,
+      "top3": 0.918519,
+      "answers": 0.644444,
+      "right_when_it_answers": 0.810345,
+      "accuracy_ci95": [
+        0.667,
+        0.748
+      ]
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona_picked_by_itself",
+      "set_label": "LLM-written stand-in for classmates' sentences: the writer picked the option by itself",
+      "n": 163,
+      "accuracy": 0.638037,
+      "macro_f1": 0.688494,
+      "top3": 0.90184,
+      "answers": 0.638037,
+      "right_when_it_answers": 0.730769,
+      "accuracy_ci95": [
+        0.568,
+        0.701
+      ]
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona_told",
+      "set_label": "LLM-written stand-in for classmates' sentences: the writer was told which option (voice ends in _told)",
+      "n": 107,
+      "accuracy": 0.813084,
+      "macro_f1": 0.803464,
+      "top3": 0.943925,
+      "answers": 0.654206,
+      "right_when_it_answers": 0.928571,
+      "accuracy_ci95": [
+        0.73,
+        0.885
+      ]
+    },
+    {
+      "reader": "frozen",
+      "set": "test",
+      "set_label": "Held-out contexts (test split of reasons.jsonl; LLM-written, same generator as training)",
+      "n": 539,
+      "accuracy": 0.602968,
+      "macro_f1": 0.596011,
+      "top3": 0.851577,
+      "answers": 0.471243,
+      "right_when_it_answers": 0.84252,
+      "accuracy_ci95": [
+        0.47,
+        0.741
+      ]
+    },
+    {
+      "reader": "frozen",
+      "set": "persona",
+      "set_label": "LLM-written stand-in for classmates' sentences",
+      "n": 270,
+      "accuracy": 0.666667,
+      "macro_f1": 0.697451,
+      "top3": 0.892593,
+      "answers": 0.52963,
+      "right_when_it_answers": 0.825175,
+      "accuracy_ci95": [
+        0.6,
+        0.731
+      ]
+    },
+    {
+      "reader": "frozen",
+      "set": "persona_picked_by_itself",
+      "set_label": "LLM-written stand-in for classmates' sentences: the writer picked the option by itself",
+      "n": 163,
+      "accuracy": 0.687117,
+      "macro_f1": 0.701149,
+      "top3": 0.90184,
+      "answers": 0.527607,
+      "right_when_it_answers": 0.813953,
+      "accuracy_ci95": [
+        0.611,
+        0.755
+      ]
+    },
+    {
+      "reader": "frozen",
+      "set": "persona_told",
+      "set_label": "LLM-written stand-in for classmates' sentences: the writer was told which option (voice ends in _told)",
+      "n": 107,
+      "accuracy": 0.635514,
+      "macro_f1": 0.654925,
+      "top3": 0.878505,
+      "answers": 0.53271,
+      "right_when_it_answers": 0.842105,
+      "accuracy_ci95": [
+        0.509,
+        0.761
+      ]
+    }
+  ],
+  "per_voice": [
+    {
+      "reader": "tfidf",
+      "set": "test",
+      "voice": "confident",
+      "language": "English",
+      "n": 85,
+      "accuracy": 0.776471,
+      "macro_f1": 0.752048,
+      "top3": 0.964706,
+      "answers": 0.6,
+      "right_when_it_answers": 0.921569
+    },
+    {
+      "reader": "tfidf",
+      "set": "test",
+      "voice": "hinglish",
+      "language": "Hinglish",
+      "n": 85,
+      "accuracy": 0.694118,
+      "macro_f1": 0.645192,
+      "top3": 0.847059,
+      "answers": 0.411765,
+      "right_when_it_answers": 0.971429
+    },
+    {
+      "reader": "tfidf",
+      "set": "test",
+      "voice": "over_explaining",
+      "language": "English",
+      "n": 95,
+      "accuracy": 0.705263,
+      "macro_f1": 0.706106,
+      "top3": 0.873684,
+      "answers": 0.578947,
+      "right_when_it_answers": 0.872727
+    },
+    {
+      "reader": "tfidf",
+      "set": "test",
+      "voice": "typos",
+      "language": "English",
+      "n": 95,
+      "accuracy": 0.726316,
+      "macro_f1": 0.739367,
+      "top3": 0.884211,
+      "answers": 0.484211,
+      "right_when_it_answers": 0.891304
+    },
+    {
+      "reader": "tfidf",
+      "set": "test",
+      "voice": "unsure",
+      "language": "English",
+      "n": 95,
+      "accuracy": 0.705263,
+      "macro_f1": 0.705552,
+      "top3": 0.842105,
+      "answers": 0.526316,
+      "right_when_it_answers": 0.92
+    },
+    {
+      "reader": "tfidf",
+      "set": "test",
+      "voice": "very_short",
+      "language": "English",
+      "n": 84,
+      "accuracy": 0.714286,
+      "macro_f1": 0.686744,
+      "top3": 0.845238,
+      "answers": 0.630952,
+      "right_when_it_answers": 0.811321
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona",
+      "voice": "persona_crammer",
+      "language": "English",
+      "n": 45,
+      "accuracy": 0.755556,
+      "macro_f1": 0.788499,
+      "top3": 0.911111,
+      "answers": 0.688889,
+      "right_when_it_answers": 0.83871
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona",
+      "voice": "persona_friend",
+      "language": "Hinglish",
+      "n": 45,
+      "accuracy": 0.822222,
+      "macro_f1": 0.8625,
+      "top3": 0.933333,
+      "answers": 0.466667,
+      "right_when_it_answers": 0.952381
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona",
+      "voice": "persona_hostel_2am",
+      "language": "English",
+      "n": 46,
+      "accuracy": 0.652174,
+      "macro_f1": 0.697466,
+      "top3": 0.891304,
+      "answers": 0.630435,
+      "right_when_it_answers": 0.758621
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona",
+      "voice": "persona_nervous",
+      "language": "English",
+      "n": 45,
+      "accuracy": 0.755556,
+      "macro_f1": 0.77037,
+      "top3": 0.866667,
+      "answers": 0.555556,
+      "right_when_it_answers": 0.84
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona",
+      "voice": "persona_topper",
+      "language": "English",
+      "n": 44,
+      "accuracy": 0.727273,
+      "macro_f1": 0.756754,
+      "top3": 0.954545,
+      "answers": 0.659091,
+      "right_when_it_answers": 0.758621
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona",
+      "voice": "persona_tracer",
+      "language": "English",
+      "n": 45,
+      "accuracy": 0.666667,
+      "macro_f1": 0.63771,
+      "top3": 0.844444,
+      "answers": 0.644444,
+      "right_when_it_answers": 0.862069
+    },
+    {
+      "reader": "biencoder",
+      "set": "test",
+      "voice": "confident",
+      "language": "English",
+      "n": 85,
+      "accuracy": 0.811765,
+      "macro_f1": 0.772924,
+      "top3": 0.941176,
+      "answers": 0.552941,
+      "right_when_it_answers": 0.978723
+    },
+    {
+      "reader": "biencoder",
+      "set": "test",
+      "voice": "hinglish",
+      "language": "Hinglish",
+      "n": 85,
+      "accuracy": 0.717647,
+      "macro_f1": 0.663212,
+      "top3": 0.882353,
+      "answers": 0.470588,
+      "right_when_it_answers": 0.875
+    },
+    {
+      "reader": "biencoder",
+      "set": "test",
+      "voice": "over_explaining",
+      "language": "English",
+      "n": 95,
+      "accuracy": 0.726316,
+      "macro_f1": 0.738897,
+      "top3": 0.852632,
+      "answers": 0.568421,
+      "right_when_it_answers": 0.944444
+    },
+    {
+      "reader": "biencoder",
+      "set": "test",
+      "voice": "typos",
+      "language": "English",
+      "n": 95,
+      "accuracy": 0.694737,
+      "macro_f1": 0.693968,
+      "top3": 0.894737,
+      "answers": 0.515789,
+      "right_when_it_answers": 0.979592
+    },
+    {
+      "reader": "biencoder",
+      "set": "test",
+      "voice": "unsure",
+      "language": "English",
+      "n": 95,
+      "accuracy": 0.652632,
+      "macro_f1": 0.643583,
+      "top3": 0.842105,
+      "answers": 0.610526,
+      "right_when_it_answers": 0.913793
+    },
+    {
+      "reader": "biencoder",
+      "set": "test",
+      "voice": "very_short",
+      "language": "English",
+      "n": 84,
+      "accuracy": 0.714286,
+      "macro_f1": 0.671737,
+      "top3": 0.940476,
+      "answers": 0.535714,
+      "right_when_it_answers": 0.911111
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona",
+      "voice": "persona_crammer",
+      "language": "English",
+      "n": 45,
+      "accuracy": 0.777778,
+      "macro_f1": 0.835613,
+      "top3": 0.933333,
+      "answers": 0.8,
+      "right_when_it_answers": 0.805556
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona",
+      "voice": "persona_friend",
+      "language": "Hinglish",
+      "n": 45,
+      "accuracy": 0.755556,
+      "macro_f1": 0.820798,
+      "top3": 0.933333,
+      "answers": 0.555556,
+      "right_when_it_answers": 0.88
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona",
+      "voice": "persona_hostel_2am",
+      "language": "English",
+      "n": 46,
+      "accuracy": 0.652174,
+      "macro_f1": 0.721164,
+      "top3": 0.891304,
+      "answers": 0.652174,
+      "right_when_it_answers": 0.733333
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona",
+      "voice": "persona_nervous",
+      "language": "English",
+      "n": 45,
+      "accuracy": 0.666667,
+      "macro_f1": 0.723362,
+      "top3": 0.888889,
+      "answers": 0.666667,
+      "right_when_it_answers": 0.766667
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona",
+      "voice": "persona_topper",
+      "language": "English",
+      "n": 44,
+      "accuracy": 0.681818,
+      "macro_f1": 0.75463,
+      "top3": 0.954545,
+      "answers": 0.590909,
+      "right_when_it_answers": 0.846154
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona",
+      "voice": "persona_tracer",
+      "language": "English",
+      "n": 45,
+      "accuracy": 0.711111,
+      "macro_f1": 0.716049,
+      "top3": 0.911111,
+      "answers": 0.6,
+      "right_when_it_answers": 0.851852
+    },
+    {
+      "reader": "frozen",
+      "set": "test",
+      "voice": "confident",
+      "language": "English",
+      "n": 85,
+      "accuracy": 0.682353,
+      "macro_f1": 0.659031,
+      "top3": 0.894118,
+      "answers": 0.541176,
+      "right_when_it_answers": 0.891304
+    },
+    {
+      "reader": "frozen",
+      "set": "test",
+      "voice": "hinglish",
+      "language": "Hinglish",
+      "n": 85,
+      "accuracy": 0.529412,
+      "macro_f1": 0.471675,
+      "top3": 0.8,
+      "answers": 0.317647,
+      "right_when_it_answers": 0.888889
+    },
+    {
+      "reader": "frozen",
+      "set": "test",
+      "voice": "over_explaining",
+      "language": "English",
+      "n": 95,
+      "accuracy": 0.6,
+      "macro_f1": 0.592887,
+      "top3": 0.852632,
+      "answers": 0.463158,
+      "right_when_it_answers": 0.863636
+    },
+    {
+      "reader": "frozen",
+      "set": "test",
+      "voice": "typos",
+      "language": "English",
+      "n": 95,
+      "accuracy": 0.631579,
+      "macro_f1": 0.658993,
+      "top3": 0.852632,
+      "answers": 0.452632,
+      "right_when_it_answers": 0.860465
+    },
+    {
+      "reader": "frozen",
+      "set": "test",
+      "voice": "unsure",
+      "language": "English",
+      "n": 95,
+      "accuracy": 0.610526,
+      "macro_f1": 0.590661,
+      "top3": 0.831579,
+      "answers": 0.515789,
+      "right_when_it_answers": 0.836735
+    },
+    {
+      "reader": "frozen",
+      "set": "test",
+      "voice": "very_short",
+      "language": "English",
+      "n": 84,
+      "accuracy": 0.559524,
+      "macro_f1": 0.549319,
+      "top3": 0.880952,
+      "answers": 0.535714,
+      "right_when_it_answers": 0.733333
+    },
+    {
+      "reader": "frozen",
+      "set": "persona",
+      "voice": "persona_crammer",
+      "language": "English",
+      "n": 45,
+      "accuracy": 0.755556,
+      "macro_f1": 0.796032,
+      "top3": 0.911111,
+      "answers": 0.711111,
+      "right_when_it_answers": 0.90625
+    },
+    {
+      "reader": "frozen",
+      "set": "persona",
+      "voice": "persona_friend",
+      "language": "Hinglish",
+      "n": 45,
+      "accuracy": 0.688889,
+      "macro_f1": 0.694444,
+      "top3": 0.888889,
+      "answers": 0.311111,
+      "right_when_it_answers": 0.785714
+    },
+    {
+      "reader": "frozen",
+      "set": "persona",
+      "voice": "persona_hostel_2am",
+      "language": "English",
+      "n": 46,
+      "accuracy": 0.543478,
+      "macro_f1": 0.600585,
+      "top3": 0.891304,
+      "answers": 0.586957,
+      "right_when_it_answers": 0.703704
+    },
+    {
+      "reader": "frozen",
+      "set": "persona",
+      "voice": "persona_nervous",
+      "language": "English",
+      "n": 45,
+      "accuracy": 0.622222,
+      "macro_f1": 0.678968,
+      "top3": 0.844444,
+      "answers": 0.488889,
+      "right_when_it_answers": 0.818182
+    },
+    {
+      "reader": "frozen",
+      "set": "persona",
+      "voice": "persona_topper",
+      "language": "English",
+      "n": 44,
+      "accuracy": 0.75,
+      "macro_f1": 0.774074,
+      "top3": 0.931818,
+      "answers": 0.568182,
+      "right_when_it_answers": 0.88
+    },
+    {
+      "reader": "frozen",
+      "set": "persona",
+      "voice": "persona_tracer",
+      "language": "English",
+      "n": 45,
+      "accuracy": 0.644444,
+      "macro_f1": 0.582997,
+      "top3": 0.888889,
+      "answers": 0.511111,
+      "right_when_it_answers": 0.826087
+    }
+  ],
+  "language": [
+    {
+      "reader": "tfidf",
+      "set": "test",
+      "language": "English",
+      "n": 454,
+      "accuracy": 0.72467,
+      "macro_f1": 0.722655,
+      "top3": 0.881057,
+      "answers": 0.561674,
+      "right_when_it_answers": 0.882353
+    },
+    {
+      "reader": "tfidf",
+      "set": "test",
+      "language": "Hinglish",
+      "n": 85,
+      "accuracy": 0.694118,
+      "macro_f1": 0.645192,
+      "top3": 0.847059,
+      "answers": 0.411765,
+      "right_when_it_answers": 0.971429
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona",
+      "language": "English",
+      "n": 225,
+      "accuracy": 0.711111,
+      "macro_f1": 0.741734,
+      "top3": 0.893333,
+      "answers": 0.635556,
+      "right_when_it_answers": 0.811189
+    },
+    {
+      "reader": "tfidf",
+      "set": "persona",
+      "language": "Hinglish",
+      "n": 45,
+      "accuracy": 0.822222,
+      "macro_f1": 0.8625,
+      "top3": 0.933333,
+      "answers": 0.466667,
+      "right_when_it_answers": 0.952381
+    },
+    {
+      "reader": "biencoder",
+      "set": "test",
+      "language": "English",
+      "n": 454,
+      "accuracy": 0.718062,
+      "macro_f1": 0.705549,
+      "top3": 0.89207,
+      "answers": 0.557269,
+      "right_when_it_answers": 0.944664
+    },
+    {
+      "reader": "biencoder",
+      "set": "test",
+      "language": "Hinglish",
+      "n": 85,
+      "accuracy": 0.717647,
+      "macro_f1": 0.663212,
+      "top3": 0.882353,
+      "answers": 0.470588,
+      "right_when_it_answers": 0.875
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona",
+      "language": "English",
+      "n": 225,
+      "accuracy": 0.697778,
+      "macro_f1": 0.752665,
+      "top3": 0.915556,
+      "answers": 0.662222,
+      "right_when_it_answers": 0.798658
+    },
+    {
+      "reader": "biencoder",
+      "set": "persona",
+      "language": "Hinglish",
+      "n": 45,
+      "accuracy": 0.755556,
+      "macro_f1": 0.820798,
+      "top3": 0.933333,
+      "answers": 0.555556,
+      "right_when_it_answers": 0.88
+    },
+    {
+      "reader": "frozen",
+      "set": "test",
+      "language": "English",
+      "n": 454,
+      "accuracy": 0.61674,
+      "macro_f1": 0.616476,
+      "top3": 0.861233,
+      "answers": 0.5,
+      "right_when_it_answers": 0.837004
+    },
+    {
+      "reader": "frozen",
+      "set": "test",
+      "language": "Hinglish",
+      "n": 85,
+      "accuracy": 0.529412,
+      "macro_f1": 0.471675,
+      "top3": 0.8,
+      "answers": 0.317647,
+      "right_when_it_answers": 0.888889
+    },
+    {
+      "reader": "frozen",
+      "set": "persona",
+      "language": "English",
+      "n": 225,
+      "accuracy": 0.662222,
+      "macro_f1": 0.6957,
+      "top3": 0.893333,
+      "answers": 0.573333,
+      "right_when_it_answers": 0.829457
+    },
+    {
+      "reader": "frozen",
+      "set": "persona",
+      "language": "Hinglish",
+      "n": 45,
+      "accuracy": 0.688889,
+      "macro_f1": 0.694444,
+      "top3": 0.888889,
+      "answers": 0.311111,
+      "right_when_it_answers": 0.785714
+    }
+  ],
+  "with_code_masking": {
+    "what": "The same sentences with each row's code passed to read(). Only whole, self-contained code is used for masking (it parses as C functions and calls nothing it does not define), so bare quiz fragments change nothing",
+    "rows": [
+      {
+        "reader": "tfidf",
+        "set": "test",
+        "rows_with_usable_code": 120,
+        "n": 539,
+        "accuracy": 0.719852,
+        "macro_f1": 0.714448,
+        "top3": 0.875696,
+        "answers": 0.55102,
+        "right_when_it_answers": 0.895623
+      },
+      {
+        "reader": "tfidf",
+        "set": "persona",
+        "rows_with_usable_code": 64,
+        "n": 270,
+        "accuracy": 0.72963,
+        "macro_f1": 0.761905,
+        "top3": 0.9,
+        "answers": 0.614815,
+        "right_when_it_answers": 0.831325
+      },
+      {
+        "reader": "biencoder",
+        "set": "test",
+        "rows_with_usable_code": 120,
+        "n": 539,
+        "accuracy": 0.717996,
+        "macro_f1": 0.702452,
+        "top3": 0.890538,
+        "answers": 0.54731,
+        "right_when_it_answers": 0.935593
+      },
+      {
+        "reader": "biencoder",
+        "set": "persona",
+        "rows_with_usable_code": 64,
+        "n": 270,
+        "accuracy": 0.707407,
+        "macro_f1": 0.762426,
+        "top3": 0.918519,
+        "answers": 0.648148,
+        "right_when_it_answers": 0.805714
+      },
+      {
+        "reader": "frozen",
+        "set": "test",
+        "rows_with_usable_code": 120,
+        "n": 539,
+        "accuracy": 0.602968,
+        "macro_f1": 0.596011,
+        "top3": 0.853432,
+        "answers": 0.478664,
+        "right_when_it_answers": 0.844961
+      },
+      {
+        "reader": "frozen",
+        "set": "persona",
+        "rows_with_usable_code": 64,
+        "n": 270,
+        "accuracy": 0.666667,
+        "macro_f1": 0.697451,
+        "top3": 0.892593,
+        "answers": 0.533333,
+        "right_when_it_answers": 0.826389
+      }
+    ]
+  },
+  "per_class_by_reader": {
+    "tfidf": {
+      "M01": {
+        "n": 30,
+        "precision": 0.684,
+        "recall": 0.433,
+        "f1": 0.531
+      },
+      "M02": {
+        "n": 30,
+        "precision": 0.514,
+        "recall": 0.6,
+        "f1": 0.554
+      },
+      "M03": {
+        "n": 30,
+        "precision": 0.737,
+        "recall": 0.467,
+        "f1": 0.571
+      },
+      "M04": {
+        "n": 30,
+        "precision": 1.0,
+        "recall": 0.933,
+        "f1": 0.966
+      },
+      "M05": {
+        "n": 29,
+        "precision": 0.846,
+        "recall": 0.759,
+        "f1": 0.8
+      },
+      "M06": {
+        "n": 30,
+        "precision": 0.525,
+        "recall": 0.7,
+        "f1": 0.6
+      },
+      "M07": {
+        "n": 30,
+        "precision": 0.516,
+        "recall": 0.533,
+        "f1": 0.525
+      },
+      "M08": {
+        "n": 30,
+        "precision": 0.829,
+        "recall": 0.967,
+        "f1": 0.892
+      },
+      "M10": {
+        "n": 30,
+        "precision": 0.8,
+        "recall": 0.933,
+        "f1": 0.862
+      },
+      "D01": {
+        "n": 30,
+        "precision": 0.9,
+        "recall": 0.6,
+        "f1": 0.72
+      },
+      "D02": {
+        "n": 30,
+        "precision": 0.967,
+        "recall": 0.967,
+        "f1": 0.967
+      },
+      "D03": {
+        "n": 30,
+        "precision": 0.725,
+        "recall": 0.967,
+        "f1": 0.829
+      },
+      "D04": {
+        "n": 30,
+        "precision": 0.882,
+        "recall": 1.0,
+        "f1": 0.938
+      },
+      "D05": {
+        "n": 30,
+        "precision": 0.808,
+        "recall": 0.7,
+        "f1": 0.75
+      },
+      "D06": {
+        "n": 30,
+        "precision": 0.6,
+        "recall": 0.4,
+        "f1": 0.48
+      },
+      "D07": {
+        "n": 30,
+        "precision": 0.765,
+        "recall": 0.867,
+        "f1": 0.812
+      },
+      "D08": {
+        "n": 30,
+        "precision": 0.853,
+        "recall": 0.967,
+        "f1": 0.906
+      },
+      "CORRECT_REASON": {
+        "n": 30,
+        "precision": 0.152,
+        "recall": 0.167,
+        "f1": 0.159
+      }
+    },
+    "biencoder": {
+      "M01": {
+        "n": 30,
+        "precision": 0.571,
+        "recall": 0.267,
+        "f1": 0.364
+      },
+      "M02": {
+        "n": 30,
+        "precision": 0.677,
+        "recall": 0.7,
+        "f1": 0.689
+      },
+      "M03": {
+        "n": 30,
+        "precision": 0.667,
+        "recall": 0.667,
+        "f1": 0.667
+      },
+      "M04": {
+        "n": 30,
+        "precision": 0.968,
+        "recall": 1.0,
+        "f1": 0.984
+      },
+      "M05": {
+        "n": 29,
+        "precision": 0.897,
+        "recall": 0.897,
+        "f1": 0.897
+      },
+      "M06": {
+        "n": 30,
+        "precision": 0.548,
+        "recall": 0.767,
+        "f1": 0.639
+      },
+      "M07": {
+        "n": 30,
+        "precision": 0.56,
+        "recall": 0.467,
+        "f1": 0.509
+      },
+      "M08": {
+        "n": 30,
+        "precision": 0.667,
+        "recall": 0.8,
+        "f1": 0.727
+      },
+      "M10": {
+        "n": 30,
+        "precision": 0.833,
+        "recall": 1.0,
+        "f1": 0.909
+      },
+      "D01": {
+        "n": 30,
+        "precision": 0.786,
+        "recall": 0.733,
+        "f1": 0.759
+      },
+      "D02": {
+        "n": 30,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "D03": {
+        "n": 30,
+        "precision": 0.682,
+        "recall": 1.0,
+        "f1": 0.811
+      },
+      "D04": {
+        "n": 30,
+        "precision": 0.963,
+        "recall": 0.867,
+        "f1": 0.912
+      },
+      "D05": {
+        "n": 30,
+        "precision": 0.677,
+        "recall": 0.7,
+        "f1": 0.689
+      },
+      "D06": {
+        "n": 30,
+        "precision": 0.5,
+        "recall": 0.267,
+        "f1": 0.348
+      },
+      "D07": {
+        "n": 30,
+        "precision": 0.806,
+        "recall": 0.967,
+        "f1": 0.879
+      },
+      "D08": {
+        "n": 30,
+        "precision": 0.857,
+        "recall": 0.8,
+        "f1": 0.828
+      },
+      "CORRECT_REASON": {
+        "n": 30,
+        "precision": 0.04,
+        "recall": 0.033,
+        "f1": 0.036
+      }
+    },
+    "frozen": {
+      "M01": {
+        "n": 30,
+        "precision": 0.5,
+        "recall": 0.1,
+        "f1": 0.167
+      },
+      "M02": {
+        "n": 30,
+        "precision": 0.4,
+        "recall": 0.533,
+        "f1": 0.457
+      },
+      "M03": {
+        "n": 30,
+        "precision": 0.9,
+        "recall": 0.3,
+        "f1": 0.45
+      },
+      "M04": {
+        "n": 30,
+        "precision": 0.968,
+        "recall": 1.0,
+        "f1": 0.984
+      },
+      "M05": {
+        "n": 29,
+        "precision": 0.952,
+        "recall": 0.69,
+        "f1": 0.8
+      },
+      "M06": {
+        "n": 30,
+        "precision": 0.524,
+        "recall": 0.367,
+        "f1": 0.431
+      },
+      "M07": {
+        "n": 30,
+        "precision": 0.281,
+        "recall": 0.3,
+        "f1": 0.29
+      },
+      "M08": {
+        "n": 30,
+        "precision": 0.511,
+        "recall": 0.8,
+        "f1": 0.623
+      },
+      "M10": {
+        "n": 30,
+        "precision": 0.931,
+        "recall": 0.9,
+        "f1": 0.915
+      },
+      "D01": {
+        "n": 30,
+        "precision": 0.762,
+        "recall": 0.533,
+        "f1": 0.627
+      },
+      "D02": {
+        "n": 30,
+        "precision": 0.966,
+        "recall": 0.933,
+        "f1": 0.949
+      },
+      "D03": {
+        "n": 30,
+        "precision": 0.659,
+        "recall": 0.9,
+        "f1": 0.761
+      },
+      "D04": {
+        "n": 30,
+        "precision": 0.903,
+        "recall": 0.933,
+        "f1": 0.918
+      },
+      "D05": {
+        "n": 30,
+        "precision": 0.571,
+        "recall": 0.533,
+        "f1": 0.552
+      },
+      "D06": {
+        "n": 30,
+        "precision": 0.312,
+        "recall": 0.167,
+        "f1": 0.217
+      },
+      "D07": {
+        "n": 30,
+        "precision": 0.667,
+        "recall": 0.933,
+        "f1": 0.778
+      },
+      "D08": {
+        "n": 30,
+        "precision": 0.649,
+        "recall": 0.8,
+        "f1": 0.716
+      },
+      "CORRECT_REASON": {
+        "n": 30,
+        "precision": 0.07,
+        "recall": 0.133,
+        "f1": 0.092
+      }
+    }
+  },
+  "mohler": {
+    "set_label": "Mohler short answers (real CS students; none of our classes applies)",
+    "n": 2442,
+    "rows": [
+      {
+        "reader": "tfidf",
+        "n": 2442,
+        "unsure": 0.8915,
+        "matched_wrongly": 0.1016,
+        "correct_reasoning": 0.007,
+        "most_often_matched": [
+          [
+            "D04",
+            0.0291
+          ],
+          [
+            "M08",
+            0.027
+          ],
+          [
+            "D06",
+            0.0205
+          ],
+          [
+            "M05",
+            0.0094
+          ],
+          [
+            "D08",
+            0.0094
+          ]
+        ],
+        "graded_4_or_more": {
+          "n": 1771,
+          "unsure": 0.8814,
+          "matched_wrongly": 0.1101
+        },
+        "graded_under_4": {
+          "n": 671,
+          "unsure": 0.918,
+          "matched_wrongly": 0.079
+        }
+      },
+      {
+        "reader": "biencoder",
+        "n": 2442,
+        "unsure": 0.869,
+        "matched_wrongly": 0.1024,
+        "correct_reasoning": 0.0287,
+        "most_often_matched": [
+          [
+            "D04",
+            0.0545
+          ],
+          [
+            "D06",
+            0.0176
+          ],
+          [
+            "M08",
+            0.0172
+          ],
+          [
+            "M05",
+            0.009
+          ],
+          [
+            "D03",
+            0.0012
+          ]
+        ],
+        "graded_4_or_more": {
+          "n": 1771,
+          "unsure": 0.86,
+          "matched_wrongly": 0.109
+        },
+        "graded_under_4": {
+          "n": 671,
+          "unsure": 0.8927,
+          "matched_wrongly": 0.0849
+        }
+      },
+      {
+        "reader": "frozen",
+        "n": 2442,
+        "unsure": 0.8264,
+        "matched_wrongly": 0.1188,
+        "correct_reasoning": 0.0549,
+        "most_often_matched": [
+          [
+            "D04",
+            0.0647
+          ],
+          [
+            "D06",
+            0.016
+          ],
+          [
+            "M08",
+            0.0139
+          ],
+          [
+            "D08",
+            0.0074
+          ],
+          [
+            "M05",
+            0.0061
+          ]
+        ],
+        "graded_4_or_more": {
+          "n": 1771,
+          "unsure": 0.8255,
+          "matched_wrongly": 0.1135
+        },
+        "graded_under_4": {
+          "n": 671,
+          "unsure": 0.8286,
+          "matched_wrongly": 0.1326
+        }
+      }
+    ],
+    "what": "Every 'matched' is wrong: these answers are about other questions and show none of our 17 mistakes. 'correct_reasoning' is listed apart; it updates nothing about a mistake."
+  },
+  "leave_one_class_out": {
+    "source": "run on Colab on 2026-10-04, copied from notes/T1.md",
+    "finetuned": "trained without any sentence of the class, then asked to find them from its description",
+    "unchanged": "BAAI/bge-base-en-v1.5 with no training at all: nearest description (texts from ml/artifacts/reason_9d7b8962/descriptions.json), computed here on the same sentences (every sentence of the class)",
+    "per_class": {
+      "M01": {
+        "finetuned_top1": 0.0,
+        "finetuned_top3": 0.017,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.594,
+        "unchanged_top3_all": 0.928,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.567,
+        "unchanged_top3_test": 1.0
+      },
+      "M02": {
+        "finetuned_top1": 0.067,
+        "finetuned_top3": null,
+        "unchanged_n_all": 179,
+        "unchanged_top1_all": 0.184,
+        "unchanged_top3_all": 0.52,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.233,
+        "unchanged_top3_test": 0.5
+      },
+      "M03": {
+        "finetuned_top1": 0.106,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.55,
+        "unchanged_top3_all": 0.933,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.633,
+        "unchanged_top3_test": 0.933
+      },
+      "M04": {
+        "finetuned_top1": 0.217,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.811,
+        "unchanged_top3_all": 0.961,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.8,
+        "unchanged_top3_test": 1.0
+      },
+      "M05": {
+        "finetuned_top1": 0.155,
+        "finetuned_top3": null,
+        "unchanged_n_all": 174,
+        "unchanged_top1_all": 0.54,
+        "unchanged_top3_all": 0.862,
+        "unchanged_n_test": 29,
+        "unchanged_top1_test": 0.828,
+        "unchanged_top3_test": 1.0
+      },
+      "M06": {
+        "finetuned_top1": 0.011,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.256,
+        "unchanged_top3_all": 0.594,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.467,
+        "unchanged_top3_test": 0.6
+      },
+      "M07": {
+        "finetuned_top1": 0.0,
+        "finetuned_top3": 0.067,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.144,
+        "unchanged_top3_all": 0.344,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.167,
+        "unchanged_top3_test": 0.367
+      },
+      "M08": {
+        "finetuned_top1": 0.044,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.7,
+        "unchanged_top3_all": 0.878,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.433,
+        "unchanged_top3_test": 0.667
+      },
+      "M10": {
+        "finetuned_top1": 0.272,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.55,
+        "unchanged_top3_all": 0.794,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.633,
+        "unchanged_top3_test": 0.9
+      },
+      "D01": {
+        "finetuned_top1": 0.144,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.322,
+        "unchanged_top3_all": 0.433,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.233,
+        "unchanged_top3_test": 0.433
+      },
+      "D02": {
+        "finetuned_top1": 0.311,
+        "finetuned_top3": 0.6,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.517,
+        "unchanged_top3_all": 0.672,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.533,
+        "unchanged_top3_test": 0.8
+      },
+      "D03": {
+        "finetuned_top1": 0.25,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.633,
+        "unchanged_top3_all": 0.817,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.733,
+        "unchanged_top3_test": 0.933
+      },
+      "D04": {
+        "finetuned_top1": 0.267,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.456,
+        "unchanged_top3_all": 0.717,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.367,
+        "unchanged_top3_test": 0.633
+      },
+      "D05": {
+        "finetuned_top1": 0.011,
+        "finetuned_top3": null,
+        "unchanged_n_all": 179,
+        "unchanged_top1_all": 0.19,
+        "unchanged_top3_all": 0.43,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.3,
+        "unchanged_top3_test": 0.567
+      },
+      "D06": {
+        "finetuned_top1": 0.011,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.383,
+        "unchanged_top3_all": 0.656,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.333,
+        "unchanged_top3_test": 0.733
+      },
+      "D07": {
+        "finetuned_top1": 0.139,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.589,
+        "unchanged_top3_all": 0.883,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.767,
+        "unchanged_top3_test": 0.933
+      },
+      "D08": {
+        "finetuned_top1": 0.028,
+        "finetuned_top3": null,
+        "unchanged_n_all": 180,
+        "unchanged_top1_all": 0.583,
+        "unchanged_top3_all": 0.844,
+        "unchanged_n_test": 30,
+        "unchanged_top1_test": 0.767,
+        "unchanged_top3_test": 1.0
+      }
+    },
+    "mean": {
+      "finetuned_top1": 0.12,
+      "finetuned_top3": 0.283,
+      "unchanged_top1_all": 0.471,
+      "unchanged_top3_all": 0.722,
+      "unchanged_top1_test": 0.517,
+      "unchanged_top3_test": 0.765
+    },
+    "unchanged_on_the_whole_test_split": {
+      "n_test": 539,
+      "top1_test": 0.4898,
+      "top3_test": 0.731,
+      "n_all": 3307,
+      "top1_all": 0.4354,
+      "top3_all": 0.6728
+    }
+  },
+  "not_run": [
+    {
+      "row": "DeepSeek zero-shot",
+      "why": "Optional row of 05 §9. Not run: no LLM API call was made for this card."
+    }
+  ]
+}
