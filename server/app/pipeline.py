@@ -239,13 +239,23 @@ def analyse(problem, code, *, learner_id=None, prediction=None, events=None):
     analysis.tests, analysis.trace = run_result["tests"], trace
     analysis.timings["run"] = _ms(t0)
 
+    if trace["status"] in ("parse_error", "unsupported"):
+        # gate.check() is pure pycparser syntax, no execution, and can't see a semantic
+        # rejection the interpreter only finds while building the program (e.g. a parameter
+        # redeclared in the function's own scope: legal-looking C, illegal C). Finding out here
+        # is too late to skip feature extraction on the strength of gate.check() alone — code
+        # that never actually ran has no real evidence behind it, and classifying it anyway
+        # produces a diagnosis built on nothing (every test's model_answer defaulting to blank).
+        # Promote it to a real gate rejection, same shape gate.check() itself returns for G3a.
+        from ml.c_interp import harness
+        from ml.contracts.subset import GATE_MESSAGES
+        error = harness.check(text, problem)
+        analysis.gate = {"code": "G3a", "message": GATE_MESSAGES["G3a"].format(n=error["line"], reason=error["reason"])}
+        return analysis
+
     t0 = time.perf_counter()
-    trace_ok = trace["status"] in ("ok", "timeout", "runtime_error")
-    if trace_ok:
-        ref_trace, run_reference = _reference(problem)
-        row, meta = extract(problem, text, trace, ref_trace, run_reference, run_result=run_result)
-    else:                                                # parse_error / unsupported: no trace features
-        row, meta = extract(problem, text)
+    ref_trace, run_reference = _reference(problem)
+    row, meta = extract(problem, text, trace, ref_trace, run_reference, run_result=run_result)
     analysis.row, analysis.meta = row, meta
     analysis.timings["features"] = _ms(t0)
 

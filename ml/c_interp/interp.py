@@ -384,7 +384,13 @@ class Program:
     def _declare(self, name, ctype, line, is_global=False):
         fn = self.fn
         scope = self.scopes[-1]
-        if name in scope.vars and scope.vars[name].kind != "param":
+        if name in scope.vars:
+            # Real C rejects this too: a parameter and the function's own top-level block
+            # share one scope, so redeclaring the parameter's name there is illegal — same
+            # error GCC gives ("redeclaration of 'n' with no linkage"). Letting it through
+            # silently clobbered the parameter's value with the new local's, which produced
+            # a confusing, hard-to-classify bug (every test behaving as if the argument were
+            # ignored) instead of a clear rejection.
             raise SourceError("parse_error", line, f"`{name}` is declared twice")
         if is_global:
             var = _Var(name, fn.nslots, ctype, "global", None)
