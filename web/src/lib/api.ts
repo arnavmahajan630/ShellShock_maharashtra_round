@@ -252,11 +252,11 @@ export const api = {
   trapItem: (classId: string) => get<TrapItem>(`/trap-items/${classId}`),
   probeAnswer: (payload: { learner_id: string; attempt_id: string; probe_id: string; answer: string; problem_id: string; code: string }) =>
     post<{ diagnosis: Diagnosis }>("/probe/answer", payload),
-  startExam: (learnerId = "pilot") => post<ExamStartResponse>("/exam/start", { learner_id: learnerId }),
-  runTrial: (payload: { item_id: string; code: string }) => post<ExamRunResponse>("/exam/run", payload),
+  startExam: (learnerId = "pilot") => post<ExamStartResponse>("/trials/start", { learner_id: learnerId }),
+  runTrial: (payload: { item_id: string; code: string }) => post<ExamRunResponse>("/trials/run", payload),
   answerTrial: (payload: { exam_id: string; item_id: string; code: string; predict_answer?: number }) =>
-    post<ExamAnswerResponse>("/exam/answer", payload),
-  finishExam: (examId: string) => post<{ report: DebriefReport }>("/exam/finish", { exam_id: examId }),
-  getExamReport: (examId: string) => get<{ report: DebriefReport }>(`/exam/${examId}/report`),
-  getTrials: () => get<DsaTrial[]>("/exam/trials"),
+    post<ExamAnswerResponse>("/trials/answer", payload),
+  finishExam: (examId: string) => post<{ report: DebriefReport }>("/trials/finish", { exam_id: examId }),
+  getExamReport: (examId: string) => get<{ report: DebriefReport }>(`/trials/${examId}/report`),
+  getTrials: () => get<DsaTrial[]>("/trials/list"),
 };

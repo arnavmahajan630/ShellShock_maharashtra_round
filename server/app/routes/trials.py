@@ -1,12 +1,14 @@
-"""Live API routes for the Black Hole: Deep Space Trials.
+"""Live API routes for the Black Hole: Deep Space Trials (rule-based, five fixed problems).
+
+Served under /trials/. The /exam/ paths belong to the adaptive exam in routes/exam.py.
 
 Endpoints:
-- POST /exam/start: begins a trials session with 5 canonical DSA items
-- POST /exam/run: executes candidate code against sample tests
-- POST /exam/answer: logs submission, runs diagnosis, advances to next trial
-- POST /exam/finish: compiles debrief report with score & revealed misconceptions
-- GET /exam/{exam_id}/report: fetches debrief report
-- GET /exam/trials: lists the 5 trials with metadata
+- POST /trials/start: begins a trials session with 5 canonical DSA items
+- POST /trials/run: executes candidate code against sample tests
+- POST /trials/answer: logs submission, runs diagnosis, advances to next trial
+- POST /trials/finish: compiles debrief report with score & revealed misconceptions
+- GET /trials/{exam_id}/report: fetches debrief report
+- GET /trials/list: lists the 5 trials with metadata
 """
 import json
 import time
@@ -34,12 +36,12 @@ def _find_trial(item_id: str) -> Dict[str, Any] | None:
     return next((t for t in trials if t["problem_id"] == item_id), None)
 
 
-@router.get("/exam/trials")
+@router.get("/trials/list")
 async def get_trials():
     return _get_trials()
 
 
-@router.post("/exam/start")
+@router.post("/trials/start")
 async def start_exam(request: Request):
     body = await request.json() if request.headers.get("content-type") == "application/json" else {}
     learner_id = body.get("learner_id", "pilot")
@@ -65,7 +67,7 @@ async def start_exam(request: Request):
     }
 
 
-@router.post("/exam/run")
+@router.post("/trials/run")
 async def run_trial(request: Request):
     body = await request.json()
     item_id = body.get("item_id")
@@ -93,7 +95,7 @@ async def run_trial(request: Request):
     }
 
 
-@router.post("/exam/answer")
+@router.post("/trials/answer")
 async def answer_trial(request: Request):
     body = await request.json()
     exam_id = body.get("exam_id")
@@ -152,7 +154,7 @@ async def answer_trial(request: Request):
     }
 
 
-@router.post("/exam/finish")
+@router.post("/trials/finish")
 async def finish_exam(request: Request):
     body = await request.json()
     exam_id = body.get("exam_id")
@@ -179,7 +181,7 @@ async def finish_exam(request: Request):
     return {"report": report}
 
 
-@router.get("/exam/{exam_id}/report")
+@router.get("/trials/{exam_id}/report")
 async def get_exam_report(exam_id: str):
     sess = _SESSIONS.get(exam_id)
     if sess and sess.get("report"):
