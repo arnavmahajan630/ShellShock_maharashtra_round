@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { cpp } from "@codemirror/lang-cpp";
 import CodeMirror from "@uiw/react-codemirror";
 import { api, type Problem, type TrapItem } from "../lib/api";
 import { useMissionStore } from "../store/missionStore";
 import SignalGateWorld from "../components/SignalGateWorld";
-
-const NEXT_PROBLEM: Record<string, string> = { P11: "P12", P12: "P16", P16: "P17", P17: "P11" };
+import { getPlanetConfig } from "../planets";
+import DeadEnd from "../components/DeadEnd";
 
 export default function TransferTrapScreen() {
   const navigate = useNavigate();
+  const { planet: planetSlug } = useParams<{ planet: string }>();
+  const planet = getPlanetConfig(planetSlug);
   const learnerId = useMissionStore((s) => s.learnerId);
   const problem = useMissionStore((s) => s.problem);
   const attempt = useMissionStore((s) => s.attempt);
@@ -39,12 +41,8 @@ export default function TransferTrapScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [classId]);
 
-  if (!problem || !classId) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-deep-space">
-        <p className="font-ui text-2xl text-slate">No intervention in progress.</p>
-      </div>
-    );
+  if (!problem || !classId || !planet) {
+    return <DeadEnd message="No intervention in progress." to={planetSlug ? `/planet/${planetSlug}` : undefined} />;
   }
 
   if (loadError) {
@@ -61,7 +59,7 @@ export default function TransferTrapScreen() {
     setTrapPassed(correct);
     try {
       await api.reassess({ learner_id: learnerId, class: classId!, item_id: `trap_${classId}`, item_type: "trap", result: { correct } });
-      const nextId = NEXT_PROBLEM[problem!.problem_id];
+      const nextId = planet!.nextProblem[problem!.problem_id];
       const next = await api.getProblem(nextId);
       setTransferProblem(next);
       setCode(next.starter);
@@ -156,7 +154,7 @@ export default function TransferTrapScreen() {
                 {!running && (
                   <button
                     type="button"
-                    onClick={() => navigate("/planet/conditions/verdict")}
+                    onClick={() => navigate(`/planet/${planetSlug}/verdict`)}
                     className="mt-6 font-ui text-xl px-6 py-2 rounded bg-warp-cyan text-deep-space hover:brightness-110 active:scale-95"
                   >
                     See verdict →

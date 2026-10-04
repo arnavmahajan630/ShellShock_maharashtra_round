@@ -9,7 +9,7 @@ import SignalGateWorld from "../components/SignalGateWorld";
 type Phase = "loading" | "predict" | "code" | "run";
 
 export default function MissionScreen() {
-  const { problemId } = useParams<{ problemId: string }>();
+  const { planet, problemId } = useParams<{ planet: string; problemId: string }>();
   const navigate = useNavigate();
   const learnerId = useMissionStore((s) => s.learnerId);
   const problem = useMissionStore((s) => s.problem);
@@ -85,9 +85,9 @@ export default function MissionScreen() {
       return;
     }
     if (attempt.tests && attempt.tests.passed === attempt.tests.total) {
-      navigate("/planet/conditions");
+      navigate(`/planet/${planet}`);
     } else {
-      navigate("/planet/conditions/diagnosis");
+      navigate(`/planet/${planet}/diagnosis`);
     }
   }
 

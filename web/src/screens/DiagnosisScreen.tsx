@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useMissionStore } from "../store/missionStore";
+import DeadEnd from "../components/DeadEnd";
 
 const BAND_COLOR: Record<string, string> = {
   Likely: "var(--color-mint-success)",
@@ -20,6 +21,7 @@ const CHIP_LABEL: Record<string, string> = {
 
 export default function DiagnosisScreen() {
   const navigate = useNavigate();
+  const { planet } = useParams<{ planet: string }>();
   const attempt = useMissionStore((s) => s.attempt);
   const problem = useMissionStore((s) => s.problem);
   const [scanning, setScanning] = useState(true);
@@ -30,11 +32,7 @@ export default function DiagnosisScreen() {
   }, []);
 
   if (!attempt || !attempt.diagnosis || !problem) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-deep-space">
-        <p className="font-ui text-2xl text-slate">No attempt in progress.</p>
-      </div>
-    );
+    return <DeadEnd message="No attempt in progress." to={planet ? `/planet/${planet}` : undefined} />;
   }
 
   const diagnosis = attempt.diagnosis;
@@ -53,8 +51,8 @@ export default function DiagnosisScreen() {
   }
 
   function proceed() {
-    if (diagnosis!.status === "ambiguous") navigate("/planet/conditions/probe");
-    else navigate("/planet/conditions/intervention");
+    if (diagnosis!.status === "ambiguous") navigate(`/planet/${planet}/probe`);
+    else navigate(`/planet/${planet}/intervention`);
   }
 
   const isNovel = diagnosis.status === "novel";

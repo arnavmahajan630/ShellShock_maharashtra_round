@@ -16,13 +16,13 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingScreen />} />
         <Route path="/map" element={<MapScreen />} />
-        <Route path="/planet/conditions" element={<PlanetPathScreen />} />
-        <Route path="/planet/conditions/mission/:problemId" element={<MissionScreen />} />
-        <Route path="/planet/conditions/diagnosis" element={<DiagnosisScreen />} />
-        <Route path="/planet/conditions/probe" element={<ProbeScreen />} />
-        <Route path="/planet/conditions/intervention" element={<InterventionScreen />} />
-        <Route path="/planet/conditions/trap" element={<TransferTrapScreen />} />
-        <Route path="/planet/conditions/verdict" element={<VerdictScreen />} />
+        <Route path="/planet/:planet" element={<PlanetPathScreen />} />
+        <Route path="/planet/:planet/mission/:problemId" element={<MissionScreen />} />
+        <Route path="/planet/:planet/diagnosis" element={<DiagnosisScreen />} />
+        <Route path="/planet/:planet/probe" element={<ProbeScreen />} />
+        <Route path="/planet/:planet/intervention" element={<InterventionScreen />} />
+        <Route path="/planet/:planet/trap" element={<TransferTrapScreen />} />
+        <Route path="/planet/:planet/verdict" element={<VerdictScreen />} />
       </Routes>
     </MotionConfig>
   );

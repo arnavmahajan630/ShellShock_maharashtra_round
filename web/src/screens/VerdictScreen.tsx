@@ -1,18 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useMissionStore } from "../store/missionStore";
+import DeadEnd from "../components/DeadEnd";
 
 export default function VerdictScreen() {
   const navigate = useNavigate();
+  const { planet } = useParams<{ planet: string }>();
   const verdict = useMissionStore((s) => s.verdict);
   const attempt = useMissionStore((s) => s.attempt);
 
   if (!verdict) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-deep-space">
-        <p className="font-ui text-2xl text-slate">No verdict yet.</p>
-      </div>
-    );
+    return <DeadEnd message="No verdict yet." to={planet ? `/planet/${planet}` : undefined} />;
   }
 
   const stable = verdict.state === "STABLE";
@@ -36,7 +34,7 @@ export default function VerdictScreen() {
             </p>
             <button
               type="button"
-              onClick={() => navigate("/planet/conditions")}
+              onClick={() => navigate(`/planet/${planet}`)}
               className="font-ui text-xl px-6 py-2 rounded bg-mint-success text-deep-space hover:brightness-110 active:scale-95"
             >
               Back to path
@@ -55,7 +53,7 @@ export default function VerdictScreen() {
             <p className="font-ui text-lg text-slate mb-6">p_active: {verdict.p_active.toFixed(2)} — try a different explanation.</p>
             <button
               type="button"
-              onClick={() => navigate("/planet/conditions/intervention")}
+              onClick={() => navigate(`/planet/${planet}/intervention`)}
               className="font-ui text-xl px-6 py-2 rounded bg-alert-red text-deep-space hover:brightness-110 active:scale-95"
             >
               Retry intervention

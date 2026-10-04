@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../lib/api";
 import { useMissionStore } from "../store/missionStore";
+import ValueMeter from "../components/ValueMeter";
+import MemoryStrip from "../components/MemoryStrip";
+import DeadEnd from "../components/DeadEnd";
 
 export default function InterventionScreen() {
   const navigate = useNavigate();
+  const { planet } = useParams<{ planet: string }>();
   const problem = useMissionStore((s) => s.problem);
   const code = useMissionStore((s) => s.code);
   const attempt = useMissionStore((s) => s.attempt);
@@ -25,11 +29,7 @@ export default function InterventionScreen() {
   const [showFix, setShowFix] = useState(false);
 
   if (!problem || !attempt?.diagnosis?.top[0]) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-deep-space">
-        <p className="font-ui text-2xl text-slate">No diagnosis to intervene on.</p>
-      </div>
-    );
+    return <DeadEnd message="No diagnosis to intervene on." to={planet ? `/planet/${planet}` : undefined} />;
   }
 
   if (loadError) {
@@ -58,15 +58,27 @@ export default function InterventionScreen() {
           ))}
         </div>
 
-        <h2 className="font-display text-xs text-warp-cyan mb-3">What happened, step by step</h2>
-        <ul className="space-y-1 mb-6 font-mono text-sm">
-          {intervention.timeline.map((step) => (
-            <li key={step.step} className="rounded border border-void-blue bg-deep-space/50 px-3 py-2">
-              line {step.line} · <span className="text-pulsar-magenta">{step.flag}</span> · {JSON.stringify(step.vars)}
-            </li>
-          ))}
-          {intervention.timeline.length === 0 && <li className="font-ui text-lg text-slate">No flagged steps captured.</li>}
-        </ul>
+        <div className="mb-6">
+          {intervention.modality === "memory_strip" && intervention.memory_strip && (
+            <MemoryStrip {...intervention.memory_strip} />
+          )}
+          {intervention.modality === "value_meter" && intervention.value_meter && (
+            <ValueMeter {...intervention.value_meter} />
+          )}
+          {intervention.modality === "trace_timeline" && (
+            <>
+              <h2 className="font-display text-xs text-warp-cyan mb-3">What happened, step by step</h2>
+              <ul className="space-y-1 font-mono text-sm">
+                {intervention.timeline.map((step) => (
+                  <li key={step.step} className="rounded border border-void-blue bg-deep-space/50 px-3 py-2">
+                    line {step.line} · <span className="text-pulsar-magenta">{step.flag}</span> · {JSON.stringify(step.vars)}
+                  </li>
+                ))}
+                {intervention.timeline.length === 0 && <li className="font-ui text-lg text-slate">No flagged steps captured.</li>}
+              </ul>
+            </>
+          )}
+        </div>
 
         {intervention.counterexample && (
           <div className="mb-6">
@@ -98,7 +110,7 @@ export default function InterventionScreen() {
 
         <button
           type="button"
-          onClick={() => navigate("/planet/conditions/trap")}
+          onClick={() => navigate(`/planet/${planet}/trap`)}
           className="font-ui text-xl px-6 py-2 rounded bg-mint-success text-deep-space hover:brightness-110 active:scale-95"
         >
           I understand it now →

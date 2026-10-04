@@ -1,8 +1,8 @@
 import { create } from "zustand";
-import type { AttemptResponse, Intervention, Problem, ReassessResponse } from "../lib/api";
+import type { AttemptResponse, Diagnosis, Intervention, Problem, ReassessResponse } from "../lib/api";
 
 const LEARNER_ID = "demo-learner";
-const PASSED_KEY = "relearn:conditions:passed";
+const PASSED_KEY = "relearn:planets:passed";
 
 function loadPassed(): Record<string, boolean> {
   try {
@@ -28,6 +28,7 @@ interface MissionState {
   startMission: (problem: Problem) => void;
   setCode: (code: string) => void;
   setAttempt: (attempt: AttemptResponse) => void;
+  updateDiagnosis: (diagnosis: Diagnosis) => void;
   setIntervention: (intervention: Intervention) => void;
   setTrapPassed: (passed: boolean) => void;
   setTransferAttempt: (attempt: AttemptResponse) => void;
@@ -65,6 +66,8 @@ export const useMissionStore = create<MissionState>((set) => ({
     }),
   setCode: (code) => set({ code }),
   setAttempt: (attempt) => set({ attempt }),
+  updateDiagnosis: (diagnosis) =>
+    set((state) => (state.attempt ? { attempt: { ...state.attempt, diagnosis } } : state)),
   setIntervention: (intervention) => set({ intervention }),
   setTrapPassed: (trapPassed) => set({ trapPassed }),
   setTransferAttempt: (transferAttempt) => set({ transferAttempt }),

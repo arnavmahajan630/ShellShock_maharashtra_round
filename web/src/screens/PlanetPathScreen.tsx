@@ -1,95 +1,77 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ArtStage from "../components/ArtStage";
 import { useMissionStore } from "../store/missionStore";
-
-type NodeKind = "briefing" | "warmup" | "mission" | "ghost";
-
-interface PathNode {
-  id: string;
-  kind: NodeKind;
-  label: string;
-  position: { top: number; left: number };
-  problemId?: string;
-}
-
-const NODES: PathNode[] = [
-  { id: "BRIEFING", kind: "briefing", label: "Briefing", position: { top: 51.3, left: 20.5 } },
-  { id: "WARMUP", kind: "warmup", label: "Predict Warm-up", position: { top: 54.7, left: 30.9 } },
-  { id: "P11", kind: "mission", label: "door_open", position: { top: 59.8, left: 41.6 }, problemId: "P11" },
-  { id: "P12", kind: "mission", label: "shield_mode", position: { top: 62.1, left: 52.0 }, problemId: "P12" },
-  { id: "P16", kind: "mission", label: "in_range", position: { top: 66.0, left: 62.4 }, problemId: "P16" },
-  { id: "P17", kind: "ghost", label: "max_of_three", position: { top: 67.7, left: 73.9 }, problemId: "P17" },
-];
-
-const BRIEFING_TEXT = [
-  "An `if` checks a condition and runs its block only when that condition is true.",
-  "`==` compares two values. `=` stores a value — using it inside an `if` is a trap: `if (x = 1)` always runs.",
-  "A `;` right after `if (...)` ends the statement there. `if (x < 5);` means the block below always runs, condition or not.",
-];
+import { getPlanetConfig } from "../planets";
+import type { PathNode } from "../planets";
+import DeadEnd from "../components/DeadEnd";
 
 export default function PlanetPathScreen() {
+  const { planet: planetSlug } = useParams<{ planet: string }>();
   const navigate = useNavigate();
   const passed = useMissionStore((s) => s.passedProblems);
   const markPassed = useMissionStore((s) => s.markPassed);
   const [modal, setModal] = useState<"briefing" | "warmup" | null>(null);
   const [warmupAnswer, setWarmupAnswer] = useState<string | null>(null);
 
-  function stateOf(node: PathNode, index: number): "done" | "current" | "available" | "locked" {
-    if (passed[node.id]) return "done";
-    const prevDone = index === 0 || passed[NODES[index - 1].id];
-    return prevDone ? (index === 0 ? "current" : "available") : "locked";
+  const planet = getPlanetConfig(planetSlug);
+  if (!planet) {
+    return <DeadEnd message={`Unknown planet "${planetSlug}".`} />;
   }
 
-  function openNode(node: PathNode, state: string) {
-    if (state === "locked") return;
+  const { nodes, warmup } = planet;
+  // Mission node ids (problem_ids) are globally unique; BRIEFING/WARMUP are not, so they're
+  // namespaced per planet to avoid Loops reading Conditions' progress (or vice versa).
+  const progressKey = (node: PathNode) => (node.problemId ? node.id : `${planetSlug}:${node.id}`);
+
+  // Every node is open from the start — no node gates the next. "done" just reflects
+  // this session's progress (checkmark), it never blocks access.
+  function stateOf(node: PathNode): "done" | "available" {
+    return passed[progressKey(node)] ? "done" : "available";
+  }
+
+  function openNode(node: PathNode) {
     if (node.kind === "briefing") setModal("briefing");
     else if (node.kind === "warmup") {
       setWarmupAnswer(null);
       setModal("warmup");
     } else if (node.problemId) {
-      navigate(`/planet/conditions/mission/${node.problemId}`);
+      navigate(`/planet/${planetSlug}/mission/${node.problemId}`);
     }
   }
 
-  const warmup = {
-    code: "int code = 7;\nint open = 0;\nif (code = 42) {\n    open = 1;\n}",
-    question: "What is open after this runs?",
-    options: ["0", "1", "42"],
-    correct: "1",
-  };
-
   return (
-    <ArtStage src="/images/landing_planetA.png" width={1779} height={884} alt="Aegis Grid — planet path">
+    <ArtStage src={planet.artSrc} width={planet.artWidth} height={planet.artHeight} alt={`${planet.name} — planet path`}>
       <motion.button
         type="button"
         onClick={() => navigate("/map")}
         whileHover={{ scale: 1.04, boxShadow: "0 0 20px 4px var(--color-warp-cyan)" }}
         whileTap={{ scale: 0.96 }}
         className="absolute cursor-pointer rounded outline-none focus-visible:ring-4 focus-visible:ring-warp-cyan/70"
-        style={{ top: "0.9%", left: "0.8%", width: "14.3%", height: "5.7%" }}
+        style={{
+          top: `${planet.backButton.top}%`,
+          left: `${planet.backButton.left}%`,
+          width: `${planet.backButton.width}%`,
+          height: `${planet.backButton.height}%`,
+        }}
         aria-label="Back to Galaxy"
       />
-      {NODES.map((node, index) => {
-        const state = stateOf(node, index);
+      {nodes.map((node, index) => {
+        const state = stateOf(node);
         return (
           <motion.button
             key={node.id}
             type="button"
-            disabled={state === "locked"}
-            onClick={() => openNode(node, state)}
+            onClick={() => openNode(node)}
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.1 + index * 0.08, duration: 0.35 }}
-            whileHover={state !== "locked" ? { scale: 1.1, boxShadow: "0 0 24px 6px var(--color-warp-cyan)" } : undefined}
-            whileTap={state !== "locked" ? { scale: 0.92 } : undefined}
-            className={
-              "absolute -translate-x-1/2 -translate-y-1/2 rounded-full outline-none" +
-              (state === "locked" ? " cursor-not-allowed" : " cursor-pointer focus-visible:ring-4 focus-visible:ring-warp-cyan/70")
-            }
+            whileHover={{ scale: 1.1, boxShadow: "0 0 24px 6px var(--color-warp-cyan)" }}
+            whileTap={{ scale: 0.92 }}
+            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full outline-none cursor-pointer focus-visible:ring-4 focus-visible:ring-warp-cyan/70"
             style={{ top: `${node.position.top}%`, left: `${node.position.left}%`, width: "8%", aspectRatio: "1 / 1" }}
-            aria-label={`${node.label}${state === "locked" ? " (locked)" : ""}`}
+            aria-label={`${node.label}${state === "done" ? " (done)" : ""}`}
           />
         );
       })}
@@ -99,14 +81,14 @@ export default function PlanetPathScreen() {
           <Modal onClose={() => setModal(null)}>
             <h2 className="font-display text-sm text-starlight mb-4">Briefing</h2>
             <ul className="font-ui text-xl space-y-3 text-light">
-              {BRIEFING_TEXT.map((line) => (
+              {planet.briefingText.map((line) => (
                 <li key={line}>{line}</li>
               ))}
             </ul>
             <button
               type="button"
               onClick={() => {
-                markPassed("BRIEFING");
+                markPassed(`${planetSlug}:BRIEFING`);
                 setModal(null);
               }}
               className="mt-6 font-ui text-xl px-6 py-2 rounded bg-starlight text-deep-space hover:brightness-110 active:scale-95"
@@ -147,12 +129,12 @@ export default function PlanetPathScreen() {
             {warmupAnswer !== null && (
               <div className="mt-4">
                 <p className="font-ui text-lg text-light">
-                  {warmupAnswer === warmup.correct ? "Right." : "Not quite."} `if (code = 42)` assigns 42 to code — it doesn't compare. The block always runs.
+                  {warmupAnswer === warmup.correct ? "Right." : "Not quite."} {warmup.explanation}
                 </p>
                 <button
                   type="button"
                   onClick={() => {
-                    markPassed("WARMUP");
+                    markPassed(`${planetSlug}:WARMUP`);
                     setModal(null);
                   }}
                   className="mt-4 font-ui text-xl px-6 py-2 rounded bg-warp-cyan text-deep-space hover:brightness-110 active:scale-95"

@@ -102,9 +102,11 @@ export interface AttemptResponse {
 
 export interface Intervention {
   class: string;
-  modality: string;
+  modality: "trace_timeline" | "memory_strip" | "value_meter";
   copy: string[];
   timeline: { step: number; line: number; vars: Record<string, unknown>; effect: string; flag: string }[];
+  memory_strip: { array: string; values: unknown[]; reads: number[] } | null;
+  value_meter: { exact: unknown; shown: unknown } | null;
   counterexample: { input: unknown; intended: Record<string, unknown>; yours: Record<string, unknown>; effect_diff: string } | null;
   fix: { kind: string; code: string; changed_lines: number[]; rule: string; verified: boolean } | null;
 }
@@ -150,4 +152,6 @@ export const api = {
   reassess: (payload: { learner_id: string; class: string; item_id: string; item_type: "trap" | "transfer_code"; result: unknown }) =>
     post<ReassessResponse>("/reassess", payload),
   trapItem: (classId: string) => get<TrapItem>(`/trap-items/${classId}`),
+  probeAnswer: (payload: { learner_id: string; attempt_id: string; probe_id: string; answer: string; problem_id: string; code: string }) =>
+    post<{ diagnosis: Diagnosis }>("/probe/answer", payload),
 };

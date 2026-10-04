@@ -6,7 +6,7 @@ the client, no separate grading round-trip needed.
 """
 from fastapi import APIRouter, HTTPException
 
-from server.app.conditions_rules import TRAP_ITEMS
+from server.app.diagnosis_common import TRAP_ITEMS
 
 router = APIRouter()
 
