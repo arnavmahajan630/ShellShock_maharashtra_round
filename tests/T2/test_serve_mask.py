@@ -100,6 +100,61 @@ def test_no_code_or_unparsable_code_or_a_bare_fragment_is_not_masked(code):
     assert serve.mask_probs(row, serve.allowed_labels(code))[0].tolist() == pytest.approx(row.tolist())
 
 
+HELPER_NOT_SHOWN = """void sort(int a[], int n) {
+    for (j = 0; j < n - 1; j++)
+        if (a[j] > a[j + 1]) swap(a, j, j + 1);
+}"""
+HELPER_SHOWN = """void swap(int a[], int i, int j) {
+    int t = a[i];
+    a[i] = a[j];
+    a[j] = t;
+}
+""" + HELPER_NOT_SHOWN
+PRINTS = """int add(int a, int b) {
+    printf("%d", a + b);
+    return 0;
+}"""
+
+
+def test_code_that_calls_a_helper_it_does_not_show_is_not_masked():
+    """The array writes are inside `swap`; their absence here proves nothing (D04 must stay)."""
+    assert not serve.self_contained(HELPER_NOT_SHOWN)
+    assert serve.allowed_labels(HELPER_NOT_SHOWN) is None
+
+
+def test_code_that_defines_its_helper_is_masked_and_keeps_the_sort_classes():
+    assert serve.self_contained(HELPER_SHOWN)
+    assert removed(HELPER_SHOWN) == {"D02", "D05", "D06", "D07", "D08"}
+
+
+def test_library_calls_do_not_stop_masking():
+    assert serve.self_contained(PRINTS)
+    assert removed(PRINTS) == {"D02", "D03", "D04", "D05", "D06", "D07", "D08"}
+
+
+def test_masking_never_removes_the_label_of_a_generated_sentence():
+    """Every context of the two sentence sets: its code never rules out the label written for it."""
+    import json
+    rows = []
+    for name in ("reasons.jsonl", "reasons_persona.jsonl"):
+        rows += [json.loads(line) for line in (serve.ROOT / "ml" / "data" / name).read_text(encoding="utf-8").splitlines()]
+    pairs = {(row["code"], row["label"]) for row in rows}
+    masked_contexts = 0
+    for code, label in pairs:
+        gone = removed(code)
+        masked_contexts += gone is not None
+        assert gone is None or label not in gone, (label, code)
+    assert masked_contexts >= 10                       # the check is not empty
+
+
+def test_keep_protects_named_labels(fixed):
+    fixed(D05=0.5, M02=0.3, CORRECT_REASON=0.2)
+    kept = serve.read(LOOP_SUM, "it stops by itself", keep=["D05"])
+    assert kept["probs"][REASON_LABELS.index("D05")] == pytest.approx(0.5)
+    assert "D05" not in kept["masked"] and "D06" in kept["masked"]
+    assert check_shape(serve.read(LOOP_SUM, "it stops by itself", keep="not a list"))["masked"]
+
+
 def test_read_removes_an_impossible_class_and_renormalises(fixed):
     fixed(D05=0.5, M02=0.3, CORRECT_REASON=0.2)
     without = check_shape(serve.read(None, "it stops by itself"))

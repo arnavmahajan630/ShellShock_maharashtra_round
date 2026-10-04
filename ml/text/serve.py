@@ -9,8 +9,10 @@
     top_classes(result)   # [{id, name, subtitle, p, band}] for the /reason response
 
 The sentence alone is what a reader sees. `code` is optional and is used only to remove the
-classes the snippet makes impossible, with the diagnoser's own masking table
-(MASK_PRECONDITIONS through ml/model/mask.py and ml/features/ast_feats.py).
+classes the code makes impossible, with the diagnoser's own masking table
+(MASK_PRECONDITIONS through ml/model/mask.py and ml/features/ast_feats.py). Masking is applied
+only to whole, self-contained code (see `allowed_labels`); `read(..., keep=[...])` names
+labels that must never be removed.
 
 Three readers, one interface (`probs(texts) -> (n, 18)`, `threshold`, `version`):
 
@@ -305,17 +307,44 @@ def reset():
 
 # ---------------------------------------------------------------- masking by the code
 
+# Calls that cannot hide a loop, a swap or a recursion of the learner's own.
+LIBRARY_CALLS = frozenset({"printf", "scanf", "puts", "putchar", "getchar", "strlen", "strcmp", "strcpy", "abs"})
+
+
+def self_contained(code):
+    """True when the code parses and every function it calls is defined in it (library calls aside).
+
+    A snippet that calls a helper it does not show (`swap(a, j, j + 1)`) is not proof that a
+    structure is absent: the array writes are inside the helper.
+    """
+    from pycparser import c_ast
+    from ml.features.ast_feats import parse
+    tree = parse(code)
+    if tree is None:
+        return False
+    defined = {node.decl.name for node in tree.ext if isinstance(node, c_ast.FuncDef)}
+    called = set()
+
+    class Calls(c_ast.NodeVisitor):
+        def visit_FuncCall(self, node):
+            called.add(node.name.name if isinstance(node.name, c_ast.ID) else None)
+            self.generic_visit(node)
+    Calls().visit(tree)
+    return called <= defined | LIBRARY_CALLS
+
+
 @functools.lru_cache(maxsize=256)
 def allowed_labels(code):
     """Per label: False when the code makes the class impossible. None = no masking.
 
-    None for no code and for code that does not parse as a C file with at least one function.
-    A bare fragment (a few statements, as most quiz snippets are) is therefore not masked, on
-    purpose: the preconditions were written for whole learner functions. Wrapping fragments in
-    an empty function was tried and removed the true class on 10 of the 85 train and val
-    contexts (a swap of two plain variables has no array write; `low = mid;` alone has no
-    mid computation). See notes/T2.md.
-    CORRECT_REASON has no precondition, so it is never removed.
+    Masking needs whole code, as the diagnoser gets it. So None (no masking) for:
+      * no code, or code that does not parse as a C file with at least one function. A bare
+        fragment (a few statements, as most quiz snippets are) is not masked, on purpose:
+        wrapping fragments in an empty function was tried and removed the true class on 10 of
+        the 85 train and val contexts (a swap of two plain variables has no array write;
+        `low = mid;` alone has no mid computation);
+      * code that calls a function it does not define (see `self_contained`).
+    CORRECT_REASON has no precondition, so it is never removed. See notes/T2.md.
     """
     if not isinstance(code, str) or not code.strip():
         return None
@@ -323,7 +352,7 @@ def allowed_labels(code):
         from ml.features.ast_feats import ast_features
         from ml.model.mask import allowed_classes
         feats, meta = ast_features(code)
-        if not meta.get("parse_ok"):
+        if not meta.get("parse_ok") or not self_contained(code):
             return None
         row = [feats[name] for name in GROUP_A]
         return tuple(bool(ok) for ok in allowed_classes(row, features=GROUP_A, labels=REASON_LABELS)[0])
@@ -360,12 +389,13 @@ def clean(text):
     return text[:MAX_CHARS].strip()
 
 
-def read(code, text, reader=None, heads_dir=None, artifacts_dir=None):
+def read(code, text, reader=None, heads_dir=None, artifacts_dir=None, keep=()):
     """Which mistake does this one sentence show?
 
-    code    the snippet the sentence is about, or None. Only used to remove impossible classes.
+    code    the code the sentence is about, or None. Only used to remove impossible classes.
     text    the learner's sentence.
     reader  optional: "tfidf", "biencoder", "frozen" (tried first) or "none".
+    keep    labels that must never be removed, e.g. a quiz item's own `classes`.
     """
     try:
         chosen = get_reader(reader, heads_dir, artifacts_dir)
@@ -376,6 +406,8 @@ def read(code, text, reader=None, heads_dir=None, artifacts_dir=None):
             return _nothing(chosen.name, chosen.threshold, chosen.version)
         raw = chosen.probs([sentence])
         allowed = allowed_labels(code) if isinstance(code, str) else None
+        if allowed and isinstance(keep, (list, tuple, set, frozenset)) and keep:
+            allowed = tuple(ok or label in keep for label, ok in zip(REASON_LABELS, allowed))
         row = mask_probs(raw, allowed)[0]
         if row.shape != (N,) or not np.isfinite(row).all():
             return _nothing(chosen.name, chosen.threshold, chosen.version)
