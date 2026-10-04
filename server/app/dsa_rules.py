@@ -132,6 +132,15 @@ def diagnose_trial(trial: Dict[str, Any], code: str) -> Dict[str, Any]:
             return result("confident", "M01", 0.90, _DSA_EVIDENCE["M01"])
         if re.search(r"for\s*\(\s*(?:int\s+)?\w+\s*=\s*1\s*;", code):
             return result("confident", "M08", 0.88, _DSA_EVIDENCE["M08"])
+        # Premature Abort (D01's pattern, applied here): bailing out of the whole search on
+        # the first pair that doesn't sum to target, instead of continuing to check the rest.
+        if re.search(r"!=\s*target\s*\)\s*\{?\s*return\b", code):
+            return result(
+                "confident", "D01", 0.90,
+                "The function returns as soon as one pair's sum doesn't equal `target` — it gives "
+                "up on the very first mismatch instead of continuing to check the remaining pairs "
+                "(Premature Abort).",
+            )
 
     # 2. Trial 2: Binary Search (Searching)
     if problem_id == "T2_binary_search":
