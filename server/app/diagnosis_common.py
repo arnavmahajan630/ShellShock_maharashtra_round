@@ -118,6 +118,57 @@ TRAP_ITEMS = {
         "options": ["The printed value", "An unpredictable value — printing isn't returning", "0"],
         "correct": 1,
     },
+    # D01-D08 are DSA-specific misconceptions, but the trained diagnoser (ml/model/) can surface
+    # them for any attempt, not just Deep Space Trials — so the trap bank needs an entry for
+    # every class it can actually emit, not just the ones the old rule-based planets produced.
+    "D01": {
+        "prompt": "A linear search returns `-1` the instant one element doesn't match. What does this miss?",
+        "code": "int search(int a[], int n, int target) {\n    for (int i = 0; i < n; i++) {\n        if (a[i] != target) return -1;\n    }\n    return 1;\n}",
+        "options": ["Nothing — the first mismatch proves it's absent", "Every element after the first mismatch is never checked", "It's slower than it needs to be"],
+        "correct": 1,
+    },
+    "D02": {
+        "prompt": "`if (a[mid] < target) lo = mid;` in a binary search — what happens to the window?",
+        "code": "while (lo <= hi) {\n    int mid = (lo + hi) / 2;\n    if (a[mid] < target) lo = mid;\n    else hi = mid - 1;\n}",
+        "options": ["It keeps shrinking normally", "It can stop shrinking and loop forever — mid should be excluded", "It shrinks twice as fast"],
+        "correct": 1,
+    },
+    "D03": {
+        "prompt": "`a[j] = a[j+1]; a[j+1] = a[j];` is meant to swap two cells. What actually happens?",
+        "code": "int t = a[j];\na[j] = a[j + 1];\na[j + 1] = a[j];",
+        "options": ["The two values swap correctly", "a[j]'s original value is lost — both cells end up holding a[j+1]'s value", "A compile error"],
+        "correct": 1,
+    },
+    "D04": {
+        "prompt": "A sort runs the inner comparison-and-swap loop exactly once over the array. Is it sorted after?",
+        "code": "for (int j = 0; j < n - 1; j++) {\n    if (a[j] > a[j + 1]) swap(&a[j], &a[j + 1]);\n}",
+        "options": ["Yes, one pass sorts it", "No — one pass only moves the largest element to the end", "Only if n is even"],
+        "correct": 1,
+    },
+    "D05": {
+        "prompt": "`int f(int n) { return n + f(n - 1); }` — what happens when this is called?",
+        "code": "int f(int n) {\n    return n + f(n - 1);\n}",
+        "options": ["It adds up to n and stops at 0", "It recurses forever (no base case) until the call stack overflows", "It returns 0 immediately"],
+        "correct": 1,
+    },
+    "D06": {
+        "prompt": "`int f(int n) { if (n == 0) return 0; return n + f(n); }` — does this reach its base case?",
+        "code": "int f(int n) {\n    if (n == 0) return 0;\n    return n + f(n);\n}",
+        "options": ["Yes, n shrinks each call", "No — the recursive call passes n unchanged, so it never reaches n == 0", "Only when n is negative"],
+        "correct": 1,
+    },
+    "D07": {
+        "prompt": "`int f(int n) { if (n == 0) return 0; f(n - 1); return n; }` — what does this compute?",
+        "code": "int f(int n) {\n    if (n == 0) return 0;\n    f(n - 1);\n    return n;\n}",
+        "options": ["The sum 1+2+...+n", "Just n — the recursive call's result is discarded, never added in", "0"],
+        "correct": 1,
+    },
+    "D08": {
+        "prompt": "`if (s1 == s2)` where `s1` and `s2` are two `char[]` with the same text — what does this check?",
+        "code": "char s1[] = \"cat\";\nchar s2[] = \"cat\";\nif (s1 == s2) { /* ... */ }",
+        "options": ["Whether the text is equal", "Whether they're the same memory address — false here even though the text matches", "A compile error"],
+        "correct": 1,
+    },
 }
 
 

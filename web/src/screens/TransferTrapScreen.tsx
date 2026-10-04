@@ -31,13 +31,34 @@ export default function TransferTrapScreen() {
   const [lastAttempt, setLastAttempt] = useState<Awaited<ReturnType<typeof api.attempt>> | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
 
+  async function loadTransferProblem() {
+    const nextId = planet!.nextProblem[problem!.problem_id];
+    const next = await api.getProblem(nextId);
+    setTransferProblem(next);
+    setCode(next.starter);
+    setPhase("transfer");
+  }
+
   useEffect(() => {
     if (!classId) return;
     setLoadError(null);
     api
       .trapItem(classId)
       .then(setTrapItem)
-      .catch((err) => setLoadError(err instanceof Error ? err.message : "Couldn't reach the backend."));
+      .catch((err) => {
+        const message = err instanceof Error ? err.message : "Couldn't reach the backend.";
+        // The trained diagnoser can label an attempt with a class the hand-authored trap
+        // bank has no question for (e.g. "OTHER", the catch-all for an unrecognized bug).
+        // That's not a backend outage — skip straight to the transfer problem instead of
+        // showing a hard error for something that was never going to have content.
+        if (message.includes("404")) {
+          loadTransferProblem().catch((err2) =>
+            setLoadError(err2 instanceof Error ? err2.message : "Couldn't reach the backend.")
+          );
+          return;
+        }
+        setLoadError(message);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [classId]);
 
@@ -59,11 +80,7 @@ export default function TransferTrapScreen() {
     setTrapPassed(correct);
     try {
       await api.reassess({ learner_id: learnerId, class: classId!, item_id: `trap_${classId}`, item_type: "trap", result: { correct } });
-      const nextId = planet!.nextProblem[problem!.problem_id];
-      const next = await api.getProblem(nextId);
-      setTransferProblem(next);
-      setCode(next.starter);
-      setPhase("transfer");
+      await loadTransferProblem();
     } catch (err) {
       setLoadError(err instanceof Error ? err.message : "Couldn't reach the backend.");
     }
