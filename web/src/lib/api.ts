@@ -243,7 +243,7 @@ export interface DebriefReport {
 
 export const api = {
   getProblem: (problemId: string) => get<Problem>(`/problems/${problemId}`),
-  attempt: (payload: { learner_id: string; problem_id: string; code: string; events?: unknown[] }) =>
+  attempt: (payload: { learner_id: string; problem_id: string; code: string; prediction?: string; events?: unknown[] }) =>
     post<AttemptResponse>("/attempt", { events: [], ...payload }),
   intervene: (payload: { problem_id: string; code: string; class: string }) =>
     post<Intervention>("/intervene", payload),

@@ -89,9 +89,21 @@ def _legacy(problem_id, code, want_diagnosis):
 # ---------------------------------------------------------------- which path
 
 def _live_problem(problem_id):
-    """The bank problem when the pipeline can serve it, else None."""
+    """The bank problem when the pipeline can serve it, else None.
+
+    The ML pipeline's own problem bank (`ml/problems/main/`) numbers its problems P01, P02, ...
+    independently of the older planet fixtures (`server/fixtures/problems.json`) — a handful of
+    ids collide with a *different* problem under the same id (P13 is "sync_ratio" on the planet
+    but "fuel_percent" in the pipeline bank; P14 is "signal_diff" vs "distance"). Trusting the id
+    alone there means the gate checks the submission against the wrong signature and every
+    attempt fails before diagnosis ever runs. Cross-check the signature against the fixture's
+    own declared one before trusting the pipeline's answer for this id.
+    """
     problem = pipeline.get_problem(problem_id) if problem_id else None
     if problem is None:
+        return None
+    fixture_problem = _find_problem(problem_id)
+    if fixture_problem is not None and fixture_problem.get("signature") != problem.get("signature"):
         return None
     try:
         pipeline._model()

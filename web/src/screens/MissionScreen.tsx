@@ -66,7 +66,12 @@ export default function MissionScreen() {
     setPhase("run");
     setRunError(null);
     try {
-      const result = await api.attempt({ learner_id: learnerId, problem_id: problem!.problem_id, code });
+      const result = await api.attempt({
+        learner_id: learnerId,
+        problem_id: problem!.problem_id,
+        code,
+        prediction: predictAnswer ?? undefined,
+      });
       setAttempt(result);
       if (result.gate.code === "G0" && result.tests && result.tests.passed === result.tests.total) {
         markPassed(problem!.problem_id);

@@ -80,6 +80,13 @@ export default function TransferTrapScreen() {
     setTrapPassed(correct);
     try {
       await api.reassess({ learner_id: learnerId, class: classId!, item_id: `trap_${classId}`, item_type: "trap", result: { correct } });
+    } catch (err) {
+      setLoadError(err instanceof Error ? err.message : "Couldn't reach the backend.");
+    }
+  }
+
+  async function continueToTransfer() {
+    try {
       await loadTransferProblem();
     } catch (err) {
       setLoadError(err instanceof Error ? err.message : "Couldn't reach the backend.");
@@ -141,6 +148,20 @@ export default function TransferTrapScreen() {
                 </button>
               ))}
             </div>
+            {trapAnswer !== null && (
+              <div className="mt-6">
+                <p className={"font-ui text-lg " + (trapAnswer === trapItem.correct ? "text-mint-success" : "text-alert-red")}>
+                  {trapAnswer === trapItem.correct ? "Correct." : "Not quite — see the highlighted answer above."}
+                </p>
+                <button
+                  type="button"
+                  onClick={continueToTransfer}
+                  className="mt-3 font-ui text-xl px-6 py-2 rounded bg-warp-cyan text-deep-space hover:brightness-110 active:scale-95"
+                >
+                  Continue →
+                </button>
+              </div>
+            )}
           </>
         )}
 
