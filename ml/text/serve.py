@@ -1,4 +1,4 @@
-"""Sentence reader, serving side (plans/05 §6), package T2.
+"""Sentence reader, serving side (ml_plan/05 §6), package T2.
 
     from ml.text.serve import read, top_classes
     result = read(code, text)
@@ -493,9 +493,10 @@ def main(argv=None):
             print(row)
         return 0
     result = read(args.code, args.text or "", args.reader)
+    # ASCII only: a Windows console cannot print every character in the class subtitles.
     print(json.dumps({"status": result["status"], "reader": result["reader"],
                       "threshold": result["threshold"], "masked": result["masked"],
-                      "top": top_classes(result)}, indent=2, ensure_ascii=False))
+                      "top": top_classes(result)}, indent=2, ensure_ascii=True))
     return 0
 
 

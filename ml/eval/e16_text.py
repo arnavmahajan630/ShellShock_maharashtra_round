@@ -1,4 +1,4 @@
-"""E16: how well does the sentence reader work? (plans/05 §9), package E-c.
+"""E16: how well does the sentence reader work? (ml_plan/05 §9), package E-c.
 
     python -m ml.eval.e16_text            # writes ml/eval/e16_card.json and ml/eval/e16_card.md
 
