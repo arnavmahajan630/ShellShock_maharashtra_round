@@ -1,0 +1,121 @@
+{
+ "id": "E13",
+ "title": "Real students (ITSP slice) — AST-only, candidate labels",
+ "slice": "X: ITSP buggy/fixed pairs, one hunk <= 3 lines (X1)",
+ "n": 396,
+ "model_version": "diagnoser_40e8e6ff",
+ "status": "partially run: AST-only; labels are UNVERIFIED rule candidates (human hand-check not done)",
+ "metrics": {
+  "rows_in_slice": 396,
+  "rows_with_ast_features": 396,
+  "rows_skipped": 0,
+  "skipped_reasons": {},
+  "macro_f1_vs_candidate_labels_all": 0.1727551230563279,
+  "macro_f1_ci95_cluster_by_problem": [
+   0.045037880390570405,
+   0.321387551732198
+  ],
+  "acc_vs_candidate_labels_all": 0.10858585858585859,
+  "n_rule_labelled_non_other": 19,
+  "macro_f1_on_rule_labelled_only": 0.34523809523809523,
+  "macro_f1_on_rule_labelled_ci95_row_bootstrap": [
+   0.2,
+   0.5614711399711398
+  ],
+  "acc_on_rule_labelled_only": 0.3684210526315789,
+  "full_features_macro_f1": null,
+  "full_features_status": "not available: ITSP programs use main/scanf/malloc/char** (outside the frozen subset), so the interpreter cannot trace them"
+ },
+ "per_candidate_label": {
+  "D05": {
+   "n": 2,
+   "recall_top1_hits_label": 0.0,
+   "predicted_as": {
+    "M03": 1,
+    "D06": 1
+   }
+  },
+  "D07": {
+   "n": 3,
+   "recall_top1_hits_label": 1.0,
+   "predicted_as": {
+    "D07": 3
+   }
+  },
+  "M01": {
+   "n": 7,
+   "recall_top1_hits_label": 0.14285714285714285,
+   "predicted_as": {
+    "M01": 1,
+    "OTHER": 1,
+    "M05": 1,
+    "M03": 3,
+    "M10": 1
+   }
+  },
+  "M03": {
+   "n": 1,
+   "recall_top1_hits_label": 1.0,
+   "predicted_as": {
+    "M03": 1
+   }
+  },
+  "M05": {
+   "n": 1,
+   "recall_top1_hits_label": 1.0,
+   "predicted_as": {
+    "M05": 1
+   }
+  },
+  "M06": {
+   "n": 3,
+   "recall_top1_hits_label": 0.3333333333333333,
+   "predicted_as": {
+    "M06": 1,
+    "OTHER": 1,
+    "M05": 1
+   }
+  },
+  "M07": {
+   "n": 2,
+   "recall_top1_hits_label": 0.0,
+   "predicted_as": {
+    "M05": 2
+   }
+  }
+ },
+ "prediction_distribution_all": {
+  "M10": 152,
+  "M05": 64,
+  "CORRECT": 47,
+  "OTHER": 38,
+  "M03": 29,
+  "D06": 16,
+  "M02": 14,
+  "D01": 11,
+  "M01": 11,
+  "D07": 7,
+  "D04": 3,
+  "M06": 2,
+  "M08": 1,
+  "D05": 1
+ },
+ "prediction_distribution_on_auto_OTHER": {
+  "M10": 151,
+  "M05": 59,
+  "CORRECT": 47,
+  "OTHER": 36,
+  "M03": 24,
+  "D06": 15,
+  "M02": 14,
+  "D01": 11,
+  "M01": 10,
+  "D07": 4,
+  "D04": 3,
+  "M06": 1,
+  "M08": 1,
+  "D05": 1
+ },
+ "status_x1": "ml/data/external/itsp_slice.jsonl (gitignored) holds code from ITSP; code is not copied into this card",
+ "caveat": "The ITSP labels are the output of regex rules on the diff (notes/X1.md): 377 of 396 are 'OTHER' = no rule matched, which includes real classes the rules do not reach, so agreement with them is not accuracy. Only 19 rows carry a class, unchecked by a person; per-label counts are 1-7. The entry function is the function containing the first changed line (a pseudo-problem, since ITSP has no problem-bank entry); without tests there are no trace or relation features, and the shipped model, trained with feature dropout, is run on AST (A) + task (C) features only. Real student programs here are much larger than the bank's single-function problems (loops over several functions, pointers, I/O). Treat this card as a feasibility check, not a real-student result."
+}

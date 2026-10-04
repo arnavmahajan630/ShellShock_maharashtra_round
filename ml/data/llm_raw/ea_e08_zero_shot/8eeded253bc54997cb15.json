@@ -1,0 +1,24 @@
+{
+  "job": "ea_e08_zero_shot",
+  "model": "deepseek-flash",
+  "temperature": 0.0,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are an experienced teacher of introductory C programming. A student wrote the function below for a task. Decide which single label best describes the student's code. Labels:\nM01: Loop runs one step too many or too few. The student believes: i<=n (from 0) runs n times; whether the bound is the last value included or excluded is mixed up\nM02: Loop variable never moves toward the exit. The student believes: The loop variable advances by itself and the loop ends by itself\nM03: Running total is reset inside the loop. The student believes: The total keeps its value across passes even if it is set again inside the loop\nM04: int ÷ int drops the decimals. The student believes: int / int gives the exact decimal\nM05: Variable used before it was given a value. The student believes: Local variables start at 0\nM06: `=` stores a value; `==` compares. The student believes: = compares\nM07: A stray `;` gives the if/loop an empty body. The student believes: A ; after the header is harmless\nM08: Arrays start at 0; last cell is n−1. The student believes: Arrays are indexed 1..n\nM10: `printf` shows a value; `return` hands it back. The student believes: Printing the value hands it back to the caller\nD01: The search gives up after the first miss. The student believes: The else branch means 'not this one, keep looking'; it doesn't end or overwrite anything\nD02: Binary search window never shrinks (`low = mid`). The student believes: mid is excluded from the window automatically\nD03: Swapping without a temp loses a value. The student believes: Two assignments happen at the same time\nD04: One pass doesn't sort the whole array. The student believes: One pass over the array sorts it\nD05: Recursion has no reachable base case. The student believes: Recursion stops by itself when the work is done\nD06: The recursive call doesn't move toward the base case. The student believes: The recursive call moves toward the base case on its own\nD07: The recursive call's result is thrown away. The student believes: The recursive call's result is combined automatically\nD08: `==` doesn't compare text in C. The student believes: == compares text\nCORRECT: the program solves the task correctly (even if the style is unusual).\nOTHER: the program is wrong or odd, but none of the 17 beliefs above explains it.\nAnswer with a JSON object {\"label\": \"<one label id>\", \"reason\": \"<one short sentence>\"} and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Task: Return the sum of the decimal digits of n, using recursion. n is not negative.\nSignature: int sum_digits(int n)\n\nStudent code:\n```c\nint sum_digits(int n) {\n    int sum;\n    int rem;\n    sum = 0;\n    rem = 0;\n    while (n != 0) {\n        sum = n % 10;\n        n = n / 10;\n        sum_digits(n);\n        rem = sum;\n    }\n    return sum;\n}\n```"
+    }
+  ],
+  "content": "{\"label\": \"M03\", \"reason\": \"The running total `sum` is reset to the last digit inside the loop instead of accumulating across passes.\"}",
+  "parsed": {
+    "label": "M03",
+    "reason": "The running total `sum` is reset to the last digit inside the loop instead of accumulating across passes."
+  },
+  "usage": {
+    "prompt_tokens": 703,
+    "completion_tokens": 33
+  }
+}

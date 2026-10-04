@@ -1,0 +1,296 @@
+{
+ "id": "E8",
+ "title": "Baselines",
+ "slice": "E1 folds on TRAIN; E2 = HOLDOUT-P; E4 = R-llm (LLM-written stand-in, 52 scored)",
+ "n": 5815,
+ "model_version": "diagnoser_40e8e6ff",
+ "metrics": {
+  "majority": {
+   "E1": {
+    "macro_f1": 0.026233854398647914,
+    "std": 0.002674564682342059,
+    "n": 5815
+   },
+   "E2": {
+    "macro_f1": 0.03540442205429611,
+    "ci95": [
+     0.03124257543359468,
+     0.08671992947797773
+    ],
+    "n": 938
+   },
+   "E4": {
+    "macro_f1": 0.01697792869269949,
+    "ci95": [
+     0.010319917440660475,
+     0.030811487638533662
+    ],
+    "n": 52
+   }
+  },
+  "rules": {
+   "E1": {
+    "macro_f1": 0.826201498494588,
+    "std": 0.05804100647946637,
+    "n": 5815
+   },
+   "E2": {
+    "macro_f1": 0.6639566750562692,
+    "ci95": [
+     0.540647816839502,
+     0.7837299486860919
+    ],
+    "n": 938
+   },
+   "E4": {
+    "macro_f1": 0.6968524251805985,
+    "ci95": [
+     0.5444330065359477,
+     0.818252450980392
+    ],
+    "n": 52
+   }
+  },
+  "tfidf_lr": {
+   "E1": {
+    "macro_f1": 0.4388785194324701,
+    "std": 0.10087578563938303,
+    "n": 5815
+   },
+   "E2": {
+    "macro_f1": 0.4193080532160631,
+    "ci95": [
+     0.22745706988385464,
+     0.6862457828524533
+    ],
+    "n": 938
+   },
+   "E4": {
+    "macro_f1": 0.462531328320802,
+    "ci95": [
+     0.3038536271912231,
+     0.5938516677838693
+    ],
+    "n": 52
+   }
+  },
+  "tfidf_lgbm": {
+   "E1": {
+    "macro_f1": 0.48446996117630114,
+    "std": 0.13596721792861607,
+    "n": 5815
+   },
+   "E2": {
+    "macro_f1": 0.45122978165178473,
+    "ci95": [
+     0.2465134027440558,
+     0.6754298052227465
+    ],
+    "n": 938
+   },
+   "E4": {
+    "macro_f1": 0.35341055341055344,
+    "ci95": [
+     0.19830633154162566,
+     0.4611145104895105
+    ],
+    "n": 52
+   }
+  },
+  "diagnoser": {
+   "E1": {
+    "macro_f1": 0.827094513593452,
+    "std": 0.09358791491437343,
+    "n": 5815
+   },
+   "E2": {
+    "macro_f1": 0.7987470548946098,
+    "ci95": [
+     0.6987168600764032,
+     0.9893103657004082
+    ],
+    "n": 938
+   },
+   "E4": {
+    "macro_f1": 0.7827067669172931,
+    "ci95": [
+     0.629806219923867,
+     0.9044223823051947
+    ],
+    "n": 52
+   }
+  },
+  "deepseek_zero_shot": {
+   "E1": null,
+   "E2": null,
+   "E4": {
+    "macro_f1": 0.9167919799498746,
+    "ci95": [
+     0.8506647058823531,
+     1.0
+    ],
+    "n": 52,
+    "acc": 0.9615384615384616
+   }
+  }
+ },
+ "table": {
+  "majority": {
+   "name": "majority class",
+   "E1": {
+    "macro_f1": 0.026233854398647914,
+    "std": 0.002674564682342059,
+    "n": 5815
+   },
+   "E2": {
+    "macro_f1": 0.03540442205429611,
+    "ci95": [
+     0.03124257543359468,
+     0.08671992947797773
+    ],
+    "n": 938
+   },
+   "E4": {
+    "macro_f1": 0.01697792869269949,
+    "ci95": [
+     0.010319917440660475,
+     0.030811487638533662
+    ],
+    "n": 52
+   }
+  },
+  "rules": {
+   "name": "rules (03 §5.7 order, on extracted features)",
+   "E1": {
+    "macro_f1": 0.826201498494588,
+    "std": 0.05804100647946637,
+    "n": 5815
+   },
+   "E2": {
+    "macro_f1": 0.6639566750562692,
+    "ci95": [
+     0.540647816839502,
+     0.7837299486860919
+    ],
+    "n": 938
+   },
+   "E4": {
+    "macro_f1": 0.6968524251805985,
+    "ci95": [
+     0.5444330065359477,
+     0.818252450980392
+    ],
+    "n": 52
+   }
+  },
+  "tfidf_lr": {
+   "name": "TF-IDF char 3-5 + logistic regression",
+   "E1": {
+    "macro_f1": 0.4388785194324701,
+    "std": 0.10087578563938303,
+    "n": 5815
+   },
+   "E2": {
+    "macro_f1": 0.4193080532160631,
+    "ci95": [
+     0.22745706988385464,
+     0.6862457828524533
+    ],
+    "n": 938
+   },
+   "E4": {
+    "macro_f1": 0.462531328320802,
+    "ci95": [
+     0.3038536271912231,
+     0.5938516677838693
+    ],
+    "n": 52
+   }
+  },
+  "tfidf_lgbm": {
+   "name": "TF-IDF char 3-5 + LightGBM",
+   "E1": {
+    "macro_f1": 0.48446996117630114,
+    "std": 0.13596721792861607,
+    "n": 5815
+   },
+   "E2": {
+    "macro_f1": 0.45122978165178473,
+    "ci95": [
+     0.2465134027440558,
+     0.6754298052227465
+    ],
+    "n": 938
+   },
+   "E4": {
+    "macro_f1": 0.35341055341055344,
+    "ci95": [
+     0.19830633154162566,
+     0.4611145104895105
+    ],
+    "n": 52
+   }
+  },
+  "diagnoser": {
+   "name": "diagnoser (LightGBM on A+B+R+C, calibrated, masked)",
+   "E1": {
+    "macro_f1": 0.827094513593452,
+    "std": 0.09358791491437343,
+    "n": 5815
+   },
+   "E2": {
+    "macro_f1": 0.7987470548946098,
+    "ci95": [
+     0.6987168600764032,
+     0.9893103657004082
+    ],
+    "n": 938
+   },
+   "E4": {
+    "macro_f1": 0.7827067669172931,
+    "ci95": [
+     0.629806219923867,
+     0.9044223823051947
+    ],
+    "n": 52
+   }
+  },
+  "deepseek_zero_shot": {
+   "name": "DeepSeek zero-shot (deepseek-flash), label list + code + task text, temperature 0",
+   "E1": null,
+   "E2": null,
+   "E4": {
+    "macro_f1": 0.9167919799498746,
+    "ci95": [
+     0.8506647058823531,
+     1.0
+    ],
+    "n": 52,
+    "acc": 0.9615384615384616
+   }
+  }
+ },
+ "deepseek": {
+  "status": "ran",
+  "model": "deepseek-flash",
+  "calls": 52,
+  "failed": 0,
+  "invalid_label_mapped_to_OTHER": 0,
+  "temperature": 0.0,
+  "usage": {
+   "calls": 52,
+   "prompt_tokens": 38972,
+   "completion_tokens": 1864
+  },
+  "all_from_cache": true,
+  "answers_file": "E08_deepseek_answers.json"
+ },
+ "data_status": {
+  "R-blind": "R-blind (40 hand-written by FE) is still open: no file exists, so nothing was run on it. The headline of 03 §0.3 is therefore not measured.",
+  "R-llm": "R-llm (58 LLM-written programs, NOT hand-written, NOT real students)"
+ },
+ "plots": [
+  "E08_baselines.png"
+ ],
+ "caveat": "E1 is the mean of five per-fold macro-F1 values (± std); E2 uses a cluster bootstrap by problem over 6 problems; E4 is a row bootstrap over 52 LLM-written programs. TF-IDF baselines see source text only; rules and the diagnoser see extracted features (including the test run). The rules baseline uses the extracted features, not the generator's predicates. The DeepSeek row sees the task text and the code but not the test results, was run once with a prompt written by E-a (not tuned). READ THE DEEPSEEK ROW WITH CARE: the R-llm programs were themselves written by a DeepSeek model (deepseek-v4-pro) that was told the belief and asked to act it out, the labels are those beliefs, and the second rater is DeepSeek too. A DeepSeek model reading code from a DeepSeek model, with the belief wording in its own label list, is the easiest possible case for it; its high score on this stand-in is not evidence that it beats the diagnoser on real student code. R-blind (hand-written) is missing, so this cannot be checked. Also note: the rules baseline equals the diagnoser on E1 (the rules read the same extracted features, written from the same plan as the generator's operators) and is clearly lower on E2 and E4."
+}

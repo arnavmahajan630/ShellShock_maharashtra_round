@@ -1,0 +1,429 @@
+{
+ "id": "E7",
+ "title": "Calibration",
+ "slice": "TRAIN out-of-fold (5815 rows, 28 problems)",
+ "n": 5815,
+ "model_version": "diagnoser_40e8e6ff",
+ "metrics": {
+  "temperature": 2.4468147074242865,
+  "ece_before": 0.03559246736222726,
+  "ece_after": 0.30273871065713415,
+  "ece_after_ci95_cluster": [
+   0.2187826611984053,
+   0.38356204296562774
+  ],
+  "nll_before": 2.632246101316692,
+  "nll_after": 1.8892298839769426,
+  "brier_before": 0.27004096070468364,
+  "brier_after": 0.3474805316032444,
+  "unmasked": {
+   "ece_before": 0.03357440102201389,
+   "ece_after": 0.3630883441566099,
+   "ece_after_ci95_cluster": [
+    0.27705434660019307,
+    0.44483789404225427
+   ],
+   "nll_before": 2.6426077783512754,
+   "nll_after": 2.02830687585002,
+   "brier_before": 0.26675383535593195,
+   "brier_after": 0.38166472868781115
+  },
+  "n_boot": 1000
+ },
+ "target": "ECE after temperature <= 0.08",
+ "target_met": false,
+ "reliability_after": [
+  {
+   "lo": 0.0,
+   "hi": 0.1,
+   "count": 0,
+   "confidence": null,
+   "accuracy": null
+  },
+  {
+   "lo": 0.1,
+   "hi": 0.2,
+   "count": 191,
+   "confidence": 0.1815182291205862,
+   "accuracy": 0.27225130890052357
+  },
+  {
+   "lo": 0.2,
+   "hi": 0.30000000000000004,
+   "count": 714,
+   "confidence": 0.2557531373399752,
+   "accuracy": 0.4579831932773109
+  },
+  {
+   "lo": 0.30000000000000004,
+   "hi": 0.4,
+   "count": 756,
+   "confidence": 0.3413383224434892,
+   "accuracy": 0.6772486772486772
+  },
+  {
+   "lo": 0.4,
+   "hi": 0.5,
+   "count": 669,
+   "confidence": 0.4516390454126998,
+   "accuracy": 0.7757847533632287
+  },
+  {
+   "lo": 0.5,
+   "hi": 0.6000000000000001,
+   "count": 959,
+   "confidence": 0.5545227998893122,
+   "accuracy": 0.9614181438998958
+  },
+  {
+   "lo": 0.6000000000000001,
+   "hi": 0.7000000000000001,
+   "count": 1393,
+   "confidence": 0.652095110433168,
+   "accuracy": 0.9798994974874372
+  },
+  {
+   "lo": 0.7000000000000001,
+   "hi": 0.8,
+   "count": 967,
+   "confidence": 0.7424648488476115,
+   "accuracy": 1.0
+  },
+  {
+   "lo": 0.8,
+   "hi": 0.9,
+   "count": 166,
+   "confidence": 0.8071025288838738,
+   "accuracy": 1.0
+  },
+  {
+   "lo": 0.9,
+   "hi": 1.0,
+   "count": 0,
+   "confidence": null,
+   "accuracy": null
+  }
+ ],
+ "reliability_before": [
+  {
+   "lo": 0.0,
+   "hi": 0.1,
+   "count": 0,
+   "confidence": null,
+   "accuracy": null
+  },
+  {
+   "lo": 0.1,
+   "hi": 0.2,
+   "count": 0,
+   "confidence": null,
+   "accuracy": null
+  },
+  {
+   "lo": 0.2,
+   "hi": 0.30000000000000004,
+   "count": 5,
+   "confidence": 0.2906102207260236,
+   "accuracy": 0.6
+  },
+  {
+   "lo": 0.30000000000000004,
+   "hi": 0.4,
+   "count": 160,
+   "confidence": 0.3660180301057335,
+   "accuracy": 0.28125
+  },
+  {
+   "lo": 0.4,
+   "hi": 0.5,
+   "count": 193,
+   "confidence": 0.4604714287155965,
+   "accuracy": 0.5233160621761658
+  },
+  {
+   "lo": 0.5,
+   "hi": 0.6000000000000001,
+   "count": 369,
+   "confidence": 0.5425593340558813,
+   "accuracy": 0.4715447154471545
+  },
+  {
+   "lo": 0.6000000000000001,
+   "hi": 0.7000000000000001,
+   "count": 446,
+   "confidence": 0.6502590781295072,
+   "accuracy": 0.6076233183856502
+  },
+  {
+   "lo": 0.7000000000000001,
+   "hi": 0.8,
+   "count": 389,
+   "confidence": 0.7527729035046546,
+   "accuracy": 0.6580976863753213
+  },
+  {
+   "lo": 0.8,
+   "hi": 0.9,
+   "count": 648,
+   "confidence": 0.8513382603381977,
+   "accuracy": 0.75
+  },
+  {
+   "lo": 0.9,
+   "hi": 1.0,
+   "count": 3605,
+   "confidence": 0.9780903063704108,
+   "accuracy": 0.9692094313453536
+  }
+ ],
+ "per_predicted_class": {
+  "M01": {
+   "n_predicted": 499,
+   "acc": 0.8416833667334669,
+   "mean_confidence": 0.40462231947823657,
+   "gap": -0.4370610472552303
+  },
+  "M02": {
+   "n_predicted": 271,
+   "acc": 0.7822878228782287,
+   "mean_confidence": 0.5823166769390102,
+   "gap": -0.1999711459392185
+  },
+  "M03": {
+   "n_predicted": 291,
+   "acc": 1.0,
+   "mean_confidence": 0.6676799069316511,
+   "gap": -0.33232009306834887
+  },
+  "M05": {
+   "n_predicted": 226,
+   "acc": 1.0,
+   "mean_confidence": 0.6595494315528794,
+   "gap": -0.3404505684471206
+  },
+  "M07": {
+   "n_predicted": 355,
+   "acc": 0.9380281690140845,
+   "mean_confidence": 0.6054825797078516,
+   "gap": -0.3325455893062329
+  },
+  "M08": {
+   "n_predicted": 537,
+   "acc": 0.8733705772811918,
+   "mean_confidence": 0.4081718823924289,
+   "gap": -0.4651986948887629
+  },
+  "M10": {
+   "n_predicted": 347,
+   "acc": 0.9423631123919308,
+   "mean_confidence": 0.5959666960973755,
+   "gap": -0.3463964162945553
+  },
+  "D01": {
+   "n_predicted": 191,
+   "acc": 1.0,
+   "mean_confidence": 0.5992882018003411,
+   "gap": -0.40071179819965885
+  },
+  "D02": {
+   "n_predicted": 210,
+   "acc": 1.0,
+   "mean_confidence": 0.6140434510990108,
+   "gap": -0.3859565489009892
+  },
+  "D03": {
+   "n_predicted": 207,
+   "acc": 0.7632850241545893,
+   "mean_confidence": 0.528683495150078,
+   "gap": -0.23460152900451137
+  },
+  "D04": {
+   "n_predicted": 109,
+   "acc": 0.8807339449541285,
+   "mean_confidence": 0.3867559693842927,
+   "gap": -0.4939779755698358
+  },
+  "D05": {
+   "n_predicted": 193,
+   "acc": 1.0,
+   "mean_confidence": 0.5024809911367073,
+   "gap": -0.4975190088632927
+  },
+  "D06": {
+   "n_predicted": 198,
+   "acc": 1.0,
+   "mean_confidence": 0.43182270627160074,
+   "gap": -0.5681772937283993
+  },
+  "D07": {
+   "n_predicted": 71,
+   "acc": 1.0,
+   "mean_confidence": 0.5994578401502526,
+   "gap": -0.4005421598497474
+  },
+  "CORRECT": {
+   "n_predicted": 1148,
+   "acc": 0.9102787456445993,
+   "mean_confidence": 0.6384957247248356,
+   "gap": -0.2717830209197637
+  },
+  "OTHER": {
+   "n_predicted": 962,
+   "acc": 0.40540540540540543,
+   "mean_confidence": 0.38724591977570594,
+   "gap": -0.01815948562969949
+  }
+ },
+ "per_class_flagged_gap_gt_0.10_n_ge_30": {
+  "M01": {
+   "n_predicted": 499,
+   "acc": 0.8416833667334669,
+   "mean_confidence": 0.40462231947823657,
+   "gap": -0.4370610472552303
+  },
+  "M02": {
+   "n_predicted": 271,
+   "acc": 0.7822878228782287,
+   "mean_confidence": 0.5823166769390102,
+   "gap": -0.1999711459392185
+  },
+  "M03": {
+   "n_predicted": 291,
+   "acc": 1.0,
+   "mean_confidence": 0.6676799069316511,
+   "gap": -0.33232009306834887
+  },
+  "M05": {
+   "n_predicted": 226,
+   "acc": 1.0,
+   "mean_confidence": 0.6595494315528794,
+   "gap": -0.3404505684471206
+  },
+  "M07": {
+   "n_predicted": 355,
+   "acc": 0.9380281690140845,
+   "mean_confidence": 0.6054825797078516,
+   "gap": -0.3325455893062329
+  },
+  "M08": {
+   "n_predicted": 537,
+   "acc": 0.8733705772811918,
+   "mean_confidence": 0.4081718823924289,
+   "gap": -0.4651986948887629
+  },
+  "M10": {
+   "n_predicted": 347,
+   "acc": 0.9423631123919308,
+   "mean_confidence": 0.5959666960973755,
+   "gap": -0.3463964162945553
+  },
+  "D01": {
+   "n_predicted": 191,
+   "acc": 1.0,
+   "mean_confidence": 0.5992882018003411,
+   "gap": -0.40071179819965885
+  },
+  "D02": {
+   "n_predicted": 210,
+   "acc": 1.0,
+   "mean_confidence": 0.6140434510990108,
+   "gap": -0.3859565489009892
+  },
+  "D03": {
+   "n_predicted": 207,
+   "acc": 0.7632850241545893,
+   "mean_confidence": 0.528683495150078,
+   "gap": -0.23460152900451137
+  },
+  "D04": {
+   "n_predicted": 109,
+   "acc": 0.8807339449541285,
+   "mean_confidence": 0.3867559693842927,
+   "gap": -0.4939779755698358
+  },
+  "D05": {
+   "n_predicted": 193,
+   "acc": 1.0,
+   "mean_confidence": 0.5024809911367073,
+   "gap": -0.4975190088632927
+  },
+  "D06": {
+   "n_predicted": 198,
+   "acc": 1.0,
+   "mean_confidence": 0.43182270627160074,
+   "gap": -0.5681772937283993
+  },
+  "D07": {
+   "n_predicted": 71,
+   "acc": 1.0,
+   "mean_confidence": 0.5994578401502526,
+   "gap": -0.4005421598497474
+  },
+  "CORRECT": {
+   "n_predicted": 1148,
+   "acc": 0.9102787456445993,
+   "mean_confidence": 0.6384957247248356,
+   "gap": -0.2717830209197637
+  }
+ },
+ "final_model_no_refit": {
+  "HOLDOUT-P": {
+   "ece": 0.2601794090355394,
+   "nll": 0.7528227068121822,
+   "brier": 0.2588934991845086,
+   "acc": 0.8795309168443497,
+   "mean_confidence": 0.6193515078088103,
+   "n": 938,
+   "ece_ci95_row_bootstrap": [
+    0.20486197875768092,
+    0.3485037168178638
+   ]
+  },
+  "R-llm": {
+   "ece": 0.29261407280872626,
+   "nll": 1.4030642799133988,
+   "brier": 0.31359843260492515,
+   "acc": 0.8269230769230769,
+   "mean_confidence": 0.5804295485611252,
+   "n": 52,
+   "ece_ci95_row_bootstrap": [
+    0.2418362901025826,
+    0.36212577439972365
+   ]
+  }
+ },
+ "finding": "Temperature scaling by NLL makes ECE WORSE here: T is pushed up to the value that limits the damage of the few confident mistakes on whole unseen problems (the worst 5% of rows carry 52% of the NLL at T=1), which makes the many correct predictions under-confident. Not changed (ml/model/ is M1's); see notes/E-a.md.",
+ "informational_ece_optimal_T": {
+  "oof": {
+   "ece": 0.013897905264380058,
+   "nll": 2.617613085701358,
+   "brier": 0.26158762422305987,
+   "acc": 0.8306104901117799,
+   "mean_confidence": 0.8197760187206522,
+   "temperature": 1.2
+  },
+  "final_model_no_refit": {
+   "HOLDOUT-P": {
+    "ece": 0.07153067136407813,
+    "nll": 0.5805499321331942,
+    "brier": 0.20603694674394155,
+    "acc": 0.8795309168443497,
+    "mean_confidence": 0.8994312375490572,
+    "n": 938
+   },
+   "R-llm": {
+    "ece": 0.0891837317861594,
+    "nll": 1.2901156685958481,
+    "brier": 0.26264043562361633,
+    "acc": 0.8269230769230769,
+    "mean_confidence": 0.8673732303129827,
+    "n": 52
+   }
+  },
+  "note": "T chosen to minimise ECE on the same OOF rows, in-sample; not what the trainer fits or ships"
+ },
+ "plots": [
+  "E07_reliability.png"
+ ],
+ "caveat": "Numbers without a 'masked' label are masked (structural masking applied after temperature, as served); 'unmasked' is what ml/model/calibrate.py reports. T is fitted on these same OOF logits, so 'after' is in-sample for one parameter. ECE with 10 bins on ~5,800 correlated synthetic rows is optimistic for real code; R-llm numbers (n=52 scored, LLM-written) are noisy and not a calibration claim."
+}

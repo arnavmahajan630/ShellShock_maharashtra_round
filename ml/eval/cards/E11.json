@@ -1,0 +1,315 @@
+{
+ "id": "E11",
+ "title": "Robustness to semantics-preserving rewrites",
+ "slice": "R-llm (52 scored, LLM-written stand-in) and HOLDOUT-P (938)",
+ "n": 990,
+ "model_version": "diagnoser_40e8e6ff",
+ "metrics": {
+  "invariance_R-llm_pooled": 1.0,
+  "invariance_HOLDOUT-P_pooled": 1.0,
+  "feature_vector_identical_R-llm_pooled": 0.9556451612903226,
+  "feature_vector_identical_HOLDOUT-P_pooled": 1.0,
+  "stress_invariance_R-llm": 1.0,
+  "stress_invariance_HOLDOUT-P": 1.0,
+  "invariance_R-llm_combined": 1.0,
+  "invariance_HOLDOUT-P_combined": 1.0,
+  "near_miss_false_alarm_HOLDOUT-P": 0.0,
+  "near_miss_false_alarm_TRAIN_oof": 0.07534246575342465
+ },
+ "target": "invariance >= 0.90 unchanged",
+ "by_rewrite": {
+  "R-llm": {
+   "rename": {
+    "applicable": 52,
+    "behaviour_preserved": 52,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 0.9615384615384616,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8269230769230769,
+    "acc_after": 0.8269230769230769,
+    "example_flips": []
+   },
+   "reformat": {
+    "applicable": 52,
+    "behaviour_preserved": 52,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 0.9615384615384616,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8269230769230769,
+    "acc_after": 0.8269230769230769,
+    "example_flips": []
+   },
+   "comments": {
+    "applicable": 52,
+    "behaviour_preserved": 52,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 1.0,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8269230769230769,
+    "acc_after": 0.8269230769230769,
+    "example_flips": []
+   },
+   "dead_variable": {
+    "applicable": 52,
+    "behaviour_preserved": 52,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 0.9230769230769231,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8269230769230769,
+    "acc_after": 0.8269230769230769,
+    "example_flips": []
+   },
+   "for_while": {
+    "applicable": 40,
+    "behaviour_preserved": 40,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 0.925,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8,
+    "acc_after": 0.8,
+    "example_flips": []
+   },
+   "combined": {
+    "applicable": 52,
+    "behaviour_preserved": 52,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 0.9038461538461539,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8269230769230769,
+    "acc_after": 0.8269230769230769,
+    "example_flips": []
+   },
+   "flip_compare": {
+    "applicable": 48,
+    "behaviour_preserved": 48,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 0.8125,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8125,
+    "acc_after": 0.8125,
+    "example_flips": []
+   },
+   "incr_form": {
+    "applicable": 12,
+    "behaviour_preserved": 12,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 1.0,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.75,
+    "acc_after": 0.75,
+    "example_flips": []
+   },
+   "_pooled_single_rewrites": {
+    "n": 248,
+    "unchanged_share": 1.0,
+    "feature_vector_identical_share": 0.9556451612903226
+   },
+   "_pooled_stress_rewrites": {
+    "n": 60,
+    "unchanged_share": 1.0,
+    "feature_vector_identical_share": 0.85
+   }
+  },
+  "HOLDOUT-P": {
+   "rename": {
+    "applicable": 938,
+    "behaviour_preserved": 938,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 1.0,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8795309168443497,
+    "acc_after": 0.8795309168443497,
+    "example_flips": []
+   },
+   "reformat": {
+    "applicable": 505,
+    "behaviour_preserved": 505,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 1.0,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8633663366336634,
+    "acc_after": 0.8633663366336634,
+    "example_flips": []
+   },
+   "comments": {
+    "applicable": 938,
+    "behaviour_preserved": 938,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 1.0,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8795309168443497,
+    "acc_after": 0.8795309168443497,
+    "example_flips": []
+   },
+   "dead_variable": {
+    "applicable": 938,
+    "behaviour_preserved": 938,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 1.0,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8795309168443497,
+    "acc_after": 0.8795309168443497,
+    "example_flips": []
+   },
+   "for_while": {
+    "applicable": 600,
+    "behaviour_preserved": 600,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 1.0,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8966666666666666,
+    "acc_after": 0.8966666666666666,
+    "example_flips": []
+   },
+   "combined": {
+    "applicable": 938,
+    "behaviour_preserved": 938,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 1.0,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8795309168443497,
+    "acc_after": 0.8795309168443497,
+    "example_flips": []
+   },
+   "flip_compare": {
+    "applicable": 735,
+    "behaviour_preserved": 735,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 1.0,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8462585034013606,
+    "acc_after": 0.8462585034013606,
+    "example_flips": []
+   },
+   "incr_form": {
+    "applicable": 583,
+    "behaviour_preserved": 583,
+    "not_preserved_dropped": 0,
+    "feature_vector_identical_share": 1.0,
+    "unchanged_share": 1.0,
+    "unchanged_ci95": [
+     1.0,
+     1.0
+    ],
+    "acc_before": 0.8970840480274442,
+    "acc_after": 0.8970840480274442,
+    "example_flips": []
+   },
+   "_pooled_single_rewrites": {
+    "n": 3919,
+    "unchanged_share": 1.0,
+    "feature_vector_identical_share": 1.0
+   },
+   "_pooled_stress_rewrites": {
+    "n": 1318,
+    "unchanged_share": 1.0,
+    "feature_vector_identical_share": 1.0
+   }
+  }
+ },
+ "false_alarm": {
+  "near_miss_CORRECT_HOLDOUT-P": {
+   "n": 170,
+   "top1_not_correct": 0.0,
+   "top1_misconception_p_ge_0.5": 0.0,
+   "slice": "HOLDOUT-P near-miss CORRECT (unseen problems)",
+   "top1_not_correct_ci95_cluster": [
+    0.0,
+    0.0
+   ]
+  },
+  "plain_CORRECT_HOLDOUT-P": {
+   "n": 83,
+   "top1_not_correct": 0.0,
+   "top1_misconception_p_ge_0.5": 0.0,
+   "slice": "HOLDOUT-P other CORRECT"
+  },
+  "near_miss_CORRECT_TRAIN_oof": {
+   "n": 730,
+   "top1_not_correct": 0.07534246575342465,
+   "top1_misconception_p_ge_0.5": 0.0,
+   "slice": "TRAIN near-miss CORRECT, out-of-fold"
+  },
+  "plain_CORRECT_TRAIN_oof": {
+   "n": 398,
+   "top1_not_correct": 0.07035175879396985,
+   "top1_misconception_p_ge_0.5": 0.0,
+   "slice": "TRAIN other CORRECT, out-of-fold"
+  },
+  "correct_but_unusual_R-llm": {
+   "n": 10,
+   "top1_not_correct": 0.0,
+   "top1_misconception_p_ge_0.5": 0.0,
+   "slice": "R-llm correct-but-unusual (LLM-written stand-in)"
+  }
+ },
+ "data_status": {
+  "R-blind": "R-blind (40 hand-written by FE) is still open: no file exists, so nothing was run on it. The headline of 03 §0.3 is therefore not measured.",
+  "R-llm": "R-llm (58 LLM-written programs, NOT hand-written, NOT real students)"
+ },
+ "plots": [
+  "E11_invariance.png"
+ ],
+ "finding": "Invariance is high mostly because the feature extractors already ignore these edits: the plan's five rewrites leave the feature vector bit-identical in 100% of HOLDOUT-P cases and 95.6% of R-llm cases, and the two stress rewrites (flip_compare `i<n` -> `n>i`, incr_form `i++` -> `i += 1`, not in the plan) in 100% and 85%. HOLDOUT-P programs come from a generator that reprints with pycparser, so they are already in canonical form and most rewrites change nothing structural there; R-llm (messier, LLM-written) is the more informative slice. Where features did change on R-llm, the top-1 did not.",
+ "caveat": "Rewrites are applied to the program text; behaviour preservation is checked by running the problem's tests before and after (only same pass/fail vectors are kept; dropped counts are listed). 'Unchanged' compares the model's top-1 before and after, whether or not it was right. HOLDOUT-P rows already contain generator style augmentations (renames, comments, ...) so they are less surprising than fresh rewrites, and its intervals are a cluster bootstrap over 6 problems. R-llm is LLM-written, 52 programs. for<->while changes the loop structure the AST features read, so a drop there is a real weakness of the features, not a bug in the rewrite. Near-miss CORRECT = generator rows with op_id nm_* (correct code that looks like a bug); 'false alarm' = top-1 is not CORRECT."
+}

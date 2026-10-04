@@ -1,0 +1,1687 @@
+{
+ "id": "E12",
+ "title": "Failure audit",
+ "slice": "wrong predictions with confidence >= 0.6 on E2 (HOLDOUT-P) and E4 (R-llm stand-in)",
+ "n": 21,
+ "model_version": "diagnoser_40e8e6ff",
+ "metrics": {
+  "audited": 21,
+  "by_set": {
+   "E2 HOLDOUT-P": {
+    "n": 938,
+    "wrong": 113,
+    "wrong_conf_ge_0.6_calibrated": 32
+   },
+   "E4 R-llm": {
+    "n": 52,
+    "wrong": 9,
+    "wrong_conf_ge_0.6_calibrated": 0
+   }
+  },
+  "selected_by_calibrated": 4,
+  "manual_whys": 21,
+  "most_common_confusions": [
+   [
+    [
+     "E2 HOLDOUT-P",
+     "D01",
+     "OTHER"
+    ],
+    6
+   ],
+   [
+    [
+     "E2 HOLDOUT-P",
+     "D06",
+     "OTHER"
+    ],
+    6
+   ],
+   [
+    [
+     "E2 HOLDOUT-P",
+     "M08",
+     "OTHER"
+    ],
+    2
+   ],
+   [
+    [
+     "E2 HOLDOUT-P",
+     "D01",
+     "M10"
+    ],
+    1
+   ],
+   [
+    [
+     "E4 R-llm (LLM-written stand-in)",
+     "M02",
+     "OTHER"
+    ],
+    1
+   ],
+   [
+    [
+     "E4 R-llm (LLM-written stand-in)",
+     "M03",
+     "M01"
+    ],
+    1
+   ],
+   [
+    [
+     "E4 R-llm (LLM-written stand-in)",
+     "M06",
+     "M01"
+    ],
+    1
+   ],
+   [
+    [
+     "E4 R-llm (LLM-written stand-in)",
+     "OTHER",
+     "M08"
+    ],
+    1
+   ],
+   [
+    [
+     "E4 R-llm (LLM-written stand-in)",
+     "D07",
+     "M10"
+    ],
+    1
+   ],
+   [
+    [
+     "E4 R-llm (LLM-written stand-in)",
+     "OTHER",
+     "M01"
+    ],
+    1
+   ]
+  ]
+ },
+ "table": [
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-002622",
+   "problem": "Q04",
+   "code": "int contains(int a[], int n, int x)\n{\n  int found = 0;\n  for (int i = 0; i < n; i++)\n  {\n    if (a[i] == x)\n    {\n      found = 1;\n    }\n    else\n      found = 0;\n  }\n\n  return found;\n}\n\n",
+   "true": "D01",
+   "pred": "OTHER",
+   "conf": 0.3493799698374102,
+   "conf_T1": 0.8589296458547074,
+   "p_true": 0.04970782616012084,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_index_i_plus_1",
+     "value": 0.0,
+     "contribution": 0.2534611771334709
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.24984805568099974
+    },
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 0.1840816051198409
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "b_pass_frac",
+     "value": 0.800000011920929,
+     "contribution": 0.027537101440633264
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 1.0,
+     "contribution": 0.00935332464611571
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.004576593373527875
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "a_return_in_loop_else",
+     "a_assign_in_loop_else",
+     "b_return_first_iter",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ],
+    "fired": [
+     "a_assign_in_loop_else",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d01_else_flag_reset",
+   "why": "Q04 `contains` keeps a `found` flag and sets it back to 0 in the else branch, so only the last cell decides (D01, operator d01_else_flag_reset). In TRAIN every D01 row uses `else return` inside the loop (operator d01_else_return, Q01/Q08/Q12/Q15); d01_else_flag_reset exists only on this held-out problem. D01's own features that fired here (a_assign_in_loop_else, r_eq_first/last_check_only) are not the ones the model learned from `else return`, and the evidence for OTHER is generic (r_eq_zero=1, a_index_i_plus_1=0). Held-out surface form of a trained class, not a labelling error.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 14,
+   "cluster_ids": [
+    "A-002622",
+    "A-002624",
+    "A-002625",
+    "A-002626",
+    "A-002627",
+    "A-002628",
+    "A-002629",
+    "A-002630",
+    "A-002631",
+    "A-002632",
+    "A-002633",
+    "A-002634",
+    "A-002635",
+    "A-002636"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-002623",
+   "problem": "Q04",
+   "code": "int contains(int a[], int n, int x)\n{\n  int found = 0;\n  for (int i = 0; i < n; i++)\n  {\n    if (a[i] == x)\n      found = 1;\n    else\n      found = 0;\n  }\n\n  return found;\n}\n\n",
+   "true": "D01",
+   "pred": "OTHER",
+   "conf": 0.3493799698374102,
+   "conf_T1": 0.8589296458547074,
+   "p_true": 0.04970782616012084,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_index_i_plus_1",
+     "value": 0.0,
+     "contribution": 0.2534611771334709
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.24984805568099974
+    },
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 0.1840816051198409
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "b_pass_frac",
+     "value": 0.800000011920929,
+     "contribution": 0.027537101440633264
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 1.0,
+     "contribution": 0.00935332464611571
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.004576593373527875
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "a_return_in_loop_else",
+     "a_assign_in_loop_else",
+     "b_return_first_iter",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ],
+    "fired": [
+     "a_assign_in_loop_else",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d01_else_flag_reset",
+   "why": "Same mutant as A-002622 with the `if` braces dropped. Held-out operator d01_else_flag_reset on Q04; training D01 rows are all `else return` shapes.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "A-002623"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-002637",
+   "problem": "Q04",
+   "code": "int contains(int a[], int n, int x)\n{\n  int tmp_pad = 0;\n  int found = 0;\n  for (int i = 0; i < n; i++)\n  {\n    if (a[i] == x)\n    {\n      found = 1;\n    }\n    else\n      found = 0;\n  }\n\n  return found;\n}\n\n",
+   "true": "D01",
+   "pred": "OTHER",
+   "conf": 0.3493799698374102,
+   "conf_T1": 0.8589296458547074,
+   "p_true": 0.04970782616012084,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_index_i_plus_1",
+     "value": 0.0,
+     "contribution": 0.2534611771334709
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.24984805568099974
+    },
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 0.1840816051198409
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "b_pass_frac",
+     "value": 0.800000011920929,
+     "contribution": 0.027537101440633264
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 1.0,
+     "contribution": 0.00935332464611571
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.004576593373527875
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "a_return_in_loop_else",
+     "a_assign_in_loop_else",
+     "b_return_first_iter",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ],
+    "fired": [
+     "a_assign_in_loop_else",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d01_else_flag_reset",
+   "why": "Same as A-002622 with a padding variable. Held-out operator d01_else_flag_reset; the extra variable does not change the evidence.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 2,
+   "cluster_ids": [
+    "A-002637",
+    "A-002638"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-002658",
+   "problem": "Q04",
+   "code": "int contains(int a[], int n, int x)\n{\n  int found = 0;\n  int i = 0;\n  while (i < n)\n  {\n    if (a[i] == x)\n    {\n      found = 1;\n    }\n    else\n      found = 0;\n    i++;\n  }\n\n  return found;\n}\n\n",
+   "true": "D01",
+   "pred": "OTHER",
+   "conf": 0.3493799698374102,
+   "conf_T1": 0.8589296458547074,
+   "p_true": 0.04970782616012084,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_index_i_plus_1",
+     "value": 0.0,
+     "contribution": 0.2534611771334709
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.24984805568099974
+    },
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 0.1840816051198409
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "b_pass_frac",
+     "value": 0.800000011920929,
+     "contribution": 0.027537101440633264
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 1.0,
+     "contribution": 0.00935332464611571
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.004576593373527875
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "a_return_in_loop_else",
+     "a_assign_in_loop_else",
+     "b_return_first_iter",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ],
+    "fired": [
+     "a_assign_in_loop_else",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d01_else_flag_reset",
+   "why": "Same flag reset as A-002622 written as a while loop. Held-out operator d01_else_flag_reset; not a loop-form problem.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 14,
+   "cluster_ids": [
+    "A-002658",
+    "A-002660",
+    "A-002661",
+    "A-002662",
+    "A-002663",
+    "A-002664",
+    "A-002665",
+    "A-002666",
+    "A-002667",
+    "A-002668",
+    "A-002669",
+    "A-002670",
+    "A-002671",
+    "A-002672"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-002659",
+   "problem": "Q04",
+   "code": "int contains(int a[], int n, int x)\n{\n  int found = 0;\n  int i = 0;\n  while (i < n)\n  {\n    if (a[i] == x)\n      found = 1;\n    else\n      found = 0;\n    i++;\n  }\n\n  return found;\n}\n\n",
+   "true": "D01",
+   "pred": "OTHER",
+   "conf": 0.3493799698374102,
+   "conf_T1": 0.8589296458547074,
+   "p_true": 0.04970782616012084,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_index_i_plus_1",
+     "value": 0.0,
+     "contribution": 0.2534611771334709
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.24984805568099974
+    },
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 0.1840816051198409
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "b_pass_frac",
+     "value": 0.800000011920929,
+     "contribution": 0.027537101440633264
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 1.0,
+     "contribution": 0.00935332464611571
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.004576593373527875
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "a_return_in_loop_else",
+     "a_assign_in_loop_else",
+     "b_return_first_iter",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ],
+    "fired": [
+     "a_assign_in_loop_else",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d01_else_flag_reset",
+   "why": "Same as A-002658 without braces. Held-out operator d01_else_flag_reset.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "A-002659"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-002673",
+   "problem": "Q04",
+   "code": "int contains(int a[], int n, int x)\n{\n  int tmp_pad = 0;\n  int found = 0;\n  int i = 0;\n  while (i < n)\n  {\n    if (a[i] == x)\n    {\n      found = 1;\n    }\n    else\n      found = 0;\n    i++;\n  }\n\n  return found;\n}\n\n",
+   "true": "D01",
+   "pred": "OTHER",
+   "conf": 0.3493799698374102,
+   "conf_T1": 0.8589296458547074,
+   "p_true": 0.04970782616012084,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_index_i_plus_1",
+     "value": 0.0,
+     "contribution": 0.2534611771334709
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.24984805568099974
+    },
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 0.1840816051198409
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "b_pass_frac",
+     "value": 0.800000011920929,
+     "contribution": 0.027537101440633264
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 1.0,
+     "contribution": 0.00935332464611571
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.004576593373527875
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "a_return_in_loop_else",
+     "a_assign_in_loop_else",
+     "b_return_first_iter",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ],
+    "fired": [
+     "a_assign_in_loop_else",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d01_else_flag_reset",
+   "why": "Same as A-002658 with a padding variable. Held-out operator d01_else_flag_reset.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 2,
+   "cluster_ids": [
+    "A-002673",
+    "A-002674"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-002701",
+   "problem": "Q04",
+   "code": "int contains(int a[], int n, int x)\n{\n  printf(\"debug=true %d\\n\", n);\n  int found = 0;\n  int i;\n  for (i = n - 1; i >= 0; i--)\n  {\n    if (a[i] == x)\n      found = 1;\n    else\n      found = 0;\n  }\n\n  return found;\n}\n\n",
+   "true": "D01",
+   "pred": "M10",
+   "conf": 0.3433823712098258,
+   "conf_T1": 0.8505537044962216,
+   "p_true": 0.05042825706416734,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_printf_in_nonvoid",
+     "value": 1.0,
+     "contribution": 5.217167412932344
+    },
+    {
+     "feature": "a_bound_form_n",
+     "value": 0.0,
+     "contribution": 0.22006929120476315
+    },
+    {
+     "feature": "b_printed_nonempty",
+     "value": 1.0,
+     "contribution": 0.18053674002798892
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "a_init_form_n_minus_1",
+     "value": 1.0,
+     "contribution": 0.18218844214058022
+    },
+    {
+     "feature": "b_pass_frac",
+     "value": 0.6000000238418579,
+     "contribution": 0.024296595044791622
+    },
+    {
+     "feature": "a_printf_in_nonvoid",
+     "value": 1.0,
+     "contribution": 0.006748562837462988
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "a_return_in_loop_else",
+     "a_assign_in_loop_else",
+     "b_return_first_iter",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ],
+    "fired": [
+     "a_assign_in_loop_else",
+     "r_eq_first_check_only",
+     "r_eq_last_check_only"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [
+     "b_printed_eq_ref_return",
+     "a_printf_in_nonvoid",
+     "a_nonvoid_missing_return"
+    ],
+    "fired": [
+     "a_printf_in_nonvoid"
+    ]
+   },
+   "twin_set": null,
+   "op_id": "d01_else_flag_reset",
+   "why": "Countdown loop with the D01 flag reset plus a debug `printf` in a function that does return. The model puts 5.2 SHAP units on a_printf_in_nonvoid into M10 (printed instead of returned), although the function returns `found`: a debug print next to a return is exactly the near-miss shape M10 should not fire on. The D01 signature (a_assign_in_loop_else) was seen only on this held-out problem.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "A-002701"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-003455",
+   "problem": "Q09",
+   "code": "int second_largest(int a[], int n)\n{\n  int first = (a[0] > a[1]) ? (a[0]) : (a[1]);\n  int second = (a[0] > a[1]) ? (a[1]) : (a[1]);\n  for (int i = 2; i < n; i++)\n  {\n    if (a[i] > first)\n    {\n      second = first;\n      first = a[i];\n    }\n    else\n      if (a[i] > second)\n    {\n      second = a[i];\n    }\n  }\n\n  return second;\n}\n\n",
+   "true": "M08",
+   "pred": "OTHER",
+   "conf": 0.31277949964105944,
+   "conf_T1": 0.8019380087622897,
+   "p_true": 0.11116745274706867,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_index_i_plus_1",
+     "value": 0.0,
+     "contribution": 0.2434792698171538
+    },
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 0.14750831909270817
+    },
+    {
+     "feature": "r_eq_ref_drop_last",
+     "value": 0.0,
+     "contribution": 0.12241526396540704
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "t_has_array_param",
+     "value": 1.0,
+     "contribution": 0.39266467574558733
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 1.0,
+     "contribution": 0.11010764872970652
+    },
+    {
+     "feature": "a_index_pair_plus1",
+     "value": 0.0,
+     "contribution": 0.10948122080675401
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "b_oob_read_idx_eq_n",
+     "a_index_n",
+     "a_array_loop_le_n",
+     "a_array_loop_start1",
+     "a_index_i_plus_1",
+     "a_index_const1",
+     "r_eq_ref_drop_first"
+    ],
+    "fired": [
+     "a_index_const1"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "m08_first1",
+   "why": "Q09 `second_largest` seeds `second` with `(a[0] > a[1]) ? a[1] : a[1]`, a constant-index slip (m08_first1). Only a_index_const1 points to M08 and the model gives it little weight; the winners are absence features (a_index_i_plus_1=0, b_status_timeout=0), so OTHER wins with low confidence (0.31 calibrated, 0.80 at T=1). Weak M08 surface on a held-out problem; the tests still fail, so OTHER is a fair 'something is wrong' answer.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "A-003455"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-003456",
+   "problem": "Q09",
+   "code": "int second_largest(int a[], int n)\n{\n  int first = (a[0] > a[1]) ? (a[0]) : (a[1]);\n  int second = (a[1] > a[1]) ? (a[1]) : (a[0]);\n  for (int i = 2; i < n; i++)\n  {\n    if (a[i] > first)\n    {\n      second = first;\n      first = a[i];\n    }\n    else\n      if (a[i] > second)\n    {\n      second = a[i];\n    }\n  }\n\n  return second;\n}\n\n",
+   "true": "M08",
+   "pred": "OTHER",
+   "conf": 0.3125810997428076,
+   "conf_T1": 0.8014524090768885,
+   "p_true": 0.11109693785929871,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_index_i_plus_1",
+     "value": 0.0,
+     "contribution": 0.24334596241532896
+    },
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 0.14750831909270817
+    },
+    {
+     "feature": "r_eq_ref_drop_last",
+     "value": 0.0,
+     "contribution": 0.12241526396540704
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "t_has_array_param",
+     "value": 1.0,
+     "contribution": 0.39265417397438557
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 1.0,
+     "contribution": 0.11010764872970652
+    },
+    {
+     "feature": "a_index_pair_plus1",
+     "value": 0.0,
+     "contribution": 0.10948122080675401
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "b_oob_read_idx_eq_n",
+     "a_index_n",
+     "a_array_loop_le_n",
+     "a_array_loop_start1",
+     "a_index_i_plus_1",
+     "a_index_const1",
+     "r_eq_ref_drop_first"
+    ],
+    "fired": [
+     "a_index_const1"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "m08_first1",
+   "why": "Same family as A-003455 (`(a[1] > a[1]) ? a[1] : a[0]`). Weak constant-index evidence, OTHER wins at low confidence.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "A-003456"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-004584",
+   "problem": "Q16",
+   "code": "int sum_digits(int n)\n{\n  if (n < 10)\n    return n;\n  return (n % 10) + sum_digits(n % 10);\n}\n\n",
+   "true": "D06",
+   "pred": "OTHER",
+   "conf": 0.6404076679635607,
+   "conf_T1": 0.993161142072795,
+   "p_true": 0.05460590443049854,
+   "selected_by": "calibrated>=0.6",
+   "top3_for_pred": [
+    {
+     "feature": "a_rec_arg_form_other",
+     "value": 1.0,
+     "contribution": 2.5633724585761377
+    },
+    {
+     "feature": "t_has_array_param",
+     "value": 0.0,
+     "contribution": 0.4099150731729521
+    },
+    {
+     "feature": "r_off_by_value_1",
+     "value": 1.0,
+     "contribution": 0.31402980344131926
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "a_has_recursion",
+     "value": 1.0,
+     "contribution": 1.8151070980035013
+    },
+    {
+     "feature": "a_base_case_present",
+     "value": 1.0,
+     "contribution": 1.0919409402530509
+    },
+    {
+     "feature": "a_rec_arg_form_minus1",
+     "value": 0.0,
+     "contribution": 0.23143612159595847
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "b_depth_cap",
+     "b_rec_arg_constant",
+     "b_rec_arg_growing",
+     "a_rec_arg_form_same",
+     "a_rec_arg_form_plus1"
+    ],
+    "fired": []
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d06_same_arg",
+   "why": "Q16 `sum_digits` recurses on `n % 10` instead of `n / 10` (d06_same_arg): the argument never shrinks towards the base for n >= 10 (it is stuck below 10, so the answer is wrong rather than looping). a_rec_arg_form_other=1 gives OTHER 2.6 SHAP units. TRAIN D06 rows (Q17, Q18) have the argument unchanged (`f(n)`) or growing (`f(n+1)`), which are the features D06 owns (a_rec_arg_form_same/plus1); none of them fires for `n % 10`, so the class's defining features are all silent here. Same operator id as in training, different surface form on the held-out problem.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 14,
+   "cluster_ids": [
+    "A-004584",
+    "A-004585",
+    "A-004586",
+    "A-004587",
+    "A-004588",
+    "A-004589",
+    "A-004590",
+    "A-004591",
+    "A-004592",
+    "A-004593",
+    "A-004594",
+    "A-004595",
+    "A-004596",
+    "A-004597"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-004598",
+   "problem": "Q16",
+   "code": "int sum_digits(int n)\n{\n  int tmp_pad = 0;\n  if (n < 10)\n    return n;\n  return (n % 10) + sum_digits(n % 10);\n}\n\n",
+   "true": "D06",
+   "pred": "OTHER",
+   "conf": 0.6404076679635607,
+   "conf_T1": 0.993161142072795,
+   "p_true": 0.05460590443049854,
+   "selected_by": "calibrated>=0.6",
+   "top3_for_pred": [
+    {
+     "feature": "a_rec_arg_form_other",
+     "value": 1.0,
+     "contribution": 2.5633724585761377
+    },
+    {
+     "feature": "t_has_array_param",
+     "value": 0.0,
+     "contribution": 0.4099150731729521
+    },
+    {
+     "feature": "r_off_by_value_1",
+     "value": 1.0,
+     "contribution": 0.31402980344131926
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "a_has_recursion",
+     "value": 1.0,
+     "contribution": 1.8151070980035013
+    },
+    {
+     "feature": "a_base_case_present",
+     "value": 1.0,
+     "contribution": 1.0919409402530509
+    },
+    {
+     "feature": "a_rec_arg_form_minus1",
+     "value": 0.0,
+     "contribution": 0.23143612159595847
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "b_depth_cap",
+     "b_rec_arg_constant",
+     "b_rec_arg_growing",
+     "a_rec_arg_form_same",
+     "a_rec_arg_form_plus1"
+    ],
+    "fired": []
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d06_same_arg",
+   "why": "Same as A-004584 with a padding variable. D06's defining features did not fire; `n % 10` reads as 'other' argument form.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 3,
+   "cluster_ids": [
+    "A-004598",
+    "A-004599",
+    "A-004600"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-004631",
+   "problem": "Q16",
+   "code": "int sum_digits(int n)\n{\n  if (n == 0)\n    return 0;\n  return (n % 10) + sum_digits(n % 10);\n}\n\n",
+   "true": "D06",
+   "pred": "OTHER",
+   "conf": 0.47537027102654106,
+   "conf_T1": 0.9374672418158461,
+   "p_true": 0.10976076754138862,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_rec_arg_form_other",
+     "value": 1.0,
+     "contribution": 2.925866583981079
+    },
+    {
+     "feature": "r_off_by_value_1",
+     "value": 0.25,
+     "contribution": 0.3608917808391632
+    },
+    {
+     "feature": "t_has_array_param",
+     "value": 0.0,
+     "contribution": 0.23926925211480934
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "a_has_recursion",
+     "value": 1.0,
+     "contribution": 1.9769777421944454
+    },
+    {
+     "feature": "a_base_case_present",
+     "value": 1.0,
+     "contribution": 1.2225702850428413
+    },
+    {
+     "feature": "b_depth_cap",
+     "value": 1.0,
+     "contribution": 0.5742758397780521
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "b_depth_cap",
+     "b_rec_arg_constant",
+     "b_rec_arg_growing",
+     "a_rec_arg_form_same",
+     "a_rec_arg_form_plus1"
+    ],
+    "fired": [
+     "b_depth_cap",
+     "b_rec_arg_constant"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d06_same_arg",
+   "why": "Q16 with base case `n == 0` and `sum_digits(n % 10)`: the run hits the depth cap (b_depth_cap and b_rec_arg_constant fired, both D06 defining features) but a_rec_arg_form_other=1 adds 2.9 SHAP units to OTHER and wins. The trace evidence for D06 is present and is outvoted by the static argument form.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 14,
+   "cluster_ids": [
+    "A-004631",
+    "A-004632",
+    "A-004633",
+    "A-004634",
+    "A-004635",
+    "A-004636",
+    "A-004637",
+    "A-004638",
+    "A-004639",
+    "A-004640",
+    "A-004641",
+    "A-004642",
+    "A-004643",
+    "A-004644"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-004645",
+   "problem": "Q16",
+   "code": "int sum_digits(int n)\n{\n  int tmp_pad = 0;\n  if (n == 0)\n    return 0;\n  return (n % 10) + sum_digits(n % 10);\n}\n\n",
+   "true": "D06",
+   "pred": "OTHER",
+   "conf": 0.47537027102654106,
+   "conf_T1": 0.9374672418158461,
+   "p_true": 0.10976076754138862,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_rec_arg_form_other",
+     "value": 1.0,
+     "contribution": 2.925866583981079
+    },
+    {
+     "feature": "r_off_by_value_1",
+     "value": 0.25,
+     "contribution": 0.3608917808391632
+    },
+    {
+     "feature": "t_has_array_param",
+     "value": 0.0,
+     "contribution": 0.23926925211480934
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "a_has_recursion",
+     "value": 1.0,
+     "contribution": 1.9769777421944454
+    },
+    {
+     "feature": "a_base_case_present",
+     "value": 1.0,
+     "contribution": 1.2225702850428413
+    },
+    {
+     "feature": "b_depth_cap",
+     "value": 1.0,
+     "contribution": 0.5742758397780521
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "b_depth_cap",
+     "b_rec_arg_constant",
+     "b_rec_arg_growing",
+     "a_rec_arg_form_same",
+     "a_rec_arg_form_plus1"
+    ],
+    "fired": [
+     "b_depth_cap",
+     "b_rec_arg_constant"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d06_same_arg",
+   "why": "Same as A-004631 with a padding variable. Trace signature of D06 present, static 'other' form outvotes it.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 3,
+   "cluster_ids": [
+    "A-004645",
+    "A-004646",
+    "A-004647"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-004692",
+   "problem": "Q16",
+   "code": "int sum_digits(int n)\n{\n  if (n < 10)\n    return n;\n  int rest = sum_digits(n % 10);\n  return rest + (n % 10);\n}\n\n",
+   "true": "D06",
+   "pred": "OTHER",
+   "conf": 0.6404076679635607,
+   "conf_T1": 0.993161142072795,
+   "p_true": 0.05460590443049854,
+   "selected_by": "calibrated>=0.6",
+   "top3_for_pred": [
+    {
+     "feature": "a_rec_arg_form_other",
+     "value": 1.0,
+     "contribution": 2.5633724585761377
+    },
+    {
+     "feature": "t_has_array_param",
+     "value": 0.0,
+     "contribution": 0.4099150731729521
+    },
+    {
+     "feature": "r_off_by_value_1",
+     "value": 1.0,
+     "contribution": 0.31402980344131926
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "a_has_recursion",
+     "value": 1.0,
+     "contribution": 1.8151070980035013
+    },
+    {
+     "feature": "a_base_case_present",
+     "value": 1.0,
+     "contribution": 1.0919409402530509
+    },
+    {
+     "feature": "a_rec_arg_form_minus1",
+     "value": 0.0,
+     "contribution": 0.23143612159595847
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "b_depth_cap",
+     "b_rec_arg_constant",
+     "b_rec_arg_growing",
+     "a_rec_arg_form_same",
+     "a_rec_arg_form_plus1"
+    ],
+    "fired": []
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d06_same_arg",
+   "why": "Q16 with the recursive call stored in `rest` before the add. Same d06_same_arg mutant as A-004584: `n % 10` is an 'other' argument form, no D06 defining feature fires.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 14,
+   "cluster_ids": [
+    "A-004692",
+    "A-004693",
+    "A-004694",
+    "A-004695",
+    "A-004696",
+    "A-004697",
+    "A-004698",
+    "A-004699",
+    "A-004700",
+    "A-004701",
+    "A-004702",
+    "A-004703",
+    "A-004704",
+    "A-004705"
+   ]
+  },
+  {
+   "set": "E2 HOLDOUT-P",
+   "id": "A-004706",
+   "problem": "Q16",
+   "code": "int sum_digits(int n)\n{\n  int tmp_pad = 0;\n  if (n < 10)\n    return n;\n  int rest = sum_digits(n % 10);\n  return rest + (n % 10);\n}\n\n",
+   "true": "D06",
+   "pred": "OTHER",
+   "conf": 0.6404076679635607,
+   "conf_T1": 0.993161142072795,
+   "p_true": 0.05460590443049854,
+   "selected_by": "calibrated>=0.6",
+   "top3_for_pred": [
+    {
+     "feature": "a_rec_arg_form_other",
+     "value": 1.0,
+     "contribution": 2.5633724585761377
+    },
+    {
+     "feature": "t_has_array_param",
+     "value": 0.0,
+     "contribution": 0.4099150731729521
+    },
+    {
+     "feature": "r_off_by_value_1",
+     "value": 1.0,
+     "contribution": 0.31402980344131926
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "a_has_recursion",
+     "value": 1.0,
+     "contribution": 1.8151070980035013
+    },
+    {
+     "feature": "a_base_case_present",
+     "value": 1.0,
+     "contribution": 1.0919409402530509
+    },
+    {
+     "feature": "a_rec_arg_form_minus1",
+     "value": 0.0,
+     "contribution": 0.23143612159595847
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "b_depth_cap",
+     "b_rec_arg_constant",
+     "b_rec_arg_growing",
+     "a_rec_arg_form_same",
+     "a_rec_arg_form_plus1"
+    ],
+    "fired": []
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": "d06_same_arg",
+   "why": "Same as A-004692 with a padding variable.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 3,
+   "cluster_ids": [
+    "A-004706",
+    "A-004707",
+    "A-004708"
+   ]
+  },
+  {
+   "set": "E4 R-llm (LLM-written stand-in)",
+   "id": "RL-003",
+   "problem": "P05",
+   "code": "int add_seven(int value) {\n    // return the value plus seven\n    return ((value) + (7));\n}\n\nint charge_steps(int level, int target) {\n    int steps = 0; // step counter starts at zero\n    // keep looping while level is less than target\n    for (steps = 0; level < target; ) {\n        // increase level by seven each round\n        level = add_seven(level);\n        // the loop variable steps moves forward by itself\n    }\n    // return the counted steps after the loop\n    return steps;\n}",
+   "true": "M02",
+   "pred": "OTHER",
+   "conf": 0.5725807735913584,
+   "conf_T1": 0.9831268862566298,
+   "p_true": 0.03813348313618564,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "r_eq_ref_n_plus_1",
+     "value": 0.5,
+     "contribution": 0.6178062298910078
+    },
+    {
+     "feature": "t_has_array_param",
+     "value": 0.0,
+     "contribution": 0.3374814809857808
+    },
+    {
+     "feature": "r_off_by_value_1",
+     "value": 0.75,
+     "contribution": 0.3207010488952685
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "t_has_array_param",
+     "value": 0.0,
+     "contribution": 0.1633847458956401
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 0.0,
+     "contribution": 0.0921275737437616
+    },
+    {
+     "feature": "a_n_loops",
+     "value": 1.0,
+     "contribution": 0.07758283431638734
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "b_step_cap",
+     "a_update_present",
+     "a_update_dir",
+     "a_update_var_is_cond_var",
+     "a_update_in_branch"
+    ],
+    "fired": [
+     "a_update_present",
+     "a_update_var_is_cond_var"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "twin_set": null,
+   "op_id": null,
+   "why": "P05 `charge_steps`: the loop is `for (steps = 0; level < target; )` and `steps` is never advanced, but `level` advances through the helper `add_seven`, so the loop ends and the function returns 0. The LLM-written belief is M02 (variable advances by itself), yet the symptom is a wrong count, not a loop that never ends. M02's timeout signature (b_step_cap) is absent, the helper call hides the update from the AST features, and the model falls back to OTHER on generic evidence (r_eq_ref_n_plus_1=0.5, r_off_by_value_1=0.75). The label is the author's intended belief, not what the run shows.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "RL-003"
+   ]
+  },
+  {
+   "set": "E4 R-llm (LLM-written stand-in)",
+   "id": "RL-005",
+   "problem": "P03",
+   "code": "int total_energy(int cells[], int n) {\n    int i = 0;\n    int totalValueSoFar = 0;\n    int finished = 0;\n    while (finished == 0) {\n        if (i < n) {\n            totalValueSoFar = 0;\n            totalValueSoFar = totalValueSoFar + cells[i];\n            i = i + 1;\n        }\n        else {\n            finished = 1;\n        }\n    }\n    if (finished == 1) {\n        return totalValueSoFar;\n    } else {\n        return totalValueSoFar;\n    }\n}",
+   "true": "M03",
+   "pred": "M01",
+   "conf": 0.4659759930295809,
+   "conf_T1": 0.9389577497969758,
+   "p_true": 0.09530789503944531,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "b_iter_delta_const_pm1",
+     "value": 1.0,
+     "contribution": 2.627574100016921
+    },
+    {
+     "feature": "b_iter_delta_mean",
+     "value": 1.0,
+     "contribution": 1.297111401372163
+    },
+    {
+     "feature": "a_update_var_is_cond_var",
+     "value": 1.0,
+     "contribution": 0.17866498473807454
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "b_window_frozen",
+     "value": 1.0,
+     "contribution": 1.6501557313559625
+    },
+    {
+     "feature": "b_iter_delta_mean",
+     "value": 1.0,
+     "contribution": 0.4431072548925821
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 0.0,
+     "contribution": 0.15873463528688242
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "r_eq_ref_last_only",
+     "a_init_inside_loop"
+    ],
+    "fired": [
+     "r_eq_ref_last_only"
+    ]
+   },
+   "pred_class_signature": {
+    "defining_features": [
+     "b_iter_delta_const_pm1",
+     "b_iter_delta_mean",
+     "a_half_bound",
+     "r_eq_reversed_twice"
+    ],
+    "fired": [
+     "b_iter_delta_const_pm1",
+     "b_iter_delta_mean"
+    ]
+   },
+   "twin_set": null,
+   "op_id": null,
+   "why": "P03 `total_energy` rewritten as a `finished` flag loop that resets the total to 0 on every pass (M03). The flag loop takes one extra pass to notice the end, so b_iter_delta_const_pm1=1 (iterations = n+1) gives M01 2.6 SHAP units; M03's own signature (r_eq_ref_last_only: the total equals the last cell only) fired but weighs less. The sentinel-flag loop imitates an off-by-one bound.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "RL-005"
+   ]
+  },
+  {
+   "set": "E4 R-llm (LLM-written stand-in)",
+   "id": "RL-010",
+   "problem": "P11",
+   "code": "int door_open(int code)\n{\n    int i = 0;\n    int resultValue = 0;\n    int compareCheck = 0;\n\n    while (i < 1)\n    {\n        compareCheck = (code = 42);\n        i = i + 1;\n    }\n\n    if (compareCheck)\n    {\n        resultValue = 1;\n    }\n    else\n    {\n        resultValue = 0;\n    }\n\n    return resultValue;\n}",
+   "true": "M06",
+   "pred": "M01",
+   "conf": 0.5558986413836655,
+   "conf_T1": 0.9016867762416982,
+   "p_true": 0.023720228545891182,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "b_iter_delta_const_pm1",
+     "value": 1.0,
+     "contribution": 2.1700851201035385
+    },
+    {
+     "feature": "b_iter_delta_mean",
+     "value": 1.0,
+     "contribution": 1.8293937057674619
+    },
+    {
+     "feature": "t_has_array_param",
+     "value": 0.0,
+     "contribution": 0.4327523714910836
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "b_branch_always",
+     "value": 1.0,
+     "contribution": 0.4046017293291571
+    },
+    {
+     "feature": "r_eq_ref_n_plus_1",
+     "value": 0.25,
+     "contribution": 0.0008924033480707592
+    },
+    {
+     "feature": "a_bound_form_n",
+     "value": 0.0,
+     "contribution": 0.00010169608111662706
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "a_assign_in_cond",
+     "b_assign_in_cond_rt"
+    ],
+    "fired": []
+   },
+   "pred_class_signature": {
+    "defining_features": [
+     "b_iter_delta_const_pm1",
+     "b_iter_delta_mean",
+     "a_half_bound",
+     "r_eq_reversed_twice"
+    ],
+    "fired": [
+     "b_iter_delta_const_pm1",
+     "b_iter_delta_mean"
+    ]
+   },
+   "twin_set": null,
+   "op_id": null,
+   "why": "P11 `door_open` assigns inside a statement, `compareCheck = (code = 42)`, wrapped in a dummy `while (i < 1)` loop. M06's features (a_assign_in_cond, b_assign_in_cond_rt) look for an assignment inside an `if` condition and did not fire. The dummy loop gives an iteration-count mismatch (b_iter_delta_const_pm1=1), which reads as M01. Surface form of M06 the generator does not produce (m06_while_assign had no site, notes/C3.md).",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "RL-010"
+   ]
+  },
+  {
+   "set": "E4 R-llm (LLM-written stand-in)",
+   "id": "RL-019",
+   "problem": "Q08",
+   "code": "int is_sorted(int a[], int n)\n{\n    int i = 0;\n    int flag = 1;\n    int count;\n\n    while (i < n - 1)\n    {\n        if (a[i] <= a[i + 1])\n        {\n            flag = 1;\n        }\n        else\n        {\n        }\n        i = i + 1;\n    }\n    return flag;\n}",
+   "true": "OTHER",
+   "pred": "M08",
+   "conf": 0.28939149869827857,
+   "conf_T1": 0.7477226090000617,
+   "p_true": 0.07841665306335707,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_index_i_plus_1",
+     "value": 1.0,
+     "contribution": 1.6554169662407576
+    },
+    {
+     "feature": "t_has_array_param",
+     "value": 1.0,
+     "contribution": 0.4815917789118678
+    },
+    {
+     "feature": "a_update_dir",
+     "value": 1.0,
+     "contribution": 0.09916391639012725
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 0.08410903414009155
+    },
+    {
+     "feature": "r_off_by_value_1",
+     "value": 1.0,
+     "contribution": 0.08214054623155173
+    },
+    {
+     "feature": "b_iter_delta_mean",
+     "value": 0.0,
+     "contribution": 0.08139170144909084
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "pred_class_signature": {
+    "defining_features": [
+     "b_oob_read_idx_eq_n",
+     "a_index_n",
+     "a_array_loop_le_n",
+     "a_array_loop_start1",
+     "a_index_i_plus_1",
+     "a_index_const1",
+     "r_eq_ref_drop_first"
+    ],
+    "fired": [
+     "a_index_i_plus_1",
+     "r_eq_ref_drop_first"
+    ]
+   },
+   "twin_set": null,
+   "op_id": null,
+   "why": "Q08 `is_sorted` has an empty `else` and sets `flag = 1` in both branches, so it always returns 1; labelled OTHER (relabelled from D01 in notes/T1.md). a_index_i_plus_1=1 gives M08 1.7 SHAP units: `a[i + 1]` with bound `i < n - 1` is the correct way to compare neighbours in this problem, but the feature cannot tell a legal neighbour read from M08's past-the-end read. A feature limit; the wrong behaviour (always true) has no class of its own, so OTHER is correct.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "RL-019"
+   ]
+  },
+  {
+   "set": "E4 R-llm (LLM-written stand-in)",
+   "id": "RL-030",
+   "problem": "Q18",
+   "code": "int array_sum_rec(int a[], int n) {\n    if (n == 0) {\n        return 0;\n    }\n    // yaha add karo\n    int temp1 = a[n - 1];\n    int ans = array_sum_rec(a, n - 1);\n    printf(\"debug ans = %d temp1 = %d\\n\", ans, temp1);\n    return ans;\n}",
+   "true": "D07",
+   "pred": "M10",
+   "conf": 0.2564946214540283,
+   "conf_T1": 0.7236716500928174,
+   "p_true": 0.0575925497327678,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "a_printf_in_nonvoid",
+     "value": 1.0,
+     "contribution": 5.123456817131191
+    },
+    {
+     "feature": "a_bound_form_n",
+     "value": 0.0,
+     "contribution": 0.20368314353202754
+    },
+    {
+     "feature": "r_eq_zero",
+     "value": 1.0,
+     "contribution": 0.1863169761506238
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "a_base_case_static_reachable",
+     "value": 1.0,
+     "contribution": 0.9713668013113983
+    },
+    {
+     "feature": "a_base_case_present",
+     "value": 1.0,
+     "contribution": 0.12076307613764244
+    },
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 6.46307223318823e-05
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [
+     "a_rec_call_discarded",
+     "b_discarded_call_value",
+     "r_eq_top_frame_only"
+    ],
+    "fired": []
+   },
+   "pred_class_signature": {
+    "defining_features": [
+     "b_printed_eq_ref_return",
+     "a_printf_in_nonvoid",
+     "a_nonvoid_missing_return"
+    ],
+    "fired": [
+     "a_printf_in_nonvoid"
+    ]
+   },
+   "twin_set": "T8",
+   "op_id": null,
+   "why": "Q18 `array_sum_rec` keeps the recursive result (`ans`) but returns it without adding `a[n-1]`, and has a debug `printf`. The label D07 (result of the recursive call not combined) is the author's intended belief. a_printf_in_nonvoid=1 gives M10 5.1 SHAP units: a debug print in a function that returns is the near-miss shape M10 should not fire on. D07's defining features (a_rec_call_discarded) are 0 because the call result is used.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "RL-030"
+   ]
+  },
+  {
+   "set": "E4 R-llm (LLM-written stand-in)",
+   "id": "RL-048",
+   "problem": "Q08",
+   "code": "int is_sorted(int a[], int n) {\n    int ans = 1;\n    int temp1;\n    int x2;\n    int i;\n    // yaha add karo\n    for (i = 0; i < n - 1; i++) {\n        if (a[i] < a[i + 1]) {\n            ans = 0;\n            break;\n        }\n    }\n    printf(\"bhai sorted check ho gaya\\n\");\n    return ans;\n}",
+   "true": "OTHER",
+   "pred": "M01",
+   "conf": 0.3531069657985441,
+   "conf_T1": 0.755743050210402,
+   "p_true": 0.0418312264346843,
+   "selected_by": "T=1 confidence>=0.6 only",
+   "top3_for_pred": [
+    {
+     "feature": "b_iter_delta_mean",
+     "value": -0.6000000238418579,
+     "contribution": 1.9366846636850505
+    },
+    {
+     "feature": "a_bound_form_n_minus_1",
+     "value": 1.0,
+     "contribution": 0.6504825896477733
+    },
+    {
+     "feature": "b_return_first_iter",
+     "value": 1.0,
+     "contribution": 0.3678781382616035
+    }
+   ],
+   "top3_for_true": [
+    {
+     "feature": "r_off_by_value_1",
+     "value": 1.0,
+     "contribution": 0.0819751655921196
+    },
+    {
+     "feature": "b_status_timeout",
+     "value": 0.0,
+     "contribution": 0.07067404564419666
+    },
+    {
+     "feature": "b_body_once_vs_many",
+     "value": 1.0,
+     "contribution": 0.05992672735042292
+    }
+   ],
+   "true_class_signature": {
+    "defining_features": [],
+    "fired": []
+   },
+   "pred_class_signature": {
+    "defining_features": [
+     "b_iter_delta_const_pm1",
+     "b_iter_delta_mean",
+     "a_half_bound",
+     "r_eq_reversed_twice"
+    ],
+    "fired": [
+     "b_iter_delta_mean"
+    ]
+   },
+   "twin_set": null,
+   "op_id": null,
+   "why": "Q08 `is_sorted` with the comparison reversed (`a[i] < a[i + 1]` clears the flag) and a `break`; wrong answer, label OTHER. The break stops the loop early, so b_iter_delta_mean=-0.6 gives M01 1.9 SHAP units (loop ran fewer times than the reference), which is what M01 looks like for a loop that stops on purpose. The model has no way to separate 'stopped early because it found the answer' from 'bound too small'.",
+   "why_source": "manual (E-a, after reading the code)",
+   "cluster_size": 1,
+   "cluster_ids": [
+    "RL-048"
+   ]
+  }
+ ],
+ "data_status": {
+  "R-blind": "R-blind (40 hand-written by FE) is still open: no file exists, so nothing was run on it. The headline of 03 §0.3 is therefore not measured.",
+  "R-llm": "R-llm (58 LLM-written programs, NOT hand-written, NOT real students)"
+ },
+ "caveat": "Confidence is the shipped one (T=2.45 flattens it; E7). 'Manual' whys were written by E-a after reading the code and the SHAP-style contributors; they are an explanation of the model's mistake, not a re-labelling of the data. Contributors are LightGBM pred_contrib on the model's raw score (before temperature and masking)."
+}

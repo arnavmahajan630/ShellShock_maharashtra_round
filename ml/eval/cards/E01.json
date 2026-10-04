@@ -1,0 +1,322 @@
+{
+ "id": "E1",
+ "title": "Grouped CV by problem",
+ "slice": "TRAIN (28 problems, 5 folds, out-of-fold)",
+ "n": 5815,
+ "model_version": "diagnoser_40e8e6ff",
+ "metrics": {
+  "macro_f1": 0.827094513593452,
+  "macro_f1_std": 0.09358791491437343,
+  "macro_f1_fold_scores": [
+   0.7776584415146868,
+   0.8872663297374838,
+   0.7078562376287051,
+   0.9752200311783128,
+   0.7874715279080707
+  ],
+  "macro_f1_pooled_oof": 0.7484077568580169,
+  "macro_f1_pooled_oof_ci95_cluster": [
+   0.6785716209373005,
+   0.8906469369322021
+  ],
+  "acc": 0.8306104901117799,
+  "n_boot": 1000,
+  "d_classes_on_dsa_problems_macro_f1": 0.8097236869702671,
+  "d_classes_on_dsa_problems_ci95_cluster": [
+   0.655738379797361,
+   0.990093647565796
+  ],
+  "d_classes_on_dsa_problems_n": 1527,
+  "trainer_reported_cv_macro_f1": 0.827094513593452,
+  "trainer_reported_cv_macro_f1_std": 0.09358791491437343
+ },
+ "targets": {
+  "macro_f1": ">= 0.80 (red flag >= 0.98)",
+  "d_classes_dsa": ">= 0.75 (red flag >= 0.98)"
+ },
+ "red_flag": {
+  "macro_f1_ge_0.98": false,
+  "d_on_dsa_ge_0.98": false
+ },
+ "per_class": {
+  "M01": {
+   "precision": 0.8416833667334669,
+   "recall": 0.967741935483871,
+   "f1": 0.9003215434083601,
+   "support": 434,
+   "predicted": 499
+  },
+  "M02": {
+   "precision": 0.7822878228782287,
+   "recall": 0.6973684210526315,
+   "f1": 0.7373913043478261,
+   "support": 304,
+   "predicted": 271
+  },
+  "M03": {
+   "precision": 1.0,
+   "recall": 0.9208860759493671,
+   "f1": 0.9588138385502472,
+   "support": 316,
+   "predicted": 291
+  },
+  "M04": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "support": 102,
+   "predicted": 0
+  },
+  "M05": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 226,
+   "predicted": 226
+  },
+  "M06": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "support": 114,
+   "predicted": 0
+  },
+  "M07": {
+   "precision": 0.9380281690140845,
+   "recall": 0.9327731092436975,
+   "f1": 0.9353932584269663,
+   "support": 357,
+   "predicted": 355
+  },
+  "M08": {
+   "precision": 0.8733705772811918,
+   "recall": 0.9455645161290323,
+   "f1": 0.9080348499515973,
+   "support": 496,
+   "predicted": 537
+  },
+  "M10": {
+   "precision": 0.9423631123919308,
+   "recall": 1.0,
+   "f1": 0.9703264094955489,
+   "support": 327,
+   "predicted": 347
+  },
+  "D01": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 191,
+   "predicted": 191
+  },
+  "D02": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 210,
+   "predicted": 210
+  },
+  "D03": {
+   "precision": 0.7632850241545893,
+   "recall": 0.7559808612440191,
+   "f1": 0.7596153846153846,
+   "support": 209,
+   "predicted": 207
+  },
+  "D04": {
+   "precision": 0.8807339449541285,
+   "recall": 0.47058823529411764,
+   "f1": 0.6134185303514377,
+   "support": 204,
+   "predicted": 109
+  },
+  "D05": {
+   "precision": 1.0,
+   "recall": 0.9948453608247423,
+   "f1": 0.9974160206718347,
+   "support": 194,
+   "predicted": 193
+  },
+  "D06": {
+   "precision": 1.0,
+   "recall": 0.9611650485436893,
+   "f1": 0.9801980198019802,
+   "support": 206,
+   "predicted": 198
+  },
+  "D07": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 71,
+   "predicted": 71
+  },
+  "D08": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "support": 245,
+   "predicted": 0
+  },
+  "CORRECT": {
+   "precision": 0.9102787456445993,
+   "recall": 0.9264184397163121,
+   "f1": 0.9182776801405975,
+   "support": 1128,
+   "predicted": 1148
+  },
+  "OTHER": {
+   "precision": 0.40540540540540543,
+   "recall": 0.8108108108108109,
+   "f1": 0.5405405405405406,
+   "support": 481,
+   "predicted": 962
+  }
+ },
+ "per_problem_acc": {
+  "P01": {
+   "acc": 0.9559471365638766,
+   "n": 227
+  },
+  "P02": {
+   "acc": 0.950354609929078,
+   "n": 141
+  },
+  "P03": {
+   "acc": 0.9930555555555556,
+   "n": 288
+  },
+  "P05": {
+   "acc": 0.8630952380952381,
+   "n": 168
+  },
+  "P06": {
+   "acc": 0.9642857142857143,
+   "n": 252
+  },
+  "P07": {
+   "acc": 0.7082152974504249,
+   "n": 353
+  },
+  "P08": {
+   "acc": 0.9784172661870504,
+   "n": 139
+  },
+  "P10": {
+   "acc": 0.9510204081632653,
+   "n": 245
+  },
+  "P11": {
+   "acc": 0.8032786885245902,
+   "n": 183
+  },
+  "P12": {
+   "acc": 0.9512195121951219,
+   "n": 82
+  },
+  "P14": {
+   "acc": 0.9807692307692307,
+   "n": 104
+  },
+  "P16": {
+   "acc": 0.9402985074626866,
+   "n": 67
+  },
+  "P17": {
+   "acc": 0.9568965517241379,
+   "n": 116
+  },
+  "Q01": {
+   "acc": 1.0,
+   "n": 235
+  },
+  "Q02": {
+   "acc": 0.9953488372093023,
+   "n": 215
+  },
+  "Q03": {
+   "acc": 1.0,
+   "n": 144
+  },
+  "Q05": {
+   "acc": 0.9791666666666666,
+   "n": 144
+  },
+  "Q06": {
+   "acc": 0.926605504587156,
+   "n": 327
+  },
+  "Q07": {
+   "acc": 0.5952380952380952,
+   "n": 252
+  },
+  "Q08": {
+   "acc": 0.957345971563981,
+   "n": 211
+  },
+  "Q10": {
+   "acc": 0.7028301886792453,
+   "n": 212
+  },
+  "Q11": {
+   "acc": 0.6341463414634146,
+   "n": 164
+  },
+  "Q12": {
+   "acc": 0.5576036866359447,
+   "n": 217
+  },
+  "Q13": {
+   "acc": 0.8266666666666667,
+   "n": 75
+  },
+  "Q14": {
+   "acc": 0.2183406113537118,
+   "n": 458
+  },
+  "Q15": {
+   "acc": 0.9353233830845771,
+   "n": 201
+  },
+  "Q17": {
+   "acc": 0.9417808219178082,
+   "n": 292
+  },
+  "Q18": {
+   "acc": 0.9801980198019802,
+   "n": 303
+  }
+ },
+ "by_domain": {
+  "main": {
+   "n": 2365,
+   "macro_f1": 0.7773201280455279,
+   "acc": 0.9069767441860465
+  },
+  "dsa": {
+   "n": 3450,
+   "macro_f1": 0.7280893194959568,
+   "acc": 0.7782608695652173
+  }
+ },
+ "by_class_family": {
+  "M": {
+   "n": 2679,
+   "macro_f1": 0.7122534671311718,
+   "recall": 0.8514371033967898
+  },
+  "D": {
+   "n": 1527,
+   "macro_f1": 0.7938309944300797,
+   "recall": 0.7295350360183366
+  }
+ },
+ "effective_n": {
+  "rows": 5815,
+  "unique_ast_hash": 1558
+ },
+ "plots": [
+  "E01_confusion.png"
+ ],
+ "caveat": "Synthetic rows from the same generator as the training rows, so this is optimistic (03 §9.2). Folds hold out whole problems but the mutation operators are shared across folds. macro_f1 is the mean of the per-fold macro-F1 over the classes present in each fold, computed from the final OOF logits with the fitted temperature and masking; pooled_oof is one macro-F1 over all rows with a cluster bootstrap by problem (1,000 resamples)."
+}

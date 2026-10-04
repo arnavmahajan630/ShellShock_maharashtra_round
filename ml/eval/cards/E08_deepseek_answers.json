@@ -1,0 +1,213 @@
+{
+ "about": "DeepSeek zero-shot label per R-llm program (an LLM's guess, not a ground truth)",
+ "answers": {
+  "RL-001": {
+   "label": "M01",
+   "reason": "The loop condition i <= n runs n+1 times, including n, but the task requires firing only up to n-1."
+  },
+  "RL-002": {
+   "label": "M01",
+   "reason": "The loop condition i <= n/2 runs one extra iteration for even n, swapping the middle pair twice and undoing it."
+  },
+  "RL-003": {
+   "label": "M02",
+   "reason": "The loop counter `steps` is never incremented inside the loop, so it stays 0 and the loop never terminates properly."
+  },
+  "RL-004": {
+   "label": "M02",
+   "reason": "The while loop never changes i or j, so it never moves toward the exit condition."
+  },
+  "RL-005": {
+   "label": "M03",
+   "reason": "The running total is reset to 0 inside the loop on every iteration, so only the last cell's value is returned."
+  },
+  "RL-006": {
+   "label": "M03",
+   "reason": "The running total is reset to 0 inside the loop on every iteration, so only the last match is counted."
+  },
+  "RL-007": {
+   "label": "M04",
+   "reason": "The code computes sum / n using integer division, dropping the fractional part, then assigns to a float."
+  },
+  "RL-008": {
+   "label": "M04",
+   "reason": "The code uses integer division fuel / cap, which truncates the fraction before multiplying by 100, so the decimal part is lost."
+  },
+  "RL-009": {
+   "label": "CORRECT",
+   "reason": "The code correctly computes base^k with result initialized to 1 and a loop multiplying by base k times."
+  },
+  "RL-010": {
+   "label": "M06",
+   "reason": "The student used `=` instead of `==` in `(code = 42)`, which assigns 42 to code and always evaluates true."
+  },
+  "RL-011": {
+   "label": "M06",
+   "reason": "The if condition uses assignment `=` instead of comparison `==`, so it stores x into a[i] and is always true (nonzero), returning index 0 immediately."
+  },
+  "RL-012": {
+   "label": "M07",
+   "reason": "The stray semicolons after the if headers make the if bodies empty, so the blocks always execute and ans is always set to 1."
+  },
+  "RL-013": {
+   "label": "M07",
+   "reason": "The semicolon after the outer while header makes its body empty, so the loop never executes and the array is never sorted."
+  },
+  "RL-014": {
+   "label": "M08",
+   "reason": "The helper accesses arr[size], but the last valid index is size-1, showing the belief that arrays are indexed 1..n."
+  },
+  "RL-015": {
+   "label": "M08",
+   "reason": "The code treats the array as 1-indexed (a[1]..a[n]) instead of 0-indexed (a[0]..a[n-1]), so it reads/writes out of bounds and never touches a[0]."
+  },
+  "RL-016": {
+   "label": "M10",
+   "reason": "The function prints the computed distance but returns 0 instead of the value, so the caller never receives the result."
+  },
+  "RL-017": {
+   "label": "M10",
+   "reason": "The function prints the result with printf instead of returning it, so the caller never receives the value."
+  },
+  "RL-018": {
+   "label": "D01",
+   "reason": "The else branch resets ans to -1 on every non-matching element, so a later miss overwrites a found index."
+  },
+  "RL-019": {
+   "label": "OTHER",
+   "reason": "The else branch is empty, so flag is never set to 0 when an out-of-order pair is found."
+  },
+  "RL-020": {
+   "label": "D02",
+   "reason": "The search window never shrinks because low and high are set to mid instead of mid+1/mid-1, causing an infinite loop."
+  },
+  "RL-021": {
+   "label": "D02",
+   "reason": "The binary search window never shrinks because l and h are set to m instead of m+1/m-1, so it can loop forever."
+  },
+  "RL-022": {
+   "label": "D03",
+   "reason": "The swap overwrites a[innerLoopIndex] before saving it, losing the original value because no temp is used."
+  },
+  "RL-023": {
+   "label": "D03",
+   "reason": "The swap overwrites a[left_index] before saving its old value, so the two assignments do not happen simultaneously and one value is lost."
+  },
+  "RL-024": {
+   "label": "D04",
+   "reason": "A single pass of adjacent swaps does not fully sort the array; bubble sort needs nested loops to repeat passes."
+  },
+  "RL-025": {
+   "label": "D04",
+   "reason": "The code performs only one pass to place the smallest element at index 0, not a full selection sort over the whole array."
+  },
+  "RL-026": {
+   "label": "D05",
+   "reason": "The recursive factorial function has no base case, so it recurses infinitely instead of stopping at n=0."
+  },
+  "RL-027": {
+   "label": "D05",
+   "reason": "The recursion has no base case, so it never stops."
+  },
+  "RL-028": {
+   "label": "D06",
+   "reason": "The recursive call factorial(n) does not decrease n, so it never moves toward the base case and recurses infinitely."
+  },
+  "RL-029": {
+   "label": "D06",
+   "reason": "The recursive call passes n unchanged, so it never moves toward the base case."
+  },
+  "RL-030": {
+   "label": "D07",
+   "reason": "The recursive call's result is stored in ans but temp1 is never added, so the returned sum omits the current element."
+  },
+  "RL-031": {
+   "label": "M03",
+   "reason": "The running total `sum` is reset to the last digit inside the loop instead of accumulating across passes."
+  },
+  "RL-032": {
+   "label": "D08",
+   "reason": "The code compares a char to string literals with ==, which compares pointers, not text."
+  },
+  "RL-033": {
+   "label": "D08",
+   "reason": "The code uses == to compare two strings, which compares pointers rather than the text contents."
+  },
+  "RL-034": {
+   "label": "CORRECT",
+   "reason": "The loop correctly sums all cells from index n-1 down to 0 and returns the total."
+  },
+  "RL-035": {
+   "label": "CORRECT",
+   "reason": "The function correctly returns base^k, including the k=0 case returning 1."
+  },
+  "RL-036": {
+   "label": "CORRECT",
+   "reason": "The loop iterates over all n cells and ans ends up holding the last element, which is returned."
+  },
+  "RL-037": {
+   "label": "CORRECT",
+   "reason": "The nested if/else assigns 0, 1, or 2 based on the energy thresholds and returns the correct mode."
+  },
+  "RL-038": {
+   "label": "CORRECT",
+   "reason": "The code correctly iterates through the array, returns the index of x if found, and -1 otherwise."
+  },
+  "RL-039": {
+   "label": "CORRECT",
+   "reason": "The binary search correctly maintains the window, updates bounds, and returns the index or -1."
+  },
+  "RL-040": {
+   "label": "CORRECT",
+   "reason": "The bubble sort correctly sorts the array in place using a shrinking pass bound and a swap flag."
+  },
+  "RL-041": {
+   "label": "CORRECT",
+   "reason": "The code correctly swaps elements from both ends moving inward, reversing the array in place."
+  },
+  "RL-042": {
+   "label": "CORRECT",
+   "reason": "The code correctly computes the string length and compares mirrored characters, returning 1 for a palindrome and 0 otherwise."
+  },
+  "RL-043": {
+   "label": "CORRECT",
+   "reason": "The recursive factorial correctly handles the base case and multiplies n by factorial(n-1)."
+  },
+  "RL-044": {
+   "label": "OTHER",
+   "reason": "The helper subtracts each cell value instead of adding it, so the total is negated rather than summed."
+  },
+  "RL-045": {
+   "label": "OTHER",
+   "reason": "The code returns a-b which can be negative, not the absolute difference; no listed belief explains this."
+  },
+  "RL-046": {
+   "label": "OTHER",
+   "reason": "The upper threshold is set to 60 instead of the required 70, so energies 60-69 incorrectly return 2."
+  },
+  "RL-047": {
+   "label": "OTHER",
+   "reason": "The code compares a[i] to n instead of x, so it counts occurrences of n rather than x."
+  },
+  "RL-048": {
+   "label": "OTHER",
+   "reason": "The comparison is reversed: it sets ans=0 when a[i] < a[i+1], so it reports unsorted for non-decreasing arrays."
+  },
+  "RL-049": {
+   "label": "OTHER",
+   "reason": "The base case returns 0 instead of 1, so factorial(0) is wrong and all results become 0."
+  },
+  "RL-050": {
+   "label": "M01",
+   "reason": "The loop condition position <= n runs one step too many, accessing cells[n] out of bounds; it should be position < n."
+  },
+  "RL-051": {
+   "label": "M01",
+   "reason": "The loop condition i<=k runs one extra iteration, summing k+1 elements instead of k."
+  },
+  "RL-052": {
+   "label": "M01",
+   "reason": "The inner loop bound j < n - i runs one step too far, accessing a[j+1] out of bounds on the first pass."
+  }
+ }
+}

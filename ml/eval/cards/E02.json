@@ -1,0 +1,195 @@
+{
+ "id": "E2",
+ "title": "Unseen problems",
+ "slice": "HOLDOUT-P (P04, P09, P13, Q04, Q09, Q16)",
+ "n": 938,
+ "model_version": "diagnoser_40e8e6ff",
+ "metrics": {
+  "macro_f1": 0.7987470548946098,
+  "macro_f1_ci95": [
+   0.6987168600764032,
+   0.9893103657004082
+  ],
+  "ci_kind": "cluster bootstrap by problem",
+  "n_boot": 1000,
+  "n_clusters": 6,
+  "acc": 0.8795309168443497,
+  "main_macro_f1": 1.0,
+  "main_n": 536,
+  "dsa_macro_f1": 0.6421307671307671,
+  "dsa_n": 402,
+  "d_classes_on_dsa_macro_f1": 0.5,
+  "d_classes_on_dsa_ci95_cluster": [
+   0.0,
+   0.6666666666666666
+  ],
+  "d_classes_on_dsa_n": 174,
+  "m_classes_macro_f1": 0.988440611846833,
+  "d_classes_macro_f1": 0.5
+ },
+ "targets": {
+  "macro_f1": ">= 0.70 (red flag 1.00)",
+  "d_classes_dsa": ">= 0.65 (red flag 1.00)"
+ },
+ "red_flag": {
+  "macro_f1_eq_1": false,
+  "d_on_dsa_eq_1": false
+ },
+ "per_class": {
+  "M01": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 29,
+   "predicted": 29
+  },
+  "M03": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 53,
+   "predicted": 53
+  },
+  "M04": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 72,
+   "predicted": 72
+  },
+  "M05": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 108,
+   "predicted": 108
+  },
+  "M08": {
+   "precision": 1.0,
+   "recall": 0.8910891089108911,
+   "f1": 0.9424083769633508,
+   "support": 101,
+   "predicted": 90
+  },
+  "M10": {
+   "precision": 0.9767441860465116,
+   "recall": 1.0,
+   "f1": 0.9882352941176471,
+   "support": 42,
+   "predicted": 43
+  },
+  "D01": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "support": 51,
+   "predicted": 0
+  },
+  "D05": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 36,
+   "predicted": 36
+  },
+  "D06": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "support": 51,
+   "predicted": 0
+  },
+  "D07": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 36,
+   "predicted": 36
+  },
+  "CORRECT": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 253,
+   "predicted": 253
+  },
+  "OTHER": {
+   "precision": 0.48623853211009177,
+   "recall": 1.0,
+   "f1": 0.654320987654321,
+   "support": 106,
+   "predicted": 218
+  }
+ },
+ "per_problem_acc": {
+  "P04": {
+   "acc": 1.0,
+   "n": 250
+  },
+  "P09": {
+   "acc": 1.0,
+   "n": 120
+  },
+  "P13": {
+   "acc": 1.0,
+   "n": 166
+  },
+  "Q04": {
+   "acc": 0.6076923076923076,
+   "n": 130
+  },
+  "Q09": {
+   "acc": 0.89,
+   "n": 100
+  },
+  "Q16": {
+   "acc": 0.7034883720930233,
+   "n": 172
+  }
+ },
+ "by_domain": {
+  "main": {
+   "n": 536,
+   "macro_f1": 1.0,
+   "acc": 1.0
+  },
+  "dsa": {
+   "n": 402,
+   "macro_f1": 0.6421307671307671,
+   "acc": 0.7189054726368159
+  }
+ },
+ "by_class_family": {
+  "M": {
+   "n": 405,
+   "macro_f1": 0.988440611846833,
+   "recall": 0.9728395061728395
+  },
+  "D": {
+   "n": 174,
+   "macro_f1": 0.5,
+   "recall": 0.41379310344827586
+  }
+ },
+ "classes_present": [
+  "CORRECT",
+  "D01",
+  "D05",
+  "D06",
+  "D07",
+  "M01",
+  "M03",
+  "M04",
+  "M05",
+  "M08",
+  "M10",
+  "OTHER"
+ ],
+ "leakage_check": {
+  "ast_hash_overlap_with_train": 0
+ },
+ "plots": [
+  "E02_confusion.png"
+ ],
+ "caveat": "Synthetic rows from the same generator (same operators) as the training data, on 6 problems only: the cluster bootstrap resamples 6 clusters, so the interval is wide and slightly optimistic about its own width. Not realistic code (that is E4)."
+}

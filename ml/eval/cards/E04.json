@@ -1,0 +1,695 @@
+{
+ "id": "E4",
+ "title": "Realistic code (LLM-written stand-in)",
+ "slice": "R-llm: 58 LLM-written programs (source R-llm), 52 scored by the model + 6 junk rows for the gate",
+ "n": 52,
+ "model_version": "diagnoser_40e8e6ff",
+ "data_status": {
+  "R-blind": {
+   "status": "missing",
+   "note": "R-blind (40 hand-written by FE) is still open: no file exists, so nothing was run on it. The headline of 03 §0.3 is therefore not measured."
+  },
+  "R-team": {
+   "status": "replaced",
+   "note": "replaced by R-llm: 58 programs written by deepseek-v4-pro role-playing a student; run-checked against reference solutions; NOT hand-written, NOT real students."
+  },
+  "R-llm": {
+   "status": "used",
+   "label": "R-llm (58 LLM-written programs, NOT hand-written, NOT real students)"
+  }
+ },
+ "metrics": {
+  "macro_f1": 0.7827067669172931,
+  "macro_f1_ci95": [
+   0.629806219923867,
+   0.9044223823051947
+  ],
+  "ci_kind": "row bootstrap, 1,000 resamples",
+  "acc": 0.8269230769230769,
+  "n_scored": 52,
+  "n_wrong": 9,
+  "main_macro_f1": 0.6839826839826839,
+  "main_n": 19,
+  "dsa_macro_f1": 0.7787114845938374,
+  "dsa_n": 33,
+  "m_classes_macro_f1": 0.7952380952380952,
+  "m_n": 20,
+  "d_classes_macro_f1": 0.75,
+  "d_n": 15,
+  "majority_class_macro_f1": 0.01697792869269949,
+  "fixer_coverage_true_class": 0.5142857142857142,
+  "fixer_coverage_top3": 0.5142857142857142,
+  "fixer_coverage_n": 35,
+  "label_rater2_agreement": 0.9137931034482759,
+  "label_rater2_kappa": 0.906057661159702,
+  "label_rater2_n": 58,
+  "label_rater2_is": "deepseek-flash reading the code alone (an LLM, not a person)",
+  "misconception_programs_that_pass_all_tests": 0
+ },
+ "target": "macro-F1 >= 0.60 on R-blind (not measured); this card is the LLM stand-in only",
+ "per_class": {
+  "M01": {
+   "precision": 0.5,
+   "recall": 1.0,
+   "f1": 0.6666666666666666,
+   "support": 4,
+   "predicted": 8
+  },
+  "M02": {
+   "precision": 0.5,
+   "recall": 0.5,
+   "f1": 0.5,
+   "support": 2,
+   "predicted": 2
+  },
+  "M03": {
+   "precision": 1.0,
+   "recall": 0.5,
+   "f1": 0.6666666666666666,
+   "support": 2,
+   "predicted": 1
+  },
+  "M04": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 2,
+   "predicted": 2
+  },
+  "M05": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 1,
+   "predicted": 1
+  },
+  "M06": {
+   "precision": 1.0,
+   "recall": 0.5,
+   "f1": 0.6666666666666666,
+   "support": 2,
+   "predicted": 1
+  },
+  "M07": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 2,
+   "predicted": 2
+  },
+  "M08": {
+   "precision": 0.75,
+   "recall": 1.0,
+   "f1": 0.8571428571428571,
+   "support": 3,
+   "predicted": 4
+  },
+  "M10": {
+   "precision": 0.6666666666666666,
+   "recall": 1.0,
+   "f1": 0.8,
+   "support": 2,
+   "predicted": 3
+  },
+  "D01": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "support": 1,
+   "predicted": 0
+  },
+  "D02": {
+   "precision": 1.0,
+   "recall": 0.5,
+   "f1": 0.6666666666666666,
+   "support": 2,
+   "predicted": 1
+  },
+  "D03": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 2,
+   "predicted": 2
+  },
+  "D04": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 2,
+   "predicted": 2
+  },
+  "D05": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 2,
+   "predicted": 2
+  },
+  "D06": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 2,
+   "predicted": 2
+  },
+  "D07": {
+   "precision": 1.0,
+   "recall": 0.5,
+   "f1": 0.6666666666666666,
+   "support": 2,
+   "predicted": 1
+  },
+  "D08": {
+   "precision": 1.0,
+   "recall": 0.5,
+   "f1": 0.6666666666666666,
+   "support": 2,
+   "predicted": 1
+  },
+  "CORRECT": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "support": 10,
+   "predicted": 10
+  },
+  "OTHER": {
+   "precision": 0.7142857142857143,
+   "recall": 0.7142857142857143,
+   "f1": 0.7142857142857143,
+   "support": 7,
+   "predicted": 7
+  }
+ },
+ "by_domain": {
+  "main": {
+   "n": 19,
+   "macro_f1": 0.6839826839826839,
+   "acc": 0.8421052631578947
+  },
+  "dsa": {
+   "n": 33,
+   "macro_f1": 0.7787114845938374,
+   "acc": 0.8181818181818182
+  }
+ },
+ "by_class_family": {
+  "M": {
+   "n": 20,
+   "macro_f1": 0.7952380952380952,
+   "recall": 0.85
+  },
+  "D": {
+   "n": 15,
+   "macro_f1": 0.75,
+   "recall": 0.7333333333333333
+  }
+ },
+ "gate": {
+  "junk_rows": 6,
+  "junk_caught": 5,
+  "normal_rows": 52,
+  "normal_wrongly_gated": 0,
+  "junk_detail": {
+   "RL-053": "G4",
+   "RL-054": "G1",
+   "RL-055": "G0",
+   "RL-056": "G3c",
+   "RL-057": "G5b",
+   "RL-058": "G4"
+  },
+  "normal_wrongly_gated_ids": []
+ },
+ "fixer_coverage": {
+  "n_misconception_programs": 35,
+  "fix_found_for_true_class": 0.5142857142857142,
+  "fix_found_in_top3": 0.5142857142857142
+ },
+ "fixer_coverage_detail": {
+  "RL-001": {
+   "true": [
+    "M01"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M01",
+    "M08"
+   ],
+   "fix_top3": true
+  },
+  "RL-002": {
+   "true": [
+    "M01"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M01",
+    "M08"
+   ],
+   "fix_top3": true
+  },
+  "RL-003": {
+   "true": [
+    "M02"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M01",
+    "M03"
+   ],
+   "fix_top3": false
+  },
+  "RL-004": {
+   "true": [
+    "M02"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M02",
+    "M01"
+   ],
+   "fix_top3": false
+  },
+  "RL-005": {
+   "true": [
+    "M03"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M01",
+    "M03"
+   ],
+   "fix_top3": false
+  },
+  "RL-006": {
+   "true": [
+    "M03"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M03",
+    "M08"
+   ],
+   "fix_top3": true
+  },
+  "RL-007": {
+   "true": [
+    "M04"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M04",
+    "M10"
+   ],
+   "fix_top3": true
+  },
+  "RL-008": {
+   "true": [
+    "M04"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M04",
+    "M01"
+   ],
+   "fix_top3": true
+  },
+  "RL-009": {
+   "true": [
+    "M05"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M05",
+    "M02"
+   ],
+   "fix_top3": false
+  },
+  "RL-010": {
+   "true": [
+    "M06"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M01",
+    "M08"
+   ],
+   "fix_top3": false
+  },
+  "RL-011": {
+   "true": [
+    "M06"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M06",
+    "M01"
+   ],
+   "fix_top3": true
+  },
+  "RL-012": {
+   "true": [
+    "M07"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M07",
+    "M10"
+   ],
+   "fix_top3": false
+  },
+  "RL-013": {
+   "true": [
+    "M07"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M07",
+    "D04",
+    "M08"
+   ],
+   "fix_top3": true
+  },
+  "RL-014": {
+   "true": [
+    "M08"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M08",
+    "M01"
+   ],
+   "fix_top3": true
+  },
+  "RL-015": {
+   "true": [
+    "M08"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M08",
+    "M01",
+    "D03"
+   ],
+   "fix_top3": false
+  },
+  "RL-016": {
+   "true": [
+    "M10"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M10",
+    "M01"
+   ],
+   "fix_top3": true
+  },
+  "RL-017": {
+   "true": [
+    "M10"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M10",
+    "M08",
+    "M01"
+   ],
+   "fix_top3": true
+  },
+  "RL-018": {
+   "true": [
+    "D01"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M01",
+    "M10"
+   ],
+   "fix_top3": false
+  },
+  "RL-020": {
+   "true": [
+    "D02"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M02",
+    "M01"
+   ],
+   "fix_top3": false
+  },
+  "RL-021": {
+   "true": [
+    "D02"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "D02",
+    "M02"
+   ],
+   "fix_top3": false
+  },
+  "RL-022": {
+   "true": [
+    "D03"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "D03",
+    "M08",
+    "D04"
+   ],
+   "fix_top3": true
+  },
+  "RL-023": {
+   "true": [
+    "D03"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "D03",
+    "M08"
+   ],
+   "fix_top3": true
+  },
+  "RL-024": {
+   "true": [
+    "D04"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "D04",
+    "M08",
+    "M01"
+   ],
+   "fix_top3": true
+  },
+  "RL-025": {
+   "true": [
+    "D04"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "D04",
+    "D03"
+   ],
+   "fix_top3": false
+  },
+  "RL-026": {
+   "true": [
+    "D05"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "D05",
+    "D06"
+   ],
+   "fix_top3": false
+  },
+  "RL-027": {
+   "true": [
+    "D05"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "D05",
+    "D06"
+   ],
+   "fix_top3": true
+  },
+  "RL-028": {
+   "true": [
+    "D06"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "D06",
+    "D05"
+   ],
+   "fix_top3": true
+  },
+  "RL-029": {
+   "true": [
+    "D06"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "D06",
+    "D05"
+   ],
+   "fix_top3": false
+  },
+  "RL-030": {
+   "true": [
+    "D07"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M10",
+    "D05"
+   ],
+   "fix_top3": false
+  },
+  "RL-031": {
+   "true": [
+    "D07"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "D07",
+    "D06",
+    "M03"
+   ],
+   "fix_top3": false
+  },
+  "RL-032": {
+   "true": [
+    "D08"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "D08",
+    "M08"
+   ],
+   "fix_top3": true
+  },
+  "RL-033": {
+   "true": [
+    "D08"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M08",
+    "M01"
+   ],
+   "fix_top3": false
+  },
+  "RL-050": {
+   "true": [
+    "M01",
+    "M08"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M01",
+    "M08"
+   ],
+   "fix_top3": true
+  },
+  "RL-051": {
+   "true": [
+    "M01",
+    "M08"
+   ],
+   "fix_true_class": true,
+   "top3": [
+    "M08",
+    "M01"
+   ],
+   "fix_top3": true
+  },
+  "RL-052": {
+   "true": [
+    "M01",
+    "M08"
+   ],
+   "fix_true_class": false,
+   "top3": [
+    "M01",
+    "M08"
+   ],
+   "fix_top3": false
+  }
+ },
+ "passes_all_tests_but_labelled_misconception": [],
+ "wrong_predictions": [
+  {
+   "id": "RL-003",
+   "problem": "P05",
+   "true": "M02",
+   "pred": "OTHER",
+   "conf": 0.5725807735913584
+  },
+  {
+   "id": "RL-005",
+   "problem": "P03",
+   "true": "M03",
+   "pred": "M01",
+   "conf": 0.4659759930295809
+  },
+  {
+   "id": "RL-010",
+   "problem": "P11",
+   "true": "M06",
+   "pred": "M01",
+   "conf": 0.5558986413836655
+  },
+  {
+   "id": "RL-018",
+   "problem": "Q01",
+   "true": "D01",
+   "pred": "M01",
+   "conf": 0.23643984450847427
+  },
+  {
+   "id": "RL-019",
+   "problem": "Q08",
+   "true": "OTHER",
+   "pred": "M08",
+   "conf": 0.28939149869827857
+  },
+  {
+   "id": "RL-020",
+   "problem": "Q03",
+   "true": "D02",
+   "pred": "M02",
+   "conf": 0.2386935653795001
+  },
+  {
+   "id": "RL-030",
+   "problem": "Q18",
+   "true": "D07",
+   "pred": "M10",
+   "conf": 0.2564946214540283
+  },
+  {
+   "id": "RL-033",
+   "problem": "Q15",
+   "true": "D08",
+   "pred": "OTHER",
+   "conf": 0.1781146255758499
+  },
+  {
+   "id": "RL-048",
+   "problem": "Q08",
+   "true": "OTHER",
+   "pred": "M01",
+   "conf": 0.3531069657985441
+  }
+ ],
+ "plots": [
+  "E04_confusion.png"
+ ],
+ "caveat": "LLM-WRITTEN STAND-IN. 58 programs written by deepseek-v4-pro playing a student with a given belief; not hand-written, not blind to the operators in the sense of 03 §3.4 (the author model saw only the belief text), not real learners. n=52 scored over ~19 classes means 1-2 items per class: per-class numbers are anecdotes and the interval is wide. The run check shows a program is wrong, not that it is wrong for the intended reason. Labels were not adjudicated by a person. R-blind (the headline) is missing. Do not quote this as R-blind or as a human study."
+}
