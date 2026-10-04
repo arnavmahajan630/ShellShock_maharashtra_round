@@ -1,0 +1,63 @@
+{
+  "reader": "tfidf",
+  "labels": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08",
+    "M10",
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08",
+    "CORRECT_REASON"
+  ],
+  "threshold": 0.584,
+  "blocks": [
+    {
+      "key": "word",
+      "analyzer": "word",
+      "ngram_range": [
+        1,
+        2
+      ]
+    },
+    {
+      "key": "char",
+      "analyzer": "char_wb",
+      "ngram_range": [
+        3,
+        5
+      ]
+    }
+  ],
+  "logreg": {
+    "C": 10.0,
+    "max_iter": 2000
+  },
+  "n_features": 26559,
+  "sentences": {
+    "train": 2215
+  },
+  "fit_seconds": 2.61,
+  "version": "89d0e16d",
+  "data": "ml/data/reasons.jsonl",
+  "data_sha256": "c903dc45e4abaa46922e28f6745c30f8be1d25cc45f291289f93e6fbbfaf8f0a",
+  "threshold_rule": "smallest confidence with accepted answers >= 90% right on val",
+  "val": {
+    "n": 553,
+    "accuracy": 0.6835443037974683,
+    "macro_f1": 0.6900919261863563,
+    "top3": 0.8842676311030742,
+    "answers": 0.4719710669077758,
+    "right_when_it_answers": 0.9003831417624522
+  }
+}

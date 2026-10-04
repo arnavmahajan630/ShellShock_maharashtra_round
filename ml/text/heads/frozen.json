@@ -1,0 +1,51 @@
+{
+  "reader": "frozen",
+  "labels": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08",
+    "M10",
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08",
+    "CORRECT_REASON"
+  ],
+  "threshold": 0.585,
+  "model": "BAAI/bge-base-en-v1.5",
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "file": "onnx/model.onnx",
+  "max_len": 64,
+  "pooling": "cls",
+  "normalize": true,
+  "logreg": {
+    "C": 10.0,
+    "max_iter": 2000
+  },
+  "sentences": {
+    "train": 2215
+  },
+  "embed_seconds": 42.0,
+  "fit_seconds": 2.03,
+  "version": "dfdaf841",
+  "data": "ml/data/reasons.jsonl",
+  "data_sha256": "c903dc45e4abaa46922e28f6745c30f8be1d25cc45f291289f93e6fbbfaf8f0a",
+  "threshold_rule": "smallest confidence with accepted answers >= 90% right on val",
+  "val": {
+    "n": 553,
+    "accuracy": 0.6329113924050633,
+    "macro_f1": 0.6297036811650782,
+    "top3": 0.8462929475587704,
+    "answers": 0.45569620253164556,
+    "right_when_it_answers": 0.9047619047619048
+  }
+}
