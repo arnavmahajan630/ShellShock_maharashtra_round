@@ -82,6 +82,22 @@ class AudioManager {
     return this.volume;
   }
 
+  private preDuckVolume: number | null = null;
+
+  public duck(level: number = 0.1) {
+    if (this.preDuckVolume === null) {
+      this.preDuckVolume = this.volume;
+    }
+    this.setVolume(level);
+  }
+
+  public restore() {
+    if (this.preDuckVolume !== null) {
+      this.setVolume(this.preDuckVolume);
+      this.preDuckVolume = null;
+    }
+  }
+
   public setVolume(vol: number) {
     this.volume = Math.max(0, Math.min(1, vol));
     if (this.currentTrack && !this.isMuted) {

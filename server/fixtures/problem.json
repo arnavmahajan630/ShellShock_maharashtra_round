@@ -574,6 +574,103 @@
         {"args": [2, 50, 12], "expect": {"returned": 50}},
         {"args": [3, 10, 20], "expect": {"returned": -1}}
       ]
+    },
+    "MMA-01": {
+      "problem_id": "MMA-01",
+      "name": "Shield Relay · Flowchart Trace",
+      "type": "flowchart_trace",
+      "planet": "conditions",
+      "sector": null,
+      "difficulty": 1,
+      "world": "flowchart",
+      "signature": "int shield_relay(int power)",
+      "starter": "int power = 10;\nint shield = 0;\nif (power >= 5) {\n    shield = 1;\n}\nreturn shield;",
+      "prompt": "The Aegis defense station evaluates power telemetry to raise the defense shield. Telemetry reports power = 10 and shield = 0. Trace the execution path through the flowchart and predict if the shield activates (1) or stays offline (0).",
+      "inputs": { "power": 10, "shield": 0 },
+      "graph": {
+        "nodes": [
+          { "id": "n1", "kind": "start", "label": "Start:\npower = 10, shield = 0" },
+          { "id": "n2", "kind": "decision", "label": "Check Power:\nif (power >= 5)" },
+          { "id": "n3", "kind": "process", "label": "Raise Shield:\nshield = 1" },
+          { "id": "n4", "kind": "end", "label": "Return:\nshield" }
+        ],
+        "edges": [
+          { "from": "n1", "to": "n2", "label": null },
+          { "from": "n2", "to": "n3", "label": "true (power >= 5)" },
+          { "from": "n2", "to": "n4", "label": "false (power < 5)" },
+          { "from": "n3", "to": "n4", "label": null }
+        ]
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [10], "expect": {"returned": 1}},
+        {"args": [2], "expect": {"returned": 0}}
+      ]
+    },
+    "MMA-01T": {
+      "problem_id": "MMA-01T",
+      "name": "Shield Grid Relay · Flowchart Transfer",
+      "type": "flowchart_trace",
+      "planet": "conditions",
+      "sector": null,
+      "difficulty": 1,
+      "world": "flowchart",
+      "signature": "int shield_relay(int status)",
+      "starter": "int status = 0;\nint alert = 0;\nif (status = 99) {\n    alert = 1;\n}\nreturn alert;",
+      "prompt": "Transfer challenge: trace the deflector grid path for status = 0.",
+      "inputs": { "status": 0, "alert": 0 },
+      "graph": {
+        "nodes": [
+          { "id": "n1", "kind": "start", "label": "Start: status = 0, alert = 0" },
+          { "id": "n2", "kind": "decision", "label": "Grid Condition:\nif (status = 99)" },
+          { "id": "n3", "kind": "process", "label": "Activate Deflector:\nalert = 1" },
+          { "id": "n4", "kind": "end", "label": "Return:\nalert" }
+        ],
+        "edges": [
+          { "from": "n1", "to": "n2", "label": null },
+          { "from": "n2", "to": "n3", "label": "non-zero (true)" },
+          { "from": "n2", "to": "n4", "label": "zero (false)" },
+          { "from": "n3", "to": "n4", "label": null }
+        ]
+      },
+      "markers": [],
+      "sample_tests": [
+        {"args": [0], "expect": {"returned": 0}},
+        {"args": [99], "expect": {"returned": 1}}
+      ]
+    },
+    "MMB-01": {
+      "problem_id": "MMB-01",
+      "name": "Astronaut ID Search · Voice Trace",
+      "type": "voice_trace",
+      "planet": "loops",
+      "sector": null,
+      "difficulty": 1,
+      "world": "voice_loop",
+      "signature": "int find_commander_rahul(AstronautCard cards[100])",
+      "starter": "// Search 100 astronaut cards arranged randomly\nint find_commander_rahul(AstronautCard cards[100]) {\n    for (int i = 0; i < 100; i++) {\n        if (is_commander_rahul(cards[i])) {\n            return i; // Found Rahul's card\n        }\n    }\n    return -1; // Not found\n}",
+      "prompt": "A space station has 100 identification cards belonging to different astronauts, arranged randomly. You need to find the card belonging to Commander Rahul. Explain how you would find it.",
+      "markers": [],
+      "sample_tests": [
+        {"args": [100], "expect": {"returned": 100}}
+      ]
+    },
+    "MMB-01T": {
+      "problem_id": "MMB-01T",
+      "name": "Reactor Pulse · Voice Transfer",
+      "type": "voice_trace",
+      "planet": "loops",
+      "sector": null,
+      "difficulty": 1,
+      "world": "voice_loop",
+      "signature": "int reactor_pulses(int target)",
+      "starter": "int pulses = 0;\nfor (int k = 0; k <= target; k++) {\n    pulses++;\n}\nreturn pulses;",
+      "prompt": "Transfer challenge: explain aloud how many reactor pulses fire when target = 4, and how the loop terminates.",
+      "markers": [],
+      "sample_tests": [
+        {"args": [4], "expect": {"returned": 4}},
+        {"args": [0], "expect": {"returned": 0}}
+      ]
     }
   },
   "default": "P03"

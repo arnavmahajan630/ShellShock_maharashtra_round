@@ -1,0 +1,8 @@
+{
+  "deterministic_match": 0.90,
+  "deterministic_divergence": 0.75,
+  "judge_cue_strong": 0.85,
+  "judge_cue_medium": 0.70,
+  "hedge_penalty": 0.08,
+  "correct_path_prob": 0.95
+}

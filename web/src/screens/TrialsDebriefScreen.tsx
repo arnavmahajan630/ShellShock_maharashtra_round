@@ -75,6 +75,21 @@ export default function TrialsDebriefScreen() {
               route: "/planet/arrays",
             },
           ],
+          remediations: [
+            {
+              class: "D03",
+              name: "Cargo Overwrite",
+              subtitle: "Swapping without a temp loses a value",
+              trial_title: "Bubble Sort",
+              root_cause: "Attempting to swap elements without a temporary buffer, overwriting the first value.",
+              rule_to_remember: "Two assignments cannot execute simultaneously. A swap requires a temporary buffer: temp = a; a = b; b = temp;.",
+              code_fix: {
+                wrong: "arr[j] = arr[j + 1]; // Overwrites arr[j]!\narr[j + 1] = arr[j]; // Copies back the overwritten value",
+                right: "int temp = arr[j];\narr[j + 1] = temp;\narr[j] = arr[j + 1];\n// Safely preserves original values",
+              },
+              self_check: "Trace with a = 5, b = 9. After step 1 (a = b), both a and b are 9! A temporary storage variable is mandatory.",
+            },
+          ],
         });
       });
 
@@ -336,6 +351,104 @@ export default function TrialsDebriefScreen() {
                   </div>
                 )}
               </div>
+
+              {/* How to Clear Identified Misconceptions Card */}
+              {report.remediations && report.remediations.length > 0 && (
+                <div className="p-5 rounded-2xl bg-deep-space/80 border border-warp-cyan/40 space-y-4 shadow-[0_0_20px_rgba(0,240,255,0.08)]">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-warp-cyan flex items-center gap-2">
+                      <span>💡</span> How to Clear Identified Misconceptions
+                    </h3>
+                    <span className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-warp-cyan/10 border border-warp-cyan/30 text-warp-cyan font-bold tracking-wide">
+                      LLM PEDAGOGY GUIDE
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-white/60 font-ui">
+                    Targeted cognitive shifts, invariant rules, and code patterns to permanently resolve diagnosed bugs.
+                  </p>
+
+                  <div className="space-y-4">
+                    {report.remediations.map((rem, idx) => (
+                      <div
+                        key={idx}
+                        className="p-4 rounded-xl bg-black/60 border border-warp-cyan/25 text-xs font-mono space-y-3.5 shadow-inner"
+                      >
+                        <div className="flex items-center justify-between flex-wrap gap-2 border-b border-white/10 pb-2.5">
+                          <div className="flex items-center gap-2">
+                            <span className="px-2 py-0.5 rounded bg-warp-cyan/20 text-warp-cyan font-bold border border-warp-cyan/40">
+                              {rem.class}
+                            </span>
+                            <span className="font-bold text-white text-sm">{rem.name}</span>
+                          </div>
+                          {rem.trial_title && (
+                            <span className="text-[11px] text-white/50">Context: {rem.trial_title}</span>
+                          )}
+                        </div>
+
+                        {/* Cognitive shift */}
+                        <div className="space-y-1">
+                          <div className="text-[10px] text-white/40 uppercase tracking-wider font-bold">
+                            1. Cognitive Shift (Why this occurs)
+                          </div>
+                          <p className="text-white/80 font-ui leading-relaxed text-xs">
+                            {rem.root_cause}
+                          </p>
+                        </div>
+
+                        {/* Rule to remember */}
+                        <div className="p-3 rounded-lg bg-amber-950/30 border border-amber-500/40 text-amber-200 space-y-1">
+                          <div className="text-[10px] text-amber-400 uppercase tracking-widest font-bold flex items-center gap-1">
+                            <span>⚡</span> Rule to Remember
+                          </div>
+                          <p className="text-xs font-ui leading-relaxed text-amber-100 font-semibold">
+                            {rem.rule_to_remember}
+                          </p>
+                        </div>
+
+                        {/* Code fix */}
+                        {rem.code_fix && (rem.code_fix.wrong || rem.code_fix.right) && (
+                          <div className="space-y-1.5">
+                            <div className="text-[10px] text-white/40 uppercase tracking-wider font-bold">
+                              2. Code Transformation (Wrong vs Correct)
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                              {rem.code_fix.wrong && (
+                                <div className="p-2.5 rounded bg-rose-950/20 border border-rose-500/30 font-mono space-y-1">
+                                  <div className="text-[10px] text-rose-400 font-bold uppercase tracking-wider">
+                                    ✗ Faulty Pattern
+                                  </div>
+                                  <pre className="text-rose-200/90 whitespace-pre-wrap leading-tight text-[11px] font-mono">
+                                    {rem.code_fix.wrong}
+                                  </pre>
+                                </div>
+                              )}
+                              {rem.code_fix.right && (
+                                <div className="p-2.5 rounded bg-emerald-950/20 border border-emerald-500/30 font-mono space-y-1">
+                                  <div className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">
+                                    ✓ Invariant Safe
+                                  </div>
+                                  <pre className="text-emerald-200 whitespace-pre-wrap leading-tight text-[11px] font-mono">
+                                    {rem.code_fix.right}
+                                  </pre>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Self check */}
+                        {rem.self_check && (
+                          <div className="flex items-start gap-2 text-[11px] text-warp-cyan/90 bg-warp-cyan/10 p-2.5 rounded-lg border border-warp-cyan/30">
+                            <span className="shrink-0 font-bold">🔍 Self-Check:</span>
+                            <span className="font-ui">{rem.self_check}</span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Right Column (4 of 12): Next Steps (Panel 11) */}

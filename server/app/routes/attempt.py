@@ -38,8 +38,8 @@ MAX_ATTEMPTS_KEPT = 1000
 
 # ---------------------------------------------------------------- the older rule-based path
 
-CONDITIONS_IDS = {"P11", "P12", "P16", "P17"}
-LOOPS_IDS = {"P01", "P03", "P05", "P06"}
+CONDITIONS_IDS = {"P11", "P12", "P16", "P17", "MMA-01", "MMA-01T"}
+LOOPS_IDS = {"P01", "P03", "P05", "P06", "MMB-01", "MMB-01T"}
 ARRAYS_IDS = {"P08", "P07", "P10", "P09"}
 VARIABLES_IDS = {"P13", "P14", "P18", "P19"}
 FUNCTIONS_IDS = {"P20", "P21", "P22", "P23"}

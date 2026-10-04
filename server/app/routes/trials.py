@@ -21,6 +21,7 @@ from fastapi import APIRouter, Request
 
 from ml.c_interp import harness
 from server.app import dsa_rules, store as store_module
+from server.app.remediation import enrich_report_with_remediations, get_remediation_for_finding
 
 log = logging.getLogger("relearn.trials")
 router = APIRouter()
@@ -191,6 +192,7 @@ async def finish_exam(request: Request):
 
     answers = sess.get("answers", []) if sess else []
     report = dsa_rules.compile_debrief(exam_id, answers, trials)
+    report = enrich_report_with_remediations(report)
     if sess:
         sess["report"] = report
 
@@ -201,7 +203,20 @@ async def finish_exam(request: Request):
 async def get_exam_report(exam_id: str):
     sess = _SESSIONS.get(exam_id)
     if sess and sess.get("report"):
-        return {"report": sess["report"]}
+        rep = sess["report"]
+        if "remediations" not in rep:
+            rep = enrich_report_with_remediations(rep)
+            sess["report"] = rep
+        return {"report": rep}
     trials = _get_trials()
     report = dsa_rules.compile_debrief(exam_id, [], trials)
+    report = enrich_report_with_remediations(report)
     return {"report": report}
+
+
+@router.post("/trials/remediation")
+async def get_remediation_endpoint(request: Request):
+    """Returns tailored remediation steps for an identified misconception class or finding."""
+    body = await request.json()
+    finding = body.get("finding") or body
+    return {"remediation": get_remediation_for_finding(finding)}

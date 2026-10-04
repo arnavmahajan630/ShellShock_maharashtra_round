@@ -11,6 +11,7 @@ export interface PredictItem {
 export interface Problem {
   problem_id: string;
   name: string;
+  type?: "code" | "flowchart_trace" | "voice_trace";
   planet: string | null;
   sector: string | null;
   difficulty: number;
@@ -21,7 +22,23 @@ export interface Problem {
   predict_item: PredictItem | null;
   markers: string[];
   sample_tests: { args: unknown[]; expect: Record<string, unknown> }[];
+  story?: string;
+  graph?: {
+    nodes: { id: string; kind: "start" | "decision" | "process" | "end"; label: string }[];
+    edges: { from: string; to: string; label: string | null }[];
+  };
+  inputs?: Record<string, unknown>;
+  code_equivalent?: string;
+  candidates?: string[];
 }
+
+export type MmProblem = Problem & {
+  correct_path?: string[];
+  correct_output?: string;
+  expected_iterations?: number;
+  rubric?: unknown[];
+  canonical_explanation?: string;
+};
 
 export interface Gate {
   code: string;
@@ -231,6 +248,20 @@ export interface DebriefRecommendation {
   route: string;
 }
 
+export interface DebriefRemediation {
+  class: string;
+  name: string;
+  subtitle: string;
+  trial_title: string;
+  root_cause: string;
+  rule_to_remember: string;
+  code_fix: {
+    wrong: string;
+    right: string;
+  };
+  self_check: string;
+}
+
 export interface DebriefReport {
   exam_id: string;
   items_total: number;
@@ -239,6 +270,7 @@ export interface DebriefReport {
   sectors: DebriefSector[];
   findings: DebriefFinding[];
   recommendations: DebriefRecommendation[];
+  remediations?: DebriefRemediation[];
 }
 
 export type ChartStarState = "uncharted" | "unexplored" | "attempted" | "known" | "shaky";
@@ -337,4 +369,23 @@ export const api = {
   finishExam: (examId: string) => post<{ report: DebriefReport }>("/trials/finish", { exam_id: examId }),
   getExamReport: (examId: string) => get<{ report: DebriefReport }>(`/trials/${examId}/report`),
   getTrials: () => get<DsaTrial[]>("/trials/list"),
+  getMmProblem: (problemId: string) => get<Problem>(`/mm/problem/${problemId}`),
+  mmAttempt: (payload: {
+    learner_id?: string;
+    problem_id: string;
+    modality: "flowchart_trace" | "voice_trace" | "image" | "voice";
+    response: {
+      path?: string[];
+      predicted_output?: string;
+      explanation_text?: string;
+      transcript?: string;
+      transcript_edited?: boolean;
+    };
+    signals?: {
+      response_ms?: number;
+      hedge_count?: number;
+      speech_rate_wps?: number;
+      pause_count?: number;
+    };
+  }) => post<AttemptResponse & { mm_feedback?: string; mm_debug?: unknown }>("/mm/attempt", payload),
 };

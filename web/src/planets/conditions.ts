@@ -10,7 +10,7 @@ export const conditions: PlanetConfig = {
   nodes: [
     { id: "BRIEFING", kind: "briefing", label: "Briefing", position: { top: 51.3, left: 20.5 } },
     { id: "WARMUP", kind: "warmup", label: "Predict Warm-up", position: { top: 54.7, left: 30.9 } },
-    { id: "P11", kind: "mission", label: "door_open", position: { top: 59.8, left: 41.6 }, problemId: "P11" },
+    { id: "MMA-01", kind: "mission", label: "shield_trace", position: { top: 59.8, left: 41.6 }, problemId: "MMA-01" },
     { id: "P12", kind: "mission", label: "shield_mode", position: { top: 62.1, left: 52.0 }, problemId: "P12" },
     { id: "P16", kind: "mission", label: "in_range", position: { top: 66.0, left: 62.4 }, problemId: "P16" },
     { id: "P17", kind: "ghost", label: "max_of_three", position: { top: 67.7, left: 73.9 }, problemId: "P17" },
@@ -27,5 +27,5 @@ export const conditions: PlanetConfig = {
     correct: "1",
     explanation: "`if (code = 42)` assigns 42 to code — it doesn't compare. The block always runs.",
   },
-  nextProblem: { P11: "P12", P12: "P16", P16: "P17", P17: "P11" },
+  nextProblem: { "MMA-01": "P12", P11: "P12", P12: "P16", P16: "P17", P17: "MMA-01" },
 };

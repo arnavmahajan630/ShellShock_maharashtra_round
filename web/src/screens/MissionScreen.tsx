@@ -5,6 +5,8 @@ import CodeMirror from "@uiw/react-codemirror";
 import { api } from "../lib/api";
 import { useMissionStore } from "../store/missionStore";
 import SignalGateWorld from "../components/SignalGateWorld";
+import FlowchartTraceMission from "./missions/FlowchartTraceMission";
+import VoiceTraceMission from "./missions/VoiceTraceMission";
 
 type Phase = "loading" | "predict" | "code" | "run";
 
@@ -59,6 +61,14 @@ export default function MissionScreen() {
         <p className="font-ui text-2xl text-slate">Loading mission…</p>
       </div>
     );
+  }
+
+  if (problem.type === "flowchart_trace") {
+    return <FlowchartTraceMission problem={problem} />;
+  }
+
+  if (problem.type === "voice_trace") {
+    return <VoiceTraceMission problem={problem} />;
   }
 
   async function runCode() {
