@@ -190,7 +190,11 @@ export default function StarChartScreen() {
           view = await api.getChart(learnerId);
         }
         if (!mounted) return;
-        if (view === null) setError("The server does not know this pilot, and could not create it.");
+        if (view === null) {
+          setError(
+            "The server answered \"not found\" for the chart. It was probably started before the star chart was added: stop it and start it again.",
+          );
+        }
         else setChart(view);
       } catch (err) {
         if (!mounted) return;
