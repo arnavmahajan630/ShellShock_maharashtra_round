@@ -1,5 +1,79 @@
 [
   {
+    "problem_id": "P01",
+    "name": "fire_shots",
+    "planet": "loops",
+    "sector": null,
+    "difficulty": 1,
+    "world": "cannon",
+    "signature": "void fire_shots(int n)",
+    "starter": "void fire_shots(int n) {\n    // TODO\n}",
+    "prompt": "Fire the cannon n times.",
+    "predict_item": {
+      "item_id": "PR_P01",
+      "code": "int n = 3;\nfor (int i = 0; i <= n; i++) {\n    fire();\n}",
+      "question": "How many times does fire() run?",
+      "options": ["3", "4", "n"],
+      "correct": "4"
+    },
+    "markers": ["i"],
+    "sample_tests": [
+      {"args": [3], "expect": {"fire": 3}},
+      {"args": [0], "expect": {"fire": 0}},
+      {"args": [5], "expect": {"fire": 5}}
+    ]
+  },
+  {
+    "problem_id": "P05",
+    "name": "charge_steps",
+    "planet": "loops",
+    "sector": null,
+    "difficulty": 1,
+    "world": "charger",
+    "signature": "int charge_steps(int level, int target)",
+    "starter": "int charge_steps(int level, int target) {\n    // TODO: +7 per step\n}",
+    "prompt": "Count how many +7 charge steps it takes level to reach or pass target.",
+    "predict_item": {
+      "item_id": "PR_P05",
+      "code": "int level = 0;\nint steps = 0;\nwhile (level < 20) {\n    steps++;\n}",
+      "question": "What happens?",
+      "options": ["Stops after 3 steps", "Never stops — level never changes", "Stops after 20 steps"],
+      "correct": "Never stops — level never changes"
+    },
+    "markers": [],
+    "sample_tests": [
+      {"args": [0, 20], "expect": {"returned": 3}},
+      {"args": [0, 7], "expect": {"returned": 1}},
+      {"args": [14, 15], "expect": {"returned": 1}},
+      {"args": [21, 21], "expect": {"returned": 0}}
+    ]
+  },
+  {
+    "problem_id": "P06",
+    "name": "power_up",
+    "planet": "loops",
+    "sector": null,
+    "difficulty": 2,
+    "world": "amplifier",
+    "signature": "int power_up(int base, int k)",
+    "starter": "int power_up(int base, int k) {\n    // TODO: base^k\n}",
+    "prompt": "Return base raised to the k-th power (k >= 0).",
+    "predict_item": {
+      "item_id": "PR_P06",
+      "code": "int result;\nfor (int i = 0; i < 3; i++) {\n    result = 2;\n}",
+      "question": "This is meant to compute 2 * 2 * 2. What is result after it runs?",
+      "options": ["8", "2", "0"],
+      "correct": "2"
+    },
+    "markers": [],
+    "sample_tests": [
+      {"args": [2, 3], "expect": {"returned": 8}},
+      {"args": [5, 0], "expect": {"returned": 1}},
+      {"args": [3, 2], "expect": {"returned": 9}},
+      {"args": [2, 4], "expect": {"returned": 16}}
+    ]
+  },
+  {
     "problem_id": "P03",
     "name": "total_energy",
     "planet": "loops",
@@ -89,6 +163,93 @@
           "returned": 0
         }
       }
+    ]
+  },
+  {
+    "problem_id": "P12",
+    "name": "shield_mode",
+    "planet": "conditions",
+    "sector": null,
+    "difficulty": 1,
+    "world": "shield",
+    "signature": "int shield_mode(int energy)",
+    "starter": "int shield_mode(int energy) {\n    // TODO: < 30 -> 0, < 70 -> 1, else -> 2\n}",
+    "prompt": "Return 0 if energy < 30, 1 if energy < 70, otherwise 2.",
+    "predict_item": {
+      "item_id": "PR_P12",
+      "code": "int energy = 90;\nint mode = 99;\nif (energy < 30);\n{\n    mode = 0;\n}",
+      "question": "What is mode after this runs?",
+      "options": [
+        "99",
+        "0",
+        "2"
+      ],
+      "correct": "0"
+    },
+    "markers": [],
+    "sample_tests": [
+      {"args": [10], "expect": {"returned": 0}},
+      {"args": [50], "expect": {"returned": 1}},
+      {"args": [90], "expect": {"returned": 2}},
+      {"args": [30], "expect": {"returned": 1}}
+    ]
+  },
+  {
+    "problem_id": "P16",
+    "name": "in_range",
+    "planet": "conditions",
+    "sector": null,
+    "difficulty": 1,
+    "world": "shield_gate",
+    "signature": "int in_range(int x, int lo, int hi)",
+    "starter": "int in_range(int x, int lo, int hi) {\n    // TODO: return 1 iff lo < x < hi\n}",
+    "prompt": "Return 1 if x is strictly between lo and hi, otherwise 0.",
+    "predict_item": {
+      "item_id": "PR_P16",
+      "code": "int lo = 0, hi = 10, x = 15;\nint ok = lo < x < hi;",
+      "question": "What is ok after this runs?",
+      "options": [
+        "1",
+        "0",
+        "15"
+      ],
+      "correct": "1"
+    },
+    "markers": [],
+    "sample_tests": [
+      {"args": [5, 0, 10], "expect": {"returned": 1}},
+      {"args": [0, 0, 10], "expect": {"returned": 0}},
+      {"args": [10, 0, 10], "expect": {"returned": 0}},
+      {"args": [15, 0, 10], "expect": {"returned": 0}}
+    ]
+  },
+  {
+    "problem_id": "P17",
+    "name": "max_of_three",
+    "planet": "conditions",
+    "sector": null,
+    "difficulty": 2,
+    "world": "radar",
+    "signature": "int max_of_three(int a, int b, int c)",
+    "starter": "int max_of_three(int a, int b, int c) {\n    // TODO\n}",
+    "prompt": "Return the largest of a, b and c.",
+    "predict_item": {
+      "item_id": "PR_P17",
+      "code": "int max_of_three(int a, int b, int c) {\n    int m = a;\n    if (b > m) m = b;\n    if (c > m) m = c;\n    printf(\"%d\", m);\n}",
+      "question": "What does max_of_three(1, 5, 3) return to its caller?",
+      "options": [
+        "5",
+        "0",
+        "unpredictable"
+      ],
+      "correct": "unpredictable"
+    },
+    "markers": [],
+    "sample_tests": [
+      {"args": [1, 2, 3], "expect": {"returned": 3}},
+      {"args": [5, 2, 1], "expect": {"returned": 5}},
+      {"args": [2, 5, 5], "expect": {"returned": 5}},
+      {"args": [-1, -2, -3], "expect": {"returned": -1}}
     ]
   },
   {
