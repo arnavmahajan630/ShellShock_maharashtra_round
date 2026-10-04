@@ -143,6 +143,104 @@ async function get<T>(path: string): Promise<T> {
   return res.json();
 }
 
+export interface DsaExample {
+  input: string;
+  output: string;
+  explanation: string;
+}
+
+export interface DsaPredictItem {
+  item_id: string;
+  code: string;
+  question: string;
+  call_stack: string[];
+  stdout: string[];
+  options: string[];
+  correct: number;
+}
+
+export interface DsaTrial {
+  problem_id: string;
+  name: string;
+  title: string;
+  sector: string;
+  difficulty: number;
+  difficulty_label: string;
+  prompt: string;
+  signature: string;
+  starter: string;
+  examples: DsaExample[];
+  constraints: string[];
+  sample_tests: { args: unknown[]; expect: Record<string, unknown> }[];
+  predict_item: DsaPredictItem;
+  hints: string[];
+}
+
+export interface ExamStartResponse {
+  exam_id: string;
+  total_trials: number;
+  current_index: number;
+  item: DsaTrial;
+  trials: DsaTrial[];
+  time_limit_s: number;
+}
+
+export interface ExamRunResponse {
+  tests: {
+    passed: number;
+    total: number;
+    results: TestResult[];
+  };
+  trace: Trace;
+  diagnosis: Record<string, unknown>;
+}
+
+export interface ExamAnswerResponse {
+  logged: boolean;
+  next_item: DsaTrial | null;
+  finished: boolean;
+  progress: { k: number; n: number };
+  diagnosis: Record<string, unknown>;
+}
+
+export interface DebriefSector {
+  sector: string;
+  name: string;
+  items: string[];
+  passed: number;
+  rating_before: number;
+  rating_after: number;
+}
+
+export interface DebriefFinding {
+  class: string;
+  status: string;
+  p_active: number;
+  name: string;
+  subtitle: string;
+  belief: string;
+  item_id: string;
+  trial_title: string;
+  evidence: { type: string; text: string }[];
+}
+
+export interface DebriefRecommendation {
+  sector: string;
+  title: string;
+  description: string;
+  route: string;
+}
+
+export interface DebriefReport {
+  exam_id: string;
+  items_total: number;
+  items_passed: number;
+  score_pct: number;
+  sectors: DebriefSector[];
+  findings: DebriefFinding[];
+  recommendations: DebriefRecommendation[];
+}
+
 export const api = {
   getProblem: (problemId: string) => get<Problem>(`/problems/${problemId}`),
   attempt: (payload: { learner_id: string; problem_id: string; code: string; events?: unknown[] }) =>
@@ -154,4 +252,11 @@ export const api = {
   trapItem: (classId: string) => get<TrapItem>(`/trap-items/${classId}`),
   probeAnswer: (payload: { learner_id: string; attempt_id: string; probe_id: string; answer: string; problem_id: string; code: string }) =>
     post<{ diagnosis: Diagnosis }>("/probe/answer", payload),
+  startExam: (learnerId = "pilot") => post<ExamStartResponse>("/trials/start", { learner_id: learnerId }),
+  runTrial: (payload: { item_id: string; code: string }) => post<ExamRunResponse>("/trials/run", payload),
+  answerTrial: (payload: { exam_id: string; item_id: string; code: string; predict_answer?: number }) =>
+    post<ExamAnswerResponse>("/trials/answer", payload),
+  finishExam: (examId: string) => post<{ report: DebriefReport }>("/trials/finish", { exam_id: examId }),
+  getExamReport: (examId: string) => get<{ report: DebriefReport }>(`/trials/${examId}/report`),
+  getTrials: () => get<DsaTrial[]>("/trials/list"),
 };
