@@ -195,6 +195,7 @@ def compile_debrief(exam_id: str, answers: List[Dict[str, Any]], trials: List[Di
     findings = []
     seen_misconceptions = set()
     total_passed = 0
+    attempted_sectors = set()
 
     for ans in answers:
         pid = ans.get("problem_id")
@@ -203,6 +204,7 @@ def compile_debrief(exam_id: str, answers: List[Dict[str, Any]], trials: List[Di
             continue
 
         sector_key = trial.get("sector", "arrays")
+        attempted_sectors.add(sector_key)
         sec = sectors_map.get(sector_key)
         if sec:
             sec["items"].append(pid)
@@ -237,12 +239,16 @@ def compile_debrief(exam_id: str, answers: List[Dict[str, Any]], trials: List[Di
                         "evidence": diag.get("evidence", []),
                     })
 
-    # Build recommendations based on weak sectors
+    # Only report on sectors the pilot actually attempted — a 1-trial run shouldn't
+    # show the other four sectors as "REVIEW" when nothing was tried there.
+    attempted_sector_data = [sectors_map[k] for k in sectors_map if k in attempted_sectors]
+
+    # Build recommendations based on weak sectors, scoped to what was attempted.
     recommendations = []
-    for s_key, s_data in sectors_map.items():
+    for s_data in attempted_sector_data:
         if s_data["passed"] == 0:
             recommendations.append({
-                "sector": s_key,
+                "sector": s_data["sector"],
                 "title": f"Review {s_data['name']}",
                 "description": f"Focus on core invariants and boundary contracts in {s_data['name']}.",
                 "route": "/map",
@@ -251,17 +257,20 @@ def compile_debrief(exam_id: str, answers: List[Dict[str, Any]], trials: List[Di
     if not recommendations:
         recommendations.append({
             "sector": "mastery",
-            "title": "All Sectors Mastered!",
-            "description": "Outstanding performance across all 5 Deep Space Trials.",
+            "title": "All Sectors Mastered!" if len(attempted_sector_data) == len(sectors_map) else "Trial Cleared!",
+            "description": "Outstanding performance across all 5 Deep Space Trials."
+            if len(attempted_sector_data) == len(sectors_map)
+            else "No active misconceptions detected in the trial(s) you attempted.",
             "route": "/map",
         })
 
+    items_total = len(answers) or 1
     return {
         "exam_id": exam_id,
-        "items_total": len(trials),
+        "items_total": items_total,
         "items_passed": total_passed,
-        "score_pct": round((total_passed / len(trials)) * 100),
-        "sectors": list(sectors_map.values()),
+        "score_pct": round((total_passed / items_total) * 100),
+        "sectors": attempted_sector_data,
         "findings": findings,
         "recommendations": recommendations,
     }

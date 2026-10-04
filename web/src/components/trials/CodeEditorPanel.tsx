@@ -14,6 +14,8 @@ interface CodeEditorPanelProps {
   isRunning: boolean;
   isSubmitting: boolean;
   testResults: TestResult[] | null;
+  canFinishEarly: boolean;
+  onFinishEarly: () => void;
 }
 
 export default function CodeEditorPanel({
@@ -26,6 +28,8 @@ export default function CodeEditorPanel({
   isRunning,
   isSubmitting,
   testResults,
+  canFinishEarly,
+  onFinishEarly,
 }: CodeEditorPanelProps) {
   const [activeTab] = useState("main.c");
   const [isExpanded, setIsExpanded] = useState(false);
@@ -183,14 +187,27 @@ export default function CodeEditorPanel({
 
         {/* Action Controls Footer */}
         <div className="flex items-center justify-between pt-3 mt-2 border-t border-white/10">
-          {/* Skip Button */}
-          <button
-            type="button"
-            onClick={onSkipClick}
-            className="text-xs font-ui text-white/50 hover:text-white underline underline-offset-4 cursor-pointer"
-          >
-            Skip this trial
-          </button>
+          {/* Skip / Finish Early */}
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={onSkipClick}
+              className="text-xs font-ui text-white/50 hover:text-white underline underline-offset-4 cursor-pointer"
+            >
+              Skip this trial
+            </button>
+            {canFinishEarly && (
+              <button
+                type="button"
+                onClick={onFinishEarly}
+                disabled={isRunning || isSubmitting}
+                title="Compile a report for the trial(s) you've already submitted"
+                className="text-xs font-ui text-mint-success hover:text-white underline underline-offset-4 cursor-pointer disabled:opacity-50"
+              >
+                Finish &amp; view report →
+              </button>
+            )}
+          </div>
 
           {/* Action Buttons */}
           <div className="flex items-center gap-3">

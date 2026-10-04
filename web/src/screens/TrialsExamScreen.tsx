@@ -24,6 +24,7 @@ export default function TrialsExamScreen() {
   const [showSkipModal, setShowSkipModal] = useState(false);
   const [showLeaveModal, setShowLeaveModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [answeredCount, setAnsweredCount] = useState(0);
 
   // Initialize Exam Session
   useEffect(() => {
@@ -127,6 +128,7 @@ export default function TrialsExamScreen() {
         code,
         predict_answer: selectedOption ?? undefined,
       });
+      setAnsweredCount((n) => n + 1);
 
       if (res.finished || currentIndex >= trials.length - 1) {
         navigate("/trials/debrief", { state: { examId, totalTrials: trials.length } });
@@ -135,10 +137,17 @@ export default function TrialsExamScreen() {
       }
     } catch {
       // Advance to next trial on network error
+      setAnsweredCount((n) => n + 1);
       goToTrial(currentIndex + 1);
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  // A pilot can stop after any single trial and get a report scoped to what they attempted —
+  // no need to grind through all 5. /exam/finish no longer pads the rest as failures.
+  function handleFinishEarly() {
+    navigate("/trials/debrief", { state: { examId, totalTrials: trials.length } });
   }
 
   function handleSkipConfirm() {
@@ -184,6 +193,8 @@ export default function TrialsExamScreen() {
             isRunning={isRunning}
             isSubmitting={isSubmitting}
             testResults={testResults}
+            canFinishEarly={answeredCount > 0}
+            onFinishEarly={handleFinishEarly}
           />
         </div>
 

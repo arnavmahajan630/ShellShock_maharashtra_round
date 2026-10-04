@@ -156,24 +156,17 @@ async def answer_trial(request: Request):
 
 @router.post("/trials/finish")
 async def finish_exam(request: Request):
+    """Compile a debrief from whatever has been answered so far — one trial or all five.
+
+    No longer pads unanswered trials with a fake empty-code failure: a pilot who finishes
+    after a single trial gets a report scoped to that trial, not a 1/5 score.
+    """
     body = await request.json()
     exam_id = body.get("exam_id")
     trials = _get_trials()
     sess = _SESSIONS.get(exam_id)
 
     answers = sess.get("answers", []) if sess else []
-    # If some trials weren't answered, fill defaults
-    answered_ids = {a["problem_id"] for a in answers}
-    for t in trials:
-        if t["problem_id"] not in answered_ids:
-            answers.append({
-                "problem_id": t["problem_id"],
-                "code": "",
-                "predict_answer": None,
-                "diagnosis": dsa_rules.diagnose_trial(t, ""),
-                "pass": False,
-            })
-
     report = dsa_rules.compile_debrief(exam_id, answers, trials)
     if sess:
         sess["report"] = report
