@@ -11,4 +11,6 @@ ml/artifacts/reason_*/
 ml/eval/_ea_cache/
 ml/eval/out/
 .claude/
+# Isolated plan-execution worktrees — a local checkout, not repo content.
+.worktrees/
 
