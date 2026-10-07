@@ -328,7 +328,3 @@ pytest tests/E-a -q  # Machine learning evaluation suite
 * **Evaluation & Benchmarks**: 18 empirical evaluation cards (`E01`–`E18`), cluster bootstrapping, ablation studies, and Mohler benchmark validation.
 
 ---
-
-<p align="center">
-  Built for <b>ShellShock (Maharashtra Round)</b> • Adaptive Multimodal Learning Environment
-</p>
